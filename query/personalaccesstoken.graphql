@@ -78,6 +78,7 @@ query GetAllPersonalAccessTokens {
     }
   }
 }
+
 query GetPersonalAccessTokenByID($personalAccessTokenId: ID!) {
   personalAccessToken(id: $personalAccessTokenId) {
     createdAt
@@ -150,6 +151,7 @@ query GetPersonalAccessTokens($first: Int, $last: Int, $where: PersonalAccessTok
     }
   }
 }
+
 mutation UpdatePersonalAccessToken($updatePersonalAccessTokenId: ID!, $input: UpdatePersonalAccessTokenInput!) {
   updatePersonalAccessToken(id: $updatePersonalAccessTokenId, input: $input) {
     personalAccessToken {

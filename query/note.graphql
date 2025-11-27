@@ -3,4 +3,3 @@ mutation DeleteNote($noteID: ID!) {
     deletedID
   }
 }
-

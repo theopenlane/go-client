@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVSubcontrol($input: Upload!) {
   createBulkCSVSubcontrol(input: $input) {
     subcontrols {
@@ -165,6 +164,7 @@ query GetAllSubcontrols {
     }
   }
 }
+
 query GetSubcontrolByID($subcontrolId: ID!) {
   subcontrol(id: $subcontrolId) {
     aliases
@@ -247,6 +247,7 @@ query GetSubcontrols($first: Int, $last: Int, $where: SubcontrolWhereInput) {
     }
   }
 }
+
 mutation UpdateSubcontrol($updateSubcontrolId: ID!, $input: UpdateSubcontrolInput!) {
   updateSubcontrol(id: $updateSubcontrolId, input: $input) {
     subcontrol {

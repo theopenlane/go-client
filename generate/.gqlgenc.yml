@@ -1,9 +1,9 @@
 model:
-  package: openlaneclient
-  filename: ../models.go
+  package: genclient
+  filename: genclient/models.go
 client:
-  package: openlaneclient
-  filename: ../graphclient.go
+  package: genclient
+  filename: genclient/graphclient.go
 models:
   Int:
     model: github.com/99designs/gqlgen/graphql.Int64

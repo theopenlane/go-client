@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVWorkflowEvent($input: Upload!) {
   createBulkCSVWorkflowEvent(input: $input) {
     workflowEvents {
@@ -85,6 +84,7 @@ query GetAllWorkflowEvents {
     }
   }
 }
+
 query GetWorkflowEventByID($workflowEventId: ID!) {
   workflowEvent(id: $workflowEventId) {
     createdAt
@@ -127,6 +127,7 @@ query GetWorkflowEvents($first: Int, $last: Int, $where: WorkflowEventWhereInput
     }
   }
 }
+
 mutation UpdateWorkflowEvent($updateWorkflowEventId: ID!, $input: UpdateWorkflowEventInput!) {
   updateWorkflowEvent(id: $updateWorkflowEventId, input: $input) {
     workflowEvent {

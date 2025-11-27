@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVOrganizationSetting($input: Upload!) {
   createBulkCSVOrganizationSetting(input: $input) {
     organizationSettings {
@@ -145,6 +144,7 @@ query GetAllOrganizationSettings {
     }
   }
 }
+
 query GetOrganizationSettingByID($organizationSettingId: ID!) {
   organizationSetting(id: $organizationSettingId) {
     allowedEmailDomains
@@ -217,6 +217,7 @@ query GetOrganizationSettings($first: Int, $last: Int, $where: OrganizationSetti
     }
   }
 }
+
 mutation UpdateOrganizationSetting($updateOrganizationSettingId: ID!, $input: UpdateOrganizationSettingInput!) {
   updateOrganizationSetting(id: $updateOrganizationSettingId, input: $input) {
     organizationSetting {

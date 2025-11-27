@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVTagDefinition($input: Upload!) {
   createBulkCSVTagDefinition(input: $input) {
     tagDefinitions {
@@ -97,6 +96,7 @@ query GetAllTagDefinitions {
     }
   }
 }
+
 query GetTagDefinitionByID($tagDefinitionId: ID!) {
   tagDefinition(id: $tagDefinitionId) {
     aliases
@@ -145,6 +145,7 @@ query GetTagDefinitions($first: Int, $last: Int, $where: TagDefinitionWhereInput
     }
   }
 }
+
 mutation UpdateTagDefinition($updateTagDefinitionId: ID!, $input: UpdateTagDefinitionInput!) {
   updateTagDefinition(id: $updateTagDefinitionId, input: $input) {
     tagDefinition {

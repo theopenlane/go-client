@@ -23,7 +23,7 @@ mutation CreateStandard($input: CreateStandardInput!) {
       updatedAt
       updatedBy
       version
-      controls{
+      controls {
         totalCount
       }
     }
@@ -69,13 +69,14 @@ query GetAllStandards {
         updatedAt
         updatedBy
         version
-        controls{
+        controls {
           totalCount
         }
       }
     }
   }
 }
+
 query GetStandardByID($standardId: ID!) {
   standard(id: $standardId) {
     createdAt
@@ -100,7 +101,7 @@ query GetStandardByID($standardId: ID!) {
     updatedAt
     updatedBy
     version
-    controls{
+    controls {
       totalCount
     }
   }
@@ -139,13 +140,14 @@ query GetStandards($first: Int, $last: Int, $where: StandardWhereInput) {
         updatedAt
         updatedBy
         version
-        controls{
+        controls {
           totalCount
         }
       }
     }
   }
 }
+
 mutation UpdateStandard($updateStandardId: ID!, $input: UpdateStandardInput!) {
   updateStandard(id: $updateStandardId, input: $input) {
     standard {
@@ -171,7 +173,7 @@ mutation UpdateStandard($updateStandardId: ID!, $input: UpdateStandardInput!) {
       updatedAt
       updatedBy
       version
-      controls{
+      controls {
         totalCount
       }
     }
