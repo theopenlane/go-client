@@ -6,7 +6,7 @@ import (
 	"github.com/theopenlane/httpsling"
 	"github.com/theopenlane/httpsling/httpclient"
 
-	api "github.com/theopenlane/core/pkg/openapi"
+	api "github.com/theopenlane/shared/openapi"
 )
 
 // OpenlaneRestClient is the interface that wraps the openlane API REST client methods
