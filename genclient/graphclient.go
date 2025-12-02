@@ -8,8 +8,8 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/Yamashou/gqlgenc/clientv2"
-	"github.com/theopenlane/core/pkg/enums"
-	"github.com/theopenlane/core/pkg/models"
+	"github.com/theopenlane/shared/enums"
+	"github.com/theopenlane/shared/models"
 )
 
 type OpenlaneGraphClient interface {
