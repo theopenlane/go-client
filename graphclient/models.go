@@ -2094,9 +2094,9 @@ type Control struct {
 	// references for the control
 	References []*models.Reference `json:"references,omitempty"`
 	// reference steps to take to test the control
-	TestingProcedures []string `json:"testingProcedures,omitempty"`
+	TestingProcedures []*models.TestingProcedures `json:"testingProcedures,omitempty"`
 	// list of common evidence requests for the control
-	EvidenceRequests []string `json:"evidenceRequests,omitempty"`
+	EvidenceRequests []*models.EvidenceRequests `json:"evidenceRequests,omitempty"`
 	// the id of the group that owns the control
 	ControlOwnerID *string `json:"controlOwnerID,omitempty"`
 	// the id of the group that is temporarily delegated to own the control
@@ -3737,9 +3737,9 @@ type CreateControlInput struct {
 	// references for the control
 	References []*models.Reference `json:"references,omitempty"`
 	// reference steps to take to test the control
-	TestingProcedures []string `json:"testingProcedures,omitempty"`
+	TestingProcedures []*models.TestingProcedures `json:"testingProcedures,omitempty"`
 	// list of common evidence requests for the control
-	EvidenceRequests []string `json:"evidenceRequests,omitempty"`
+	EvidenceRequests []*models.EvidenceRequests `json:"evidenceRequests,omitempty"`
 	// internal notes about the object creation, this field is only available to system admins
 	InternalNotes *string `json:"internalNotes,omitempty"`
 	// an internal identifier for the mapping, this field is only available to system admins
@@ -5464,9 +5464,9 @@ type CreateSubcontrolInput struct {
 	// references for the control
 	References []*models.Reference `json:"references,omitempty"`
 	// reference steps to take to test the control
-	TestingProcedures []string `json:"testingProcedures,omitempty"`
+	TestingProcedures []*models.TestingProcedures `json:"testingProcedures,omitempty"`
 	// list of common evidence requests for the control
-	EvidenceRequests []string `json:"evidenceRequests,omitempty"`
+	EvidenceRequests []*models.EvidenceRequests `json:"evidenceRequests,omitempty"`
 	// internal notes about the object creation, this field is only available to system admins
 	InternalNotes *string `json:"internalNotes,omitempty"`
 	// an internal identifier for the mapping, this field is only available to system admins
@@ -22046,9 +22046,9 @@ type Subcontrol struct {
 	// references for the control
 	References []*models.Reference `json:"references,omitempty"`
 	// reference steps to take to test the control
-	TestingProcedures []string `json:"testingProcedures,omitempty"`
+	TestingProcedures []*models.TestingProcedures `json:"testingProcedures,omitempty"`
 	// list of common evidence requests for the control
-	EvidenceRequests []string `json:"evidenceRequests,omitempty"`
+	EvidenceRequests []*models.EvidenceRequests `json:"evidenceRequests,omitempty"`
 	// the id of the group that owns the control
 	ControlOwnerID *string `json:"controlOwnerID,omitempty"`
 	// the id of the group that is temporarily delegated to own the control
@@ -26638,13 +26638,13 @@ type UpdateControlInput struct {
 	AppendReferences []*models.Reference `json:"appendReferences,omitempty"`
 	ClearReferences  *bool               `json:"clearReferences,omitempty"`
 	// reference steps to take to test the control
-	TestingProcedures       []string `json:"testingProcedures,omitempty"`
-	AppendTestingProcedures []string `json:"appendTestingProcedures,omitempty"`
-	ClearTestingProcedures  *bool    `json:"clearTestingProcedures,omitempty"`
+	TestingProcedures       []*models.TestingProcedures `json:"testingProcedures,omitempty"`
+	AppendTestingProcedures []*models.TestingProcedures `json:"appendTestingProcedures,omitempty"`
+	ClearTestingProcedures  *bool                       `json:"clearTestingProcedures,omitempty"`
 	// list of common evidence requests for the control
-	EvidenceRequests       []string `json:"evidenceRequests,omitempty"`
-	AppendEvidenceRequests []string `json:"appendEvidenceRequests,omitempty"`
-	ClearEvidenceRequests  *bool    `json:"clearEvidenceRequests,omitempty"`
+	EvidenceRequests       []*models.EvidenceRequests `json:"evidenceRequests,omitempty"`
+	AppendEvidenceRequests []*models.EvidenceRequests `json:"appendEvidenceRequests,omitempty"`
+	ClearEvidenceRequests  *bool                      `json:"clearEvidenceRequests,omitempty"`
 	// internal notes about the object creation, this field is only available to system admins
 	InternalNotes      *string `json:"internalNotes,omitempty"`
 	ClearInternalNotes *bool   `json:"clearInternalNotes,omitempty"`
@@ -29458,13 +29458,13 @@ type UpdateSubcontrolInput struct {
 	AppendReferences []*models.Reference `json:"appendReferences,omitempty"`
 	ClearReferences  *bool               `json:"clearReferences,omitempty"`
 	// reference steps to take to test the control
-	TestingProcedures       []string `json:"testingProcedures,omitempty"`
-	AppendTestingProcedures []string `json:"appendTestingProcedures,omitempty"`
-	ClearTestingProcedures  *bool    `json:"clearTestingProcedures,omitempty"`
+	TestingProcedures       []*models.TestingProcedures `json:"testingProcedures,omitempty"`
+	AppendTestingProcedures []*models.TestingProcedures `json:"appendTestingProcedures,omitempty"`
+	ClearTestingProcedures  *bool                       `json:"clearTestingProcedures,omitempty"`
 	// list of common evidence requests for the control
-	EvidenceRequests       []string `json:"evidenceRequests,omitempty"`
-	AppendEvidenceRequests []string `json:"appendEvidenceRequests,omitempty"`
-	ClearEvidenceRequests  *bool    `json:"clearEvidenceRequests,omitempty"`
+	EvidenceRequests       []*models.EvidenceRequests `json:"evidenceRequests,omitempty"`
+	AppendEvidenceRequests []*models.EvidenceRequests `json:"appendEvidenceRequests,omitempty"`
+	ClearEvidenceRequests  *bool                      `json:"clearEvidenceRequests,omitempty"`
 	// internal notes about the object creation, this field is only available to system admins
 	InternalNotes      *string `json:"internalNotes,omitempty"`
 	ClearInternalNotes *bool   `json:"clearInternalNotes,omitempty"`
