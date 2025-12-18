@@ -1,4 +1,4 @@
-package goclient
+package openlane
 
 import (
 	"net/http"

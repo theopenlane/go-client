@@ -4,8 +4,14 @@ mutation DeleteFile($deleteFileId: ID!) {
   }
 }
 
-query GetAllFiles {
-  files {
+query GetAllFiles($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [FileOrder!]){
+  files(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -62,8 +68,15 @@ query GetFileByID($fileId: ID!) {
   }
 }
 
-query GetFiles($first: Int, $last: Int, $where: FileWhereInput) {
-  files(first: $first, last: $last, where: $where) {
+query GetFiles($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: FileWhereInput, $orderBy: [FileOrder!]) {
+files(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

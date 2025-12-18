@@ -45,8 +45,14 @@ mutation DeleteEvidence($deleteEvidenceId: ID!) {
   }
 }
 
-query GetAllEvidences {
-  evidences {
+query GetAllEvidences($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [EvidenceOrder!]){
+  evidences(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -133,8 +139,15 @@ query GetEvidenceByID($evidenceId: ID!) {
   }
 }
 
-query GetEvidences($first: Int, $last: Int, $where: EvidenceWhereInput) {
-  evidences(first: $first, last: $last, where: $where) {
+query GetEvidences($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: EvidenceWhereInput, $orderBy: [EvidenceOrder!]) {
+evidences(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

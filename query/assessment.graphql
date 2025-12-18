@@ -22,8 +22,20 @@ mutation DeleteAssessment($deleteAssessmentId: ID!) {
   }
 }
 
-query GetAllAssessments {
-  assessments {
+mutation DeleteBulkAssessment($ids: [ID!]!) {
+  deleteBulkAssessment(ids: $ids) {
+    deletedIDs
+  }
+}
+
+query GetAllAssessments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [AssessmentOrder!]){
+  assessments(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -62,8 +74,15 @@ query GetAssessmentByID($assessmentId: ID!) {
   }
 }
 
-query GetAssessments($first: Int, $last: Int, $where: AssessmentWhereInput) {
-  assessments(first: $first, last: $last, where: $where) {
+query GetAssessments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: AssessmentWhereInput, $orderBy: [AssessmentOrder!]) {
+assessments(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

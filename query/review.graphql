@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVReview($input: Upload!) {
   createBulkCSVReview(input: $input) {
     reviews {
@@ -98,8 +97,14 @@ mutation DeleteReview($deleteReviewId: ID!) {
   }
 }
 
-query GetAllReviews {
-  reviews {
+query GetAllReviews($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ReviewOrder!]) {
+  reviews(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -137,6 +142,7 @@ query GetAllReviews {
     }
   }
 }
+
 query GetReviewByID($reviewId: ID!) {
   review(id: $reviewId) {
     approved
@@ -166,8 +172,15 @@ query GetReviewByID($reviewId: ID!) {
   }
 }
 
-query GetReviews($first: Int, $last: Int, $where: ReviewWhereInput) {
-  reviews(first: $first, last: $last, where: $where) {
+query GetReviews($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ReviewWhereInput, $orderBy: [ReviewOrder!]) {
+  reviews(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -205,6 +218,7 @@ query GetReviews($first: Int, $last: Int, $where: ReviewWhereInput) {
     }
   }
 }
+
 mutation UpdateReview($updateReviewId: ID!, $input: UpdateReviewInput!) {
   updateReview(id: $updateReviewId, input: $input) {
     review {

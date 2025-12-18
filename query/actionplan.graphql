@@ -1,7 +1,6 @@
-
-mutation CreateBulkCSVActionPlan($input: Upload!) {
-  createBulkCSVActionPlan(input: $input) {
-    actionPlans {
+mutation CreateActionPlan($input: CreateActionPlanInput!) {
+  createActionPlan(input: $input) {
+    actionPlan {
       actionPlanType
       approvalRequired
       approverID
@@ -67,9 +66,9 @@ mutation CreateBulkActionPlan($input: [CreateActionPlanInput!]) {
   }
 }
 
-mutation CreateActionPlan($input: CreateActionPlanInput!) {
-  createActionPlan(input: $input) {
-    actionPlan {
+mutation CreateBulkCSVActionPlan($input: Upload!) {
+  createBulkCSVActionPlan(input: $input) {
+    actionPlans {
       actionPlanType
       approvalRequired
       approverID
@@ -107,48 +106,6 @@ mutation DeleteActionPlan($deleteActionPlanId: ID!) {
   }
 }
 
-query GetAllActionPlans {
-  actionPlans {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        actionPlanType
-        approvalRequired
-        approverID
-        controlSuggestions
-        createdAt
-        createdBy
-        delegateID
-        details
-        dismissedControlSuggestions
-        dismissedImprovementSuggestions
-        dismissedTagSuggestions
-        dueDate
-        id
-        improvementSuggestions
-        name
-        ownerID
-        priority
-        reviewDue
-        reviewFrequency
-        revision
-        source
-        status
-        summary
-        tagSuggestions
-        tags
-        updatedAt
-        updatedBy
-      }
-    }
-  }
-}
 query GetActionPlanByID($actionPlanId: ID!) {
   actionPlan(id: $actionPlanId) {
     actionPlanType
@@ -181,8 +138,15 @@ query GetActionPlanByID($actionPlanId: ID!) {
   }
 }
 
-query GetActionPlans($first: Int, $last: Int, $where: ActionPlanWhereInput) {
-  actionPlans(first: $first, last: $last, where: $where) {
+query GetActionPlans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ActionPlanWhereInput, $orderBy: [ActionPlanOrder!]) {
+actionPlans(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -223,6 +187,56 @@ query GetActionPlans($first: Int, $last: Int, $where: ActionPlanWhereInput) {
     }
   }
 }
+
+query GetAllActionPlans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ActionPlanOrder!]) {
+  actionPlans(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
+    totalCount
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+    edges {
+      node {
+        actionPlanType
+        approvalRequired
+        approverID
+        controlSuggestions
+        createdAt
+        createdBy
+        delegateID
+        details
+        dismissedControlSuggestions
+        dismissedImprovementSuggestions
+        dismissedTagSuggestions
+        dueDate
+        id
+        improvementSuggestions
+        name
+        ownerID
+        priority
+        reviewDue
+        reviewFrequency
+        revision
+        source
+        status
+        summary
+        tagSuggestions
+        tags
+        updatedAt
+        updatedBy
+      }
+    }
+  }
+}
+
 mutation UpdateActionPlan($updateActionPlanId: ID!, $input: UpdateActionPlanInput!) {
   updateActionPlan(id: $updateActionPlanId, input: $input) {
     actionPlan {

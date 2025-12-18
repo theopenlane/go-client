@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVOrgMembership($input: Upload!) {
   createBulkCSVOrgMembership(input: $input) {
     orgMemberships {
@@ -50,8 +49,14 @@ mutation DeleteOrgMembership($deleteOrgMembershipId: ID!) {
   }
 }
 
-query GetAllOrgMemberships {
-  orgMemberships {
+query GetAllOrgMemberships($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [OrgMembershipOrder!]) {
+  orgMemberships(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -73,6 +78,7 @@ query GetAllOrgMemberships {
     }
   }
 }
+
 query GetOrgMembershipByID($orgMembershipId: ID!) {
   orgMembership(id: $orgMembershipId) {
     createdAt
@@ -86,8 +92,15 @@ query GetOrgMembershipByID($orgMembershipId: ID!) {
   }
 }
 
-query GetOrgMemberships($first: Int, $last: Int, $where: OrgMembershipWhereInput) {
-  orgMemberships(first: $first, last: $last, where: $where) {
+query GetOrgMemberships($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: OrgMembershipWhereInput, $orderBy: [OrgMembershipOrder!]) {
+  orgMemberships(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -109,6 +122,7 @@ query GetOrgMemberships($first: Int, $last: Int, $where: OrgMembershipWhereInput
     }
   }
 }
+
 mutation UpdateOrgMembership($updateOrgMembershipId: ID!, $input: UpdateOrgMembershipInput!) {
   updateOrgMembership(id: $updateOrgMembershipId, input: $input) {
     orgMembership {

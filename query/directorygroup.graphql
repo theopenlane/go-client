@@ -94,8 +94,14 @@ mutation DeleteDirectoryGroup($deleteDirectoryGroupId: ID!) {
   }
 }
 
-query GetAllDirectoryGroups {
-  directoryGroups {
+query GetAllDirectoryGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectoryGroupOrder!]){
+  directoryGroups(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -161,8 +167,15 @@ query GetDirectoryGroupByID($directoryGroupId: ID!) {
   }
 }
 
-query GetDirectoryGroups($first: Int, $last: Int, $where: DirectoryGroupWhereInput) {
-  directoryGroups(first: $first, last: $last, where: $where) {
+query GetDirectoryGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DirectoryGroupWhereInput, $orderBy: [DirectoryGroupOrder!]) {
+directoryGroups(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVGroupSetting($input: Upload!) {
   createBulkCSVGroupSetting(input: $input) {
     groupSettings {
@@ -56,8 +55,14 @@ mutation DeleteGroupSetting($deleteGroupSettingId: ID!) {
   }
 }
 
-query GetAllGroupSettings {
-  groupSettings {
+query GetAllGroupSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [GroupSettingOrder!]) {
+  groupSettings(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -81,6 +86,7 @@ query GetAllGroupSettings {
     }
   }
 }
+
 query GetGroupSettingByID($groupSettingId: ID!) {
   groupSetting(id: $groupSettingId) {
     createdAt
@@ -96,8 +102,15 @@ query GetGroupSettingByID($groupSettingId: ID!) {
   }
 }
 
-query GetGroupSettings($first: Int, $last: Int, $where: GroupSettingWhereInput) {
-  groupSettings(first: $first, last: $last, where: $where) {
+query GetGroupSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: GroupSettingWhereInput, $orderBy: [GroupSettingOrder!]) {
+  groupSettings(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -121,6 +134,7 @@ query GetGroupSettings($first: Int, $last: Int, $where: GroupSettingWhereInput) 
     }
   }
 }
+
 mutation UpdateGroupSetting($updateGroupSettingId: ID!, $input: UpdateGroupSettingInput!) {
   updateGroupSetting(id: $updateGroupSettingId, input: $input) {
     groupSetting {

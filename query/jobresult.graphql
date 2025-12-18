@@ -23,8 +23,14 @@ mutation DeleteJobResult($deleteJobResultId: ID!) {
   }
 }
 
-query GetAllJobResults {
-  jobResults {
+query GetAllJobResults($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [JobResultOrder!]){
+  jobResults(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -68,8 +74,15 @@ query GetJobResultByID($jobResultId: ID!) {
   }
 }
 
-query GetJobResults($first: Int, $last: Int, $where: JobResultWhereInput) {
-  jobResults(first: $first, last: $last, where: $where) {
+query GetJobResults($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: JobResultWhereInput, $orderBy: [JobResultOrder!]) {
+jobResults(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

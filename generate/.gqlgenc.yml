@@ -1,9 +1,9 @@
 model:
-  package: genclient
-  filename: genclient/models.go
+  package: graphclient
+  filename: ../graphclient/models.go
 client:
-  package: genclient
-  filename: genclient/graphclient.go
+  package: graphclient
+  filename: ../graphclient/graphclient.go
 models:
   Int:
     model: github.com/99designs/gqlgen/graphql.Int64
@@ -75,6 +75,6 @@ schema: ["../schema/schema.graphql"]
 query: ["../query/*.graphql"]
 generate:
   clientV2: true
-  clientInterfaceName: "OpenlaneGraphClient"
+  clientInterfaceName: "GraphClient"
   query: false
   mutation: false

@@ -1,62 +1,56 @@
-mutation CreateBulkCSVHush($input: Upload!) {
-  createBulkCSVHush(input: $input) {
-    hushes {
+mutation CreateBulkCSVDiscussion($input: Upload!) {
+  createBulkCSVDiscussion(input: $input) {
+    discussions {
       createdAt
       createdBy
-      description
+      externalID
       id
-      kind
-      name
+      isResolved
       ownerID
-      secretName
       updatedAt
       updatedBy
     }
   }
 }
 
-mutation CreateBulkHush($input: [CreateHushInput!]) {
-  createBulkHush(input: $input) {
-    hushes {
+mutation CreateBulkDiscussion($input: [CreateDiscussionInput!]) {
+  createBulkDiscussion(input: $input) {
+    discussions {
       createdAt
       createdBy
-      description
+      externalID
       id
-      kind
-      name
+      isResolved
       ownerID
-      secretName
       updatedAt
       updatedBy
     }
   }
 }
 
-mutation CreateHush($input: CreateHushInput!) {
-  createHush(input: $input) {
-    hush {
+mutation CreateDiscussion($input: CreateDiscussionInput!) {
+  createDiscussion(input: $input) {
+    discussion {
       createdAt
       createdBy
-      description
+      externalID
       id
-      kind
-      name
+      isResolved
       ownerID
-      secretName
       updatedAt
       updatedBy
     }
   }
 }
 
-mutation DeleteHush($deleteHushId: ID!) {
-  deleteHush(id: $deleteHushId) {
+mutation DeleteDiscussion($deleteDiscussionId: ID!) {
+  deleteDiscussion(id: $deleteDiscussionId) {
     deletedID
   }
 }
 
-query GetAllHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [HushOrder!]) {
-  hushes(
+query GetAllDiscussions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DiscussionOrder!]) {
+  discussions(
     first: $first
     last: $last
     after: $after
@@ -74,12 +68,10 @@ query GetAllHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
       node {
         createdAt
         createdBy
-        description
+        externalID
         id
-        kind
-        name
+        isResolved
         ownerID
-        secretName
         updatedAt
         updatedBy
       }
@@ -87,23 +79,21 @@ query GetAllHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
   }
 }
 
-query GetHushByID($hushId: ID!) {
-  hush(id: $hushId) {
+query GetDiscussionByID($discussionId: ID!) {
+  discussion(id: $discussionId) {
     createdAt
     createdBy
-    description
+    externalID
     id
-    kind
-    name
+    isResolved
     ownerID
-    secretName
     updatedAt
     updatedBy
   }
 }
 
-query GetHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: HushWhereInput, $orderBy: [HushOrder!]) {
-  hushes(
+query GetDiscussions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DiscussionWhereInput, $orderBy: [DiscussionOrder!]) {
+  discussions(
     first: $first
     last: $last
     after: $after
@@ -122,12 +112,10 @@ query GetHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where
       node {
         createdAt
         createdBy
-        description
+        externalID
         id
-        kind
-        name
+        isResolved
         ownerID
-        secretName
         updatedAt
         updatedBy
       }
@@ -135,17 +123,15 @@ query GetHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where
   }
 }
 
-mutation UpdateHush($updateHushId: ID!, $input: UpdateHushInput!) {
-  updateHush(id: $updateHushId, input: $input) {
-    hush {
+mutation UpdateDiscussion($updateDiscussionId: ID!, $input: UpdateDiscussionInput!) {
+  updateDiscussion(id: $updateDiscussionId, input: $input) {
+    discussion {
       createdAt
       createdBy
-      description
+      externalID
       id
-      kind
-      name
+      isResolved
       ownerID
-      secretName
       updatedAt
       updatedBy
     }

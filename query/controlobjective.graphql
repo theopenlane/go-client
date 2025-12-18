@@ -115,8 +115,14 @@ mutation DeleteControlObjective($deleteControlObjectiveId: ID!) {
   }
 }
 
-query GetAllControlObjectives {
-  controlObjectives {
+query GetAllControlObjectives($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlObjectiveOrder!]){
+  controlObjectives(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -196,8 +202,15 @@ query GetControlObjectiveByID($controlObjectiveId: ID!) {
   }
 }
 
-query GetControlObjectives($first: Int, $last: Int, $where: ControlObjectiveWhereInput) {
-  controlObjectives(first: $first, last: $last, where: $where) {
+query GetControlObjectives($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ControlObjectiveWhereInput, $orderBy: [ControlObjectiveOrder!]) {
+controlObjectives(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

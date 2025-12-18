@@ -40,8 +40,14 @@ mutation DeleteTrustCenterDoc($deleteTrustCenterDocId: ID!) {
   }
 }
 
-query GetAllTrustCenterDocs {
-  trustCenterDocs {
+query GetAllTrustCenterDocs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterDocOrder!]) {
+  trustCenterDocs(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -78,6 +84,7 @@ query GetAllTrustCenterDocs {
     }
   }
 }
+
 query GetTrustCenterDocByID($trustCenterDocId: ID!) {
   trustCenterDoc(id: $trustCenterDocId) {
     id
@@ -112,8 +119,15 @@ query GetTrustCenterDocByID($trustCenterDocId: ID!) {
   }
 }
 
-query GetTrustCenterDocs($first: Int, $last: Int, $where: TrustCenterDocWhereInput) {
-  trustCenterDocs(first: $first, last: $last, where: $where) {
+query GetTrustCenterDocs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TrustCenterDocWhereInput, $orderBy: [TrustCenterDocOrder!]) {
+  trustCenterDocs(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -150,8 +164,14 @@ query GetTrustCenterDocs($first: Int, $last: Int, $where: TrustCenterDocWhereInp
     }
   }
 }
+
 mutation UpdateTrustCenterDoc($updateTrustCenterDocId: ID!, $input: UpdateTrustCenterDocInput!, $trustCenterDocFile: Upload, $watermarkedTrustCenterDocFile: Upload) {
-  updateTrustCenterDoc(id: $updateTrustCenterDocId, input: $input, trustCenterDocFile: $trustCenterDocFile, watermarkedTrustCenterDocFile: $watermarkedTrustCenterDocFile) {
+  updateTrustCenterDoc(
+    id: $updateTrustCenterDocId
+    input: $input
+    trustCenterDocFile: $trustCenterDocFile
+    watermarkedTrustCenterDocFile: $watermarkedTrustCenterDocFile
+  ) {
     trustCenterDoc {
       id
       createdAt

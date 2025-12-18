@@ -1,4 +1,4 @@
-package goclient
+package openlane
 
 import (
 	"net/url"
@@ -27,31 +27,41 @@ func GraphRequestPath(config *Config) string {
 	return baseurl + config.GraphQLPath
 }
 
+const (
+	localDevHost = "localhost:17608"
+	host         = "api.theopenlane.io"
+	defaultPath  = "/query"
+	historyPath  = "/history/query"
+)
+
 // NewDefaultConfig returns a new default configuration for the API client
+// and connecting to the production environment
 func NewDefaultConfig() Config {
-	return defaultDevClientConfig
-}
+	c := defaultConfig
 
-var defaultDevClientConfig = Config{
-	BaseURL: &url.URL{
-		Scheme: "http",
-		Host:   "localhost:17608",
-	},
-	GraphQLPath:     "/query",
-	Interceptors:    []clientv2.RequestInterceptor{},
-	Clientv2Options: clientv2.Options{ParseDataAlongWithErrors: true},
-}
-
-// NewProdDefaultConfig returns a new default configuration for the API client
-func NewProdDefaultConfig() Config {
-	return defaultProductionClientConfig
-}
-
-var defaultProductionClientConfig = Config{
-	BaseURL: &url.URL{
+	c.BaseURL = &url.URL{
 		Scheme: "https",
-		Host:   "api.theopenlane.io",
-	},
-	GraphQLPath:     "/query",
+		Host:   host,
+	}
+
+	return c
+}
+
+// NewLocalConfig returns a new default configuration for the API client
+// for local development
+func NewLocalConfig() Config {
+	c := defaultConfig
+
+	c.BaseURL = &url.URL{
+		Scheme: "http",
+		Host:   localDevHost,
+	}
+
+	return c
+}
+
+var defaultConfig = Config{
+	BaseURL:         &url.URL{},
+	GraphQLPath:     defaultPath,
 	Clientv2Options: clientv2.Options{ParseDataAlongWithErrors: true},
 }

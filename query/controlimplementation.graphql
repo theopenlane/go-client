@@ -89,8 +89,14 @@ mutation DeleteControlImplementation($deleteControlImplementationId: ID!) {
   }
 }
 
-query GetAllControlImplementations {
-  controlImplementations {
+query GetAllControlImplementations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlImplementationOrder!]){
+  controlImplementations(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -162,8 +168,15 @@ query GetControlImplementationByID($controlImplementationId: ID!) {
   }
 }
 
-query GetControlImplementations($first: Int, $last: Int, $where: ControlImplementationWhereInput) {
-  controlImplementations(first: $first, last: $last, where: $where) {
+query GetControlImplementations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ControlImplementationWhereInput, $orderBy: [ControlImplementationOrder!]) {
+controlImplementations(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

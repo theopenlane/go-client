@@ -101,8 +101,14 @@ mutation DeleteRemediation($deleteRemediationId: ID!) {
   }
 }
 
-query GetAllRemediations {
-  remediations {
+query GetAllRemediations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [RemediationOrder!]){
+  remediations(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -171,8 +177,15 @@ query GetRemediationByID($remediationId: ID!) {
   }
 }
 
-query GetRemediations($first: Int, $last: Int, $where: RemediationWhereInput) {
-  remediations(first: $first, last: $last, where: $where) {
+query GetRemediations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: RemediationWhereInput, $orderBy: [RemediationOrder!]) {
+remediations(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
