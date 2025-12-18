@@ -5,6 +5,7 @@ mutation CreateTrustCenterSetting($input: CreateTrustCenterSettingInput!) {
       backgroundColor
       createdAt
       createdBy
+      environment
       faviconLocalFileID
       faviconRemoteURL
       font
@@ -50,6 +51,7 @@ query GetAllTrustCenterSettings($first: Int, $last: Int, $after: Cursor, $before
         backgroundColor
         createdAt
         createdBy
+        environment
         faviconLocalFileID
         faviconRemoteURL
         font
@@ -75,6 +77,7 @@ query GetTrustCenterSettingByID($trustCenterSettingId: ID!) {
     backgroundColor
     createdAt
     createdBy
+    environment
     faviconLocalFileID
     faviconRemoteURL
     font
@@ -114,6 +117,7 @@ query GetTrustCenterSettings($first: Int, $last: Int, $after: Cursor, $before: C
         backgroundColor
         createdAt
         createdBy
+        environment
         faviconLocalFileID
         faviconRemoteURL
         font
@@ -145,6 +149,7 @@ mutation UpdateTrustCenterSetting($updateTrustCenterSettingId: ID!, $input: Upda
       backgroundColor
       createdAt
       createdBy
+      environment
       faviconLocalFileID
       faviconRemoteURL
       font

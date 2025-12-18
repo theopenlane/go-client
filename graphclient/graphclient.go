@@ -31,6 +31,7 @@ type GraphClient interface {
 	UpdateAPIToken(ctx context.Context, updateAPITokenID string, input UpdateAPITokenInput, interceptors ...clientv2.RequestInterceptor) (*UpdateAPIToken, error)
 	CreateAssessment(ctx context.Context, input CreateAssessmentInput, interceptors ...clientv2.RequestInterceptor) (*CreateAssessment, error)
 	DeleteAssessment(ctx context.Context, deleteAssessmentID string, interceptors ...clientv2.RequestInterceptor) (*DeleteAssessment, error)
+	DeleteBulkAssessment(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkAssessment, error)
 	GetAllAssessments(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*AssessmentOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllAssessments, error)
 	GetAssessmentByID(ctx context.Context, assessmentID string, interceptors ...clientv2.RequestInterceptor) (*GetAssessmentByID, error)
 	GetAssessments(ctx context.Context, first *int64, last *int64, after *string, before *string, where *AssessmentWhereInput, orderBy []*AssessmentOrder, interceptors ...clientv2.RequestInterceptor) (*GetAssessments, error)
@@ -136,6 +137,14 @@ type GraphClient interface {
 	GetDirectorySyncRunByID(ctx context.Context, directorySyncRunID string, interceptors ...clientv2.RequestInterceptor) (*GetDirectorySyncRunByID, error)
 	GetDirectorySyncRuns(ctx context.Context, first *int64, last *int64, after *string, before *string, where *DirectorySyncRunWhereInput, orderBy []*DirectorySyncRunOrder, interceptors ...clientv2.RequestInterceptor) (*GetDirectorySyncRuns, error)
 	UpdateDirectorySyncRun(ctx context.Context, updateDirectorySyncRunID string, input UpdateDirectorySyncRunInput, interceptors ...clientv2.RequestInterceptor) (*UpdateDirectorySyncRun, error)
+	CreateBulkCSVDiscussion(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVDiscussion, error)
+	CreateBulkDiscussion(ctx context.Context, input []*CreateDiscussionInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkDiscussion, error)
+	CreateDiscussion(ctx context.Context, input CreateDiscussionInput, interceptors ...clientv2.RequestInterceptor) (*CreateDiscussion, error)
+	DeleteDiscussion(ctx context.Context, deleteDiscussionID string, interceptors ...clientv2.RequestInterceptor) (*DeleteDiscussion, error)
+	GetAllDiscussions(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*DiscussionOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllDiscussions, error)
+	GetDiscussionByID(ctx context.Context, discussionID string, interceptors ...clientv2.RequestInterceptor) (*GetDiscussionByID, error)
+	GetDiscussions(ctx context.Context, first *int64, last *int64, after *string, before *string, where *DiscussionWhereInput, orderBy []*DiscussionOrder, interceptors ...clientv2.RequestInterceptor) (*GetDiscussions, error)
+	UpdateDiscussion(ctx context.Context, updateDiscussionID string, input UpdateDiscussionInput, interceptors ...clientv2.RequestInterceptor) (*UpdateDiscussion, error)
 	CreateBulkCSVDNSVerification(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVDNSVerification, error)
 	CreateBulkDNSVerification(ctx context.Context, input []*CreateDNSVerificationInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkDNSVerification, error)
 	CreateDNSVerification(ctx context.Context, input CreateDNSVerificationInput, interceptors ...clientv2.RequestInterceptor) (*CreateDNSVerification, error)
@@ -503,6 +512,7 @@ type GraphClient interface {
 	SendTrustCenterNDAEmail(ctx context.Context, input SendTrustCenterNDAInput, interceptors ...clientv2.RequestInterceptor) (*SendTrustCenterNDAEmail, error)
 	SubmitTrustCenterNDAResponse(ctx context.Context, input SubmitTrustCenterNDAResponseInput, interceptors ...clientv2.RequestInterceptor) (*SubmitTrustCenterNDAResponse, error)
 	UpdateTrustCenterNda(ctx context.Context, id string, templateFiles []*graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterNda, error)
+	CreateTrustCenterPreviewSetting(ctx context.Context, input CreateTrustCenterPreviewSettingInput, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterPreviewSetting, error)
 	CreateTrustCenterSetting(ctx context.Context, input CreateTrustCenterSettingInput, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterSetting, error)
 	DeleteTrustCenterSetting(ctx context.Context, deleteTrustCenterSettingID string, interceptors ...clientv2.RequestInterceptor) (*DeleteTrustCenterSetting, error)
 	GetAllTrustCenterSettings(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*TrustCenterSettingOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllTrustCenterSettings, error)
@@ -3339,6 +3349,17 @@ func (t *DeleteAssessment_DeleteAssessment) GetDeletedID() string {
 		t = &DeleteAssessment_DeleteAssessment{}
 	}
 	return t.DeletedID
+}
+
+type DeleteBulkAssessment_DeleteBulkAssessment struct {
+	DeletedIDs []string "json:\"deletedIDs\" graphql:\"deletedIDs\""
+}
+
+func (t *DeleteBulkAssessment_DeleteBulkAssessment) GetDeletedIDs() []string {
+	if t == nil {
+		t = &DeleteBulkAssessment_DeleteBulkAssessment{}
+	}
+	return t.DeletedIDs
 }
 
 type GetAllAssessments_Assessments_PageInfo struct {
@@ -18655,6 +18676,617 @@ func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun) GetDirectorySyncRun() *U
 		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun{}
 	}
 	return &t.DirectorySyncRun
+}
+
+type CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions struct {
+	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ID         string     "json:\"id\" graphql:\"id\""
+	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
+	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	UpdatedAt  *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy  *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetExternalID() string {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions{}
+	}
+	return t.ExternalID
+}
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetID() string {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions{}
+	}
+	return t.ID
+}
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetIsResolved() bool {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions{}
+	}
+	return t.IsResolved
+}
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetOwnerID() *string {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions{}
+	}
+	return t.OwnerID
+}
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateBulkCSVDiscussion_CreateBulkCSVDiscussion struct {
+	Discussions []*CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions "json:\"discussions,omitempty\" graphql:\"discussions\""
+}
+
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion) GetDiscussions() []*CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion{}
+	}
+	return t.Discussions
+}
+
+type CreateBulkDiscussion_CreateBulkDiscussion_Discussions struct {
+	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ID         string     "json:\"id\" graphql:\"id\""
+	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
+	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	UpdatedAt  *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy  *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetExternalID() string {
+	if t == nil {
+		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
+	}
+	return t.ExternalID
+}
+func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetID() string {
+	if t == nil {
+		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
+	}
+	return t.ID
+}
+func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetIsResolved() bool {
+	if t == nil {
+		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
+	}
+	return t.IsResolved
+}
+func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetOwnerID() *string {
+	if t == nil {
+		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
+	}
+	return t.OwnerID
+}
+func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateBulkDiscussion_CreateBulkDiscussion struct {
+	Discussions []*CreateBulkDiscussion_CreateBulkDiscussion_Discussions "json:\"discussions,omitempty\" graphql:\"discussions\""
+}
+
+func (t *CreateBulkDiscussion_CreateBulkDiscussion) GetDiscussions() []*CreateBulkDiscussion_CreateBulkDiscussion_Discussions {
+	if t == nil {
+		t = &CreateBulkDiscussion_CreateBulkDiscussion{}
+	}
+	return t.Discussions
+}
+
+type CreateDiscussion_CreateDiscussion_Discussion struct {
+	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ID         string     "json:\"id\" graphql:\"id\""
+	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
+	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	UpdatedAt  *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy  *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateDiscussion_CreateDiscussion_Discussion) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateDiscussion_CreateDiscussion_Discussion{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateDiscussion_CreateDiscussion_Discussion) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateDiscussion_CreateDiscussion_Discussion{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateDiscussion_CreateDiscussion_Discussion) GetExternalID() string {
+	if t == nil {
+		t = &CreateDiscussion_CreateDiscussion_Discussion{}
+	}
+	return t.ExternalID
+}
+func (t *CreateDiscussion_CreateDiscussion_Discussion) GetID() string {
+	if t == nil {
+		t = &CreateDiscussion_CreateDiscussion_Discussion{}
+	}
+	return t.ID
+}
+func (t *CreateDiscussion_CreateDiscussion_Discussion) GetIsResolved() bool {
+	if t == nil {
+		t = &CreateDiscussion_CreateDiscussion_Discussion{}
+	}
+	return t.IsResolved
+}
+func (t *CreateDiscussion_CreateDiscussion_Discussion) GetOwnerID() *string {
+	if t == nil {
+		t = &CreateDiscussion_CreateDiscussion_Discussion{}
+	}
+	return t.OwnerID
+}
+func (t *CreateDiscussion_CreateDiscussion_Discussion) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateDiscussion_CreateDiscussion_Discussion{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateDiscussion_CreateDiscussion_Discussion) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateDiscussion_CreateDiscussion_Discussion{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateDiscussion_CreateDiscussion struct {
+	Discussion CreateDiscussion_CreateDiscussion_Discussion "json:\"discussion\" graphql:\"discussion\""
+}
+
+func (t *CreateDiscussion_CreateDiscussion) GetDiscussion() *CreateDiscussion_CreateDiscussion_Discussion {
+	if t == nil {
+		t = &CreateDiscussion_CreateDiscussion{}
+	}
+	return &t.Discussion
+}
+
+type DeleteDiscussion_DeleteDiscussion struct {
+	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
+}
+
+func (t *DeleteDiscussion_DeleteDiscussion) GetDeletedID() string {
+	if t == nil {
+		t = &DeleteDiscussion_DeleteDiscussion{}
+	}
+	return t.DeletedID
+}
+
+type GetAllDiscussions_Discussions_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetAllDiscussions_Discussions_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetAllDiscussions_Discussions_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetAllDiscussions_Discussions_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetAllDiscussions_Discussions_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetAllDiscussions_Discussions_Edges_Node struct {
+	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ID         string     "json:\"id\" graphql:\"id\""
+	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
+	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	UpdatedAt  *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy  *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetAllDiscussions_Discussions_Edges_Node) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_Edges_Node{}
+	}
+	return t.CreatedAt
+}
+func (t *GetAllDiscussions_Discussions_Edges_Node) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_Edges_Node{}
+	}
+	return t.CreatedBy
+}
+func (t *GetAllDiscussions_Discussions_Edges_Node) GetExternalID() string {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_Edges_Node{}
+	}
+	return t.ExternalID
+}
+func (t *GetAllDiscussions_Discussions_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetAllDiscussions_Discussions_Edges_Node) GetIsResolved() bool {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_Edges_Node{}
+	}
+	return t.IsResolved
+}
+func (t *GetAllDiscussions_Discussions_Edges_Node) GetOwnerID() *string {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_Edges_Node{}
+	}
+	return t.OwnerID
+}
+func (t *GetAllDiscussions_Discussions_Edges_Node) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_Edges_Node{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetAllDiscussions_Discussions_Edges_Node) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_Edges_Node{}
+	}
+	return t.UpdatedBy
+}
+
+type GetAllDiscussions_Discussions_Edges struct {
+	Node *GetAllDiscussions_Discussions_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetAllDiscussions_Discussions_Edges) GetNode() *GetAllDiscussions_Discussions_Edges_Node {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions_Edges{}
+	}
+	return t.Node
+}
+
+type GetAllDiscussions_Discussions struct {
+	Edges      []*GetAllDiscussions_Discussions_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo   GetAllDiscussions_Discussions_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+	TotalCount int64                                  "json:\"totalCount\" graphql:\"totalCount\""
+}
+
+func (t *GetAllDiscussions_Discussions) GetEdges() []*GetAllDiscussions_Discussions_Edges {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions{}
+	}
+	return t.Edges
+}
+func (t *GetAllDiscussions_Discussions) GetPageInfo() *GetAllDiscussions_Discussions_PageInfo {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions{}
+	}
+	return &t.PageInfo
+}
+func (t *GetAllDiscussions_Discussions) GetTotalCount() int64 {
+	if t == nil {
+		t = &GetAllDiscussions_Discussions{}
+	}
+	return t.TotalCount
+}
+
+type GetDiscussionByID_Discussion struct {
+	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ID         string     "json:\"id\" graphql:\"id\""
+	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
+	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	UpdatedAt  *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy  *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetDiscussionByID_Discussion) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetDiscussionByID_Discussion{}
+	}
+	return t.CreatedAt
+}
+func (t *GetDiscussionByID_Discussion) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetDiscussionByID_Discussion{}
+	}
+	return t.CreatedBy
+}
+func (t *GetDiscussionByID_Discussion) GetExternalID() string {
+	if t == nil {
+		t = &GetDiscussionByID_Discussion{}
+	}
+	return t.ExternalID
+}
+func (t *GetDiscussionByID_Discussion) GetID() string {
+	if t == nil {
+		t = &GetDiscussionByID_Discussion{}
+	}
+	return t.ID
+}
+func (t *GetDiscussionByID_Discussion) GetIsResolved() bool {
+	if t == nil {
+		t = &GetDiscussionByID_Discussion{}
+	}
+	return t.IsResolved
+}
+func (t *GetDiscussionByID_Discussion) GetOwnerID() *string {
+	if t == nil {
+		t = &GetDiscussionByID_Discussion{}
+	}
+	return t.OwnerID
+}
+func (t *GetDiscussionByID_Discussion) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetDiscussionByID_Discussion{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetDiscussionByID_Discussion) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetDiscussionByID_Discussion{}
+	}
+	return t.UpdatedBy
+}
+
+type GetDiscussions_Discussions_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetDiscussions_Discussions_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetDiscussions_Discussions_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetDiscussions_Discussions_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetDiscussions_Discussions_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetDiscussions_Discussions_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetDiscussions_Discussions_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetDiscussions_Discussions_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetDiscussions_Discussions_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetDiscussions_Discussions_Edges_Node struct {
+	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ID         string     "json:\"id\" graphql:\"id\""
+	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
+	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	UpdatedAt  *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy  *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetDiscussions_Discussions_Edges_Node) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetDiscussions_Discussions_Edges_Node{}
+	}
+	return t.CreatedAt
+}
+func (t *GetDiscussions_Discussions_Edges_Node) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetDiscussions_Discussions_Edges_Node{}
+	}
+	return t.CreatedBy
+}
+func (t *GetDiscussions_Discussions_Edges_Node) GetExternalID() string {
+	if t == nil {
+		t = &GetDiscussions_Discussions_Edges_Node{}
+	}
+	return t.ExternalID
+}
+func (t *GetDiscussions_Discussions_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetDiscussions_Discussions_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetDiscussions_Discussions_Edges_Node) GetIsResolved() bool {
+	if t == nil {
+		t = &GetDiscussions_Discussions_Edges_Node{}
+	}
+	return t.IsResolved
+}
+func (t *GetDiscussions_Discussions_Edges_Node) GetOwnerID() *string {
+	if t == nil {
+		t = &GetDiscussions_Discussions_Edges_Node{}
+	}
+	return t.OwnerID
+}
+func (t *GetDiscussions_Discussions_Edges_Node) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetDiscussions_Discussions_Edges_Node{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetDiscussions_Discussions_Edges_Node) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetDiscussions_Discussions_Edges_Node{}
+	}
+	return t.UpdatedBy
+}
+
+type GetDiscussions_Discussions_Edges struct {
+	Node *GetDiscussions_Discussions_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetDiscussions_Discussions_Edges) GetNode() *GetDiscussions_Discussions_Edges_Node {
+	if t == nil {
+		t = &GetDiscussions_Discussions_Edges{}
+	}
+	return t.Node
+}
+
+type GetDiscussions_Discussions struct {
+	Edges      []*GetDiscussions_Discussions_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo   GetDiscussions_Discussions_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+	TotalCount int64                               "json:\"totalCount\" graphql:\"totalCount\""
+}
+
+func (t *GetDiscussions_Discussions) GetEdges() []*GetDiscussions_Discussions_Edges {
+	if t == nil {
+		t = &GetDiscussions_Discussions{}
+	}
+	return t.Edges
+}
+func (t *GetDiscussions_Discussions) GetPageInfo() *GetDiscussions_Discussions_PageInfo {
+	if t == nil {
+		t = &GetDiscussions_Discussions{}
+	}
+	return &t.PageInfo
+}
+func (t *GetDiscussions_Discussions) GetTotalCount() int64 {
+	if t == nil {
+		t = &GetDiscussions_Discussions{}
+	}
+	return t.TotalCount
+}
+
+type UpdateDiscussion_UpdateDiscussion_Discussion struct {
+	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ID         string     "json:\"id\" graphql:\"id\""
+	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
+	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	UpdatedAt  *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy  *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateDiscussion_UpdateDiscussion_Discussion{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateDiscussion_UpdateDiscussion_Discussion{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetExternalID() string {
+	if t == nil {
+		t = &UpdateDiscussion_UpdateDiscussion_Discussion{}
+	}
+	return t.ExternalID
+}
+func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetID() string {
+	if t == nil {
+		t = &UpdateDiscussion_UpdateDiscussion_Discussion{}
+	}
+	return t.ID
+}
+func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetIsResolved() bool {
+	if t == nil {
+		t = &UpdateDiscussion_UpdateDiscussion_Discussion{}
+	}
+	return t.IsResolved
+}
+func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetOwnerID() *string {
+	if t == nil {
+		t = &UpdateDiscussion_UpdateDiscussion_Discussion{}
+	}
+	return t.OwnerID
+}
+func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateDiscussion_UpdateDiscussion_Discussion{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateDiscussion_UpdateDiscussion_Discussion{}
+	}
+	return t.UpdatedBy
+}
+
+type UpdateDiscussion_UpdateDiscussion struct {
+	Discussion UpdateDiscussion_UpdateDiscussion_Discussion "json:\"discussion\" graphql:\"discussion\""
+}
+
+func (t *UpdateDiscussion_UpdateDiscussion) GetDiscussion() *UpdateDiscussion_UpdateDiscussion_Discussion {
+	if t == nil {
+		t = &UpdateDiscussion_UpdateDiscussion{}
+	}
+	return &t.Discussion
 }
 
 type CreateBulkCSVDNSVerification_CreateBulkCSVDNSVerification_DNSVerifications struct {
@@ -67024,18 +67656,150 @@ func (t *GetAllTrustCenters_TrustCenters_Edges_Node_Setting) GetTitle() *string 
 	return t.Title
 }
 
+type GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile struct {
+	PresignedURL *string "json:\"presignedURL,omitempty\" graphql:\"presignedURL\""
+}
+
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile) GetPresignedURL() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile{}
+	}
+	return t.PresignedURL
+}
+
+type GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile struct {
+	PresignedURL *string "json:\"presignedURL,omitempty\" graphql:\"presignedURL\""
+}
+
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile) GetPresignedURL() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile{}
+	}
+	return t.PresignedURL
+}
+
+type GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting struct {
+	AccentColor        *string                                                                "json:\"accentColor,omitempty\" graphql:\"accentColor\""
+	BackgroundColor    *string                                                                "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	FaviconFile        *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile "json:\"faviconFile,omitempty\" graphql:\"faviconFile\""
+	FaviconLocalFileID *string                                                                "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
+	FaviconRemoteURL   *string                                                                "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
+	Font               *string                                                                "json:\"font,omitempty\" graphql:\"font\""
+	ForegroundColor    *string                                                                "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
+	ID                 string                                                                 "json:\"id\" graphql:\"id\""
+	LogoFile           *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile    "json:\"logoFile,omitempty\" graphql:\"logoFile\""
+	LogoLocalFileID    *string                                                                "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
+	LogoRemoteURL      *string                                                                "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Overview           *string                                                                "json:\"overview,omitempty\" graphql:\"overview\""
+	PrimaryColor       *string                                                                "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	ThemeMode          *enums.TrustCenterThemeMode                                            "json:\"themeMode,omitempty\" graphql:\"themeMode\""
+	Title              *string                                                                "json:\"title,omitempty\" graphql:\"title\""
+}
+
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetAccentColor() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.AccentColor
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetBackgroundColor() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.BackgroundColor
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetFaviconFile() *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.FaviconFile
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetFaviconLocalFileID() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.FaviconLocalFileID
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetFaviconRemoteURL() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.FaviconRemoteURL
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetFont() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.Font
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetForegroundColor() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.ForegroundColor
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetID() string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.ID
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetLogoFile() *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.LogoFile
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetLogoLocalFileID() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.LogoLocalFileID
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetLogoRemoteURL() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.LogoRemoteURL
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetOverview() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.Overview
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetPrimaryColor() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.PrimaryColor
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetThemeMode() *enums.TrustCenterThemeMode {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.ThemeMode
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetTitle() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.Title
+}
+
 type GetAllTrustCenters_TrustCenters_Edges_Node struct {
-	CreatedAt      *time.Time                                               "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                                  "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CustomDomain   *GetAllTrustCenters_TrustCenters_Edges_Node_CustomDomain "json:\"customDomain,omitempty\" graphql:\"customDomain\""
-	CustomDomainID *string                                                  "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
-	ID             string                                                   "json:\"id\" graphql:\"id\""
-	OwnerID        *string                                                  "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Setting        *GetAllTrustCenters_TrustCenters_Edges_Node_Setting      "json:\"setting,omitempty\" graphql:\"setting\""
-	Slug           *string                                                  "json:\"slug,omitempty\" graphql:\"slug\""
-	Tags           []string                                                 "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt      *time.Time                                               "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                                  "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	CreatedAt      *time.Time                                                 "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy      *string                                                    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CustomDomain   *GetAllTrustCenters_TrustCenters_Edges_Node_CustomDomain   "json:\"customDomain,omitempty\" graphql:\"customDomain\""
+	CustomDomainID *string                                                    "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
+	ID             string                                                     "json:\"id\" graphql:\"id\""
+	OwnerID        *string                                                    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PreviewSetting *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting "json:\"previewSetting,omitempty\" graphql:\"previewSetting\""
+	Setting        *GetAllTrustCenters_TrustCenters_Edges_Node_Setting        "json:\"setting,omitempty\" graphql:\"setting\""
+	Slug           *string                                                    "json:\"slug,omitempty\" graphql:\"slug\""
+	Tags           []string                                                   "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt      *time.Time                                                 "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy      *string                                                    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetAllTrustCenters_TrustCenters_Edges_Node) GetCreatedAt() *time.Time {
@@ -67073,6 +67837,12 @@ func (t *GetAllTrustCenters_TrustCenters_Edges_Node) GetOwnerID() *string {
 		t = &GetAllTrustCenters_TrustCenters_Edges_Node{}
 	}
 	return t.OwnerID
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node) GetPreviewSetting() *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node{}
+	}
+	return t.PreviewSetting
 }
 func (t *GetAllTrustCenters_TrustCenters_Edges_Node) GetSetting() *GetAllTrustCenters_TrustCenters_Edges_Node_Setting {
 	if t == nil {
@@ -67368,21 +68138,153 @@ func (t *GetTrustCenterByID_TrustCenter_Setting) GetTitle() *string {
 	return t.Title
 }
 
+type GetTrustCenterByID_TrustCenter_PreviewSetting_LogoFile struct {
+	PresignedURL *string "json:\"presignedURL,omitempty\" graphql:\"presignedURL\""
+}
+
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting_LogoFile) GetPresignedURL() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting_LogoFile{}
+	}
+	return t.PresignedURL
+}
+
+type GetTrustCenterByID_TrustCenter_PreviewSetting_FaviconFile struct {
+	PresignedURL *string "json:\"presignedURL,omitempty\" graphql:\"presignedURL\""
+}
+
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting_FaviconFile) GetPresignedURL() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting_FaviconFile{}
+	}
+	return t.PresignedURL
+}
+
+type GetTrustCenterByID_TrustCenter_PreviewSetting struct {
+	AccentColor        *string                                                    "json:\"accentColor,omitempty\" graphql:\"accentColor\""
+	BackgroundColor    *string                                                    "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	FaviconFile        *GetTrustCenterByID_TrustCenter_PreviewSetting_FaviconFile "json:\"faviconFile,omitempty\" graphql:\"faviconFile\""
+	FaviconLocalFileID *string                                                    "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
+	FaviconRemoteURL   *string                                                    "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
+	Font               *string                                                    "json:\"font,omitempty\" graphql:\"font\""
+	ForegroundColor    *string                                                    "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
+	ID                 string                                                     "json:\"id\" graphql:\"id\""
+	LogoFile           *GetTrustCenterByID_TrustCenter_PreviewSetting_LogoFile    "json:\"logoFile,omitempty\" graphql:\"logoFile\""
+	LogoLocalFileID    *string                                                    "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
+	LogoRemoteURL      *string                                                    "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Overview           *string                                                    "json:\"overview,omitempty\" graphql:\"overview\""
+	PrimaryColor       *string                                                    "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	ThemeMode          *enums.TrustCenterThemeMode                                "json:\"themeMode,omitempty\" graphql:\"themeMode\""
+	Title              *string                                                    "json:\"title,omitempty\" graphql:\"title\""
+}
+
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetAccentColor() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.AccentColor
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetBackgroundColor() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.BackgroundColor
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetFaviconFile() *GetTrustCenterByID_TrustCenter_PreviewSetting_FaviconFile {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.FaviconFile
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetFaviconLocalFileID() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.FaviconLocalFileID
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetFaviconRemoteURL() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.FaviconRemoteURL
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetFont() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.Font
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetForegroundColor() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.ForegroundColor
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetID() string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.ID
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetLogoFile() *GetTrustCenterByID_TrustCenter_PreviewSetting_LogoFile {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.LogoFile
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetLogoLocalFileID() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.LogoLocalFileID
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetLogoRemoteURL() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.LogoRemoteURL
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetOverview() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.Overview
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetPrimaryColor() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.PrimaryColor
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetThemeMode() *enums.TrustCenterThemeMode {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.ThemeMode
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewSetting) GetTitle() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewSetting{}
+	}
+	return t.Title
+}
+
 type GetTrustCenterByID_TrustCenter struct {
-	CreatedAt                *time.Time                                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy                *string                                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CustomDomain             *GetTrustCenterByID_TrustCenter_CustomDomain  "json:\"customDomain,omitempty\" graphql:\"customDomain\""
-	CustomDomainID           *string                                       "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
-	ID                       string                                        "json:\"id\" graphql:\"id\""
-	OwnerID                  *string                                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PirschDomainID           *string                                       "json:\"pirschDomainID,omitempty\" graphql:\"pirschDomainID\""
-	PirschIdentificationCode *string                                       "json:\"pirschIdentificationCode,omitempty\" graphql:\"pirschIdentificationCode\""
-	PreviewDomain            *GetTrustCenterByID_TrustCenter_PreviewDomain "json:\"previewDomain,omitempty\" graphql:\"previewDomain\""
-	Setting                  *GetTrustCenterByID_TrustCenter_Setting       "json:\"setting,omitempty\" graphql:\"setting\""
-	Slug                     *string                                       "json:\"slug,omitempty\" graphql:\"slug\""
-	Tags                     []string                                      "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt                *time.Time                                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy                *string                                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	CreatedAt                *time.Time                                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy                *string                                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CustomDomain             *GetTrustCenterByID_TrustCenter_CustomDomain   "json:\"customDomain,omitempty\" graphql:\"customDomain\""
+	CustomDomainID           *string                                        "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
+	ID                       string                                         "json:\"id\" graphql:\"id\""
+	OwnerID                  *string                                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PirschDomainID           *string                                        "json:\"pirschDomainID,omitempty\" graphql:\"pirschDomainID\""
+	PirschIdentificationCode *string                                        "json:\"pirschIdentificationCode,omitempty\" graphql:\"pirschIdentificationCode\""
+	PreviewDomain            *GetTrustCenterByID_TrustCenter_PreviewDomain  "json:\"previewDomain,omitempty\" graphql:\"previewDomain\""
+	PreviewSetting           *GetTrustCenterByID_TrustCenter_PreviewSetting "json:\"previewSetting,omitempty\" graphql:\"previewSetting\""
+	Setting                  *GetTrustCenterByID_TrustCenter_Setting        "json:\"setting,omitempty\" graphql:\"setting\""
+	Slug                     *string                                        "json:\"slug,omitempty\" graphql:\"slug\""
+	Tags                     []string                                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt                *time.Time                                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy                *string                                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetTrustCenterByID_TrustCenter) GetCreatedAt() *time.Time {
@@ -67438,6 +68340,12 @@ func (t *GetTrustCenterByID_TrustCenter) GetPreviewDomain() *GetTrustCenterByID_
 		t = &GetTrustCenterByID_TrustCenter{}
 	}
 	return t.PreviewDomain
+}
+func (t *GetTrustCenterByID_TrustCenter) GetPreviewSetting() *GetTrustCenterByID_TrustCenter_PreviewSetting {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter{}
+	}
+	return t.PreviewSetting
 }
 func (t *GetTrustCenterByID_TrustCenter) GetSetting() *GetTrustCenterByID_TrustCenter_Setting {
 	if t == nil {
@@ -67651,18 +68559,150 @@ func (t *GetTrustCenters_TrustCenters_Edges_Node_Setting) GetTitle() *string {
 	return t.Title
 }
 
+type GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile struct {
+	PresignedURL *string "json:\"presignedURL,omitempty\" graphql:\"presignedURL\""
+}
+
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile) GetPresignedURL() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile{}
+	}
+	return t.PresignedURL
+}
+
+type GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile struct {
+	PresignedURL *string "json:\"presignedURL,omitempty\" graphql:\"presignedURL\""
+}
+
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile) GetPresignedURL() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile{}
+	}
+	return t.PresignedURL
+}
+
+type GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting struct {
+	AccentColor        *string                                                             "json:\"accentColor,omitempty\" graphql:\"accentColor\""
+	BackgroundColor    *string                                                             "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	FaviconFile        *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile "json:\"faviconFile,omitempty\" graphql:\"faviconFile\""
+	FaviconLocalFileID *string                                                             "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
+	FaviconRemoteURL   *string                                                             "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
+	Font               *string                                                             "json:\"font,omitempty\" graphql:\"font\""
+	ForegroundColor    *string                                                             "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
+	ID                 string                                                              "json:\"id\" graphql:\"id\""
+	LogoFile           *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile    "json:\"logoFile,omitempty\" graphql:\"logoFile\""
+	LogoLocalFileID    *string                                                             "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
+	LogoRemoteURL      *string                                                             "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Overview           *string                                                             "json:\"overview,omitempty\" graphql:\"overview\""
+	PrimaryColor       *string                                                             "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	ThemeMode          *enums.TrustCenterThemeMode                                         "json:\"themeMode,omitempty\" graphql:\"themeMode\""
+	Title              *string                                                             "json:\"title,omitempty\" graphql:\"title\""
+}
+
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetAccentColor() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.AccentColor
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetBackgroundColor() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.BackgroundColor
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetFaviconFile() *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_FaviconFile {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.FaviconFile
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetFaviconLocalFileID() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.FaviconLocalFileID
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetFaviconRemoteURL() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.FaviconRemoteURL
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetFont() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.Font
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetForegroundColor() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.ForegroundColor
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetID() string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.ID
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetLogoFile() *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting_LogoFile {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.LogoFile
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetLogoLocalFileID() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.LogoLocalFileID
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetLogoRemoteURL() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.LogoRemoteURL
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetOverview() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.Overview
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetPrimaryColor() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.PrimaryColor
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetThemeMode() *enums.TrustCenterThemeMode {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.ThemeMode
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetTitle() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting{}
+	}
+	return t.Title
+}
+
 type GetTrustCenters_TrustCenters_Edges_Node struct {
-	CreatedAt      *time.Time                                            "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                               "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CustomDomain   *GetTrustCenters_TrustCenters_Edges_Node_CustomDomain "json:\"customDomain,omitempty\" graphql:\"customDomain\""
-	CustomDomainID *string                                               "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
-	ID             string                                                "json:\"id\" graphql:\"id\""
-	OwnerID        *string                                               "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Setting        *GetTrustCenters_TrustCenters_Edges_Node_Setting      "json:\"setting,omitempty\" graphql:\"setting\""
-	Slug           *string                                               "json:\"slug,omitempty\" graphql:\"slug\""
-	Tags           []string                                              "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt      *time.Time                                            "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                               "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	CreatedAt      *time.Time                                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy      *string                                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CustomDomain   *GetTrustCenters_TrustCenters_Edges_Node_CustomDomain   "json:\"customDomain,omitempty\" graphql:\"customDomain\""
+	CustomDomainID *string                                                 "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
+	ID             string                                                  "json:\"id\" graphql:\"id\""
+	OwnerID        *string                                                 "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PreviewSetting *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting "json:\"previewSetting,omitempty\" graphql:\"previewSetting\""
+	Setting        *GetTrustCenters_TrustCenters_Edges_Node_Setting        "json:\"setting,omitempty\" graphql:\"setting\""
+	Slug           *string                                                 "json:\"slug,omitempty\" graphql:\"slug\""
+	Tags           []string                                                "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt      *time.Time                                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy      *string                                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetTrustCenters_TrustCenters_Edges_Node) GetCreatedAt() *time.Time {
@@ -67700,6 +68740,12 @@ func (t *GetTrustCenters_TrustCenters_Edges_Node) GetOwnerID() *string {
 		t = &GetTrustCenters_TrustCenters_Edges_Node{}
 	}
 	return t.OwnerID
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node) GetPreviewSetting() *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node{}
+	}
+	return t.PreviewSetting
 }
 func (t *GetTrustCenters_TrustCenters_Edges_Node) GetSetting() *GetTrustCenters_TrustCenters_Edges_Node_Setting {
 	if t == nil {
@@ -70472,25 +71518,174 @@ func (t *UpdateTrustCenterNda_UpdateTrustCenterNda) GetTemplate() *UpdateTrustCe
 	return &t.Template
 }
 
+type CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting struct {
+	AccentColor        *string                       "json:\"accentColor,omitempty\" graphql:\"accentColor\""
+	BackgroundColor    *string                       "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	CreatedAt          *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy          *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Environment        *enums.TrustCenterEnvironment "json:\"environment,omitempty\" graphql:\"environment\""
+	FaviconLocalFileID *string                       "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
+	FaviconRemoteURL   *string                       "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
+	Font               *string                       "json:\"font,omitempty\" graphql:\"font\""
+	ForegroundColor    *string                       "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
+	ID                 string                        "json:\"id\" graphql:\"id\""
+	LogoLocalFileID    *string                       "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
+	LogoRemoteURL      *string                       "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Overview           *string                       "json:\"overview,omitempty\" graphql:\"overview\""
+	PrimaryColor       *string                       "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	ThemeMode          *enums.TrustCenterThemeMode   "json:\"themeMode,omitempty\" graphql:\"themeMode\""
+	Title              *string                       "json:\"title,omitempty\" graphql:\"title\""
+	TrustCenterID      *string                       "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt          *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy          *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetAccentColor() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.AccentColor
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetBackgroundColor() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.BackgroundColor
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetEnvironment() *enums.TrustCenterEnvironment {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.Environment
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetFaviconLocalFileID() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.FaviconLocalFileID
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetFaviconRemoteURL() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.FaviconRemoteURL
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetFont() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.Font
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetForegroundColor() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.ForegroundColor
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetID() string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.ID
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetLogoLocalFileID() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.LogoLocalFileID
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetLogoRemoteURL() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.LogoRemoteURL
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetOverview() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.Overview
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetPrimaryColor() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.PrimaryColor
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetThemeMode() *enums.TrustCenterThemeMode {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.ThemeMode
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetTitle() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.Title
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetTrustCenterID() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.TrustCenterID
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting struct {
+	TrustCenterSetting CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting "json:\"trustCenterSetting\" graphql:\"trustCenterSetting\""
+}
+
+func (t *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting) GetTrustCenterSetting() *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting{}
+	}
+	return &t.TrustCenterSetting
+}
+
 type CreateTrustCenterSetting_CreateTrustCenterSetting_TrustCenterSetting struct {
-	AccentColor        *string                     "json:\"accentColor,omitempty\" graphql:\"accentColor\""
-	BackgroundColor    *string                     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	CreatedAt          *time.Time                  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FaviconLocalFileID *string                     "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
-	FaviconRemoteURL   *string                     "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
-	Font               *string                     "json:\"font,omitempty\" graphql:\"font\""
-	ForegroundColor    *string                     "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
-	ID                 string                      "json:\"id\" graphql:\"id\""
-	LogoLocalFileID    *string                     "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
-	LogoRemoteURL      *string                     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Overview           *string                     "json:\"overview,omitempty\" graphql:\"overview\""
-	PrimaryColor       *string                     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	ThemeMode          *enums.TrustCenterThemeMode "json:\"themeMode,omitempty\" graphql:\"themeMode\""
-	Title              *string                     "json:\"title,omitempty\" graphql:\"title\""
-	TrustCenterID      *string                     "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt          *time.Time                  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccentColor        *string                       "json:\"accentColor,omitempty\" graphql:\"accentColor\""
+	BackgroundColor    *string                       "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	CreatedAt          *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy          *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Environment        *enums.TrustCenterEnvironment "json:\"environment,omitempty\" graphql:\"environment\""
+	FaviconLocalFileID *string                       "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
+	FaviconRemoteURL   *string                       "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
+	Font               *string                       "json:\"font,omitempty\" graphql:\"font\""
+	ForegroundColor    *string                       "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
+	ID                 string                        "json:\"id\" graphql:\"id\""
+	LogoLocalFileID    *string                       "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
+	LogoRemoteURL      *string                       "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Overview           *string                       "json:\"overview,omitempty\" graphql:\"overview\""
+	PrimaryColor       *string                       "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	ThemeMode          *enums.TrustCenterThemeMode   "json:\"themeMode,omitempty\" graphql:\"themeMode\""
+	Title              *string                       "json:\"title,omitempty\" graphql:\"title\""
+	TrustCenterID      *string                       "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt          *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy          *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *CreateTrustCenterSetting_CreateTrustCenterSetting_TrustCenterSetting) GetAccentColor() *string {
@@ -70516,6 +71711,12 @@ func (t *CreateTrustCenterSetting_CreateTrustCenterSetting_TrustCenterSetting) G
 		t = &CreateTrustCenterSetting_CreateTrustCenterSetting_TrustCenterSetting{}
 	}
 	return t.CreatedBy
+}
+func (t *CreateTrustCenterSetting_CreateTrustCenterSetting_TrustCenterSetting) GetEnvironment() *enums.TrustCenterEnvironment {
+	if t == nil {
+		t = &CreateTrustCenterSetting_CreateTrustCenterSetting_TrustCenterSetting{}
+	}
+	return t.Environment
 }
 func (t *CreateTrustCenterSetting_CreateTrustCenterSetting_TrustCenterSetting) GetFaviconLocalFileID() *string {
 	if t == nil {
@@ -70657,24 +71858,25 @@ func (t *GetAllTrustCenterSettings_TrustCenterSettings_PageInfo) GetStartCursor(
 }
 
 type GetAllTrustCenterSettings_TrustCenterSettings_Edges_Node struct {
-	AccentColor        *string                     "json:\"accentColor,omitempty\" graphql:\"accentColor\""
-	BackgroundColor    *string                     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	CreatedAt          *time.Time                  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FaviconLocalFileID *string                     "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
-	FaviconRemoteURL   *string                     "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
-	Font               *string                     "json:\"font,omitempty\" graphql:\"font\""
-	ForegroundColor    *string                     "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
-	ID                 string                      "json:\"id\" graphql:\"id\""
-	LogoLocalFileID    *string                     "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
-	LogoRemoteURL      *string                     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Overview           *string                     "json:\"overview,omitempty\" graphql:\"overview\""
-	PrimaryColor       *string                     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	ThemeMode          *enums.TrustCenterThemeMode "json:\"themeMode,omitempty\" graphql:\"themeMode\""
-	Title              *string                     "json:\"title,omitempty\" graphql:\"title\""
-	TrustCenterID      *string                     "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt          *time.Time                  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccentColor        *string                       "json:\"accentColor,omitempty\" graphql:\"accentColor\""
+	BackgroundColor    *string                       "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	CreatedAt          *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy          *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Environment        *enums.TrustCenterEnvironment "json:\"environment,omitempty\" graphql:\"environment\""
+	FaviconLocalFileID *string                       "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
+	FaviconRemoteURL   *string                       "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
+	Font               *string                       "json:\"font,omitempty\" graphql:\"font\""
+	ForegroundColor    *string                       "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
+	ID                 string                        "json:\"id\" graphql:\"id\""
+	LogoLocalFileID    *string                       "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
+	LogoRemoteURL      *string                       "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Overview           *string                       "json:\"overview,omitempty\" graphql:\"overview\""
+	PrimaryColor       *string                       "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	ThemeMode          *enums.TrustCenterThemeMode   "json:\"themeMode,omitempty\" graphql:\"themeMode\""
+	Title              *string                       "json:\"title,omitempty\" graphql:\"title\""
+	TrustCenterID      *string                       "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt          *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy          *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetAllTrustCenterSettings_TrustCenterSettings_Edges_Node) GetAccentColor() *string {
@@ -70700,6 +71902,12 @@ func (t *GetAllTrustCenterSettings_TrustCenterSettings_Edges_Node) GetCreatedBy(
 		t = &GetAllTrustCenterSettings_TrustCenterSettings_Edges_Node{}
 	}
 	return t.CreatedBy
+}
+func (t *GetAllTrustCenterSettings_TrustCenterSettings_Edges_Node) GetEnvironment() *enums.TrustCenterEnvironment {
+	if t == nil {
+		t = &GetAllTrustCenterSettings_TrustCenterSettings_Edges_Node{}
+	}
+	return t.Environment
 }
 func (t *GetAllTrustCenterSettings_TrustCenterSettings_Edges_Node) GetFaviconLocalFileID() *string {
 	if t == nil {
@@ -70823,24 +72031,25 @@ func (t *GetAllTrustCenterSettings_TrustCenterSettings) GetTotalCount() int64 {
 }
 
 type GetTrustCenterSettingByID_TrustCenterSetting struct {
-	AccentColor        *string                     "json:\"accentColor,omitempty\" graphql:\"accentColor\""
-	BackgroundColor    *string                     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	CreatedAt          *time.Time                  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FaviconLocalFileID *string                     "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
-	FaviconRemoteURL   *string                     "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
-	Font               *string                     "json:\"font,omitempty\" graphql:\"font\""
-	ForegroundColor    *string                     "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
-	ID                 string                      "json:\"id\" graphql:\"id\""
-	LogoLocalFileID    *string                     "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
-	LogoRemoteURL      *string                     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Overview           *string                     "json:\"overview,omitempty\" graphql:\"overview\""
-	PrimaryColor       *string                     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	ThemeMode          *enums.TrustCenterThemeMode "json:\"themeMode,omitempty\" graphql:\"themeMode\""
-	Title              *string                     "json:\"title,omitempty\" graphql:\"title\""
-	TrustCenterID      *string                     "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt          *time.Time                  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccentColor        *string                       "json:\"accentColor,omitempty\" graphql:\"accentColor\""
+	BackgroundColor    *string                       "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	CreatedAt          *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy          *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Environment        *enums.TrustCenterEnvironment "json:\"environment,omitempty\" graphql:\"environment\""
+	FaviconLocalFileID *string                       "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
+	FaviconRemoteURL   *string                       "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
+	Font               *string                       "json:\"font,omitempty\" graphql:\"font\""
+	ForegroundColor    *string                       "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
+	ID                 string                        "json:\"id\" graphql:\"id\""
+	LogoLocalFileID    *string                       "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
+	LogoRemoteURL      *string                       "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Overview           *string                       "json:\"overview,omitempty\" graphql:\"overview\""
+	PrimaryColor       *string                       "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	ThemeMode          *enums.TrustCenterThemeMode   "json:\"themeMode,omitempty\" graphql:\"themeMode\""
+	Title              *string                       "json:\"title,omitempty\" graphql:\"title\""
+	TrustCenterID      *string                       "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt          *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy          *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetTrustCenterSettingByID_TrustCenterSetting) GetAccentColor() *string {
@@ -70866,6 +72075,12 @@ func (t *GetTrustCenterSettingByID_TrustCenterSetting) GetCreatedBy() *string {
 		t = &GetTrustCenterSettingByID_TrustCenterSetting{}
 	}
 	return t.CreatedBy
+}
+func (t *GetTrustCenterSettingByID_TrustCenterSetting) GetEnvironment() *enums.TrustCenterEnvironment {
+	if t == nil {
+		t = &GetTrustCenterSettingByID_TrustCenterSetting{}
+	}
+	return t.Environment
 }
 func (t *GetTrustCenterSettingByID_TrustCenterSetting) GetFaviconLocalFileID() *string {
 	if t == nil {
@@ -70985,24 +72200,25 @@ func (t *GetTrustCenterSettings_TrustCenterSettings_PageInfo) GetStartCursor() *
 }
 
 type GetTrustCenterSettings_TrustCenterSettings_Edges_Node struct {
-	AccentColor        *string                     "json:\"accentColor,omitempty\" graphql:\"accentColor\""
-	BackgroundColor    *string                     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	CreatedAt          *time.Time                  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FaviconLocalFileID *string                     "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
-	FaviconRemoteURL   *string                     "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
-	Font               *string                     "json:\"font,omitempty\" graphql:\"font\""
-	ForegroundColor    *string                     "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
-	ID                 string                      "json:\"id\" graphql:\"id\""
-	LogoLocalFileID    *string                     "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
-	LogoRemoteURL      *string                     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Overview           *string                     "json:\"overview,omitempty\" graphql:\"overview\""
-	PrimaryColor       *string                     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	ThemeMode          *enums.TrustCenterThemeMode "json:\"themeMode,omitempty\" graphql:\"themeMode\""
-	Title              *string                     "json:\"title,omitempty\" graphql:\"title\""
-	TrustCenterID      *string                     "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt          *time.Time                  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccentColor        *string                       "json:\"accentColor,omitempty\" graphql:\"accentColor\""
+	BackgroundColor    *string                       "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	CreatedAt          *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy          *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Environment        *enums.TrustCenterEnvironment "json:\"environment,omitempty\" graphql:\"environment\""
+	FaviconLocalFileID *string                       "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
+	FaviconRemoteURL   *string                       "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
+	Font               *string                       "json:\"font,omitempty\" graphql:\"font\""
+	ForegroundColor    *string                       "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
+	ID                 string                        "json:\"id\" graphql:\"id\""
+	LogoLocalFileID    *string                       "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
+	LogoRemoteURL      *string                       "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Overview           *string                       "json:\"overview,omitempty\" graphql:\"overview\""
+	PrimaryColor       *string                       "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	ThemeMode          *enums.TrustCenterThemeMode   "json:\"themeMode,omitempty\" graphql:\"themeMode\""
+	Title              *string                       "json:\"title,omitempty\" graphql:\"title\""
+	TrustCenterID      *string                       "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt          *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy          *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetTrustCenterSettings_TrustCenterSettings_Edges_Node) GetAccentColor() *string {
@@ -71028,6 +72244,12 @@ func (t *GetTrustCenterSettings_TrustCenterSettings_Edges_Node) GetCreatedBy() *
 		t = &GetTrustCenterSettings_TrustCenterSettings_Edges_Node{}
 	}
 	return t.CreatedBy
+}
+func (t *GetTrustCenterSettings_TrustCenterSettings_Edges_Node) GetEnvironment() *enums.TrustCenterEnvironment {
+	if t == nil {
+		t = &GetTrustCenterSettings_TrustCenterSettings_Edges_Node{}
+	}
+	return t.Environment
 }
 func (t *GetTrustCenterSettings_TrustCenterSettings_Edges_Node) GetFaviconLocalFileID() *string {
 	if t == nil {
@@ -71151,24 +72373,25 @@ func (t *GetTrustCenterSettings_TrustCenterSettings) GetTotalCount() int64 {
 }
 
 type UpdateTrustCenterSetting_UpdateTrustCenterSetting_TrustCenterSetting struct {
-	AccentColor        *string                     "json:\"accentColor,omitempty\" graphql:\"accentColor\""
-	BackgroundColor    *string                     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	CreatedAt          *time.Time                  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FaviconLocalFileID *string                     "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
-	FaviconRemoteURL   *string                     "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
-	Font               *string                     "json:\"font,omitempty\" graphql:\"font\""
-	ForegroundColor    *string                     "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
-	ID                 string                      "json:\"id\" graphql:\"id\""
-	LogoLocalFileID    *string                     "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
-	LogoRemoteURL      *string                     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Overview           *string                     "json:\"overview,omitempty\" graphql:\"overview\""
-	PrimaryColor       *string                     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	ThemeMode          *enums.TrustCenterThemeMode "json:\"themeMode,omitempty\" graphql:\"themeMode\""
-	Title              *string                     "json:\"title,omitempty\" graphql:\"title\""
-	TrustCenterID      *string                     "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt          *time.Time                  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccentColor        *string                       "json:\"accentColor,omitempty\" graphql:\"accentColor\""
+	BackgroundColor    *string                       "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	CreatedAt          *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy          *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Environment        *enums.TrustCenterEnvironment "json:\"environment,omitempty\" graphql:\"environment\""
+	FaviconLocalFileID *string                       "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
+	FaviconRemoteURL   *string                       "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
+	Font               *string                       "json:\"font,omitempty\" graphql:\"font\""
+	ForegroundColor    *string                       "json:\"foregroundColor,omitempty\" graphql:\"foregroundColor\""
+	ID                 string                        "json:\"id\" graphql:\"id\""
+	LogoLocalFileID    *string                       "json:\"logoLocalFileID,omitempty\" graphql:\"logoLocalFileID\""
+	LogoRemoteURL      *string                       "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Overview           *string                       "json:\"overview,omitempty\" graphql:\"overview\""
+	PrimaryColor       *string                       "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	ThemeMode          *enums.TrustCenterThemeMode   "json:\"themeMode,omitempty\" graphql:\"themeMode\""
+	Title              *string                       "json:\"title,omitempty\" graphql:\"title\""
+	TrustCenterID      *string                       "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt          *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy          *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *UpdateTrustCenterSetting_UpdateTrustCenterSetting_TrustCenterSetting) GetAccentColor() *string {
@@ -71194,6 +72417,12 @@ func (t *UpdateTrustCenterSetting_UpdateTrustCenterSetting_TrustCenterSetting) G
 		t = &UpdateTrustCenterSetting_UpdateTrustCenterSetting_TrustCenterSetting{}
 	}
 	return t.CreatedBy
+}
+func (t *UpdateTrustCenterSetting_UpdateTrustCenterSetting_TrustCenterSetting) GetEnvironment() *enums.TrustCenterEnvironment {
+	if t == nil {
+		t = &UpdateTrustCenterSetting_UpdateTrustCenterSetting_TrustCenterSetting{}
+	}
+	return t.Environment
 }
 func (t *UpdateTrustCenterSetting_UpdateTrustCenterSetting_TrustCenterSetting) GetFaviconLocalFileID() *string {
 	if t == nil {
@@ -82789,6 +84018,17 @@ func (t *DeleteAssessment) GetDeleteAssessment() *DeleteAssessment_DeleteAssessm
 	return &t.DeleteAssessment
 }
 
+type DeleteBulkAssessment struct {
+	DeleteBulkAssessment DeleteBulkAssessment_DeleteBulkAssessment "json:\"deleteBulkAssessment\" graphql:\"deleteBulkAssessment\""
+}
+
+func (t *DeleteBulkAssessment) GetDeleteBulkAssessment() *DeleteBulkAssessment_DeleteBulkAssessment {
+	if t == nil {
+		t = &DeleteBulkAssessment{}
+	}
+	return &t.DeleteBulkAssessment
+}
+
 type GetAllAssessments struct {
 	Assessments GetAllAssessments_Assessments "json:\"assessments\" graphql:\"assessments\""
 }
@@ -83942,6 +85182,94 @@ func (t *UpdateDirectorySyncRun) GetUpdateDirectorySyncRun() *UpdateDirectorySyn
 		t = &UpdateDirectorySyncRun{}
 	}
 	return &t.UpdateDirectorySyncRun
+}
+
+type CreateBulkCSVDiscussion struct {
+	CreateBulkCSVDiscussion CreateBulkCSVDiscussion_CreateBulkCSVDiscussion "json:\"createBulkCSVDiscussion\" graphql:\"createBulkCSVDiscussion\""
+}
+
+func (t *CreateBulkCSVDiscussion) GetCreateBulkCSVDiscussion() *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion {
+	if t == nil {
+		t = &CreateBulkCSVDiscussion{}
+	}
+	return &t.CreateBulkCSVDiscussion
+}
+
+type CreateBulkDiscussion struct {
+	CreateBulkDiscussion CreateBulkDiscussion_CreateBulkDiscussion "json:\"createBulkDiscussion\" graphql:\"createBulkDiscussion\""
+}
+
+func (t *CreateBulkDiscussion) GetCreateBulkDiscussion() *CreateBulkDiscussion_CreateBulkDiscussion {
+	if t == nil {
+		t = &CreateBulkDiscussion{}
+	}
+	return &t.CreateBulkDiscussion
+}
+
+type CreateDiscussion struct {
+	CreateDiscussion CreateDiscussion_CreateDiscussion "json:\"createDiscussion\" graphql:\"createDiscussion\""
+}
+
+func (t *CreateDiscussion) GetCreateDiscussion() *CreateDiscussion_CreateDiscussion {
+	if t == nil {
+		t = &CreateDiscussion{}
+	}
+	return &t.CreateDiscussion
+}
+
+type DeleteDiscussion struct {
+	DeleteDiscussion DeleteDiscussion_DeleteDiscussion "json:\"deleteDiscussion\" graphql:\"deleteDiscussion\""
+}
+
+func (t *DeleteDiscussion) GetDeleteDiscussion() *DeleteDiscussion_DeleteDiscussion {
+	if t == nil {
+		t = &DeleteDiscussion{}
+	}
+	return &t.DeleteDiscussion
+}
+
+type GetAllDiscussions struct {
+	Discussions GetAllDiscussions_Discussions "json:\"discussions\" graphql:\"discussions\""
+}
+
+func (t *GetAllDiscussions) GetDiscussions() *GetAllDiscussions_Discussions {
+	if t == nil {
+		t = &GetAllDiscussions{}
+	}
+	return &t.Discussions
+}
+
+type GetDiscussionByID struct {
+	Discussion GetDiscussionByID_Discussion "json:\"discussion\" graphql:\"discussion\""
+}
+
+func (t *GetDiscussionByID) GetDiscussion() *GetDiscussionByID_Discussion {
+	if t == nil {
+		t = &GetDiscussionByID{}
+	}
+	return &t.Discussion
+}
+
+type GetDiscussions struct {
+	Discussions GetDiscussions_Discussions "json:\"discussions\" graphql:\"discussions\""
+}
+
+func (t *GetDiscussions) GetDiscussions() *GetDiscussions_Discussions {
+	if t == nil {
+		t = &GetDiscussions{}
+	}
+	return &t.Discussions
+}
+
+type UpdateDiscussion struct {
+	UpdateDiscussion UpdateDiscussion_UpdateDiscussion "json:\"updateDiscussion\" graphql:\"updateDiscussion\""
+}
+
+func (t *UpdateDiscussion) GetUpdateDiscussion() *UpdateDiscussion_UpdateDiscussion {
+	if t == nil {
+		t = &UpdateDiscussion{}
+	}
+	return &t.UpdateDiscussion
 }
 
 type CreateBulkCSVDNSVerification struct {
@@ -87981,6 +89309,17 @@ func (t *UpdateTrustCenterNda) GetUpdateTrustCenterNda() *UpdateTrustCenterNda_U
 	return &t.UpdateTrustCenterNda
 }
 
+type CreateTrustCenterPreviewSetting struct {
+	CreateTrustCenterPreviewSetting CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting "json:\"createTrustCenterPreviewSetting\" graphql:\"createTrustCenterPreviewSetting\""
+}
+
+func (t *CreateTrustCenterPreviewSetting) GetCreateTrustCenterPreviewSetting() *CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting {
+	if t == nil {
+		t = &CreateTrustCenterPreviewSetting{}
+	}
+	return &t.CreateTrustCenterPreviewSetting
+}
+
 type CreateTrustCenterSetting struct {
 	CreateTrustCenterSetting CreateTrustCenterSetting_CreateTrustCenterSetting "json:\"createTrustCenterSetting\" graphql:\"createTrustCenterSetting\""
 }
@@ -89771,6 +91110,30 @@ func (c *Client) DeleteAssessment(ctx context.Context, deleteAssessmentID string
 
 	var res DeleteAssessment
 	if err := c.Client.Post(ctx, "DeleteAssessment", DeleteAssessmentDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const DeleteBulkAssessmentDocument = `mutation DeleteBulkAssessment ($ids: [ID!]!) {
+	deleteBulkAssessment(ids: $ids) {
+		deletedIDs
+	}
+}
+`
+
+func (c *Client) DeleteBulkAssessment(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkAssessment, error) {
+	vars := map[string]any{
+		"ids": ids,
+	}
+
+	var res DeleteBulkAssessment
+	if err := c.Client.Post(ctx, "DeleteBulkAssessment", DeleteBulkAssessmentDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -94541,6 +95904,287 @@ func (c *Client) UpdateDirectorySyncRun(ctx context.Context, updateDirectorySync
 
 	var res UpdateDirectorySyncRun
 	if err := c.Client.Post(ctx, "UpdateDirectorySyncRun", UpdateDirectorySyncRunDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateBulkCSVDiscussionDocument = `mutation CreateBulkCSVDiscussion ($input: Upload!) {
+	createBulkCSVDiscussion(input: $input) {
+		discussions {
+			createdAt
+			createdBy
+			externalID
+			id
+			isResolved
+			ownerID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateBulkCSVDiscussion(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVDiscussion, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateBulkCSVDiscussion
+	if err := c.Client.Post(ctx, "CreateBulkCSVDiscussion", CreateBulkCSVDiscussionDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateBulkDiscussionDocument = `mutation CreateBulkDiscussion ($input: [CreateDiscussionInput!]) {
+	createBulkDiscussion(input: $input) {
+		discussions {
+			createdAt
+			createdBy
+			externalID
+			id
+			isResolved
+			ownerID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateBulkDiscussion(ctx context.Context, input []*CreateDiscussionInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkDiscussion, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateBulkDiscussion
+	if err := c.Client.Post(ctx, "CreateBulkDiscussion", CreateBulkDiscussionDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateDiscussionDocument = `mutation CreateDiscussion ($input: CreateDiscussionInput!) {
+	createDiscussion(input: $input) {
+		discussion {
+			createdAt
+			createdBy
+			externalID
+			id
+			isResolved
+			ownerID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateDiscussion(ctx context.Context, input CreateDiscussionInput, interceptors ...clientv2.RequestInterceptor) (*CreateDiscussion, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateDiscussion
+	if err := c.Client.Post(ctx, "CreateDiscussion", CreateDiscussionDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const DeleteDiscussionDocument = `mutation DeleteDiscussion ($deleteDiscussionId: ID!) {
+	deleteDiscussion(id: $deleteDiscussionId) {
+		deletedID
+	}
+}
+`
+
+func (c *Client) DeleteDiscussion(ctx context.Context, deleteDiscussionID string, interceptors ...clientv2.RequestInterceptor) (*DeleteDiscussion, error) {
+	vars := map[string]any{
+		"deleteDiscussionId": deleteDiscussionID,
+	}
+
+	var res DeleteDiscussion
+	if err := c.Client.Post(ctx, "DeleteDiscussion", DeleteDiscussionDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetAllDiscussionsDocument = `query GetAllDiscussions ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DiscussionOrder!]) {
+	discussions(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				externalID
+				id
+				isResolved
+				ownerID
+				updatedAt
+				updatedBy
+			}
+		}
+	}
+}
+`
+
+func (c *Client) GetAllDiscussions(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*DiscussionOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllDiscussions, error) {
+	vars := map[string]any{
+		"first":   first,
+		"last":    last,
+		"after":   after,
+		"before":  before,
+		"orderBy": orderBy,
+	}
+
+	var res GetAllDiscussions
+	if err := c.Client.Post(ctx, "GetAllDiscussions", GetAllDiscussionsDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetDiscussionByIDDocument = `query GetDiscussionByID ($discussionId: ID!) {
+	discussion(id: $discussionId) {
+		createdAt
+		createdBy
+		externalID
+		id
+		isResolved
+		ownerID
+		updatedAt
+		updatedBy
+	}
+}
+`
+
+func (c *Client) GetDiscussionByID(ctx context.Context, discussionID string, interceptors ...clientv2.RequestInterceptor) (*GetDiscussionByID, error) {
+	vars := map[string]any{
+		"discussionId": discussionID,
+	}
+
+	var res GetDiscussionByID
+	if err := c.Client.Post(ctx, "GetDiscussionByID", GetDiscussionByIDDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetDiscussionsDocument = `query GetDiscussions ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DiscussionWhereInput, $orderBy: [DiscussionOrder!]) {
+	discussions(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				externalID
+				id
+				isResolved
+				ownerID
+				updatedAt
+				updatedBy
+			}
+		}
+	}
+}
+`
+
+func (c *Client) GetDiscussions(ctx context.Context, first *int64, last *int64, after *string, before *string, where *DiscussionWhereInput, orderBy []*DiscussionOrder, interceptors ...clientv2.RequestInterceptor) (*GetDiscussions, error) {
+	vars := map[string]any{
+		"first":   first,
+		"last":    last,
+		"after":   after,
+		"before":  before,
+		"where":   where,
+		"orderBy": orderBy,
+	}
+
+	var res GetDiscussions
+	if err := c.Client.Post(ctx, "GetDiscussions", GetDiscussionsDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateDiscussionDocument = `mutation UpdateDiscussion ($updateDiscussionId: ID!, $input: UpdateDiscussionInput!) {
+	updateDiscussion(id: $updateDiscussionId, input: $input) {
+		discussion {
+			createdAt
+			createdBy
+			externalID
+			id
+			isResolved
+			ownerID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) UpdateDiscussion(ctx context.Context, updateDiscussionID string, input UpdateDiscussionInput, interceptors ...clientv2.RequestInterceptor) (*UpdateDiscussion, error) {
+	vars := map[string]any{
+		"updateDiscussionId": updateDiscussionID,
+		"input":              input,
+	}
+
+	var res UpdateDiscussion
+	if err := c.Client.Post(ctx, "UpdateDiscussion", UpdateDiscussionDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -109978,6 +111622,27 @@ const GetAllTrustCentersDocument = `query GetAllTrustCenters ($first: Int, $last
 					backgroundColor
 					accentColor
 				}
+				previewSetting {
+					id
+					overview
+					title
+					primaryColor
+					logoRemoteURL
+					logoLocalFileID
+					logoFile {
+						presignedURL
+					}
+					faviconRemoteURL
+					faviconLocalFileID
+					faviconFile {
+						presignedURL
+					}
+					themeMode
+					font
+					foregroundColor
+					backgroundColor
+					accentColor
+				}
 			}
 		}
 	}
@@ -110056,6 +111721,27 @@ const GetTrustCenterByIDDocument = `query GetTrustCenterByID ($trustCenterId: ID
 			backgroundColor
 			accentColor
 		}
+		previewSetting {
+			id
+			overview
+			title
+			primaryColor
+			logoRemoteURL
+			logoLocalFileID
+			logoFile {
+				presignedURL
+			}
+			faviconRemoteURL
+			faviconLocalFileID
+			faviconFile {
+				presignedURL
+			}
+			themeMode
+			font
+			foregroundColor
+			backgroundColor
+			accentColor
+		}
 	}
 }
 `
@@ -110102,6 +111788,27 @@ const GetTrustCentersDocument = `query GetTrustCenters ($first: Int, $last: Int,
 					dnsVerificationID
 				}
 				setting {
+					id
+					overview
+					title
+					primaryColor
+					logoRemoteURL
+					logoLocalFileID
+					logoFile {
+						presignedURL
+					}
+					faviconRemoteURL
+					faviconLocalFileID
+					faviconFile {
+						presignedURL
+					}
+					themeMode
+					font
+					foregroundColor
+					backgroundColor
+					accentColor
+				}
+				previewSetting {
 					id
 					overview
 					title
@@ -111034,6 +112741,50 @@ func (c *Client) UpdateTrustCenterNda(ctx context.Context, id string, templateFi
 	return &res, nil
 }
 
+const CreateTrustCenterPreviewSettingDocument = `mutation CreateTrustCenterPreviewSetting ($input: CreateTrustCenterPreviewSettingInput!) {
+	createTrustCenterPreviewSetting(input: $input) {
+		trustCenterSetting {
+			accentColor
+			backgroundColor
+			createdAt
+			createdBy
+			environment
+			faviconLocalFileID
+			faviconRemoteURL
+			font
+			foregroundColor
+			id
+			logoLocalFileID
+			logoRemoteURL
+			overview
+			primaryColor
+			themeMode
+			title
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateTrustCenterPreviewSetting(ctx context.Context, input CreateTrustCenterPreviewSettingInput, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterPreviewSetting, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateTrustCenterPreviewSetting
+	if err := c.Client.Post(ctx, "CreateTrustCenterPreviewSetting", CreateTrustCenterPreviewSettingDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
 const CreateTrustCenterSettingDocument = `mutation CreateTrustCenterSetting ($input: CreateTrustCenterSettingInput!) {
 	createTrustCenterSetting(input: $input) {
 		trustCenterSetting {
@@ -111041,6 +112792,7 @@ const CreateTrustCenterSettingDocument = `mutation CreateTrustCenterSetting ($in
 			backgroundColor
 			createdAt
 			createdBy
+			environment
 			faviconLocalFileID
 			faviconRemoteURL
 			font
@@ -111116,6 +112868,7 @@ const GetAllTrustCenterSettingsDocument = `query GetAllTrustCenterSettings ($fir
 				backgroundColor
 				createdAt
 				createdBy
+				environment
 				faviconLocalFileID
 				faviconRemoteURL
 				font
@@ -111163,6 +112916,7 @@ const GetTrustCenterSettingByIDDocument = `query GetTrustCenterSettingByID ($tru
 		backgroundColor
 		createdAt
 		createdBy
+		environment
 		faviconLocalFileID
 		faviconRemoteURL
 		font
@@ -111213,6 +112967,7 @@ const GetTrustCenterSettingsDocument = `query GetTrustCenterSettings ($first: In
 				backgroundColor
 				createdAt
 				createdBy
+				environment
 				faviconLocalFileID
 				faviconRemoteURL
 				font
@@ -111262,6 +113017,7 @@ const UpdateTrustCenterSettingDocument = `mutation UpdateTrustCenterSetting ($up
 			backgroundColor
 			createdAt
 			createdBy
+			environment
 			faviconLocalFileID
 			faviconRemoteURL
 			font
@@ -114963,6 +116719,7 @@ var DocumentOperationNames = map[string]string{
 	UpdateAPITokenDocument:                        "UpdateAPIToken",
 	CreateAssessmentDocument:                      "CreateAssessment",
 	DeleteAssessmentDocument:                      "DeleteAssessment",
+	DeleteBulkAssessmentDocument:                  "DeleteBulkAssessment",
 	GetAllAssessmentsDocument:                     "GetAllAssessments",
 	GetAssessmentByIDDocument:                     "GetAssessmentByID",
 	GetAssessmentsDocument:                        "GetAssessments",
@@ -115068,6 +116825,14 @@ var DocumentOperationNames = map[string]string{
 	GetDirectorySyncRunByIDDocument:               "GetDirectorySyncRunByID",
 	GetDirectorySyncRunsDocument:                  "GetDirectorySyncRuns",
 	UpdateDirectorySyncRunDocument:                "UpdateDirectorySyncRun",
+	CreateBulkCSVDiscussionDocument:               "CreateBulkCSVDiscussion",
+	CreateBulkDiscussionDocument:                  "CreateBulkDiscussion",
+	CreateDiscussionDocument:                      "CreateDiscussion",
+	DeleteDiscussionDocument:                      "DeleteDiscussion",
+	GetAllDiscussionsDocument:                     "GetAllDiscussions",
+	GetDiscussionByIDDocument:                     "GetDiscussionByID",
+	GetDiscussionsDocument:                        "GetDiscussions",
+	UpdateDiscussionDocument:                      "UpdateDiscussion",
 	CreateBulkCSVDNSVerificationDocument:          "CreateBulkCSVDNSVerification",
 	CreateBulkDNSVerificationDocument:             "CreateBulkDNSVerification",
 	CreateDNSVerificationDocument:                 "CreateDNSVerification",
@@ -115435,6 +117200,7 @@ var DocumentOperationNames = map[string]string{
 	SendTrustCenterNDAEmailDocument:               "SendTrustCenterNDAEmail",
 	SubmitTrustCenterNDAResponseDocument:          "SubmitTrustCenterNDAResponse",
 	UpdateTrustCenterNdaDocument:                  "UpdateTrustCenterNda",
+	CreateTrustCenterPreviewSettingDocument:       "CreateTrustCenterPreviewSetting",
 	CreateTrustCenterSettingDocument:              "CreateTrustCenterSetting",
 	DeleteTrustCenterSettingDocument:              "DeleteTrustCenterSetting",
 	GetAllTrustCenterSettingsDocument:             "GetAllTrustCenterSettings",

@@ -22,6 +22,12 @@ mutation DeleteAssessment($deleteAssessmentId: ID!) {
   }
 }
 
+mutation DeleteBulkAssessment($ids: [ID!]!) {
+  deleteBulkAssessment(ids: $ids) {
+    deletedIDs
+  }
+}
+
 query GetAllAssessments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [AssessmentOrder!]){
   assessments(
     first: $first

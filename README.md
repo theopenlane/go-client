@@ -21,10 +21,9 @@ go get github.com/theopenlane/go-client
 ### Basic Setup
 
 ```go
-import (
-    "context"
-	openlane "github.com/theopenlane/go-client"
-)
+    import (
+        openlane "github.com/theopenlane/go-client"
+    )
 
     // get the api token
     apiToken := os.Getenv("OPENLANE_API_TOKEN")
@@ -33,7 +32,6 @@ import (
 	client, err := openlane.New(
 		openlane.WithAPIToken(apiToken),
 	)
-
 ```
 
 ### Basic Queries
