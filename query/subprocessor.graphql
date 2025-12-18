@@ -23,8 +23,14 @@ mutation DeleteSubprocessor($deleteSubprocessorId: ID!) {
   }
 }
 
-query GetAllSubprocessors {
-  subprocessors {
+query GetAllSubprocessors($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubprocessorOrder!]){
+  subprocessors(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

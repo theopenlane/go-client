@@ -49,8 +49,14 @@ mutation DeleteMappableDomain($deleteMappableDomainId: ID!) {
   }
 }
 
-query GetAllMappableDomains {
-  mappableDomains {
+query GetAllMappableDomains($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [MappableDomainOrder!]){
+  mappableDomains(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

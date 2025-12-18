@@ -67,8 +67,14 @@ mutation DeleteTagDefinition($deleteTagDefinitionId: ID!) {
   }
 }
 
-query GetAllTagDefinitions {
-  tagDefinitions {
+query GetAllTagDefinitions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TagDefinitionOrder!]){
+  tagDefinitions(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

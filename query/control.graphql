@@ -121,8 +121,14 @@ mutation DeleteControl($deleteControlId: ID!) {
   }
 }
 
-query GetAllControls {
-  controls {
+query GetAllControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]){
+  controls(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

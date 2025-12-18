@@ -30,8 +30,14 @@ mutation DeleteUser($deleteUserId: ID!) {
   }
 }
 
-query GetAllUsers {
-  users {
+query GetAllUsers($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [UserOrder!]){
+  users(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

@@ -58,8 +58,14 @@ mutation DeleteNarrative($deleteNarrativeId: ID!) {
   }
 }
 
-query GetAllNarratives {
-  narratives {
+query GetAllNarratives($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [NarrativeOrder!]){
+  narratives(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

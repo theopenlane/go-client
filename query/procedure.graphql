@@ -133,8 +133,14 @@ mutation DeleteProcedure($deleteProcedureId: ID!) {
   }
 }
 
-query GetAllProcedures {
-  procedures {
+query GetAllProcedures($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ProcedureOrder!]){
+  procedures(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

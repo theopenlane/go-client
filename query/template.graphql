@@ -72,8 +72,14 @@ mutation DeleteTemplate($deleteTemplateId: ID!) {
   }
 }
 
-query GetAllTemplates {
-  templates {
+query GetAllTemplates($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TemplateOrder!]) {
+  templates(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

@@ -30,8 +30,14 @@ mutation DeleteExport($deleteExportId: ID!) {
   }
 }
 
-query GetAllExports {
-  exports {
+query GetAllExports($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ExportOrder!]){
+  exports(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

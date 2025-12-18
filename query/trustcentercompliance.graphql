@@ -77,8 +77,14 @@ mutation DeleteTrustCenterCompliance($deleteTrustCenterComplianceId: ID!) {
   }
 }
 
-query GetAllTrustCenterCompliances {
-  trustCenterCompliances {
+query GetAllTrustCenterCompliances($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterComplianceOrder!]){
+  trustCenterCompliances(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

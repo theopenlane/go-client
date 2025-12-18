@@ -25,8 +25,14 @@ mutation DeleteOrganization($deleteOrganizationId: ID!) {
   }
 }
 
-query GetAllOrganizations {
-  organizations {
+query GetAllOrganizations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [OrganizationOrder!]){
+  organizations(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

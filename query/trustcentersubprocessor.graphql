@@ -53,8 +53,14 @@ mutation DeleteTrustCenterSubprocessor($deleteTrustCenterSubprocessorId: ID!) {
   }
 }
 
-query GetAllTrustCenterSubprocessors {
-  trustCenterSubprocessors {
+query GetAllTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterSubprocessorOrder!]){
+  trustCenterSubprocessors(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
