@@ -107,8 +107,15 @@ query GetScanByID($scanId: ID!) {
   }
 }
 
-query GetScans($first: Int, $last: Int, $where: ScanWhereInput) {
-  scans(first: $first, last: $last, where: $where) {
+query GetScans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ScanWhereInput, $orderBy: [ScanOrder!]) {
+scans(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

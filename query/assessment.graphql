@@ -68,8 +68,15 @@ query GetAssessmentByID($assessmentId: ID!) {
   }
 }
 
-query GetAssessments($first: Int, $last: Int, $where: AssessmentWhereInput) {
-  assessments(first: $first, last: $last, where: $where) {
+query GetAssessments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: AssessmentWhereInput, $orderBy: [AssessmentOrder!]) {
+assessments(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

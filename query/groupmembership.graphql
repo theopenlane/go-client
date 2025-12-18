@@ -110,8 +110,15 @@ query GetGroupMembershipByID($groupMembershipId: ID!) {
   }
 }
 
-query GetGroupMemberships($first: Int, $last: Int, $where: GroupMembershipWhereInput) {
-  groupMemberships(first: $first, last: $last, where: $where) {
+query GetGroupMemberships($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: GroupMembershipWhereInput, $orderBy: [GroupMembershipOrder!]) {
+groupMemberships(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

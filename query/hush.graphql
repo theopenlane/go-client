@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVHush($input: Upload!) {
   createBulkCSVHush(input: $input) {
     hushes {
@@ -56,7 +55,7 @@ mutation DeleteHush($deleteHushId: ID!) {
   }
 }
 
-query GetAllHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [HushOrder!]){
+query GetAllHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [HushOrder!]) {
   hushes(
     first: $first
     last: $last
@@ -87,6 +86,7 @@ query GetAllHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
     }
   }
 }
+
 query GetHushByID($hushId: ID!) {
   hush(id: $hushId) {
     createdAt
@@ -102,8 +102,15 @@ query GetHushByID($hushId: ID!) {
   }
 }
 
-query GetHushes($first: Int, $last: Int, $where: HushWhereInput) {
-  hushes(first: $first, last: $last, where: $where) {
+query GetHushes($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: HushWhereInput, $orderBy: [HushOrder!]) {
+  hushes(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -127,6 +134,7 @@ query GetHushes($first: Int, $last: Int, $where: HushWhereInput) {
     }
   }
 }
+
 mutation UpdateHush($updateHushId: ID!, $input: UpdateHushInput!) {
   updateHush(id: $updateHushId, input: $input) {
     hush {

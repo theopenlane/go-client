@@ -122,8 +122,15 @@ query GetProgramMembershipByID($programMembershipId: ID!) {
   }
 }
 
-query GetProgramMemberships($first: Int, $last: Int, $where: ProgramMembershipWhereInput) {
-  programMemberships(first: $first, last: $last, where: $where) {
+query GetProgramMemberships($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ProgramMembershipWhereInput, $orderBy: [ProgramMembershipOrder!]) {
+  programMemberships(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

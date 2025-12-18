@@ -45,7 +45,7 @@ mutation DeleteTrustCenter($deleteTrustCenterId: ID!) {
   }
 }
 
-query GetAllTrustCenters($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterOrder!]){
+query GetAllTrustCenters($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterOrder!]) {
   trustCenters(
     first: $first
     last: $last
@@ -155,8 +155,15 @@ query GetTrustCenterByID($trustCenterId: ID!) {
   }
 }
 
-query GetTrustCenters($first: Int, $last: Int, $where: TrustCenterWhereInput) {
-  trustCenters(first: $first, last: $last, where: $where) {
+query GetTrustCenters($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TrustCenterWhereInput, $orderBy: [TrustCenterOrder!]) {
+  trustCenters(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -205,10 +212,7 @@ query GetTrustCenters($first: Int, $last: Int, $where: TrustCenterWhereInput) {
   }
 }
 
-mutation UpdateTrustCenter(
-  $updateTrustCenterId: ID!
-  $input: UpdateTrustCenterInput!
-) {
+mutation UpdateTrustCenter($updateTrustCenterId: ID!, $input: UpdateTrustCenterInput!) {
   updateTrustCenter(id: $updateTrustCenterId, input: $input) {
     trustCenter {
       createdAt

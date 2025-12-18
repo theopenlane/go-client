@@ -112,8 +112,15 @@ query GetInviteByID($inviteId: ID!) {
   }
 }
 
-query GetInvites($first: Int, $last: Int, $where: InviteWhereInput) {
-  invites(first: $first, last: $last, where: $where) {
+query GetInvites($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: InviteWhereInput, $orderBy: [InviteOrder!]) {
+invites(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

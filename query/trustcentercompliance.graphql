@@ -137,8 +137,15 @@ query GetTrustCenterComplianceByID($trustCenterComplianceId: ID!) {
   }
 }
 
-query GetTrustCenterCompliances($first: Int, $last: Int, $where: TrustCenterComplianceWhereInput) {
-  trustCenterCompliances(first: $first, last: $last, where: $where) {
+query GetTrustCenterCompliances($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TrustCenterComplianceWhereInput, $orderBy: [TrustCenterComplianceOrder!]) {
+trustCenterCompliances(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

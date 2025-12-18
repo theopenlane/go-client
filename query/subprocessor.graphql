@@ -74,8 +74,15 @@ query GetSubprocessorByID($subprocessorId: ID!) {
   }
 }
 
-query GetSubprocessors($first: Int, $last: Int, $where: SubprocessorWhereInput) {
-  subprocessors(first: $first, last: $last, where: $where) {
+query GetSubprocessors($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: SubprocessorWhereInput, $orderBy: [SubprocessorOrder!]) {
+subprocessors(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

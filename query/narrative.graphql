@@ -107,8 +107,15 @@ query GetNarrativeByID($narrativeId: ID!) {
   }
 }
 
-query GetNarratives($first: Int, $last: Int, $where: NarrativeWhereInput) {
-  narratives(first: $first, last: $last, where: $where) {
+query GetNarratives($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: NarrativeWhereInput, $orderBy: [NarrativeOrder!]) {
+narratives(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

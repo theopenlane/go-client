@@ -209,8 +209,15 @@ query GetProcedureByID($procedureId: ID!) {
   }
 }
 
-query GetProcedures($first: Int, $last: Int, $where: ProcedureWhereInput) {
-  procedures(first: $first, last: $last, where: $where) {
+query GetProcedures($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ProcedureWhereInput, $orderBy: [ProcedureOrder!]) {
+procedures(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

@@ -127,8 +127,15 @@ query GetJobTemplateByID($jobTemplateId: ID!) {
   }
 }
 
-query GetJobTemplates($first: Int, $last: Int, $where: JobTemplateWhereInput) {
-  jobTemplates(first: $first, last: $last, where: $where) {
+query GetJobTemplates($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: JobTemplateWhereInput, $orderBy: [JobTemplateOrder!]) {
+jobTemplates(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

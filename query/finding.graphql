@@ -267,8 +267,15 @@ query GetFindingByID($findingId: ID!) {
   }
 }
 
-query GetFindings($first: Int, $last: Int, $where: FindingWhereInput) {
-  findings(first: $first, last: $last, where: $where) {
+query GetFindings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: FindingWhereInput, $orderBy: [FindingOrder!]) {
+findings(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

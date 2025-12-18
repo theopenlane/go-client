@@ -142,8 +142,15 @@ query GetDirectoryMembershipByID($directoryMembershipId: ID!) {
   }
 }
 
-query GetDirectoryMemberships($first: Int, $last: Int, $where: DirectoryMembershipWhereInput) {
-  directoryMemberships(first: $first, last: $last, where: $where) {
+query GetDirectoryMemberships($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DirectoryMembershipWhereInput, $orderBy: [DirectoryMembershipOrder!]) {
+directoryMemberships(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

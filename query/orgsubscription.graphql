@@ -52,8 +52,15 @@ query GetOrgSubscriptionByID($orgSubscriptionId: ID!) {
   }
 }
 
-query GetOrgSubscriptions($first: Int, $last: Int, $where: OrgSubscriptionWhereInput) {
-  orgSubscriptions(first: $first, last: $last, where: $where) {
+query GetOrgSubscriptions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: OrgSubscriptionWhereInput, $orderBy: OrgSubscriptionOrder) {
+orgSubscriptions(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

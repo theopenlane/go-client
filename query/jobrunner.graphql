@@ -73,8 +73,15 @@ query GetJobRunnerByID($jobRunnerId: ID!) {
   }
 }
 
-query GetJobRunners($first: Int, $last: Int, $where: JobRunnerWhereInput) {
-  jobRunners(first: $first, last: $last, where: $where) {
+query GetJobRunners($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: JobRunnerWhereInput, $orderBy: [JobRunnerOrder!]) {
+jobRunners(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

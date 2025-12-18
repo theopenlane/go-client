@@ -127,8 +127,15 @@ query GetWorkflowObjectRefByID($workflowObjectRefId: ID!) {
   }
 }
 
-query GetWorkflowObjectRefs($first: Int, $last: Int, $where: WorkflowObjectRefWhereInput) {
-  workflowObjectRefs(first: $first, last: $last, where: $where) {
+query GetWorkflowObjectRefs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: WorkflowObjectRefWhereInput, $orderBy: [WorkflowObjectRefOrder!]) {
+  workflowObjectRefs(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

@@ -182,8 +182,15 @@ query GetAllInternalPolicies($first: Int, $last: Int, $after: Cursor, $before: C
   }
 }
 
-query GetInternalPolicies($first: Int, $last: Int, $where: InternalPolicyWhereInput) {
-  internalPolicies(first: $first, last: $last, where: $where) {
+query GetInternalPolicies($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: InternalPolicyWhereInput, $orderBy: [InternalPolicyOrder!]) {
+internalPolicies(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

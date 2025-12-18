@@ -99,8 +99,15 @@ query GetAllEntities($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
   }
 }
 
-query GetEntities($first: Int, $last: Int, $where: EntityWhereInput) {
-  entities(first: $first, last: $last, where: $where) {
+query GetEntities($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: EntityWhereInput, $orderBy: [EntityOrder!]) {
+entities(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

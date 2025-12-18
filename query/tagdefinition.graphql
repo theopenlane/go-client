@@ -122,8 +122,15 @@ query GetTagDefinitionByID($tagDefinitionId: ID!) {
   }
 }
 
-query GetTagDefinitions($first: Int, $last: Int, $where: TagDefinitionWhereInput) {
-  tagDefinitions(first: $first, last: $last, where: $where) {
+query GetTagDefinitions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TagDefinitionWhereInput, $orderBy: [TagDefinitionOrder!]) {
+tagDefinitions(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

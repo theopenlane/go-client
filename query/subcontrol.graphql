@@ -207,8 +207,15 @@ query GetSubcontrolByID($subcontrolId: ID!) {
   }
 }
 
-query GetSubcontrols($first: Int, $last: Int, $where: SubcontrolWhereInput) {
-  subcontrols(first: $first, last: $last, where: $where) {
+query GetSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: SubcontrolWhereInput, $orderBy: [SubcontrolOrder!]) {
+subcontrols(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

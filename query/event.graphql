@@ -102,8 +102,15 @@ query GetEventByID($eventId: ID!) {
   }
 }
 
-query GetEvents($first: Int, $last: Int, $where: EventWhereInput) {
-  events(first: $first, last: $last, where: $where) {
+query GetEvents($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: EventWhereInput, $orderBy: [EventOrder!]) {
+events(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

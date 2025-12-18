@@ -51,8 +51,15 @@ query GetIntegrationByID($integrationId: ID!) {
   }
 }
 
-query GetIntegrations($first: Int, $last: Int, $where: IntegrationWhereInput) {
-  integrations(first: $first, last: $last, where: $where) {
+query GetIntegrations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: IntegrationWhereInput, $orderBy: [IntegrationOrder!]) {
+integrations(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

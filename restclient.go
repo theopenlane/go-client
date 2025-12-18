@@ -1,4 +1,4 @@
-package goclient
+package openlane
 
 import (
 	"context"
@@ -9,8 +9,8 @@ import (
 	api "github.com/theopenlane/core/pkg/openapi"
 )
 
-// OpenlaneRestClient is the interface that wraps the openlane API REST client methods
-type OpenlaneRestClient interface {
+// RestClient is the interface that wraps the openlane API REST client methods
+type RestClient interface {
 	// Register a new user with the API
 	Register(context.Context, *api.RegisterRequest) (*api.RegisterReply, error)
 	// Login to the API
@@ -48,7 +48,7 @@ type OpenlaneRestClient interface {
 }
 
 // NewRestClient creates a new API v1 client that implements the Openlane Client interface
-func NewRestClient(config Config, opts ...ClientOption) (_ OpenlaneRestClient, err error) {
+func NewRestClient(config Config, opts ...ClientOption) (_ RestClient, err error) {
 	c := &APIv1{
 		Config: &config,
 	}
@@ -76,7 +76,7 @@ func NewRestClient(config Config, opts ...ClientOption) (_ OpenlaneRestClient, e
 }
 
 // Ensure the APIv1 implements the OpenlaneClient interface
-var _ OpenlaneRestClient = &APIv1{}
+var _ RestClient = &APIv1{}
 
 // Register a new user with the API
 func (s *APIv1) Register(ctx context.Context, in *api.RegisterRequest) (out *api.RegisterReply, err error) {

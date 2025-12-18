@@ -152,8 +152,15 @@ query GetRiskByID($riskId: ID!) {
   }
 }
 
-query GetRisks($first: Int, $last: Int, $where: RiskWhereInput) {
-  risks(first: $first, last: $last, where: $where) {
+query GetRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: RiskWhereInput, $orderBy: [RiskOrder!]) {
+risks(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

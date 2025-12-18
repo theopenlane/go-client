@@ -177,8 +177,15 @@ query GetWorkflowDefinitionByID($workflowDefinitionId: ID!) {
   }
 }
 
-query GetWorkflowDefinitions($first: Int, $last: Int, $where: WorkflowDefinitionWhereInput) {
-  workflowDefinitions(first: $first, last: $last, where: $where) {
+query GetWorkflowDefinitions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: WorkflowDefinitionWhereInput, $orderBy: [WorkflowDefinitionOrder!]) {
+workflowDefinitions(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

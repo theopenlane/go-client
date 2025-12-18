@@ -230,8 +230,15 @@ query GetMappedControlByID($mappedControlId: ID!) {
   }
 }
 
-query GetMappedControls($first: Int, $last: Int, $where: MappedControlWhereInput) {
-  mappedControls(first: $first, last: $last, where: $where) {
+query GetMappedControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: MappedControlWhereInput, $orderBy: [MappedControlOrder!]) {
+mappedControls(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

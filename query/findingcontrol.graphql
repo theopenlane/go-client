@@ -122,8 +122,15 @@ query GetFindingControlByID($findingControlId: ID!) {
   }
 }
 
-query GetFindingControls($first: Int, $last: Int, $where: FindingControlWhereInput) {
-  findingControls(first: $first, last: $last, where: $where) {
+query GetFindingControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: FindingControlWhereInput, $orderBy: [FindingControlOrder!]) {
+findingControls(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

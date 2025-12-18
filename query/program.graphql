@@ -157,8 +157,15 @@ query GetProgramByID($programId: ID!) {
   }
 }
 
-query GetPrograms($first: Int, $last: Int, $where: ProgramWhereInput) {
-  programs(first: $first, last: $last, where: $where) {
+query GetPrograms($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ProgramWhereInput, $orderBy: [ProgramOrder!]) {
+programs(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

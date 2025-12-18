@@ -88,8 +88,15 @@ query GetTrustCenterWatermarkConfigByID($trustCenterWatermarkConfigId: ID!) {
   }
 }
 
-query GetTrustCenterWatermarkConfigs($first: Int, $last: Int, $where: TrustCenterWatermarkConfigWhereInput) {
-  trustCenterWatermarkConfigs(first: $first, last: $last, where: $where) {
+query GetTrustCenterWatermarkConfigs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TrustCenterWatermarkConfigWhereInput, $orderBy: [TrustCenterWatermarkConfigOrder!]) {
+trustCenterWatermarkConfigs(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

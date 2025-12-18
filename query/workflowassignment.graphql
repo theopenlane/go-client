@@ -147,8 +147,15 @@ query GetWorkflowAssignmentByID($workflowAssignmentId: ID!) {
   }
 }
 
-query GetWorkflowAssignments($first: Int, $last: Int, $where: WorkflowAssignmentWhereInput) {
-  workflowAssignments(first: $first, last: $last, where: $where) {
+query GetWorkflowAssignments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: WorkflowAssignmentWhereInput, $orderBy: [WorkflowAssignmentOrder!]) {
+workflowAssignments(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

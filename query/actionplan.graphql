@@ -138,8 +138,15 @@ query GetActionPlanByID($actionPlanId: ID!) {
   }
 }
 
-query GetActionPlans($first: Int, $last: Int, $where: ActionPlanWhereInput) {
-  actionPlans(first: $first, last: $last, where: $where) {
+query GetActionPlans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ActionPlanWhereInput, $orderBy: [ActionPlanOrder!]) {
+actionPlans(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

@@ -197,8 +197,15 @@ query GetDirectoryAccountByID($directoryAccountId: ID!) {
   }
 }
 
-query GetDirectoryAccounts($first: Int, $last: Int, $where: DirectoryAccountWhereInput) {
-  directoryAccounts(first: $first, last: $last, where: $where) {
+query GetDirectoryAccounts($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DirectoryAccountWhereInput, $orderBy: [DirectoryAccountOrder!]) {
+directoryAccounts(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

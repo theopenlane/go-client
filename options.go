@@ -1,4 +1,4 @@
-package goclient
+package openlane
 
 import (
 	"net/http"
@@ -27,6 +27,19 @@ func WithCredentials(creds Credentials) ClientOption {
 
 		// Set the bearer token for the HTTPSling client, used for REST requests
 		return c.Requester.Apply(httpsling.BearerAuth(auth.BearerToken))
+	}
+}
+
+// WithAPIToken sets the API token for the APIv1 client
+// This is the recommended way to authenticate using an API token or personal access token
+// use WithCredentials for more advanced authentication methods
+func WithAPIToken(apiToken string) ClientOption {
+	return func(c *APIv1) error {
+		creds := Authorization{
+			BearerToken: apiToken,
+		}
+
+		return WithCredentials(creds)(c)
 	}
 }
 
@@ -60,13 +73,18 @@ func WithGraphQueryEndpoint(endpoint string) ClientOption {
 }
 
 // WithBaseURL sets the base URL for the APIv1 client
-func WithBaseURL(baseURL *url.URL) ClientOption {
+func WithBaseURL(baseURL string) ClientOption {
 	return func(c *APIv1) error {
+		url, err := url.Parse(baseURL)
+		if err != nil {
+			return err
+		}
+
 		// Set the base URL for the APIv1 client
-		c.Config.BaseURL = baseURL
+		c.Config.BaseURL = url
 
 		// Set the base URL for the HTTPSling client
-		return c.Requester.Apply(httpsling.URL(baseURL.String()))
+		return c.Requester.Apply(httpsling.URL(url.String()))
 	}
 }
 

@@ -122,8 +122,15 @@ query GetCustomTypeEnumByID($customTypeEnumId: ID!) {
   }
 }
 
-query GetCustomTypeEnums($first: Int, $last: Int, $where: CustomTypeEnumWhereInput) {
-  customTypeEnums(first: $first, last: $last, where: $where) {
+query GetCustomTypeEnums($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: CustomTypeEnumWhereInput, $orderBy: [CustomTypeEnumOrder!]) {
+customTypeEnums(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

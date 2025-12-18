@@ -79,8 +79,15 @@ query GetJobRunnerTokenByID($jobRunnerTokenId: ID!) {
   }
 }
 
-query GetJobRunnerTokens($first: Int, $last: Int, $where: JobRunnerTokenWhereInput) {
-  jobRunnerTokens(first: $first, last: $last, where: $where) {
+query GetJobRunnerTokens($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: JobRunnerTokenWhereInput, $orderBy: [JobRunnerTokenOrder!]) {
+jobRunnerTokens(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

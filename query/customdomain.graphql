@@ -141,8 +141,15 @@ query GetCustomDomainByID($customDomainId: ID!) {
   }
 }
 
-query GetCustomDomains($first: Int, $last: Int, $where: CustomDomainWhereInput) {
-  customDomains(first: $first, last: $last, where: $where) {
+query GetCustomDomains($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: CustomDomainWhereInput, $orderBy: [CustomDomainOrder!]) {
+customDomains(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

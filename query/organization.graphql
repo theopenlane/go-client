@@ -25,7 +25,7 @@ mutation DeleteOrganization($deleteOrganizationId: ID!) {
   }
 }
 
-query GetAllOrganizations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [OrganizationOrder!]){
+query GetAllOrganizations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [OrganizationOrder!]) {
   organizations(
     first: $first
     last: $last
@@ -60,6 +60,7 @@ query GetAllOrganizations($first: Int, $last: Int, $after: Cursor, $before: Curs
     }
   }
 }
+
 query GetOrganizationByID($organizationId: ID!) {
   organization(id: $organizationId) {
     avatarLocalFileID
@@ -79,8 +80,15 @@ query GetOrganizationByID($organizationId: ID!) {
   }
 }
 
-query GetOrganizations($first: Int, $last: Int, $where: OrganizationWhereInput) {
-  organizations(first: $first, last: $last, where: $where) {
+query GetOrganizations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: OrganizationWhereInput, $orderBy: [OrganizationOrder!]) {
+  organizations(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -108,6 +116,7 @@ query GetOrganizations($first: Int, $last: Int, $where: OrganizationWhereInput) 
     }
   }
 }
+
 mutation UpdateOrganization($updateOrganizationId: ID!, $input: UpdateOrganizationInput!, $avatarFile: Upload) {
   updateOrganization(
     id: $updateOrganizationId

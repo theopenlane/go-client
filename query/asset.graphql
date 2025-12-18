@@ -122,8 +122,15 @@ query GetAssetByID($assetId: ID!) {
   }
 }
 
-query GetAssets($first: Int, $last: Int, $where: AssetWhereInput) {
-  assets(first: $first, last: $last, where: $where) {
+query GetAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: AssetWhereInput, $orderBy: [AssetOrder!]) {
+assets(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

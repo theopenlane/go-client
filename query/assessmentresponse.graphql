@@ -83,8 +83,15 @@ query GetAssessmentResponseByID($assessmentResponseId: ID!) {
   }
 }
 
-query GetAssessmentResponses($first: Int, $last: Int, $where: AssessmentResponseWhereInput) {
-  assessmentResponses(first: $first, last: $last, where: $where) {
+query GetAssessmentResponses($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: AssessmentResponseWhereInput, $orderBy: [AssessmentResponseOrder!]) {
+assessmentResponses(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

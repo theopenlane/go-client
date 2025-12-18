@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVWorkflowAssignmentTarget($input: Upload!) {
   createBulkCSVWorkflowAssignmentTarget(input: $input) {
     workflowAssignmentTargets {
@@ -65,7 +64,7 @@ mutation DeleteWorkflowAssignmentTarget($deleteWorkflowAssignmentTargetId: ID!) 
   }
 }
 
-query GetAllWorkflowAssignmentTargets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowAssignmentTargetOrder!]){
+query GetAllWorkflowAssignmentTargets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowAssignmentTargetOrder!]) {
   workflowAssignmentTargets(
     first: $first
     last: $last
@@ -99,6 +98,7 @@ query GetAllWorkflowAssignmentTargets($first: Int, $last: Int, $after: Cursor, $
     }
   }
 }
+
 query GetWorkflowAssignmentTargetByID($workflowAssignmentTargetId: ID!) {
   workflowAssignmentTarget(id: $workflowAssignmentTargetId) {
     createdAt
@@ -117,8 +117,15 @@ query GetWorkflowAssignmentTargetByID($workflowAssignmentTargetId: ID!) {
   }
 }
 
-query GetWorkflowAssignmentTargets($first: Int, $last: Int, $where: WorkflowAssignmentTargetWhereInput) {
-  workflowAssignmentTargets(first: $first, last: $last, where: $where) {
+query GetWorkflowAssignmentTargets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: WorkflowAssignmentTargetWhereInput, $orderBy: [WorkflowAssignmentTargetOrder!]) {
+  workflowAssignmentTargets(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -145,8 +152,12 @@ query GetWorkflowAssignmentTargets($first: Int, $last: Int, $where: WorkflowAssi
     }
   }
 }
+
 mutation UpdateWorkflowAssignmentTarget($updateWorkflowAssignmentTargetId: ID!, $input: UpdateWorkflowAssignmentTargetInput!) {
-  updateWorkflowAssignmentTarget(id: $updateWorkflowAssignmentTargetId, input: $input) {
+  updateWorkflowAssignmentTarget(
+    id: $updateWorkflowAssignmentTargetId
+    input: $input
+  ) {
     workflowAssignmentTarget {
       createdAt
       createdBy

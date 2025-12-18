@@ -1,2 +1,2 @@
-// Package goclient contains the client to interact with the openlane api
-package goclient
+// Package openlane contains the go client to interact with the openlane api
+package openlane

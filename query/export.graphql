@@ -83,8 +83,15 @@ query GetExportByID($exportId: ID!) {
   }
 }
 
-query GetExports($first: Int, $last: Int, $where: ExportWhereInput) {
-  exports(first: $first, last: $last, where: $where) {
+query GetExports($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ExportWhereInput, $orderBy: [ExportOrder!]) {
+exports(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

@@ -119,8 +119,15 @@ query GetTrustCenterDocByID($trustCenterDocId: ID!) {
   }
 }
 
-query GetTrustCenterDocs($first: Int, $last: Int, $where: TrustCenterDocWhereInput) {
-  trustCenterDocs(first: $first, last: $last, where: $where) {
+query GetTrustCenterDocs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TrustCenterDocWhereInput, $orderBy: [TrustCenterDocOrder!]) {
+  trustCenterDocs(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor

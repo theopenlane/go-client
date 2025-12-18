@@ -182,8 +182,15 @@ query GetOrganizationSettingByID($organizationSettingId: ID!) {
   }
 }
 
-query GetOrganizationSettings($first: Int, $last: Int, $where: OrganizationSettingWhereInput) {
-  organizationSettings(first: $first, last: $last, where: $where) {
+query GetOrganizationSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: OrganizationSettingWhereInput, $orderBy: [OrganizationSettingOrder!]) {
+organizationSettings(
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    where: $where
+    orderBy: $orderBy
+  ) {
     totalCount
     pageInfo {
       startCursor
