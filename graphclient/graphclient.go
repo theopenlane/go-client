@@ -93,7 +93,7 @@ type GraphClient interface {
 	CreateBulkCustomDomain(ctx context.Context, input []*CreateCustomDomainInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCustomDomain, error)
 	CreateCustomDomain(ctx context.Context, input CreateCustomDomainInput, interceptors ...clientv2.RequestInterceptor) (*CreateCustomDomain, error)
 	DeleteCustomDomain(ctx context.Context, deleteCustomDomainID string, interceptors ...clientv2.RequestInterceptor) (*DeleteCustomDomain, error)
-	GetAllCustomDomains(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CustomDomainOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllCustomDomains, error)
+	GetAllCustomDomains(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CustomDomainOrder, where *CustomDomainWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetAllCustomDomains, error)
 	GetCustomDomainByID(ctx context.Context, customDomainID string, interceptors ...clientv2.RequestInterceptor) (*GetCustomDomainByID, error)
 	GetCustomDomains(ctx context.Context, first *int64, last *int64, after *string, before *string, where *CustomDomainWhereInput, orderBy []*CustomDomainOrder, interceptors ...clientv2.RequestInterceptor) (*GetCustomDomains, error)
 	UpdateCustomDomain(ctx context.Context, updateCustomDomainID string, input UpdateCustomDomainInput, interceptors ...clientv2.RequestInterceptor) (*UpdateCustomDomain, error)
@@ -93871,8 +93871,8 @@ func (c *Client) DeleteCustomDomain(ctx context.Context, deleteCustomDomainID st
 	return &res, nil
 }
 
-const GetAllCustomDomainsDocument = `query GetAllCustomDomains ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [CustomDomainOrder!]) {
-	customDomains(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+const GetAllCustomDomainsDocument = `query GetAllCustomDomains ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [CustomDomainOrder!], $where: CustomDomainWhereInput) {
+	customDomains(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy, where: $where) {
 		totalCount
 		pageInfo {
 			startCursor
@@ -93914,13 +93914,14 @@ const GetAllCustomDomainsDocument = `query GetAllCustomDomains ($first: Int, $la
 }
 `
 
-func (c *Client) GetAllCustomDomains(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CustomDomainOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllCustomDomains, error) {
+func (c *Client) GetAllCustomDomains(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CustomDomainOrder, where *CustomDomainWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetAllCustomDomains, error) {
 	vars := map[string]any{
 		"first":   first,
 		"last":    last,
 		"after":   after,
 		"before":  before,
 		"orderBy": orderBy,
+		"where":   where,
 	}
 
 	var res GetAllCustomDomains
