@@ -412,10 +412,6 @@ type ActionPlan implements Node {
 	"""
 	details: String
 	"""
-	structured details of the action_plan in JSON format
-	"""
-	detailsJSON: [Any!]
-	"""
 	whether approval is required for edits to the action_plan
 	"""
 	approvalRequired: Boolean
@@ -1531,7 +1527,6 @@ This scalar can be used to store and validate address information in the GraphQL
 It contains `Line1`, `Line2`, `City`, `State`, `PostalCode`, and `Country`
 """
 scalar Address
-scalar Any
 type Assessment implements Node {
 	id: ID!
 	createdAt: Time
@@ -3521,10 +3516,6 @@ type Control implements Node {
 	"""
 	description: String @externalSource(source: FRAMEWORK)
 	"""
-	structured details of the control in JSON format
-	"""
-	descriptionJSON: [Any!]
-	"""
 	additional names (ref_codes) for the control
 	"""
 	aliases: [String!]
@@ -4543,10 +4534,6 @@ type ControlImplementation implements Node {
 	details of the control implementation
 	"""
 	details: String
-	"""
-	structured details of the control implementation in JSON format
-	"""
-	detailsJSON: [Any!]
 	owner: Organization
 	blockedGroups(
 		"""
@@ -5126,10 +5113,6 @@ type ControlObjective implements Node {
 	the desired outcome or target of the control objective
 	"""
 	desiredOutcome: String
-	"""
-	structured details of the control objective in JSON format
-	"""
-	desiredOutcomeJSON: [Any!]
 	"""
 	status of the control objective
 	"""
@@ -6744,10 +6727,6 @@ input CreateActionPlanInput {
 	"""
 	details: String
 	"""
-	structured details of the action_plan in JSON format
-	"""
-	detailsJSON: [Any!]
-	"""
 	whether approval is required for edits to the action_plan
 	"""
 	approvalRequired: Boolean
@@ -7036,10 +7015,6 @@ input CreateControlImplementationInput {
 	details of the control implementation
 	"""
 	details: String
-	"""
-	structured details of the control implementation in JSON format
-	"""
-	detailsJSON: [Any!]
 	ownerID: ID
 	blockedGroupIDs: [ID!]
 	editorIDs: [ID!]
@@ -7065,10 +7040,6 @@ input CreateControlInput {
 	description of what the control is supposed to accomplish
 	"""
 	description: String @externalReadOnly(source: FRAMEWORK)
-	"""
-	structured details of the control in JSON format
-	"""
-	descriptionJSON: [Any!]
 	"""
 	additional names (ref_codes) for the control
 	"""
@@ -7233,10 +7204,6 @@ input CreateControlObjectiveInput {
 	the desired outcome or target of the control objective
 	"""
 	desiredOutcome: String
-	"""
-	structured details of the control objective in JSON format
-	"""
-	desiredOutcomeJSON: [Any!]
 	"""
 	status of the control objective
 	"""
@@ -8380,10 +8347,6 @@ input CreateInternalPolicyInput {
 	"""
 	details: String
 	"""
-	structured details of the policy in JSON format
-	"""
-	detailsJSON: [Any!]
-	"""
 	whether approval is required for edits to the policy
 	"""
 	approvalRequired: Boolean
@@ -8779,10 +8742,6 @@ input CreateNoteInput {
 	"""
 	text: String!
 	"""
-	structured details of the note in JSON format
-	"""
-	textJSON: [Any!]
-	"""
 	ref location of the note
 	"""
 	noteRef: String
@@ -9167,10 +9126,6 @@ input CreateProcedureInput {
 	details of the procedure
 	"""
 	details: String
-	"""
-	structured details of the procedure in JSON format
-	"""
-	detailsJSON: [Any!]
 	"""
 	whether approval is required for edits to the procedure
 	"""
@@ -9626,25 +9581,13 @@ input CreateRiskInput {
 	"""
 	mitigation: String
 	"""
-	structured details of the mitigation in JSON format
-	"""
-	mitigationJSON: [Any!]
-	"""
 	details of the risk
 	"""
 	details: String
 	"""
-	structured details of the risk in JSON format
-	"""
-	detailsJSON: [Any!]
-	"""
 	business costs associated with the risk
 	"""
 	businessCosts: String
-	"""
-	structured details of the business costs in JSON format
-	"""
-	businessCostsJSON: [Any!]
 	ownerID: ID
 	blockedGroupIDs: [ID!]
 	editorIDs: [ID!]
@@ -9840,10 +9783,6 @@ input CreateSubcontrolInput {
 	description of what the control is supposed to accomplish
 	"""
 	description: String @externalReadOnly(source: FRAMEWORK)
-	"""
-	structured details of the control in JSON format
-	"""
-	descriptionJSON: [Any!]
 	"""
 	additional names (ref_codes) for the control
 	"""
@@ -10074,10 +10013,6 @@ input CreateTaskInput {
 	the details of the task
 	"""
 	details: String
-	"""
-	structured details of the task in JSON format
-	"""
-	detailsJSON: [Any!]
 	"""
 	the status of the task
 	"""
@@ -18531,7 +18466,6 @@ type File implements Node {
 		where: TrustcenterEntityWhereInput
 	): TrustcenterEntityConnection!
 	presignedURL: String
-	base64: String
 }
 """
 A connection to a list of items.
@@ -24623,10 +24557,6 @@ type InternalPolicy implements Node {
 	details of the policy
 	"""
 	details: String
-	"""
-	structured details of the policy in JSON format
-	"""
-	detailsJSON: [Any!]
 	"""
 	whether approval is required for edits to the policy
 	"""
@@ -33865,10 +33795,6 @@ type Note implements Node {
 	"""
 	text: String!
 	"""
-	structured details of the note in JSON format
-	"""
-	textJSON: [Any!]
-	"""
 	ref location of the note
 	"""
 	noteRef: String
@@ -39400,10 +39326,6 @@ type Procedure implements Node {
 	details of the procedure
 	"""
 	details: String
-	"""
-	structured details of the procedure in JSON format
-	"""
-	detailsJSON: [Any!]
 	"""
 	whether approval is required for edits to the procedure
 	"""
@@ -48687,25 +48609,13 @@ type Risk implements Node {
 	"""
 	mitigation: String
 	"""
-	structured details of the mitigation in JSON format
-	"""
-	mitigationJSON: [Any!]
-	"""
 	details of the risk
 	"""
 	details: String
 	"""
-	structured details of the risk in JSON format
-	"""
-	detailsJSON: [Any!]
-	"""
 	business costs associated with the risk
 	"""
 	businessCosts: String
-	"""
-	structured details of the business costs in JSON format
-	"""
-	businessCostsJSON: [Any!]
 	"""
 	the id of the group responsible for risk oversight
 	"""
@@ -51758,10 +51668,6 @@ type Subcontrol implements Node {
 	"""
 	description: String @externalSource(source: FRAMEWORK)
 	"""
-	structured details of the control in JSON format
-	"""
-	descriptionJSON: [Any!]
-	"""
 	additional names (ref_codes) for the control
 	"""
 	aliases: [String!]
@@ -53743,9 +53649,9 @@ input SubscriberWhereInput {
 }
 type Subscription {
 	"""
-	Subscribe to notification creation events for the authenticated user
+	Subscribe to task creation events for the authenticated user
 	"""
-	notificationCreated: Notification!
+	taskCreated: Task!
 }
 type TFASetting implements Node {
 	id: ID!
@@ -54321,10 +54227,6 @@ type Task implements Node {
 	the details of the task
 	"""
 	details: String
-	"""
-	structured details of the task in JSON format
-	"""
-	detailsJSON: [Any!]
 	"""
 	the status of the task
 	"""
@@ -56360,7 +56262,7 @@ type TrustCenterDoc implements Node {
 	"""
 	whether watermarking is enabled for the document. this will only take effect if watermarking is configured for the trust center
 	"""
-	watermarkingEnabled: Boolean
+	watermarkingEnabled: Boolean!
 	"""
 	status of the watermarking
 	"""
@@ -56684,8 +56586,6 @@ input TrustCenterDocWhereInput {
 	"""
 	watermarkingEnabled: Boolean
 	watermarkingEnabledNEQ: Boolean
-	watermarkingEnabledIsNil: Boolean
-	watermarkingEnabledNotNil: Boolean
 	"""
 	watermark_status field predicates
 	"""
@@ -58685,12 +58585,6 @@ input UpdateActionPlanInput {
 	details: String
 	clearDetails: Boolean
 	"""
-	structured details of the action_plan in JSON format
-	"""
-	detailsJSON: [Any!]
-	appendDetailsJSON: [Any!]
-	clearDetailsJSON: Boolean
-	"""
 	whether approval is required for edits to the action_plan
 	"""
 	approvalRequired: Boolean
@@ -59072,12 +58966,6 @@ input UpdateControlImplementationInput {
 	"""
 	details: String
 	clearDetails: Boolean
-	"""
-	structured details of the control implementation in JSON format
-	"""
-	detailsJSON: [Any!]
-	appendDetailsJSON: [Any!]
-	clearDetailsJSON: Boolean
 	addBlockedGroupIDs: [ID!]
 	removeBlockedGroupIDs: [ID!]
 	clearBlockedGroups: Boolean
@@ -59118,12 +59006,6 @@ input UpdateControlInput {
 	"""
 	description: String @externalReadOnly(source: FRAMEWORK)
 	clearDescription: Boolean @externalReadOnly(source: FRAMEWORK)
-	"""
-	structured details of the control in JSON format
-	"""
-	descriptionJSON: [Any!]
-	appendDescriptionJSON: [Any!]
-	clearDescriptionJSON: Boolean
 	"""
 	additional names (ref_codes) for the control
 	"""
@@ -59334,7 +59216,6 @@ input UpdateControlInput {
 	removeWorkflowObjectRefIDs: [ID!]
 	clearWorkflowObjectRefs: Boolean
 	addDiscussion: CreateDiscussionInput
-	updateDiscussions: [UpdateDiscussionsInput!]
 	deleteDiscussion: ID
 	addComment: CreateNoteInput
 	deleteComment: ID
@@ -59374,12 +59255,6 @@ input UpdateControlObjectiveInput {
 	"""
 	desiredOutcome: String
 	clearDesiredOutcome: Boolean
-	"""
-	structured details of the control objective in JSON format
-	"""
-	desiredOutcomeJSON: [Any!]
-	appendDesiredOutcomeJSON: [Any!]
-	clearDesiredOutcomeJSON: Boolean
 	"""
 	status of the control objective
 	"""
@@ -59872,16 +59747,6 @@ input UpdateDiscussionInput {
 	clearInternalPolicy: Boolean
 	addComment: CreateNoteInput
 	deleteComment: ID
-}
-"""
-Update discussions related to an object
-"""
-input UpdateDiscussionsInput {
-	"""
-	id of the discussion to update
-	"""
-	id: ID!
-	input: UpdateDiscussionInput!
 }
 """
 UpdateDocumentDataInput is used for update DocumentData object.
@@ -60931,12 +60796,6 @@ input UpdateInternalPolicyInput {
 	details: String
 	clearDetails: Boolean
 	"""
-	structured details of the policy in JSON format
-	"""
-	detailsJSON: [Any!]
-	appendDetailsJSON: [Any!]
-	clearDetailsJSON: Boolean
-	"""
 	whether approval is required for edits to the policy
 	"""
 	approvalRequired: Boolean
@@ -61065,7 +60924,6 @@ input UpdateInternalPolicyInput {
 	removeWorkflowObjectRefIDs: [ID!]
 	clearWorkflowObjectRefs: Boolean
 	addDiscussion: CreateDiscussionInput
-	updateDiscussions: [UpdateDiscussionsInput!]
 	deleteDiscussion: ID
 	addComment: CreateNoteInput
 	deleteComment: ID
@@ -61424,12 +61282,6 @@ input UpdateNoteInput {
 	the text of the note
 	"""
 	text: String
-	"""
-	structured details of the note in JSON format
-	"""
-	textJSON: [Any!]
-	appendTextJSON: [Any!]
-	clearTextJSON: Boolean
 	"""
 	ref location of the note
 	"""
@@ -61964,12 +61816,6 @@ input UpdateProcedureInput {
 	details: String
 	clearDetails: Boolean
 	"""
-	structured details of the procedure in JSON format
-	"""
-	detailsJSON: [Any!]
-	appendDetailsJSON: [Any!]
-	clearDetailsJSON: Boolean
-	"""
 	whether approval is required for edits to the procedure
 	"""
 	approvalRequired: Boolean
@@ -62084,7 +61930,6 @@ input UpdateProcedureInput {
 	fileID: ID
 	clearFile: Boolean
 	addDiscussion: CreateDiscussionInput
-	updateDiscussions: [UpdateDiscussionsInput!]
 	deleteDiscussion: ID
 	addComment: CreateNoteInput
 	deleteComment: ID
@@ -62614,33 +62459,15 @@ input UpdateRiskInput {
 	mitigation: String
 	clearMitigation: Boolean
 	"""
-	structured details of the mitigation in JSON format
-	"""
-	mitigationJSON: [Any!]
-	appendMitigationJSON: [Any!]
-	clearMitigationJSON: Boolean
-	"""
 	details of the risk
 	"""
 	details: String
 	clearDetails: Boolean
 	"""
-	structured details of the risk in JSON format
-	"""
-	detailsJSON: [Any!]
-	appendDetailsJSON: [Any!]
-	clearDetailsJSON: Boolean
-	"""
 	business costs associated with the risk
 	"""
 	businessCosts: String
 	clearBusinessCosts: Boolean
-	"""
-	structured details of the business costs in JSON format
-	"""
-	businessCostsJSON: [Any!]
-	appendBusinessCostsJSON: [Any!]
-	clearBusinessCostsJSON: Boolean
 	addBlockedGroupIDs: [ID!]
 	removeBlockedGroupIDs: [ID!]
 	clearBlockedGroups: Boolean
@@ -62695,7 +62522,6 @@ input UpdateRiskInput {
 	removeDiscussionIDs: [ID!]
 	clearDiscussions: Boolean
 	addDiscussion: CreateDiscussionInput
-	updateDiscussions: [UpdateDiscussionsInput!]
 	deleteDiscussion: ID
 	addComment: CreateNoteInput
 	deleteComment: ID
@@ -62919,12 +62745,6 @@ input UpdateSubcontrolInput {
 	description: String @externalReadOnly(source: FRAMEWORK)
 	clearDescription: Boolean @externalReadOnly(source: FRAMEWORK)
 	"""
-	structured details of the control in JSON format
-	"""
-	descriptionJSON: [Any!]
-	appendDescriptionJSON: [Any!]
-	clearDescriptionJSON: Boolean
-	"""
 	additional names (ref_codes) for the control
 	"""
 	aliases: [String!]
@@ -63094,7 +62914,6 @@ input UpdateSubcontrolInput {
 	removeScheduledJobIDs: [ID!]
 	clearScheduledJobs: Boolean
 	addDiscussion: CreateDiscussionInput
-	updateDiscussions: [UpdateDiscussionsInput!]
 	deleteDiscussion: ID
 	addComment: CreateNoteInput
 	deleteComment: ID
@@ -63250,12 +63069,6 @@ input UpdateTaskInput {
 	"""
 	details: String
 	clearDetails: Boolean
-	"""
-	structured details of the task in JSON format
-	"""
-	detailsJSON: [Any!]
-	appendDetailsJSON: [Any!]
-	clearDetailsJSON: Boolean
 	"""
 	the status of the task
 	"""
@@ -63436,7 +63249,6 @@ input UpdateTrustCenterDocInput {
 	whether watermarking is enabled for the document. this will only take effect if watermarking is configured for the trust center
 	"""
 	watermarkingEnabled: Boolean
-	clearWatermarkingEnabled: Boolean
 	"""
 	status of the watermarking
 	"""
