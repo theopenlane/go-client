@@ -6,10 +6,7 @@ import (
 
 	"github.com/Yamashou/gqlgenc/config"
 	"github.com/Yamashou/gqlgenc/generator"
-	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-
-	"github.com/theopenlane/core/pkg/logx"
 )
 
 const (
@@ -17,14 +14,6 @@ const (
 )
 
 func main() {
-	logx.Configure(logx.LoggerConfig{
-		Level:         zerolog.DebugLevel,
-		Pretty:        true,
-		Writer:        os.Stderr,
-		IncludeCaller: true,
-		SetGlobal:     true,
-	})
-
 	cfg, err := config.LoadConfig(graphapiGenDir + ".gqlgenc.yml")
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to load config")
