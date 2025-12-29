@@ -8,7 +8,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.52.0
-	github.com/theopenlane/core/common v0.0.0-20251226231451-1392578dd846
+	github.com/theopenlane/core/common v0.1.0
 	github.com/theopenlane/entx v0.20.2
 	github.com/theopenlane/httpsling v0.3.0
 	github.com/theopenlane/iam v0.23.2
