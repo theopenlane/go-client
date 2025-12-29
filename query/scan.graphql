@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVScan($input: Upload!) {
   createBulkCSVScan(input: $input) {
     scans {
@@ -59,7 +58,7 @@ mutation DeleteScan($deleteScanId: ID!) {
   }
 }
 
-query GetAllScans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ScanOrder!]){
+query GetAllScans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ScanOrder!]) {
   scans(
     first: $first
     last: $last
@@ -91,6 +90,7 @@ query GetAllScans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
     }
   }
 }
+
 query GetScanByID($scanId: ID!) {
   scan(id: $scanId) {
     createdAt
@@ -108,7 +108,7 @@ query GetScanByID($scanId: ID!) {
 }
 
 query GetScans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ScanWhereInput, $orderBy: [ScanOrder!]) {
-scans(
+  scans(
     first: $first
     last: $last
     after: $after
@@ -140,6 +140,7 @@ scans(
     }
   }
 }
+
 mutation UpdateScan($updateScanId: ID!, $input: UpdateScanInput!) {
   updateScan(id: $updateScanId, input: $input) {
     scan {

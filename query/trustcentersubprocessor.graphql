@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVTrustCenterSubprocessor($input: Upload!) {
   createBulkCSVTrustCenterSubprocessor(input: $input) {
     trustCenterSubprocessors {
@@ -53,7 +52,7 @@ mutation DeleteTrustCenterSubprocessor($deleteTrustCenterSubprocessorId: ID!) {
   }
 }
 
-query GetAllTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterSubprocessorOrder!]){
+query GetAllTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterSubprocessorOrder!]) {
   trustCenterSubprocessors(
     first: $first
     last: $last
@@ -90,6 +89,7 @@ query GetAllTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $b
     }
   }
 }
+
 query GetTrustCenterSubprocessorByID($trustCenterSubprocessorId: ID!) {
   trustCenterSubprocessor(id: $trustCenterSubprocessorId) {
     category
@@ -112,7 +112,7 @@ query GetTrustCenterSubprocessorByID($trustCenterSubprocessorId: ID!) {
 }
 
 query GetTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TrustCenterSubprocessorWhereInput, $orderBy: [TrustCenterSubprocessorOrder!]) {
-trustCenterSubprocessors(
+  trustCenterSubprocessors(
     first: $first
     last: $last
     after: $after
@@ -149,8 +149,12 @@ trustCenterSubprocessors(
     }
   }
 }
+
 mutation UpdateTrustCenterSubprocessor($updateTrustCenterSubprocessorId: ID!, $input: UpdateTrustCenterSubprocessorInput!) {
-  updateTrustCenterSubprocessor(id: $updateTrustCenterSubprocessorId, input: $input) {
+  updateTrustCenterSubprocessor(
+    id: $updateTrustCenterSubprocessorId
+    input: $input
+  ) {
     trustCenterSubprocessor {
       category
       countries

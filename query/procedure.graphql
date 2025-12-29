@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVProcedure($input: Upload!) {
   createBulkCSVProcedure(input: $input) {
     procedures {
@@ -133,7 +132,7 @@ mutation DeleteProcedure($deleteProcedureId: ID!) {
   }
 }
 
-query GetAllProcedures($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ProcedureOrder!]){
+query GetAllProcedures($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ProcedureOrder!]) {
   procedures(
     first: $first
     last: $last
@@ -179,6 +178,7 @@ query GetAllProcedures($first: Int, $last: Int, $after: Cursor, $before: Cursor,
     }
   }
 }
+
 query GetProcedureByID($procedureId: ID!) {
   procedure(id: $procedureId) {
     approvalRequired
@@ -210,7 +210,7 @@ query GetProcedureByID($procedureId: ID!) {
 }
 
 query GetProcedures($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ProcedureWhereInput, $orderBy: [ProcedureOrder!]) {
-procedures(
+  procedures(
     first: $first
     last: $last
     after: $after
@@ -256,6 +256,7 @@ procedures(
     }
   }
 }
+
 mutation UpdateProcedure($updateProcedureId: ID!, $input: UpdateProcedureInput!) {
   updateProcedure(id: $updateProcedureId, input: $input) {
     procedure {
@@ -287,8 +288,13 @@ mutation UpdateProcedure($updateProcedureId: ID!, $input: UpdateProcedureInput!)
     }
   }
 }
+
 mutation UpdateProcedureWithFile($updateProcedureId: ID!, $procedureFile: Upload!, $input: UpdateProcedureInput!) {
-  updateProcedure(id: $updateProcedureId, procedureFile: $procedureFile, input: $input) {
+  updateProcedure(
+    id: $updateProcedureId
+    procedureFile: $procedureFile
+    input: $input
+  ) {
     procedure {
       approvalRequired
       approverID
@@ -318,4 +324,3 @@ mutation UpdateProcedureWithFile($updateProcedureId: ID!, $procedureFile: Upload
     }
   }
 }
-

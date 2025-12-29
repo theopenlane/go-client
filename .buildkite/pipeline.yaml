@@ -25,8 +25,15 @@ steps:
             - "GITHUB_TOKEN"
     command: |
       #!/bin/sh
+      set -e
       echo "--- running go generate"
       task generate
+      EXIT_CODE=$?
+
+      if [ $EXIT_CODE -ne 0 ]; then
+        echo "task generate failed with exit code $EXIT_CODE"
+        exit $EXIT_CODE
+      fi
 
       echo "--- configuring git user"
       git config user.name "theopenlane-bender"
