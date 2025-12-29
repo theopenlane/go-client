@@ -45,7 +45,7 @@ mutation DeleteEvidence($deleteEvidenceId: ID!) {
   }
 }
 
-query GetAllEvidences($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [EvidenceOrder!]){
+query GetAllEvidences($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [EvidenceOrder!]) {
   evidences(
     first: $first
     last: $last
@@ -100,6 +100,7 @@ query GetAllEvidences($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
     }
   }
 }
+
 query GetEvidenceByID($evidenceId: ID!) {
   evidence(id: $evidenceId) {
     collectionProcedure
@@ -140,7 +141,7 @@ query GetEvidenceByID($evidenceId: ID!) {
 }
 
 query GetEvidences($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: EvidenceWhereInput, $orderBy: [EvidenceOrder!]) {
-evidences(
+  evidences(
     first: $first
     last: $last
     after: $after
@@ -195,6 +196,7 @@ evidences(
     }
   }
 }
+
 mutation UpdateEvidence($updateEvidenceId: ID!, $input: UpdateEvidenceInput!, $evidenceFiles: [Upload!]) {
   updateEvidence(
     id: $updateEvidenceId

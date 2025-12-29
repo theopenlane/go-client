@@ -1,5 +1,5 @@
-mutation CreateTrustCenterWatermarkConfig($input: CreateTrustCenterWatermarkConfigInput!, $logoFile: Upload) {
-  createTrustCenterWatermarkConfig(input: $input, logoFile: $logoFile) {
+mutation CreateTrustCenterWatermarkConfig($input: CreateTrustCenterWatermarkConfigInput!, $watermarkFile: Upload) {
+  createTrustCenterWatermarkConfig(input: $input, watermarkFile: $watermarkFile) {
     trustCenterWatermarkConfig {
       createdAt
       createdBy
@@ -28,7 +28,7 @@ mutation DeleteTrustCenterWatermarkConfig($deleteTrustCenterWatermarkConfigId: I
   }
 }
 
-query GetAllTrustCenterWatermarkConfigs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterWatermarkConfigOrder!]){
+query GetAllTrustCenterWatermarkConfigs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterWatermarkConfigOrder!]) {
   trustCenterWatermarkConfigs(
     first: $first
     last: $last
@@ -66,6 +66,7 @@ query GetAllTrustCenterWatermarkConfigs($first: Int, $last: Int, $after: Cursor,
     }
   }
 }
+
 query GetTrustCenterWatermarkConfigByID($trustCenterWatermarkConfigId: ID!) {
   trustCenterWatermarkConfig(id: $trustCenterWatermarkConfigId) {
     createdAt
@@ -89,7 +90,7 @@ query GetTrustCenterWatermarkConfigByID($trustCenterWatermarkConfigId: ID!) {
 }
 
 query GetTrustCenterWatermarkConfigs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TrustCenterWatermarkConfigWhereInput, $orderBy: [TrustCenterWatermarkConfigOrder!]) {
-trustCenterWatermarkConfigs(
+  trustCenterWatermarkConfigs(
     first: $first
     last: $last
     after: $after
@@ -127,8 +128,13 @@ trustCenterWatermarkConfigs(
     }
   }
 }
-mutation UpdateTrustCenterWatermarkConfig($updateTrustCenterWatermarkConfigId: ID!, $input: UpdateTrustCenterWatermarkConfigInput!, $logoFile: Upload) {
-  updateTrustCenterWatermarkConfig(id: $updateTrustCenterWatermarkConfigId, input: $input, logoFile: $logoFile) {
+
+mutation UpdateTrustCenterWatermarkConfig($updateTrustCenterWatermarkConfigId: ID!, $input: UpdateTrustCenterWatermarkConfigInput!, $watermarkFile: Upload) {
+  updateTrustCenterWatermarkConfig(
+    id: $updateTrustCenterWatermarkConfigId
+    input: $input
+    watermarkFile: $watermarkFile
+  ) {
     trustCenterWatermarkConfig {
       createdAt
       createdBy

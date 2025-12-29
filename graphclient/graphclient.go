@@ -41,9 +41,9 @@ type GraphClient interface {
 	GetAllAssessmentResponses(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*AssessmentResponseOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllAssessmentResponses, error)
 	GetAssessmentResponseByID(ctx context.Context, assessmentResponseID string, interceptors ...clientv2.RequestInterceptor) (*GetAssessmentResponseByID, error)
 	GetAssessmentResponses(ctx context.Context, first *int64, last *int64, after *string, before *string, where *AssessmentResponseWhereInput, orderBy []*AssessmentResponseOrder, interceptors ...clientv2.RequestInterceptor) (*GetAssessmentResponses, error)
-	CreateBulkCSVAsset(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVAsset, error)
-	CreateBulkAsset(ctx context.Context, input []*CreateAssetInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkAsset, error)
 	CreateAsset(ctx context.Context, input CreateAssetInput, interceptors ...clientv2.RequestInterceptor) (*CreateAsset, error)
+	CreateBulkAsset(ctx context.Context, input []*CreateAssetInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkAsset, error)
+	CreateBulkCSVAsset(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVAsset, error)
 	DeleteAsset(ctx context.Context, deleteAssetID string, interceptors ...clientv2.RequestInterceptor) (*DeleteAsset, error)
 	GetAllAssets(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*AssetOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllAssets, error)
 	GetAssetByID(ctx context.Context, assetID string, interceptors ...clientv2.RequestInterceptor) (*GetAssetByID, error)
@@ -527,12 +527,12 @@ type GraphClient interface {
 	GetTrustCenterSubprocessorByID(ctx context.Context, trustCenterSubprocessorID string, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterSubprocessorByID, error)
 	GetTrustCenterSubprocessors(ctx context.Context, first *int64, last *int64, after *string, before *string, where *TrustCenterSubprocessorWhereInput, orderBy []*TrustCenterSubprocessorOrder, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterSubprocessors, error)
 	UpdateTrustCenterSubprocessor(ctx context.Context, updateTrustCenterSubprocessorID string, input UpdateTrustCenterSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterSubprocessor, error)
-	CreateTrustCenterWatermarkConfig(ctx context.Context, input CreateTrustCenterWatermarkConfigInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterWatermarkConfig, error)
+	CreateTrustCenterWatermarkConfig(ctx context.Context, input CreateTrustCenterWatermarkConfigInput, watermarkFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterWatermarkConfig, error)
 	DeleteTrustCenterWatermarkConfig(ctx context.Context, deleteTrustCenterWatermarkConfigID string, interceptors ...clientv2.RequestInterceptor) (*DeleteTrustCenterWatermarkConfig, error)
 	GetAllTrustCenterWatermarkConfigs(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*TrustCenterWatermarkConfigOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllTrustCenterWatermarkConfigs, error)
 	GetTrustCenterWatermarkConfigByID(ctx context.Context, trustCenterWatermarkConfigID string, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterWatermarkConfigByID, error)
 	GetTrustCenterWatermarkConfigs(ctx context.Context, first *int64, last *int64, after *string, before *string, where *TrustCenterWatermarkConfigWhereInput, orderBy []*TrustCenterWatermarkConfigOrder, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterWatermarkConfigs, error)
-	UpdateTrustCenterWatermarkConfig(ctx context.Context, updateTrustCenterWatermarkConfigID string, input UpdateTrustCenterWatermarkConfigInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterWatermarkConfig, error)
+	UpdateTrustCenterWatermarkConfig(ctx context.Context, updateTrustCenterWatermarkConfigID string, input UpdateTrustCenterWatermarkConfigInput, watermarkFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterWatermarkConfig, error)
 	CreateUser(ctx context.Context, input CreateUserInput, interceptors ...clientv2.RequestInterceptor) (*CreateUser, error)
 	DeleteUser(ctx context.Context, deleteUserID string, interceptors ...clientv2.RequestInterceptor) (*DeleteUser, error)
 	GetAllUsers(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*UserOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllUsers, error)
@@ -4399,7 +4399,7 @@ func (t *GetAssessmentResponses_AssessmentResponses) GetTotalCount() int64 {
 	return t.TotalCount
 }
 
-type CreateBulkCSVAsset_CreateBulkCSVAsset_Assets struct {
+type CreateAsset_CreateAsset_Asset struct {
 	AssetType   enums.AssetType "json:\"assetType\" graphql:\"assetType\""
 	Categories  []string        "json:\"categories,omitempty\" graphql:\"categories\""
 	Cpe         *string         "json:\"cpe,omitempty\" graphql:\"cpe\""
@@ -4416,100 +4416,100 @@ type CreateBulkCSVAsset_CreateBulkCSVAsset_Assets struct {
 	Website     *string         "json:\"website,omitempty\" graphql:\"website\""
 }
 
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetAssetType() *enums.AssetType {
+func (t *CreateAsset_CreateAsset_Asset) GetAssetType() *enums.AssetType {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return &t.AssetType
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetCategories() []string {
+func (t *CreateAsset_CreateAsset_Asset) GetCategories() []string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.Categories
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetCpe() *string {
+func (t *CreateAsset_CreateAsset_Asset) GetCpe() *string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.Cpe
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetCreatedAt() *time.Time {
+func (t *CreateAsset_CreateAsset_Asset) GetCreatedAt() *time.Time {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.CreatedAt
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetCreatedBy() *string {
+func (t *CreateAsset_CreateAsset_Asset) GetCreatedBy() *string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.CreatedBy
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetDescription() *string {
+func (t *CreateAsset_CreateAsset_Asset) GetDescription() *string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.Description
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetID() string {
+func (t *CreateAsset_CreateAsset_Asset) GetID() string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.ID
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetIdentifier() *string {
+func (t *CreateAsset_CreateAsset_Asset) GetIdentifier() *string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.Identifier
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetName() string {
+func (t *CreateAsset_CreateAsset_Asset) GetName() string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.Name
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetOwnerID() *string {
+func (t *CreateAsset_CreateAsset_Asset) GetOwnerID() *string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.OwnerID
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetTags() []string {
+func (t *CreateAsset_CreateAsset_Asset) GetTags() []string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.Tags
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetUpdatedAt() *time.Time {
+func (t *CreateAsset_CreateAsset_Asset) GetUpdatedAt() *time.Time {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.UpdatedAt
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetUpdatedBy() *string {
+func (t *CreateAsset_CreateAsset_Asset) GetUpdatedBy() *string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.UpdatedBy
 }
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetWebsite() *string {
+func (t *CreateAsset_CreateAsset_Asset) GetWebsite() *string {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
+		t = &CreateAsset_CreateAsset_Asset{}
 	}
 	return t.Website
 }
 
-type CreateBulkCSVAsset_CreateBulkCSVAsset struct {
-	Assets []*CreateBulkCSVAsset_CreateBulkCSVAsset_Assets "json:\"assets,omitempty\" graphql:\"assets\""
+type CreateAsset_CreateAsset struct {
+	Asset CreateAsset_CreateAsset_Asset "json:\"asset\" graphql:\"asset\""
 }
 
-func (t *CreateBulkCSVAsset_CreateBulkCSVAsset) GetAssets() []*CreateBulkCSVAsset_CreateBulkCSVAsset_Assets {
+func (t *CreateAsset_CreateAsset) GetAsset() *CreateAsset_CreateAsset_Asset {
 	if t == nil {
-		t = &CreateBulkCSVAsset_CreateBulkCSVAsset{}
+		t = &CreateAsset_CreateAsset{}
 	}
-	return t.Assets
+	return &t.Asset
 }
 
 type CreateBulkAsset_CreateBulkAsset_Assets struct {
@@ -4625,7 +4625,7 @@ func (t *CreateBulkAsset_CreateBulkAsset) GetAssets() []*CreateBulkAsset_CreateB
 	return t.Assets
 }
 
-type CreateAsset_CreateAsset_Asset struct {
+type CreateBulkCSVAsset_CreateBulkCSVAsset_Assets struct {
 	AssetType   enums.AssetType "json:\"assetType\" graphql:\"assetType\""
 	Categories  []string        "json:\"categories,omitempty\" graphql:\"categories\""
 	Cpe         *string         "json:\"cpe,omitempty\" graphql:\"cpe\""
@@ -4642,100 +4642,100 @@ type CreateAsset_CreateAsset_Asset struct {
 	Website     *string         "json:\"website,omitempty\" graphql:\"website\""
 }
 
-func (t *CreateAsset_CreateAsset_Asset) GetAssetType() *enums.AssetType {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetAssetType() *enums.AssetType {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return &t.AssetType
 }
-func (t *CreateAsset_CreateAsset_Asset) GetCategories() []string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetCategories() []string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.Categories
 }
-func (t *CreateAsset_CreateAsset_Asset) GetCpe() *string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetCpe() *string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.Cpe
 }
-func (t *CreateAsset_CreateAsset_Asset) GetCreatedAt() *time.Time {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetCreatedAt() *time.Time {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.CreatedAt
 }
-func (t *CreateAsset_CreateAsset_Asset) GetCreatedBy() *string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetCreatedBy() *string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.CreatedBy
 }
-func (t *CreateAsset_CreateAsset_Asset) GetDescription() *string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetDescription() *string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.Description
 }
-func (t *CreateAsset_CreateAsset_Asset) GetID() string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetID() string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.ID
 }
-func (t *CreateAsset_CreateAsset_Asset) GetIdentifier() *string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetIdentifier() *string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.Identifier
 }
-func (t *CreateAsset_CreateAsset_Asset) GetName() string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetName() string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.Name
 }
-func (t *CreateAsset_CreateAsset_Asset) GetOwnerID() *string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetOwnerID() *string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.OwnerID
 }
-func (t *CreateAsset_CreateAsset_Asset) GetTags() []string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetTags() []string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.Tags
 }
-func (t *CreateAsset_CreateAsset_Asset) GetUpdatedAt() *time.Time {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetUpdatedAt() *time.Time {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.UpdatedAt
 }
-func (t *CreateAsset_CreateAsset_Asset) GetUpdatedBy() *string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetUpdatedBy() *string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.UpdatedBy
 }
-func (t *CreateAsset_CreateAsset_Asset) GetWebsite() *string {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset_Assets) GetWebsite() *string {
 	if t == nil {
-		t = &CreateAsset_CreateAsset_Asset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset_Assets{}
 	}
 	return t.Website
 }
 
-type CreateAsset_CreateAsset struct {
-	Asset CreateAsset_CreateAsset_Asset "json:\"asset\" graphql:\"asset\""
+type CreateBulkCSVAsset_CreateBulkCSVAsset struct {
+	Assets []*CreateBulkCSVAsset_CreateBulkCSVAsset_Assets "json:\"assets,omitempty\" graphql:\"assets\""
 }
 
-func (t *CreateAsset_CreateAsset) GetAsset() *CreateAsset_CreateAsset_Asset {
+func (t *CreateBulkCSVAsset_CreateBulkCSVAsset) GetAssets() []*CreateBulkCSVAsset_CreateBulkCSVAsset_Assets {
 	if t == nil {
-		t = &CreateAsset_CreateAsset{}
+		t = &CreateBulkCSVAsset_CreateBulkCSVAsset{}
 	}
-	return &t.Asset
+	return t.Assets
 }
 
 type DeleteAsset_DeleteAsset struct {
@@ -18755,7 +18755,7 @@ func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun) GetDirectorySyncRun() *U
 type CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions struct {
 	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ExternalID *string    "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID         string     "json:\"id\" graphql:\"id\""
 	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
 	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -18775,7 +18775,7 @@ func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetCreated
 	}
 	return t.CreatedBy
 }
-func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetExternalID() string {
+func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions) GetExternalID() *string {
 	if t == nil {
 		t = &CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions{}
 	}
@@ -18826,7 +18826,7 @@ func (t *CreateBulkCSVDiscussion_CreateBulkCSVDiscussion) GetDiscussions() []*Cr
 type CreateBulkDiscussion_CreateBulkDiscussion_Discussions struct {
 	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ExternalID *string    "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID         string     "json:\"id\" graphql:\"id\""
 	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
 	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -18846,7 +18846,7 @@ func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetCreatedBy() *
 	}
 	return t.CreatedBy
 }
-func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetExternalID() string {
+func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetExternalID() *string {
 	if t == nil {
 		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
 	}
@@ -18897,7 +18897,7 @@ func (t *CreateBulkDiscussion_CreateBulkDiscussion) GetDiscussions() []*CreateBu
 type CreateDiscussion_CreateDiscussion_Discussion struct {
 	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ExternalID *string    "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID         string     "json:\"id\" graphql:\"id\""
 	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
 	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -18917,7 +18917,7 @@ func (t *CreateDiscussion_CreateDiscussion_Discussion) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *CreateDiscussion_CreateDiscussion_Discussion) GetExternalID() string {
+func (t *CreateDiscussion_CreateDiscussion_Discussion) GetExternalID() *string {
 	if t == nil {
 		t = &CreateDiscussion_CreateDiscussion_Discussion{}
 	}
@@ -19011,7 +19011,7 @@ func (t *GetAllDiscussions_Discussions_PageInfo) GetStartCursor() *string {
 type GetAllDiscussions_Discussions_Edges_Node struct {
 	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ExternalID *string    "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID         string     "json:\"id\" graphql:\"id\""
 	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
 	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -19031,7 +19031,7 @@ func (t *GetAllDiscussions_Discussions_Edges_Node) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *GetAllDiscussions_Discussions_Edges_Node) GetExternalID() string {
+func (t *GetAllDiscussions_Discussions_Edges_Node) GetExternalID() *string {
 	if t == nil {
 		t = &GetAllDiscussions_Discussions_Edges_Node{}
 	}
@@ -19107,7 +19107,7 @@ func (t *GetAllDiscussions_Discussions) GetTotalCount() int64 {
 type GetDiscussionByID_Discussion struct {
 	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ExternalID *string    "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID         string     "json:\"id\" graphql:\"id\""
 	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
 	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -19127,7 +19127,7 @@ func (t *GetDiscussionByID_Discussion) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *GetDiscussionByID_Discussion) GetExternalID() string {
+func (t *GetDiscussionByID_Discussion) GetExternalID() *string {
 	if t == nil {
 		t = &GetDiscussionByID_Discussion{}
 	}
@@ -19199,7 +19199,7 @@ func (t *GetDiscussions_Discussions_PageInfo) GetStartCursor() *string {
 type GetDiscussions_Discussions_Edges_Node struct {
 	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ExternalID *string    "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID         string     "json:\"id\" graphql:\"id\""
 	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
 	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -19219,7 +19219,7 @@ func (t *GetDiscussions_Discussions_Edges_Node) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *GetDiscussions_Discussions_Edges_Node) GetExternalID() string {
+func (t *GetDiscussions_Discussions_Edges_Node) GetExternalID() *string {
 	if t == nil {
 		t = &GetDiscussions_Discussions_Edges_Node{}
 	}
@@ -19295,7 +19295,7 @@ func (t *GetDiscussions_Discussions) GetTotalCount() int64 {
 type UpdateDiscussion_UpdateDiscussion_Discussion struct {
 	CreatedAt  *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy  *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	ExternalID string     "json:\"externalID\" graphql:\"externalID\""
+	ExternalID *string    "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID         string     "json:\"id\" graphql:\"id\""
 	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
 	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -19315,7 +19315,7 @@ func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetExternalID() string {
+func (t *UpdateDiscussion_UpdateDiscussion_Discussion) GetExternalID() *string {
 	if t == nil {
 		t = &UpdateDiscussion_UpdateDiscussion_Discussion{}
 	}
@@ -80003,31 +80003,29 @@ func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget) GetWorkf
 }
 
 type CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_WorkflowDefinitions struct {
-	Active            bool                               "json:\"active\" graphql:\"active\""
-	CooldownSeconds   int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
-	CreatedAt         *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionJSON    *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
-	Description       *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID         string                             "json:\"displayID\" graphql:\"displayID\""
-	Draft             bool                               "json:\"draft\" graphql:\"draft\""
-	ID                string                             "json:\"id\" graphql:\"id\""
-	InternalNotes     *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	IsDefault         bool                               "json:\"isDefault\" graphql:\"isDefault\""
-	Name              string                             "json:\"name\" graphql:\"name\""
-	OwnerID           *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PublishedAt       *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	Revision          int64                              "json:\"revision\" graphql:\"revision\""
-	SchemaType        string                             "json:\"schemaType\" graphql:\"schemaType\""
-	SystemInternalID  *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned       *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	Tags              []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	TrackedFields     []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
-	TriggerFields     []string                           "json:\"triggerFields,omitempty\" graphql:\"triggerFields\""
-	TriggerOperations []string                           "json:\"triggerOperations,omitempty\" graphql:\"triggerOperations\""
-	UpdatedAt         *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowKind      enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
+	Active           bool                               "json:\"active\" graphql:\"active\""
+	CooldownSeconds  int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
+	CreatedAt        *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DefinitionJSON   *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
+	Description      *string                            "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID        string                             "json:\"displayID\" graphql:\"displayID\""
+	Draft            bool                               "json:\"draft\" graphql:\"draft\""
+	ID               string                             "json:\"id\" graphql:\"id\""
+	InternalNotes    *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	IsDefault        bool                               "json:\"isDefault\" graphql:\"isDefault\""
+	Name             string                             "json:\"name\" graphql:\"name\""
+	OwnerID          *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PublishedAt      *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	Revision         int64                              "json:\"revision\" graphql:\"revision\""
+	SchemaType       string                             "json:\"schemaType\" graphql:\"schemaType\""
+	SystemInternalID *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned      *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags             []string                           "json:\"tags,omitempty\" graphql:\"tags\""
+	TrackedFields    []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
+	UpdatedAt        *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	WorkflowKind     enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
 }
 
 func (t *CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_WorkflowDefinitions) GetActive() bool {
@@ -80150,18 +80148,6 @@ func (t *CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_Workflo
 	}
 	return t.TrackedFields
 }
-func (t *CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_WorkflowDefinitions) GetTriggerFields() []string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_WorkflowDefinitions{}
-	}
-	return t.TriggerFields
-}
-func (t *CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_WorkflowDefinitions) GetTriggerOperations() []string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_WorkflowDefinitions{}
-	}
-	return t.TriggerOperations
-}
 func (t *CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_WorkflowDefinitions) GetUpdatedAt() *time.Time {
 	if t == nil {
 		t = &CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_WorkflowDefinitions{}
@@ -80193,31 +80179,29 @@ func (t *CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition) GetWor
 }
 
 type CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition_WorkflowDefinitions struct {
-	Active            bool                               "json:\"active\" graphql:\"active\""
-	CooldownSeconds   int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
-	CreatedAt         *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionJSON    *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
-	Description       *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID         string                             "json:\"displayID\" graphql:\"displayID\""
-	Draft             bool                               "json:\"draft\" graphql:\"draft\""
-	ID                string                             "json:\"id\" graphql:\"id\""
-	InternalNotes     *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	IsDefault         bool                               "json:\"isDefault\" graphql:\"isDefault\""
-	Name              string                             "json:\"name\" graphql:\"name\""
-	OwnerID           *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PublishedAt       *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	Revision          int64                              "json:\"revision\" graphql:\"revision\""
-	SchemaType        string                             "json:\"schemaType\" graphql:\"schemaType\""
-	SystemInternalID  *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned       *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	Tags              []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	TrackedFields     []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
-	TriggerFields     []string                           "json:\"triggerFields,omitempty\" graphql:\"triggerFields\""
-	TriggerOperations []string                           "json:\"triggerOperations,omitempty\" graphql:\"triggerOperations\""
-	UpdatedAt         *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowKind      enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
+	Active           bool                               "json:\"active\" graphql:\"active\""
+	CooldownSeconds  int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
+	CreatedAt        *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DefinitionJSON   *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
+	Description      *string                            "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID        string                             "json:\"displayID\" graphql:\"displayID\""
+	Draft            bool                               "json:\"draft\" graphql:\"draft\""
+	ID               string                             "json:\"id\" graphql:\"id\""
+	InternalNotes    *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	IsDefault        bool                               "json:\"isDefault\" graphql:\"isDefault\""
+	Name             string                             "json:\"name\" graphql:\"name\""
+	OwnerID          *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PublishedAt      *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	Revision         int64                              "json:\"revision\" graphql:\"revision\""
+	SchemaType       string                             "json:\"schemaType\" graphql:\"schemaType\""
+	SystemInternalID *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned      *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags             []string                           "json:\"tags,omitempty\" graphql:\"tags\""
+	TrackedFields    []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
+	UpdatedAt        *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	WorkflowKind     enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
 }
 
 func (t *CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition_WorkflowDefinitions) GetActive() bool {
@@ -80340,18 +80324,6 @@ func (t *CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition_WorkflowDefin
 	}
 	return t.TrackedFields
 }
-func (t *CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition_WorkflowDefinitions) GetTriggerFields() []string {
-	if t == nil {
-		t = &CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition_WorkflowDefinitions{}
-	}
-	return t.TriggerFields
-}
-func (t *CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition_WorkflowDefinitions) GetTriggerOperations() []string {
-	if t == nil {
-		t = &CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition_WorkflowDefinitions{}
-	}
-	return t.TriggerOperations
-}
 func (t *CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition_WorkflowDefinitions) GetUpdatedAt() *time.Time {
 	if t == nil {
 		t = &CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition_WorkflowDefinitions{}
@@ -80383,31 +80355,29 @@ func (t *CreateBulkWorkflowDefinition_CreateBulkWorkflowDefinition) GetWorkflowD
 }
 
 type CreateWorkflowDefinition_CreateWorkflowDefinition_WorkflowDefinition struct {
-	Active            bool                               "json:\"active\" graphql:\"active\""
-	CooldownSeconds   int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
-	CreatedAt         *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionJSON    *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
-	Description       *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID         string                             "json:\"displayID\" graphql:\"displayID\""
-	Draft             bool                               "json:\"draft\" graphql:\"draft\""
-	ID                string                             "json:\"id\" graphql:\"id\""
-	InternalNotes     *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	IsDefault         bool                               "json:\"isDefault\" graphql:\"isDefault\""
-	Name              string                             "json:\"name\" graphql:\"name\""
-	OwnerID           *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PublishedAt       *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	Revision          int64                              "json:\"revision\" graphql:\"revision\""
-	SchemaType        string                             "json:\"schemaType\" graphql:\"schemaType\""
-	SystemInternalID  *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned       *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	Tags              []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	TrackedFields     []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
-	TriggerFields     []string                           "json:\"triggerFields,omitempty\" graphql:\"triggerFields\""
-	TriggerOperations []string                           "json:\"triggerOperations,omitempty\" graphql:\"triggerOperations\""
-	UpdatedAt         *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowKind      enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
+	Active           bool                               "json:\"active\" graphql:\"active\""
+	CooldownSeconds  int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
+	CreatedAt        *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DefinitionJSON   *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
+	Description      *string                            "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID        string                             "json:\"displayID\" graphql:\"displayID\""
+	Draft            bool                               "json:\"draft\" graphql:\"draft\""
+	ID               string                             "json:\"id\" graphql:\"id\""
+	InternalNotes    *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	IsDefault        bool                               "json:\"isDefault\" graphql:\"isDefault\""
+	Name             string                             "json:\"name\" graphql:\"name\""
+	OwnerID          *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PublishedAt      *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	Revision         int64                              "json:\"revision\" graphql:\"revision\""
+	SchemaType       string                             "json:\"schemaType\" graphql:\"schemaType\""
+	SystemInternalID *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned      *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags             []string                           "json:\"tags,omitempty\" graphql:\"tags\""
+	TrackedFields    []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
+	UpdatedAt        *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	WorkflowKind     enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
 }
 
 func (t *CreateWorkflowDefinition_CreateWorkflowDefinition_WorkflowDefinition) GetActive() bool {
@@ -80530,18 +80500,6 @@ func (t *CreateWorkflowDefinition_CreateWorkflowDefinition_WorkflowDefinition) G
 	}
 	return t.TrackedFields
 }
-func (t *CreateWorkflowDefinition_CreateWorkflowDefinition_WorkflowDefinition) GetTriggerFields() []string {
-	if t == nil {
-		t = &CreateWorkflowDefinition_CreateWorkflowDefinition_WorkflowDefinition{}
-	}
-	return t.TriggerFields
-}
-func (t *CreateWorkflowDefinition_CreateWorkflowDefinition_WorkflowDefinition) GetTriggerOperations() []string {
-	if t == nil {
-		t = &CreateWorkflowDefinition_CreateWorkflowDefinition_WorkflowDefinition{}
-	}
-	return t.TriggerOperations
-}
 func (t *CreateWorkflowDefinition_CreateWorkflowDefinition_WorkflowDefinition) GetUpdatedAt() *time.Time {
 	if t == nil {
 		t = &CreateWorkflowDefinition_CreateWorkflowDefinition_WorkflowDefinition{}
@@ -80616,31 +80574,29 @@ func (t *GetAllWorkflowDefinitions_WorkflowDefinitions_PageInfo) GetStartCursor(
 }
 
 type GetAllWorkflowDefinitions_WorkflowDefinitions_Edges_Node struct {
-	Active            bool                               "json:\"active\" graphql:\"active\""
-	CooldownSeconds   int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
-	CreatedAt         *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionJSON    *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
-	Description       *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID         string                             "json:\"displayID\" graphql:\"displayID\""
-	Draft             bool                               "json:\"draft\" graphql:\"draft\""
-	ID                string                             "json:\"id\" graphql:\"id\""
-	InternalNotes     *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	IsDefault         bool                               "json:\"isDefault\" graphql:\"isDefault\""
-	Name              string                             "json:\"name\" graphql:\"name\""
-	OwnerID           *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PublishedAt       *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	Revision          int64                              "json:\"revision\" graphql:\"revision\""
-	SchemaType        string                             "json:\"schemaType\" graphql:\"schemaType\""
-	SystemInternalID  *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned       *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	Tags              []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	TrackedFields     []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
-	TriggerFields     []string                           "json:\"triggerFields,omitempty\" graphql:\"triggerFields\""
-	TriggerOperations []string                           "json:\"triggerOperations,omitempty\" graphql:\"triggerOperations\""
-	UpdatedAt         *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowKind      enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
+	Active           bool                               "json:\"active\" graphql:\"active\""
+	CooldownSeconds  int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
+	CreatedAt        *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DefinitionJSON   *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
+	Description      *string                            "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID        string                             "json:\"displayID\" graphql:\"displayID\""
+	Draft            bool                               "json:\"draft\" graphql:\"draft\""
+	ID               string                             "json:\"id\" graphql:\"id\""
+	InternalNotes    *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	IsDefault        bool                               "json:\"isDefault\" graphql:\"isDefault\""
+	Name             string                             "json:\"name\" graphql:\"name\""
+	OwnerID          *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PublishedAt      *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	Revision         int64                              "json:\"revision\" graphql:\"revision\""
+	SchemaType       string                             "json:\"schemaType\" graphql:\"schemaType\""
+	SystemInternalID *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned      *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags             []string                           "json:\"tags,omitempty\" graphql:\"tags\""
+	TrackedFields    []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
+	UpdatedAt        *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	WorkflowKind     enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
 }
 
 func (t *GetAllWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetActive() bool {
@@ -80763,18 +80719,6 @@ func (t *GetAllWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetTrackedFie
 	}
 	return t.TrackedFields
 }
-func (t *GetAllWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetTriggerFields() []string {
-	if t == nil {
-		t = &GetAllWorkflowDefinitions_WorkflowDefinitions_Edges_Node{}
-	}
-	return t.TriggerFields
-}
-func (t *GetAllWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetTriggerOperations() []string {
-	if t == nil {
-		t = &GetAllWorkflowDefinitions_WorkflowDefinitions_Edges_Node{}
-	}
-	return t.TriggerOperations
-}
 func (t *GetAllWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetUpdatedAt() *time.Time {
 	if t == nil {
 		t = &GetAllWorkflowDefinitions_WorkflowDefinitions_Edges_Node{}
@@ -80831,31 +80775,29 @@ func (t *GetAllWorkflowDefinitions_WorkflowDefinitions) GetTotalCount() int64 {
 }
 
 type GetWorkflowDefinitionByID_WorkflowDefinition struct {
-	Active            bool                               "json:\"active\" graphql:\"active\""
-	CooldownSeconds   int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
-	CreatedAt         *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionJSON    *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
-	Description       *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID         string                             "json:\"displayID\" graphql:\"displayID\""
-	Draft             bool                               "json:\"draft\" graphql:\"draft\""
-	ID                string                             "json:\"id\" graphql:\"id\""
-	InternalNotes     *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	IsDefault         bool                               "json:\"isDefault\" graphql:\"isDefault\""
-	Name              string                             "json:\"name\" graphql:\"name\""
-	OwnerID           *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PublishedAt       *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	Revision          int64                              "json:\"revision\" graphql:\"revision\""
-	SchemaType        string                             "json:\"schemaType\" graphql:\"schemaType\""
-	SystemInternalID  *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned       *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	Tags              []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	TrackedFields     []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
-	TriggerFields     []string                           "json:\"triggerFields,omitempty\" graphql:\"triggerFields\""
-	TriggerOperations []string                           "json:\"triggerOperations,omitempty\" graphql:\"triggerOperations\""
-	UpdatedAt         *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowKind      enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
+	Active           bool                               "json:\"active\" graphql:\"active\""
+	CooldownSeconds  int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
+	CreatedAt        *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DefinitionJSON   *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
+	Description      *string                            "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID        string                             "json:\"displayID\" graphql:\"displayID\""
+	Draft            bool                               "json:\"draft\" graphql:\"draft\""
+	ID               string                             "json:\"id\" graphql:\"id\""
+	InternalNotes    *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	IsDefault        bool                               "json:\"isDefault\" graphql:\"isDefault\""
+	Name             string                             "json:\"name\" graphql:\"name\""
+	OwnerID          *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PublishedAt      *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	Revision         int64                              "json:\"revision\" graphql:\"revision\""
+	SchemaType       string                             "json:\"schemaType\" graphql:\"schemaType\""
+	SystemInternalID *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned      *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags             []string                           "json:\"tags,omitempty\" graphql:\"tags\""
+	TrackedFields    []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
+	UpdatedAt        *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	WorkflowKind     enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
 }
 
 func (t *GetWorkflowDefinitionByID_WorkflowDefinition) GetActive() bool {
@@ -80978,18 +80920,6 @@ func (t *GetWorkflowDefinitionByID_WorkflowDefinition) GetTrackedFields() []stri
 	}
 	return t.TrackedFields
 }
-func (t *GetWorkflowDefinitionByID_WorkflowDefinition) GetTriggerFields() []string {
-	if t == nil {
-		t = &GetWorkflowDefinitionByID_WorkflowDefinition{}
-	}
-	return t.TriggerFields
-}
-func (t *GetWorkflowDefinitionByID_WorkflowDefinition) GetTriggerOperations() []string {
-	if t == nil {
-		t = &GetWorkflowDefinitionByID_WorkflowDefinition{}
-	}
-	return t.TriggerOperations
-}
 func (t *GetWorkflowDefinitionByID_WorkflowDefinition) GetUpdatedAt() *time.Time {
 	if t == nil {
 		t = &GetWorkflowDefinitionByID_WorkflowDefinition{}
@@ -81042,31 +80972,29 @@ func (t *GetWorkflowDefinitions_WorkflowDefinitions_PageInfo) GetStartCursor() *
 }
 
 type GetWorkflowDefinitions_WorkflowDefinitions_Edges_Node struct {
-	Active            bool                               "json:\"active\" graphql:\"active\""
-	CooldownSeconds   int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
-	CreatedAt         *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionJSON    *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
-	Description       *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID         string                             "json:\"displayID\" graphql:\"displayID\""
-	Draft             bool                               "json:\"draft\" graphql:\"draft\""
-	ID                string                             "json:\"id\" graphql:\"id\""
-	InternalNotes     *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	IsDefault         bool                               "json:\"isDefault\" graphql:\"isDefault\""
-	Name              string                             "json:\"name\" graphql:\"name\""
-	OwnerID           *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PublishedAt       *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	Revision          int64                              "json:\"revision\" graphql:\"revision\""
-	SchemaType        string                             "json:\"schemaType\" graphql:\"schemaType\""
-	SystemInternalID  *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned       *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	Tags              []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	TrackedFields     []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
-	TriggerFields     []string                           "json:\"triggerFields,omitempty\" graphql:\"triggerFields\""
-	TriggerOperations []string                           "json:\"triggerOperations,omitempty\" graphql:\"triggerOperations\""
-	UpdatedAt         *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowKind      enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
+	Active           bool                               "json:\"active\" graphql:\"active\""
+	CooldownSeconds  int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
+	CreatedAt        *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DefinitionJSON   *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
+	Description      *string                            "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID        string                             "json:\"displayID\" graphql:\"displayID\""
+	Draft            bool                               "json:\"draft\" graphql:\"draft\""
+	ID               string                             "json:\"id\" graphql:\"id\""
+	InternalNotes    *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	IsDefault        bool                               "json:\"isDefault\" graphql:\"isDefault\""
+	Name             string                             "json:\"name\" graphql:\"name\""
+	OwnerID          *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PublishedAt      *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	Revision         int64                              "json:\"revision\" graphql:\"revision\""
+	SchemaType       string                             "json:\"schemaType\" graphql:\"schemaType\""
+	SystemInternalID *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned      *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags             []string                           "json:\"tags,omitempty\" graphql:\"tags\""
+	TrackedFields    []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
+	UpdatedAt        *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	WorkflowKind     enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
 }
 
 func (t *GetWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetActive() bool {
@@ -81189,18 +81117,6 @@ func (t *GetWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetTrackedFields
 	}
 	return t.TrackedFields
 }
-func (t *GetWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetTriggerFields() []string {
-	if t == nil {
-		t = &GetWorkflowDefinitions_WorkflowDefinitions_Edges_Node{}
-	}
-	return t.TriggerFields
-}
-func (t *GetWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetTriggerOperations() []string {
-	if t == nil {
-		t = &GetWorkflowDefinitions_WorkflowDefinitions_Edges_Node{}
-	}
-	return t.TriggerOperations
-}
 func (t *GetWorkflowDefinitions_WorkflowDefinitions_Edges_Node) GetUpdatedAt() *time.Time {
 	if t == nil {
 		t = &GetWorkflowDefinitions_WorkflowDefinitions_Edges_Node{}
@@ -81257,31 +81173,29 @@ func (t *GetWorkflowDefinitions_WorkflowDefinitions) GetTotalCount() int64 {
 }
 
 type UpdateWorkflowDefinition_UpdateWorkflowDefinition_WorkflowDefinition struct {
-	Active            bool                               "json:\"active\" graphql:\"active\""
-	CooldownSeconds   int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
-	CreatedAt         *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionJSON    *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
-	Description       *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID         string                             "json:\"displayID\" graphql:\"displayID\""
-	Draft             bool                               "json:\"draft\" graphql:\"draft\""
-	ID                string                             "json:\"id\" graphql:\"id\""
-	InternalNotes     *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	IsDefault         bool                               "json:\"isDefault\" graphql:\"isDefault\""
-	Name              string                             "json:\"name\" graphql:\"name\""
-	OwnerID           *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PublishedAt       *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	Revision          int64                              "json:\"revision\" graphql:\"revision\""
-	SchemaType        string                             "json:\"schemaType\" graphql:\"schemaType\""
-	SystemInternalID  *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned       *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	Tags              []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	TrackedFields     []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
-	TriggerFields     []string                           "json:\"triggerFields,omitempty\" graphql:\"triggerFields\""
-	TriggerOperations []string                           "json:\"triggerOperations,omitempty\" graphql:\"triggerOperations\""
-	UpdatedAt         *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowKind      enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
+	Active           bool                               "json:\"active\" graphql:\"active\""
+	CooldownSeconds  int64                              "json:\"cooldownSeconds\" graphql:\"cooldownSeconds\""
+	CreatedAt        *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DefinitionJSON   *models.WorkflowDefinitionDocument "json:\"definitionJSON,omitempty\" graphql:\"definitionJSON\""
+	Description      *string                            "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID        string                             "json:\"displayID\" graphql:\"displayID\""
+	Draft            bool                               "json:\"draft\" graphql:\"draft\""
+	ID               string                             "json:\"id\" graphql:\"id\""
+	InternalNotes    *string                            "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	IsDefault        bool                               "json:\"isDefault\" graphql:\"isDefault\""
+	Name             string                             "json:\"name\" graphql:\"name\""
+	OwnerID          *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PublishedAt      *time.Time                         "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	Revision         int64                              "json:\"revision\" graphql:\"revision\""
+	SchemaType       string                             "json:\"schemaType\" graphql:\"schemaType\""
+	SystemInternalID *string                            "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned      *bool                              "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags             []string                           "json:\"tags,omitempty\" graphql:\"tags\""
+	TrackedFields    []string                           "json:\"trackedFields,omitempty\" graphql:\"trackedFields\""
+	UpdatedAt        *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	WorkflowKind     enums.WorkflowKind                 "json:\"workflowKind\" graphql:\"workflowKind\""
 }
 
 func (t *UpdateWorkflowDefinition_UpdateWorkflowDefinition_WorkflowDefinition) GetActive() bool {
@@ -81403,18 +81317,6 @@ func (t *UpdateWorkflowDefinition_UpdateWorkflowDefinition_WorkflowDefinition) G
 		t = &UpdateWorkflowDefinition_UpdateWorkflowDefinition_WorkflowDefinition{}
 	}
 	return t.TrackedFields
-}
-func (t *UpdateWorkflowDefinition_UpdateWorkflowDefinition_WorkflowDefinition) GetTriggerFields() []string {
-	if t == nil {
-		t = &UpdateWorkflowDefinition_UpdateWorkflowDefinition_WorkflowDefinition{}
-	}
-	return t.TriggerFields
-}
-func (t *UpdateWorkflowDefinition_UpdateWorkflowDefinition_WorkflowDefinition) GetTriggerOperations() []string {
-	if t == nil {
-		t = &UpdateWorkflowDefinition_UpdateWorkflowDefinition_WorkflowDefinition{}
-	}
-	return t.TriggerOperations
 }
 func (t *UpdateWorkflowDefinition_UpdateWorkflowDefinition_WorkflowDefinition) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -84202,15 +84104,15 @@ func (t *GetAssessmentResponses) GetAssessmentResponses() *GetAssessmentResponse
 	return &t.AssessmentResponses
 }
 
-type CreateBulkCSVAsset struct {
-	CreateBulkCSVAsset CreateBulkCSVAsset_CreateBulkCSVAsset "json:\"createBulkCSVAsset\" graphql:\"createBulkCSVAsset\""
+type CreateAsset struct {
+	CreateAsset CreateAsset_CreateAsset "json:\"createAsset\" graphql:\"createAsset\""
 }
 
-func (t *CreateBulkCSVAsset) GetCreateBulkCSVAsset() *CreateBulkCSVAsset_CreateBulkCSVAsset {
+func (t *CreateAsset) GetCreateAsset() *CreateAsset_CreateAsset {
 	if t == nil {
-		t = &CreateBulkCSVAsset{}
+		t = &CreateAsset{}
 	}
-	return &t.CreateBulkCSVAsset
+	return &t.CreateAsset
 }
 
 type CreateBulkAsset struct {
@@ -84224,15 +84126,15 @@ func (t *CreateBulkAsset) GetCreateBulkAsset() *CreateBulkAsset_CreateBulkAsset 
 	return &t.CreateBulkAsset
 }
 
-type CreateAsset struct {
-	CreateAsset CreateAsset_CreateAsset "json:\"createAsset\" graphql:\"createAsset\""
+type CreateBulkCSVAsset struct {
+	CreateBulkCSVAsset CreateBulkCSVAsset_CreateBulkCSVAsset "json:\"createBulkCSVAsset\" graphql:\"createBulkCSVAsset\""
 }
 
-func (t *CreateAsset) GetCreateAsset() *CreateAsset_CreateAsset {
+func (t *CreateBulkCSVAsset) GetCreateBulkCSVAsset() *CreateBulkCSVAsset_CreateBulkCSVAsset {
 	if t == nil {
-		t = &CreateAsset{}
+		t = &CreateBulkCSVAsset{}
 	}
-	return &t.CreateAsset
+	return &t.CreateBulkCSVAsset
 }
 
 type DeleteAsset struct {
@@ -91593,9 +91495,9 @@ func (c *Client) GetAssessmentResponses(ctx context.Context, first *int64, last 
 	return &res, nil
 }
 
-const CreateBulkCSVAssetDocument = `mutation CreateBulkCSVAsset ($input: Upload!) {
-	createBulkCSVAsset(input: $input) {
-		assets {
+const CreateAssetDocument = `mutation CreateAsset ($input: CreateAssetInput!) {
+	createAsset(input: $input) {
+		asset {
 			assetType
 			categories
 			cpe
@@ -91615,13 +91517,13 @@ const CreateBulkCSVAssetDocument = `mutation CreateBulkCSVAsset ($input: Upload!
 }
 `
 
-func (c *Client) CreateBulkCSVAsset(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVAsset, error) {
+func (c *Client) CreateAsset(ctx context.Context, input CreateAssetInput, interceptors ...clientv2.RequestInterceptor) (*CreateAsset, error) {
 	vars := map[string]any{
 		"input": input,
 	}
 
-	var res CreateBulkCSVAsset
-	if err := c.Client.Post(ctx, "CreateBulkCSVAsset", CreateBulkCSVAssetDocument, &res, vars, interceptors...); err != nil {
+	var res CreateAsset
+	if err := c.Client.Post(ctx, "CreateAsset", CreateAssetDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -91671,9 +91573,9 @@ func (c *Client) CreateBulkAsset(ctx context.Context, input []*CreateAssetInput,
 	return &res, nil
 }
 
-const CreateAssetDocument = `mutation CreateAsset ($input: CreateAssetInput!) {
-	createAsset(input: $input) {
-		asset {
+const CreateBulkCSVAssetDocument = `mutation CreateBulkCSVAsset ($input: Upload!) {
+	createBulkCSVAsset(input: $input) {
+		assets {
 			assetType
 			categories
 			cpe
@@ -91693,13 +91595,13 @@ const CreateAssetDocument = `mutation CreateAsset ($input: CreateAssetInput!) {
 }
 `
 
-func (c *Client) CreateAsset(ctx context.Context, input CreateAssetInput, interceptors ...clientv2.RequestInterceptor) (*CreateAsset, error) {
+func (c *Client) CreateBulkCSVAsset(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVAsset, error) {
 	vars := map[string]any{
 		"input": input,
 	}
 
-	var res CreateAsset
-	if err := c.Client.Post(ctx, "CreateAsset", CreateAssetDocument, &res, vars, interceptors...); err != nil {
+	var res CreateBulkCSVAsset
+	if err := c.Client.Post(ctx, "CreateBulkCSVAsset", CreateBulkCSVAssetDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -113458,8 +113360,8 @@ func (c *Client) UpdateTrustCenterSubprocessor(ctx context.Context, updateTrustC
 	return &res, nil
 }
 
-const CreateTrustCenterWatermarkConfigDocument = `mutation CreateTrustCenterWatermarkConfig ($input: CreateTrustCenterWatermarkConfigInput!, $logoFile: Upload) {
-	createTrustCenterWatermarkConfig(input: $input, logoFile: $logoFile) {
+const CreateTrustCenterWatermarkConfigDocument = `mutation CreateTrustCenterWatermarkConfig ($input: CreateTrustCenterWatermarkConfigInput!, $watermarkFile: Upload) {
+	createTrustCenterWatermarkConfig(input: $input, watermarkFile: $watermarkFile) {
 		trustCenterWatermarkConfig {
 			createdAt
 			createdBy
@@ -113483,10 +113385,10 @@ const CreateTrustCenterWatermarkConfigDocument = `mutation CreateTrustCenterWate
 }
 `
 
-func (c *Client) CreateTrustCenterWatermarkConfig(ctx context.Context, input CreateTrustCenterWatermarkConfigInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterWatermarkConfig, error) {
+func (c *Client) CreateTrustCenterWatermarkConfig(ctx context.Context, input CreateTrustCenterWatermarkConfigInput, watermarkFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterWatermarkConfig, error) {
 	vars := map[string]any{
-		"input":    input,
-		"logoFile": logoFile,
+		"input":         input,
+		"watermarkFile": watermarkFile,
 	}
 
 	var res CreateTrustCenterWatermarkConfig
@@ -113676,8 +113578,8 @@ func (c *Client) GetTrustCenterWatermarkConfigs(ctx context.Context, first *int6
 	return &res, nil
 }
 
-const UpdateTrustCenterWatermarkConfigDocument = `mutation UpdateTrustCenterWatermarkConfig ($updateTrustCenterWatermarkConfigId: ID!, $input: UpdateTrustCenterWatermarkConfigInput!, $logoFile: Upload) {
-	updateTrustCenterWatermarkConfig(id: $updateTrustCenterWatermarkConfigId, input: $input, logoFile: $logoFile) {
+const UpdateTrustCenterWatermarkConfigDocument = `mutation UpdateTrustCenterWatermarkConfig ($updateTrustCenterWatermarkConfigId: ID!, $input: UpdateTrustCenterWatermarkConfigInput!, $watermarkFile: Upload) {
+	updateTrustCenterWatermarkConfig(id: $updateTrustCenterWatermarkConfigId, input: $input, watermarkFile: $watermarkFile) {
 		trustCenterWatermarkConfig {
 			createdAt
 			createdBy
@@ -113701,11 +113603,11 @@ const UpdateTrustCenterWatermarkConfigDocument = `mutation UpdateTrustCenterWate
 }
 `
 
-func (c *Client) UpdateTrustCenterWatermarkConfig(ctx context.Context, updateTrustCenterWatermarkConfigID string, input UpdateTrustCenterWatermarkConfigInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterWatermarkConfig, error) {
+func (c *Client) UpdateTrustCenterWatermarkConfig(ctx context.Context, updateTrustCenterWatermarkConfigID string, input UpdateTrustCenterWatermarkConfigInput, watermarkFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterWatermarkConfig, error) {
 	vars := map[string]any{
 		"updateTrustCenterWatermarkConfigId": updateTrustCenterWatermarkConfigID,
 		"input":                              input,
-		"logoFile":                           logoFile,
+		"watermarkFile":                      watermarkFile,
 	}
 
 	var res UpdateTrustCenterWatermarkConfig
@@ -115501,8 +115403,6 @@ const CreateBulkCSVWorkflowDefinitionDocument = `mutation CreateBulkCSVWorkflowD
 			systemOwned
 			tags
 			trackedFields
-			triggerFields
-			triggerOperations
 			updatedAt
 			updatedBy
 			workflowKind
@@ -115551,8 +115451,6 @@ const CreateBulkWorkflowDefinitionDocument = `mutation CreateBulkWorkflowDefinit
 			systemOwned
 			tags
 			trackedFields
-			triggerFields
-			triggerOperations
 			updatedAt
 			updatedBy
 			workflowKind
@@ -115601,8 +115499,6 @@ const CreateWorkflowDefinitionDocument = `mutation CreateWorkflowDefinition ($in
 			systemOwned
 			tags
 			trackedFields
-			triggerFields
-			triggerOperations
 			updatedAt
 			updatedBy
 			workflowKind
@@ -115683,8 +115579,6 @@ const GetAllWorkflowDefinitionsDocument = `query GetAllWorkflowDefinitions ($fir
 				systemOwned
 				tags
 				trackedFields
-				triggerFields
-				triggerOperations
 				updatedAt
 				updatedBy
 				workflowKind
@@ -115737,8 +115631,6 @@ const GetWorkflowDefinitionByIDDocument = `query GetWorkflowDefinitionByID ($wor
 		systemOwned
 		tags
 		trackedFields
-		triggerFields
-		triggerOperations
 		updatedAt
 		updatedBy
 		workflowKind
@@ -115794,8 +115686,6 @@ const GetWorkflowDefinitionsDocument = `query GetWorkflowDefinitions ($first: In
 				systemOwned
 				tags
 				trackedFields
-				triggerFields
-				triggerOperations
 				updatedAt
 				updatedBy
 				workflowKind
@@ -115850,8 +115740,6 @@ const UpdateWorkflowDefinitionDocument = `mutation UpdateWorkflowDefinition ($up
 			systemOwned
 			tags
 			trackedFields
-			triggerFields
-			triggerOperations
 			updatedAt
 			updatedBy
 			workflowKind
@@ -116814,9 +116702,9 @@ var DocumentOperationNames = map[string]string{
 	GetAllAssessmentResponsesDocument:             "GetAllAssessmentResponses",
 	GetAssessmentResponseByIDDocument:             "GetAssessmentResponseByID",
 	GetAssessmentResponsesDocument:                "GetAssessmentResponses",
-	CreateBulkCSVAssetDocument:                    "CreateBulkCSVAsset",
-	CreateBulkAssetDocument:                       "CreateBulkAsset",
 	CreateAssetDocument:                           "CreateAsset",
+	CreateBulkAssetDocument:                       "CreateBulkAsset",
+	CreateBulkCSVAssetDocument:                    "CreateBulkCSVAsset",
 	DeleteAssetDocument:                           "DeleteAsset",
 	GetAllAssetsDocument:                          "GetAllAssets",
 	GetAssetByIDDocument:                          "GetAssetByID",

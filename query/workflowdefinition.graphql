@@ -21,8 +21,6 @@ mutation CreateBulkCSVWorkflowDefinition($input: Upload!) {
       systemOwned
       tags
       trackedFields
-      triggerFields
-      triggerOperations
       updatedAt
       updatedBy
       workflowKind
@@ -53,8 +51,6 @@ mutation CreateBulkWorkflowDefinition($input: [CreateWorkflowDefinitionInput!]) 
       systemOwned
       tags
       trackedFields
-      triggerFields
-      triggerOperations
       updatedAt
       updatedBy
       workflowKind
@@ -85,8 +81,6 @@ mutation CreateWorkflowDefinition($input: CreateWorkflowDefinitionInput!) {
       systemOwned
       tags
       trackedFields
-      triggerFields
-      triggerOperations
       updatedAt
       updatedBy
       workflowKind
@@ -100,7 +94,7 @@ mutation DeleteWorkflowDefinition($deleteWorkflowDefinitionId: ID!) {
   }
 }
 
-query GetAllWorkflowDefinitions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowDefinitionOrder!]){
+query GetAllWorkflowDefinitions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowDefinitionOrder!]) {
   workflowDefinitions(
     first: $first
     last: $last
@@ -137,8 +131,6 @@ query GetAllWorkflowDefinitions($first: Int, $last: Int, $after: Cursor, $before
         systemOwned
         tags
         trackedFields
-        triggerFields
-        triggerOperations
         updatedAt
         updatedBy
         workflowKind
@@ -169,8 +161,6 @@ query GetWorkflowDefinitionByID($workflowDefinitionId: ID!) {
     systemOwned
     tags
     trackedFields
-    triggerFields
-    triggerOperations
     updatedAt
     updatedBy
     workflowKind
@@ -178,7 +168,7 @@ query GetWorkflowDefinitionByID($workflowDefinitionId: ID!) {
 }
 
 query GetWorkflowDefinitions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: WorkflowDefinitionWhereInput, $orderBy: [WorkflowDefinitionOrder!]) {
-workflowDefinitions(
+  workflowDefinitions(
     first: $first
     last: $last
     after: $after
@@ -215,8 +205,6 @@ workflowDefinitions(
         systemOwned
         tags
         trackedFields
-        triggerFields
-        triggerOperations
         updatedAt
         updatedBy
         workflowKind
@@ -248,8 +236,6 @@ mutation UpdateWorkflowDefinition($updateWorkflowDefinitionId: ID!, $input: Upda
       systemOwned
       tags
       trackedFields
-      triggerFields
-      triggerOperations
       updatedAt
       updatedBy
       workflowKind
