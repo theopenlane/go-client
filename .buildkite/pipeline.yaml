@@ -5,7 +5,6 @@ env:
 
 steps:
   - label: ":graphql: generate"
-    skip: true # skip temporarily while fixing cyclical dependency issue
     key: "generate"
     agents:
       queue: $LARGE_RUNNER_QUEUE
