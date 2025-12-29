@@ -12362,12 +12362,42 @@ func (t *GetCustomDomains_CustomDomains_PageInfo) GetStartCursor() *string {
 }
 
 type GetCustomDomains_CustomDomains_Edges_Node_DNSVerification struct {
-	DNSTxtRecord          string                      "json:\"dnsTxtRecord\" graphql:\"dnsTxtRecord\""
-	DNSTxtValue           string                      "json:\"dnsTxtValue\" graphql:\"dnsTxtValue\""
-	DNSVerificationStatus enums.DNSVerificationStatus "json:\"dnsVerificationStatus\" graphql:\"dnsVerificationStatus\""
-	ID                    string                      "json:\"id\" graphql:\"id\""
+	AcmeChallengePath           *string                     "json:\"acmeChallengePath,omitempty\" graphql:\"acmeChallengePath\""
+	AcmeChallengeStatus         enums.SSLVerificationStatus "json:\"acmeChallengeStatus\" graphql:\"acmeChallengeStatus\""
+	AcmeChallengeStatusReason   *string                     "json:\"acmeChallengeStatusReason,omitempty\" graphql:\"acmeChallengeStatusReason\""
+	CloudflareHostnameID        string                      "json:\"cloudflareHostnameID\" graphql:\"cloudflareHostnameID\""
+	DNSTxtRecord                string                      "json:\"dnsTxtRecord\" graphql:\"dnsTxtRecord\""
+	DNSTxtValue                 string                      "json:\"dnsTxtValue\" graphql:\"dnsTxtValue\""
+	DNSVerificationStatus       enums.DNSVerificationStatus "json:\"dnsVerificationStatus\" graphql:\"dnsVerificationStatus\""
+	DNSVerificationStatusReason *string                     "json:\"dnsVerificationStatusReason,omitempty\" graphql:\"dnsVerificationStatusReason\""
+	ExpectedAcmeChallengeValue  *string                     "json:\"expectedAcmeChallengeValue,omitempty\" graphql:\"expectedAcmeChallengeValue\""
+	ID                          string                      "json:\"id\" graphql:\"id\""
 }
 
+func (t *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification) GetAcmeChallengePath() *string {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node_DNSVerification{}
+	}
+	return t.AcmeChallengePath
+}
+func (t *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification) GetAcmeChallengeStatus() *enums.SSLVerificationStatus {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node_DNSVerification{}
+	}
+	return &t.AcmeChallengeStatus
+}
+func (t *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification) GetAcmeChallengeStatusReason() *string {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node_DNSVerification{}
+	}
+	return t.AcmeChallengeStatusReason
+}
+func (t *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification) GetCloudflareHostnameID() string {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node_DNSVerification{}
+	}
+	return t.CloudflareHostnameID
+}
 func (t *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification) GetDNSTxtRecord() string {
 	if t == nil {
 		t = &GetCustomDomains_CustomDomains_Edges_Node_DNSVerification{}
@@ -12386,11 +12416,48 @@ func (t *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification) GetDNSVerifi
 	}
 	return &t.DNSVerificationStatus
 }
+func (t *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification) GetDNSVerificationStatusReason() *string {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node_DNSVerification{}
+	}
+	return t.DNSVerificationStatusReason
+}
+func (t *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification) GetExpectedAcmeChallengeValue() *string {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node_DNSVerification{}
+	}
+	return t.ExpectedAcmeChallengeValue
+}
 func (t *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification) GetID() string {
 	if t == nil {
 		t = &GetCustomDomains_CustomDomains_Edges_Node_DNSVerification{}
 	}
 	return t.ID
+}
+
+type GetCustomDomains_CustomDomains_Edges_Node_MappableDomain struct {
+	ID     string "json:\"id\" graphql:\"id\""
+	Name   string "json:\"name\" graphql:\"name\""
+	ZoneID string "json:\"zoneID\" graphql:\"zoneID\""
+}
+
+func (t *GetCustomDomains_CustomDomains_Edges_Node_MappableDomain) GetID() string {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node_MappableDomain{}
+	}
+	return t.ID
+}
+func (t *GetCustomDomains_CustomDomains_Edges_Node_MappableDomain) GetName() string {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node_MappableDomain{}
+	}
+	return t.Name
+}
+func (t *GetCustomDomains_CustomDomains_Edges_Node_MappableDomain) GetZoneID() string {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node_MappableDomain{}
+	}
+	return t.ZoneID
 }
 
 type GetCustomDomains_CustomDomains_Edges_Node struct {
@@ -12400,6 +12467,7 @@ type GetCustomDomains_CustomDomains_Edges_Node struct {
 	DNSVerification   *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification "json:\"dnsVerification,omitempty\" graphql:\"dnsVerification\""
 	DNSVerificationID *string                                                    "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
 	ID                string                                                     "json:\"id\" graphql:\"id\""
+	MappableDomain    GetCustomDomains_CustomDomains_Edges_Node_MappableDomain   "json:\"mappableDomain\" graphql:\"mappableDomain\""
 	MappableDomainID  string                                                     "json:\"mappableDomainID\" graphql:\"mappableDomainID\""
 	OwnerID           *string                                                    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Tags              []string                                                   "json:\"tags,omitempty\" graphql:\"tags\""
@@ -12442,6 +12510,12 @@ func (t *GetCustomDomains_CustomDomains_Edges_Node) GetID() string {
 		t = &GetCustomDomains_CustomDomains_Edges_Node{}
 	}
 	return t.ID
+}
+func (t *GetCustomDomains_CustomDomains_Edges_Node) GetMappableDomain() *GetCustomDomains_CustomDomains_Edges_Node_MappableDomain {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node{}
+	}
+	return &t.MappableDomain
 }
 func (t *GetCustomDomains_CustomDomains_Edges_Node) GetMappableDomainID() string {
 	if t == nil {
@@ -94005,9 +94079,20 @@ const GetCustomDomainsDocument = `query GetCustomDomains ($first: Int, $last: In
 					dnsTxtRecord
 					dnsTxtValue
 					dnsVerificationStatus
+					dnsVerificationStatusReason
+					acmeChallengePath
+					expectedAcmeChallengeValue
+					acmeChallengeStatus
+					acmeChallengeStatusReason
+					cloudflareHostnameID
 				}
 				id
 				mappableDomainID
+				mappableDomain {
+					id
+					name
+					zoneID
+				}
 				ownerID
 				tags
 				updatedAt
