@@ -30,6 +30,8 @@ mutation CreateBulkControl($input: [CreateControlInput!]) {
       status
       subcategory
       tags
+      testingProcedures
+      evidenceRequests
       title
       updatedAt
       updatedBy
@@ -69,6 +71,8 @@ mutation CreateBulkCSVControl($input: Upload!) {
       status
       subcategory
       tags
+      testingProcedures
+      evidenceRequests
       title
       updatedAt
       updatedBy
@@ -108,6 +112,8 @@ mutation CreateControl($input: CreateControlInput!) {
       status
       subcategory
       tags
+      testingProcedures
+      evidenceRequests
       title
       updatedAt
       updatedBy
@@ -167,6 +173,8 @@ query GetAllControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
         status
         subcategory
         tags
+        testingProcedures
+        evidenceRequests
         title
         updatedAt
         updatedBy
@@ -206,6 +214,8 @@ query GetControlByID($controlId: ID!) {
     status
     subcategory
     tags
+    testingProcedures
+    evidenceRequests
     title
     updatedAt
     updatedBy
@@ -259,6 +269,8 @@ controls(
         status
         subcategory
         tags
+        testingProcedures
+        evidenceRequests
         title
         updatedAt
         updatedBy
@@ -299,6 +311,8 @@ mutation UpdateControl($updateControlId: ID!, $input: UpdateControlInput!) {
       status
       subcategory
       tags
+      testingProcedures
+      evidenceRequests
       title
       updatedAt
       updatedBy
