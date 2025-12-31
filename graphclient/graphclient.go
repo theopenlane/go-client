@@ -6225,6 +6225,7 @@ type CreateBulkControl_CreateBulkControl_Controls struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -6239,6 +6240,7 @@ type CreateBulkControl_CreateBulkControl_Controls struct {
 	Status                 *enums.ControlStatus             "json:\"status,omitempty\" graphql:\"status\""
 	Subcategory            *string                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
 	Tags                   []string                         "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures      []*models.TestingProcedures      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
 	Title                  *string                          "json:\"title,omitempty\" graphql:\"title\""
 	UpdatedAt              *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy              *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -6334,6 +6336,12 @@ func (t *CreateBulkControl_CreateBulkControl_Controls) GetDisplayID() string {
 	}
 	return t.DisplayID
 }
+func (t *CreateBulkControl_CreateBulkControl_Controls) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &CreateBulkControl_CreateBulkControl_Controls{}
+	}
+	return t.EvidenceRequests
+}
 func (t *CreateBulkControl_CreateBulkControl_Controls) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
 		t = &CreateBulkControl_CreateBulkControl_Controls{}
@@ -6418,6 +6426,12 @@ func (t *CreateBulkControl_CreateBulkControl_Controls) GetTags() []string {
 	}
 	return t.Tags
 }
+func (t *CreateBulkControl_CreateBulkControl_Controls) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &CreateBulkControl_CreateBulkControl_Controls{}
+	}
+	return t.TestingProcedures
+}
 func (t *CreateBulkControl_CreateBulkControl_Controls) GetTitle() *string {
 	if t == nil {
 		t = &CreateBulkControl_CreateBulkControl_Controls{}
@@ -6464,6 +6478,7 @@ type CreateBulkCSVControl_CreateBulkCSVControl_Controls struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -6478,6 +6493,7 @@ type CreateBulkCSVControl_CreateBulkCSVControl_Controls struct {
 	Status                 *enums.ControlStatus             "json:\"status,omitempty\" graphql:\"status\""
 	Subcategory            *string                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
 	Tags                   []string                         "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures      []*models.TestingProcedures      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
 	Title                  *string                          "json:\"title,omitempty\" graphql:\"title\""
 	UpdatedAt              *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy              *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -6573,6 +6589,12 @@ func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetDisplayID() stri
 	}
 	return t.DisplayID
 }
+func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &CreateBulkCSVControl_CreateBulkCSVControl_Controls{}
+	}
+	return t.EvidenceRequests
+}
 func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
 		t = &CreateBulkCSVControl_CreateBulkCSVControl_Controls{}
@@ -6657,6 +6679,12 @@ func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetTags() []string 
 	}
 	return t.Tags
 }
+func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &CreateBulkCSVControl_CreateBulkCSVControl_Controls{}
+	}
+	return t.TestingProcedures
+}
 func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetTitle() *string {
 	if t == nil {
 		t = &CreateBulkCSVControl_CreateBulkCSVControl_Controls{}
@@ -6703,6 +6731,7 @@ type CreateControl_CreateControl_Control struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -6717,6 +6746,7 @@ type CreateControl_CreateControl_Control struct {
 	Status                 *enums.ControlStatus             "json:\"status,omitempty\" graphql:\"status\""
 	Subcategory            *string                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
 	Tags                   []string                         "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures      []*models.TestingProcedures      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
 	Title                  *string                          "json:\"title,omitempty\" graphql:\"title\""
 	UpdatedAt              *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy              *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -6812,6 +6842,12 @@ func (t *CreateControl_CreateControl_Control) GetDisplayID() string {
 	}
 	return t.DisplayID
 }
+func (t *CreateControl_CreateControl_Control) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &CreateControl_CreateControl_Control{}
+	}
+	return t.EvidenceRequests
+}
 func (t *CreateControl_CreateControl_Control) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
 		t = &CreateControl_CreateControl_Control{}
@@ -6895,6 +6931,12 @@ func (t *CreateControl_CreateControl_Control) GetTags() []string {
 		t = &CreateControl_CreateControl_Control{}
 	}
 	return t.Tags
+}
+func (t *CreateControl_CreateControl_Control) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &CreateControl_CreateControl_Control{}
+	}
+	return t.TestingProcedures
 }
 func (t *CreateControl_CreateControl_Control) GetTitle() *string {
 	if t == nil {
@@ -6985,6 +7027,7 @@ type GetAllControls_Controls_Edges_Node struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -6999,6 +7042,7 @@ type GetAllControls_Controls_Edges_Node struct {
 	Status                 *enums.ControlStatus             "json:\"status,omitempty\" graphql:\"status\""
 	Subcategory            *string                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
 	Tags                   []string                         "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures      []*models.TestingProcedures      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
 	Title                  *string                          "json:\"title,omitempty\" graphql:\"title\""
 	UpdatedAt              *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy              *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -7094,6 +7138,12 @@ func (t *GetAllControls_Controls_Edges_Node) GetDisplayID() string {
 	}
 	return t.DisplayID
 }
+func (t *GetAllControls_Controls_Edges_Node) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &GetAllControls_Controls_Edges_Node{}
+	}
+	return t.EvidenceRequests
+}
 func (t *GetAllControls_Controls_Edges_Node) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
 		t = &GetAllControls_Controls_Edges_Node{}
@@ -7178,6 +7228,12 @@ func (t *GetAllControls_Controls_Edges_Node) GetTags() []string {
 	}
 	return t.Tags
 }
+func (t *GetAllControls_Controls_Edges_Node) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &GetAllControls_Controls_Edges_Node{}
+	}
+	return t.TestingProcedures
+}
 func (t *GetAllControls_Controls_Edges_Node) GetTitle() *string {
 	if t == nil {
 		t = &GetAllControls_Controls_Edges_Node{}
@@ -7249,6 +7305,7 @@ type GetControlByID_Control struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -7263,6 +7320,7 @@ type GetControlByID_Control struct {
 	Status                 *enums.ControlStatus             "json:\"status,omitempty\" graphql:\"status\""
 	Subcategory            *string                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
 	Tags                   []string                         "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures      []*models.TestingProcedures      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
 	Title                  *string                          "json:\"title,omitempty\" graphql:\"title\""
 	UpdatedAt              *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy              *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -7358,6 +7416,12 @@ func (t *GetControlByID_Control) GetDisplayID() string {
 	}
 	return t.DisplayID
 }
+func (t *GetControlByID_Control) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &GetControlByID_Control{}
+	}
+	return t.EvidenceRequests
+}
 func (t *GetControlByID_Control) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
 		t = &GetControlByID_Control{}
@@ -7442,6 +7506,12 @@ func (t *GetControlByID_Control) GetTags() []string {
 	}
 	return t.Tags
 }
+func (t *GetControlByID_Control) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &GetControlByID_Control{}
+	}
+	return t.TestingProcedures
+}
 func (t *GetControlByID_Control) GetTitle() *string {
 	if t == nil {
 		t = &GetControlByID_Control{}
@@ -7509,6 +7579,7 @@ type GetControls_Controls_Edges_Node struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -7523,6 +7594,7 @@ type GetControls_Controls_Edges_Node struct {
 	Status                 *enums.ControlStatus             "json:\"status,omitempty\" graphql:\"status\""
 	Subcategory            *string                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
 	Tags                   []string                         "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures      []*models.TestingProcedures      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
 	Title                  *string                          "json:\"title,omitempty\" graphql:\"title\""
 	UpdatedAt              *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy              *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -7618,6 +7690,12 @@ func (t *GetControls_Controls_Edges_Node) GetDisplayID() string {
 	}
 	return t.DisplayID
 }
+func (t *GetControls_Controls_Edges_Node) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &GetControls_Controls_Edges_Node{}
+	}
+	return t.EvidenceRequests
+}
 func (t *GetControls_Controls_Edges_Node) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
 		t = &GetControls_Controls_Edges_Node{}
@@ -7702,6 +7780,12 @@ func (t *GetControls_Controls_Edges_Node) GetTags() []string {
 	}
 	return t.Tags
 }
+func (t *GetControls_Controls_Edges_Node) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &GetControls_Controls_Edges_Node{}
+	}
+	return t.TestingProcedures
+}
 func (t *GetControls_Controls_Edges_Node) GetTitle() *string {
 	if t == nil {
 		t = &GetControls_Controls_Edges_Node{}
@@ -7773,6 +7857,7 @@ type UpdateControl_UpdateControl_Control struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -7787,6 +7872,7 @@ type UpdateControl_UpdateControl_Control struct {
 	Status                 *enums.ControlStatus             "json:\"status,omitempty\" graphql:\"status\""
 	Subcategory            *string                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
 	Tags                   []string                         "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures      []*models.TestingProcedures      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
 	Title                  *string                          "json:\"title,omitempty\" graphql:\"title\""
 	UpdatedAt              *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy              *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -7882,6 +7968,12 @@ func (t *UpdateControl_UpdateControl_Control) GetDisplayID() string {
 	}
 	return t.DisplayID
 }
+func (t *UpdateControl_UpdateControl_Control) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &UpdateControl_UpdateControl_Control{}
+	}
+	return t.EvidenceRequests
+}
 func (t *UpdateControl_UpdateControl_Control) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
 		t = &UpdateControl_UpdateControl_Control{}
@@ -7965,6 +8057,12 @@ func (t *UpdateControl_UpdateControl_Control) GetTags() []string {
 		t = &UpdateControl_UpdateControl_Control{}
 	}
 	return t.Tags
+}
+func (t *UpdateControl_UpdateControl_Control) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &UpdateControl_UpdateControl_Control{}
+	}
+	return t.TestingProcedures
 }
 func (t *UpdateControl_UpdateControl_Control) GetTitle() *string {
 	if t == nil {
@@ -8054,6 +8152,7 @@ type CreateControlsByClone_CreateControlsByClone_Controls struct {
 	CreatedBy                  *string                                                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description                *string                                                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID                  string                                                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests           []*models.EvidenceRequests                                       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence            []*models.ExampleEvidence                                        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                         string                                                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance     []*models.ImplementationGuidance                                 "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -8069,6 +8168,7 @@ type CreateControlsByClone_CreateControlsByClone_Controls struct {
 	Subcategory                *string                                                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
 	Subcontrols                CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols "json:\"subcontrols\" graphql:\"subcontrols\""
 	Tags                       []string                                                         "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures          []*models.TestingProcedures                                      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
 	Title                      *string                                                          "json:\"title,omitempty\" graphql:\"title\""
 	UpdatedAt                  *time.Time                                                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy                  *string                                                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -8133,6 +8233,12 @@ func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetDisplayID() st
 		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
 	}
 	return t.DisplayID
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.EvidenceRequests
 }
 func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
@@ -8224,6 +8330,12 @@ func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetTags() []strin
 	}
 	return t.Tags
 }
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.TestingProcedures
+}
 func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetTitle() *string {
 	if t == nil {
 		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
@@ -8312,6 +8424,7 @@ type CloneBulkCSVControl_CloneBulkCSVControl_Controls struct {
 	CreatedBy                  *string                                                      "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description                *string                                                      "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID                  string                                                       "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests           []*models.EvidenceRequests                                   "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence            []*models.ExampleEvidence                                    "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                         string                                                       "json:\"id\" graphql:\"id\""
 	ImplementationGuidance     []*models.ImplementationGuidance                             "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -8328,6 +8441,7 @@ type CloneBulkCSVControl_CloneBulkCSVControl_Controls struct {
 	Subcategory                *string                                                      "json:\"subcategory,omitempty\" graphql:\"subcategory\""
 	Subcontrols                CloneBulkCSVControl_CloneBulkCSVControl_Controls_Subcontrols "json:\"subcontrols\" graphql:\"subcontrols\""
 	Tags                       []string                                                     "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures          []*models.TestingProcedures                                  "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
 	Title                      *string                                                      "json:\"title,omitempty\" graphql:\"title\""
 	UpdatedAt                  *time.Time                                                   "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy                  *string                                                      "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -8392,6 +8506,12 @@ func (t *CloneBulkCSVControl_CloneBulkCSVControl_Controls) GetDisplayID() string
 		t = &CloneBulkCSVControl_CloneBulkCSVControl_Controls{}
 	}
 	return t.DisplayID
+}
+func (t *CloneBulkCSVControl_CloneBulkCSVControl_Controls) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &CloneBulkCSVControl_CloneBulkCSVControl_Controls{}
+	}
+	return t.EvidenceRequests
 }
 func (t *CloneBulkCSVControl_CloneBulkCSVControl_Controls) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
@@ -8488,6 +8608,12 @@ func (t *CloneBulkCSVControl_CloneBulkCSVControl_Controls) GetTags() []string {
 		t = &CloneBulkCSVControl_CloneBulkCSVControl_Controls{}
 	}
 	return t.Tags
+}
+func (t *CloneBulkCSVControl_CloneBulkCSVControl_Controls) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &CloneBulkCSVControl_CloneBulkCSVControl_Controls{}
+	}
+	return t.TestingProcedures
 }
 func (t *CloneBulkCSVControl_CloneBulkCSVControl_Controls) GetTitle() *string {
 	if t == nil {
@@ -92194,6 +92320,8 @@ const CreateBulkControlDocument = `mutation CreateBulkControl ($input: [CreateCo
 			status
 			subcategory
 			tags
+			testingProcedures
+			evidenceRequests
 			title
 			updatedAt
 			updatedBy
@@ -92251,6 +92379,8 @@ const CreateBulkCSVControlDocument = `mutation CreateBulkCSVControl ($input: Upl
 			status
 			subcategory
 			tags
+			testingProcedures
+			evidenceRequests
 			title
 			updatedAt
 			updatedBy
@@ -92308,6 +92438,8 @@ const CreateControlDocument = `mutation CreateControl ($input: CreateControlInpu
 			status
 			subcategory
 			tags
+			testingProcedures
+			evidenceRequests
 			title
 			updatedAt
 			updatedBy
@@ -92397,6 +92529,8 @@ const GetAllControlsDocument = `query GetAllControls ($first: Int, $last: Int, $
 				status
 				subcategory
 				tags
+				testingProcedures
+				evidenceRequests
 				title
 				updatedAt
 				updatedBy
@@ -92458,6 +92592,8 @@ const GetControlByIDDocument = `query GetControlByID ($controlId: ID!) {
 		status
 		subcategory
 		tags
+		testingProcedures
+		evidenceRequests
 		title
 		updatedAt
 		updatedBy
@@ -92522,6 +92658,8 @@ const GetControlsDocument = `query GetControls ($first: Int, $last: Int, $after:
 				status
 				subcategory
 				tags
+				testingProcedures
+				evidenceRequests
 				title
 				updatedAt
 				updatedBy
@@ -92585,6 +92723,8 @@ const UpdateControlDocument = `mutation UpdateControl ($updateControlId: ID!, $i
 			status
 			subcategory
 			tags
+			testingProcedures
+			evidenceRequests
 			title
 			updatedAt
 			updatedBy
@@ -92638,6 +92778,8 @@ const CreateControlsByCloneDocument = `mutation CreateControlsByClone ($input: C
 			status
 			subcategory
 			tags
+			testingProcedures
+			evidenceRequests
 			title
 			updatedAt
 			updatedBy
@@ -92700,6 +92842,8 @@ const CloneBulkCSVControlDocument = `mutation CloneBulkCSVControl ($input: Uploa
 			status
 			subcategory
 			tags
+			testingProcedures
+			evidenceRequests
 			title
 			updatedAt
 			updatedBy
