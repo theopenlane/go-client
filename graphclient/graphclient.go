@@ -73628,6 +73628,7 @@ type GetAllTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node st
 	ID            string                                                                         "json:\"id\" graphql:\"id\""
 	LogoID        *string                                                                        "json:\"logoID,omitempty\" graphql:\"logoID\""
 	Opacity       *float64                                                                       "json:\"opacity,omitempty\" graphql:\"opacity\""
+	OwnerID       *string                                                                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Rotation      *float64                                                                       "json:\"rotation,omitempty\" graphql:\"rotation\""
 	Text          *string                                                                        "json:\"text,omitempty\" graphql:\"text\""
 	TrustCenterID *string                                                                        "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
@@ -73688,6 +73689,12 @@ func (t *GetAllTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Nod
 		t = &GetAllTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node{}
 	}
 	return t.Opacity
+}
+func (t *GetAllTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node) GetOwnerID() *string {
+	if t == nil {
+		t = &GetAllTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node{}
+	}
+	return t.OwnerID
 }
 func (t *GetAllTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node) GetRotation() *float64 {
 	if t == nil {
@@ -73784,6 +73791,7 @@ type GetTrustCenterWatermarkConfigByID_TrustCenterWatermarkConfig struct {
 	ID            string                                                             "json:\"id\" graphql:\"id\""
 	LogoID        *string                                                            "json:\"logoID,omitempty\" graphql:\"logoID\""
 	Opacity       *float64                                                           "json:\"opacity,omitempty\" graphql:\"opacity\""
+	OwnerID       *string                                                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Rotation      *float64                                                           "json:\"rotation,omitempty\" graphql:\"rotation\""
 	Text          *string                                                            "json:\"text,omitempty\" graphql:\"text\""
 	TrustCenterID *string                                                            "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
@@ -73844,6 +73852,12 @@ func (t *GetTrustCenterWatermarkConfigByID_TrustCenterWatermarkConfig) GetOpacit
 		t = &GetTrustCenterWatermarkConfigByID_TrustCenterWatermarkConfig{}
 	}
 	return t.Opacity
+}
+func (t *GetTrustCenterWatermarkConfigByID_TrustCenterWatermarkConfig) GetOwnerID() *string {
+	if t == nil {
+		t = &GetTrustCenterWatermarkConfigByID_TrustCenterWatermarkConfig{}
+	}
+	return t.OwnerID
 }
 func (t *GetTrustCenterWatermarkConfigByID_TrustCenterWatermarkConfig) GetRotation() *float64 {
 	if t == nil {
@@ -73936,6 +73950,7 @@ type GetTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node struc
 	ID            string                                                                      "json:\"id\" graphql:\"id\""
 	LogoID        *string                                                                     "json:\"logoID,omitempty\" graphql:\"logoID\""
 	Opacity       *float64                                                                    "json:\"opacity,omitempty\" graphql:\"opacity\""
+	OwnerID       *string                                                                     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Rotation      *float64                                                                    "json:\"rotation,omitempty\" graphql:\"rotation\""
 	Text          *string                                                                     "json:\"text,omitempty\" graphql:\"text\""
 	TrustCenterID *string                                                                     "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
@@ -73996,6 +74011,12 @@ func (t *GetTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node) 
 		t = &GetTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node{}
 	}
 	return t.Opacity
+}
+func (t *GetTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node) GetOwnerID() *string {
+	if t == nil {
+		t = &GetTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node{}
+	}
+	return t.OwnerID
 }
 func (t *GetTrustCenterWatermarkConfigs_TrustCenterWatermarkConfigs_Edges_Node) GetRotation() *float64 {
 	if t == nil {
@@ -113455,6 +113476,7 @@ const GetAllTrustCenterWatermarkConfigsDocument = `query GetAllTrustCenterWaterm
 				rotation
 				color
 				font
+				ownerID
 			}
 		}
 	}
@@ -113500,6 +113522,7 @@ const GetTrustCenterWatermarkConfigByIDDocument = `query GetTrustCenterWatermark
 		opacity
 		rotation
 		color
+		ownerID
 		font
 	}
 }
@@ -113539,6 +113562,7 @@ const GetTrustCenterWatermarkConfigsDocument = `query GetTrustCenterWatermarkCon
 				updatedAt
 				updatedBy
 				trustCenterID
+				ownerID
 				file {
 					id
 					presignedURL
