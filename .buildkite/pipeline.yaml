@@ -53,7 +53,7 @@ steps:
       echo "--- committing changes"
       git status
       git checkout "${BUILDKITE_BRANCH}"
-      git add graphclient/
+      git add graphclient/*
 
       # commit changes
       git commit -m "chore: run go generate"
@@ -102,14 +102,14 @@ steps:
       echo "--- committing changes"
       branchName="chore/go-generate-$(date +%s)"
       git status
-      git checkout -b "$branchName"
-      git add graphclient/
+      git checkout -b "$$branchName"
+      git add graphclient/*
 
       # commit changes
       git commit -m "chore: run go generate"
 
       echo "--- pushing to origin chore/go-generate"
-      git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:$branchName"
+      git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:$$branchName"
 
       echo "Changes found, creating pull request..."
       cat <<EOF | buildkite-agent pipeline upload
@@ -120,7 +120,7 @@ steps:
           plugins:
             - envato/github-pull-request#v0.4.0:
                 title: "chore: generated client changes"
-                head: "$branchName"
+                head: "$$branchName"
       EOF
 
   - label: ":golangci-lint: lint :lint-roller:"
