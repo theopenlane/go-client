@@ -31,6 +31,8 @@ steps:
     command: |
       #!/bin/bash
       set -e
+      set -o pipefail
+
       echo "--- running go generate"
       task generate
       EXIT_CODE=$?
@@ -77,9 +79,12 @@ steps:
           environment:
             - "APOLLO_KEY"
             - "GITHUB_TOKEN"
+            - "BUILDKITE_AGENT_ACCESS_TOKEN"
     command: |
       #!/bin/bash
       set -e
+      set -o pipefail
+
       echo "--- running go generate"
       task generate
       EXIT_CODE=$?
