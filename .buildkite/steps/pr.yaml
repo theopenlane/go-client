@@ -1,3 +1,6 @@
+secrets:
+  - GITHUB_TOKEN
+
 steps:
   - label: ":github: pr generated changes"
     key: "create_pr"
