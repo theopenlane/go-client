@@ -10,3 +10,5 @@ steps:
           title: "chore: generated client changes"
           head: "[branchName]"
           base: "main"
+    env:
+      - GITHUB_TOKEN="${GITHUB_TOKEN}"
