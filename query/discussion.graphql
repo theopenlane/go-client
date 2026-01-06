@@ -23,7 +23,6 @@ mutation CreateBulkDiscussion($input: [CreateDiscussionInput!]) {
       isResolved
       ownerID
       updatedAt
-      updatedBy
     }
   }
 }

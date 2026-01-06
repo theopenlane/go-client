@@ -81,7 +81,7 @@ steps:
             - "APOLLO_KEY"
             - "GITHUB_TOKEN"
     command: |
-      #!/bin/sh
+      #!/bin/bash
       set -e
       echo "--- running go generate"
       task generate
