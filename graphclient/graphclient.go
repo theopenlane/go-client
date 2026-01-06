@@ -18859,7 +18859,6 @@ type CreateBulkDiscussion_CreateBulkDiscussion_Discussions struct {
 	IsResolved bool       "json:\"isResolved\" graphql:\"isResolved\""
 	OwnerID    *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	UpdatedAt  *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy  *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetCreatedAt() *time.Time {
@@ -18903,12 +18902,6 @@ func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetUpdatedAt() *
 		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
 	}
 	return t.UpdatedAt
-}
-func (t *CreateBulkDiscussion_CreateBulkDiscussion_Discussions) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkDiscussion_CreateBulkDiscussion_Discussions{}
-	}
-	return t.UpdatedBy
 }
 
 type CreateBulkDiscussion_CreateBulkDiscussion struct {
@@ -95934,7 +95927,6 @@ const CreateBulkDiscussionDocument = `mutation CreateBulkDiscussion ($input: [Cr
 			isResolved
 			ownerID
 			updatedAt
-			updatedBy
 		}
 	}
 }
