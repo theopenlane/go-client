@@ -1,5 +1,5 @@
-mutation CreateStandard($input: CreateStandardInput!) {
-  createStandard(input: $input) {
+mutation CreateStandard($input: CreateStandardInput!, $logoFile: Upload) {
+  createStandard(input: $input, logoFile: $logoFile) {
     standard {
       createdAt
       createdBy
@@ -36,7 +36,7 @@ mutation DeleteStandard($deleteStandardId: ID!) {
   }
 }
 
-query GetAllStandards($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [StandardOrder!]){
+query GetAllStandards($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [StandardOrder!]) {
   standards(
     first: $first
     last: $last
@@ -114,7 +114,7 @@ query GetStandardByID($standardId: ID!) {
 }
 
 query GetStandards($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: StandardWhereInput, $orderBy: [StandardOrder!]) {
-standards(
+  standards(
     first: $first
     last: $last
     after: $after
@@ -161,8 +161,8 @@ standards(
   }
 }
 
-mutation UpdateStandard($updateStandardId: ID!, $input: UpdateStandardInput!) {
-  updateStandard(id: $updateStandardId, input: $input) {
+mutation UpdateStandard($updateStandardId: ID!, $input: UpdateStandardInput!, $logoFile: Upload) {
+  updateStandard(id: $updateStandardId, input: $input, logoFile: $logoFile) {
     standard {
       createdAt
       createdBy

@@ -1,0 +1,13 @@
+secrets:
+  - GITHUB_TOKEN
+
+steps:
+  - label: ":github: pr generated changes"
+    key: "create_pr"
+    command: echo 'Creating PR for [branchName]'
+    plugins:
+      - envato/github-pull-request#v0.4.0:
+          title: "chore: generated client changes"
+          head: "[branchName]"
+          base: "main"
+          repo: "theopenlane/go-client"
