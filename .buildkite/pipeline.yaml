@@ -6,7 +6,6 @@ env:
 secrets:
   - GITHUB_TOKEN
   - APOLLO_KEY
-  - BUILDKITE_AGENT_ACCESS_TOKEN
   - GITHUB_SSH_PRIVATE_KEY
 
 steps:
