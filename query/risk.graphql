@@ -2,7 +2,6 @@ mutation CreateBulkCSVRisk($input: Upload!) {
   createBulkCSVRisk(input: $input) {
     risks {
       businessCosts
-      category
       createdAt
       createdBy
       delegateID
@@ -14,7 +13,7 @@ mutation CreateBulkCSVRisk($input: Upload!) {
       mitigation
       name
       ownerID
-      riskType
+      riskKindName
       score
       stakeholderID
       status
@@ -29,7 +28,6 @@ mutation CreateBulkRisk($input: [CreateRiskInput!]) {
   createBulkRisk(input: $input) {
     risks {
       businessCosts
-      category
       createdAt
       createdBy
       delegateID
@@ -41,7 +39,7 @@ mutation CreateBulkRisk($input: [CreateRiskInput!]) {
       mitigation
       name
       ownerID
-      riskType
+      riskKindName
       score
       stakeholderID
       status
@@ -56,7 +54,6 @@ mutation CreateRisk($input: CreateRiskInput!) {
   createRisk(input: $input) {
     risk {
       businessCosts
-      category
       createdAt
       createdBy
       delegateID
@@ -68,7 +65,7 @@ mutation CreateRisk($input: CreateRiskInput!) {
       mitigation
       name
       ownerID
-      riskType
+      riskKindName
       score
       stakeholderID
       status
@@ -103,8 +100,7 @@ query GetAllRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
     edges {
       node {
         businessCosts
-        category
-        createdAt
+          createdAt
         createdBy
         delegateID
         details
@@ -115,7 +111,7 @@ query GetAllRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
         mitigation
         name
         ownerID
-        riskType
+        riskKindName
         score
         stakeholderID
         status
@@ -130,7 +126,6 @@ query GetAllRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
 query GetRiskByID($riskId: ID!) {
   risk(id: $riskId) {
     businessCosts
-    category
     createdAt
     createdBy
     delegateID
@@ -142,7 +137,7 @@ query GetRiskByID($riskId: ID!) {
     mitigation
     name
     ownerID
-    riskType
+    riskKindName
     score
     stakeholderID
     status
@@ -171,8 +166,7 @@ query GetRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where:
     edges {
       node {
         businessCosts
-        category
-        createdAt
+          createdAt
         createdBy
         delegateID
         details
@@ -183,7 +177,7 @@ query GetRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where:
         mitigation
         name
         ownerID
-        riskType
+        riskKindName
         score
         stakeholderID
         status
@@ -199,7 +193,6 @@ mutation UpdateRisk($updateRiskId: ID!, $input: UpdateRiskInput!) {
   updateRisk(id: $updateRiskId, input: $input) {
     risk {
       businessCosts
-      category
       createdAt
       createdBy
       delegateID
@@ -211,7 +204,7 @@ mutation UpdateRisk($updateRiskId: ID!, $input: UpdateRiskInput!) {
       mitigation
       name
       ownerID
-      riskType
+      riskKindName
       score
       stakeholderID
       status

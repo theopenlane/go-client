@@ -10,7 +10,6 @@ mutation CreateBulkCSVSubcontrol($input: Upload!) {
       controlID
       controlOwnerID
       controlQuestions
-      controlType
       createdAt
       createdBy
       delegateID
@@ -28,6 +27,7 @@ mutation CreateBulkCSVSubcontrol($input: Upload!) {
       source
       status
       subcategory
+      subcontrolKindName
       tags
       title
       updatedAt
@@ -48,7 +48,6 @@ mutation CreateBulkSubcontrol($input: [CreateSubcontrolInput!]) {
       controlID
       controlOwnerID
       controlQuestions
-      controlType
       createdAt
       createdBy
       delegateID
@@ -66,6 +65,7 @@ mutation CreateBulkSubcontrol($input: [CreateSubcontrolInput!]) {
       source
       status
       subcategory
+      subcontrolKindName
       tags
       title
       updatedAt
@@ -86,7 +86,6 @@ mutation CreateSubcontrol($input: CreateSubcontrolInput!) {
       controlID
       controlOwnerID
       controlQuestions
-      controlType
       createdAt
       createdBy
       delegateID
@@ -104,6 +103,7 @@ mutation CreateSubcontrol($input: CreateSubcontrolInput!) {
       source
       status
       subcategory
+      subcontrolKindName
       tags
       title
       updatedAt
@@ -118,7 +118,7 @@ mutation DeleteSubcontrol($deleteSubcontrolId: ID!) {
   }
 }
 
-query GetAllSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]){
+query GetAllSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
   subcontrols(
     first: $first
     last: $last
@@ -144,7 +144,6 @@ query GetAllSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor
         controlID
         controlOwnerID
         controlQuestions
-        controlType
         createdAt
         createdBy
         delegateID
@@ -162,6 +161,7 @@ query GetAllSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor
         source
         status
         subcategory
+        subcontrolKindName
         tags
         title
         updatedAt
@@ -182,7 +182,6 @@ query GetSubcontrolByID($subcontrolId: ID!) {
     controlID
     controlOwnerID
     controlQuestions
-    controlType
     createdAt
     createdBy
     delegateID
@@ -200,6 +199,7 @@ query GetSubcontrolByID($subcontrolId: ID!) {
     source
     status
     subcategory
+    subcontrolKindName
     tags
     title
     updatedAt
@@ -208,7 +208,7 @@ query GetSubcontrolByID($subcontrolId: ID!) {
 }
 
 query GetSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: SubcontrolWhereInput, $orderBy: [SubcontrolOrder!]) {
-subcontrols(
+  subcontrols(
     first: $first
     last: $last
     after: $after
@@ -234,7 +234,6 @@ subcontrols(
         controlID
         controlOwnerID
         controlQuestions
-        controlType
         createdAt
         createdBy
         delegateID
@@ -252,6 +251,7 @@ subcontrols(
         source
         status
         subcategory
+        subcontrolKindName
         tags
         title
         updatedAt
@@ -273,7 +273,6 @@ mutation UpdateSubcontrol($updateSubcontrolId: ID!, $input: UpdateSubcontrolInpu
       controlID
       controlOwnerID
       controlQuestions
-      controlType
       createdAt
       createdBy
       delegateID
@@ -291,6 +290,7 @@ mutation UpdateSubcontrol($updateSubcontrolId: ID!, $input: UpdateSubcontrolInpu
       source
       status
       subcategory
+      subcontrolKindName
       tags
       title
       updatedAt

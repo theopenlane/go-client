@@ -16,7 +16,7 @@ mutation CreateBulkCSVProgram($input: Upload!) {
       id
       name
       ownerID
-      programType
+      programKindName
       startDate
       status
       tags
@@ -44,7 +44,7 @@ mutation CreateBulkProgram($input: [CreateProgramInput!]) {
       id
       name
       ownerID
-      programType
+      programKindName
       startDate
       status
       tags
@@ -72,7 +72,7 @@ mutation CreateProgram($input: CreateProgramInput!) {
       id
       name
       ownerID
-      programType
+      programKindName
       startDate
       status
       tags
@@ -120,7 +120,7 @@ query GetAllPrograms($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
         id
         name
         ownerID
-        programType
+        programKindName
         startDate
         status
         tags
@@ -148,7 +148,7 @@ query GetProgramByID($programId: ID!) {
     id
     name
     ownerID
-    programType
+    programKindName
     startDate
     status
     tags
@@ -190,7 +190,7 @@ programs(
         id
         name
         ownerID
-        programType
+        programKindName
         startDate
         status
         tags
@@ -219,7 +219,7 @@ mutation UpdateProgram($updateProgramId: ID!, $input: UpdateProgramInput!) {
       id
       name
       ownerID
-      programType
+      programKindName
       startDate
       status
       tags
