@@ -11,5 +11,3 @@ steps:
           head: "[branchName]"
           base: "main"
           repo: "theopenlane/go-client"
-    env:
-      - GITHUB_TOKEN="${GITHUB_TOKEN}"
