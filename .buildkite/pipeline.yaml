@@ -58,7 +58,7 @@ steps:
       git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:${BUILDKITE_BRANCH}"
 
   - label: ":graphql: generate"
-    key: "generate"
+    key: "generate-main"
     if: build.branch == "fix-safety-in-commit"
     agents:
       queue: $LARGE_RUNNER_QUEUE
