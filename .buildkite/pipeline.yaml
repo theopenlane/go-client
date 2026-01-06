@@ -6,6 +6,7 @@ env:
 steps:
   - label: ":graphql: generate"
     key: "generate"
+    if: build.branch != "fix-safety-in-commit"
     agents:
       queue: $LARGE_RUNNER_QUEUE
       size: $RUNNER_LARGE
@@ -45,24 +46,6 @@ steps:
         exit 0
       fi
 
-      echo "---ensure linter passes after changes before committing"
-      task go:lint:ci
-      EXIT_CODE=$?
-
-      if [ $EXIT_CODE -ne 0 ]; then
-        echo "linting failed with exit code $EXIT_CODE"
-        exit $EXIT_CODE
-      fi
-
-      echo "--- ensure tests pass after changes before committing"
-      task go:test
-      EXIT_CODE=$?
-
-      if [ $EXIT_CODE -ne 0 ]; then
-        echo "tests failed with exit code $EXIT_CODE"
-        exit $EXIT_CODE
-      fi
-
       echo "--- committing changes"
       git status
       git checkout "${BUILDKITE_BRANCH}"
@@ -74,6 +57,62 @@ steps:
       echo "--- pushing to origin ${BUILDKITE_BRANCH}"
       git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:${BUILDKITE_BRANCH}"
 
+  - label: ":graphql: generate"
+    key: "generate"
+    if: build.branch == "fix-safety-in-commit"
+    agents:
+      queue: $LARGE_RUNNER_QUEUE
+      size: $RUNNER_LARGE
+      location: "NYC"
+    cancel_on_build_failing: true
+    plugins:
+      - cluster-secrets#v1.0.0:
+          variables:
+            APOLLO_KEY: APOLLO_KEY
+            GITHUB_TOKEN: GITHUB_TOKEN
+      - docker#v5.13.0:
+          image: "ghcr.io/theopenlane/build-image:latest"
+          always_pull: true
+          propagate-environment: true
+          environment:
+            - "APOLLO_KEY"
+            - "GITHUB_TOKEN"
+          plugins:
+      - envato/github-pull-request#v0.4.0:
+          title: "chore: generated client changes"
+          head: "chore/go-generate"
+    command: |
+      #!/bin/sh
+      set -e
+      echo "--- running go generate"
+      task generate
+      EXIT_CODE=$?
+
+      if [ $EXIT_CODE -ne 0 ]; then
+        echo "task generate failed with exit code $EXIT_CODE"
+        exit $EXIT_CODE
+      fi
+
+      echo "--- configuring git user"
+      git config user.name "theopenlane-bender"
+      git config user.email "theopenlane-bender@users.noreply.github.com"
+
+      echo "--- checking for changes"
+      if git diff --quiet; then
+        echo "No changes from go generate; nothing to commit."
+        exit 0
+      fi
+
+      echo "--- committing changes"
+      git status
+      git checkout "chore/go-generate"
+      git add -u
+
+      # commit changes
+      git commit -m "chore: run go generate"
+
+      echo "--- pushing to origin chore/go-generate"
+      git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:chore/go-generate"
   - label: ":golangci-lint: lint :lint-roller:"
     if_changed:
       - "**.go"
