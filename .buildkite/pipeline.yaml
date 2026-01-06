@@ -24,6 +24,9 @@ steps:
           environment:
             - "APOLLO_KEY"
             - "GITHUB_TOKEN"
+      - pr-commenter#v0.3.0:
+          message: "Generated client changes have been pushed to the the PR branch. Please review the changes."
+          secret-name: GITHUB_TOKEN
     command: |
       #!/bin/sh
       set -e
@@ -77,9 +80,6 @@ steps:
           environment:
             - "APOLLO_KEY"
             - "GITHUB_TOKEN"
-      - envato/github-pull-request#v0.4.0:
-          title: "chore: generated client changes"
-          head: "chore/go-generate"
     command: |
       #!/bin/sh
       set -e
@@ -112,6 +112,21 @@ steps:
 
       echo "--- pushing to origin chore/go-generate"
       git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:chore/go-generate"
+
+      echo "Changes found, creating pull request..."
+      cat <<EOF | buildkite-agent pipeline upload
+      steps:
+        - label: ":github: pr generated changes
+          key: "create_pr"
+          command: "echo 'Creating PR...'"
+          plugins:
+            - cluster-secrets#v1.0.0:
+                variables:
+                  GITHUB_TOKEN: GITHUB_TOKEN
+            - envato/github-pull-request#v0.4.0:
+                title: "chore: generated client changes"
+                head: "chore/go-generate"
+      EOF
 
   - label: ":golangci-lint: lint :lint-roller:"
     if_changed:
