@@ -8,4 +8,4 @@ steps:
     plugins:
       - envato/github-pull-request#v0.4.0:
           title: "chore: generated client changes"
-          head: "${branchName}"
+          head: "[branchName]"
