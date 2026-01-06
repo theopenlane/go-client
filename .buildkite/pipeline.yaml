@@ -49,7 +49,7 @@ steps:
       echo "--- committing changes"
       git status
       git checkout "${BUILDKITE_BRANCH}"
-      git add -u
+      git add graphclient/
 
       # commit changes
       git commit -m "chore: run go generate"
