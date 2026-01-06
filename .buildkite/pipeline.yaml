@@ -55,7 +55,8 @@ steps:
       echo "--- committing changes"
       git status
       git checkout "${BUILDKITE_BRANCH}"
-      git add graphclient/*
+      git add graphclient/
+      git add schema/
 
       # commit changes
       git commit -m "chore: run go generate"
@@ -108,7 +109,8 @@ steps:
       branchName="chore/go-generate-$(date +%s)"
       git status
       git checkout -b "$$branchName"
-      git add graphclient/*
+      git add graphclient/
+      git add schema/
 
       # commit changes
       git commit -m "chore: run go generate"
@@ -117,7 +119,7 @@ steps:
       git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:$$branchName"
 
       echo "Changes found, creating pull request..."
-      sed "s|\${branchName}|$$branchName|g" .buildkite/steps/pr.yaml | buildkite-agent pipeline upload
+      cat .buildkite/steps/pr.yaml | buildkite-agent pipeline upload
 
   - label: ":golangci-lint: lint :lint-roller:"
     if_changed:
