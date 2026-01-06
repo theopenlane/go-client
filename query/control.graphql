@@ -9,7 +9,6 @@ mutation CreateBulkControl($input: [CreateControlInput!]) {
       categoryID
       controlOwnerID
       controlQuestions
-      controlType
       controlKindName
       createdAt
       createdBy
@@ -50,7 +49,6 @@ mutation CreateBulkCSVControl($input: Upload!) {
       categoryID
       controlOwnerID
       controlQuestions
-      controlType
       controlKindName
       createdAt
       createdBy
@@ -91,7 +89,6 @@ mutation CreateControl($input: CreateControlInput!) {
       categoryID
       controlOwnerID
       controlQuestions
-      controlType
       controlKindName
       createdAt
       createdBy
@@ -152,7 +149,6 @@ query GetAllControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
         categoryID
         controlOwnerID
         controlQuestions
-        controlType
         controlKindName
         createdAt
         createdBy
@@ -193,7 +189,6 @@ query GetControlByID($controlId: ID!) {
     categoryID
     controlOwnerID
     controlQuestions
-    controlType
     controlKindName
     createdAt
     createdBy
@@ -248,7 +243,6 @@ controls(
         categoryID
         controlOwnerID
         controlQuestions
-        controlType
         controlKindName
         createdAt
         createdBy
@@ -290,7 +284,6 @@ mutation UpdateControl($updateControlId: ID!, $input: UpdateControlInput!) {
       categoryID
       controlOwnerID
       controlQuestions
-      controlType
       controlKindName
       createdAt
       createdBy

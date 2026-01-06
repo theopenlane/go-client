@@ -10,7 +10,6 @@ mutation CreateBulkCSVSubcontrol($input: Upload!) {
       controlID
       controlOwnerID
       controlQuestions
-      controlType
       createdAt
       createdBy
       delegateID
@@ -48,7 +47,6 @@ mutation CreateBulkSubcontrol($input: [CreateSubcontrolInput!]) {
       controlID
       controlOwnerID
       controlQuestions
-      controlType
       createdAt
       createdBy
       delegateID
@@ -86,7 +84,6 @@ mutation CreateSubcontrol($input: CreateSubcontrolInput!) {
       controlID
       controlOwnerID
       controlQuestions
-      controlType
       createdAt
       createdBy
       delegateID
@@ -144,7 +141,6 @@ query GetAllSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor
         controlID
         controlOwnerID
         controlQuestions
-        controlType
         createdAt
         createdBy
         delegateID
@@ -182,7 +178,6 @@ query GetSubcontrolByID($subcontrolId: ID!) {
     controlID
     controlOwnerID
     controlQuestions
-    controlType
     createdAt
     createdBy
     delegateID
@@ -234,7 +229,6 @@ subcontrols(
         controlID
         controlOwnerID
         controlQuestions
-        controlType
         createdAt
         createdBy
         delegateID
@@ -273,7 +267,6 @@ mutation UpdateSubcontrol($updateSubcontrolId: ID!, $input: UpdateSubcontrolInpu
       controlID
       controlOwnerID
       controlQuestions
-      controlType
       createdAt
       createdBy
       delegateID
