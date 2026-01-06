@@ -119,6 +119,7 @@ steps:
       git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:$$branchName"
 
       echo "Changes found, creating pull request..."
+      export branchName
       sed "s|\[branchName\]|$$branchName|g" .buildkite/steps/pr.yaml | buildkite-agent pipeline upload
 
   - label: ":golangci-lint: lint :lint-roller:"
