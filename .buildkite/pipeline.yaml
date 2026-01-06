@@ -105,8 +105,8 @@ steps:
 
       echo "--- committing changes"
       git status
-      git checkout "chore/go-generate"
-      git add -u
+      git checkout -b chore/go-generate
+      git add graphclient/
 
       # commit changes
       git commit -m "chore: run go generate"
