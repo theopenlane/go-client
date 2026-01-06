@@ -6,7 +6,7 @@ mutation CreateControlsByClone($input: CloneControlInput!) {
       category
       categoryID
       controlQuestions
-      controlType
+      controlKindName
       createdAt
       createdBy
       description
@@ -51,7 +51,7 @@ mutation CloneBulkCSVControl($input: Upload!) {
       category
       categoryID
       controlQuestions
-      controlType
+      controlKindName
       createdAt
       createdBy
       description
