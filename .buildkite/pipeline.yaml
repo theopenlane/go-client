@@ -3,6 +3,12 @@ env:
   GOMODCACHE: $HOME/.cache/go/pkg/mod
   GOLANGCI_LINT_CACHE: $HOME/.cache/golangci-lint
 
+secrets:
+  - GITHUB_TOKEN
+  - APOLLO_KEY
+  - BUILDKITE_AGENT_ACCESS_TOKEN
+  - GITHUB_SSH_PRIVATE_KEY
+
 steps:
   - label: ":graphql: generate"
     key: "generate"
@@ -13,10 +19,6 @@ steps:
       location: "NYC"
     cancel_on_build_failing: true
     plugins:
-      - cluster-secrets#v1.0.0:
-          variables:
-            APOLLO_KEY: APOLLO_KEY
-            GITHUB_TOKEN: GITHUB_TOKEN
       - docker#v5.13.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           always_pull: true
@@ -34,7 +36,7 @@ steps:
       task generate
       EXIT_CODE=$?
 
-      if [ $EXIT_CODE -ne 0 ]; then
+      if [ "$EXIT_CODE" -ne 0 ]; then
         echo "task generate failed with exit code $EXIT_CODE"
         exit $EXIT_CODE
       fi
@@ -69,11 +71,6 @@ steps:
       location: "NYC"
     cancel_on_build_failing: true
     plugins:
-      - cluster-secrets#v1.0.0:
-          variables:
-            APOLLO_KEY: APOLLO_KEY
-            GITHUB_TOKEN: GITHUB_TOKEN
-            BUILDKITE_AGENT_ACCESS_TOKEN: SECRET_BUILDKITE_AGENT_TOKEN
       - docker#v5.13.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           always_pull: true
@@ -121,9 +118,6 @@ steps:
           key: "create_pr"
           command: "echo 'Creating PR...'"
           plugins:
-            - cluster-secrets#v1.0.0:
-                variables:
-                  GITHUB_TOKEN: GITHUB_TOKEN
             - envato/github-pull-request#v0.4.0:
                 title: "chore: generated client changes"
                 head: "chore/go-generate"
@@ -139,9 +133,6 @@ steps:
     cancel_on_build_failing: true
     key: "lint"
     plugins:
-      - cluster-secrets#v1.0.0:
-          variables:
-            GITHUB_SSH_PRIVATE_KEY: GITHUB_SSH_PRIVATE_KEY
       - docker#v5.13.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           command: ["task", "go:lint:ci"]
@@ -159,9 +150,6 @@ steps:
       - "**.go"
       - "go.mod"
     plugins:
-      - cluster-secrets#v1.0.0:
-          variables:
-            GITHUB_SSH_PRIVATE_KEY: GITHUB_SSH_PRIVATE_KEY
       - docker#v5.13.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           always-pull: true
