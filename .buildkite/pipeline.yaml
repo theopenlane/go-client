@@ -116,8 +116,9 @@ steps:
       echo "--- pushing to origin chore/go-generate"
       git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:$$branchName"
 
-      echo "Changes found, creating pull request..."
-      cat <<EOF | buildkite-agent pipeline upload
+      if [ -n "${BUILDKITE_AGENT_ACCESS_TOKEN}" ]; then
+        echo "Changes found, creating pull request..."
+        cat <<EOF | buildkite-agent pipeline upload
       steps:
         - label: ":github: pr generated changes
           key: "create_pr"
@@ -127,6 +128,9 @@ steps:
                 title: "chore: generated client changes"
                 head: "$$branchName"
       EOF
+      else
+        echo "No agent token found found, skipping dynamic PR creation step."
+      fi
 
   - label: ":golangci-lint: lint :lint-roller:"
     if_changed:
