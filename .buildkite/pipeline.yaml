@@ -45,6 +45,24 @@ steps:
         exit 0
       fi
 
+      echo "---ensure linter passes after changes before committing"
+      task go:lint:ci
+      EXIT_CODE=$?
+
+      if [ $EXIT_CODE -ne 0 ]; then
+        echo "linting failed with exit code $EXIT_CODE"
+        exit $EXIT_CODE
+      fi
+
+      echo "--- ensure tests pass after changes before committing"
+      task go:test
+      EXIT_CODE=$?
+
+      if [ $EXIT_CODE -ne 0 ]; then
+        echo "tests failed with exit code $EXIT_CODE"
+        exit $EXIT_CODE
+      fi
+
       echo "--- committing changes"
       git status
       git checkout "${BUILDKITE_BRANCH}"
