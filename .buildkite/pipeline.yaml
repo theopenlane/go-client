@@ -2,9 +2,15 @@ env:
   GOCACHE: $HOME/.cache/go-build
   GOMODCACHE: $HOME/.cache/go/pkg/mod
   GOLANGCI_LINT_CACHE: $HOME/.cache/golangci-lint
+  DEFAULT_BRANCH: "main"
+
+secrets:
+  - GITHUB_TOKEN
+  - APOLLO_KEY
+  - GITHUB_SSH_PRIVATE_KEY
 
 steps:
-  - label: ":graphql: generate"
+  - label: ":graphql: generate branch changes"
     key: "generate"
     agents:
       queue: $LARGE_RUNNER_QUEUE
@@ -12,10 +18,6 @@ steps:
       location: "NYC"
     cancel_on_build_failing: true
     plugins:
-      - cluster-secrets#v1.0.0:
-          variables:
-            APOLLO_KEY: APOLLO_KEY
-            GITHUB_TOKEN: GITHUB_TOKEN
       - docker#v5.13.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           always_pull: true
@@ -23,14 +25,17 @@ steps:
           environment:
             - "APOLLO_KEY"
             - "GITHUB_TOKEN"
+            - "BUILDKITE_AGENT_ACCESS_TOKEN"
     command: |
-      #!/bin/sh
+      #!/bin/bash
       set -e
+      set -o pipefail
+
       echo "--- running go generate"
       task generate
       EXIT_CODE=$?
 
-      if [ $EXIT_CODE -ne 0 ]; then
+      if [ "$EXIT_CODE" -ne 0 ]; then
         echo "task generate failed with exit code $EXIT_CODE"
         exit $EXIT_CODE
       fi
@@ -46,29 +51,41 @@ steps:
       fi
 
       echo "--- committing changes"
-      git status
-      git checkout "${BUILDKITE_BRANCH}"
+      # if on default branch create a new branch for a PR, else use the current branch
+      if [ "${BUILDKITE_BRANCH}" == "$DEFAULT_BRANCH" ]; then
+        branchName="chore/go-generate-$(date +%s)"
+        git checkout -b "$$branchName"
+      else
+        branchName="${BUILDKITE_BRANCH}"
+        git checkout "$$branchName"
+      fi
       git add -u
 
       # commit changes
       git commit -m "chore: run go generate"
 
-      echo "--- pushing to origin ${BUILDKITE_BRANCH}"
-      git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:${BUILDKITE_BRANCH}"
+      echo "--- pushing changes to $$branchName"
+      git push "https://x-access-token:$${GITHUB_TOKEN}@github.com/theopenlane/go-client.git" "HEAD:$$branchName"
+
+      if [ "${BUILDKITE_BRANCH}" == "$DEFAULT_BRANCH" ]; then
+        echo "Changes found, creating pull request..."
+        sed "s|\[branchName\]|$$branchName|g" .buildkite/steps/pr.yaml | buildkite-agent pipeline upload
+      else
+        echo "Changes pushed to existing branch $$branchName; not creating a PR."
+      fi
 
   - label: ":golangci-lint: lint :lint-roller:"
     if_changed:
       - "**.go"
       - .golangci.yaml
+    depends_on:
+      - "generate"
     agents:
       queue: $LARGE_RUNNER_QUEUE
       size: $RUNNER_LARGE
     cancel_on_build_failing: true
     key: "lint"
     plugins:
-      - cluster-secrets#v1.0.0:
-          variables:
-            GITHUB_SSH_PRIVATE_KEY: GITHUB_SSH_PRIVATE_KEY
       - docker#v5.13.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           command: ["task", "go:lint:ci"]
@@ -82,13 +99,12 @@ steps:
             - "GOTOOLCHAIN=auto"
   - label: ":golang: go test"
     key: "go_test"
+    depends_on:
+      - "generate"
     if_changed:
       - "**.go"
       - "go.mod"
     plugins:
-      - cluster-secrets#v1.0.0:
-          variables:
-            GITHUB_SSH_PRIVATE_KEY: GITHUB_SSH_PRIVATE_KEY
       - docker#v5.13.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           always-pull: true
