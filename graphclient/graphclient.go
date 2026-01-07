@@ -430,12 +430,12 @@ type GraphClient interface {
 	GetScheduledJobRuns(ctx context.Context, first *int64, last *int64, after *string, before *string, where *ScheduledJobRunWhereInput, orderBy []*ScheduledJobRunOrder, interceptors ...clientv2.RequestInterceptor) (*GetScheduledJobRuns, error)
 	UpdateScheduledJobRun(ctx context.Context, updateScheduledJobRunID string, input UpdateScheduledJobRunInput, interceptors ...clientv2.RequestInterceptor) (*UpdateScheduledJobRun, error)
 	GlobalSearch(ctx context.Context, query string, interceptors ...clientv2.RequestInterceptor) (*GlobalSearch, error)
-	CreateStandard(ctx context.Context, input CreateStandardInput, interceptors ...clientv2.RequestInterceptor) (*CreateStandard, error)
+	CreateStandard(ctx context.Context, input CreateStandardInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateStandard, error)
 	DeleteStandard(ctx context.Context, deleteStandardID string, interceptors ...clientv2.RequestInterceptor) (*DeleteStandard, error)
 	GetAllStandards(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*StandardOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllStandards, error)
 	GetStandardByID(ctx context.Context, standardID string, interceptors ...clientv2.RequestInterceptor) (*GetStandardByID, error)
 	GetStandards(ctx context.Context, first *int64, last *int64, after *string, before *string, where *StandardWhereInput, orderBy []*StandardOrder, interceptors ...clientv2.RequestInterceptor) (*GetStandards, error)
-	UpdateStandard(ctx context.Context, updateStandardID string, input UpdateStandardInput, interceptors ...clientv2.RequestInterceptor) (*UpdateStandard, error)
+	UpdateStandard(ctx context.Context, updateStandardID string, input UpdateStandardInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateStandard, error)
 	CreateBulkCSVSubcontrol(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVSubcontrol, error)
 	CreateBulkSubcontrol(ctx context.Context, input []*CreateSubcontrolInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkSubcontrol, error)
 	CreateSubcontrol(ctx context.Context, input CreateSubcontrolInput, interceptors ...clientv2.RequestInterceptor) (*CreateSubcontrol, error)
@@ -613,6 +613,7 @@ func NewClient(cli clientv2.HttpClient, baseURL string, options *clientv2.Option
 }
 
 type CreateActionPlan_CreateActionPlan_ActionPlan struct {
+	ActionPlanKindName              *string               "json:\"actionPlanKindName,omitempty\" graphql:\"actionPlanKindName\""
 	ApprovalRequired                *bool                 "json:\"approvalRequired,omitempty\" graphql:\"approvalRequired\""
 	ApproverID                      *string               "json:\"approverID,omitempty\" graphql:\"approverID\""
 	ControlSuggestions              []string              "json:\"controlSuggestions,omitempty\" graphql:\"controlSuggestions\""
@@ -641,6 +642,12 @@ type CreateActionPlan_CreateActionPlan_ActionPlan struct {
 	UpdatedBy                       *string               "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
+func (t *CreateActionPlan_CreateActionPlan_ActionPlan) GetActionPlanKindName() *string {
+	if t == nil {
+		t = &CreateActionPlan_CreateActionPlan_ActionPlan{}
+	}
+	return t.ActionPlanKindName
+}
 func (t *CreateActionPlan_CreateActionPlan_ActionPlan) GetApprovalRequired() *bool {
 	if t == nil {
 		t = &CreateActionPlan_CreateActionPlan_ActionPlan{}
@@ -810,6 +817,7 @@ func (t *CreateActionPlan_CreateActionPlan) GetActionPlan() *CreateActionPlan_Cr
 }
 
 type CreateBulkActionPlan_CreateBulkActionPlan_ActionPlans struct {
+	ActionPlanKindName              *string               "json:\"actionPlanKindName,omitempty\" graphql:\"actionPlanKindName\""
 	ApprovalRequired                *bool                 "json:\"approvalRequired,omitempty\" graphql:\"approvalRequired\""
 	ApproverID                      *string               "json:\"approverID,omitempty\" graphql:\"approverID\""
 	ControlSuggestions              []string              "json:\"controlSuggestions,omitempty\" graphql:\"controlSuggestions\""
@@ -838,6 +846,12 @@ type CreateBulkActionPlan_CreateBulkActionPlan_ActionPlans struct {
 	UpdatedBy                       *string               "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
+func (t *CreateBulkActionPlan_CreateBulkActionPlan_ActionPlans) GetActionPlanKindName() *string {
+	if t == nil {
+		t = &CreateBulkActionPlan_CreateBulkActionPlan_ActionPlans{}
+	}
+	return t.ActionPlanKindName
+}
 func (t *CreateBulkActionPlan_CreateBulkActionPlan_ActionPlans) GetApprovalRequired() *bool {
 	if t == nil {
 		t = &CreateBulkActionPlan_CreateBulkActionPlan_ActionPlans{}
@@ -1007,6 +1021,7 @@ func (t *CreateBulkActionPlan_CreateBulkActionPlan) GetActionPlans() []*CreateBu
 }
 
 type CreateBulkCSVActionPlan_CreateBulkCSVActionPlan_ActionPlans struct {
+	ActionPlanKindName              *string               "json:\"actionPlanKindName,omitempty\" graphql:\"actionPlanKindName\""
 	ApprovalRequired                *bool                 "json:\"approvalRequired,omitempty\" graphql:\"approvalRequired\""
 	ApproverID                      *string               "json:\"approverID,omitempty\" graphql:\"approverID\""
 	ControlSuggestions              []string              "json:\"controlSuggestions,omitempty\" graphql:\"controlSuggestions\""
@@ -1035,6 +1050,12 @@ type CreateBulkCSVActionPlan_CreateBulkCSVActionPlan_ActionPlans struct {
 	UpdatedBy                       *string               "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
+func (t *CreateBulkCSVActionPlan_CreateBulkCSVActionPlan_ActionPlans) GetActionPlanKindName() *string {
+	if t == nil {
+		t = &CreateBulkCSVActionPlan_CreateBulkCSVActionPlan_ActionPlans{}
+	}
+	return t.ActionPlanKindName
+}
 func (t *CreateBulkCSVActionPlan_CreateBulkCSVActionPlan_ActionPlans) GetApprovalRequired() *bool {
 	if t == nil {
 		t = &CreateBulkCSVActionPlan_CreateBulkCSVActionPlan_ActionPlans{}
@@ -1215,6 +1236,7 @@ func (t *DeleteActionPlan_DeleteActionPlan) GetDeletedID() string {
 }
 
 type GetActionPlanByID_ActionPlan struct {
+	ActionPlanKindName              *string               "json:\"actionPlanKindName,omitempty\" graphql:\"actionPlanKindName\""
 	ApprovalRequired                *bool                 "json:\"approvalRequired,omitempty\" graphql:\"approvalRequired\""
 	ApproverID                      *string               "json:\"approverID,omitempty\" graphql:\"approverID\""
 	ControlSuggestions              []string              "json:\"controlSuggestions,omitempty\" graphql:\"controlSuggestions\""
@@ -1243,6 +1265,12 @@ type GetActionPlanByID_ActionPlan struct {
 	UpdatedBy                       *string               "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
+func (t *GetActionPlanByID_ActionPlan) GetActionPlanKindName() *string {
+	if t == nil {
+		t = &GetActionPlanByID_ActionPlan{}
+	}
+	return t.ActionPlanKindName
+}
 func (t *GetActionPlanByID_ActionPlan) GetApprovalRequired() *bool {
 	if t == nil {
 		t = &GetActionPlanByID_ActionPlan{}
@@ -1433,6 +1461,7 @@ func (t *GetActionPlans_ActionPlans_PageInfo) GetStartCursor() *string {
 }
 
 type GetActionPlans_ActionPlans_Edges_Node struct {
+	ActionPlanKindName              *string               "json:\"actionPlanKindName,omitempty\" graphql:\"actionPlanKindName\""
 	ApprovalRequired                *bool                 "json:\"approvalRequired,omitempty\" graphql:\"approvalRequired\""
 	ApproverID                      *string               "json:\"approverID,omitempty\" graphql:\"approverID\""
 	ControlSuggestions              []string              "json:\"controlSuggestions,omitempty\" graphql:\"controlSuggestions\""
@@ -1461,6 +1490,12 @@ type GetActionPlans_ActionPlans_Edges_Node struct {
 	UpdatedBy                       *string               "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
+func (t *GetActionPlans_ActionPlans_Edges_Node) GetActionPlanKindName() *string {
+	if t == nil {
+		t = &GetActionPlans_ActionPlans_Edges_Node{}
+	}
+	return t.ActionPlanKindName
+}
 func (t *GetActionPlans_ActionPlans_Edges_Node) GetApprovalRequired() *bool {
 	if t == nil {
 		t = &GetActionPlans_ActionPlans_Edges_Node{}
@@ -1687,6 +1722,7 @@ func (t *GetAllActionPlans_ActionPlans_PageInfo) GetStartCursor() *string {
 }
 
 type GetAllActionPlans_ActionPlans_Edges_Node struct {
+	ActionPlanKindName              *string               "json:\"actionPlanKindName,omitempty\" graphql:\"actionPlanKindName\""
 	ApprovalRequired                *bool                 "json:\"approvalRequired,omitempty\" graphql:\"approvalRequired\""
 	ApproverID                      *string               "json:\"approverID,omitempty\" graphql:\"approverID\""
 	ControlSuggestions              []string              "json:\"controlSuggestions,omitempty\" graphql:\"controlSuggestions\""
@@ -1715,6 +1751,12 @@ type GetAllActionPlans_ActionPlans_Edges_Node struct {
 	UpdatedBy                       *string               "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
+func (t *GetAllActionPlans_ActionPlans_Edges_Node) GetActionPlanKindName() *string {
+	if t == nil {
+		t = &GetAllActionPlans_ActionPlans_Edges_Node{}
+	}
+	return t.ActionPlanKindName
+}
 func (t *GetAllActionPlans_ActionPlans_Edges_Node) GetApprovalRequired() *bool {
 	if t == nil {
 		t = &GetAllActionPlans_ActionPlans_Edges_Node{}
@@ -1909,6 +1951,7 @@ func (t *GetAllActionPlans_ActionPlans) GetTotalCount() int64 {
 }
 
 type UpdateActionPlan_UpdateActionPlan_ActionPlan struct {
+	ActionPlanKindName              *string               "json:\"actionPlanKindName,omitempty\" graphql:\"actionPlanKindName\""
 	ApprovalRequired                *bool                 "json:\"approvalRequired,omitempty\" graphql:\"approvalRequired\""
 	ApproverID                      *string               "json:\"approverID,omitempty\" graphql:\"approverID\""
 	ControlSuggestions              []string              "json:\"controlSuggestions,omitempty\" graphql:\"controlSuggestions\""
@@ -1937,6 +1980,12 @@ type UpdateActionPlan_UpdateActionPlan_ActionPlan struct {
 	UpdatedBy                       *string               "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
+func (t *UpdateActionPlan_UpdateActionPlan_ActionPlan) GetActionPlanKindName() *string {
+	if t == nil {
+		t = &UpdateActionPlan_UpdateActionPlan_ActionPlan{}
+	}
+	return t.ActionPlanKindName
+}
 func (t *UpdateActionPlan_UpdateActionPlan_ActionPlan) GetApprovalRequired() *bool {
 	if t == nil {
 		t = &UpdateActionPlan_UpdateActionPlan_ActionPlan{}
@@ -90264,6 +90313,7 @@ func (t *GetWorkflowObjectRefs) GetWorkflowObjectRefs() *GetWorkflowObjectRefs_W
 const CreateActionPlanDocument = `mutation CreateActionPlan ($input: CreateActionPlanInput!) {
 	createActionPlan(input: $input) {
 		actionPlan {
+			actionPlanKindName
 			approvalRequired
 			approverID
 			controlSuggestions
@@ -90315,6 +90365,7 @@ func (c *Client) CreateActionPlan(ctx context.Context, input CreateActionPlanInp
 const CreateBulkActionPlanDocument = `mutation CreateBulkActionPlan ($input: [CreateActionPlanInput!]) {
 	createBulkActionPlan(input: $input) {
 		actionPlans {
+			actionPlanKindName
 			approvalRequired
 			approverID
 			controlSuggestions
@@ -90366,6 +90417,7 @@ func (c *Client) CreateBulkActionPlan(ctx context.Context, input []*CreateAction
 const CreateBulkCSVActionPlanDocument = `mutation CreateBulkCSVActionPlan ($input: Upload!) {
 	createBulkCSVActionPlan(input: $input) {
 		actionPlans {
+			actionPlanKindName
 			approvalRequired
 			approverID
 			controlSuggestions
@@ -90440,6 +90492,7 @@ func (c *Client) DeleteActionPlan(ctx context.Context, deleteActionPlanID string
 
 const GetActionPlanByIDDocument = `query GetActionPlanByID ($actionPlanId: ID!) {
 	actionPlan(id: $actionPlanId) {
+		actionPlanKindName
 		approvalRequired
 		approverID
 		controlSuggestions
@@ -90498,6 +90551,7 @@ const GetActionPlansDocument = `query GetActionPlans ($first: Int, $last: Int, $
 		}
 		edges {
 			node {
+				actionPlanKindName
 				approvalRequired
 				approverID
 				controlSuggestions
@@ -90563,6 +90617,7 @@ const GetAllActionPlansDocument = `query GetAllActionPlans ($first: Int, $last: 
 		}
 		edges {
 			node {
+				actionPlanKindName
 				approvalRequired
 				approverID
 				controlSuggestions
@@ -90619,6 +90674,7 @@ func (c *Client) GetAllActionPlans(ctx context.Context, first *int64, last *int6
 const UpdateActionPlanDocument = `mutation UpdateActionPlan ($updateActionPlanId: ID!, $input: UpdateActionPlanInput!) {
 	updateActionPlan(id: $updateActionPlanId, input: $input) {
 		actionPlan {
+			actionPlanKindName
 			approvalRequired
 			approverID
 			controlSuggestions
@@ -108955,8 +109011,8 @@ func (c *Client) GlobalSearch(ctx context.Context, query string, interceptors ..
 	return &res, nil
 }
 
-const CreateStandardDocument = `mutation CreateStandard ($input: CreateStandardInput!) {
-	createStandard(input: $input) {
+const CreateStandardDocument = `mutation CreateStandard ($input: CreateStandardInput!, $logoFile: Upload) {
+	createStandard(input: $input, logoFile: $logoFile) {
 		standard {
 			createdAt
 			createdBy
@@ -108988,9 +109044,10 @@ const CreateStandardDocument = `mutation CreateStandard ($input: CreateStandardI
 }
 `
 
-func (c *Client) CreateStandard(ctx context.Context, input CreateStandardInput, interceptors ...clientv2.RequestInterceptor) (*CreateStandard, error) {
+func (c *Client) CreateStandard(ctx context.Context, input CreateStandardInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateStandard, error) {
 	vars := map[string]any{
-		"input": input,
+		"input":    input,
+		"logoFile": logoFile,
 	}
 
 	var res CreateStandard
@@ -109204,8 +109261,8 @@ func (c *Client) GetStandards(ctx context.Context, first *int64, last *int64, af
 	return &res, nil
 }
 
-const UpdateStandardDocument = `mutation UpdateStandard ($updateStandardId: ID!, $input: UpdateStandardInput!) {
-	updateStandard(id: $updateStandardId, input: $input) {
+const UpdateStandardDocument = `mutation UpdateStandard ($updateStandardId: ID!, $input: UpdateStandardInput!, $logoFile: Upload) {
+	updateStandard(id: $updateStandardId, input: $input, logoFile: $logoFile) {
 		standard {
 			createdAt
 			createdBy
@@ -109237,10 +109294,11 @@ const UpdateStandardDocument = `mutation UpdateStandard ($updateStandardId: ID!,
 }
 `
 
-func (c *Client) UpdateStandard(ctx context.Context, updateStandardID string, input UpdateStandardInput, interceptors ...clientv2.RequestInterceptor) (*UpdateStandard, error) {
+func (c *Client) UpdateStandard(ctx context.Context, updateStandardID string, input UpdateStandardInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateStandard, error) {
 	vars := map[string]any{
 		"updateStandardId": updateStandardID,
 		"input":            input,
+		"logoFile":         logoFile,
 	}
 
 	var res UpdateStandard
