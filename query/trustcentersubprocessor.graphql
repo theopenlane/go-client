@@ -46,6 +46,12 @@ mutation CreateTrustCenterSubprocessor($input: CreateTrustCenterSubprocessorInpu
   }
 }
 
+mutation DeleteBulkTrustCenterSubprocessor($ids: [ID!]!) {
+  deleteBulkTrustCenterSubprocessor(ids: $ids) {
+    deletedIDs
+  }
+}
+
 mutation DeleteTrustCenterSubprocessor($deleteTrustCenterSubprocessorId: ID!) {
   deleteTrustCenterSubprocessor(id: $deleteTrustCenterSubprocessorId) {
     deletedID
@@ -145,6 +151,29 @@ query GetTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $befo
           }
           logoRemoteURL
         }
+      }
+    }
+  }
+}
+
+mutation UpdateBulkTrustCenterSubprocessor($ids: [ID!]!, $input: UpdateTrustCenterSubprocessorInput!) {
+  updateBulkTrustCenterSubprocessor(ids: $ids, input: $input) {
+    trustCenterSubprocessors {
+      category
+      countries
+      createdAt
+      createdBy
+      id
+      trustCenterID
+      updatedAt
+      updatedBy
+      subprocessor {
+        name
+        description
+        logoFile {
+          presignedURL
+        }
+        logoRemoteURL
       }
     }
   }

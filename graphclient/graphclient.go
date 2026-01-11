@@ -444,11 +444,15 @@ type GraphClient interface {
 	GetSubcontrolByID(ctx context.Context, subcontrolID string, interceptors ...clientv2.RequestInterceptor) (*GetSubcontrolByID, error)
 	GetSubcontrols(ctx context.Context, first *int64, last *int64, after *string, before *string, where *SubcontrolWhereInput, orderBy []*SubcontrolOrder, interceptors ...clientv2.RequestInterceptor) (*GetSubcontrols, error)
 	UpdateSubcontrol(ctx context.Context, updateSubcontrolID string, input UpdateSubcontrolInput, interceptors ...clientv2.RequestInterceptor) (*UpdateSubcontrol, error)
+	CreateBulkCSVSubprocessor(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVSubprocessor, error)
+	CreateBulkSubprocessor(ctx context.Context, input []*CreateSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkSubprocessor, error)
 	CreateSubprocessor(ctx context.Context, input CreateSubprocessorInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateSubprocessor, error)
+	DeleteBulkSubprocessor(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkSubprocessor, error)
 	DeleteSubprocessor(ctx context.Context, deleteSubprocessorID string, interceptors ...clientv2.RequestInterceptor) (*DeleteSubprocessor, error)
 	GetAllSubprocessors(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*SubprocessorOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllSubprocessors, error)
 	GetSubprocessorByID(ctx context.Context, subprocessorID string, interceptors ...clientv2.RequestInterceptor) (*GetSubprocessorByID, error)
 	GetSubprocessors(ctx context.Context, first *int64, last *int64, after *string, before *string, where *SubprocessorWhereInput, orderBy []*SubprocessorOrder, interceptors ...clientv2.RequestInterceptor) (*GetSubprocessors, error)
+	UpdateBulkSubprocessor(ctx context.Context, ids []string, input UpdateSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkSubprocessor, error)
 	UpdateSubprocessor(ctx context.Context, updateSubprocessorID string, input UpdateSubprocessorInput, logoFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateSubprocessor, error)
 	CreateBulkCSVSubscriber(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVSubscriber, error)
 	CreateBulkSubscriber(ctx context.Context, input []*CreateSubscriberInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkSubscriber, error)
@@ -522,10 +526,12 @@ type GraphClient interface {
 	CreateBulkCSVTrustCenterSubprocessor(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVTrustCenterSubprocessor, error)
 	CreateBulkTrustCenterSubprocessor(ctx context.Context, input []*CreateTrustCenterSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkTrustCenterSubprocessor, error)
 	CreateTrustCenterSubprocessor(ctx context.Context, input CreateTrustCenterSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterSubprocessor, error)
+	DeleteBulkTrustCenterSubprocessor(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkTrustCenterSubprocessor, error)
 	DeleteTrustCenterSubprocessor(ctx context.Context, deleteTrustCenterSubprocessorID string, interceptors ...clientv2.RequestInterceptor) (*DeleteTrustCenterSubprocessor, error)
 	GetAllTrustCenterSubprocessors(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*TrustCenterSubprocessorOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllTrustCenterSubprocessors, error)
 	GetTrustCenterSubprocessorByID(ctx context.Context, trustCenterSubprocessorID string, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterSubprocessorByID, error)
 	GetTrustCenterSubprocessors(ctx context.Context, first *int64, last *int64, after *string, before *string, where *TrustCenterSubprocessorWhereInput, orderBy []*TrustCenterSubprocessorOrder, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterSubprocessors, error)
+	UpdateBulkTrustCenterSubprocessor(ctx context.Context, ids []string, input UpdateTrustCenterSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkTrustCenterSubprocessor, error)
 	UpdateTrustCenterSubprocessor(ctx context.Context, updateTrustCenterSubprocessorID string, input UpdateTrustCenterSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterSubprocessor, error)
 	CreateTrustCenterWatermarkConfig(ctx context.Context, input CreateTrustCenterWatermarkConfigInput, watermarkFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterWatermarkConfig, error)
 	DeleteTrustCenterWatermarkConfig(ctx context.Context, deleteTrustCenterWatermarkConfigID string, interceptors ...clientv2.RequestInterceptor) (*DeleteTrustCenterWatermarkConfig, error)
@@ -62389,6 +62395,204 @@ func (t *UpdateSubcontrol_UpdateSubcontrol) GetSubcontrol() *UpdateSubcontrol_Up
 	return &t.Subcontrol
 }
 
+type CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors struct {
+	CreatedAt     *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy     *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Description   *string    "json:\"description,omitempty\" graphql:\"description\""
+	ID            string     "json:\"id\" graphql:\"id\""
+	LogoFileID    *string    "json:\"logoFileID,omitempty\" graphql:\"logoFileID\""
+	LogoRemoteURL *string    "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Name          string     "json:\"name\" graphql:\"name\""
+	OwnerID       *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	SystemOwned   *bool      "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags          []string   "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt     *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy     *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetDescription() *string {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.Description
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetID() string {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.ID
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetLogoFileID() *string {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.LogoFileID
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetLogoRemoteURL() *string {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.LogoRemoteURL
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetName() string {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.Name
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetOwnerID() *string {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.OwnerID
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetSystemOwned() *bool {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.SystemOwned
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetTags() []string {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.Tags
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor struct {
+	Subprocessors []*CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors "json:\"subprocessors,omitempty\" graphql:\"subprocessors\""
+}
+
+func (t *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor) GetSubprocessors() []*CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor_Subprocessors {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor{}
+	}
+	return t.Subprocessors
+}
+
+type CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors struct {
+	CreatedAt     *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy     *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Description   *string    "json:\"description,omitempty\" graphql:\"description\""
+	ID            string     "json:\"id\" graphql:\"id\""
+	LogoFileID    *string    "json:\"logoFileID,omitempty\" graphql:\"logoFileID\""
+	LogoRemoteURL *string    "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Name          string     "json:\"name\" graphql:\"name\""
+	OwnerID       *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	SystemOwned   *bool      "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags          []string   "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt     *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy     *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetDescription() *string {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.Description
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetID() string {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.ID
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetLogoFileID() *string {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.LogoFileID
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetLogoRemoteURL() *string {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.LogoRemoteURL
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetName() string {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.Name
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetOwnerID() *string {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.OwnerID
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetSystemOwned() *bool {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.SystemOwned
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetTags() []string {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.Tags
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateBulkSubprocessor_CreateBulkSubprocessor struct {
+	Subprocessors []*CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors "json:\"subprocessors,omitempty\" graphql:\"subprocessors\""
+}
+
+func (t *CreateBulkSubprocessor_CreateBulkSubprocessor) GetSubprocessors() []*CreateBulkSubprocessor_CreateBulkSubprocessor_Subprocessors {
+	if t == nil {
+		t = &CreateBulkSubprocessor_CreateBulkSubprocessor{}
+	}
+	return t.Subprocessors
+}
+
 type CreateSubprocessor_CreateSubprocessor_Subprocessor struct {
 	CreatedAt     *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy     *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
@@ -62486,6 +62690,17 @@ func (t *CreateSubprocessor_CreateSubprocessor) GetSubprocessor() *CreateSubproc
 		t = &CreateSubprocessor_CreateSubprocessor{}
 	}
 	return &t.Subprocessor
+}
+
+type DeleteBulkSubprocessor_DeleteBulkSubprocessor struct {
+	DeletedIDs []string "json:\"deletedIDs\" graphql:\"deletedIDs\""
+}
+
+func (t *DeleteBulkSubprocessor_DeleteBulkSubprocessor) GetDeletedIDs() []string {
+	if t == nil {
+		t = &DeleteBulkSubprocessor_DeleteBulkSubprocessor{}
+	}
+	return t.DeletedIDs
 }
 
 type DeleteSubprocessor_DeleteSubprocessor struct {
@@ -62897,6 +63112,105 @@ func (t *GetSubprocessors_Subprocessors) GetTotalCount() int64 {
 		t = &GetSubprocessors_Subprocessors{}
 	}
 	return t.TotalCount
+}
+
+type UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors struct {
+	CreatedAt     *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy     *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Description   *string    "json:\"description,omitempty\" graphql:\"description\""
+	ID            string     "json:\"id\" graphql:\"id\""
+	LogoFileID    *string    "json:\"logoFileID,omitempty\" graphql:\"logoFileID\""
+	LogoRemoteURL *string    "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Name          string     "json:\"name\" graphql:\"name\""
+	OwnerID       *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	SystemOwned   *bool      "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	Tags          []string   "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt     *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy     *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetDescription() *string {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.Description
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetID() string {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.ID
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetLogoFileID() *string {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.LogoFileID
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetLogoRemoteURL() *string {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.LogoRemoteURL
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetName() string {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.Name
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetOwnerID() *string {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.OwnerID
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetSystemOwned() *bool {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.SystemOwned
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetTags() []string {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.Tags
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors{}
+	}
+	return t.UpdatedBy
+}
+
+type UpdateBulkSubprocessor_UpdateBulkSubprocessor struct {
+	Subprocessors []*UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors "json:\"subprocessors,omitempty\" graphql:\"subprocessors\""
+}
+
+func (t *UpdateBulkSubprocessor_UpdateBulkSubprocessor) GetSubprocessors() []*UpdateBulkSubprocessor_UpdateBulkSubprocessor_Subprocessors {
+	if t == nil {
+		t = &UpdateBulkSubprocessor_UpdateBulkSubprocessor{}
+	}
+	return t.Subprocessors
 }
 
 type UpdateSubprocessor_UpdateSubprocessor_Subprocessor struct {
@@ -72842,6 +73156,17 @@ func (t *CreateTrustCenterSubprocessor_CreateTrustCenterSubprocessor) GetTrustCe
 	return &t.TrustCenterSubprocessor
 }
 
+type DeleteBulkTrustCenterSubprocessor_DeleteBulkTrustCenterSubprocessor struct {
+	DeletedIDs []string "json:\"deletedIDs\" graphql:\"deletedIDs\""
+}
+
+func (t *DeleteBulkTrustCenterSubprocessor_DeleteBulkTrustCenterSubprocessor) GetDeletedIDs() []string {
+	if t == nil {
+		t = &DeleteBulkTrustCenterSubprocessor_DeleteBulkTrustCenterSubprocessor{}
+	}
+	return t.DeletedIDs
+}
+
 type DeleteTrustCenterSubprocessor_DeleteTrustCenterSubprocessor struct {
 	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
 }
@@ -73317,6 +73642,127 @@ func (t *GetTrustCenterSubprocessors_TrustCenterSubprocessors) GetTotalCount() i
 		t = &GetTrustCenterSubprocessors_TrustCenterSubprocessors{}
 	}
 	return t.TotalCount
+}
+
+type UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor_LogoFile struct {
+	PresignedURL *string "json:\"presignedURL,omitempty\" graphql:\"presignedURL\""
+}
+
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor_LogoFile) GetPresignedURL() *string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor_LogoFile{}
+	}
+	return t.PresignedURL
+}
+
+type UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor struct {
+	Description   *string                                                                                                             "json:\"description,omitempty\" graphql:\"description\""
+	LogoFile      *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor_LogoFile "json:\"logoFile,omitempty\" graphql:\"logoFile\""
+	LogoRemoteURL *string                                                                                                             "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
+	Name          string                                                                                                              "json:\"name\" graphql:\"name\""
+}
+
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor) GetDescription() *string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor{}
+	}
+	return t.Description
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor) GetLogoFile() *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor_LogoFile {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor{}
+	}
+	return t.LogoFile
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor) GetLogoRemoteURL() *string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor{}
+	}
+	return t.LogoRemoteURL
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor) GetName() string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor{}
+	}
+	return t.Name
+}
+
+type UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors struct {
+	Category      string                                                                                                    "json:\"category\" graphql:\"category\""
+	Countries     []string                                                                                                  "json:\"countries,omitempty\" graphql:\"countries\""
+	CreatedAt     *time.Time                                                                                                "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy     *string                                                                                                   "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	ID            string                                                                                                    "json:\"id\" graphql:\"id\""
+	Subprocessor  UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor "json:\"subprocessor\" graphql:\"subprocessor\""
+	TrustCenterID *string                                                                                                   "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt     *time.Time                                                                                                "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy     *string                                                                                                   "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors) GetCategory() string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors{}
+	}
+	return t.Category
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors) GetCountries() []string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors{}
+	}
+	return t.Countries
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors) GetID() string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors{}
+	}
+	return t.ID
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors) GetSubprocessor() *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors_Subprocessor {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors{}
+	}
+	return &t.Subprocessor
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors) GetTrustCenterID() *string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors{}
+	}
+	return t.TrustCenterID
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors{}
+	}
+	return t.UpdatedBy
+}
+
+type UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor struct {
+	TrustCenterSubprocessors []*UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors "json:\"trustCenterSubprocessors,omitempty\" graphql:\"trustCenterSubprocessors\""
+}
+
+func (t *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor) GetTrustCenterSubprocessors() []*UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor_TrustCenterSubprocessors {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor{}
+	}
+	return t.TrustCenterSubprocessors
 }
 
 type UpdateTrustCenterSubprocessor_UpdateTrustCenterSubprocessor_TrustCenterSubprocessor_Subprocessor_LogoFile struct {
@@ -88572,6 +89018,28 @@ func (t *UpdateSubcontrol) GetUpdateSubcontrol() *UpdateSubcontrol_UpdateSubcont
 	return &t.UpdateSubcontrol
 }
 
+type CreateBulkCSVSubprocessor struct {
+	CreateBulkCSVSubprocessor CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor "json:\"createBulkCSVSubprocessor\" graphql:\"createBulkCSVSubprocessor\""
+}
+
+func (t *CreateBulkCSVSubprocessor) GetCreateBulkCSVSubprocessor() *CreateBulkCSVSubprocessor_CreateBulkCSVSubprocessor {
+	if t == nil {
+		t = &CreateBulkCSVSubprocessor{}
+	}
+	return &t.CreateBulkCSVSubprocessor
+}
+
+type CreateBulkSubprocessor struct {
+	CreateBulkSubprocessor CreateBulkSubprocessor_CreateBulkSubprocessor "json:\"createBulkSubprocessor\" graphql:\"createBulkSubprocessor\""
+}
+
+func (t *CreateBulkSubprocessor) GetCreateBulkSubprocessor() *CreateBulkSubprocessor_CreateBulkSubprocessor {
+	if t == nil {
+		t = &CreateBulkSubprocessor{}
+	}
+	return &t.CreateBulkSubprocessor
+}
+
 type CreateSubprocessor struct {
 	CreateSubprocessor CreateSubprocessor_CreateSubprocessor "json:\"createSubprocessor\" graphql:\"createSubprocessor\""
 }
@@ -88581,6 +89049,17 @@ func (t *CreateSubprocessor) GetCreateSubprocessor() *CreateSubprocessor_CreateS
 		t = &CreateSubprocessor{}
 	}
 	return &t.CreateSubprocessor
+}
+
+type DeleteBulkSubprocessor struct {
+	DeleteBulkSubprocessor DeleteBulkSubprocessor_DeleteBulkSubprocessor "json:\"deleteBulkSubprocessor\" graphql:\"deleteBulkSubprocessor\""
+}
+
+func (t *DeleteBulkSubprocessor) GetDeleteBulkSubprocessor() *DeleteBulkSubprocessor_DeleteBulkSubprocessor {
+	if t == nil {
+		t = &DeleteBulkSubprocessor{}
+	}
+	return &t.DeleteBulkSubprocessor
 }
 
 type DeleteSubprocessor struct {
@@ -88625,6 +89104,17 @@ func (t *GetSubprocessors) GetSubprocessors() *GetSubprocessors_Subprocessors {
 		t = &GetSubprocessors{}
 	}
 	return &t.Subprocessors
+}
+
+type UpdateBulkSubprocessor struct {
+	UpdateBulkSubprocessor UpdateBulkSubprocessor_UpdateBulkSubprocessor "json:\"updateBulkSubprocessor\" graphql:\"updateBulkSubprocessor\""
+}
+
+func (t *UpdateBulkSubprocessor) GetUpdateBulkSubprocessor() *UpdateBulkSubprocessor_UpdateBulkSubprocessor {
+	if t == nil {
+		t = &UpdateBulkSubprocessor{}
+	}
+	return &t.UpdateBulkSubprocessor
 }
 
 type UpdateSubprocessor struct {
@@ -89430,6 +89920,17 @@ func (t *CreateTrustCenterSubprocessor) GetCreateTrustCenterSubprocessor() *Crea
 	return &t.CreateTrustCenterSubprocessor
 }
 
+type DeleteBulkTrustCenterSubprocessor struct {
+	DeleteBulkTrustCenterSubprocessor DeleteBulkTrustCenterSubprocessor_DeleteBulkTrustCenterSubprocessor "json:\"deleteBulkTrustCenterSubprocessor\" graphql:\"deleteBulkTrustCenterSubprocessor\""
+}
+
+func (t *DeleteBulkTrustCenterSubprocessor) GetDeleteBulkTrustCenterSubprocessor() *DeleteBulkTrustCenterSubprocessor_DeleteBulkTrustCenterSubprocessor {
+	if t == nil {
+		t = &DeleteBulkTrustCenterSubprocessor{}
+	}
+	return &t.DeleteBulkTrustCenterSubprocessor
+}
+
 type DeleteTrustCenterSubprocessor struct {
 	DeleteTrustCenterSubprocessor DeleteTrustCenterSubprocessor_DeleteTrustCenterSubprocessor "json:\"deleteTrustCenterSubprocessor\" graphql:\"deleteTrustCenterSubprocessor\""
 }
@@ -89472,6 +89973,17 @@ func (t *GetTrustCenterSubprocessors) GetTrustCenterSubprocessors() *GetTrustCen
 		t = &GetTrustCenterSubprocessors{}
 	}
 	return &t.TrustCenterSubprocessors
+}
+
+type UpdateBulkTrustCenterSubprocessor struct {
+	UpdateBulkTrustCenterSubprocessor UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor "json:\"updateBulkTrustCenterSubprocessor\" graphql:\"updateBulkTrustCenterSubprocessor\""
+}
+
+func (t *UpdateBulkTrustCenterSubprocessor) GetUpdateBulkTrustCenterSubprocessor() *UpdateBulkTrustCenterSubprocessor_UpdateBulkTrustCenterSubprocessor {
+	if t == nil {
+		t = &UpdateBulkTrustCenterSubprocessor{}
+	}
+	return &t.UpdateBulkTrustCenterSubprocessor
 }
 
 type UpdateTrustCenterSubprocessor struct {
@@ -109755,6 +110267,80 @@ func (c *Client) UpdateSubcontrol(ctx context.Context, updateSubcontrolID string
 	return &res, nil
 }
 
+const CreateBulkCSVSubprocessorDocument = `mutation CreateBulkCSVSubprocessor ($input: Upload!) {
+	createBulkCSVSubprocessor(input: $input) {
+		subprocessors {
+			createdAt
+			createdBy
+			description
+			id
+			logoFileID
+			logoRemoteURL
+			name
+			ownerID
+			systemOwned
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateBulkCSVSubprocessor(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVSubprocessor, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateBulkCSVSubprocessor
+	if err := c.Client.Post(ctx, "CreateBulkCSVSubprocessor", CreateBulkCSVSubprocessorDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateBulkSubprocessorDocument = `mutation CreateBulkSubprocessor ($input: [CreateSubprocessorInput!]) {
+	createBulkSubprocessor(input: $input) {
+		subprocessors {
+			createdAt
+			createdBy
+			description
+			id
+			logoFileID
+			logoRemoteURL
+			name
+			ownerID
+			systemOwned
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateBulkSubprocessor(ctx context.Context, input []*CreateSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkSubprocessor, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateBulkSubprocessor
+	if err := c.Client.Post(ctx, "CreateBulkSubprocessor", CreateBulkSubprocessorDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
 const CreateSubprocessorDocument = `mutation CreateSubprocessor ($input: CreateSubprocessorInput!, $logoFile: Upload) {
 	createSubprocessor(input: $input, logoFile: $logoFile) {
 		subprocessor {
@@ -109783,6 +110369,30 @@ func (c *Client) CreateSubprocessor(ctx context.Context, input CreateSubprocesso
 
 	var res CreateSubprocessor
 	if err := c.Client.Post(ctx, "CreateSubprocessor", CreateSubprocessorDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const DeleteBulkSubprocessorDocument = `mutation DeleteBulkSubprocessor ($ids: [ID!]!) {
+	deleteBulkSubprocessor(ids: $ids) {
+		deletedIDs
+	}
+}
+`
+
+func (c *Client) DeleteBulkSubprocessor(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkSubprocessor, error) {
+	vars := map[string]any{
+		"ids": ids,
+	}
+
+	var res DeleteBulkSubprocessor
+	if err := c.Client.Post(ctx, "DeleteBulkSubprocessor", DeleteBulkSubprocessorDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -109943,6 +110553,44 @@ func (c *Client) GetSubprocessors(ctx context.Context, first *int64, last *int64
 
 	var res GetSubprocessors
 	if err := c.Client.Post(ctx, "GetSubprocessors", GetSubprocessorsDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateBulkSubprocessorDocument = `mutation UpdateBulkSubprocessor ($ids: [ID!]!, $input: UpdateSubprocessorInput!) {
+	updateBulkSubprocessor(ids: $ids, input: $input) {
+		subprocessors {
+			createdAt
+			createdBy
+			description
+			id
+			logoFileID
+			logoRemoteURL
+			name
+			ownerID
+			systemOwned
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) UpdateBulkSubprocessor(ctx context.Context, ids []string, input UpdateSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkSubprocessor, error) {
+	vars := map[string]any{
+		"ids":   ids,
+		"input": input,
+	}
+
+	var res UpdateBulkSubprocessor
+	if err := c.Client.Post(ctx, "UpdateBulkSubprocessor", UpdateBulkSubprocessorDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -113185,6 +113833,30 @@ func (c *Client) CreateTrustCenterSubprocessor(ctx context.Context, input Create
 	return &res, nil
 }
 
+const DeleteBulkTrustCenterSubprocessorDocument = `mutation DeleteBulkTrustCenterSubprocessor ($ids: [ID!]!) {
+	deleteBulkTrustCenterSubprocessor(ids: $ids) {
+		deletedIDs
+	}
+}
+`
+
+func (c *Client) DeleteBulkTrustCenterSubprocessor(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkTrustCenterSubprocessor, error) {
+	vars := map[string]any{
+		"ids": ids,
+	}
+
+	var res DeleteBulkTrustCenterSubprocessor
+	if err := c.Client.Post(ctx, "DeleteBulkTrustCenterSubprocessor", DeleteBulkTrustCenterSubprocessorDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
 const DeleteTrustCenterSubprocessorDocument = `mutation DeleteTrustCenterSubprocessor ($deleteTrustCenterSubprocessorId: ID!) {
 	deleteTrustCenterSubprocessor(id: $deleteTrustCenterSubprocessorId) {
 		deletedID
@@ -113347,6 +114019,48 @@ func (c *Client) GetTrustCenterSubprocessors(ctx context.Context, first *int64, 
 
 	var res GetTrustCenterSubprocessors
 	if err := c.Client.Post(ctx, "GetTrustCenterSubprocessors", GetTrustCenterSubprocessorsDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateBulkTrustCenterSubprocessorDocument = `mutation UpdateBulkTrustCenterSubprocessor ($ids: [ID!]!, $input: UpdateTrustCenterSubprocessorInput!) {
+	updateBulkTrustCenterSubprocessor(ids: $ids, input: $input) {
+		trustCenterSubprocessors {
+			category
+			countries
+			createdAt
+			createdBy
+			id
+			trustCenterID
+			updatedAt
+			updatedBy
+			subprocessor {
+				name
+				description
+				logoFile {
+					presignedURL
+				}
+				logoRemoteURL
+			}
+		}
+	}
+}
+`
+
+func (c *Client) UpdateBulkTrustCenterSubprocessor(ctx context.Context, ids []string, input UpdateTrustCenterSubprocessorInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkTrustCenterSubprocessor, error) {
+	vars := map[string]any{
+		"ids":   ids,
+		"input": input,
+	}
+
+	var res UpdateBulkTrustCenterSubprocessor
+	if err := c.Client.Post(ctx, "UpdateBulkTrustCenterSubprocessor", UpdateBulkTrustCenterSubprocessorDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -117147,11 +117861,15 @@ var DocumentOperationNames = map[string]string{
 	GetSubcontrolByIDDocument:                     "GetSubcontrolByID",
 	GetSubcontrolsDocument:                        "GetSubcontrols",
 	UpdateSubcontrolDocument:                      "UpdateSubcontrol",
+	CreateBulkCSVSubprocessorDocument:             "CreateBulkCSVSubprocessor",
+	CreateBulkSubprocessorDocument:                "CreateBulkSubprocessor",
 	CreateSubprocessorDocument:                    "CreateSubprocessor",
+	DeleteBulkSubprocessorDocument:                "DeleteBulkSubprocessor",
 	DeleteSubprocessorDocument:                    "DeleteSubprocessor",
 	GetAllSubprocessorsDocument:                   "GetAllSubprocessors",
 	GetSubprocessorByIDDocument:                   "GetSubprocessorByID",
 	GetSubprocessorsDocument:                      "GetSubprocessors",
+	UpdateBulkSubprocessorDocument:                "UpdateBulkSubprocessor",
 	UpdateSubprocessorDocument:                    "UpdateSubprocessor",
 	CreateBulkCSVSubscriberDocument:               "CreateBulkCSVSubscriber",
 	CreateBulkSubscriberDocument:                  "CreateBulkSubscriber",
@@ -117225,10 +117943,12 @@ var DocumentOperationNames = map[string]string{
 	CreateBulkCSVTrustCenterSubprocessorDocument:  "CreateBulkCSVTrustCenterSubprocessor",
 	CreateBulkTrustCenterSubprocessorDocument:     "CreateBulkTrustCenterSubprocessor",
 	CreateTrustCenterSubprocessorDocument:         "CreateTrustCenterSubprocessor",
+	DeleteBulkTrustCenterSubprocessorDocument:     "DeleteBulkTrustCenterSubprocessor",
 	DeleteTrustCenterSubprocessorDocument:         "DeleteTrustCenterSubprocessor",
 	GetAllTrustCenterSubprocessorsDocument:        "GetAllTrustCenterSubprocessors",
 	GetTrustCenterSubprocessorByIDDocument:        "GetTrustCenterSubprocessorByID",
 	GetTrustCenterSubprocessorsDocument:           "GetTrustCenterSubprocessors",
+	UpdateBulkTrustCenterSubprocessorDocument:     "UpdateBulkTrustCenterSubprocessor",
 	UpdateTrustCenterSubprocessorDocument:         "UpdateTrustCenterSubprocessor",
 	CreateTrustCenterWatermarkConfigDocument:      "CreateTrustCenterWatermarkConfig",
 	DeleteTrustCenterWatermarkConfigDocument:      "DeleteTrustCenterWatermarkConfig",
