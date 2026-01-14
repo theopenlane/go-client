@@ -313,11 +313,11 @@ type GraphClient interface {
 	CreateMappedControl(ctx context.Context, input CreateMappedControlInput, interceptors ...clientv2.RequestInterceptor) (*CreateMappedControl, error)
 	DeleteMappedControl(ctx context.Context, deleteMappedControlID string, interceptors ...clientv2.RequestInterceptor) (*DeleteMappedControl, error)
 	GetAllMappedControls(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*MappedControlOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllMappedControls, error)
-	GetMappedControlByID(ctx context.Context, mappedControlID string, interceptors ...clientv2.RequestInterceptor) (*GetMappedControlByID, error)
 	GetMappedAllFromControlsForID(ctx context.Context, mappedControlID string, first *int64, last *int64, after *string, before *string, orderBy []*ControlOrder, interceptors ...clientv2.RequestInterceptor) (*GetMappedAllFromControlsForID, error)
-	GetMappedAllToControlsForID(ctx context.Context, mappedControlID string, first *int64, last *int64, after *string, before *string, orderBy []*ControlOrder, interceptors ...clientv2.RequestInterceptor) (*GetMappedAllToControlsForID, error)
 	GetMappedAllFromSubcontrolsForID(ctx context.Context, mappedControlID string, first *int64, last *int64, after *string, before *string, orderBy []*SubcontrolOrder, interceptors ...clientv2.RequestInterceptor) (*GetMappedAllFromSubcontrolsForID, error)
+	GetMappedAllToControlsForID(ctx context.Context, mappedControlID string, first *int64, last *int64, after *string, before *string, orderBy []*ControlOrder, interceptors ...clientv2.RequestInterceptor) (*GetMappedAllToControlsForID, error)
 	GetMappedAllToSubcontrolsForID(ctx context.Context, mappedControlID string, first *int64, last *int64, after *string, before *string, orderBy []*SubcontrolOrder, interceptors ...clientv2.RequestInterceptor) (*GetMappedAllToSubcontrolsForID, error)
+	GetMappedControlByID(ctx context.Context, mappedControlID string, interceptors ...clientv2.RequestInterceptor) (*GetMappedControlByID, error)
 	GetMappedControls(ctx context.Context, first *int64, last *int64, after *string, before *string, where *MappedControlWhereInput, orderBy []*MappedControlOrder, interceptors ...clientv2.RequestInterceptor) (*GetMappedControls, error)
 	UpdateMappedControl(ctx context.Context, updateMappedControlID string, input UpdateMappedControlInput, interceptors ...clientv2.RequestInterceptor) (*UpdateMappedControl, error)
 	CreateBulkCSVNarrative(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVNarrative, error)
@@ -39997,6 +39997,450 @@ func (t *GetAllMappedControls_MappedControls) GetTotalCount() int64 {
 	return t.TotalCount
 }
 
+type GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node struct {
+	ID                         string  "json:\"id\" graphql:\"id\""
+	RefCode                    string  "json:\"refCode\" graphql:\"refCode\""
+	ReferenceFramework         *string "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
+	ReferenceFrameworkRevision *string "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
+	StandardID                 *string "json:\"standardID,omitempty\" graphql:\"standardID\""
+}
+
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetRefCode() string {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
+	}
+	return t.RefCode
+}
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetReferenceFramework() *string {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
+	}
+	return t.ReferenceFramework
+}
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetReferenceFrameworkRevision() *string {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
+	}
+	return t.ReferenceFrameworkRevision
+}
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetStandardID() *string {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
+	}
+	return t.StandardID
+}
+
+type GetMappedAllFromControlsForID_MappedControl_FromControls_Edges struct {
+	Node *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges) GetNode() *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges{}
+	}
+	return t.Node
+}
+
+type GetMappedAllFromControlsForID_MappedControl_FromControls struct {
+	Edges    []*GetMappedAllFromControlsForID_MappedControl_FromControls_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+}
+
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls) GetEdges() []*GetMappedAllFromControlsForID_MappedControl_FromControls_Edges {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls{}
+	}
+	return t.Edges
+}
+func (t *GetMappedAllFromControlsForID_MappedControl_FromControls) GetPageInfo() *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl_FromControls{}
+	}
+	return &t.PageInfo
+}
+
+type GetMappedAllFromControlsForID_MappedControl struct {
+	FromControls GetMappedAllFromControlsForID_MappedControl_FromControls "json:\"fromControls\" graphql:\"fromControls\""
+}
+
+func (t *GetMappedAllFromControlsForID_MappedControl) GetFromControls() *GetMappedAllFromControlsForID_MappedControl_FromControls {
+	if t == nil {
+		t = &GetMappedAllFromControlsForID_MappedControl{}
+	}
+	return &t.FromControls
+}
+
+type GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node struct {
+	ControlID                  string  "json:\"controlID\" graphql:\"controlID\""
+	ID                         string  "json:\"id\" graphql:\"id\""
+	RefCode                    string  "json:\"refCode\" graphql:\"refCode\""
+	ReferenceFramework         *string "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
+	ReferenceFrameworkRevision *string "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
+}
+
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetControlID() string {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
+	}
+	return t.ControlID
+}
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetRefCode() string {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
+	}
+	return t.RefCode
+}
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetReferenceFramework() *string {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
+	}
+	return t.ReferenceFramework
+}
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetReferenceFrameworkRevision() *string {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
+	}
+	return t.ReferenceFrameworkRevision
+}
+
+type GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges struct {
+	Node *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges) GetNode() *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges{}
+	}
+	return t.Node
+}
+
+type GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols struct {
+	Edges    []*GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+}
+
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols) GetEdges() []*GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols{}
+	}
+	return t.Edges
+}
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols) GetPageInfo() *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols{}
+	}
+	return &t.PageInfo
+}
+
+type GetMappedAllFromSubcontrolsForID_MappedControl struct {
+	FromSubcontrols GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols "json:\"fromSubcontrols\" graphql:\"fromSubcontrols\""
+}
+
+func (t *GetMappedAllFromSubcontrolsForID_MappedControl) GetFromSubcontrols() *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols {
+	if t == nil {
+		t = &GetMappedAllFromSubcontrolsForID_MappedControl{}
+	}
+	return &t.FromSubcontrols
+}
+
+type GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node struct {
+	ID                         string  "json:\"id\" graphql:\"id\""
+	RefCode                    string  "json:\"refCode\" graphql:\"refCode\""
+	ReferenceFramework         *string "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
+	ReferenceFrameworkRevision *string "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
+	StandardID                 *string "json:\"standardID,omitempty\" graphql:\"standardID\""
+}
+
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetRefCode() string {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
+	}
+	return t.RefCode
+}
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetReferenceFramework() *string {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
+	}
+	return t.ReferenceFramework
+}
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetReferenceFrameworkRevision() *string {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
+	}
+	return t.ReferenceFrameworkRevision
+}
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetStandardID() *string {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
+	}
+	return t.StandardID
+}
+
+type GetMappedAllToControlsForID_MappedControl_ToControls_Edges struct {
+	Node *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges) GetNode() *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges{}
+	}
+	return t.Node
+}
+
+type GetMappedAllToControlsForID_MappedControl_ToControls struct {
+	Edges    []*GetMappedAllToControlsForID_MappedControl_ToControls_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+}
+
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls) GetEdges() []*GetMappedAllToControlsForID_MappedControl_ToControls_Edges {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls{}
+	}
+	return t.Edges
+}
+func (t *GetMappedAllToControlsForID_MappedControl_ToControls) GetPageInfo() *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl_ToControls{}
+	}
+	return &t.PageInfo
+}
+
+type GetMappedAllToControlsForID_MappedControl struct {
+	ToControls GetMappedAllToControlsForID_MappedControl_ToControls "json:\"toControls\" graphql:\"toControls\""
+}
+
+func (t *GetMappedAllToControlsForID_MappedControl) GetToControls() *GetMappedAllToControlsForID_MappedControl_ToControls {
+	if t == nil {
+		t = &GetMappedAllToControlsForID_MappedControl{}
+	}
+	return &t.ToControls
+}
+
+type GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node struct {
+	ControlID                  string  "json:\"controlID\" graphql:\"controlID\""
+	ID                         string  "json:\"id\" graphql:\"id\""
+	RefCode                    string  "json:\"refCode\" graphql:\"refCode\""
+	ReferenceFramework         *string "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
+	ReferenceFrameworkRevision *string "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
+}
+
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetControlID() string {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
+	}
+	return t.ControlID
+}
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetRefCode() string {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
+	}
+	return t.RefCode
+}
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetReferenceFramework() *string {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
+	}
+	return t.ReferenceFramework
+}
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetReferenceFrameworkRevision() *string {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
+	}
+	return t.ReferenceFrameworkRevision
+}
+
+type GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges struct {
+	Node *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges) GetNode() *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges{}
+	}
+	return t.Node
+}
+
+type GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols struct {
+	Edges    []*GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+}
+
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols) GetEdges() []*GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols{}
+	}
+	return t.Edges
+}
+func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols) GetPageInfo() *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols{}
+	}
+	return &t.PageInfo
+}
+
+type GetMappedAllToSubcontrolsForID_MappedControl struct {
+	ToSubcontrols GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols "json:\"toSubcontrols\" graphql:\"toSubcontrols\""
+}
+
+func (t *GetMappedAllToSubcontrolsForID_MappedControl) GetToSubcontrols() *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols {
+	if t == nil {
+		t = &GetMappedAllToSubcontrolsForID_MappedControl{}
+	}
+	return &t.ToSubcontrols
+}
+
 type GetMappedControlByID_MappedControl_FromControls_Edges_Node struct {
 	ID      string "json:\"id\" graphql:\"id\""
 	RefCode string "json:\"refCode\" graphql:\"refCode\""
@@ -40257,450 +40701,6 @@ func (t *GetMappedControlByID_MappedControl) GetUpdatedBy() *string {
 		t = &GetMappedControlByID_MappedControl{}
 	}
 	return t.UpdatedBy
-}
-
-type GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo struct {
-	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
-	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
-	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
-	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
-}
-
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo) GetEndCursor() *string {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo{}
-	}
-	return t.EndCursor
-}
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo) GetHasNextPage() bool {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo{}
-	}
-	return t.HasNextPage
-}
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo) GetHasPreviousPage() bool {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo{}
-	}
-	return t.HasPreviousPage
-}
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo) GetStartCursor() *string {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo{}
-	}
-	return t.StartCursor
-}
-
-type GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node struct {
-	ID                         string  "json:\"id\" graphql:\"id\""
-	RefCode                    string  "json:\"refCode\" graphql:\"refCode\""
-	ReferenceFramework         *string "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
-	ReferenceFrameworkRevision *string "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
-	StandardID                 *string "json:\"standardID,omitempty\" graphql:\"standardID\""
-}
-
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetID() string {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
-	}
-	return t.ID
-}
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetRefCode() string {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
-	}
-	return t.RefCode
-}
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetReferenceFramework() *string {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
-	}
-	return t.ReferenceFramework
-}
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetReferenceFrameworkRevision() *string {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
-	}
-	return t.ReferenceFrameworkRevision
-}
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node) GetStandardID() *string {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node{}
-	}
-	return t.StandardID
-}
-
-type GetMappedAllFromControlsForID_MappedControl_FromControls_Edges struct {
-	Node *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
-}
-
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges) GetNode() *GetMappedAllFromControlsForID_MappedControl_FromControls_Edges_Node {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls_Edges{}
-	}
-	return t.Node
-}
-
-type GetMappedAllFromControlsForID_MappedControl_FromControls struct {
-	Edges    []*GetMappedAllFromControlsForID_MappedControl_FromControls_Edges "json:\"edges,omitempty\" graphql:\"edges\""
-	PageInfo GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
-}
-
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls) GetEdges() []*GetMappedAllFromControlsForID_MappedControl_FromControls_Edges {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls{}
-	}
-	return t.Edges
-}
-func (t *GetMappedAllFromControlsForID_MappedControl_FromControls) GetPageInfo() *GetMappedAllFromControlsForID_MappedControl_FromControls_PageInfo {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl_FromControls{}
-	}
-	return &t.PageInfo
-}
-
-type GetMappedAllFromControlsForID_MappedControl struct {
-	FromControls GetMappedAllFromControlsForID_MappedControl_FromControls "json:\"fromControls\" graphql:\"fromControls\""
-}
-
-func (t *GetMappedAllFromControlsForID_MappedControl) GetFromControls() *GetMappedAllFromControlsForID_MappedControl_FromControls {
-	if t == nil {
-		t = &GetMappedAllFromControlsForID_MappedControl{}
-	}
-	return &t.FromControls
-}
-
-type GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo struct {
-	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
-	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
-	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
-	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
-}
-
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo) GetEndCursor() *string {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo{}
-	}
-	return t.EndCursor
-}
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo) GetHasNextPage() bool {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo{}
-	}
-	return t.HasNextPage
-}
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo) GetHasPreviousPage() bool {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo{}
-	}
-	return t.HasPreviousPage
-}
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo) GetStartCursor() *string {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo{}
-	}
-	return t.StartCursor
-}
-
-type GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node struct {
-	ID                         string  "json:\"id\" graphql:\"id\""
-	RefCode                    string  "json:\"refCode\" graphql:\"refCode\""
-	ReferenceFramework         *string "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
-	ReferenceFrameworkRevision *string "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
-	StandardID                 *string "json:\"standardID,omitempty\" graphql:\"standardID\""
-}
-
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetID() string {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
-	}
-	return t.ID
-}
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetRefCode() string {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
-	}
-	return t.RefCode
-}
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetReferenceFramework() *string {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
-	}
-	return t.ReferenceFramework
-}
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetReferenceFrameworkRevision() *string {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
-	}
-	return t.ReferenceFrameworkRevision
-}
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node) GetStandardID() *string {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node{}
-	}
-	return t.StandardID
-}
-
-type GetMappedAllToControlsForID_MappedControl_ToControls_Edges struct {
-	Node *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
-}
-
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls_Edges) GetNode() *GetMappedAllToControlsForID_MappedControl_ToControls_Edges_Node {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls_Edges{}
-	}
-	return t.Node
-}
-
-type GetMappedAllToControlsForID_MappedControl_ToControls struct {
-	Edges    []*GetMappedAllToControlsForID_MappedControl_ToControls_Edges "json:\"edges,omitempty\" graphql:\"edges\""
-	PageInfo GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
-}
-
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls) GetEdges() []*GetMappedAllToControlsForID_MappedControl_ToControls_Edges {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls{}
-	}
-	return t.Edges
-}
-func (t *GetMappedAllToControlsForID_MappedControl_ToControls) GetPageInfo() *GetMappedAllToControlsForID_MappedControl_ToControls_PageInfo {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl_ToControls{}
-	}
-	return &t.PageInfo
-}
-
-type GetMappedAllToControlsForID_MappedControl struct {
-	ToControls GetMappedAllToControlsForID_MappedControl_ToControls "json:\"toControls\" graphql:\"toControls\""
-}
-
-func (t *GetMappedAllToControlsForID_MappedControl) GetToControls() *GetMappedAllToControlsForID_MappedControl_ToControls {
-	if t == nil {
-		t = &GetMappedAllToControlsForID_MappedControl{}
-	}
-	return &t.ToControls
-}
-
-type GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo struct {
-	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
-	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
-	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
-	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
-}
-
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo) GetEndCursor() *string {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo{}
-	}
-	return t.EndCursor
-}
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo) GetHasNextPage() bool {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo{}
-	}
-	return t.HasNextPage
-}
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo) GetHasPreviousPage() bool {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo{}
-	}
-	return t.HasPreviousPage
-}
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo) GetStartCursor() *string {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo{}
-	}
-	return t.StartCursor
-}
-
-type GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node struct {
-	ControlID                  string  "json:\"controlID\" graphql:\"controlID\""
-	ID                         string  "json:\"id\" graphql:\"id\""
-	RefCode                    string  "json:\"refCode\" graphql:\"refCode\""
-	ReferenceFramework         *string "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
-	ReferenceFrameworkRevision *string "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
-}
-
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetControlID() string {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
-	}
-	return t.ControlID
-}
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetID() string {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
-	}
-	return t.ID
-}
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetRefCode() string {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
-	}
-	return t.RefCode
-}
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetReferenceFramework() *string {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
-	}
-	return t.ReferenceFramework
-}
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node) GetReferenceFrameworkRevision() *string {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node{}
-	}
-	return t.ReferenceFrameworkRevision
-}
-
-type GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges struct {
-	Node *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
-}
-
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges) GetNode() *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges_Node {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges{}
-	}
-	return t.Node
-}
-
-type GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols struct {
-	Edges    []*GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges "json:\"edges,omitempty\" graphql:\"edges\""
-	PageInfo GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
-}
-
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols) GetEdges() []*GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_Edges {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols{}
-	}
-	return t.Edges
-}
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols) GetPageInfo() *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols_PageInfo {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols{}
-	}
-	return &t.PageInfo
-}
-
-type GetMappedAllFromSubcontrolsForID_MappedControl struct {
-	FromSubcontrols GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols "json:\"fromSubcontrols\" graphql:\"fromSubcontrols\""
-}
-
-func (t *GetMappedAllFromSubcontrolsForID_MappedControl) GetFromSubcontrols() *GetMappedAllFromSubcontrolsForID_MappedControl_FromSubcontrols {
-	if t == nil {
-		t = &GetMappedAllFromSubcontrolsForID_MappedControl{}
-	}
-	return &t.FromSubcontrols
-}
-
-type GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo struct {
-	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
-	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
-	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
-	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
-}
-
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo) GetEndCursor() *string {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo{}
-	}
-	return t.EndCursor
-}
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo) GetHasNextPage() bool {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo{}
-	}
-	return t.HasNextPage
-}
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo) GetHasPreviousPage() bool {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo{}
-	}
-	return t.HasPreviousPage
-}
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo) GetStartCursor() *string {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo{}
-	}
-	return t.StartCursor
-}
-
-type GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node struct {
-	ControlID                  string  "json:\"controlID\" graphql:\"controlID\""
-	ID                         string  "json:\"id\" graphql:\"id\""
-	RefCode                    string  "json:\"refCode\" graphql:\"refCode\""
-	ReferenceFramework         *string "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
-	ReferenceFrameworkRevision *string "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
-}
-
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetControlID() string {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
-	}
-	return t.ControlID
-}
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetID() string {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
-	}
-	return t.ID
-}
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetRefCode() string {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
-	}
-	return t.RefCode
-}
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetReferenceFramework() *string {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
-	}
-	return t.ReferenceFramework
-}
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node) GetReferenceFrameworkRevision() *string {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node{}
-	}
-	return t.ReferenceFrameworkRevision
-}
-
-type GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges struct {
-	Node *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
-}
-
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges) GetNode() *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges_Node {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges{}
-	}
-	return t.Node
-}
-
-type GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols struct {
-	Edges    []*GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges "json:\"edges,omitempty\" graphql:\"edges\""
-	PageInfo GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
-}
-
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols) GetEdges() []*GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_Edges {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols{}
-	}
-	return t.Edges
-}
-func (t *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols) GetPageInfo() *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols_PageInfo {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols{}
-	}
-	return &t.PageInfo
-}
-
-type GetMappedAllToSubcontrolsForID_MappedControl struct {
-	ToSubcontrols GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols "json:\"toSubcontrols\" graphql:\"toSubcontrols\""
-}
-
-func (t *GetMappedAllToSubcontrolsForID_MappedControl) GetToSubcontrols() *GetMappedAllToSubcontrolsForID_MappedControl_ToSubcontrols {
-	if t == nil {
-		t = &GetMappedAllToSubcontrolsForID_MappedControl{}
-	}
-	return &t.ToSubcontrols
 }
 
 type GetMappedControls_MappedControls_PageInfo struct {
@@ -88025,17 +88025,6 @@ func (t *GetAllMappedControls) GetMappedControls() *GetAllMappedControls_MappedC
 	return &t.MappedControls
 }
 
-type GetMappedControlByID struct {
-	MappedControl GetMappedControlByID_MappedControl "json:\"mappedControl\" graphql:\"mappedControl\""
-}
-
-func (t *GetMappedControlByID) GetMappedControl() *GetMappedControlByID_MappedControl {
-	if t == nil {
-		t = &GetMappedControlByID{}
-	}
-	return &t.MappedControl
-}
-
 type GetMappedAllFromControlsForID struct {
 	MappedControl GetMappedAllFromControlsForID_MappedControl "json:\"mappedControl\" graphql:\"mappedControl\""
 }
@@ -88043,17 +88032,6 @@ type GetMappedAllFromControlsForID struct {
 func (t *GetMappedAllFromControlsForID) GetMappedControl() *GetMappedAllFromControlsForID_MappedControl {
 	if t == nil {
 		t = &GetMappedAllFromControlsForID{}
-	}
-	return &t.MappedControl
-}
-
-type GetMappedAllToControlsForID struct {
-	MappedControl GetMappedAllToControlsForID_MappedControl "json:\"mappedControl\" graphql:\"mappedControl\""
-}
-
-func (t *GetMappedAllToControlsForID) GetMappedControl() *GetMappedAllToControlsForID_MappedControl {
-	if t == nil {
-		t = &GetMappedAllToControlsForID{}
 	}
 	return &t.MappedControl
 }
@@ -88069,6 +88047,17 @@ func (t *GetMappedAllFromSubcontrolsForID) GetMappedControl() *GetMappedAllFromS
 	return &t.MappedControl
 }
 
+type GetMappedAllToControlsForID struct {
+	MappedControl GetMappedAllToControlsForID_MappedControl "json:\"mappedControl\" graphql:\"mappedControl\""
+}
+
+func (t *GetMappedAllToControlsForID) GetMappedControl() *GetMappedAllToControlsForID_MappedControl {
+	if t == nil {
+		t = &GetMappedAllToControlsForID{}
+	}
+	return &t.MappedControl
+}
+
 type GetMappedAllToSubcontrolsForID struct {
 	MappedControl GetMappedAllToSubcontrolsForID_MappedControl "json:\"mappedControl\" graphql:\"mappedControl\""
 }
@@ -88076,6 +88065,17 @@ type GetMappedAllToSubcontrolsForID struct {
 func (t *GetMappedAllToSubcontrolsForID) GetMappedControl() *GetMappedAllToSubcontrolsForID_MappedControl {
 	if t == nil {
 		t = &GetMappedAllToSubcontrolsForID{}
+	}
+	return &t.MappedControl
+}
+
+type GetMappedControlByID struct {
+	MappedControl GetMappedControlByID_MappedControl "json:\"mappedControl\" graphql:\"mappedControl\""
+}
+
+func (t *GetMappedControlByID) GetMappedControl() *GetMappedControlByID_MappedControl {
+	if t == nil {
+		t = &GetMappedControlByID{}
 	}
 	return &t.MappedControl
 }
@@ -104286,71 +104286,6 @@ func (c *Client) GetAllMappedControls(ctx context.Context, first *int64, last *i
 	return &res, nil
 }
 
-const GetMappedControlByIDDocument = `query GetMappedControlByID ($mappedControlId: ID!) {
-	mappedControl(id: $mappedControlId) {
-		confidence
-		createdAt
-		createdBy
-		id
-		mappingType
-		relation
-		source
-		tags
-		updatedAt
-		updatedBy
-		fromControls {
-			edges {
-				node {
-					id
-					refCode
-				}
-			}
-		}
-		toControls {
-			edges {
-				node {
-					id
-					refCode
-				}
-			}
-		}
-		fromSubcontrols {
-			edges {
-				node {
-					id
-					refCode
-				}
-			}
-		}
-		toSubcontrols {
-			edges {
-				node {
-					id
-					refCode
-				}
-			}
-		}
-	}
-}
-`
-
-func (c *Client) GetMappedControlByID(ctx context.Context, mappedControlID string, interceptors ...clientv2.RequestInterceptor) (*GetMappedControlByID, error) {
-	vars := map[string]any{
-		"mappedControlId": mappedControlID,
-	}
-
-	var res GetMappedControlByID
-	if err := c.Client.Post(ctx, "GetMappedControlByID", GetMappedControlByIDDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const GetMappedAllFromControlsForIDDocument = `query GetMappedAllFromControlsForID ($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
 	mappedControl(id: $mappedControlId) {
 		fromControls(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
@@ -104386,51 +104321,6 @@ func (c *Client) GetMappedAllFromControlsForID(ctx context.Context, mappedContro
 
 	var res GetMappedAllFromControlsForID
 	if err := c.Client.Post(ctx, "GetMappedAllFromControlsForID", GetMappedAllFromControlsForIDDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const GetMappedAllToControlsForIDDocument = `query GetMappedAllToControlsForID ($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
-	mappedControl(id: $mappedControlId) {
-		toControls(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
-			pageInfo {
-				startCursor
-				endCursor
-				hasNextPage
-				hasPreviousPage
-			}
-			edges {
-				node {
-					id
-					refCode
-					referenceFramework
-					referenceFrameworkRevision
-					standardID
-				}
-			}
-		}
-	}
-}
-`
-
-func (c *Client) GetMappedAllToControlsForID(ctx context.Context, mappedControlID string, first *int64, last *int64, after *string, before *string, orderBy []*ControlOrder, interceptors ...clientv2.RequestInterceptor) (*GetMappedAllToControlsForID, error) {
-	vars := map[string]any{
-		"mappedControlId": mappedControlID,
-		"first":           first,
-		"last":            last,
-		"after":           after,
-		"before":          before,
-		"orderBy":         orderBy,
-	}
-
-	var res GetMappedAllToControlsForID
-	if err := c.Client.Post(ctx, "GetMappedAllToControlsForID", GetMappedAllToControlsForIDDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -104486,6 +104376,51 @@ func (c *Client) GetMappedAllFromSubcontrolsForID(ctx context.Context, mappedCon
 	return &res, nil
 }
 
+const GetMappedAllToControlsForIDDocument = `query GetMappedAllToControlsForID ($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
+	mappedControl(id: $mappedControlId) {
+		toControls(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+			pageInfo {
+				startCursor
+				endCursor
+				hasNextPage
+				hasPreviousPage
+			}
+			edges {
+				node {
+					id
+					refCode
+					referenceFramework
+					referenceFrameworkRevision
+					standardID
+				}
+			}
+		}
+	}
+}
+`
+
+func (c *Client) GetMappedAllToControlsForID(ctx context.Context, mappedControlID string, first *int64, last *int64, after *string, before *string, orderBy []*ControlOrder, interceptors ...clientv2.RequestInterceptor) (*GetMappedAllToControlsForID, error) {
+	vars := map[string]any{
+		"mappedControlId": mappedControlID,
+		"first":           first,
+		"last":            last,
+		"after":           after,
+		"before":          before,
+		"orderBy":         orderBy,
+	}
+
+	var res GetMappedAllToControlsForID
+	if err := c.Client.Post(ctx, "GetMappedAllToControlsForID", GetMappedAllToControlsForIDDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
 const GetMappedAllToSubcontrolsForIDDocument = `query GetMappedAllToSubcontrolsForID ($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
 	mappedControl(id: $mappedControlId) {
 		toSubcontrols(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
@@ -104521,6 +104456,71 @@ func (c *Client) GetMappedAllToSubcontrolsForID(ctx context.Context, mappedContr
 
 	var res GetMappedAllToSubcontrolsForID
 	if err := c.Client.Post(ctx, "GetMappedAllToSubcontrolsForID", GetMappedAllToSubcontrolsForIDDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetMappedControlByIDDocument = `query GetMappedControlByID ($mappedControlId: ID!) {
+	mappedControl(id: $mappedControlId) {
+		confidence
+		createdAt
+		createdBy
+		id
+		mappingType
+		relation
+		source
+		tags
+		updatedAt
+		updatedBy
+		fromControls {
+			edges {
+				node {
+					id
+					refCode
+				}
+			}
+		}
+		toControls {
+			edges {
+				node {
+					id
+					refCode
+				}
+			}
+		}
+		fromSubcontrols {
+			edges {
+				node {
+					id
+					refCode
+				}
+			}
+		}
+		toSubcontrols {
+			edges {
+				node {
+					id
+					refCode
+				}
+			}
+		}
+	}
+}
+`
+
+func (c *Client) GetMappedControlByID(ctx context.Context, mappedControlID string, interceptors ...clientv2.RequestInterceptor) (*GetMappedControlByID, error) {
+	vars := map[string]any{
+		"mappedControlId": mappedControlID,
+	}
+
+	var res GetMappedControlByID
+	if err := c.Client.Post(ctx, "GetMappedControlByID", GetMappedControlByIDDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -118402,11 +118402,11 @@ var DocumentOperationNames = map[string]string{
 	CreateMappedControlDocument:                   "CreateMappedControl",
 	DeleteMappedControlDocument:                   "DeleteMappedControl",
 	GetAllMappedControlsDocument:                  "GetAllMappedControls",
-	GetMappedControlByIDDocument:                  "GetMappedControlByID",
 	GetMappedAllFromControlsForIDDocument:         "GetMappedAllFromControlsForID",
-	GetMappedAllToControlsForIDDocument:           "GetMappedAllToControlsForID",
 	GetMappedAllFromSubcontrolsForIDDocument:      "GetMappedAllFromSubcontrolsForID",
+	GetMappedAllToControlsForIDDocument:           "GetMappedAllToControlsForID",
 	GetMappedAllToSubcontrolsForIDDocument:        "GetMappedAllToSubcontrolsForID",
+	GetMappedControlByIDDocument:                  "GetMappedControlByID",
 	GetMappedControlsDocument:                     "GetMappedControls",
 	UpdateMappedControlDocument:                   "UpdateMappedControl",
 	CreateBulkCSVNarrativeDocument:                "CreateBulkCSVNarrative",
