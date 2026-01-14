@@ -4562,8 +4562,6 @@ type CreateInviteInput struct {
 	Role   *enums.Role         `json:"role,omitempty"`
 	// the number of attempts made to perform email send of the invitation, maximum of 5
 	SendAttempts *int64 `json:"sendAttempts,omitempty"`
-	// the user who initiated the invitation
-	RequestorID *string `json:"requestorID,omitempty"`
 	// indicates if this invitation is for transferring organization ownership - when accepted, current owner becomes admin and invitee becomes owner
 	OwnershipTransfer *bool    `json:"ownershipTransfer,omitempty"`
 	OwnerID           *string  `json:"ownerID,omitempty"`
@@ -4785,9 +4783,9 @@ type CreateNotificationInput struct {
 	ReadAt *models.DateTime `json:"readAt,omitempty"`
 	// the channels this notification should be sent to (IN_APP, SLACK, EMAIL)
 	Channels []string `json:"channels,omitempty"`
-	// the topic of the notification
-	Topic   *string `json:"topic,omitempty"`
-	OwnerID *string `json:"ownerID,omitempty"`
+	// the topic of the notification (TASK_ASSIGNMENT, APPROVAL, MENTION, EXPORT)
+	Topic   *enums.NotificationTopic `json:"topic,omitempty"`
+	OwnerID *string                  `json:"ownerID,omitempty"`
 }
 
 // CreateOnboardingInput is used for create Onboarding object.
@@ -6192,6 +6190,12 @@ type CustomDomainOrder struct {
 // Return response for updateCustomDomain mutation
 type CustomDomainUpdatePayload struct {
 	// Updated customDomain
+	CustomDomain *CustomDomain `json:"customDomain"`
+}
+
+// Return response for validateCustomDomain mutation
+type CustomDomainValidatePayload struct {
+	// CustomDomain that validation was triggered for
 	CustomDomain *CustomDomain `json:"customDomain"`
 }
 
@@ -9982,6 +9986,8 @@ type Export struct {
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	CreatedBy *string    `json:"createdBy,omitempty"`
 	UpdatedBy *string    `json:"updatedBy,omitempty"`
+	// the user who initiated the request
+	RequestorID *string `json:"requestorID,omitempty"`
 	// the organization id that owns the object
 	OwnerID *string `json:"ownerID,omitempty"`
 	// the type of export, e.g., control, policy, etc.
@@ -9990,8 +9996,6 @@ type Export struct {
 	Format enums.ExportFormat `json:"format"`
 	// the status of the export, e.g., pending, ready, failed
 	Status enums.ExportStatus `json:"status"`
-	// the user who initiated the export
-	RequestorID *string `json:"requestorID,omitempty"`
 	// the specific fields to include in the export (defaults to only the id if not provided)
 	Fields []string `json:"fields,omitempty"`
 	// the specific filters to run against the exported data. This should be a well formatted graphql query
@@ -10132,6 +10136,22 @@ type ExportWhereInput struct {
 	UpdatedByNotNil       *bool    `json:"updatedByNotNil,omitempty"`
 	UpdatedByEqualFold    *string  `json:"updatedByEqualFold,omitempty"`
 	UpdatedByContainsFold *string  `json:"updatedByContainsFold,omitempty"`
+	// requestor_id field predicates
+	RequestorID             *string  `json:"requestorID,omitempty"`
+	RequestorIdneq          *string  `json:"requestorIDNEQ,omitempty"`
+	RequestorIDIn           []string `json:"requestorIDIn,omitempty"`
+	RequestorIDNotIn        []string `json:"requestorIDNotIn,omitempty"`
+	RequestorIdgt           *string  `json:"requestorIDGT,omitempty"`
+	RequestorIdgte          *string  `json:"requestorIDGTE,omitempty"`
+	RequestorIdlt           *string  `json:"requestorIDLT,omitempty"`
+	RequestorIdlte          *string  `json:"requestorIDLTE,omitempty"`
+	RequestorIDContains     *string  `json:"requestorIDContains,omitempty"`
+	RequestorIDHasPrefix    *string  `json:"requestorIDHasPrefix,omitempty"`
+	RequestorIDHasSuffix    *string  `json:"requestorIDHasSuffix,omitempty"`
+	RequestorIDIsNil        *bool    `json:"requestorIDIsNil,omitempty"`
+	RequestorIDNotNil       *bool    `json:"requestorIDNotNil,omitempty"`
+	RequestorIDEqualFold    *string  `json:"requestorIDEqualFold,omitempty"`
+	RequestorIDContainsFold *string  `json:"requestorIDContainsFold,omitempty"`
 	// owner_id field predicates
 	OwnerID             *string  `json:"ownerID,omitempty"`
 	OwnerIdneq          *string  `json:"ownerIDNEQ,omitempty"`
@@ -10163,22 +10183,6 @@ type ExportWhereInput struct {
 	StatusNeq   *enums.ExportStatus  `json:"statusNEQ,omitempty"`
 	StatusIn    []enums.ExportStatus `json:"statusIn,omitempty"`
 	StatusNotIn []enums.ExportStatus `json:"statusNotIn,omitempty"`
-	// requestor_id field predicates
-	RequestorID             *string  `json:"requestorID,omitempty"`
-	RequestorIdneq          *string  `json:"requestorIDNEQ,omitempty"`
-	RequestorIDIn           []string `json:"requestorIDIn,omitempty"`
-	RequestorIDNotIn        []string `json:"requestorIDNotIn,omitempty"`
-	RequestorIdgt           *string  `json:"requestorIDGT,omitempty"`
-	RequestorIdgte          *string  `json:"requestorIDGTE,omitempty"`
-	RequestorIdlt           *string  `json:"requestorIDLT,omitempty"`
-	RequestorIdlte          *string  `json:"requestorIDLTE,omitempty"`
-	RequestorIDContains     *string  `json:"requestorIDContains,omitempty"`
-	RequestorIDHasPrefix    *string  `json:"requestorIDHasPrefix,omitempty"`
-	RequestorIDHasSuffix    *string  `json:"requestorIDHasSuffix,omitempty"`
-	RequestorIDIsNil        *bool    `json:"requestorIDIsNil,omitempty"`
-	RequestorIDNotNil       *bool    `json:"requestorIDNotNil,omitempty"`
-	RequestorIDEqualFold    *string  `json:"requestorIDEqualFold,omitempty"`
-	RequestorIDContainsFold *string  `json:"requestorIDContainsFold,omitempty"`
 	// filters field predicates
 	Filters             *string  `json:"filters,omitempty"`
 	FiltersNeq          *string  `json:"filtersNEQ,omitempty"`
@@ -13710,6 +13714,8 @@ type Invite struct {
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	CreatedBy *string    `json:"createdBy,omitempty"`
 	UpdatedBy *string    `json:"updatedBy,omitempty"`
+	// the user who initiated the request
+	RequestorID *string `json:"requestorID,omitempty"`
 	// the organization id that owns the object
 	OwnerID *string `json:"ownerID,omitempty"`
 	// the expiration date of the invitation token which defaults to 14 days in the future from creation
@@ -13721,8 +13727,6 @@ type Invite struct {
 	Role   enums.Role         `json:"role"`
 	// the number of attempts made to perform email send of the invitation, maximum of 5
 	SendAttempts int64 `json:"sendAttempts"`
-	// the user who initiated the invitation
-	RequestorID *string `json:"requestorID,omitempty"`
 	// indicates if this invitation is for transferring organization ownership - when accepted, current owner becomes admin and invitee becomes owner
 	OwnershipTransfer *bool            `json:"ownershipTransfer,omitempty"`
 	Owner             *Organization    `json:"owner,omitempty"`
@@ -13859,6 +13863,22 @@ type InviteWhereInput struct {
 	UpdatedByNotNil       *bool    `json:"updatedByNotNil,omitempty"`
 	UpdatedByEqualFold    *string  `json:"updatedByEqualFold,omitempty"`
 	UpdatedByContainsFold *string  `json:"updatedByContainsFold,omitempty"`
+	// requestor_id field predicates
+	RequestorID             *string  `json:"requestorID,omitempty"`
+	RequestorIdneq          *string  `json:"requestorIDNEQ,omitempty"`
+	RequestorIDIn           []string `json:"requestorIDIn,omitempty"`
+	RequestorIDNotIn        []string `json:"requestorIDNotIn,omitempty"`
+	RequestorIdgt           *string  `json:"requestorIDGT,omitempty"`
+	RequestorIdgte          *string  `json:"requestorIDGTE,omitempty"`
+	RequestorIdlt           *string  `json:"requestorIDLT,omitempty"`
+	RequestorIdlte          *string  `json:"requestorIDLTE,omitempty"`
+	RequestorIDContains     *string  `json:"requestorIDContains,omitempty"`
+	RequestorIDHasPrefix    *string  `json:"requestorIDHasPrefix,omitempty"`
+	RequestorIDHasSuffix    *string  `json:"requestorIDHasSuffix,omitempty"`
+	RequestorIDIsNil        *bool    `json:"requestorIDIsNil,omitempty"`
+	RequestorIDNotNil       *bool    `json:"requestorIDNotNil,omitempty"`
+	RequestorIDEqualFold    *string  `json:"requestorIDEqualFold,omitempty"`
+	RequestorIDContainsFold *string  `json:"requestorIDContainsFold,omitempty"`
 	// owner_id field predicates
 	OwnerID             *string  `json:"ownerID,omitempty"`
 	OwnerIdneq          *string  `json:"ownerIDNEQ,omitempty"`
@@ -13919,22 +13939,6 @@ type InviteWhereInput struct {
 	SendAttemptsGte   *int64  `json:"sendAttemptsGTE,omitempty"`
 	SendAttemptsLt    *int64  `json:"sendAttemptsLT,omitempty"`
 	SendAttemptsLte   *int64  `json:"sendAttemptsLTE,omitempty"`
-	// requestor_id field predicates
-	RequestorID             *string  `json:"requestorID,omitempty"`
-	RequestorIdneq          *string  `json:"requestorIDNEQ,omitempty"`
-	RequestorIDIn           []string `json:"requestorIDIn,omitempty"`
-	RequestorIDNotIn        []string `json:"requestorIDNotIn,omitempty"`
-	RequestorIdgt           *string  `json:"requestorIDGT,omitempty"`
-	RequestorIdgte          *string  `json:"requestorIDGTE,omitempty"`
-	RequestorIdlt           *string  `json:"requestorIDLT,omitempty"`
-	RequestorIdlte          *string  `json:"requestorIDLTE,omitempty"`
-	RequestorIDContains     *string  `json:"requestorIDContains,omitempty"`
-	RequestorIDHasPrefix    *string  `json:"requestorIDHasPrefix,omitempty"`
-	RequestorIDHasSuffix    *string  `json:"requestorIDHasSuffix,omitempty"`
-	RequestorIDIsNil        *bool    `json:"requestorIDIsNil,omitempty"`
-	RequestorIDNotNil       *bool    `json:"requestorIDNotNil,omitempty"`
-	RequestorIDEqualFold    *string  `json:"requestorIDEqualFold,omitempty"`
-	RequestorIDContainsFold *string  `json:"requestorIDContainsFold,omitempty"`
 	// ownership_transfer field predicates
 	OwnershipTransfer       *bool `json:"ownershipTransfer,omitempty"`
 	OwnershipTransferNeq    *bool `json:"ownershipTransferNEQ,omitempty"`
@@ -16254,9 +16258,9 @@ type Notification struct {
 	ReadAt *models.DateTime `json:"readAt,omitempty"`
 	// the channels this notification should be sent to (IN_APP, SLACK, EMAIL)
 	Channels []string `json:"channels,omitempty"`
-	// the topic of the notification
-	Topic *string       `json:"topic,omitempty"`
-	Owner *Organization `json:"owner,omitempty"`
+	// the topic of the notification (TASK_ASSIGNMENT, APPROVAL, MENTION, EXPORT)
+	Topic *enums.NotificationTopic `json:"topic,omitempty"`
+	Owner *Organization            `json:"owner,omitempty"`
 }
 
 func (Notification) IsNode() {}
