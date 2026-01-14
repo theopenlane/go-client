@@ -119,7 +119,7 @@ mutation DeleteMappedControl($deleteMappedControlId: ID!) {
   }
 }
 
-query GetAllMappedControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [MappedControlOrder!]){
+query GetAllMappedControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [MappedControlOrder!]) {
   mappedControls(
     first: $first
     last: $last
@@ -183,6 +183,118 @@ query GetAllMappedControls($first: Int, $last: Int, $after: Cursor, $before: Cur
   }
 }
 
+query GetMappedAllFromControlsForID($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
+  mappedControl(id: $mappedControlId) {
+    fromControls(
+      first: $first
+      last: $last
+      after: $after
+      before: $before
+      orderBy: $orderBy
+    ) {
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          id
+          refCode
+          referenceFramework
+          referenceFrameworkRevision
+          standardID
+        }
+      }
+    }
+  }
+}
+
+query GetMappedAllFromSubcontrolsForID($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
+  mappedControl(id: $mappedControlId) {
+    fromSubcontrols(
+      first: $first
+      last: $last
+      after: $after
+      before: $before
+      orderBy: $orderBy
+    ) {
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          id
+          refCode
+          referenceFramework
+          referenceFrameworkRevision
+          controlID
+        }
+      }
+    }
+  }
+}
+
+query GetMappedAllToControlsForID($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
+  mappedControl(id: $mappedControlId) {
+    toControls(
+      first: $first
+      last: $last
+      after: $after
+      before: $before
+      orderBy: $orderBy
+    ) {
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          id
+          refCode
+          referenceFramework
+          referenceFrameworkRevision
+          standardID
+        }
+      }
+    }
+  }
+}
+
+query GetMappedAllToSubcontrolsForID($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
+  mappedControl(id: $mappedControlId) {
+    toSubcontrols(
+      first: $first
+      last: $last
+      after: $after
+      before: $before
+      orderBy: $orderBy
+    ) {
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          id
+          refCode
+          referenceFramework
+          referenceFrameworkRevision
+          controlID
+        }
+      }
+    }
+  }
+}
+
 query GetMappedControlByID($mappedControlId: ID!) {
   mappedControl(id: $mappedControlId) {
     confidence
@@ -231,7 +343,7 @@ query GetMappedControlByID($mappedControlId: ID!) {
 }
 
 query GetMappedControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: MappedControlWhereInput, $orderBy: [MappedControlOrder!]) {
-mappedControls(
+  mappedControls(
     first: $first
     last: $last
     after: $after
