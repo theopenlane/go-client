@@ -565,22 +565,12 @@ type GraphClient interface {
 	UpdateVulnerability(ctx context.Context, updateVulnerabilityID string, input UpdateVulnerabilityInput, interceptors ...clientv2.RequestInterceptor) (*UpdateVulnerability, error)
 	DeleteWebauthn(ctx context.Context, deleteWebauthnID string, interceptors ...clientv2.RequestInterceptor) (*DeleteWebauthn, error)
 	GetAllWebauthns(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy *WebauthnOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllWebauthns, error)
-	CreateBulkCSVWorkflowAssignment(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVWorkflowAssignment, error)
-	CreateBulkWorkflowAssignment(ctx context.Context, input []*CreateWorkflowAssignmentInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkWorkflowAssignment, error)
-	CreateWorkflowAssignment(ctx context.Context, input CreateWorkflowAssignmentInput, interceptors ...clientv2.RequestInterceptor) (*CreateWorkflowAssignment, error)
-	DeleteWorkflowAssignment(ctx context.Context, deleteWorkflowAssignmentID string, interceptors ...clientv2.RequestInterceptor) (*DeleteWorkflowAssignment, error)
 	GetAllWorkflowAssignments(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*WorkflowAssignmentOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllWorkflowAssignments, error)
 	GetWorkflowAssignmentByID(ctx context.Context, workflowAssignmentID string, interceptors ...clientv2.RequestInterceptor) (*GetWorkflowAssignmentByID, error)
 	GetWorkflowAssignments(ctx context.Context, first *int64, last *int64, after *string, before *string, where *WorkflowAssignmentWhereInput, orderBy []*WorkflowAssignmentOrder, interceptors ...clientv2.RequestInterceptor) (*GetWorkflowAssignments, error)
-	UpdateWorkflowAssignment(ctx context.Context, updateWorkflowAssignmentID string, input UpdateWorkflowAssignmentInput, interceptors ...clientv2.RequestInterceptor) (*UpdateWorkflowAssignment, error)
-	CreateBulkCSVWorkflowAssignmentTarget(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVWorkflowAssignmentTarget, error)
-	CreateBulkWorkflowAssignmentTarget(ctx context.Context, input []*CreateWorkflowAssignmentTargetInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkWorkflowAssignmentTarget, error)
-	CreateWorkflowAssignmentTarget(ctx context.Context, input CreateWorkflowAssignmentTargetInput, interceptors ...clientv2.RequestInterceptor) (*CreateWorkflowAssignmentTarget, error)
-	DeleteWorkflowAssignmentTarget(ctx context.Context, deleteWorkflowAssignmentTargetID string, interceptors ...clientv2.RequestInterceptor) (*DeleteWorkflowAssignmentTarget, error)
 	GetAllWorkflowAssignmentTargets(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*WorkflowAssignmentTargetOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllWorkflowAssignmentTargets, error)
 	GetWorkflowAssignmentTargetByID(ctx context.Context, workflowAssignmentTargetID string, interceptors ...clientv2.RequestInterceptor) (*GetWorkflowAssignmentTargetByID, error)
 	GetWorkflowAssignmentTargets(ctx context.Context, first *int64, last *int64, after *string, before *string, where *WorkflowAssignmentTargetWhereInput, orderBy []*WorkflowAssignmentTargetOrder, interceptors ...clientv2.RequestInterceptor) (*GetWorkflowAssignmentTargets, error)
-	UpdateWorkflowAssignmentTarget(ctx context.Context, updateWorkflowAssignmentTargetID string, input UpdateWorkflowAssignmentTargetInput, interceptors ...clientv2.RequestInterceptor) (*UpdateWorkflowAssignmentTarget, error)
 	CreateBulkCSVWorkflowDefinition(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVWorkflowDefinition, error)
 	CreateBulkWorkflowDefinition(ctx context.Context, input []*CreateWorkflowDefinitionInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkWorkflowDefinition, error)
 	CreateWorkflowDefinition(ctx context.Context, input CreateWorkflowDefinitionInput, interceptors ...clientv2.RequestInterceptor) (*CreateWorkflowDefinition, error)
@@ -597,14 +587,9 @@ type GraphClient interface {
 	GetWorkflowEventByID(ctx context.Context, workflowEventID string, interceptors ...clientv2.RequestInterceptor) (*GetWorkflowEventByID, error)
 	GetWorkflowEvents(ctx context.Context, first *int64, last *int64, after *string, before *string, where *WorkflowEventWhereInput, orderBy []*WorkflowEventOrder, interceptors ...clientv2.RequestInterceptor) (*GetWorkflowEvents, error)
 	UpdateWorkflowEvent(ctx context.Context, updateWorkflowEventID string, input UpdateWorkflowEventInput, interceptors ...clientv2.RequestInterceptor) (*UpdateWorkflowEvent, error)
-	CreateBulkCSVWorkflowInstance(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVWorkflowInstance, error)
-	CreateBulkWorkflowInstance(ctx context.Context, input []*CreateWorkflowInstanceInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkWorkflowInstance, error)
-	CreateWorkflowInstance(ctx context.Context, input CreateWorkflowInstanceInput, interceptors ...clientv2.RequestInterceptor) (*CreateWorkflowInstance, error)
-	DeleteWorkflowInstance(ctx context.Context, deleteWorkflowInstanceID string, interceptors ...clientv2.RequestInterceptor) (*DeleteWorkflowInstance, error)
 	GetAllWorkflowInstances(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*WorkflowInstanceOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllWorkflowInstances, error)
 	GetWorkflowInstanceByID(ctx context.Context, workflowInstanceID string, interceptors ...clientv2.RequestInterceptor) (*GetWorkflowInstanceByID, error)
 	GetWorkflowInstances(ctx context.Context, first *int64, last *int64, after *string, before *string, where *WorkflowInstanceWhereInput, orderBy []*WorkflowInstanceOrder, interceptors ...clientv2.RequestInterceptor) (*GetWorkflowInstances, error)
-	UpdateWorkflowInstance(ctx context.Context, updateWorkflowInstanceID string, input UpdateWorkflowInstanceInput, interceptors ...clientv2.RequestInterceptor) (*UpdateWorkflowInstance, error)
 	CreateBulkCSVWorkflowObjectRef(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVWorkflowObjectRef, error)
 	CreateBulkWorkflowObjectRef(ctx context.Context, input []*CreateWorkflowObjectRefInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkWorkflowObjectRef, error)
 	CreateWorkflowObjectRef(ctx context.Context, input CreateWorkflowObjectRefInput, interceptors ...clientv2.RequestInterceptor) (*CreateWorkflowObjectRef, error)
@@ -71019,30 +71004,24 @@ func (t *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc_OriginalFile) 
 }
 
 type CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc struct {
-	Category       string                                                                 "json:\"category\" graphql:\"category\""
-	CreatedAt      *time.Time                                                             "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                                                "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	File           *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc_File         "json:\"file,omitempty\" graphql:\"file\""
-	FileID         *string                                                                "json:\"fileID,omitempty\" graphql:\"fileID\""
-	ID             string                                                                 "json:\"id\" graphql:\"id\""
-	OriginalFile   *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
-	OriginalFileID *string                                                                "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
-	Standard       *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc_Standard     "json:\"standard,omitempty\" graphql:\"standard\""
-	StandardID     *string                                                                "json:\"standardID,omitempty\" graphql:\"standardID\""
-	Tags           []string                                                               "json:\"tags,omitempty\" graphql:\"tags\""
-	Title          string                                                                 "json:\"title\" graphql:\"title\""
-	TrustCenterID  *string                                                                "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt      *time.Time                                                             "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                                                "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Visibility     *enums.TrustCenterDocumentVisibility                                   "json:\"visibility,omitempty\" graphql:\"visibility\""
+	CreatedAt              *time.Time                                                             "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy              *string                                                                "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	File                   *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc_File         "json:\"file,omitempty\" graphql:\"file\""
+	FileID                 *string                                                                "json:\"fileID,omitempty\" graphql:\"fileID\""
+	ID                     string                                                                 "json:\"id\" graphql:\"id\""
+	OriginalFile           *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
+	OriginalFileID         *string                                                                "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
+	Standard               *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc_Standard     "json:\"standard,omitempty\" graphql:\"standard\""
+	StandardID             *string                                                                "json:\"standardID,omitempty\" graphql:\"standardID\""
+	Tags                   []string                                                               "json:\"tags,omitempty\" graphql:\"tags\""
+	Title                  string                                                                 "json:\"title\" graphql:\"title\""
+	TrustCenterDocKindName *string                                                                "json:\"trustCenterDocKindName,omitempty\" graphql:\"trustCenterDocKindName\""
+	TrustCenterID          *string                                                                "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt              *time.Time                                                             "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy              *string                                                                "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Visibility             *enums.TrustCenterDocumentVisibility                                   "json:\"visibility,omitempty\" graphql:\"visibility\""
 }
 
-func (t *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc) GetCategory() string {
-	if t == nil {
-		t = &CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc{}
-	}
-	return t.Category
-}
 func (t *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc{}
@@ -71108,6 +71087,12 @@ func (t *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc) GetTitle() st
 		t = &CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc{}
 	}
 	return t.Title
+}
+func (t *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc) GetTrustCenterDocKindName() *string {
+	if t == nil {
+		t = &CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc{}
+	}
+	return t.TrustCenterDocKindName
 }
 func (t *CreateTrustCenterDoc_CreateTrustCenterDoc_TrustCenterDoc) GetTrustCenterID() *string {
 	if t == nil {
@@ -71246,28 +71231,22 @@ func (t *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node_OriginalFile) GetProvi
 }
 
 type GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node struct {
-	Category       string                                                         "json:\"category\" graphql:\"category\""
-	CreatedAt      *time.Time                                                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	File           *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node_File         "json:\"file,omitempty\" graphql:\"file\""
-	FileID         *string                                                        "json:\"fileID,omitempty\" graphql:\"fileID\""
-	ID             string                                                         "json:\"id\" graphql:\"id\""
-	OriginalFile   *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
-	OriginalFileID *string                                                        "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
-	Tags           []string                                                       "json:\"tags,omitempty\" graphql:\"tags\""
-	Title          string                                                         "json:\"title\" graphql:\"title\""
-	TrustCenterID  *string                                                        "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt      *time.Time                                                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Visibility     *enums.TrustCenterDocumentVisibility                           "json:\"visibility,omitempty\" graphql:\"visibility\""
+	CreatedAt              *time.Time                                                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy              *string                                                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	File                   *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node_File         "json:\"file,omitempty\" graphql:\"file\""
+	FileID                 *string                                                        "json:\"fileID,omitempty\" graphql:\"fileID\""
+	ID                     string                                                         "json:\"id\" graphql:\"id\""
+	OriginalFile           *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
+	OriginalFileID         *string                                                        "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
+	Tags                   []string                                                       "json:\"tags,omitempty\" graphql:\"tags\""
+	Title                  string                                                         "json:\"title\" graphql:\"title\""
+	TrustCenterDocKindName *string                                                        "json:\"trustCenterDocKindName,omitempty\" graphql:\"trustCenterDocKindName\""
+	TrustCenterID          *string                                                        "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt              *time.Time                                                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy              *string                                                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Visibility             *enums.TrustCenterDocumentVisibility                           "json:\"visibility,omitempty\" graphql:\"visibility\""
 }
 
-func (t *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node) GetCategory() string {
-	if t == nil {
-		t = &GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node{}
-	}
-	return t.Category
-}
 func (t *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node{}
@@ -71321,6 +71300,12 @@ func (t *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node) GetTitle() string {
 		t = &GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node{}
 	}
 	return t.Title
+}
+func (t *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node) GetTrustCenterDocKindName() *string {
+	if t == nil {
+		t = &GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node{}
+	}
+	return t.TrustCenterDocKindName
 }
 func (t *GetAllTrustCenterDocs_TrustCenterDocs_Edges_Node) GetTrustCenterID() *string {
 	if t == nil {
@@ -71466,30 +71451,24 @@ func (t *GetTrustCenterDocByID_TrustCenterDoc_OriginalFile) GetProvidedFileName(
 }
 
 type GetTrustCenterDocByID_TrustCenterDoc struct {
-	Category       string                                             "json:\"category\" graphql:\"category\""
-	CreatedAt      *time.Time                                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	File           *GetTrustCenterDocByID_TrustCenterDoc_File         "json:\"file,omitempty\" graphql:\"file\""
-	FileID         *string                                            "json:\"fileID,omitempty\" graphql:\"fileID\""
-	ID             string                                             "json:\"id\" graphql:\"id\""
-	OriginalFile   *GetTrustCenterDocByID_TrustCenterDoc_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
-	OriginalFileID *string                                            "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
-	Standard       *GetTrustCenterDocByID_TrustCenterDoc_Standard     "json:\"standard,omitempty\" graphql:\"standard\""
-	StandardID     *string                                            "json:\"standardID,omitempty\" graphql:\"standardID\""
-	Tags           []string                                           "json:\"tags,omitempty\" graphql:\"tags\""
-	Title          string                                             "json:\"title\" graphql:\"title\""
-	TrustCenterID  *string                                            "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt      *time.Time                                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Visibility     *enums.TrustCenterDocumentVisibility               "json:\"visibility,omitempty\" graphql:\"visibility\""
+	CreatedAt              *time.Time                                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy              *string                                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	File                   *GetTrustCenterDocByID_TrustCenterDoc_File         "json:\"file,omitempty\" graphql:\"file\""
+	FileID                 *string                                            "json:\"fileID,omitempty\" graphql:\"fileID\""
+	ID                     string                                             "json:\"id\" graphql:\"id\""
+	OriginalFile           *GetTrustCenterDocByID_TrustCenterDoc_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
+	OriginalFileID         *string                                            "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
+	Standard               *GetTrustCenterDocByID_TrustCenterDoc_Standard     "json:\"standard,omitempty\" graphql:\"standard\""
+	StandardID             *string                                            "json:\"standardID,omitempty\" graphql:\"standardID\""
+	Tags                   []string                                           "json:\"tags,omitempty\" graphql:\"tags\""
+	Title                  string                                             "json:\"title\" graphql:\"title\""
+	TrustCenterDocKindName *string                                            "json:\"trustCenterDocKindName,omitempty\" graphql:\"trustCenterDocKindName\""
+	TrustCenterID          *string                                            "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt              *time.Time                                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy              *string                                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Visibility             *enums.TrustCenterDocumentVisibility               "json:\"visibility,omitempty\" graphql:\"visibility\""
 }
 
-func (t *GetTrustCenterDocByID_TrustCenterDoc) GetCategory() string {
-	if t == nil {
-		t = &GetTrustCenterDocByID_TrustCenterDoc{}
-	}
-	return t.Category
-}
 func (t *GetTrustCenterDocByID_TrustCenterDoc) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &GetTrustCenterDocByID_TrustCenterDoc{}
@@ -71555,6 +71534,12 @@ func (t *GetTrustCenterDocByID_TrustCenterDoc) GetTitle() string {
 		t = &GetTrustCenterDocByID_TrustCenterDoc{}
 	}
 	return t.Title
+}
+func (t *GetTrustCenterDocByID_TrustCenterDoc) GetTrustCenterDocKindName() *string {
+	if t == nil {
+		t = &GetTrustCenterDocByID_TrustCenterDoc{}
+	}
+	return t.TrustCenterDocKindName
 }
 func (t *GetTrustCenterDocByID_TrustCenterDoc) GetTrustCenterID() *string {
 	if t == nil {
@@ -71671,28 +71656,22 @@ func (t *GetTrustCenterDocs_TrustCenterDocs_Edges_Node_OriginalFile) GetProvided
 }
 
 type GetTrustCenterDocs_TrustCenterDocs_Edges_Node struct {
-	Category       string                                                      "json:\"category\" graphql:\"category\""
-	CreatedAt      *time.Time                                                  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                                     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	File           *GetTrustCenterDocs_TrustCenterDocs_Edges_Node_File         "json:\"file,omitempty\" graphql:\"file\""
-	FileID         *string                                                     "json:\"fileID,omitempty\" graphql:\"fileID\""
-	ID             string                                                      "json:\"id\" graphql:\"id\""
-	OriginalFile   *GetTrustCenterDocs_TrustCenterDocs_Edges_Node_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
-	OriginalFileID *string                                                     "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
-	Tags           []string                                                    "json:\"tags,omitempty\" graphql:\"tags\""
-	Title          string                                                      "json:\"title\" graphql:\"title\""
-	TrustCenterID  *string                                                     "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt      *time.Time                                                  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                                     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Visibility     *enums.TrustCenterDocumentVisibility                        "json:\"visibility,omitempty\" graphql:\"visibility\""
+	CreatedAt              *time.Time                                                  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy              *string                                                     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	File                   *GetTrustCenterDocs_TrustCenterDocs_Edges_Node_File         "json:\"file,omitempty\" graphql:\"file\""
+	FileID                 *string                                                     "json:\"fileID,omitempty\" graphql:\"fileID\""
+	ID                     string                                                      "json:\"id\" graphql:\"id\""
+	OriginalFile           *GetTrustCenterDocs_TrustCenterDocs_Edges_Node_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
+	OriginalFileID         *string                                                     "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
+	Tags                   []string                                                    "json:\"tags,omitempty\" graphql:\"tags\""
+	Title                  string                                                      "json:\"title\" graphql:\"title\""
+	TrustCenterDocKindName *string                                                     "json:\"trustCenterDocKindName,omitempty\" graphql:\"trustCenterDocKindName\""
+	TrustCenterID          *string                                                     "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt              *time.Time                                                  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy              *string                                                     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Visibility             *enums.TrustCenterDocumentVisibility                        "json:\"visibility,omitempty\" graphql:\"visibility\""
 }
 
-func (t *GetTrustCenterDocs_TrustCenterDocs_Edges_Node) GetCategory() string {
-	if t == nil {
-		t = &GetTrustCenterDocs_TrustCenterDocs_Edges_Node{}
-	}
-	return t.Category
-}
 func (t *GetTrustCenterDocs_TrustCenterDocs_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &GetTrustCenterDocs_TrustCenterDocs_Edges_Node{}
@@ -71746,6 +71725,12 @@ func (t *GetTrustCenterDocs_TrustCenterDocs_Edges_Node) GetTitle() string {
 		t = &GetTrustCenterDocs_TrustCenterDocs_Edges_Node{}
 	}
 	return t.Title
+}
+func (t *GetTrustCenterDocs_TrustCenterDocs_Edges_Node) GetTrustCenterDocKindName() *string {
+	if t == nil {
+		t = &GetTrustCenterDocs_TrustCenterDocs_Edges_Node{}
+	}
+	return t.TrustCenterDocKindName
 }
 func (t *GetTrustCenterDocs_TrustCenterDocs_Edges_Node) GetTrustCenterID() *string {
 	if t == nil {
@@ -71891,30 +71876,24 @@ func (t *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc_OriginalFile) 
 }
 
 type UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc struct {
-	Category       string                                                                 "json:\"category\" graphql:\"category\""
-	CreatedAt      *time.Time                                                             "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                                                "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	File           *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc_File         "json:\"file,omitempty\" graphql:\"file\""
-	FileID         *string                                                                "json:\"fileID,omitempty\" graphql:\"fileID\""
-	ID             string                                                                 "json:\"id\" graphql:\"id\""
-	OriginalFile   *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
-	OriginalFileID *string                                                                "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
-	Standard       *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc_Standard     "json:\"standard,omitempty\" graphql:\"standard\""
-	StandardID     *string                                                                "json:\"standardID,omitempty\" graphql:\"standardID\""
-	Tags           []string                                                               "json:\"tags,omitempty\" graphql:\"tags\""
-	Title          string                                                                 "json:\"title\" graphql:\"title\""
-	TrustCenterID  *string                                                                "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
-	UpdatedAt      *time.Time                                                             "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                                                "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Visibility     *enums.TrustCenterDocumentVisibility                                   "json:\"visibility,omitempty\" graphql:\"visibility\""
+	CreatedAt              *time.Time                                                             "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy              *string                                                                "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	File                   *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc_File         "json:\"file,omitempty\" graphql:\"file\""
+	FileID                 *string                                                                "json:\"fileID,omitempty\" graphql:\"fileID\""
+	ID                     string                                                                 "json:\"id\" graphql:\"id\""
+	OriginalFile           *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc_OriginalFile "json:\"originalFile,omitempty\" graphql:\"originalFile\""
+	OriginalFileID         *string                                                                "json:\"originalFileID,omitempty\" graphql:\"originalFileID\""
+	Standard               *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc_Standard     "json:\"standard,omitempty\" graphql:\"standard\""
+	StandardID             *string                                                                "json:\"standardID,omitempty\" graphql:\"standardID\""
+	Tags                   []string                                                               "json:\"tags,omitempty\" graphql:\"tags\""
+	Title                  string                                                                 "json:\"title\" graphql:\"title\""
+	TrustCenterDocKindName *string                                                                "json:\"trustCenterDocKindName,omitempty\" graphql:\"trustCenterDocKindName\""
+	TrustCenterID          *string                                                                "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt              *time.Time                                                             "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy              *string                                                                "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Visibility             *enums.TrustCenterDocumentVisibility                                   "json:\"visibility,omitempty\" graphql:\"visibility\""
 }
 
-func (t *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc) GetCategory() string {
-	if t == nil {
-		t = &UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc{}
-	}
-	return t.Category
-}
 func (t *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc{}
@@ -71980,6 +71959,12 @@ func (t *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc) GetTitle() st
 		t = &UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc{}
 	}
 	return t.Title
+}
+func (t *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc) GetTrustCenterDocKindName() *string {
+	if t == nil {
+		t = &UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc{}
+	}
+	return t.TrustCenterDocKindName
 }
 func (t *UpdateTrustCenterDoc_UpdateTrustCenterDoc_TrustCenterDoc) GetTrustCenterID() *string {
 	if t == nil {
@@ -78925,461 +78910,6 @@ func (t *GetAllWebauthns_Webauthns) GetTotalCount() int64 {
 	return t.TotalCount
 }
 
-type CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments struct {
-	ActorGroupID       *string                        "json:\"actorGroupID,omitempty\" graphql:\"actorGroupID\""
-	ActorUserID        *string                        "json:\"actorUserID,omitempty\" graphql:\"actorUserID\""
-	AssignmentKey      string                         "json:\"assignmentKey\" graphql:\"assignmentKey\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DecidedAt          *time.Time                     "json:\"decidedAt,omitempty\" graphql:\"decidedAt\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	Label              *string                        "json:\"label,omitempty\" graphql:\"label\""
-	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Notes              *string                        "json:\"notes,omitempty\" graphql:\"notes\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Required           bool                           "json:\"required\" graphql:\"required\""
-	Role               string                         "json:\"role\" graphql:\"role\""
-	Status             enums.WorkflowAssignmentStatus "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowInstanceID string                         "json:\"workflowInstanceID\" graphql:\"workflowInstanceID\""
-}
-
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetActorGroupID() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.ActorGroupID
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetActorUserID() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.ActorUserID
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetAssignmentKey() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.AssignmentKey
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetDecidedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.DecidedAt
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetDisplayID() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.DisplayID
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetID() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.ID
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetLabel() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Label
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetMetadata() map[string]any {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Metadata
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetNotes() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Notes
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetRequired() bool {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Required
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetRole() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Role
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetStatus() *enums.WorkflowAssignmentStatus {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return &t.Status
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetTags() []string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Tags
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments) GetWorkflowInstanceID() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.WorkflowInstanceID
-}
-
-type CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment struct {
-	WorkflowAssignments []*CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments "json:\"workflowAssignments,omitempty\" graphql:\"workflowAssignments\""
-}
-
-func (t *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment) GetWorkflowAssignments() []*CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment_WorkflowAssignments {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment{}
-	}
-	return t.WorkflowAssignments
-}
-
-type CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments struct {
-	ActorGroupID       *string                        "json:\"actorGroupID,omitempty\" graphql:\"actorGroupID\""
-	ActorUserID        *string                        "json:\"actorUserID,omitempty\" graphql:\"actorUserID\""
-	AssignmentKey      string                         "json:\"assignmentKey\" graphql:\"assignmentKey\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DecidedAt          *time.Time                     "json:\"decidedAt,omitempty\" graphql:\"decidedAt\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	Label              *string                        "json:\"label,omitempty\" graphql:\"label\""
-	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Notes              *string                        "json:\"notes,omitempty\" graphql:\"notes\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Required           bool                           "json:\"required\" graphql:\"required\""
-	Role               string                         "json:\"role\" graphql:\"role\""
-	Status             enums.WorkflowAssignmentStatus "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowInstanceID string                         "json:\"workflowInstanceID\" graphql:\"workflowInstanceID\""
-}
-
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetActorGroupID() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.ActorGroupID
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetActorUserID() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.ActorUserID
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetAssignmentKey() string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.AssignmentKey
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetDecidedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.DecidedAt
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetDisplayID() string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.DisplayID
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetID() string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.ID
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetLabel() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Label
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetMetadata() map[string]any {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Metadata
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetNotes() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Notes
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetRequired() bool {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Required
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetRole() string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Role
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetStatus() *enums.WorkflowAssignmentStatus {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return &t.Status
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetTags() []string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.Tags
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments) GetWorkflowInstanceID() string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments{}
-	}
-	return t.WorkflowInstanceID
-}
-
-type CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment struct {
-	WorkflowAssignments []*CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments "json:\"workflowAssignments,omitempty\" graphql:\"workflowAssignments\""
-}
-
-func (t *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment) GetWorkflowAssignments() []*CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment_WorkflowAssignments {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment{}
-	}
-	return t.WorkflowAssignments
-}
-
-type CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment struct {
-	ActorGroupID       *string                        "json:\"actorGroupID,omitempty\" graphql:\"actorGroupID\""
-	ActorUserID        *string                        "json:\"actorUserID,omitempty\" graphql:\"actorUserID\""
-	AssignmentKey      string                         "json:\"assignmentKey\" graphql:\"assignmentKey\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DecidedAt          *time.Time                     "json:\"decidedAt,omitempty\" graphql:\"decidedAt\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	Label              *string                        "json:\"label,omitempty\" graphql:\"label\""
-	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Notes              *string                        "json:\"notes,omitempty\" graphql:\"notes\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Required           bool                           "json:\"required\" graphql:\"required\""
-	Role               string                         "json:\"role\" graphql:\"role\""
-	Status             enums.WorkflowAssignmentStatus "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowInstanceID string                         "json:\"workflowInstanceID\" graphql:\"workflowInstanceID\""
-}
-
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetActorGroupID() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.ActorGroupID
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetActorUserID() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.ActorUserID
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetAssignmentKey() string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.AssignmentKey
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetDecidedAt() *time.Time {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.DecidedAt
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetDisplayID() string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.DisplayID
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetID() string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.ID
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetLabel() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Label
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetMetadata() map[string]any {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Metadata
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetNotes() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Notes
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.OwnerID
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetRequired() bool {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Required
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetRole() string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Role
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetStatus() *enums.WorkflowAssignmentStatus {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return &t.Status
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetTags() []string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Tags
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment) GetWorkflowInstanceID() string {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.WorkflowInstanceID
-}
-
-type CreateWorkflowAssignment_CreateWorkflowAssignment struct {
-	WorkflowAssignment CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment "json:\"workflowAssignment\" graphql:\"workflowAssignment\""
-}
-
-func (t *CreateWorkflowAssignment_CreateWorkflowAssignment) GetWorkflowAssignment() *CreateWorkflowAssignment_CreateWorkflowAssignment_WorkflowAssignment {
-	if t == nil {
-		t = &CreateWorkflowAssignment_CreateWorkflowAssignment{}
-	}
-	return &t.WorkflowAssignment
-}
-
-type DeleteWorkflowAssignment_DeleteWorkflowAssignment struct {
-	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
-}
-
-func (t *DeleteWorkflowAssignment_DeleteWorkflowAssignment) GetDeletedID() string {
-	if t == nil {
-		t = &DeleteWorkflowAssignment_DeleteWorkflowAssignment{}
-	}
-	return t.DeletedID
-}
-
 type GetAllWorkflowAssignments_WorkflowAssignments_PageInfo struct {
 	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
 	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
@@ -79927,483 +79457,6 @@ func (t *GetWorkflowAssignments_WorkflowAssignments) GetTotalCount() int64 {
 	return t.TotalCount
 }
 
-type UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment struct {
-	ActorGroupID       *string                        "json:\"actorGroupID,omitempty\" graphql:\"actorGroupID\""
-	ActorUserID        *string                        "json:\"actorUserID,omitempty\" graphql:\"actorUserID\""
-	AssignmentKey      string                         "json:\"assignmentKey\" graphql:\"assignmentKey\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DecidedAt          *time.Time                     "json:\"decidedAt,omitempty\" graphql:\"decidedAt\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	Label              *string                        "json:\"label,omitempty\" graphql:\"label\""
-	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Notes              *string                        "json:\"notes,omitempty\" graphql:\"notes\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Required           bool                           "json:\"required\" graphql:\"required\""
-	Role               string                         "json:\"role\" graphql:\"role\""
-	Status             enums.WorkflowAssignmentStatus "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowInstanceID string                         "json:\"workflowInstanceID\" graphql:\"workflowInstanceID\""
-}
-
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetActorGroupID() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.ActorGroupID
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetActorUserID() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.ActorUserID
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetAssignmentKey() string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.AssignmentKey
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetDecidedAt() *time.Time {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.DecidedAt
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetDisplayID() string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.DisplayID
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetID() string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.ID
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetLabel() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Label
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetMetadata() map[string]any {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Metadata
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetNotes() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Notes
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetRequired() bool {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Required
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetRole() string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Role
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetStatus() *enums.WorkflowAssignmentStatus {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return &t.Status
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetTags() []string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.Tags
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.UpdatedBy
-}
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment) GetWorkflowInstanceID() string {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment{}
-	}
-	return t.WorkflowInstanceID
-}
-
-type UpdateWorkflowAssignment_UpdateWorkflowAssignment struct {
-	WorkflowAssignment UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment "json:\"workflowAssignment\" graphql:\"workflowAssignment\""
-}
-
-func (t *UpdateWorkflowAssignment_UpdateWorkflowAssignment) GetWorkflowAssignment() *UpdateWorkflowAssignment_UpdateWorkflowAssignment_WorkflowAssignment {
-	if t == nil {
-		t = &UpdateWorkflowAssignment_UpdateWorkflowAssignment{}
-	}
-	return &t.WorkflowAssignment
-}
-
-type CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets struct {
-	CreatedAt            *time.Time               "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                  "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DisplayID            string                   "json:\"displayID\" graphql:\"displayID\""
-	ID                   string                   "json:\"id\" graphql:\"id\""
-	OwnerID              *string                  "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	ResolverKey          *string                  "json:\"resolverKey,omitempty\" graphql:\"resolverKey\""
-	Tags                 []string                 "json:\"tags,omitempty\" graphql:\"tags\""
-	TargetGroupID        *string                  "json:\"targetGroupID,omitempty\" graphql:\"targetGroupID\""
-	TargetType           enums.WorkflowTargetType "json:\"targetType\" graphql:\"targetType\""
-	TargetUserID         *string                  "json:\"targetUserID,omitempty\" graphql:\"targetUserID\""
-	UpdatedAt            *time.Time               "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                  "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowAssignmentID string                   "json:\"workflowAssignmentID\" graphql:\"workflowAssignmentID\""
-}
-
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetDisplayID() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.DisplayID
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetID() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.ID
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetResolverKey() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.ResolverKey
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetTags() []string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.Tags
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetTargetGroupID() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.TargetGroupID
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetTargetType() *enums.WorkflowTargetType {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return &t.TargetType
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetTargetUserID() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.TargetUserID
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetWorkflowAssignmentID() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.WorkflowAssignmentID
-}
-
-type CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget struct {
-	WorkflowAssignmentTargets []*CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets "json:\"workflowAssignmentTargets,omitempty\" graphql:\"workflowAssignmentTargets\""
-}
-
-func (t *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget) GetWorkflowAssignmentTargets() []*CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget_WorkflowAssignmentTargets {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget{}
-	}
-	return t.WorkflowAssignmentTargets
-}
-
-type CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets struct {
-	CreatedAt            *time.Time               "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                  "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DisplayID            string                   "json:\"displayID\" graphql:\"displayID\""
-	ID                   string                   "json:\"id\" graphql:\"id\""
-	OwnerID              *string                  "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	ResolverKey          *string                  "json:\"resolverKey,omitempty\" graphql:\"resolverKey\""
-	Tags                 []string                 "json:\"tags,omitempty\" graphql:\"tags\""
-	TargetGroupID        *string                  "json:\"targetGroupID,omitempty\" graphql:\"targetGroupID\""
-	TargetType           enums.WorkflowTargetType "json:\"targetType\" graphql:\"targetType\""
-	TargetUserID         *string                  "json:\"targetUserID,omitempty\" graphql:\"targetUserID\""
-	UpdatedAt            *time.Time               "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                  "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowAssignmentID string                   "json:\"workflowAssignmentID\" graphql:\"workflowAssignmentID\""
-}
-
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetDisplayID() string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.DisplayID
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetID() string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.ID
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetResolverKey() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.ResolverKey
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetTags() []string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.Tags
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetTargetGroupID() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.TargetGroupID
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetTargetType() *enums.WorkflowTargetType {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return &t.TargetType
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetTargetUserID() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.TargetUserID
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets) GetWorkflowAssignmentID() string {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets{}
-	}
-	return t.WorkflowAssignmentID
-}
-
-type CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget struct {
-	WorkflowAssignmentTargets []*CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets "json:\"workflowAssignmentTargets,omitempty\" graphql:\"workflowAssignmentTargets\""
-}
-
-func (t *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget) GetWorkflowAssignmentTargets() []*CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget_WorkflowAssignmentTargets {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget{}
-	}
-	return t.WorkflowAssignmentTargets
-}
-
-type CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget struct {
-	CreatedAt            *time.Time               "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                  "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DisplayID            string                   "json:\"displayID\" graphql:\"displayID\""
-	ID                   string                   "json:\"id\" graphql:\"id\""
-	OwnerID              *string                  "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	ResolverKey          *string                  "json:\"resolverKey,omitempty\" graphql:\"resolverKey\""
-	Tags                 []string                 "json:\"tags,omitempty\" graphql:\"tags\""
-	TargetGroupID        *string                  "json:\"targetGroupID,omitempty\" graphql:\"targetGroupID\""
-	TargetType           enums.WorkflowTargetType "json:\"targetType\" graphql:\"targetType\""
-	TargetUserID         *string                  "json:\"targetUserID,omitempty\" graphql:\"targetUserID\""
-	UpdatedAt            *time.Time               "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                  "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowAssignmentID string                   "json:\"workflowAssignmentID\" graphql:\"workflowAssignmentID\""
-}
-
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetDisplayID() string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.DisplayID
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetID() string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.ID
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.OwnerID
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetResolverKey() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.ResolverKey
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetTags() []string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.Tags
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetTargetGroupID() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.TargetGroupID
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetTargetType() *enums.WorkflowTargetType {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return &t.TargetType
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetTargetUserID() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.TargetUserID
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetWorkflowAssignmentID() string {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.WorkflowAssignmentID
-}
-
-type CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget struct {
-	WorkflowAssignmentTarget CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget "json:\"workflowAssignmentTarget\" graphql:\"workflowAssignmentTarget\""
-}
-
-func (t *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget) GetWorkflowAssignmentTarget() *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget_WorkflowAssignmentTarget {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget{}
-	}
-	return &t.WorkflowAssignmentTarget
-}
-
-type DeleteWorkflowAssignmentTarget_DeleteWorkflowAssignmentTarget struct {
-	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
-}
-
-func (t *DeleteWorkflowAssignmentTarget_DeleteWorkflowAssignmentTarget) GetDeletedID() string {
-	if t == nil {
-		t = &DeleteWorkflowAssignmentTarget_DeleteWorkflowAssignmentTarget{}
-	}
-	return t.DeletedID
-}
-
 type GetAllWorkflowAssignmentTargets_WorkflowAssignmentTargets_PageInfo struct {
 	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
 	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
@@ -80823,112 +79876,6 @@ func (t *GetWorkflowAssignmentTargets_WorkflowAssignmentTargets) GetTotalCount()
 		t = &GetWorkflowAssignmentTargets_WorkflowAssignmentTargets{}
 	}
 	return t.TotalCount
-}
-
-type UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget struct {
-	CreatedAt            *time.Time               "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                  "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DisplayID            string                   "json:\"displayID\" graphql:\"displayID\""
-	ID                   string                   "json:\"id\" graphql:\"id\""
-	OwnerID              *string                  "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	ResolverKey          *string                  "json:\"resolverKey,omitempty\" graphql:\"resolverKey\""
-	Tags                 []string                 "json:\"tags,omitempty\" graphql:\"tags\""
-	TargetGroupID        *string                  "json:\"targetGroupID,omitempty\" graphql:\"targetGroupID\""
-	TargetType           enums.WorkflowTargetType "json:\"targetType\" graphql:\"targetType\""
-	TargetUserID         *string                  "json:\"targetUserID,omitempty\" graphql:\"targetUserID\""
-	UpdatedAt            *time.Time               "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                  "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowAssignmentID string                   "json:\"workflowAssignmentID\" graphql:\"workflowAssignmentID\""
-}
-
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetDisplayID() string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.DisplayID
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetID() string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.ID
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetResolverKey() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.ResolverKey
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetTags() []string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.Tags
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetTargetGroupID() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.TargetGroupID
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetTargetType() *enums.WorkflowTargetType {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return &t.TargetType
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetTargetUserID() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.TargetUserID
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.UpdatedBy
-}
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget) GetWorkflowAssignmentID() string {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget{}
-	}
-	return t.WorkflowAssignmentID
-}
-
-type UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget struct {
-	WorkflowAssignmentTarget UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget "json:\"workflowAssignmentTarget\" graphql:\"workflowAssignmentTarget\""
-}
-
-func (t *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget) GetWorkflowAssignmentTarget() *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget_WorkflowAssignmentTarget {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget{}
-	}
-	return &t.WorkflowAssignmentTarget
 }
 
 type CreateBulkCSVWorkflowDefinition_CreateBulkCSVWorkflowDefinition_WorkflowDefinitions struct {
@@ -83035,335 +81982,6 @@ func (t *UpdateWorkflowEvent_UpdateWorkflowEvent) GetWorkflowEvent() *UpdateWork
 	return &t.WorkflowEvent
 }
 
-type CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances struct {
-	Context              *models.WorkflowInstanceContext    "json:\"context,omitempty\" graphql:\"context\""
-	CreatedAt            *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionSnapshot   *models.WorkflowDefinitionDocument "json:\"definitionSnapshot,omitempty\" graphql:\"definitionSnapshot\""
-	DisplayID            string                             "json:\"displayID\" graphql:\"displayID\""
-	ID                   string                             "json:\"id\" graphql:\"id\""
-	LastEvaluatedAt      *time.Time                         "json:\"lastEvaluatedAt,omitempty\" graphql:\"lastEvaluatedAt\""
-	OwnerID              *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	State                enums.WorkflowInstanceState        "json:\"state\" graphql:\"state\""
-	Tags                 []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt            *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowDefinitionID string                             "json:\"workflowDefinitionID\" graphql:\"workflowDefinitionID\""
-}
-
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetContext() *models.WorkflowInstanceContext {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.Context
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetDefinitionSnapshot() *models.WorkflowDefinitionDocument {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.DefinitionSnapshot
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetDisplayID() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.DisplayID
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetID() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.ID
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetLastEvaluatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.LastEvaluatedAt
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetState() *enums.WorkflowInstanceState {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return &t.State
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetTags() []string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.Tags
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances) GetWorkflowDefinitionID() string {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances{}
-	}
-	return t.WorkflowDefinitionID
-}
-
-type CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance struct {
-	WorkflowInstances []*CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances "json:\"workflowInstances,omitempty\" graphql:\"workflowInstances\""
-}
-
-func (t *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance) GetWorkflowInstances() []*CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance_WorkflowInstances {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance{}
-	}
-	return t.WorkflowInstances
-}
-
-type CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances struct {
-	Context              *models.WorkflowInstanceContext    "json:\"context,omitempty\" graphql:\"context\""
-	CreatedAt            *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionSnapshot   *models.WorkflowDefinitionDocument "json:\"definitionSnapshot,omitempty\" graphql:\"definitionSnapshot\""
-	DisplayID            string                             "json:\"displayID\" graphql:\"displayID\""
-	ID                   string                             "json:\"id\" graphql:\"id\""
-	LastEvaluatedAt      *time.Time                         "json:\"lastEvaluatedAt,omitempty\" graphql:\"lastEvaluatedAt\""
-	OwnerID              *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	State                enums.WorkflowInstanceState        "json:\"state\" graphql:\"state\""
-	Tags                 []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt            *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowDefinitionID string                             "json:\"workflowDefinitionID\" graphql:\"workflowDefinitionID\""
-}
-
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetContext() *models.WorkflowInstanceContext {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.Context
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetDefinitionSnapshot() *models.WorkflowDefinitionDocument {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.DefinitionSnapshot
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetDisplayID() string {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.DisplayID
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetID() string {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.ID
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetLastEvaluatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.LastEvaluatedAt
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetState() *enums.WorkflowInstanceState {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return &t.State
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetTags() []string {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.Tags
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances) GetWorkflowDefinitionID() string {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances{}
-	}
-	return t.WorkflowDefinitionID
-}
-
-type CreateBulkWorkflowInstance_CreateBulkWorkflowInstance struct {
-	WorkflowInstances []*CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances "json:\"workflowInstances,omitempty\" graphql:\"workflowInstances\""
-}
-
-func (t *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance) GetWorkflowInstances() []*CreateBulkWorkflowInstance_CreateBulkWorkflowInstance_WorkflowInstances {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance_CreateBulkWorkflowInstance{}
-	}
-	return t.WorkflowInstances
-}
-
-type CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance struct {
-	Context              *models.WorkflowInstanceContext    "json:\"context,omitempty\" graphql:\"context\""
-	CreatedAt            *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionSnapshot   *models.WorkflowDefinitionDocument "json:\"definitionSnapshot,omitempty\" graphql:\"definitionSnapshot\""
-	DisplayID            string                             "json:\"displayID\" graphql:\"displayID\""
-	ID                   string                             "json:\"id\" graphql:\"id\""
-	LastEvaluatedAt      *time.Time                         "json:\"lastEvaluatedAt,omitempty\" graphql:\"lastEvaluatedAt\""
-	OwnerID              *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	State                enums.WorkflowInstanceState        "json:\"state\" graphql:\"state\""
-	Tags                 []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt            *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowDefinitionID string                             "json:\"workflowDefinitionID\" graphql:\"workflowDefinitionID\""
-}
-
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetContext() *models.WorkflowInstanceContext {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.Context
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetDefinitionSnapshot() *models.WorkflowDefinitionDocument {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.DefinitionSnapshot
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetDisplayID() string {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.DisplayID
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetID() string {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.ID
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetLastEvaluatedAt() *time.Time {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.LastEvaluatedAt
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.OwnerID
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetState() *enums.WorkflowInstanceState {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return &t.State
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetTags() []string {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.Tags
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance) GetWorkflowDefinitionID() string {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.WorkflowDefinitionID
-}
-
-type CreateWorkflowInstance_CreateWorkflowInstance struct {
-	WorkflowInstance CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance "json:\"workflowInstance\" graphql:\"workflowInstance\""
-}
-
-func (t *CreateWorkflowInstance_CreateWorkflowInstance) GetWorkflowInstance() *CreateWorkflowInstance_CreateWorkflowInstance_WorkflowInstance {
-	if t == nil {
-		t = &CreateWorkflowInstance_CreateWorkflowInstance{}
-	}
-	return &t.WorkflowInstance
-}
-
-type DeleteWorkflowInstance_DeleteWorkflowInstance struct {
-	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
-}
-
-func (t *DeleteWorkflowInstance_DeleteWorkflowInstance) GetDeletedID() string {
-	if t == nil {
-		t = &DeleteWorkflowInstance_DeleteWorkflowInstance{}
-	}
-	return t.DeletedID
-}
-
 type GetAllWorkflowInstances_WorkflowInstances_PageInfo struct {
 	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
 	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
@@ -83783,112 +82401,6 @@ func (t *GetWorkflowInstances_WorkflowInstances) GetTotalCount() int64 {
 		t = &GetWorkflowInstances_WorkflowInstances{}
 	}
 	return t.TotalCount
-}
-
-type UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance struct {
-	Context              *models.WorkflowInstanceContext    "json:\"context,omitempty\" graphql:\"context\""
-	CreatedAt            *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DefinitionSnapshot   *models.WorkflowDefinitionDocument "json:\"definitionSnapshot,omitempty\" graphql:\"definitionSnapshot\""
-	DisplayID            string                             "json:\"displayID\" graphql:\"displayID\""
-	ID                   string                             "json:\"id\" graphql:\"id\""
-	LastEvaluatedAt      *time.Time                         "json:\"lastEvaluatedAt,omitempty\" graphql:\"lastEvaluatedAt\""
-	OwnerID              *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	State                enums.WorkflowInstanceState        "json:\"state\" graphql:\"state\""
-	Tags                 []string                           "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt            *time.Time                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	WorkflowDefinitionID string                             "json:\"workflowDefinitionID\" graphql:\"workflowDefinitionID\""
-}
-
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetContext() *models.WorkflowInstanceContext {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.Context
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetDefinitionSnapshot() *models.WorkflowDefinitionDocument {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.DefinitionSnapshot
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetDisplayID() string {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.DisplayID
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetID() string {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.ID
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetLastEvaluatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.LastEvaluatedAt
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetState() *enums.WorkflowInstanceState {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return &t.State
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetTags() []string {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.Tags
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.UpdatedBy
-}
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance) GetWorkflowDefinitionID() string {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance{}
-	}
-	return t.WorkflowDefinitionID
-}
-
-type UpdateWorkflowInstance_UpdateWorkflowInstance struct {
-	WorkflowInstance UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance "json:\"workflowInstance\" graphql:\"workflowInstance\""
-}
-
-func (t *UpdateWorkflowInstance_UpdateWorkflowInstance) GetWorkflowInstance() *UpdateWorkflowInstance_UpdateWorkflowInstance_WorkflowInstance {
-	if t == nil {
-		t = &UpdateWorkflowInstance_UpdateWorkflowInstance{}
-	}
-	return &t.WorkflowInstance
 }
 
 type CreateBulkCSVWorkflowObjectRef_CreateBulkCSVWorkflowObjectRef_WorkflowObjectRefs struct {
@@ -90797,50 +89309,6 @@ func (t *GetAllWebauthns) GetWebauthns() *GetAllWebauthns_Webauthns {
 	return &t.Webauthns
 }
 
-type CreateBulkCSVWorkflowAssignment struct {
-	CreateBulkCSVWorkflowAssignment CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment "json:\"createBulkCSVWorkflowAssignment\" graphql:\"createBulkCSVWorkflowAssignment\""
-}
-
-func (t *CreateBulkCSVWorkflowAssignment) GetCreateBulkCSVWorkflowAssignment() *CreateBulkCSVWorkflowAssignment_CreateBulkCSVWorkflowAssignment {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignment{}
-	}
-	return &t.CreateBulkCSVWorkflowAssignment
-}
-
-type CreateBulkWorkflowAssignment struct {
-	CreateBulkWorkflowAssignment CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment "json:\"createBulkWorkflowAssignment\" graphql:\"createBulkWorkflowAssignment\""
-}
-
-func (t *CreateBulkWorkflowAssignment) GetCreateBulkWorkflowAssignment() *CreateBulkWorkflowAssignment_CreateBulkWorkflowAssignment {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignment{}
-	}
-	return &t.CreateBulkWorkflowAssignment
-}
-
-type CreateWorkflowAssignment struct {
-	CreateWorkflowAssignment CreateWorkflowAssignment_CreateWorkflowAssignment "json:\"createWorkflowAssignment\" graphql:\"createWorkflowAssignment\""
-}
-
-func (t *CreateWorkflowAssignment) GetCreateWorkflowAssignment() *CreateWorkflowAssignment_CreateWorkflowAssignment {
-	if t == nil {
-		t = &CreateWorkflowAssignment{}
-	}
-	return &t.CreateWorkflowAssignment
-}
-
-type DeleteWorkflowAssignment struct {
-	DeleteWorkflowAssignment DeleteWorkflowAssignment_DeleteWorkflowAssignment "json:\"deleteWorkflowAssignment\" graphql:\"deleteWorkflowAssignment\""
-}
-
-func (t *DeleteWorkflowAssignment) GetDeleteWorkflowAssignment() *DeleteWorkflowAssignment_DeleteWorkflowAssignment {
-	if t == nil {
-		t = &DeleteWorkflowAssignment{}
-	}
-	return &t.DeleteWorkflowAssignment
-}
-
 type GetAllWorkflowAssignments struct {
 	WorkflowAssignments GetAllWorkflowAssignments_WorkflowAssignments "json:\"workflowAssignments\" graphql:\"workflowAssignments\""
 }
@@ -90874,61 +89342,6 @@ func (t *GetWorkflowAssignments) GetWorkflowAssignments() *GetWorkflowAssignment
 	return &t.WorkflowAssignments
 }
 
-type UpdateWorkflowAssignment struct {
-	UpdateWorkflowAssignment UpdateWorkflowAssignment_UpdateWorkflowAssignment "json:\"updateWorkflowAssignment\" graphql:\"updateWorkflowAssignment\""
-}
-
-func (t *UpdateWorkflowAssignment) GetUpdateWorkflowAssignment() *UpdateWorkflowAssignment_UpdateWorkflowAssignment {
-	if t == nil {
-		t = &UpdateWorkflowAssignment{}
-	}
-	return &t.UpdateWorkflowAssignment
-}
-
-type CreateBulkCSVWorkflowAssignmentTarget struct {
-	CreateBulkCSVWorkflowAssignmentTarget CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget "json:\"createBulkCSVWorkflowAssignmentTarget\" graphql:\"createBulkCSVWorkflowAssignmentTarget\""
-}
-
-func (t *CreateBulkCSVWorkflowAssignmentTarget) GetCreateBulkCSVWorkflowAssignmentTarget() *CreateBulkCSVWorkflowAssignmentTarget_CreateBulkCSVWorkflowAssignmentTarget {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowAssignmentTarget{}
-	}
-	return &t.CreateBulkCSVWorkflowAssignmentTarget
-}
-
-type CreateBulkWorkflowAssignmentTarget struct {
-	CreateBulkWorkflowAssignmentTarget CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget "json:\"createBulkWorkflowAssignmentTarget\" graphql:\"createBulkWorkflowAssignmentTarget\""
-}
-
-func (t *CreateBulkWorkflowAssignmentTarget) GetCreateBulkWorkflowAssignmentTarget() *CreateBulkWorkflowAssignmentTarget_CreateBulkWorkflowAssignmentTarget {
-	if t == nil {
-		t = &CreateBulkWorkflowAssignmentTarget{}
-	}
-	return &t.CreateBulkWorkflowAssignmentTarget
-}
-
-type CreateWorkflowAssignmentTarget struct {
-	CreateWorkflowAssignmentTarget CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget "json:\"createWorkflowAssignmentTarget\" graphql:\"createWorkflowAssignmentTarget\""
-}
-
-func (t *CreateWorkflowAssignmentTarget) GetCreateWorkflowAssignmentTarget() *CreateWorkflowAssignmentTarget_CreateWorkflowAssignmentTarget {
-	if t == nil {
-		t = &CreateWorkflowAssignmentTarget{}
-	}
-	return &t.CreateWorkflowAssignmentTarget
-}
-
-type DeleteWorkflowAssignmentTarget struct {
-	DeleteWorkflowAssignmentTarget DeleteWorkflowAssignmentTarget_DeleteWorkflowAssignmentTarget "json:\"deleteWorkflowAssignmentTarget\" graphql:\"deleteWorkflowAssignmentTarget\""
-}
-
-func (t *DeleteWorkflowAssignmentTarget) GetDeleteWorkflowAssignmentTarget() *DeleteWorkflowAssignmentTarget_DeleteWorkflowAssignmentTarget {
-	if t == nil {
-		t = &DeleteWorkflowAssignmentTarget{}
-	}
-	return &t.DeleteWorkflowAssignmentTarget
-}
-
 type GetAllWorkflowAssignmentTargets struct {
 	WorkflowAssignmentTargets GetAllWorkflowAssignmentTargets_WorkflowAssignmentTargets "json:\"workflowAssignmentTargets\" graphql:\"workflowAssignmentTargets\""
 }
@@ -90960,17 +89373,6 @@ func (t *GetWorkflowAssignmentTargets) GetWorkflowAssignmentTargets() *GetWorkfl
 		t = &GetWorkflowAssignmentTargets{}
 	}
 	return &t.WorkflowAssignmentTargets
-}
-
-type UpdateWorkflowAssignmentTarget struct {
-	UpdateWorkflowAssignmentTarget UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget "json:\"updateWorkflowAssignmentTarget\" graphql:\"updateWorkflowAssignmentTarget\""
-}
-
-func (t *UpdateWorkflowAssignmentTarget) GetUpdateWorkflowAssignmentTarget() *UpdateWorkflowAssignmentTarget_UpdateWorkflowAssignmentTarget {
-	if t == nil {
-		t = &UpdateWorkflowAssignmentTarget{}
-	}
-	return &t.UpdateWorkflowAssignmentTarget
 }
 
 type CreateBulkCSVWorkflowDefinition struct {
@@ -91149,50 +89551,6 @@ func (t *UpdateWorkflowEvent) GetUpdateWorkflowEvent() *UpdateWorkflowEvent_Upda
 	return &t.UpdateWorkflowEvent
 }
 
-type CreateBulkCSVWorkflowInstance struct {
-	CreateBulkCSVWorkflowInstance CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance "json:\"createBulkCSVWorkflowInstance\" graphql:\"createBulkCSVWorkflowInstance\""
-}
-
-func (t *CreateBulkCSVWorkflowInstance) GetCreateBulkCSVWorkflowInstance() *CreateBulkCSVWorkflowInstance_CreateBulkCSVWorkflowInstance {
-	if t == nil {
-		t = &CreateBulkCSVWorkflowInstance{}
-	}
-	return &t.CreateBulkCSVWorkflowInstance
-}
-
-type CreateBulkWorkflowInstance struct {
-	CreateBulkWorkflowInstance CreateBulkWorkflowInstance_CreateBulkWorkflowInstance "json:\"createBulkWorkflowInstance\" graphql:\"createBulkWorkflowInstance\""
-}
-
-func (t *CreateBulkWorkflowInstance) GetCreateBulkWorkflowInstance() *CreateBulkWorkflowInstance_CreateBulkWorkflowInstance {
-	if t == nil {
-		t = &CreateBulkWorkflowInstance{}
-	}
-	return &t.CreateBulkWorkflowInstance
-}
-
-type CreateWorkflowInstance struct {
-	CreateWorkflowInstance CreateWorkflowInstance_CreateWorkflowInstance "json:\"createWorkflowInstance\" graphql:\"createWorkflowInstance\""
-}
-
-func (t *CreateWorkflowInstance) GetCreateWorkflowInstance() *CreateWorkflowInstance_CreateWorkflowInstance {
-	if t == nil {
-		t = &CreateWorkflowInstance{}
-	}
-	return &t.CreateWorkflowInstance
-}
-
-type DeleteWorkflowInstance struct {
-	DeleteWorkflowInstance DeleteWorkflowInstance_DeleteWorkflowInstance "json:\"deleteWorkflowInstance\" graphql:\"deleteWorkflowInstance\""
-}
-
-func (t *DeleteWorkflowInstance) GetDeleteWorkflowInstance() *DeleteWorkflowInstance_DeleteWorkflowInstance {
-	if t == nil {
-		t = &DeleteWorkflowInstance{}
-	}
-	return &t.DeleteWorkflowInstance
-}
-
 type GetAllWorkflowInstances struct {
 	WorkflowInstances GetAllWorkflowInstances_WorkflowInstances "json:\"workflowInstances\" graphql:\"workflowInstances\""
 }
@@ -91224,17 +89582,6 @@ func (t *GetWorkflowInstances) GetWorkflowInstances() *GetWorkflowInstances_Work
 		t = &GetWorkflowInstances{}
 	}
 	return &t.WorkflowInstances
-}
-
-type UpdateWorkflowInstance struct {
-	UpdateWorkflowInstance UpdateWorkflowInstance_UpdateWorkflowInstance "json:\"updateWorkflowInstance\" graphql:\"updateWorkflowInstance\""
-}
-
-func (t *UpdateWorkflowInstance) GetUpdateWorkflowInstance() *UpdateWorkflowInstance_UpdateWorkflowInstance {
-	if t == nil {
-		t = &UpdateWorkflowInstance{}
-	}
-	return &t.UpdateWorkflowInstance
 }
 
 type CreateBulkCSVWorkflowObjectRef struct {
@@ -113618,7 +111965,7 @@ const CreateTrustCenterDocDocument = `mutation CreateTrustCenterDoc ($input: Cre
 			tags
 			trustCenterID
 			title
-			category
+			trustCenterDocKindName
 			fileID
 			visibility
 			standardID
@@ -113705,7 +112052,7 @@ const GetAllTrustCenterDocsDocument = `query GetAllTrustCenterDocs ($first: Int,
 				tags
 				trustCenterID
 				title
-				category
+				trustCenterDocKindName
 				fileID
 				visibility
 				file {
@@ -113757,7 +112104,7 @@ const GetTrustCenterDocByIDDocument = `query GetTrustCenterDocByID ($trustCenter
 		tags
 		trustCenterID
 		title
-		category
+		trustCenterDocKindName
 		fileID
 		visibility
 		standardID
@@ -113818,7 +112165,7 @@ const GetTrustCenterDocsDocument = `query GetTrustCenterDocs ($first: Int, $last
 				tags
 				trustCenterID
 				title
-				category
+				trustCenterDocKindName
 				fileID
 				visibility
 				file {
@@ -113872,7 +112219,7 @@ const UpdateTrustCenterDocDocument = `mutation UpdateTrustCenterDoc ($updateTrus
 			tags
 			trustCenterID
 			title
-			category
+			trustCenterDocKindName
 			fileID
 			visibility
 			standardID
@@ -116134,162 +114481,6 @@ func (c *Client) GetAllWebauthns(ctx context.Context, first *int64, last *int64,
 	return &res, nil
 }
 
-const CreateBulkCSVWorkflowAssignmentDocument = `mutation CreateBulkCSVWorkflowAssignment ($input: Upload!) {
-	createBulkCSVWorkflowAssignment(input: $input) {
-		workflowAssignments {
-			actorGroupID
-			actorUserID
-			assignmentKey
-			createdAt
-			createdBy
-			decidedAt
-			displayID
-			id
-			label
-			metadata
-			notes
-			ownerID
-			required
-			role
-			status
-			tags
-			updatedAt
-			updatedBy
-			workflowInstanceID
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkCSVWorkflowAssignment(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVWorkflowAssignment, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkCSVWorkflowAssignment
-	if err := c.Client.Post(ctx, "CreateBulkCSVWorkflowAssignment", CreateBulkCSVWorkflowAssignmentDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateBulkWorkflowAssignmentDocument = `mutation CreateBulkWorkflowAssignment ($input: [CreateWorkflowAssignmentInput!]) {
-	createBulkWorkflowAssignment(input: $input) {
-		workflowAssignments {
-			actorGroupID
-			actorUserID
-			assignmentKey
-			createdAt
-			createdBy
-			decidedAt
-			displayID
-			id
-			label
-			metadata
-			notes
-			ownerID
-			required
-			role
-			status
-			tags
-			updatedAt
-			updatedBy
-			workflowInstanceID
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkWorkflowAssignment(ctx context.Context, input []*CreateWorkflowAssignmentInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkWorkflowAssignment, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkWorkflowAssignment
-	if err := c.Client.Post(ctx, "CreateBulkWorkflowAssignment", CreateBulkWorkflowAssignmentDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateWorkflowAssignmentDocument = `mutation CreateWorkflowAssignment ($input: CreateWorkflowAssignmentInput!) {
-	createWorkflowAssignment(input: $input) {
-		workflowAssignment {
-			actorGroupID
-			actorUserID
-			assignmentKey
-			createdAt
-			createdBy
-			decidedAt
-			displayID
-			id
-			label
-			metadata
-			notes
-			ownerID
-			required
-			role
-			status
-			tags
-			updatedAt
-			updatedBy
-			workflowInstanceID
-		}
-	}
-}
-`
-
-func (c *Client) CreateWorkflowAssignment(ctx context.Context, input CreateWorkflowAssignmentInput, interceptors ...clientv2.RequestInterceptor) (*CreateWorkflowAssignment, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateWorkflowAssignment
-	if err := c.Client.Post(ctx, "CreateWorkflowAssignment", CreateWorkflowAssignmentDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const DeleteWorkflowAssignmentDocument = `mutation DeleteWorkflowAssignment ($deleteWorkflowAssignmentId: ID!) {
-	deleteWorkflowAssignment(id: $deleteWorkflowAssignmentId) {
-		deletedID
-	}
-}
-`
-
-func (c *Client) DeleteWorkflowAssignment(ctx context.Context, deleteWorkflowAssignmentID string, interceptors ...clientv2.RequestInterceptor) (*DeleteWorkflowAssignment, error) {
-	vars := map[string]any{
-		"deleteWorkflowAssignmentId": deleteWorkflowAssignmentID,
-	}
-
-	var res DeleteWorkflowAssignment
-	if err := c.Client.Post(ctx, "DeleteWorkflowAssignment", DeleteWorkflowAssignmentDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const GetAllWorkflowAssignmentsDocument = `query GetAllWorkflowAssignments ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowAssignmentOrder!]) {
 	workflowAssignments(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
 		totalCount
@@ -116447,189 +114638,6 @@ func (c *Client) GetWorkflowAssignments(ctx context.Context, first *int64, last 
 	return &res, nil
 }
 
-const UpdateWorkflowAssignmentDocument = `mutation UpdateWorkflowAssignment ($updateWorkflowAssignmentId: ID!, $input: UpdateWorkflowAssignmentInput!) {
-	updateWorkflowAssignment(id: $updateWorkflowAssignmentId, input: $input) {
-		workflowAssignment {
-			actorGroupID
-			actorUserID
-			assignmentKey
-			createdAt
-			createdBy
-			decidedAt
-			displayID
-			id
-			label
-			metadata
-			notes
-			ownerID
-			required
-			role
-			status
-			tags
-			updatedAt
-			updatedBy
-			workflowInstanceID
-		}
-	}
-}
-`
-
-func (c *Client) UpdateWorkflowAssignment(ctx context.Context, updateWorkflowAssignmentID string, input UpdateWorkflowAssignmentInput, interceptors ...clientv2.RequestInterceptor) (*UpdateWorkflowAssignment, error) {
-	vars := map[string]any{
-		"updateWorkflowAssignmentId": updateWorkflowAssignmentID,
-		"input":                      input,
-	}
-
-	var res UpdateWorkflowAssignment
-	if err := c.Client.Post(ctx, "UpdateWorkflowAssignment", UpdateWorkflowAssignmentDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateBulkCSVWorkflowAssignmentTargetDocument = `mutation CreateBulkCSVWorkflowAssignmentTarget ($input: Upload!) {
-	createBulkCSVWorkflowAssignmentTarget(input: $input) {
-		workflowAssignmentTargets {
-			createdAt
-			createdBy
-			displayID
-			id
-			ownerID
-			resolverKey
-			tags
-			targetGroupID
-			targetType
-			targetUserID
-			updatedAt
-			updatedBy
-			workflowAssignmentID
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkCSVWorkflowAssignmentTarget(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVWorkflowAssignmentTarget, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkCSVWorkflowAssignmentTarget
-	if err := c.Client.Post(ctx, "CreateBulkCSVWorkflowAssignmentTarget", CreateBulkCSVWorkflowAssignmentTargetDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateBulkWorkflowAssignmentTargetDocument = `mutation CreateBulkWorkflowAssignmentTarget ($input: [CreateWorkflowAssignmentTargetInput!]) {
-	createBulkWorkflowAssignmentTarget(input: $input) {
-		workflowAssignmentTargets {
-			createdAt
-			createdBy
-			displayID
-			id
-			ownerID
-			resolverKey
-			tags
-			targetGroupID
-			targetType
-			targetUserID
-			updatedAt
-			updatedBy
-			workflowAssignmentID
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkWorkflowAssignmentTarget(ctx context.Context, input []*CreateWorkflowAssignmentTargetInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkWorkflowAssignmentTarget, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkWorkflowAssignmentTarget
-	if err := c.Client.Post(ctx, "CreateBulkWorkflowAssignmentTarget", CreateBulkWorkflowAssignmentTargetDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateWorkflowAssignmentTargetDocument = `mutation CreateWorkflowAssignmentTarget ($input: CreateWorkflowAssignmentTargetInput!) {
-	createWorkflowAssignmentTarget(input: $input) {
-		workflowAssignmentTarget {
-			createdAt
-			createdBy
-			displayID
-			id
-			ownerID
-			resolverKey
-			tags
-			targetGroupID
-			targetType
-			targetUserID
-			updatedAt
-			updatedBy
-			workflowAssignmentID
-		}
-	}
-}
-`
-
-func (c *Client) CreateWorkflowAssignmentTarget(ctx context.Context, input CreateWorkflowAssignmentTargetInput, interceptors ...clientv2.RequestInterceptor) (*CreateWorkflowAssignmentTarget, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateWorkflowAssignmentTarget
-	if err := c.Client.Post(ctx, "CreateWorkflowAssignmentTarget", CreateWorkflowAssignmentTargetDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const DeleteWorkflowAssignmentTargetDocument = `mutation DeleteWorkflowAssignmentTarget ($deleteWorkflowAssignmentTargetId: ID!) {
-	deleteWorkflowAssignmentTarget(id: $deleteWorkflowAssignmentTargetId) {
-		deletedID
-	}
-}
-`
-
-func (c *Client) DeleteWorkflowAssignmentTarget(ctx context.Context, deleteWorkflowAssignmentTargetID string, interceptors ...clientv2.RequestInterceptor) (*DeleteWorkflowAssignmentTarget, error) {
-	vars := map[string]any{
-		"deleteWorkflowAssignmentTargetId": deleteWorkflowAssignmentTargetID,
-	}
-
-	var res DeleteWorkflowAssignmentTarget
-	if err := c.Client.Post(ctx, "DeleteWorkflowAssignmentTarget", DeleteWorkflowAssignmentTargetDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const GetAllWorkflowAssignmentTargetsDocument = `query GetAllWorkflowAssignmentTargets ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowAssignmentTargetOrder!]) {
 	workflowAssignmentTargets(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
 		totalCount
@@ -116759,45 +114767,6 @@ func (c *Client) GetWorkflowAssignmentTargets(ctx context.Context, first *int64,
 
 	var res GetWorkflowAssignmentTargets
 	if err := c.Client.Post(ctx, "GetWorkflowAssignmentTargets", GetWorkflowAssignmentTargetsDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateWorkflowAssignmentTargetDocument = `mutation UpdateWorkflowAssignmentTarget ($updateWorkflowAssignmentTargetId: ID!, $input: UpdateWorkflowAssignmentTargetInput!) {
-	updateWorkflowAssignmentTarget(id: $updateWorkflowAssignmentTargetId, input: $input) {
-		workflowAssignmentTarget {
-			createdAt
-			createdBy
-			displayID
-			id
-			ownerID
-			resolverKey
-			tags
-			targetGroupID
-			targetType
-			targetUserID
-			updatedAt
-			updatedBy
-			workflowAssignmentID
-		}
-	}
-}
-`
-
-func (c *Client) UpdateWorkflowAssignmentTarget(ctx context.Context, updateWorkflowAssignmentTargetID string, input UpdateWorkflowAssignmentTargetInput, interceptors ...clientv2.RequestInterceptor) (*UpdateWorkflowAssignmentTarget, error) {
-	vars := map[string]any{
-		"updateWorkflowAssignmentTargetId": updateWorkflowAssignmentTargetID,
-		"input":                            input,
-	}
-
-	var res UpdateWorkflowAssignmentTarget
-	if err := c.Client.Post(ctx, "UpdateWorkflowAssignmentTarget", UpdateWorkflowAssignmentTargetDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -117496,144 +115465,6 @@ func (c *Client) UpdateWorkflowEvent(ctx context.Context, updateWorkflowEventID 
 	return &res, nil
 }
 
-const CreateBulkCSVWorkflowInstanceDocument = `mutation CreateBulkCSVWorkflowInstance ($input: Upload!) {
-	createBulkCSVWorkflowInstance(input: $input) {
-		workflowInstances {
-			context
-			createdAt
-			createdBy
-			definitionSnapshot
-			displayID
-			id
-			lastEvaluatedAt
-			ownerID
-			state
-			tags
-			updatedAt
-			updatedBy
-			workflowDefinitionID
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkCSVWorkflowInstance(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVWorkflowInstance, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkCSVWorkflowInstance
-	if err := c.Client.Post(ctx, "CreateBulkCSVWorkflowInstance", CreateBulkCSVWorkflowInstanceDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateBulkWorkflowInstanceDocument = `mutation CreateBulkWorkflowInstance ($input: [CreateWorkflowInstanceInput!]) {
-	createBulkWorkflowInstance(input: $input) {
-		workflowInstances {
-			context
-			createdAt
-			createdBy
-			definitionSnapshot
-			displayID
-			id
-			lastEvaluatedAt
-			ownerID
-			state
-			tags
-			updatedAt
-			updatedBy
-			workflowDefinitionID
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkWorkflowInstance(ctx context.Context, input []*CreateWorkflowInstanceInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkWorkflowInstance, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkWorkflowInstance
-	if err := c.Client.Post(ctx, "CreateBulkWorkflowInstance", CreateBulkWorkflowInstanceDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateWorkflowInstanceDocument = `mutation CreateWorkflowInstance ($input: CreateWorkflowInstanceInput!) {
-	createWorkflowInstance(input: $input) {
-		workflowInstance {
-			context
-			createdAt
-			createdBy
-			definitionSnapshot
-			displayID
-			id
-			lastEvaluatedAt
-			ownerID
-			state
-			tags
-			updatedAt
-			updatedBy
-			workflowDefinitionID
-		}
-	}
-}
-`
-
-func (c *Client) CreateWorkflowInstance(ctx context.Context, input CreateWorkflowInstanceInput, interceptors ...clientv2.RequestInterceptor) (*CreateWorkflowInstance, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateWorkflowInstance
-	if err := c.Client.Post(ctx, "CreateWorkflowInstance", CreateWorkflowInstanceDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const DeleteWorkflowInstanceDocument = `mutation DeleteWorkflowInstance ($deleteWorkflowInstanceId: ID!) {
-	deleteWorkflowInstance(id: $deleteWorkflowInstanceId) {
-		deletedID
-	}
-}
-`
-
-func (c *Client) DeleteWorkflowInstance(ctx context.Context, deleteWorkflowInstanceID string, interceptors ...clientv2.RequestInterceptor) (*DeleteWorkflowInstance, error) {
-	vars := map[string]any{
-		"deleteWorkflowInstanceId": deleteWorkflowInstanceID,
-	}
-
-	var res DeleteWorkflowInstance
-	if err := c.Client.Post(ctx, "DeleteWorkflowInstance", DeleteWorkflowInstanceDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const GetAllWorkflowInstancesDocument = `query GetAllWorkflowInstances ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowInstanceOrder!]) {
 	workflowInstances(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
 		totalCount
@@ -117763,45 +115594,6 @@ func (c *Client) GetWorkflowInstances(ctx context.Context, first *int64, last *i
 
 	var res GetWorkflowInstances
 	if err := c.Client.Post(ctx, "GetWorkflowInstances", GetWorkflowInstancesDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateWorkflowInstanceDocument = `mutation UpdateWorkflowInstance ($updateWorkflowInstanceId: ID!, $input: UpdateWorkflowInstanceInput!) {
-	updateWorkflowInstance(id: $updateWorkflowInstanceId, input: $input) {
-		workflowInstance {
-			context
-			createdAt
-			createdBy
-			definitionSnapshot
-			displayID
-			id
-			lastEvaluatedAt
-			ownerID
-			state
-			tags
-			updatedAt
-			updatedBy
-			workflowDefinitionID
-		}
-	}
-}
-`
-
-func (c *Client) UpdateWorkflowInstance(ctx context.Context, updateWorkflowInstanceID string, input UpdateWorkflowInstanceInput, interceptors ...clientv2.RequestInterceptor) (*UpdateWorkflowInstance, error) {
-	vars := map[string]any{
-		"updateWorkflowInstanceId": updateWorkflowInstanceID,
-		"input":                    input,
-	}
-
-	var res UpdateWorkflowInstance
-	if err := c.Client.Post(ctx, "UpdateWorkflowInstance", UpdateWorkflowInstanceDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -118102,603 +115894,588 @@ func (c *Client) GetWorkflowObjectRefs(ctx context.Context, first *int64, last *
 }
 
 var DocumentOperationNames = map[string]string{
-	CreateActionPlanDocument:                      "CreateActionPlan",
-	CreateBulkActionPlanDocument:                  "CreateBulkActionPlan",
-	CreateBulkCSVActionPlanDocument:               "CreateBulkCSVActionPlan",
-	DeleteActionPlanDocument:                      "DeleteActionPlan",
-	GetActionPlanByIDDocument:                     "GetActionPlanByID",
-	GetActionPlansDocument:                        "GetActionPlans",
-	GetAllActionPlansDocument:                     "GetAllActionPlans",
-	UpdateActionPlanDocument:                      "UpdateActionPlan",
-	CreateAPITokenDocument:                        "CreateAPIToken",
-	CreateBulkAPITokenDocument:                    "CreateBulkAPIToken",
-	CreateBulkCSVAPITokenDocument:                 "CreateBulkCSVAPIToken",
-	DeleteAPITokenDocument:                        "DeleteAPIToken",
-	GetAllAPITokensDocument:                       "GetAllAPITokens",
-	GetAPITokenByIDDocument:                       "GetAPITokenByID",
-	GetAPITokensDocument:                          "GetAPITokens",
-	UpdateAPITokenDocument:                        "UpdateAPIToken",
-	CreateAssessmentDocument:                      "CreateAssessment",
-	DeleteAssessmentDocument:                      "DeleteAssessment",
-	DeleteBulkAssessmentDocument:                  "DeleteBulkAssessment",
-	GetAllAssessmentsDocument:                     "GetAllAssessments",
-	GetAssessmentByIDDocument:                     "GetAssessmentByID",
-	GetAssessmentsDocument:                        "GetAssessments",
-	UpdateAssessmentDocument:                      "UpdateAssessment",
-	CreateAssessmentResponseDocument:              "CreateAssessmentResponse",
-	DeleteAssessmentResponseDocument:              "DeleteAssessmentResponse",
-	GetAllAssessmentResponsesDocument:             "GetAllAssessmentResponses",
-	GetAssessmentResponseByIDDocument:             "GetAssessmentResponseByID",
-	GetAssessmentResponsesDocument:                "GetAssessmentResponses",
-	CreateAssetDocument:                           "CreateAsset",
-	CreateBulkAssetDocument:                       "CreateBulkAsset",
-	CreateBulkCSVAssetDocument:                    "CreateBulkCSVAsset",
-	DeleteAssetDocument:                           "DeleteAsset",
-	GetAllAssetsDocument:                          "GetAllAssets",
-	GetAssetByIDDocument:                          "GetAssetByID",
-	GetAssetsDocument:                             "GetAssets",
-	UpdateAssetDocument:                           "UpdateAsset",
-	CreateBulkCSVContactDocument:                  "CreateBulkCSVContact",
-	CreateBulkContactDocument:                     "CreateBulkContact",
-	CreateContactDocument:                         "CreateContact",
-	DeleteContactDocument:                         "DeleteContact",
-	GetAllContactsDocument:                        "GetAllContacts",
-	GetContactByIDDocument:                        "GetContactByID",
-	GetContactsDocument:                           "GetContacts",
-	UpdateContactDocument:                         "UpdateContact",
-	CreateBulkControlDocument:                     "CreateBulkControl",
-	CreateBulkCSVControlDocument:                  "CreateBulkCSVControl",
-	CreateControlDocument:                         "CreateControl",
-	DeleteControlDocument:                         "DeleteControl",
-	GetAllControlsDocument:                        "GetAllControls",
-	GetControlByIDDocument:                        "GetControlByID",
-	GetControlsDocument:                           "GetControls",
-	UpdateControlDocument:                         "UpdateControl",
-	CreateControlsByCloneDocument:                 "CreateControlsByClone",
-	CloneBulkCSVControlDocument:                   "CloneBulkCSVControl",
-	CreateControlsByCloneReturnIDDocument:         "CreateControlsByCloneReturnID",
-	GetControlCategoriesDocument:                  "GetControlCategories",
-	GetControlCategoriesWithFrameworkDocument:     "GetControlCategoriesWithFramework",
-	GetControlsGroupByCategoryDocument:            "GetControlsGroupByCategory",
-	GetControlSubcategoriesDocument:               "GetControlSubcategories",
-	GetControlSubcategoriesWithFrameworkDocument:  "GetControlSubcategoriesWithFramework",
-	CreateBulkControlImplementationDocument:       "CreateBulkControlImplementation",
-	CreateBulkCSVControlImplementationDocument:    "CreateBulkCSVControlImplementation",
-	CreateControlImplementationDocument:           "CreateControlImplementation",
-	DeleteControlImplementationDocument:           "DeleteControlImplementation",
-	GetAllControlImplementationsDocument:          "GetAllControlImplementations",
-	GetControlImplementationByIDDocument:          "GetControlImplementationByID",
-	GetControlImplementationsDocument:             "GetControlImplementations",
-	UpdateControlImplementationDocument:           "UpdateControlImplementation",
-	CreateBulkControlObjectiveDocument:            "CreateBulkControlObjective",
-	CreateBulkCSVControlObjectiveDocument:         "CreateBulkCSVControlObjective",
-	CreateControlObjectiveDocument:                "CreateControlObjective",
-	DeleteControlObjectiveDocument:                "DeleteControlObjective",
-	GetAllControlObjectivesDocument:               "GetAllControlObjectives",
-	GetControlObjectiveByIDDocument:               "GetControlObjectiveByID",
-	GetControlObjectivesDocument:                  "GetControlObjectives",
-	UpdateControlObjectiveDocument:                "UpdateControlObjective",
-	CreateBulkCSVCustomDomainDocument:             "CreateBulkCSVCustomDomain",
-	CreateBulkCustomDomainDocument:                "CreateBulkCustomDomain",
-	CreateCustomDomainDocument:                    "CreateCustomDomain",
-	DeleteCustomDomainDocument:                    "DeleteCustomDomain",
-	GetAllCustomDomainsDocument:                   "GetAllCustomDomains",
-	GetCustomDomainByIDDocument:                   "GetCustomDomainByID",
-	GetCustomDomainsDocument:                      "GetCustomDomains",
-	UpdateCustomDomainDocument:                    "UpdateCustomDomain",
-	CreateBulkCSVCustomTypeEnumDocument:           "CreateBulkCSVCustomTypeEnum",
-	CreateBulkCustomTypeEnumDocument:              "CreateBulkCustomTypeEnum",
-	CreateCustomTypeEnumDocument:                  "CreateCustomTypeEnum",
-	DeleteCustomTypeEnumDocument:                  "DeleteCustomTypeEnum",
-	GetAllCustomTypeEnumsDocument:                 "GetAllCustomTypeEnums",
-	GetCustomTypeEnumByIDDocument:                 "GetCustomTypeEnumByID",
-	GetCustomTypeEnumsDocument:                    "GetCustomTypeEnums",
-	UpdateCustomTypeEnumDocument:                  "UpdateCustomTypeEnum",
-	CreateBulkCSVDirectoryAccountDocument:         "CreateBulkCSVDirectoryAccount",
-	CreateBulkDirectoryAccountDocument:            "CreateBulkDirectoryAccount",
-	CreateDirectoryAccountDocument:                "CreateDirectoryAccount",
-	DeleteDirectoryAccountDocument:                "DeleteDirectoryAccount",
-	GetAllDirectoryAccountsDocument:               "GetAllDirectoryAccounts",
-	GetDirectoryAccountByIDDocument:               "GetDirectoryAccountByID",
-	GetDirectoryAccountsDocument:                  "GetDirectoryAccounts",
-	UpdateDirectoryAccountDocument:                "UpdateDirectoryAccount",
-	CreateBulkCSVDirectoryGroupDocument:           "CreateBulkCSVDirectoryGroup",
-	CreateBulkDirectoryGroupDocument:              "CreateBulkDirectoryGroup",
-	CreateDirectoryGroupDocument:                  "CreateDirectoryGroup",
-	DeleteDirectoryGroupDocument:                  "DeleteDirectoryGroup",
-	GetAllDirectoryGroupsDocument:                 "GetAllDirectoryGroups",
-	GetDirectoryGroupByIDDocument:                 "GetDirectoryGroupByID",
-	GetDirectoryGroupsDocument:                    "GetDirectoryGroups",
-	UpdateDirectoryGroupDocument:                  "UpdateDirectoryGroup",
-	CreateBulkCSVDirectoryMembershipDocument:      "CreateBulkCSVDirectoryMembership",
-	CreateBulkDirectoryMembershipDocument:         "CreateBulkDirectoryMembership",
-	CreateDirectoryMembershipDocument:             "CreateDirectoryMembership",
-	DeleteDirectoryMembershipDocument:             "DeleteDirectoryMembership",
-	GetAllDirectoryMembershipsDocument:            "GetAllDirectoryMemberships",
-	GetDirectoryMembershipByIDDocument:            "GetDirectoryMembershipByID",
-	GetDirectoryMembershipsDocument:               "GetDirectoryMemberships",
-	UpdateDirectoryMembershipDocument:             "UpdateDirectoryMembership",
-	CreateBulkCSVDirectorySyncRunDocument:         "CreateBulkCSVDirectorySyncRun",
-	CreateBulkDirectorySyncRunDocument:            "CreateBulkDirectorySyncRun",
-	CreateDirectorySyncRunDocument:                "CreateDirectorySyncRun",
-	DeleteDirectorySyncRunDocument:                "DeleteDirectorySyncRun",
-	GetAllDirectorySyncRunsDocument:               "GetAllDirectorySyncRuns",
-	GetDirectorySyncRunByIDDocument:               "GetDirectorySyncRunByID",
-	GetDirectorySyncRunsDocument:                  "GetDirectorySyncRuns",
-	UpdateDirectorySyncRunDocument:                "UpdateDirectorySyncRun",
-	CreateBulkCSVDiscussionDocument:               "CreateBulkCSVDiscussion",
-	CreateBulkDiscussionDocument:                  "CreateBulkDiscussion",
-	CreateDiscussionDocument:                      "CreateDiscussion",
-	DeleteDiscussionDocument:                      "DeleteDiscussion",
-	GetAllDiscussionsDocument:                     "GetAllDiscussions",
-	GetDiscussionByIDDocument:                     "GetDiscussionByID",
-	GetDiscussionsDocument:                        "GetDiscussions",
-	UpdateDiscussionDocument:                      "UpdateDiscussion",
-	CreateBulkCSVDNSVerificationDocument:          "CreateBulkCSVDNSVerification",
-	CreateBulkDNSVerificationDocument:             "CreateBulkDNSVerification",
-	CreateDNSVerificationDocument:                 "CreateDNSVerification",
-	DeleteDNSVerificationDocument:                 "DeleteDNSVerification",
-	GetAllDNSVerificationsDocument:                "GetAllDNSVerifications",
-	GetDNSVerificationByIDDocument:                "GetDNSVerificationByID",
-	GetDNSVerificationsDocument:                   "GetDNSVerifications",
-	UpdateDNSVerificationDocument:                 "UpdateDNSVerification",
-	CreateBulkCSVDocumentDataDocument:             "CreateBulkCSVDocumentData",
-	CreateBulkDocumentDataDocument:                "CreateBulkDocumentData",
-	CreateDocumentDataDocument:                    "CreateDocumentData",
-	DeleteDocumentDataDocument:                    "DeleteDocumentData",
-	GetDocumentDataByIDDocument:                   "GetDocumentDataByID",
-	UpdateDocumentDataDocument:                    "UpdateDocumentData",
-	CreateBulkCSVEntityDocument:                   "CreateBulkCSVEntity",
-	CreateBulkEntityDocument:                      "CreateBulkEntity",
-	CreateEntityDocument:                          "CreateEntity",
-	DeleteEntityDocument:                          "DeleteEntity",
-	GetAllEntitiesDocument:                        "GetAllEntities",
-	GetEntitiesDocument:                           "GetEntities",
-	GetEntityByIDDocument:                         "GetEntityByID",
-	UpdateEntityDocument:                          "UpdateEntity",
-	CreateBulkCSVEntityTypeDocument:               "CreateBulkCSVEntityType",
-	CreateBulkEntityTypeDocument:                  "CreateBulkEntityType",
-	CreateEntityTypeDocument:                      "CreateEntityType",
-	DeleteEntityTypeDocument:                      "DeleteEntityType",
-	GetAllEntityTypesDocument:                     "GetAllEntityTypes",
-	GetEntityTypeByIDDocument:                     "GetEntityTypeByID",
-	GetEntityTypesDocument:                        "GetEntityTypes",
-	UpdateEntityTypeDocument:                      "UpdateEntityType",
-	CreateBulkCSVEventDocument:                    "CreateBulkCSVEvent",
-	CreateBulkEventDocument:                       "CreateBulkEvent",
-	CreateEventDocument:                           "CreateEvent",
-	DeleteEventDocument:                           "DeleteEvent",
-	GetAllEventsDocument:                          "GetAllEvents",
-	GetEventByIDDocument:                          "GetEventByID",
-	GetEventsDocument:                             "GetEvents",
-	UpdateEventDocument:                           "UpdateEvent",
-	CreateEvidenceDocument:                        "CreateEvidence",
-	DeleteEvidenceDocument:                        "DeleteEvidence",
-	GetAllEvidencesDocument:                       "GetAllEvidences",
-	GetEvidenceByIDDocument:                       "GetEvidenceByID",
-	GetEvidencesDocument:                          "GetEvidences",
-	UpdateEvidenceDocument:                        "UpdateEvidence",
-	CreateExportDocument:                          "CreateExport",
-	DeleteBulkExportDocument:                      "DeleteBulkExport",
-	DeleteExportDocument:                          "DeleteExport",
-	GetAllExportsDocument:                         "GetAllExports",
-	GetExportByIDDocument:                         "GetExportByID",
-	GetExportsDocument:                            "GetExports",
-	UpdateExportDocument:                          "UpdateExport",
-	DeleteFileDocument:                            "DeleteFile",
-	GetAllFilesDocument:                           "GetAllFiles",
-	GetFileByIDDocument:                           "GetFileByID",
-	GetFilesDocument:                              "GetFiles",
-	CreateBulkCSVFindingDocument:                  "CreateBulkCSVFinding",
-	CreateBulkFindingDocument:                     "CreateBulkFinding",
-	CreateFindingDocument:                         "CreateFinding",
-	DeleteFindingDocument:                         "DeleteFinding",
-	GetAllFindingsDocument:                        "GetAllFindings",
-	GetFindingByIDDocument:                        "GetFindingByID",
-	GetFindingsDocument:                           "GetFindings",
-	UpdateFindingDocument:                         "UpdateFinding",
-	CreateBulkCSVFindingControlDocument:           "CreateBulkCSVFindingControl",
-	CreateBulkFindingControlDocument:              "CreateBulkFindingControl",
-	CreateFindingControlDocument:                  "CreateFindingControl",
-	DeleteFindingControlDocument:                  "DeleteFindingControl",
-	GetAllFindingControlsDocument:                 "GetAllFindingControls",
-	GetFindingControlByIDDocument:                 "GetFindingControlByID",
-	GetFindingControlsDocument:                    "GetFindingControls",
-	UpdateFindingControlDocument:                  "UpdateFindingControl",
-	CreateBulkCSVGroupDocument:                    "CreateBulkCSVGroup",
-	CreateBulkGroupDocument:                       "CreateBulkGroup",
-	CreateGroupDocument:                           "CreateGroup",
-	DeleteGroupDocument:                           "DeleteGroup",
-	GetAllGroupsDocument:                          "GetAllGroups",
-	GetGroupByIDDocument:                          "GetGroupByID",
-	GetGroupsDocument:                             "GetGroups",
-	UpdateGroupDocument:                           "UpdateGroup",
-	CreateBulkCSVGroupMembershipDocument:          "CreateBulkCSVGroupMembership",
-	CreateBulkGroupMembershipDocument:             "CreateBulkGroupMembership",
-	CreateGroupMembershipDocument:                 "CreateGroupMembership",
-	DeleteGroupMembershipDocument:                 "DeleteGroupMembership",
-	GetAllGroupMembershipsDocument:                "GetAllGroupMemberships",
-	GetGroupMembershipByIDDocument:                "GetGroupMembershipByID",
-	GetGroupMembershipsDocument:                   "GetGroupMemberships",
-	UpdateGroupMembershipDocument:                 "UpdateGroupMembership",
-	CreateBulkCSVGroupSettingDocument:             "CreateBulkCSVGroupSetting",
-	CreateBulkGroupSettingDocument:                "CreateBulkGroupSetting",
-	CreateGroupSettingDocument:                    "CreateGroupSetting",
-	DeleteGroupSettingDocument:                    "DeleteGroupSetting",
-	GetAllGroupSettingsDocument:                   "GetAllGroupSettings",
-	GetGroupSettingByIDDocument:                   "GetGroupSettingByID",
-	GetGroupSettingsDocument:                      "GetGroupSettings",
-	UpdateGroupSettingDocument:                    "UpdateGroupSetting",
-	CreateBulkCSVHushDocument:                     "CreateBulkCSVHush",
-	CreateBulkHushDocument:                        "CreateBulkHush",
-	CreateHushDocument:                            "CreateHush",
-	DeleteHushDocument:                            "DeleteHush",
-	GetAllHushesDocument:                          "GetAllHushes",
-	GetHushByIDDocument:                           "GetHushByID",
-	GetHushesDocument:                             "GetHushes",
-	UpdateHushDocument:                            "UpdateHush",
-	DeleteIntegrationDocument:                     "DeleteIntegration",
-	GetAllIntegrationsDocument:                    "GetAllIntegrations",
-	GetIntegrationByIDDocument:                    "GetIntegrationByID",
-	GetIntegrationsDocument:                       "GetIntegrations",
-	CreateBulkCSVInternalPolicyDocument:           "CreateBulkCSVInternalPolicy",
-	CreateBulkInternalPolicyDocument:              "CreateBulkInternalPolicy",
-	CreateInternalPolicyDocument:                  "CreateInternalPolicy",
-	CreateUploadInternalPolicyDocument:            "CreateUploadInternalPolicy",
-	DeleteInternalPolicyDocument:                  "DeleteInternalPolicy",
-	GetAllInternalPoliciesDocument:                "GetAllInternalPolicies",
-	GetInternalPoliciesDocument:                   "GetInternalPolicies",
-	GetInternalPolicyByIDDocument:                 "GetInternalPolicyByID",
-	UpdateInternalPolicyDocument:                  "UpdateInternalPolicy",
-	UpdateInternalPolicyWithFileDocument:          "UpdateInternalPolicyWithFile",
-	CreateBulkCSVInviteDocument:                   "CreateBulkCSVInvite",
-	CreateBulkInviteDocument:                      "CreateBulkInvite",
-	CreateInviteDocument:                          "CreateInvite",
-	DeleteInviteDocument:                          "DeleteInvite",
-	GetAllInvitesDocument:                         "GetAllInvites",
-	GetInviteByIDDocument:                         "GetInviteByID",
-	GetInvitesDocument:                            "GetInvites",
-	UpdateInviteDocument:                          "UpdateInvite",
-	CreateJobResultDocument:                       "CreateJobResult",
-	DeleteJobResultDocument:                       "DeleteJobResult",
-	GetAllJobResultsDocument:                      "GetAllJobResults",
-	GetJobResultByIDDocument:                      "GetJobResultByID",
-	GetJobResultsDocument:                         "GetJobResults",
-	UpdateJobResultDocument:                       "UpdateJobResult",
-	CreateJobRunnerDocument:                       "CreateJobRunner",
-	DeleteJobRunnerDocument:                       "DeleteJobRunner",
-	GetAllJobRunnersDocument:                      "GetAllJobRunners",
-	GetJobRunnerByIDDocument:                      "GetJobRunnerByID",
-	GetJobRunnersDocument:                         "GetJobRunners",
-	UpdateJobRunnerDocument:                       "UpdateJobRunner",
-	CreateJobRunnerRegistrationTokenDocument:      "CreateJobRunnerRegistrationToken",
-	DeleteJobRunnerRegistrationTokenDocument:      "DeleteJobRunnerRegistrationToken",
-	GetAllJobRunnerRegistrationTokensDocument:     "GetAllJobRunnerRegistrationTokens",
-	GetJobRunnerRegistrationTokenByIDDocument:     "GetJobRunnerRegistrationTokenByID",
-	GetJobRunnerRegistrationTokensDocument:        "GetJobRunnerRegistrationTokens",
-	CreateJobRunnerTokenDocument:                  "CreateJobRunnerToken",
-	DeleteJobRunnerTokenDocument:                  "DeleteJobRunnerToken",
-	GetAllJobRunnerTokensDocument:                 "GetAllJobRunnerTokens",
-	GetJobRunnerTokenByIDDocument:                 "GetJobRunnerTokenByID",
-	GetJobRunnerTokensDocument:                    "GetJobRunnerTokens",
-	CreateBulkCSVJobTemplateDocument:              "CreateBulkCSVJobTemplate",
-	CreateBulkJobTemplateDocument:                 "CreateBulkJobTemplate",
-	CreateJobTemplateDocument:                     "CreateJobTemplate",
-	DeleteJobTemplateDocument:                     "DeleteJobTemplate",
-	GetAllJobTemplatesDocument:                    "GetAllJobTemplates",
-	GetJobTemplateByIDDocument:                    "GetJobTemplateByID",
-	GetJobTemplatesDocument:                       "GetJobTemplates",
-	UpdateJobTemplateDocument:                     "UpdateJobTemplate",
-	CreateBulkCSVMappableDomainDocument:           "CreateBulkCSVMappableDomain",
-	CreateBulkMappableDomainDocument:              "CreateBulkMappableDomain",
-	CreateMappableDomainDocument:                  "CreateMappableDomain",
-	DeleteMappableDomainDocument:                  "DeleteMappableDomain",
-	GetAllMappableDomainsDocument:                 "GetAllMappableDomains",
-	GetMappableDomainByIDDocument:                 "GetMappableDomainByID",
-	GetMappableDomainsDocument:                    "GetMappableDomains",
-	UpdateMappableDomainDocument:                  "UpdateMappableDomain",
-	CreateBulkCSVMappedControlDocument:            "CreateBulkCSVMappedControl",
-	CreateBulkMappedControlDocument:               "CreateBulkMappedControl",
-	CreateMappedControlDocument:                   "CreateMappedControl",
-	DeleteMappedControlDocument:                   "DeleteMappedControl",
-	GetAllMappedControlsDocument:                  "GetAllMappedControls",
-	GetMappedAllFromControlsForIDDocument:         "GetMappedAllFromControlsForID",
-	GetMappedAllFromSubcontrolsForIDDocument:      "GetMappedAllFromSubcontrolsForID",
-	GetMappedAllToControlsForIDDocument:           "GetMappedAllToControlsForID",
-	GetMappedAllToSubcontrolsForIDDocument:        "GetMappedAllToSubcontrolsForID",
-	GetMappedControlByIDDocument:                  "GetMappedControlByID",
-	GetMappedControlsDocument:                     "GetMappedControls",
-	UpdateMappedControlDocument:                   "UpdateMappedControl",
-	CreateBulkCSVNarrativeDocument:                "CreateBulkCSVNarrative",
-	CreateBulkNarrativeDocument:                   "CreateBulkNarrative",
-	CreateNarrativeDocument:                       "CreateNarrative",
-	DeleteNarrativeDocument:                       "DeleteNarrative",
-	GetAllNarrativesDocument:                      "GetAllNarratives",
-	GetNarrativeByIDDocument:                      "GetNarrativeByID",
-	GetNarrativesDocument:                         "GetNarratives",
-	UpdateNarrativeDocument:                       "UpdateNarrative",
-	DeleteNoteDocument:                            "DeleteNote",
-	CreateOnboardingDocument:                      "CreateOnboarding",
-	CreateOrganizationDocument:                    "CreateOrganization",
-	DeleteOrganizationDocument:                    "DeleteOrganization",
-	GetAllOrganizationsDocument:                   "GetAllOrganizations",
-	GetOrganizationByIDDocument:                   "GetOrganizationByID",
-	GetOrganizationsDocument:                      "GetOrganizations",
-	UpdateOrganizationDocument:                    "UpdateOrganization",
-	CreateBulkCSVOrganizationSettingDocument:      "CreateBulkCSVOrganizationSetting",
-	CreateBulkOrganizationSettingDocument:         "CreateBulkOrganizationSetting",
-	CreateOrganizationSettingDocument:             "CreateOrganizationSetting",
-	DeleteOrganizationSettingDocument:             "DeleteOrganizationSetting",
-	GetAllOrganizationSettingsDocument:            "GetAllOrganizationSettings",
-	GetOrganizationSettingByIDDocument:            "GetOrganizationSettingByID",
-	GetOrganizationSettingsDocument:               "GetOrganizationSettings",
-	UpdateOrganizationSettingDocument:             "UpdateOrganizationSetting",
-	CreateBulkCSVOrgMembershipDocument:            "CreateBulkCSVOrgMembership",
-	CreateBulkOrgMembershipDocument:               "CreateBulkOrgMembership",
-	CreateOrgMembershipDocument:                   "CreateOrgMembership",
-	DeleteOrgMembershipDocument:                   "DeleteOrgMembership",
-	GetAllOrgMembershipsDocument:                  "GetAllOrgMemberships",
-	GetOrgMembershipByIDDocument:                  "GetOrgMembershipByID",
-	GetOrgMembershipsDocument:                     "GetOrgMemberships",
-	UpdateOrgMembershipDocument:                   "UpdateOrgMembership",
-	GetAllOrgSubscriptionsDocument:                "GetAllOrgSubscriptions",
-	GetOrgSubscriptionByIDDocument:                "GetOrgSubscriptionByID",
-	GetOrgSubscriptionsDocument:                   "GetOrgSubscriptions",
-	CreatePersonalAccessTokenDocument:             "CreatePersonalAccessToken",
-	DeletePersonalAccessTokenDocument:             "DeletePersonalAccessToken",
-	GetAllPersonalAccessTokensDocument:            "GetAllPersonalAccessTokens",
-	GetPersonalAccessTokenByIDDocument:            "GetPersonalAccessTokenByID",
-	GetPersonalAccessTokensDocument:               "GetPersonalAccessTokens",
-	UpdatePersonalAccessTokenDocument:             "UpdatePersonalAccessToken",
-	CreateBulkCSVProcedureDocument:                "CreateBulkCSVProcedure",
-	CreateBulkProcedureDocument:                   "CreateBulkProcedure",
-	CreateProcedureDocument:                       "CreateProcedure",
-	CreateUploadProcedureDocument:                 "CreateUploadProcedure",
-	DeleteProcedureDocument:                       "DeleteProcedure",
-	GetAllProceduresDocument:                      "GetAllProcedures",
-	GetProcedureByIDDocument:                      "GetProcedureByID",
-	GetProceduresDocument:                         "GetProcedures",
-	UpdateProcedureDocument:                       "UpdateProcedure",
-	UpdateProcedureWithFileDocument:               "UpdateProcedureWithFile",
-	CreateBulkCSVProgramDocument:                  "CreateBulkCSVProgram",
-	CreateBulkProgramDocument:                     "CreateBulkProgram",
-	CreateProgramDocument:                         "CreateProgram",
-	DeleteProgramDocument:                         "DeleteProgram",
-	GetAllProgramsDocument:                        "GetAllPrograms",
-	GetProgramByIDDocument:                        "GetProgramByID",
-	GetProgramsDocument:                           "GetPrograms",
-	UpdateProgramDocument:                         "UpdateProgram",
-	CreateBulkCSVProgramMembershipDocument:        "CreateBulkCSVProgramMembership",
-	CreateBulkProgramMembershipDocument:           "CreateBulkProgramMembership",
-	CreateProgramMembershipDocument:               "CreateProgramMembership",
-	DeleteProgramMembershipDocument:               "DeleteProgramMembership",
-	GetAllProgramMembershipsDocument:              "GetAllProgramMemberships",
-	GetProgramMembershipByIDDocument:              "GetProgramMembershipByID",
-	GetProgramMembershipsDocument:                 "GetProgramMemberships",
-	UpdateProgramMembershipDocument:               "UpdateProgramMembership",
-	CreateBulkCSVRemediationDocument:              "CreateBulkCSVRemediation",
-	CreateBulkRemediationDocument:                 "CreateBulkRemediation",
-	CreateRemediationDocument:                     "CreateRemediation",
-	DeleteRemediationDocument:                     "DeleteRemediation",
-	GetAllRemediationsDocument:                    "GetAllRemediations",
-	GetRemediationByIDDocument:                    "GetRemediationByID",
-	GetRemediationsDocument:                       "GetRemediations",
-	UpdateRemediationDocument:                     "UpdateRemediation",
-	CreateBulkCSVReviewDocument:                   "CreateBulkCSVReview",
-	CreateBulkReviewDocument:                      "CreateBulkReview",
-	CreateReviewDocument:                          "CreateReview",
-	DeleteReviewDocument:                          "DeleteReview",
-	GetAllReviewsDocument:                         "GetAllReviews",
-	GetReviewByIDDocument:                         "GetReviewByID",
-	GetReviewsDocument:                            "GetReviews",
-	UpdateReviewDocument:                          "UpdateReview",
-	CreateBulkCSVRiskDocument:                     "CreateBulkCSVRisk",
-	CreateBulkRiskDocument:                        "CreateBulkRisk",
-	CreateRiskDocument:                            "CreateRisk",
-	DeleteRiskDocument:                            "DeleteRisk",
-	GetAllRisksDocument:                           "GetAllRisks",
-	GetRiskByIDDocument:                           "GetRiskByID",
-	GetRisksDocument:                              "GetRisks",
-	UpdateRiskDocument:                            "UpdateRisk",
-	CreateBulkCSVScanDocument:                     "CreateBulkCSVScan",
-	CreateBulkScanDocument:                        "CreateBulkScan",
-	CreateScanDocument:                            "CreateScan",
-	DeleteScanDocument:                            "DeleteScan",
-	GetAllScansDocument:                           "GetAllScans",
-	GetScanByIDDocument:                           "GetScanByID",
-	GetScansDocument:                              "GetScans",
-	UpdateScanDocument:                            "UpdateScan",
-	CreateBulkCSVScheduledJobDocument:             "CreateBulkCSVScheduledJob",
-	CreateBulkScheduledJobDocument:                "CreateBulkScheduledJob",
-	CreateScheduledJobDocument:                    "CreateScheduledJob",
-	DeleteScheduledJobDocument:                    "DeleteScheduledJob",
-	GetAllScheduledJobsDocument:                   "GetAllScheduledJobs",
-	GetScheduledJobByIDDocument:                   "GetScheduledJobByID",
-	GetScheduledJobsDocument:                      "GetScheduledJobs",
-	UpdateScheduledJobDocument:                    "UpdateScheduledJob",
-	CreateScheduledJobRunDocument:                 "CreateScheduledJobRun",
-	DeleteScheduledJobRunDocument:                 "DeleteScheduledJobRun",
-	GetAllScheduledJobRunsDocument:                "GetAllScheduledJobRuns",
-	GetScheduledJobRunByIDDocument:                "GetScheduledJobRunByID",
-	GetScheduledJobRunsDocument:                   "GetScheduledJobRuns",
-	UpdateScheduledJobRunDocument:                 "UpdateScheduledJobRun",
-	GlobalSearchDocument:                          "GlobalSearch",
-	CreateStandardDocument:                        "CreateStandard",
-	DeleteStandardDocument:                        "DeleteStandard",
-	GetAllStandardsDocument:                       "GetAllStandards",
-	GetStandardByIDDocument:                       "GetStandardByID",
-	GetStandardsDocument:                          "GetStandards",
-	UpdateStandardDocument:                        "UpdateStandard",
-	CreateBulkCSVSubcontrolDocument:               "CreateBulkCSVSubcontrol",
-	CreateBulkSubcontrolDocument:                  "CreateBulkSubcontrol",
-	CreateSubcontrolDocument:                      "CreateSubcontrol",
-	DeleteSubcontrolDocument:                      "DeleteSubcontrol",
-	GetAllSubcontrolsDocument:                     "GetAllSubcontrols",
-	GetSubcontrolByIDDocument:                     "GetSubcontrolByID",
-	GetSubcontrolsDocument:                        "GetSubcontrols",
-	UpdateSubcontrolDocument:                      "UpdateSubcontrol",
-	CreateBulkCSVSubprocessorDocument:             "CreateBulkCSVSubprocessor",
-	CreateBulkSubprocessorDocument:                "CreateBulkSubprocessor",
-	CreateSubprocessorDocument:                    "CreateSubprocessor",
-	DeleteBulkSubprocessorDocument:                "DeleteBulkSubprocessor",
-	DeleteSubprocessorDocument:                    "DeleteSubprocessor",
-	GetAllSubprocessorsDocument:                   "GetAllSubprocessors",
-	GetSubprocessorByIDDocument:                   "GetSubprocessorByID",
-	GetSubprocessorsDocument:                      "GetSubprocessors",
-	UpdateBulkSubprocessorDocument:                "UpdateBulkSubprocessor",
-	UpdateSubprocessorDocument:                    "UpdateSubprocessor",
-	CreateBulkCSVSubscriberDocument:               "CreateBulkCSVSubscriber",
-	CreateBulkSubscriberDocument:                  "CreateBulkSubscriber",
-	CreateSubscriberDocument:                      "CreateSubscriber",
-	DeleteSubscriberDocument:                      "DeleteSubscriber",
-	GetAllSubscribersDocument:                     "GetAllSubscribers",
-	GetSubscriberByEmailDocument:                  "GetSubscriberByEmail",
-	GetSubscribersDocument:                        "GetSubscribers",
-	UpdateSubscriberDocument:                      "UpdateSubscriber",
-	CreateBulkCSVTagDefinitionDocument:            "CreateBulkCSVTagDefinition",
-	CreateBulkTagDefinitionDocument:               "CreateBulkTagDefinition",
-	CreateTagDefinitionDocument:                   "CreateTagDefinition",
-	DeleteTagDefinitionDocument:                   "DeleteTagDefinition",
-	GetAllTagDefinitionsDocument:                  "GetAllTagDefinitions",
-	GetTagDefinitionByIDDocument:                  "GetTagDefinitionByID",
-	GetTagDefinitionsDocument:                     "GetTagDefinitions",
-	UpdateTagDefinitionDocument:                   "UpdateTagDefinition",
-	CreateBulkCSVTaskDocument:                     "CreateBulkCSVTask",
-	CreateBulkTaskDocument:                        "CreateBulkTask",
-	CreateTaskDocument:                            "CreateTask",
-	DeleteTaskDocument:                            "DeleteTask",
-	GetAllTasksDocument:                           "GetAllTasks",
-	GetTaskByIDDocument:                           "GetTaskByID",
-	GetTasksDocument:                              "GetTasks",
-	UpdateTaskDocument:                            "UpdateTask",
-	CreateBulkCSVTemplateDocument:                 "CreateBulkCSVTemplate",
-	CreateBulkTemplateDocument:                    "CreateBulkTemplate",
-	CreateTemplateDocument:                        "CreateTemplate",
-	DeleteTemplateDocument:                        "DeleteTemplate",
-	GetAllTemplatesDocument:                       "GetAllTemplates",
-	GetTemplateByIDDocument:                       "GetTemplateByID",
-	GetTemplatesDocument:                          "GetTemplates",
-	UpdateTemplateDocument:                        "UpdateTemplate",
-	CreateTFASettingDocument:                      "CreateTFASetting",
-	GetAllTFASettingsDocument:                     "GetAllTFASettings",
-	GetTFASettingByIDDocument:                     "GetTFASettingByID",
-	GetTFASettingsDocument:                        "GetTFASettings",
-	UpdateTFASettingDocument:                      "UpdateTFASetting",
-	CreateTrustCenterDocument:                     "CreateTrustCenter",
-	DeleteTrustCenterDocument:                     "DeleteTrustCenter",
-	GetAllTrustCentersDocument:                    "GetAllTrustCenters",
-	GetTrustCenterByIDDocument:                    "GetTrustCenterByID",
-	GetTrustCentersDocument:                       "GetTrustCenters",
-	UpdateTrustCenterDocument:                     "UpdateTrustCenter",
-	CreateBulkCSVTrustCenterComplianceDocument:    "CreateBulkCSVTrustCenterCompliance",
-	CreateBulkTrustCenterComplianceDocument:       "CreateBulkTrustCenterCompliance",
-	CreateTrustCenterComplianceDocument:           "CreateTrustCenterCompliance",
-	DeleteTrustCenterComplianceDocument:           "DeleteTrustCenterCompliance",
-	GetAllTrustCenterCompliancesDocument:          "GetAllTrustCenterCompliances",
-	GetTrustCenterComplianceByIDDocument:          "GetTrustCenterComplianceByID",
-	GetTrustCenterCompliancesDocument:             "GetTrustCenterCompliances",
-	UpdateTrustCenterComplianceDocument:           "UpdateTrustCenterCompliance",
-	CreateTrustCenterDocDocument:                  "CreateTrustCenterDoc",
-	DeleteTrustCenterDocDocument:                  "DeleteTrustCenterDoc",
-	GetAllTrustCenterDocsDocument:                 "GetAllTrustCenterDocs",
-	GetTrustCenterDocByIDDocument:                 "GetTrustCenterDocByID",
-	GetTrustCenterDocsDocument:                    "GetTrustCenterDocs",
-	UpdateTrustCenterDocDocument:                  "UpdateTrustCenterDoc",
-	CreateTrustCenterDomainDocument:               "CreateTrustCenterDomain",
-	CreateTrustCenterNdaDocument:                  "CreateTrustCenterNda",
-	SendTrustCenterNDAEmailDocument:               "SendTrustCenterNDAEmail",
-	SubmitTrustCenterNDAResponseDocument:          "SubmitTrustCenterNDAResponse",
-	UpdateTrustCenterNdaDocument:                  "UpdateTrustCenterNda",
-	CreateTrustCenterPreviewSettingDocument:       "CreateTrustCenterPreviewSetting",
-	CreateTrustCenterSettingDocument:              "CreateTrustCenterSetting",
-	DeleteTrustCenterSettingDocument:              "DeleteTrustCenterSetting",
-	GetAllTrustCenterSettingsDocument:             "GetAllTrustCenterSettings",
-	GetTrustCenterSettingByIDDocument:             "GetTrustCenterSettingByID",
-	GetTrustCenterSettingsDocument:                "GetTrustCenterSettings",
-	UpdateTrustCenterSettingDocument:              "UpdateTrustCenterSetting",
-	CreateBulkCSVTrustCenterSubprocessorDocument:  "CreateBulkCSVTrustCenterSubprocessor",
-	CreateBulkTrustCenterSubprocessorDocument:     "CreateBulkTrustCenterSubprocessor",
-	CreateTrustCenterSubprocessorDocument:         "CreateTrustCenterSubprocessor",
-	DeleteBulkTrustCenterSubprocessorDocument:     "DeleteBulkTrustCenterSubprocessor",
-	DeleteTrustCenterSubprocessorDocument:         "DeleteTrustCenterSubprocessor",
-	GetAllTrustCenterSubprocessorsDocument:        "GetAllTrustCenterSubprocessors",
-	GetTrustCenterSubprocessorByIDDocument:        "GetTrustCenterSubprocessorByID",
-	GetTrustCenterSubprocessorsDocument:           "GetTrustCenterSubprocessors",
-	UpdateBulkTrustCenterSubprocessorDocument:     "UpdateBulkTrustCenterSubprocessor",
-	UpdateTrustCenterSubprocessorDocument:         "UpdateTrustCenterSubprocessor",
-	CreateTrustCenterWatermarkConfigDocument:      "CreateTrustCenterWatermarkConfig",
-	DeleteTrustCenterWatermarkConfigDocument:      "DeleteTrustCenterWatermarkConfig",
-	GetAllTrustCenterWatermarkConfigsDocument:     "GetAllTrustCenterWatermarkConfigs",
-	GetTrustCenterWatermarkConfigByIDDocument:     "GetTrustCenterWatermarkConfigByID",
-	GetTrustCenterWatermarkConfigsDocument:        "GetTrustCenterWatermarkConfigs",
-	UpdateTrustCenterWatermarkConfigDocument:      "UpdateTrustCenterWatermarkConfig",
-	CreateUserDocument:                            "CreateUser",
-	DeleteUserDocument:                            "DeleteUser",
-	GetAllUsersDocument:                           "GetAllUsers",
-	GetSelfDocument:                               "GetSelf",
-	GetUserByIDDocument:                           "GetUserByID",
-	GetUsersDocument:                              "GetUsers",
-	UpdateUserDocument:                            "UpdateUser",
-	CreateUserSettingDocument:                     "CreateUserSetting",
-	GetAllUserSettingsDocument:                    "GetAllUserSettings",
-	GetUserSettingByIDDocument:                    "GetUserSettingByID",
-	GetUserSettingsDocument:                       "GetUserSettings",
-	UpdateUserSettingDocument:                     "UpdateUserSetting",
-	CreateBulkCSVVulnerabilityDocument:            "CreateBulkCSVVulnerability",
-	CreateBulkVulnerabilityDocument:               "CreateBulkVulnerability",
-	CreateVulnerabilityDocument:                   "CreateVulnerability",
-	DeleteVulnerabilityDocument:                   "DeleteVulnerability",
-	GetAllVulnerabilitiesDocument:                 "GetAllVulnerabilities",
-	GetVulnerabilityByIDDocument:                  "GetVulnerabilityByID",
-	GetVulnerabilitiesDocument:                    "GetVulnerabilities",
-	UpdateVulnerabilityDocument:                   "UpdateVulnerability",
-	DeleteWebauthnDocument:                        "DeleteWebauthn",
-	GetAllWebauthnsDocument:                       "GetAllWebauthns",
-	CreateBulkCSVWorkflowAssignmentDocument:       "CreateBulkCSVWorkflowAssignment",
-	CreateBulkWorkflowAssignmentDocument:          "CreateBulkWorkflowAssignment",
-	CreateWorkflowAssignmentDocument:              "CreateWorkflowAssignment",
-	DeleteWorkflowAssignmentDocument:              "DeleteWorkflowAssignment",
-	GetAllWorkflowAssignmentsDocument:             "GetAllWorkflowAssignments",
-	GetWorkflowAssignmentByIDDocument:             "GetWorkflowAssignmentByID",
-	GetWorkflowAssignmentsDocument:                "GetWorkflowAssignments",
-	UpdateWorkflowAssignmentDocument:              "UpdateWorkflowAssignment",
-	CreateBulkCSVWorkflowAssignmentTargetDocument: "CreateBulkCSVWorkflowAssignmentTarget",
-	CreateBulkWorkflowAssignmentTargetDocument:    "CreateBulkWorkflowAssignmentTarget",
-	CreateWorkflowAssignmentTargetDocument:        "CreateWorkflowAssignmentTarget",
-	DeleteWorkflowAssignmentTargetDocument:        "DeleteWorkflowAssignmentTarget",
-	GetAllWorkflowAssignmentTargetsDocument:       "GetAllWorkflowAssignmentTargets",
-	GetWorkflowAssignmentTargetByIDDocument:       "GetWorkflowAssignmentTargetByID",
-	GetWorkflowAssignmentTargetsDocument:          "GetWorkflowAssignmentTargets",
-	UpdateWorkflowAssignmentTargetDocument:        "UpdateWorkflowAssignmentTarget",
-	CreateBulkCSVWorkflowDefinitionDocument:       "CreateBulkCSVWorkflowDefinition",
-	CreateBulkWorkflowDefinitionDocument:          "CreateBulkWorkflowDefinition",
-	CreateWorkflowDefinitionDocument:              "CreateWorkflowDefinition",
-	DeleteWorkflowDefinitionDocument:              "DeleteWorkflowDefinition",
-	GetAllWorkflowDefinitionsDocument:             "GetAllWorkflowDefinitions",
-	GetWorkflowDefinitionByIDDocument:             "GetWorkflowDefinitionByID",
-	GetWorkflowDefinitionsDocument:                "GetWorkflowDefinitions",
-	UpdateWorkflowDefinitionDocument:              "UpdateWorkflowDefinition",
-	CreateBulkCSVWorkflowEventDocument:            "CreateBulkCSVWorkflowEvent",
-	CreateBulkWorkflowEventDocument:               "CreateBulkWorkflowEvent",
-	CreateWorkflowEventDocument:                   "CreateWorkflowEvent",
-	DeleteWorkflowEventDocument:                   "DeleteWorkflowEvent",
-	GetAllWorkflowEventsDocument:                  "GetAllWorkflowEvents",
-	GetWorkflowEventByIDDocument:                  "GetWorkflowEventByID",
-	GetWorkflowEventsDocument:                     "GetWorkflowEvents",
-	UpdateWorkflowEventDocument:                   "UpdateWorkflowEvent",
-	CreateBulkCSVWorkflowInstanceDocument:         "CreateBulkCSVWorkflowInstance",
-	CreateBulkWorkflowInstanceDocument:            "CreateBulkWorkflowInstance",
-	CreateWorkflowInstanceDocument:                "CreateWorkflowInstance",
-	DeleteWorkflowInstanceDocument:                "DeleteWorkflowInstance",
-	GetAllWorkflowInstancesDocument:               "GetAllWorkflowInstances",
-	GetWorkflowInstanceByIDDocument:               "GetWorkflowInstanceByID",
-	GetWorkflowInstancesDocument:                  "GetWorkflowInstances",
-	UpdateWorkflowInstanceDocument:                "UpdateWorkflowInstance",
-	CreateBulkCSVWorkflowObjectRefDocument:        "CreateBulkCSVWorkflowObjectRef",
-	CreateBulkWorkflowObjectRefDocument:           "CreateBulkWorkflowObjectRef",
-	CreateWorkflowObjectRefDocument:               "CreateWorkflowObjectRef",
-	DeleteWorkflowObjectRefDocument:               "DeleteWorkflowObjectRef",
-	GetAllWorkflowObjectRefsDocument:              "GetAllWorkflowObjectRefs",
-	GetWorkflowObjectRefByIDDocument:              "GetWorkflowObjectRefByID",
-	GetWorkflowObjectRefsDocument:                 "GetWorkflowObjectRefs",
+	CreateActionPlanDocument:                     "CreateActionPlan",
+	CreateBulkActionPlanDocument:                 "CreateBulkActionPlan",
+	CreateBulkCSVActionPlanDocument:              "CreateBulkCSVActionPlan",
+	DeleteActionPlanDocument:                     "DeleteActionPlan",
+	GetActionPlanByIDDocument:                    "GetActionPlanByID",
+	GetActionPlansDocument:                       "GetActionPlans",
+	GetAllActionPlansDocument:                    "GetAllActionPlans",
+	UpdateActionPlanDocument:                     "UpdateActionPlan",
+	CreateAPITokenDocument:                       "CreateAPIToken",
+	CreateBulkAPITokenDocument:                   "CreateBulkAPIToken",
+	CreateBulkCSVAPITokenDocument:                "CreateBulkCSVAPIToken",
+	DeleteAPITokenDocument:                       "DeleteAPIToken",
+	GetAllAPITokensDocument:                      "GetAllAPITokens",
+	GetAPITokenByIDDocument:                      "GetAPITokenByID",
+	GetAPITokensDocument:                         "GetAPITokens",
+	UpdateAPITokenDocument:                       "UpdateAPIToken",
+	CreateAssessmentDocument:                     "CreateAssessment",
+	DeleteAssessmentDocument:                     "DeleteAssessment",
+	DeleteBulkAssessmentDocument:                 "DeleteBulkAssessment",
+	GetAllAssessmentsDocument:                    "GetAllAssessments",
+	GetAssessmentByIDDocument:                    "GetAssessmentByID",
+	GetAssessmentsDocument:                       "GetAssessments",
+	UpdateAssessmentDocument:                     "UpdateAssessment",
+	CreateAssessmentResponseDocument:             "CreateAssessmentResponse",
+	DeleteAssessmentResponseDocument:             "DeleteAssessmentResponse",
+	GetAllAssessmentResponsesDocument:            "GetAllAssessmentResponses",
+	GetAssessmentResponseByIDDocument:            "GetAssessmentResponseByID",
+	GetAssessmentResponsesDocument:               "GetAssessmentResponses",
+	CreateAssetDocument:                          "CreateAsset",
+	CreateBulkAssetDocument:                      "CreateBulkAsset",
+	CreateBulkCSVAssetDocument:                   "CreateBulkCSVAsset",
+	DeleteAssetDocument:                          "DeleteAsset",
+	GetAllAssetsDocument:                         "GetAllAssets",
+	GetAssetByIDDocument:                         "GetAssetByID",
+	GetAssetsDocument:                            "GetAssets",
+	UpdateAssetDocument:                          "UpdateAsset",
+	CreateBulkCSVContactDocument:                 "CreateBulkCSVContact",
+	CreateBulkContactDocument:                    "CreateBulkContact",
+	CreateContactDocument:                        "CreateContact",
+	DeleteContactDocument:                        "DeleteContact",
+	GetAllContactsDocument:                       "GetAllContacts",
+	GetContactByIDDocument:                       "GetContactByID",
+	GetContactsDocument:                          "GetContacts",
+	UpdateContactDocument:                        "UpdateContact",
+	CreateBulkControlDocument:                    "CreateBulkControl",
+	CreateBulkCSVControlDocument:                 "CreateBulkCSVControl",
+	CreateControlDocument:                        "CreateControl",
+	DeleteControlDocument:                        "DeleteControl",
+	GetAllControlsDocument:                       "GetAllControls",
+	GetControlByIDDocument:                       "GetControlByID",
+	GetControlsDocument:                          "GetControls",
+	UpdateControlDocument:                        "UpdateControl",
+	CreateControlsByCloneDocument:                "CreateControlsByClone",
+	CloneBulkCSVControlDocument:                  "CloneBulkCSVControl",
+	CreateControlsByCloneReturnIDDocument:        "CreateControlsByCloneReturnID",
+	GetControlCategoriesDocument:                 "GetControlCategories",
+	GetControlCategoriesWithFrameworkDocument:    "GetControlCategoriesWithFramework",
+	GetControlsGroupByCategoryDocument:           "GetControlsGroupByCategory",
+	GetControlSubcategoriesDocument:              "GetControlSubcategories",
+	GetControlSubcategoriesWithFrameworkDocument: "GetControlSubcategoriesWithFramework",
+	CreateBulkControlImplementationDocument:      "CreateBulkControlImplementation",
+	CreateBulkCSVControlImplementationDocument:   "CreateBulkCSVControlImplementation",
+	CreateControlImplementationDocument:          "CreateControlImplementation",
+	DeleteControlImplementationDocument:          "DeleteControlImplementation",
+	GetAllControlImplementationsDocument:         "GetAllControlImplementations",
+	GetControlImplementationByIDDocument:         "GetControlImplementationByID",
+	GetControlImplementationsDocument:            "GetControlImplementations",
+	UpdateControlImplementationDocument:          "UpdateControlImplementation",
+	CreateBulkControlObjectiveDocument:           "CreateBulkControlObjective",
+	CreateBulkCSVControlObjectiveDocument:        "CreateBulkCSVControlObjective",
+	CreateControlObjectiveDocument:               "CreateControlObjective",
+	DeleteControlObjectiveDocument:               "DeleteControlObjective",
+	GetAllControlObjectivesDocument:              "GetAllControlObjectives",
+	GetControlObjectiveByIDDocument:              "GetControlObjectiveByID",
+	GetControlObjectivesDocument:                 "GetControlObjectives",
+	UpdateControlObjectiveDocument:               "UpdateControlObjective",
+	CreateBulkCSVCustomDomainDocument:            "CreateBulkCSVCustomDomain",
+	CreateBulkCustomDomainDocument:               "CreateBulkCustomDomain",
+	CreateCustomDomainDocument:                   "CreateCustomDomain",
+	DeleteCustomDomainDocument:                   "DeleteCustomDomain",
+	GetAllCustomDomainsDocument:                  "GetAllCustomDomains",
+	GetCustomDomainByIDDocument:                  "GetCustomDomainByID",
+	GetCustomDomainsDocument:                     "GetCustomDomains",
+	UpdateCustomDomainDocument:                   "UpdateCustomDomain",
+	CreateBulkCSVCustomTypeEnumDocument:          "CreateBulkCSVCustomTypeEnum",
+	CreateBulkCustomTypeEnumDocument:             "CreateBulkCustomTypeEnum",
+	CreateCustomTypeEnumDocument:                 "CreateCustomTypeEnum",
+	DeleteCustomTypeEnumDocument:                 "DeleteCustomTypeEnum",
+	GetAllCustomTypeEnumsDocument:                "GetAllCustomTypeEnums",
+	GetCustomTypeEnumByIDDocument:                "GetCustomTypeEnumByID",
+	GetCustomTypeEnumsDocument:                   "GetCustomTypeEnums",
+	UpdateCustomTypeEnumDocument:                 "UpdateCustomTypeEnum",
+	CreateBulkCSVDirectoryAccountDocument:        "CreateBulkCSVDirectoryAccount",
+	CreateBulkDirectoryAccountDocument:           "CreateBulkDirectoryAccount",
+	CreateDirectoryAccountDocument:               "CreateDirectoryAccount",
+	DeleteDirectoryAccountDocument:               "DeleteDirectoryAccount",
+	GetAllDirectoryAccountsDocument:              "GetAllDirectoryAccounts",
+	GetDirectoryAccountByIDDocument:              "GetDirectoryAccountByID",
+	GetDirectoryAccountsDocument:                 "GetDirectoryAccounts",
+	UpdateDirectoryAccountDocument:               "UpdateDirectoryAccount",
+	CreateBulkCSVDirectoryGroupDocument:          "CreateBulkCSVDirectoryGroup",
+	CreateBulkDirectoryGroupDocument:             "CreateBulkDirectoryGroup",
+	CreateDirectoryGroupDocument:                 "CreateDirectoryGroup",
+	DeleteDirectoryGroupDocument:                 "DeleteDirectoryGroup",
+	GetAllDirectoryGroupsDocument:                "GetAllDirectoryGroups",
+	GetDirectoryGroupByIDDocument:                "GetDirectoryGroupByID",
+	GetDirectoryGroupsDocument:                   "GetDirectoryGroups",
+	UpdateDirectoryGroupDocument:                 "UpdateDirectoryGroup",
+	CreateBulkCSVDirectoryMembershipDocument:     "CreateBulkCSVDirectoryMembership",
+	CreateBulkDirectoryMembershipDocument:        "CreateBulkDirectoryMembership",
+	CreateDirectoryMembershipDocument:            "CreateDirectoryMembership",
+	DeleteDirectoryMembershipDocument:            "DeleteDirectoryMembership",
+	GetAllDirectoryMembershipsDocument:           "GetAllDirectoryMemberships",
+	GetDirectoryMembershipByIDDocument:           "GetDirectoryMembershipByID",
+	GetDirectoryMembershipsDocument:              "GetDirectoryMemberships",
+	UpdateDirectoryMembershipDocument:            "UpdateDirectoryMembership",
+	CreateBulkCSVDirectorySyncRunDocument:        "CreateBulkCSVDirectorySyncRun",
+	CreateBulkDirectorySyncRunDocument:           "CreateBulkDirectorySyncRun",
+	CreateDirectorySyncRunDocument:               "CreateDirectorySyncRun",
+	DeleteDirectorySyncRunDocument:               "DeleteDirectorySyncRun",
+	GetAllDirectorySyncRunsDocument:              "GetAllDirectorySyncRuns",
+	GetDirectorySyncRunByIDDocument:              "GetDirectorySyncRunByID",
+	GetDirectorySyncRunsDocument:                 "GetDirectorySyncRuns",
+	UpdateDirectorySyncRunDocument:               "UpdateDirectorySyncRun",
+	CreateBulkCSVDiscussionDocument:              "CreateBulkCSVDiscussion",
+	CreateBulkDiscussionDocument:                 "CreateBulkDiscussion",
+	CreateDiscussionDocument:                     "CreateDiscussion",
+	DeleteDiscussionDocument:                     "DeleteDiscussion",
+	GetAllDiscussionsDocument:                    "GetAllDiscussions",
+	GetDiscussionByIDDocument:                    "GetDiscussionByID",
+	GetDiscussionsDocument:                       "GetDiscussions",
+	UpdateDiscussionDocument:                     "UpdateDiscussion",
+	CreateBulkCSVDNSVerificationDocument:         "CreateBulkCSVDNSVerification",
+	CreateBulkDNSVerificationDocument:            "CreateBulkDNSVerification",
+	CreateDNSVerificationDocument:                "CreateDNSVerification",
+	DeleteDNSVerificationDocument:                "DeleteDNSVerification",
+	GetAllDNSVerificationsDocument:               "GetAllDNSVerifications",
+	GetDNSVerificationByIDDocument:               "GetDNSVerificationByID",
+	GetDNSVerificationsDocument:                  "GetDNSVerifications",
+	UpdateDNSVerificationDocument:                "UpdateDNSVerification",
+	CreateBulkCSVDocumentDataDocument:            "CreateBulkCSVDocumentData",
+	CreateBulkDocumentDataDocument:               "CreateBulkDocumentData",
+	CreateDocumentDataDocument:                   "CreateDocumentData",
+	DeleteDocumentDataDocument:                   "DeleteDocumentData",
+	GetDocumentDataByIDDocument:                  "GetDocumentDataByID",
+	UpdateDocumentDataDocument:                   "UpdateDocumentData",
+	CreateBulkCSVEntityDocument:                  "CreateBulkCSVEntity",
+	CreateBulkEntityDocument:                     "CreateBulkEntity",
+	CreateEntityDocument:                         "CreateEntity",
+	DeleteEntityDocument:                         "DeleteEntity",
+	GetAllEntitiesDocument:                       "GetAllEntities",
+	GetEntitiesDocument:                          "GetEntities",
+	GetEntityByIDDocument:                        "GetEntityByID",
+	UpdateEntityDocument:                         "UpdateEntity",
+	CreateBulkCSVEntityTypeDocument:              "CreateBulkCSVEntityType",
+	CreateBulkEntityTypeDocument:                 "CreateBulkEntityType",
+	CreateEntityTypeDocument:                     "CreateEntityType",
+	DeleteEntityTypeDocument:                     "DeleteEntityType",
+	GetAllEntityTypesDocument:                    "GetAllEntityTypes",
+	GetEntityTypeByIDDocument:                    "GetEntityTypeByID",
+	GetEntityTypesDocument:                       "GetEntityTypes",
+	UpdateEntityTypeDocument:                     "UpdateEntityType",
+	CreateBulkCSVEventDocument:                   "CreateBulkCSVEvent",
+	CreateBulkEventDocument:                      "CreateBulkEvent",
+	CreateEventDocument:                          "CreateEvent",
+	DeleteEventDocument:                          "DeleteEvent",
+	GetAllEventsDocument:                         "GetAllEvents",
+	GetEventByIDDocument:                         "GetEventByID",
+	GetEventsDocument:                            "GetEvents",
+	UpdateEventDocument:                          "UpdateEvent",
+	CreateEvidenceDocument:                       "CreateEvidence",
+	DeleteEvidenceDocument:                       "DeleteEvidence",
+	GetAllEvidencesDocument:                      "GetAllEvidences",
+	GetEvidenceByIDDocument:                      "GetEvidenceByID",
+	GetEvidencesDocument:                         "GetEvidences",
+	UpdateEvidenceDocument:                       "UpdateEvidence",
+	CreateExportDocument:                         "CreateExport",
+	DeleteBulkExportDocument:                     "DeleteBulkExport",
+	DeleteExportDocument:                         "DeleteExport",
+	GetAllExportsDocument:                        "GetAllExports",
+	GetExportByIDDocument:                        "GetExportByID",
+	GetExportsDocument:                           "GetExports",
+	UpdateExportDocument:                         "UpdateExport",
+	DeleteFileDocument:                           "DeleteFile",
+	GetAllFilesDocument:                          "GetAllFiles",
+	GetFileByIDDocument:                          "GetFileByID",
+	GetFilesDocument:                             "GetFiles",
+	CreateBulkCSVFindingDocument:                 "CreateBulkCSVFinding",
+	CreateBulkFindingDocument:                    "CreateBulkFinding",
+	CreateFindingDocument:                        "CreateFinding",
+	DeleteFindingDocument:                        "DeleteFinding",
+	GetAllFindingsDocument:                       "GetAllFindings",
+	GetFindingByIDDocument:                       "GetFindingByID",
+	GetFindingsDocument:                          "GetFindings",
+	UpdateFindingDocument:                        "UpdateFinding",
+	CreateBulkCSVFindingControlDocument:          "CreateBulkCSVFindingControl",
+	CreateBulkFindingControlDocument:             "CreateBulkFindingControl",
+	CreateFindingControlDocument:                 "CreateFindingControl",
+	DeleteFindingControlDocument:                 "DeleteFindingControl",
+	GetAllFindingControlsDocument:                "GetAllFindingControls",
+	GetFindingControlByIDDocument:                "GetFindingControlByID",
+	GetFindingControlsDocument:                   "GetFindingControls",
+	UpdateFindingControlDocument:                 "UpdateFindingControl",
+	CreateBulkCSVGroupDocument:                   "CreateBulkCSVGroup",
+	CreateBulkGroupDocument:                      "CreateBulkGroup",
+	CreateGroupDocument:                          "CreateGroup",
+	DeleteGroupDocument:                          "DeleteGroup",
+	GetAllGroupsDocument:                         "GetAllGroups",
+	GetGroupByIDDocument:                         "GetGroupByID",
+	GetGroupsDocument:                            "GetGroups",
+	UpdateGroupDocument:                          "UpdateGroup",
+	CreateBulkCSVGroupMembershipDocument:         "CreateBulkCSVGroupMembership",
+	CreateBulkGroupMembershipDocument:            "CreateBulkGroupMembership",
+	CreateGroupMembershipDocument:                "CreateGroupMembership",
+	DeleteGroupMembershipDocument:                "DeleteGroupMembership",
+	GetAllGroupMembershipsDocument:               "GetAllGroupMemberships",
+	GetGroupMembershipByIDDocument:               "GetGroupMembershipByID",
+	GetGroupMembershipsDocument:                  "GetGroupMemberships",
+	UpdateGroupMembershipDocument:                "UpdateGroupMembership",
+	CreateBulkCSVGroupSettingDocument:            "CreateBulkCSVGroupSetting",
+	CreateBulkGroupSettingDocument:               "CreateBulkGroupSetting",
+	CreateGroupSettingDocument:                   "CreateGroupSetting",
+	DeleteGroupSettingDocument:                   "DeleteGroupSetting",
+	GetAllGroupSettingsDocument:                  "GetAllGroupSettings",
+	GetGroupSettingByIDDocument:                  "GetGroupSettingByID",
+	GetGroupSettingsDocument:                     "GetGroupSettings",
+	UpdateGroupSettingDocument:                   "UpdateGroupSetting",
+	CreateBulkCSVHushDocument:                    "CreateBulkCSVHush",
+	CreateBulkHushDocument:                       "CreateBulkHush",
+	CreateHushDocument:                           "CreateHush",
+	DeleteHushDocument:                           "DeleteHush",
+	GetAllHushesDocument:                         "GetAllHushes",
+	GetHushByIDDocument:                          "GetHushByID",
+	GetHushesDocument:                            "GetHushes",
+	UpdateHushDocument:                           "UpdateHush",
+	DeleteIntegrationDocument:                    "DeleteIntegration",
+	GetAllIntegrationsDocument:                   "GetAllIntegrations",
+	GetIntegrationByIDDocument:                   "GetIntegrationByID",
+	GetIntegrationsDocument:                      "GetIntegrations",
+	CreateBulkCSVInternalPolicyDocument:          "CreateBulkCSVInternalPolicy",
+	CreateBulkInternalPolicyDocument:             "CreateBulkInternalPolicy",
+	CreateInternalPolicyDocument:                 "CreateInternalPolicy",
+	CreateUploadInternalPolicyDocument:           "CreateUploadInternalPolicy",
+	DeleteInternalPolicyDocument:                 "DeleteInternalPolicy",
+	GetAllInternalPoliciesDocument:               "GetAllInternalPolicies",
+	GetInternalPoliciesDocument:                  "GetInternalPolicies",
+	GetInternalPolicyByIDDocument:                "GetInternalPolicyByID",
+	UpdateInternalPolicyDocument:                 "UpdateInternalPolicy",
+	UpdateInternalPolicyWithFileDocument:         "UpdateInternalPolicyWithFile",
+	CreateBulkCSVInviteDocument:                  "CreateBulkCSVInvite",
+	CreateBulkInviteDocument:                     "CreateBulkInvite",
+	CreateInviteDocument:                         "CreateInvite",
+	DeleteInviteDocument:                         "DeleteInvite",
+	GetAllInvitesDocument:                        "GetAllInvites",
+	GetInviteByIDDocument:                        "GetInviteByID",
+	GetInvitesDocument:                           "GetInvites",
+	UpdateInviteDocument:                         "UpdateInvite",
+	CreateJobResultDocument:                      "CreateJobResult",
+	DeleteJobResultDocument:                      "DeleteJobResult",
+	GetAllJobResultsDocument:                     "GetAllJobResults",
+	GetJobResultByIDDocument:                     "GetJobResultByID",
+	GetJobResultsDocument:                        "GetJobResults",
+	UpdateJobResultDocument:                      "UpdateJobResult",
+	CreateJobRunnerDocument:                      "CreateJobRunner",
+	DeleteJobRunnerDocument:                      "DeleteJobRunner",
+	GetAllJobRunnersDocument:                     "GetAllJobRunners",
+	GetJobRunnerByIDDocument:                     "GetJobRunnerByID",
+	GetJobRunnersDocument:                        "GetJobRunners",
+	UpdateJobRunnerDocument:                      "UpdateJobRunner",
+	CreateJobRunnerRegistrationTokenDocument:     "CreateJobRunnerRegistrationToken",
+	DeleteJobRunnerRegistrationTokenDocument:     "DeleteJobRunnerRegistrationToken",
+	GetAllJobRunnerRegistrationTokensDocument:    "GetAllJobRunnerRegistrationTokens",
+	GetJobRunnerRegistrationTokenByIDDocument:    "GetJobRunnerRegistrationTokenByID",
+	GetJobRunnerRegistrationTokensDocument:       "GetJobRunnerRegistrationTokens",
+	CreateJobRunnerTokenDocument:                 "CreateJobRunnerToken",
+	DeleteJobRunnerTokenDocument:                 "DeleteJobRunnerToken",
+	GetAllJobRunnerTokensDocument:                "GetAllJobRunnerTokens",
+	GetJobRunnerTokenByIDDocument:                "GetJobRunnerTokenByID",
+	GetJobRunnerTokensDocument:                   "GetJobRunnerTokens",
+	CreateBulkCSVJobTemplateDocument:             "CreateBulkCSVJobTemplate",
+	CreateBulkJobTemplateDocument:                "CreateBulkJobTemplate",
+	CreateJobTemplateDocument:                    "CreateJobTemplate",
+	DeleteJobTemplateDocument:                    "DeleteJobTemplate",
+	GetAllJobTemplatesDocument:                   "GetAllJobTemplates",
+	GetJobTemplateByIDDocument:                   "GetJobTemplateByID",
+	GetJobTemplatesDocument:                      "GetJobTemplates",
+	UpdateJobTemplateDocument:                    "UpdateJobTemplate",
+	CreateBulkCSVMappableDomainDocument:          "CreateBulkCSVMappableDomain",
+	CreateBulkMappableDomainDocument:             "CreateBulkMappableDomain",
+	CreateMappableDomainDocument:                 "CreateMappableDomain",
+	DeleteMappableDomainDocument:                 "DeleteMappableDomain",
+	GetAllMappableDomainsDocument:                "GetAllMappableDomains",
+	GetMappableDomainByIDDocument:                "GetMappableDomainByID",
+	GetMappableDomainsDocument:                   "GetMappableDomains",
+	UpdateMappableDomainDocument:                 "UpdateMappableDomain",
+	CreateBulkCSVMappedControlDocument:           "CreateBulkCSVMappedControl",
+	CreateBulkMappedControlDocument:              "CreateBulkMappedControl",
+	CreateMappedControlDocument:                  "CreateMappedControl",
+	DeleteMappedControlDocument:                  "DeleteMappedControl",
+	GetAllMappedControlsDocument:                 "GetAllMappedControls",
+	GetMappedAllFromControlsForIDDocument:        "GetMappedAllFromControlsForID",
+	GetMappedAllFromSubcontrolsForIDDocument:     "GetMappedAllFromSubcontrolsForID",
+	GetMappedAllToControlsForIDDocument:          "GetMappedAllToControlsForID",
+	GetMappedAllToSubcontrolsForIDDocument:       "GetMappedAllToSubcontrolsForID",
+	GetMappedControlByIDDocument:                 "GetMappedControlByID",
+	GetMappedControlsDocument:                    "GetMappedControls",
+	UpdateMappedControlDocument:                  "UpdateMappedControl",
+	CreateBulkCSVNarrativeDocument:               "CreateBulkCSVNarrative",
+	CreateBulkNarrativeDocument:                  "CreateBulkNarrative",
+	CreateNarrativeDocument:                      "CreateNarrative",
+	DeleteNarrativeDocument:                      "DeleteNarrative",
+	GetAllNarrativesDocument:                     "GetAllNarratives",
+	GetNarrativeByIDDocument:                     "GetNarrativeByID",
+	GetNarrativesDocument:                        "GetNarratives",
+	UpdateNarrativeDocument:                      "UpdateNarrative",
+	DeleteNoteDocument:                           "DeleteNote",
+	CreateOnboardingDocument:                     "CreateOnboarding",
+	CreateOrganizationDocument:                   "CreateOrganization",
+	DeleteOrganizationDocument:                   "DeleteOrganization",
+	GetAllOrganizationsDocument:                  "GetAllOrganizations",
+	GetOrganizationByIDDocument:                  "GetOrganizationByID",
+	GetOrganizationsDocument:                     "GetOrganizations",
+	UpdateOrganizationDocument:                   "UpdateOrganization",
+	CreateBulkCSVOrganizationSettingDocument:     "CreateBulkCSVOrganizationSetting",
+	CreateBulkOrganizationSettingDocument:        "CreateBulkOrganizationSetting",
+	CreateOrganizationSettingDocument:            "CreateOrganizationSetting",
+	DeleteOrganizationSettingDocument:            "DeleteOrganizationSetting",
+	GetAllOrganizationSettingsDocument:           "GetAllOrganizationSettings",
+	GetOrganizationSettingByIDDocument:           "GetOrganizationSettingByID",
+	GetOrganizationSettingsDocument:              "GetOrganizationSettings",
+	UpdateOrganizationSettingDocument:            "UpdateOrganizationSetting",
+	CreateBulkCSVOrgMembershipDocument:           "CreateBulkCSVOrgMembership",
+	CreateBulkOrgMembershipDocument:              "CreateBulkOrgMembership",
+	CreateOrgMembershipDocument:                  "CreateOrgMembership",
+	DeleteOrgMembershipDocument:                  "DeleteOrgMembership",
+	GetAllOrgMembershipsDocument:                 "GetAllOrgMemberships",
+	GetOrgMembershipByIDDocument:                 "GetOrgMembershipByID",
+	GetOrgMembershipsDocument:                    "GetOrgMemberships",
+	UpdateOrgMembershipDocument:                  "UpdateOrgMembership",
+	GetAllOrgSubscriptionsDocument:               "GetAllOrgSubscriptions",
+	GetOrgSubscriptionByIDDocument:               "GetOrgSubscriptionByID",
+	GetOrgSubscriptionsDocument:                  "GetOrgSubscriptions",
+	CreatePersonalAccessTokenDocument:            "CreatePersonalAccessToken",
+	DeletePersonalAccessTokenDocument:            "DeletePersonalAccessToken",
+	GetAllPersonalAccessTokensDocument:           "GetAllPersonalAccessTokens",
+	GetPersonalAccessTokenByIDDocument:           "GetPersonalAccessTokenByID",
+	GetPersonalAccessTokensDocument:              "GetPersonalAccessTokens",
+	UpdatePersonalAccessTokenDocument:            "UpdatePersonalAccessToken",
+	CreateBulkCSVProcedureDocument:               "CreateBulkCSVProcedure",
+	CreateBulkProcedureDocument:                  "CreateBulkProcedure",
+	CreateProcedureDocument:                      "CreateProcedure",
+	CreateUploadProcedureDocument:                "CreateUploadProcedure",
+	DeleteProcedureDocument:                      "DeleteProcedure",
+	GetAllProceduresDocument:                     "GetAllProcedures",
+	GetProcedureByIDDocument:                     "GetProcedureByID",
+	GetProceduresDocument:                        "GetProcedures",
+	UpdateProcedureDocument:                      "UpdateProcedure",
+	UpdateProcedureWithFileDocument:              "UpdateProcedureWithFile",
+	CreateBulkCSVProgramDocument:                 "CreateBulkCSVProgram",
+	CreateBulkProgramDocument:                    "CreateBulkProgram",
+	CreateProgramDocument:                        "CreateProgram",
+	DeleteProgramDocument:                        "DeleteProgram",
+	GetAllProgramsDocument:                       "GetAllPrograms",
+	GetProgramByIDDocument:                       "GetProgramByID",
+	GetProgramsDocument:                          "GetPrograms",
+	UpdateProgramDocument:                        "UpdateProgram",
+	CreateBulkCSVProgramMembershipDocument:       "CreateBulkCSVProgramMembership",
+	CreateBulkProgramMembershipDocument:          "CreateBulkProgramMembership",
+	CreateProgramMembershipDocument:              "CreateProgramMembership",
+	DeleteProgramMembershipDocument:              "DeleteProgramMembership",
+	GetAllProgramMembershipsDocument:             "GetAllProgramMemberships",
+	GetProgramMembershipByIDDocument:             "GetProgramMembershipByID",
+	GetProgramMembershipsDocument:                "GetProgramMemberships",
+	UpdateProgramMembershipDocument:              "UpdateProgramMembership",
+	CreateBulkCSVRemediationDocument:             "CreateBulkCSVRemediation",
+	CreateBulkRemediationDocument:                "CreateBulkRemediation",
+	CreateRemediationDocument:                    "CreateRemediation",
+	DeleteRemediationDocument:                    "DeleteRemediation",
+	GetAllRemediationsDocument:                   "GetAllRemediations",
+	GetRemediationByIDDocument:                   "GetRemediationByID",
+	GetRemediationsDocument:                      "GetRemediations",
+	UpdateRemediationDocument:                    "UpdateRemediation",
+	CreateBulkCSVReviewDocument:                  "CreateBulkCSVReview",
+	CreateBulkReviewDocument:                     "CreateBulkReview",
+	CreateReviewDocument:                         "CreateReview",
+	DeleteReviewDocument:                         "DeleteReview",
+	GetAllReviewsDocument:                        "GetAllReviews",
+	GetReviewByIDDocument:                        "GetReviewByID",
+	GetReviewsDocument:                           "GetReviews",
+	UpdateReviewDocument:                         "UpdateReview",
+	CreateBulkCSVRiskDocument:                    "CreateBulkCSVRisk",
+	CreateBulkRiskDocument:                       "CreateBulkRisk",
+	CreateRiskDocument:                           "CreateRisk",
+	DeleteRiskDocument:                           "DeleteRisk",
+	GetAllRisksDocument:                          "GetAllRisks",
+	GetRiskByIDDocument:                          "GetRiskByID",
+	GetRisksDocument:                             "GetRisks",
+	UpdateRiskDocument:                           "UpdateRisk",
+	CreateBulkCSVScanDocument:                    "CreateBulkCSVScan",
+	CreateBulkScanDocument:                       "CreateBulkScan",
+	CreateScanDocument:                           "CreateScan",
+	DeleteScanDocument:                           "DeleteScan",
+	GetAllScansDocument:                          "GetAllScans",
+	GetScanByIDDocument:                          "GetScanByID",
+	GetScansDocument:                             "GetScans",
+	UpdateScanDocument:                           "UpdateScan",
+	CreateBulkCSVScheduledJobDocument:            "CreateBulkCSVScheduledJob",
+	CreateBulkScheduledJobDocument:               "CreateBulkScheduledJob",
+	CreateScheduledJobDocument:                   "CreateScheduledJob",
+	DeleteScheduledJobDocument:                   "DeleteScheduledJob",
+	GetAllScheduledJobsDocument:                  "GetAllScheduledJobs",
+	GetScheduledJobByIDDocument:                  "GetScheduledJobByID",
+	GetScheduledJobsDocument:                     "GetScheduledJobs",
+	UpdateScheduledJobDocument:                   "UpdateScheduledJob",
+	CreateScheduledJobRunDocument:                "CreateScheduledJobRun",
+	DeleteScheduledJobRunDocument:                "DeleteScheduledJobRun",
+	GetAllScheduledJobRunsDocument:               "GetAllScheduledJobRuns",
+	GetScheduledJobRunByIDDocument:               "GetScheduledJobRunByID",
+	GetScheduledJobRunsDocument:                  "GetScheduledJobRuns",
+	UpdateScheduledJobRunDocument:                "UpdateScheduledJobRun",
+	GlobalSearchDocument:                         "GlobalSearch",
+	CreateStandardDocument:                       "CreateStandard",
+	DeleteStandardDocument:                       "DeleteStandard",
+	GetAllStandardsDocument:                      "GetAllStandards",
+	GetStandardByIDDocument:                      "GetStandardByID",
+	GetStandardsDocument:                         "GetStandards",
+	UpdateStandardDocument:                       "UpdateStandard",
+	CreateBulkCSVSubcontrolDocument:              "CreateBulkCSVSubcontrol",
+	CreateBulkSubcontrolDocument:                 "CreateBulkSubcontrol",
+	CreateSubcontrolDocument:                     "CreateSubcontrol",
+	DeleteSubcontrolDocument:                     "DeleteSubcontrol",
+	GetAllSubcontrolsDocument:                    "GetAllSubcontrols",
+	GetSubcontrolByIDDocument:                    "GetSubcontrolByID",
+	GetSubcontrolsDocument:                       "GetSubcontrols",
+	UpdateSubcontrolDocument:                     "UpdateSubcontrol",
+	CreateBulkCSVSubprocessorDocument:            "CreateBulkCSVSubprocessor",
+	CreateBulkSubprocessorDocument:               "CreateBulkSubprocessor",
+	CreateSubprocessorDocument:                   "CreateSubprocessor",
+	DeleteBulkSubprocessorDocument:               "DeleteBulkSubprocessor",
+	DeleteSubprocessorDocument:                   "DeleteSubprocessor",
+	GetAllSubprocessorsDocument:                  "GetAllSubprocessors",
+	GetSubprocessorByIDDocument:                  "GetSubprocessorByID",
+	GetSubprocessorsDocument:                     "GetSubprocessors",
+	UpdateBulkSubprocessorDocument:               "UpdateBulkSubprocessor",
+	UpdateSubprocessorDocument:                   "UpdateSubprocessor",
+	CreateBulkCSVSubscriberDocument:              "CreateBulkCSVSubscriber",
+	CreateBulkSubscriberDocument:                 "CreateBulkSubscriber",
+	CreateSubscriberDocument:                     "CreateSubscriber",
+	DeleteSubscriberDocument:                     "DeleteSubscriber",
+	GetAllSubscribersDocument:                    "GetAllSubscribers",
+	GetSubscriberByEmailDocument:                 "GetSubscriberByEmail",
+	GetSubscribersDocument:                       "GetSubscribers",
+	UpdateSubscriberDocument:                     "UpdateSubscriber",
+	CreateBulkCSVTagDefinitionDocument:           "CreateBulkCSVTagDefinition",
+	CreateBulkTagDefinitionDocument:              "CreateBulkTagDefinition",
+	CreateTagDefinitionDocument:                  "CreateTagDefinition",
+	DeleteTagDefinitionDocument:                  "DeleteTagDefinition",
+	GetAllTagDefinitionsDocument:                 "GetAllTagDefinitions",
+	GetTagDefinitionByIDDocument:                 "GetTagDefinitionByID",
+	GetTagDefinitionsDocument:                    "GetTagDefinitions",
+	UpdateTagDefinitionDocument:                  "UpdateTagDefinition",
+	CreateBulkCSVTaskDocument:                    "CreateBulkCSVTask",
+	CreateBulkTaskDocument:                       "CreateBulkTask",
+	CreateTaskDocument:                           "CreateTask",
+	DeleteTaskDocument:                           "DeleteTask",
+	GetAllTasksDocument:                          "GetAllTasks",
+	GetTaskByIDDocument:                          "GetTaskByID",
+	GetTasksDocument:                             "GetTasks",
+	UpdateTaskDocument:                           "UpdateTask",
+	CreateBulkCSVTemplateDocument:                "CreateBulkCSVTemplate",
+	CreateBulkTemplateDocument:                   "CreateBulkTemplate",
+	CreateTemplateDocument:                       "CreateTemplate",
+	DeleteTemplateDocument:                       "DeleteTemplate",
+	GetAllTemplatesDocument:                      "GetAllTemplates",
+	GetTemplateByIDDocument:                      "GetTemplateByID",
+	GetTemplatesDocument:                         "GetTemplates",
+	UpdateTemplateDocument:                       "UpdateTemplate",
+	CreateTFASettingDocument:                     "CreateTFASetting",
+	GetAllTFASettingsDocument:                    "GetAllTFASettings",
+	GetTFASettingByIDDocument:                    "GetTFASettingByID",
+	GetTFASettingsDocument:                       "GetTFASettings",
+	UpdateTFASettingDocument:                     "UpdateTFASetting",
+	CreateTrustCenterDocument:                    "CreateTrustCenter",
+	DeleteTrustCenterDocument:                    "DeleteTrustCenter",
+	GetAllTrustCentersDocument:                   "GetAllTrustCenters",
+	GetTrustCenterByIDDocument:                   "GetTrustCenterByID",
+	GetTrustCentersDocument:                      "GetTrustCenters",
+	UpdateTrustCenterDocument:                    "UpdateTrustCenter",
+	CreateBulkCSVTrustCenterComplianceDocument:   "CreateBulkCSVTrustCenterCompliance",
+	CreateBulkTrustCenterComplianceDocument:      "CreateBulkTrustCenterCompliance",
+	CreateTrustCenterComplianceDocument:          "CreateTrustCenterCompliance",
+	DeleteTrustCenterComplianceDocument:          "DeleteTrustCenterCompliance",
+	GetAllTrustCenterCompliancesDocument:         "GetAllTrustCenterCompliances",
+	GetTrustCenterComplianceByIDDocument:         "GetTrustCenterComplianceByID",
+	GetTrustCenterCompliancesDocument:            "GetTrustCenterCompliances",
+	UpdateTrustCenterComplianceDocument:          "UpdateTrustCenterCompliance",
+	CreateTrustCenterDocDocument:                 "CreateTrustCenterDoc",
+	DeleteTrustCenterDocDocument:                 "DeleteTrustCenterDoc",
+	GetAllTrustCenterDocsDocument:                "GetAllTrustCenterDocs",
+	GetTrustCenterDocByIDDocument:                "GetTrustCenterDocByID",
+	GetTrustCenterDocsDocument:                   "GetTrustCenterDocs",
+	UpdateTrustCenterDocDocument:                 "UpdateTrustCenterDoc",
+	CreateTrustCenterDomainDocument:              "CreateTrustCenterDomain",
+	CreateTrustCenterNdaDocument:                 "CreateTrustCenterNda",
+	SendTrustCenterNDAEmailDocument:              "SendTrustCenterNDAEmail",
+	SubmitTrustCenterNDAResponseDocument:         "SubmitTrustCenterNDAResponse",
+	UpdateTrustCenterNdaDocument:                 "UpdateTrustCenterNda",
+	CreateTrustCenterPreviewSettingDocument:      "CreateTrustCenterPreviewSetting",
+	CreateTrustCenterSettingDocument:             "CreateTrustCenterSetting",
+	DeleteTrustCenterSettingDocument:             "DeleteTrustCenterSetting",
+	GetAllTrustCenterSettingsDocument:            "GetAllTrustCenterSettings",
+	GetTrustCenterSettingByIDDocument:            "GetTrustCenterSettingByID",
+	GetTrustCenterSettingsDocument:               "GetTrustCenterSettings",
+	UpdateTrustCenterSettingDocument:             "UpdateTrustCenterSetting",
+	CreateBulkCSVTrustCenterSubprocessorDocument: "CreateBulkCSVTrustCenterSubprocessor",
+	CreateBulkTrustCenterSubprocessorDocument:    "CreateBulkTrustCenterSubprocessor",
+	CreateTrustCenterSubprocessorDocument:        "CreateTrustCenterSubprocessor",
+	DeleteBulkTrustCenterSubprocessorDocument:    "DeleteBulkTrustCenterSubprocessor",
+	DeleteTrustCenterSubprocessorDocument:        "DeleteTrustCenterSubprocessor",
+	GetAllTrustCenterSubprocessorsDocument:       "GetAllTrustCenterSubprocessors",
+	GetTrustCenterSubprocessorByIDDocument:       "GetTrustCenterSubprocessorByID",
+	GetTrustCenterSubprocessorsDocument:          "GetTrustCenterSubprocessors",
+	UpdateBulkTrustCenterSubprocessorDocument:    "UpdateBulkTrustCenterSubprocessor",
+	UpdateTrustCenterSubprocessorDocument:        "UpdateTrustCenterSubprocessor",
+	CreateTrustCenterWatermarkConfigDocument:     "CreateTrustCenterWatermarkConfig",
+	DeleteTrustCenterWatermarkConfigDocument:     "DeleteTrustCenterWatermarkConfig",
+	GetAllTrustCenterWatermarkConfigsDocument:    "GetAllTrustCenterWatermarkConfigs",
+	GetTrustCenterWatermarkConfigByIDDocument:    "GetTrustCenterWatermarkConfigByID",
+	GetTrustCenterWatermarkConfigsDocument:       "GetTrustCenterWatermarkConfigs",
+	UpdateTrustCenterWatermarkConfigDocument:     "UpdateTrustCenterWatermarkConfig",
+	CreateUserDocument:                           "CreateUser",
+	DeleteUserDocument:                           "DeleteUser",
+	GetAllUsersDocument:                          "GetAllUsers",
+	GetSelfDocument:                              "GetSelf",
+	GetUserByIDDocument:                          "GetUserByID",
+	GetUsersDocument:                             "GetUsers",
+	UpdateUserDocument:                           "UpdateUser",
+	CreateUserSettingDocument:                    "CreateUserSetting",
+	GetAllUserSettingsDocument:                   "GetAllUserSettings",
+	GetUserSettingByIDDocument:                   "GetUserSettingByID",
+	GetUserSettingsDocument:                      "GetUserSettings",
+	UpdateUserSettingDocument:                    "UpdateUserSetting",
+	CreateBulkCSVVulnerabilityDocument:           "CreateBulkCSVVulnerability",
+	CreateBulkVulnerabilityDocument:              "CreateBulkVulnerability",
+	CreateVulnerabilityDocument:                  "CreateVulnerability",
+	DeleteVulnerabilityDocument:                  "DeleteVulnerability",
+	GetAllVulnerabilitiesDocument:                "GetAllVulnerabilities",
+	GetVulnerabilityByIDDocument:                 "GetVulnerabilityByID",
+	GetVulnerabilitiesDocument:                   "GetVulnerabilities",
+	UpdateVulnerabilityDocument:                  "UpdateVulnerability",
+	DeleteWebauthnDocument:                       "DeleteWebauthn",
+	GetAllWebauthnsDocument:                      "GetAllWebauthns",
+	GetAllWorkflowAssignmentsDocument:            "GetAllWorkflowAssignments",
+	GetWorkflowAssignmentByIDDocument:            "GetWorkflowAssignmentByID",
+	GetWorkflowAssignmentsDocument:               "GetWorkflowAssignments",
+	GetAllWorkflowAssignmentTargetsDocument:      "GetAllWorkflowAssignmentTargets",
+	GetWorkflowAssignmentTargetByIDDocument:      "GetWorkflowAssignmentTargetByID",
+	GetWorkflowAssignmentTargetsDocument:         "GetWorkflowAssignmentTargets",
+	CreateBulkCSVWorkflowDefinitionDocument:      "CreateBulkCSVWorkflowDefinition",
+	CreateBulkWorkflowDefinitionDocument:         "CreateBulkWorkflowDefinition",
+	CreateWorkflowDefinitionDocument:             "CreateWorkflowDefinition",
+	DeleteWorkflowDefinitionDocument:             "DeleteWorkflowDefinition",
+	GetAllWorkflowDefinitionsDocument:            "GetAllWorkflowDefinitions",
+	GetWorkflowDefinitionByIDDocument:            "GetWorkflowDefinitionByID",
+	GetWorkflowDefinitionsDocument:               "GetWorkflowDefinitions",
+	UpdateWorkflowDefinitionDocument:             "UpdateWorkflowDefinition",
+	CreateBulkCSVWorkflowEventDocument:           "CreateBulkCSVWorkflowEvent",
+	CreateBulkWorkflowEventDocument:              "CreateBulkWorkflowEvent",
+	CreateWorkflowEventDocument:                  "CreateWorkflowEvent",
+	DeleteWorkflowEventDocument:                  "DeleteWorkflowEvent",
+	GetAllWorkflowEventsDocument:                 "GetAllWorkflowEvents",
+	GetWorkflowEventByIDDocument:                 "GetWorkflowEventByID",
+	GetWorkflowEventsDocument:                    "GetWorkflowEvents",
+	UpdateWorkflowEventDocument:                  "UpdateWorkflowEvent",
+	GetAllWorkflowInstancesDocument:              "GetAllWorkflowInstances",
+	GetWorkflowInstanceByIDDocument:              "GetWorkflowInstanceByID",
+	GetWorkflowInstancesDocument:                 "GetWorkflowInstances",
+	CreateBulkCSVWorkflowObjectRefDocument:       "CreateBulkCSVWorkflowObjectRef",
+	CreateBulkWorkflowObjectRefDocument:          "CreateBulkWorkflowObjectRef",
+	CreateWorkflowObjectRefDocument:              "CreateWorkflowObjectRef",
+	DeleteWorkflowObjectRefDocument:              "DeleteWorkflowObjectRef",
+	GetAllWorkflowObjectRefsDocument:             "GetAllWorkflowObjectRefs",
+	GetWorkflowObjectRefByIDDocument:             "GetWorkflowObjectRefByID",
+	GetWorkflowObjectRefsDocument:                "GetWorkflowObjectRefs",
 }

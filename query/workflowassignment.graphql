@@ -1,89 +1,4 @@
-
-mutation CreateBulkCSVWorkflowAssignment($input: Upload!) {
-  createBulkCSVWorkflowAssignment(input: $input) {
-    workflowAssignments {
-      actorGroupID
-      actorUserID
-      assignmentKey
-      createdAt
-      createdBy
-      decidedAt
-      displayID
-      id
-      label
-      metadata
-      notes
-      ownerID
-      required
-      role
-      status
-      tags
-      updatedAt
-      updatedBy
-      workflowInstanceID
-    }
-  }
-}
-
-mutation CreateBulkWorkflowAssignment($input: [CreateWorkflowAssignmentInput!]) {
-  createBulkWorkflowAssignment(input: $input) {
-    workflowAssignments {
-      actorGroupID
-      actorUserID
-      assignmentKey
-      createdAt
-      createdBy
-      decidedAt
-      displayID
-      id
-      label
-      metadata
-      notes
-      ownerID
-      required
-      role
-      status
-      tags
-      updatedAt
-      updatedBy
-      workflowInstanceID
-    }
-  }
-}
-
-mutation CreateWorkflowAssignment($input: CreateWorkflowAssignmentInput!) {
-  createWorkflowAssignment(input: $input) {
-    workflowAssignment {
-      actorGroupID
-      actorUserID
-      assignmentKey
-      createdAt
-      createdBy
-      decidedAt
-      displayID
-      id
-      label
-      metadata
-      notes
-      ownerID
-      required
-      role
-      status
-      tags
-      updatedAt
-      updatedBy
-      workflowInstanceID
-    }
-  }
-}
-
-mutation DeleteWorkflowAssignment($deleteWorkflowAssignmentId: ID!) {
-  deleteWorkflowAssignment(id: $deleteWorkflowAssignmentId) {
-    deletedID
-  }
-}
-
-query GetAllWorkflowAssignments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowAssignmentOrder!]){
+query GetAllWorkflowAssignments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowAssignmentOrder!]) {
   workflowAssignments(
     first: $first
     last: $last
@@ -123,6 +38,7 @@ query GetAllWorkflowAssignments($first: Int, $last: Int, $after: Cursor, $before
     }
   }
 }
+
 query GetWorkflowAssignmentByID($workflowAssignmentId: ID!) {
   workflowAssignment(id: $workflowAssignmentId) {
     actorGroupID
@@ -148,7 +64,7 @@ query GetWorkflowAssignmentByID($workflowAssignmentId: ID!) {
 }
 
 query GetWorkflowAssignments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: WorkflowAssignmentWhereInput, $orderBy: [WorkflowAssignmentOrder!]) {
-workflowAssignments(
+  workflowAssignments(
     first: $first
     last: $last
     after: $after
@@ -185,31 +101,6 @@ workflowAssignments(
         updatedBy
         workflowInstanceID
       }
-    }
-  }
-}
-mutation UpdateWorkflowAssignment($updateWorkflowAssignmentId: ID!, $input: UpdateWorkflowAssignmentInput!) {
-  updateWorkflowAssignment(id: $updateWorkflowAssignmentId, input: $input) {
-    workflowAssignment {
-      actorGroupID
-      actorUserID
-      assignmentKey
-      createdAt
-      createdBy
-      decidedAt
-      displayID
-      id
-      label
-      metadata
-      notes
-      ownerID
-      required
-      role
-      status
-      tags
-      updatedAt
-      updatedBy
-      workflowInstanceID
     }
   }
 }

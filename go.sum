@@ -182,6 +182,8 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/theopenlane/core/common v1.0.1 h1:jcuau4CEPx6oSB4ZKr3rpYW75c2PLGTbmQnfHOJ5/6U=
 github.com/theopenlane/core/common v1.0.1/go.mod h1:YtuzGWC2beESJViCwrl8PV9fg4U/l1UHSh2TZiuhaxg=
+github.com/theopenlane/core/common v1.0.3 h1:iy8qKeM1RXYZPj9CafWRoNTbQTlJTuFJs5nvoQyeRhU=
+github.com/theopenlane/core/common v1.0.3/go.mod h1:Ru7UDataDDxrRZgfi2aP8H/aMO0pKKPYIuzn0Ej0rB0=
 github.com/theopenlane/echox v0.3.0 h1:uwOKEw+r1utGQoOR6dZQqAVuY5j8TcasqnTwO5+rMsA=
 github.com/theopenlane/echox v0.3.0/go.mod h1:yTrXnj7s3VNIg0FCvB7Dut2Elr+LqJKU/nruxx1E1cM=
 github.com/theopenlane/entx v0.20.5 h1:G4pzJI4Wy7wRGi+cP8jC6Uv+849Us9HkBW+fAGFt5x8=
@@ -190,6 +192,8 @@ github.com/theopenlane/httpsling v0.3.0 h1:Bad0dGdqCqAB8UVDyVo+YCevzRvGHhmkK22F7
 github.com/theopenlane/httpsling v0.3.0/go.mod h1:iJc3XRLYTFIpfCnPpLZVMBP0xsWIPAb7ozARtQoclAE=
 github.com/theopenlane/iam v0.23.2 h1:Hhsk1o3tCqOozXGHduxZs2aFsJP3DXjcGcqJEBmNMCA=
 github.com/theopenlane/iam v0.23.2/go.mod h1:LjB/4yim6FN3eHPU+h6ttcv7WyZ8wXvXeIUGF05uolU=
+github.com/theopenlane/iam v0.23.3 h1:eKURC25+ASVF0JXmbrqD809kM/3xUcb2RTagfNSa7ZI=
+github.com/theopenlane/iam v0.23.3/go.mod h1:LUukz+sahnj3VN2yXJH0ssgunaXG3EOPJXkXvLlmz5A=
 github.com/theopenlane/utils v0.6.2 h1:7TgABVt0rb+Dhph3N7DEBAO3jcB/J+wgVv47F2Nry7c=
 github.com/theopenlane/utils v0.6.2/go.mod h1:7STP+gs2LAYYKLS7blxq8FTY5jvL7R0riLiUQJfTeM0=
 github.com/valyala/bytebufferpool v1.0.0 h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6KllzawFIhcdPw=

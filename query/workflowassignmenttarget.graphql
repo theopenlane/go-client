@@ -1,69 +1,3 @@
-mutation CreateBulkCSVWorkflowAssignmentTarget($input: Upload!) {
-  createBulkCSVWorkflowAssignmentTarget(input: $input) {
-    workflowAssignmentTargets {
-      createdAt
-      createdBy
-      displayID
-      id
-      ownerID
-      resolverKey
-      tags
-      targetGroupID
-      targetType
-      targetUserID
-      updatedAt
-      updatedBy
-      workflowAssignmentID
-    }
-  }
-}
-
-mutation CreateBulkWorkflowAssignmentTarget($input: [CreateWorkflowAssignmentTargetInput!]) {
-  createBulkWorkflowAssignmentTarget(input: $input) {
-    workflowAssignmentTargets {
-      createdAt
-      createdBy
-      displayID
-      id
-      ownerID
-      resolverKey
-      tags
-      targetGroupID
-      targetType
-      targetUserID
-      updatedAt
-      updatedBy
-      workflowAssignmentID
-    }
-  }
-}
-
-mutation CreateWorkflowAssignmentTarget($input: CreateWorkflowAssignmentTargetInput!) {
-  createWorkflowAssignmentTarget(input: $input) {
-    workflowAssignmentTarget {
-      createdAt
-      createdBy
-      displayID
-      id
-      ownerID
-      resolverKey
-      tags
-      targetGroupID
-      targetType
-      targetUserID
-      updatedAt
-      updatedBy
-      workflowAssignmentID
-    }
-  }
-}
-
-mutation DeleteWorkflowAssignmentTarget($deleteWorkflowAssignmentTargetId: ID!) {
-  deleteWorkflowAssignmentTarget(id: $deleteWorkflowAssignmentTargetId) {
-    deletedID
-  }
-}
-
 query GetAllWorkflowAssignmentTargets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowAssignmentTargetOrder!]) {
   workflowAssignmentTargets(
     first: $first
@@ -149,29 +83,6 @@ query GetWorkflowAssignmentTargets($first: Int, $last: Int, $after: Cursor, $bef
         updatedBy
         workflowAssignmentID
       }
-    }
-  }
-}
-
-mutation UpdateWorkflowAssignmentTarget($updateWorkflowAssignmentTargetId: ID!, $input: UpdateWorkflowAssignmentTargetInput!) {
-  updateWorkflowAssignmentTarget(
-    id: $updateWorkflowAssignmentTargetId
-    input: $input
-  ) {
-    workflowAssignmentTarget {
-      createdAt
-      createdBy
-      displayID
-      id
-      ownerID
-      resolverKey
-      tags
-      targetGroupID
-      targetType
-      targetUserID
-      updatedAt
-      updatedBy
-      workflowAssignmentID
     }
   }
 }
