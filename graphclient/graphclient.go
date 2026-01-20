@@ -68385,6 +68385,7 @@ func (t *GetAllTrustCenters_TrustCenters_Edges_Node_Setting_FaviconFile) GetPres
 type GetAllTrustCenters_TrustCenters_Edges_Node_Setting struct {
 	AccentColor        *string                                                         "json:\"accentColor,omitempty\" graphql:\"accentColor\""
 	BackgroundColor    *string                                                         "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	CompanyDomain      *string                                                         "json:\"companyDomain,omitempty\" graphql:\"companyDomain\""
 	FaviconFile        *GetAllTrustCenters_TrustCenters_Edges_Node_Setting_FaviconFile "json:\"faviconFile,omitempty\" graphql:\"faviconFile\""
 	FaviconLocalFileID *string                                                         "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
 	FaviconRemoteURL   *string                                                         "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
@@ -68396,6 +68397,7 @@ type GetAllTrustCenters_TrustCenters_Edges_Node_Setting struct {
 	LogoRemoteURL      *string                                                         "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
 	Overview           *string                                                         "json:\"overview,omitempty\" graphql:\"overview\""
 	PrimaryColor       *string                                                         "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	SecurityContact    *string                                                         "json:\"securityContact,omitempty\" graphql:\"securityContact\""
 	ThemeMode          *enums.TrustCenterThemeMode                                     "json:\"themeMode,omitempty\" graphql:\"themeMode\""
 	Title              *string                                                         "json:\"title,omitempty\" graphql:\"title\""
 }
@@ -68411,6 +68413,12 @@ func (t *GetAllTrustCenters_TrustCenters_Edges_Node_Setting) GetBackgroundColor(
 		t = &GetAllTrustCenters_TrustCenters_Edges_Node_Setting{}
 	}
 	return t.BackgroundColor
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_Setting) GetCompanyDomain() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_Setting{}
+	}
+	return t.CompanyDomain
 }
 func (t *GetAllTrustCenters_TrustCenters_Edges_Node_Setting) GetFaviconFile() *GetAllTrustCenters_TrustCenters_Edges_Node_Setting_FaviconFile {
 	if t == nil {
@@ -68477,6 +68485,12 @@ func (t *GetAllTrustCenters_TrustCenters_Edges_Node_Setting) GetPrimaryColor() *
 		t = &GetAllTrustCenters_TrustCenters_Edges_Node_Setting{}
 	}
 	return t.PrimaryColor
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node_Setting) GetSecurityContact() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node_Setting{}
+	}
+	return t.SecurityContact
 }
 func (t *GetAllTrustCenters_TrustCenters_Edges_Node_Setting) GetThemeMode() *enums.TrustCenterThemeMode {
 	if t == nil {
@@ -68746,6 +68760,24 @@ func (t *GetAllTrustCenters_TrustCenters) GetTotalCount() int64 {
 	return t.TotalCount
 }
 
+type GetTrustCenterByID_TrustCenter_Owner struct {
+	DisplayName string "json:\"displayName\" graphql:\"displayName\""
+	ID          string "json:\"id\" graphql:\"id\""
+}
+
+func (t *GetTrustCenterByID_TrustCenter_Owner) GetDisplayName() string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_Owner{}
+	}
+	return t.DisplayName
+}
+func (t *GetTrustCenterByID_TrustCenter_Owner) GetID() string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_Owner{}
+	}
+	return t.ID
+}
+
 type GetTrustCenterByID_TrustCenter_CustomDomain struct {
 	CnameRecord       string  "json:\"cnameRecord\" graphql:\"cnameRecord\""
 	DNSVerificationID *string "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
@@ -68867,6 +68899,7 @@ func (t *GetTrustCenterByID_TrustCenter_Setting_FaviconFile) GetPresignedURL() *
 type GetTrustCenterByID_TrustCenter_Setting struct {
 	AccentColor        *string                                             "json:\"accentColor,omitempty\" graphql:\"accentColor\""
 	BackgroundColor    *string                                             "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	CompanyDomain      *string                                             "json:\"companyDomain,omitempty\" graphql:\"companyDomain\""
 	FaviconFile        *GetTrustCenterByID_TrustCenter_Setting_FaviconFile "json:\"faviconFile,omitempty\" graphql:\"faviconFile\""
 	FaviconLocalFileID *string                                             "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
 	FaviconRemoteURL   *string                                             "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
@@ -68878,6 +68911,7 @@ type GetTrustCenterByID_TrustCenter_Setting struct {
 	LogoRemoteURL      *string                                             "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
 	Overview           *string                                             "json:\"overview,omitempty\" graphql:\"overview\""
 	PrimaryColor       *string                                             "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	SecurityContact    *string                                             "json:\"securityContact,omitempty\" graphql:\"securityContact\""
 	ThemeMode          *enums.TrustCenterThemeMode                         "json:\"themeMode,omitempty\" graphql:\"themeMode\""
 	Title              *string                                             "json:\"title,omitempty\" graphql:\"title\""
 }
@@ -68893,6 +68927,12 @@ func (t *GetTrustCenterByID_TrustCenter_Setting) GetBackgroundColor() *string {
 		t = &GetTrustCenterByID_TrustCenter_Setting{}
 	}
 	return t.BackgroundColor
+}
+func (t *GetTrustCenterByID_TrustCenter_Setting) GetCompanyDomain() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_Setting{}
+	}
+	return t.CompanyDomain
 }
 func (t *GetTrustCenterByID_TrustCenter_Setting) GetFaviconFile() *GetTrustCenterByID_TrustCenter_Setting_FaviconFile {
 	if t == nil {
@@ -68959,6 +68999,12 @@ func (t *GetTrustCenterByID_TrustCenter_Setting) GetPrimaryColor() *string {
 		t = &GetTrustCenterByID_TrustCenter_Setting{}
 	}
 	return t.PrimaryColor
+}
+func (t *GetTrustCenterByID_TrustCenter_Setting) GetSecurityContact() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_Setting{}
+	}
+	return t.SecurityContact
 }
 func (t *GetTrustCenterByID_TrustCenter_Setting) GetThemeMode() *enums.TrustCenterThemeMode {
 	if t == nil {
@@ -69110,6 +69156,7 @@ type GetTrustCenterByID_TrustCenter struct {
 	CustomDomain             *GetTrustCenterByID_TrustCenter_CustomDomain   "json:\"customDomain,omitempty\" graphql:\"customDomain\""
 	CustomDomainID           *string                                        "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
 	ID                       string                                         "json:\"id\" graphql:\"id\""
+	Owner                    *GetTrustCenterByID_TrustCenter_Owner          "json:\"owner,omitempty\" graphql:\"owner\""
 	OwnerID                  *string                                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	PirschDomainID           *string                                        "json:\"pirschDomainID,omitempty\" graphql:\"pirschDomainID\""
 	PirschIdentificationCode *string                                        "json:\"pirschIdentificationCode,omitempty\" graphql:\"pirschIdentificationCode\""
@@ -69151,6 +69198,12 @@ func (t *GetTrustCenterByID_TrustCenter) GetID() string {
 		t = &GetTrustCenterByID_TrustCenter{}
 	}
 	return t.ID
+}
+func (t *GetTrustCenterByID_TrustCenter) GetOwner() *GetTrustCenterByID_TrustCenter_Owner {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter{}
+	}
+	return t.Owner
 }
 func (t *GetTrustCenterByID_TrustCenter) GetOwnerID() *string {
 	if t == nil {
@@ -69288,6 +69341,7 @@ func (t *GetTrustCenters_TrustCenters_Edges_Node_Setting_FaviconFile) GetPresign
 type GetTrustCenters_TrustCenters_Edges_Node_Setting struct {
 	AccentColor        *string                                                      "json:\"accentColor,omitempty\" graphql:\"accentColor\""
 	BackgroundColor    *string                                                      "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
+	CompanyDomain      *string                                                      "json:\"companyDomain,omitempty\" graphql:\"companyDomain\""
 	FaviconFile        *GetTrustCenters_TrustCenters_Edges_Node_Setting_FaviconFile "json:\"faviconFile,omitempty\" graphql:\"faviconFile\""
 	FaviconLocalFileID *string                                                      "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
 	FaviconRemoteURL   *string                                                      "json:\"faviconRemoteURL,omitempty\" graphql:\"faviconRemoteURL\""
@@ -69299,6 +69353,7 @@ type GetTrustCenters_TrustCenters_Edges_Node_Setting struct {
 	LogoRemoteURL      *string                                                      "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
 	Overview           *string                                                      "json:\"overview,omitempty\" graphql:\"overview\""
 	PrimaryColor       *string                                                      "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
+	SecurityContact    *string                                                      "json:\"securityContact,omitempty\" graphql:\"securityContact\""
 	ThemeMode          *enums.TrustCenterThemeMode                                  "json:\"themeMode,omitempty\" graphql:\"themeMode\""
 	Title              *string                                                      "json:\"title,omitempty\" graphql:\"title\""
 }
@@ -69314,6 +69369,12 @@ func (t *GetTrustCenters_TrustCenters_Edges_Node_Setting) GetBackgroundColor() *
 		t = &GetTrustCenters_TrustCenters_Edges_Node_Setting{}
 	}
 	return t.BackgroundColor
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_Setting) GetCompanyDomain() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_Setting{}
+	}
+	return t.CompanyDomain
 }
 func (t *GetTrustCenters_TrustCenters_Edges_Node_Setting) GetFaviconFile() *GetTrustCenters_TrustCenters_Edges_Node_Setting_FaviconFile {
 	if t == nil {
@@ -69380,6 +69441,12 @@ func (t *GetTrustCenters_TrustCenters_Edges_Node_Setting) GetPrimaryColor() *str
 		t = &GetTrustCenters_TrustCenters_Edges_Node_Setting{}
 	}
 	return t.PrimaryColor
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node_Setting) GetSecurityContact() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node_Setting{}
+	}
+	return t.SecurityContact
 }
 func (t *GetTrustCenters_TrustCenters_Edges_Node_Setting) GetThemeMode() *enums.TrustCenterThemeMode {
 	if t == nil {
@@ -111298,6 +111365,8 @@ const GetAllTrustCentersDocument = `query GetAllTrustCenters ($first: Int, $last
 					id
 					overview
 					title
+					companyDomain
+					securityContact
 					primaryColor
 					logoRemoteURL
 					logoLocalFileID
@@ -111370,6 +111439,10 @@ const GetTrustCenterByIDDocument = `query GetTrustCenterByID ($trustCenterId: ID
 		customDomainID
 		id
 		ownerID
+		owner {
+			id
+			displayName
+		}
 		pirschDomainID
 		pirschIdentificationCode
 		slug
@@ -111397,6 +111470,8 @@ const GetTrustCenterByIDDocument = `query GetTrustCenterByID ($trustCenterId: ID
 			id
 			overview
 			title
+			companyDomain
+			securityContact
 			primaryColor
 			logoRemoteURL
 			logoLocalFileID
@@ -111484,6 +111559,8 @@ const GetTrustCentersDocument = `query GetTrustCenters ($first: Int, $last: Int,
 					id
 					overview
 					title
+					companyDomain
+					securityContact
 					primaryColor
 					logoRemoteURL
 					logoLocalFileID

@@ -79,6 +79,8 @@ query GetAllTrustCenters($first: Int, $last: Int, $after: Cursor, $before: Curso
           id
           overview
           title
+          companyDomain
+          securityContact
           primaryColor
           logoRemoteURL
           logoLocalFileID
@@ -129,6 +131,10 @@ query GetTrustCenterByID($trustCenterId: ID!) {
     customDomainID
     id
     ownerID
+    owner {
+      id
+      displayName
+    }
     pirschDomainID
     pirschIdentificationCode
     slug
@@ -156,6 +162,8 @@ query GetTrustCenterByID($trustCenterId: ID!) {
       id
       overview
       title
+      companyDomain
+      securityContact
       primaryColor
       logoRemoteURL
       logoLocalFileID
@@ -232,6 +240,8 @@ query GetTrustCenters($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
           id
           overview
           title
+          companyDomain
+          securityContact
           primaryColor
           logoRemoteURL
           logoLocalFileID
