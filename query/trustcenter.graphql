@@ -129,6 +129,10 @@ query GetTrustCenterByID($trustCenterId: ID!) {
     customDomainID
     id
     ownerID
+    owner {
+      id
+      displayName
+    }
     pirschDomainID
     pirschIdentificationCode
     slug
