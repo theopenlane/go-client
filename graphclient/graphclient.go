@@ -91612,6 +91612,7 @@ const CreateBulkControlDocument = `mutation CreateBulkControl ($input: [CreateCo
 			description
 			displayID
 			exampleEvidence
+			evidenceRequests
 			id
 			implementationGuidance
 			mappedCategories
@@ -91670,6 +91671,7 @@ const CreateBulkCSVControlDocument = `mutation CreateBulkCSVControl ($input: Upl
 			description
 			displayID
 			exampleEvidence
+			evidenceRequests
 			id
 			implementationGuidance
 			mappedCategories
@@ -91728,6 +91730,7 @@ const CreateControlDocument = `mutation CreateControl ($input: CreateControlInpu
 			description
 			displayID
 			exampleEvidence
+			evidenceRequests
 			id
 			implementationGuidance
 			mappedCategories
@@ -91818,6 +91821,7 @@ const GetAllControlsDocument = `query GetAllControls ($first: Int, $last: Int, $
 				description
 				displayID
 				exampleEvidence
+				evidenceRequests
 				id
 				implementationGuidance
 				mappedCategories
@@ -91880,6 +91884,7 @@ const GetControlByIDDocument = `query GetControlByID ($controlId: ID!) {
 		description
 		displayID
 		exampleEvidence
+		evidenceRequests
 		id
 		implementationGuidance
 		mappedCategories
@@ -91945,6 +91950,7 @@ const GetControlsDocument = `query GetControls ($first: Int, $last: Int, $after:
 				description
 				displayID
 				exampleEvidence
+				evidenceRequests
 				id
 				implementationGuidance
 				mappedCategories
@@ -92009,6 +92015,7 @@ const UpdateControlDocument = `mutation UpdateControl ($updateControlId: ID!, $i
 			description
 			displayID
 			exampleEvidence
+			evidenceRequests
 			id
 			implementationGuidance
 			mappedCategories
