@@ -16,6 +16,7 @@ mutation CreateBulkControl($input: [CreateControlInput!]) {
       description
       displayID
       exampleEvidence
+      evidenceRequests
       id
       implementationGuidance
       mappedCategories
@@ -56,6 +57,7 @@ mutation CreateBulkCSVControl($input: Upload!) {
       description
       displayID
       exampleEvidence
+      evidenceRequests
       id
       implementationGuidance
       mappedCategories
@@ -96,6 +98,7 @@ mutation CreateControl($input: CreateControlInput!) {
       description
       displayID
       exampleEvidence
+      evidenceRequests
       id
       implementationGuidance
       mappedCategories
@@ -124,7 +127,7 @@ mutation DeleteControl($deleteControlId: ID!) {
   }
 }
 
-query GetAllControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]){
+query GetAllControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
   controls(
     first: $first
     last: $last
@@ -156,6 +159,7 @@ query GetAllControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
         description
         displayID
         exampleEvidence
+        evidenceRequests
         id
         implementationGuidance
         mappedCategories
@@ -189,13 +193,14 @@ query GetControlByID($controlId: ID!) {
     categoryID
     controlOwnerID
     controlQuestions
-        controlKindName
+    controlKindName
     createdAt
     createdBy
     delegateID
     description
     displayID
     exampleEvidence
+    evidenceRequests
     id
     implementationGuidance
     mappedCategories
@@ -218,7 +223,7 @@ query GetControlByID($controlId: ID!) {
 }
 
 query GetControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ControlWhereInput, $orderBy: [ControlOrder!]) {
-controls(
+  controls(
     first: $first
     last: $last
     after: $after
@@ -250,6 +255,7 @@ controls(
         description
         displayID
         exampleEvidence
+        evidenceRequests
         id
         implementationGuidance
         mappedCategories
@@ -291,6 +297,7 @@ mutation UpdateControl($updateControlId: ID!, $input: UpdateControlInput!) {
       description
       displayID
       exampleEvidence
+      evidenceRequests
       id
       implementationGuidance
       mappedCategories
