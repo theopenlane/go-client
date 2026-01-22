@@ -61105,6 +61105,7 @@ type CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -61207,6 +61208,12 @@ func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetDisplay
 		t = &CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols{}
 	}
 	return t.DisplayID
+}
+func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols{}
+	}
+	return t.EvidenceRequests
 }
 func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
@@ -61337,6 +61344,7 @@ type CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -61439,6 +61447,12 @@ func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetDisplayID() s
 		t = &CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols{}
 	}
 	return t.DisplayID
+}
+func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols{}
+	}
+	return t.EvidenceRequests
 }
 func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
@@ -61569,6 +61583,7 @@ type CreateSubcontrol_CreateSubcontrol_Subcontrol struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -61671,6 +61686,12 @@ func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetDisplayID() string {
 		t = &CreateSubcontrol_CreateSubcontrol_Subcontrol{}
 	}
 	return t.DisplayID
+}
+func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &CreateSubcontrol_CreateSubcontrol_Subcontrol{}
+	}
+	return t.EvidenceRequests
 }
 func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
@@ -61844,6 +61865,7 @@ type GetAllSubcontrols_Subcontrols_Edges_Node struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -61946,6 +61968,12 @@ func (t *GetAllSubcontrols_Subcontrols_Edges_Node) GetDisplayID() string {
 		t = &GetAllSubcontrols_Subcontrols_Edges_Node{}
 	}
 	return t.DisplayID
+}
+func (t *GetAllSubcontrols_Subcontrols_Edges_Node) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &GetAllSubcontrols_Subcontrols_Edges_Node{}
+	}
+	return t.EvidenceRequests
 }
 func (t *GetAllSubcontrols_Subcontrols_Edges_Node) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
@@ -62101,6 +62129,7 @@ type GetSubcontrolByID_Subcontrol struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -62203,6 +62232,12 @@ func (t *GetSubcontrolByID_Subcontrol) GetDisplayID() string {
 		t = &GetSubcontrolByID_Subcontrol{}
 	}
 	return t.DisplayID
+}
+func (t *GetSubcontrolByID_Subcontrol) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &GetSubcontrolByID_Subcontrol{}
+	}
+	return t.EvidenceRequests
 }
 func (t *GetSubcontrolByID_Subcontrol) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
@@ -62354,6 +62389,7 @@ type GetSubcontrols_Subcontrols_Edges_Node struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -62456,6 +62492,12 @@ func (t *GetSubcontrols_Subcontrols_Edges_Node) GetDisplayID() string {
 		t = &GetSubcontrols_Subcontrols_Edges_Node{}
 	}
 	return t.DisplayID
+}
+func (t *GetSubcontrols_Subcontrols_Edges_Node) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &GetSubcontrols_Subcontrols_Edges_Node{}
+	}
+	return t.EvidenceRequests
 }
 func (t *GetSubcontrols_Subcontrols_Edges_Node) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
@@ -62611,6 +62653,7 @@ type UpdateSubcontrol_UpdateSubcontrol_Subcontrol struct {
 	DelegateID             *string                          "json:\"delegateID,omitempty\" graphql:\"delegateID\""
 	Description            *string                          "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
@@ -62713,6 +62756,12 @@ func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetDisplayID() string {
 		t = &UpdateSubcontrol_UpdateSubcontrol_Subcontrol{}
 	}
 	return t.DisplayID
+}
+func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &UpdateSubcontrol_UpdateSubcontrol_Subcontrol{}
+	}
+	return t.EvidenceRequests
 }
 func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetExampleEvidence() []*models.ExampleEvidence {
 	if t == nil {
@@ -108936,6 +108985,7 @@ const CreateBulkCSVSubcontrolDocument = `mutation CreateBulkCSVSubcontrol ($inpu
 			description
 			displayID
 			exampleEvidence
+			evidenceRequests
 			id
 			implementationGuidance
 			mappedCategories
@@ -108992,6 +109042,7 @@ const CreateBulkSubcontrolDocument = `mutation CreateBulkSubcontrol ($input: [Cr
 			description
 			displayID
 			exampleEvidence
+			evidenceRequests
 			id
 			implementationGuidance
 			mappedCategories
@@ -109048,6 +109099,7 @@ const CreateSubcontrolDocument = `mutation CreateSubcontrol ($input: CreateSubco
 			description
 			displayID
 			exampleEvidence
+			evidenceRequests
 			id
 			implementationGuidance
 			mappedCategories
@@ -109136,6 +109188,7 @@ const GetAllSubcontrolsDocument = `query GetAllSubcontrols ($first: Int, $last: 
 				description
 				displayID
 				exampleEvidence
+				evidenceRequests
 				id
 				implementationGuidance
 				mappedCategories
@@ -109196,6 +109249,7 @@ const GetSubcontrolByIDDocument = `query GetSubcontrolByID ($subcontrolId: ID!) 
 		description
 		displayID
 		exampleEvidence
+		evidenceRequests
 		id
 		implementationGuidance
 		mappedCategories
@@ -109259,6 +109313,7 @@ const GetSubcontrolsDocument = `query GetSubcontrols ($first: Int, $last: Int, $
 				description
 				displayID
 				exampleEvidence
+				evidenceRequests
 				id
 				implementationGuidance
 				mappedCategories
@@ -109321,6 +109376,7 @@ const UpdateSubcontrolDocument = `mutation UpdateSubcontrol ($updateSubcontrolId
 			description
 			displayID
 			exampleEvidence
+			evidenceRequests
 			id
 			implementationGuidance
 			mappedCategories
