@@ -383,8 +383,12 @@ type ActionPlan struct {
 	WorkflowObjectRefs *WorkflowObjectRefConnection `json:"workflowObjectRefs"`
 	// Indicates if this actionPlan has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this actionPlan if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this actionPlan has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this actionPlan (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this actionPlan across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (ActionPlan) IsNode() {}
@@ -1004,6 +1008,8 @@ type AssessmentResponse struct {
 	OwnerID *string `json:"ownerID,omitempty"`
 	// the assessment this response is for
 	AssessmentID string `json:"assessmentID"`
+	// whether this assessment response is for a test send
+	IsTest bool `json:"isTest"`
 	// the campaign this response is associated with
 	CampaignID *string `json:"campaignID,omitempty"`
 	// the identity holder record for the recipient
@@ -1189,6 +1195,9 @@ type AssessmentResponseWhereInput struct {
 	AssessmentIDHasSuffix    *string  `json:"assessmentIDHasSuffix,omitempty"`
 	AssessmentIDEqualFold    *string  `json:"assessmentIDEqualFold,omitempty"`
 	AssessmentIDContainsFold *string  `json:"assessmentIDContainsFold,omitempty"`
+	// is_test field predicates
+	IsTest    *bool `json:"isTest,omitempty"`
+	IsTestNeq *bool `json:"isTestNEQ,omitempty"`
 	// campaign_id field predicates
 	CampaignID             *string  `json:"campaignID,omitempty"`
 	CampaignIdneq          *string  `json:"campaignIDNEQ,omitempty"`
@@ -2491,8 +2500,12 @@ type Campaign struct {
 	WorkflowObjectRefs  *WorkflowObjectRefConnection  `json:"workflowObjectRefs"`
 	// Indicates if this campaign has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this campaign if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this campaign has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this campaign (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this campaign across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (Campaign) IsNode() {}
@@ -2579,8 +2592,12 @@ type CampaignTarget struct {
 	WorkflowObjectRefs *WorkflowObjectRefConnection `json:"workflowObjectRefs"`
 	// Indicates if this campaignTarget has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this campaignTarget if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this campaignTarget has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this campaignTarget (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this campaignTarget across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (CampaignTarget) IsNode() {}
@@ -3788,8 +3805,12 @@ type Control struct {
 	ControlMappings        *FindingControlConnection        `json:"controlMappings"`
 	// Indicates if this control has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this control if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this control has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this control (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this control across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (Control) IsNode() {}
@@ -8061,6 +8082,8 @@ type CreateTrustCenterSettingInput struct {
 	Title *string `json:"title,omitempty"`
 	// company name for the trust center, defaults to the organization's display name
 	CompanyName *string `json:"companyName,omitempty"`
+	// company description for the trust center
+	CompanyDescription *string `json:"companyDescription,omitempty"`
 	// overview of the trust center
 	Overview *string `json:"overview,omitempty"`
 	// URL of the logo
@@ -8345,40 +8368,6 @@ type CreateWorkflowDefinitionInput struct {
 	OwnerID          *string  `json:"ownerID,omitempty"`
 	TagDefinitionIDs []string `json:"tagDefinitionIDs,omitempty"`
 	GroupIDs         []string `json:"groupIDs,omitempty"`
-}
-
-// CreateWorkflowEventInput is used for create WorkflowEvent object.
-// Input was generated by ent.
-type CreateWorkflowEventInput struct {
-	// tags associated with the object
-	Tags []string `json:"tags,omitempty"`
-	// Type of event, typically the action kind
-	EventType enums.WorkflowEventType `json:"eventType"`
-	// Payload for the event; stored raw
-	Payload            *models.WorkflowEventPayload `json:"payload,omitempty"`
-	OwnerID            *string                      `json:"ownerID,omitempty"`
-	WorkflowInstanceID string                       `json:"workflowInstanceID"`
-}
-
-// CreateWorkflowObjectRefInput is used for create WorkflowObjectRef object.
-// Input was generated by ent.
-type CreateWorkflowObjectRefInput struct {
-	OwnerID            *string `json:"ownerID,omitempty"`
-	WorkflowInstanceID string  `json:"workflowInstanceID"`
-	ControlID          *string `json:"controlID,omitempty"`
-	TaskID             *string `json:"taskID,omitempty"`
-	InternalPolicyID   *string `json:"internalPolicyID,omitempty"`
-	FindingID          *string `json:"findingID,omitempty"`
-	DirectoryAccountID *string `json:"directoryAccountID,omitempty"`
-	DirectoryGroupID   *string `json:"directoryGroupID,omitempty"`
-	EvidenceID         *string `json:"evidenceID,omitempty"`
-	SubcontrolID       *string `json:"subcontrolID,omitempty"`
-	ActionPlanID       *string `json:"actionPlanID,omitempty"`
-	ProcedureID        *string `json:"procedureID,omitempty"`
-	CampaignID         *string `json:"campaignID,omitempty"`
-	CampaignTargetID   *string `json:"campaignTargetID,omitempty"`
-	IdentityHolderID   *string `json:"identityHolderID,omitempty"`
-	PlatformID         *string `json:"platformID,omitempty"`
 }
 
 type CustomDomain struct {
@@ -12961,8 +12950,12 @@ type Evidence struct {
 	WorkflowObjectRefs     *WorkflowObjectRefConnection     `json:"workflowObjectRefs"`
 	// Indicates if this evidence has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this evidence if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this evidence has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this evidence (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this evidence across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (Evidence) IsNode() {}
@@ -16557,8 +16550,12 @@ type IdentityHolder struct {
 	User                *User                         `json:"user,omitempty"`
 	// Indicates if this identityHolder has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this identityHolder if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this identityHolder has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this identityHolder (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this identityHolder across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (IdentityHolder) IsNode() {}
@@ -17589,8 +17586,12 @@ type InternalPolicy struct {
 	WorkflowObjectRefs     *WorkflowObjectRefConnection     `json:"workflowObjectRefs"`
 	// Indicates if this internalPolicy has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this internalPolicy if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this internalPolicy has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this internalPolicy (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this internalPolicy across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (InternalPolicy) IsNode() {}
@@ -22627,8 +22628,12 @@ type Platform struct {
 	PlatformOwner              *User                        `json:"platformOwner,omitempty"`
 	// Indicates if this platform has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this platform if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this platform has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this platform (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this platform across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (Platform) IsNode() {}
@@ -23624,8 +23629,12 @@ type Procedure struct {
 	WorkflowObjectRefs *WorkflowObjectRefConnection `json:"workflowObjectRefs"`
 	// Indicates if this procedure has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this procedure if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this procedure has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this procedure (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this procedure across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (Procedure) IsNode() {}
@@ -27697,17 +27706,6 @@ type SearchResults struct {
 	SearchContext       []*models.SearchContext       `json:"searchContext,omitempty"`
 }
 
-type SendTrustCenterNDAEmailPayload struct {
-	Success bool `json:"success"`
-}
-
-type SendTrustCenterNDAInput struct {
-	// trust center id
-	TrustCenterID string `json:"trustCenterID"`
-	// email address
-	Email string `json:"email"`
-}
-
 type Standard struct {
 	ID        string     `json:"id"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
@@ -28251,8 +28249,12 @@ type Subcontrol struct {
 	WorkflowObjectRefs     *WorkflowObjectRefConnection     `json:"workflowObjectRefs"`
 	// Indicates if this subcontrol has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
-	// Returns the active workflow instance for this subcontrol if one is running
-	ActiveWorkflowInstance *WorkflowInstance `json:"activeWorkflowInstance,omitempty"`
+	// Indicates if this subcontrol has any workflow history (completed or failed instances)
+	HasWorkflowHistory bool `json:"hasWorkflowHistory"`
+	// Returns active workflow instances for this subcontrol (RUNNING or PAUSED)
+	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
+	// Returns the workflow event timeline for this subcontrol across all workflow instances
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (Subcontrol) IsNode() {}
@@ -31773,6 +31775,8 @@ type TrustCenterSetting struct {
 	Title *string `json:"title,omitempty"`
 	// company name for the trust center, defaults to the organization's display name
 	CompanyName *string `json:"companyName,omitempty"`
+	// company description for the trust center
+	CompanyDescription *string `json:"companyDescription,omitempty"`
 	// overview of the trust center
 	Overview *string `json:"overview,omitempty"`
 	// URL of the logo
@@ -31986,6 +31990,22 @@ type TrustCenterSettingWhereInput struct {
 	CompanyNameNotNil       *bool    `json:"companyNameNotNil,omitempty"`
 	CompanyNameEqualFold    *string  `json:"companyNameEqualFold,omitempty"`
 	CompanyNameContainsFold *string  `json:"companyNameContainsFold,omitempty"`
+	// company_description field predicates
+	CompanyDescription             *string  `json:"companyDescription,omitempty"`
+	CompanyDescriptionNeq          *string  `json:"companyDescriptionNEQ,omitempty"`
+	CompanyDescriptionIn           []string `json:"companyDescriptionIn,omitempty"`
+	CompanyDescriptionNotIn        []string `json:"companyDescriptionNotIn,omitempty"`
+	CompanyDescriptionGt           *string  `json:"companyDescriptionGT,omitempty"`
+	CompanyDescriptionGte          *string  `json:"companyDescriptionGTE,omitempty"`
+	CompanyDescriptionLt           *string  `json:"companyDescriptionLT,omitempty"`
+	CompanyDescriptionLte          *string  `json:"companyDescriptionLTE,omitempty"`
+	CompanyDescriptionContains     *string  `json:"companyDescriptionContains,omitempty"`
+	CompanyDescriptionHasPrefix    *string  `json:"companyDescriptionHasPrefix,omitempty"`
+	CompanyDescriptionHasSuffix    *string  `json:"companyDescriptionHasSuffix,omitempty"`
+	CompanyDescriptionIsNil        *bool    `json:"companyDescriptionIsNil,omitempty"`
+	CompanyDescriptionNotNil       *bool    `json:"companyDescriptionNotNil,omitempty"`
+	CompanyDescriptionEqualFold    *string  `json:"companyDescriptionEqualFold,omitempty"`
+	CompanyDescriptionContainsFold *string  `json:"companyDescriptionContainsFold,omitempty"`
 	// overview field predicates
 	Overview             *string  `json:"overview,omitempty"`
 	OverviewNeq          *string  `json:"overviewNEQ,omitempty"`
@@ -37807,6 +37827,9 @@ type UpdateTrustCenterSettingInput struct {
 	// company name for the trust center, defaults to the organization's display name
 	CompanyName      *string `json:"companyName,omitempty"`
 	ClearCompanyName *bool   `json:"clearCompanyName,omitempty"`
+	// company description for the trust center
+	CompanyDescription      *string `json:"companyDescription,omitempty"`
+	ClearCompanyDescription *bool   `json:"clearCompanyDescription,omitempty"`
 	// overview of the trust center
 	Overview      *string `json:"overview,omitempty"`
 	ClearOverview *bool   `json:"clearOverview,omitempty"`
@@ -38272,21 +38295,6 @@ type UpdateWorkflowDefinitionInput struct {
 	AddGroupIDs            []string `json:"addGroupIDs,omitempty"`
 	RemoveGroupIDs         []string `json:"removeGroupIDs,omitempty"`
 	ClearGroups            *bool    `json:"clearGroups,omitempty"`
-}
-
-// UpdateWorkflowEventInput is used for update WorkflowEvent object.
-// Input was generated by ent.
-type UpdateWorkflowEventInput struct {
-	// tags associated with the object
-	Tags       []string `json:"tags,omitempty"`
-	AppendTags []string `json:"appendTags,omitempty"`
-	ClearTags  *bool    `json:"clearTags,omitempty"`
-	// Type of event, typically the action kind
-	EventType *enums.WorkflowEventType `json:"eventType,omitempty"`
-	// Payload for the event; stored raw
-	Payload            *models.WorkflowEventPayload `json:"payload,omitempty"`
-	ClearPayload       *bool                        `json:"clearPayload,omitempty"`
-	WorkflowInstanceID *string                      `json:"workflowInstanceID,omitempty"`
 }
 
 type User struct {
@@ -40780,12 +40788,6 @@ type WorkflowEvent struct {
 
 func (WorkflowEvent) IsNode() {}
 
-// Return response for createBulkWorkflowEvent mutation
-type WorkflowEventBulkCreatePayload struct {
-	// Created workflowEvents
-	WorkflowEvents []*WorkflowEvent `json:"workflowEvents,omitempty"`
-}
-
 // A connection to a list of items.
 type WorkflowEventConnection struct {
 	// A list of edges.
@@ -40794,18 +40796,6 @@ type WorkflowEventConnection struct {
 	PageInfo *PageInfo `json:"pageInfo"`
 	// Identifies the total count of items in the connection.
 	TotalCount int64 `json:"totalCount"`
-}
-
-// Return response for createWorkflowEvent mutation
-type WorkflowEventCreatePayload struct {
-	// Created workflowEvent
-	WorkflowEvent *WorkflowEvent `json:"workflowEvent"`
-}
-
-// Return response for deleteWorkflowEvent mutation
-type WorkflowEventDeletePayload struct {
-	// Deleted workflowEvent ID
-	DeletedID string `json:"deletedID"`
 }
 
 // An edge in a connection.
@@ -40822,12 +40812,6 @@ type WorkflowEventOrder struct {
 	Direction OrderDirection `json:"direction"`
 	// The field by which to order WorkflowEvents.
 	Field WorkflowEventOrderField `json:"field"`
-}
-
-// Return response for updateWorkflowEvent mutation
-type WorkflowEventUpdatePayload struct {
-	// Updated workflowEvent
-	WorkflowEvent *WorkflowEvent `json:"workflowEvent"`
 }
 
 // WorkflowEventWhereInput is used for filtering WorkflowEvent objects.
@@ -41518,12 +41502,6 @@ type WorkflowObjectRef struct {
 
 func (WorkflowObjectRef) IsNode() {}
 
-// Return response for createBulkWorkflowObjectRef mutation
-type WorkflowObjectRefBulkCreatePayload struct {
-	// Created workflowObjectRefs
-	WorkflowObjectRefs []*WorkflowObjectRef `json:"workflowObjectRefs,omitempty"`
-}
-
 // A connection to a list of items.
 type WorkflowObjectRefConnection struct {
 	// A list of edges.
@@ -41532,18 +41510,6 @@ type WorkflowObjectRefConnection struct {
 	PageInfo *PageInfo `json:"pageInfo"`
 	// Identifies the total count of items in the connection.
 	TotalCount int64 `json:"totalCount"`
-}
-
-// Return response for createWorkflowObjectRef mutation
-type WorkflowObjectRefCreatePayload struct {
-	// Created workflowObjectRef
-	WorkflowObjectRef *WorkflowObjectRef `json:"workflowObjectRef"`
-}
-
-// Return response for deleteWorkflowObjectRef mutation
-type WorkflowObjectRefDeletePayload struct {
-	// Deleted workflowObjectRef ID
-	DeletedID string `json:"deletedID"`
 }
 
 // An edge in a connection.
