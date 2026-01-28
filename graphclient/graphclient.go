@@ -68247,17 +68247,18 @@ func (t *CreateTrustCenter_CreateTrustCenter_TrustCenter_Setting) GetTitle() *st
 }
 
 type CreateTrustCenter_CreateTrustCenter_TrustCenter struct {
-	CreatedAt      *time.Time                                                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CustomDomain   *CreateTrustCenter_CreateTrustCenter_TrustCenter_CustomDomain "json:\"customDomain,omitempty\" graphql:\"customDomain\""
-	CustomDomainID *string                                                       "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
-	ID             string                                                        "json:\"id\" graphql:\"id\""
-	OwnerID        *string                                                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Setting        *CreateTrustCenter_CreateTrustCenter_TrustCenter_Setting      "json:\"setting,omitempty\" graphql:\"setting\""
-	Slug           *string                                                       "json:\"slug,omitempty\" graphql:\"slug\""
-	Tags           []string                                                      "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt      *time.Time                                                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	CreatedAt        *time.Time                                                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                                                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CustomDomain     *CreateTrustCenter_CreateTrustCenter_TrustCenter_CustomDomain "json:\"customDomain,omitempty\" graphql:\"customDomain\""
+	CustomDomainID   *string                                                       "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
+	ID               string                                                        "json:\"id\" graphql:\"id\""
+	OwnerID          *string                                                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PirschAccessLink *string                                                       "json:\"pirschAccessLink,omitempty\" graphql:\"pirschAccessLink\""
+	Setting          *CreateTrustCenter_CreateTrustCenter_TrustCenter_Setting      "json:\"setting,omitempty\" graphql:\"setting\""
+	Slug             *string                                                       "json:\"slug,omitempty\" graphql:\"slug\""
+	Tags             []string                                                      "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                                                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                                                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *CreateTrustCenter_CreateTrustCenter_TrustCenter) GetCreatedAt() *time.Time {
@@ -68295,6 +68296,12 @@ func (t *CreateTrustCenter_CreateTrustCenter_TrustCenter) GetOwnerID() *string {
 		t = &CreateTrustCenter_CreateTrustCenter_TrustCenter{}
 	}
 	return t.OwnerID
+}
+func (t *CreateTrustCenter_CreateTrustCenter_TrustCenter) GetPirschAccessLink() *string {
+	if t == nil {
+		t = &CreateTrustCenter_CreateTrustCenter_TrustCenter{}
+	}
+	return t.PirschAccessLink
 }
 func (t *CreateTrustCenter_CreateTrustCenter_TrustCenter) GetSetting() *CreateTrustCenter_CreateTrustCenter_TrustCenter_Setting {
 	if t == nil {
@@ -68676,18 +68683,19 @@ func (t *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetTitle() *
 }
 
 type GetAllTrustCenters_TrustCenters_Edges_Node struct {
-	CreatedAt      *time.Time                                                 "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                                    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CustomDomain   *GetAllTrustCenters_TrustCenters_Edges_Node_CustomDomain   "json:\"customDomain,omitempty\" graphql:\"customDomain\""
-	CustomDomainID *string                                                    "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
-	ID             string                                                     "json:\"id\" graphql:\"id\""
-	OwnerID        *string                                                    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreviewSetting *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting "json:\"previewSetting,omitempty\" graphql:\"previewSetting\""
-	Setting        *GetAllTrustCenters_TrustCenters_Edges_Node_Setting        "json:\"setting,omitempty\" graphql:\"setting\""
-	Slug           *string                                                    "json:\"slug,omitempty\" graphql:\"slug\""
-	Tags           []string                                                   "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt      *time.Time                                                 "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                                    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	CreatedAt        *time.Time                                                 "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                                                    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CustomDomain     *GetAllTrustCenters_TrustCenters_Edges_Node_CustomDomain   "json:\"customDomain,omitempty\" graphql:\"customDomain\""
+	CustomDomainID   *string                                                    "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
+	ID               string                                                     "json:\"id\" graphql:\"id\""
+	OwnerID          *string                                                    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PirschAccessLink *string                                                    "json:\"pirschAccessLink,omitempty\" graphql:\"pirschAccessLink\""
+	PreviewSetting   *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting "json:\"previewSetting,omitempty\" graphql:\"previewSetting\""
+	Setting          *GetAllTrustCenters_TrustCenters_Edges_Node_Setting        "json:\"setting,omitempty\" graphql:\"setting\""
+	Slug             *string                                                    "json:\"slug,omitempty\" graphql:\"slug\""
+	Tags             []string                                                   "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                                                 "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                                                    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetAllTrustCenters_TrustCenters_Edges_Node) GetCreatedAt() *time.Time {
@@ -68725,6 +68733,12 @@ func (t *GetAllTrustCenters_TrustCenters_Edges_Node) GetOwnerID() *string {
 		t = &GetAllTrustCenters_TrustCenters_Edges_Node{}
 	}
 	return t.OwnerID
+}
+func (t *GetAllTrustCenters_TrustCenters_Edges_Node) GetPirschAccessLink() *string {
+	if t == nil {
+		t = &GetAllTrustCenters_TrustCenters_Edges_Node{}
+	}
+	return t.PirschAccessLink
 }
 func (t *GetAllTrustCenters_TrustCenters_Edges_Node) GetPreviewSetting() *GetAllTrustCenters_TrustCenters_Edges_Node_PreviewSetting {
 	if t == nil {
@@ -69197,6 +69211,7 @@ type GetTrustCenterByID_TrustCenter struct {
 	ID                       string                                         "json:\"id\" graphql:\"id\""
 	Owner                    *GetTrustCenterByID_TrustCenter_Owner          "json:\"owner,omitempty\" graphql:\"owner\""
 	OwnerID                  *string                                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PirschAccessLink         *string                                        "json:\"pirschAccessLink,omitempty\" graphql:\"pirschAccessLink\""
 	PirschDomainID           *string                                        "json:\"pirschDomainID,omitempty\" graphql:\"pirschDomainID\""
 	PirschIdentificationCode *string                                        "json:\"pirschIdentificationCode,omitempty\" graphql:\"pirschIdentificationCode\""
 	PreviewDomain            *GetTrustCenterByID_TrustCenter_PreviewDomain  "json:\"previewDomain,omitempty\" graphql:\"previewDomain\""
@@ -69249,6 +69264,12 @@ func (t *GetTrustCenterByID_TrustCenter) GetOwnerID() *string {
 		t = &GetTrustCenterByID_TrustCenter{}
 	}
 	return t.OwnerID
+}
+func (t *GetTrustCenterByID_TrustCenter) GetPirschAccessLink() *string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter{}
+	}
+	return t.PirschAccessLink
 }
 func (t *GetTrustCenterByID_TrustCenter) GetPirschDomainID() *string {
 	if t == nil {
@@ -69632,18 +69653,19 @@ func (t *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting) GetTitle() *str
 }
 
 type GetTrustCenters_TrustCenters_Edges_Node struct {
-	CreatedAt      *time.Time                                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CustomDomain   *GetTrustCenters_TrustCenters_Edges_Node_CustomDomain   "json:\"customDomain,omitempty\" graphql:\"customDomain\""
-	CustomDomainID *string                                                 "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
-	ID             string                                                  "json:\"id\" graphql:\"id\""
-	OwnerID        *string                                                 "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreviewSetting *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting "json:\"previewSetting,omitempty\" graphql:\"previewSetting\""
-	Setting        *GetTrustCenters_TrustCenters_Edges_Node_Setting        "json:\"setting,omitempty\" graphql:\"setting\""
-	Slug           *string                                                 "json:\"slug,omitempty\" graphql:\"slug\""
-	Tags           []string                                                "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt      *time.Time                                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	CreatedAt        *time.Time                                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CustomDomain     *GetTrustCenters_TrustCenters_Edges_Node_CustomDomain   "json:\"customDomain,omitempty\" graphql:\"customDomain\""
+	CustomDomainID   *string                                                 "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
+	ID               string                                                  "json:\"id\" graphql:\"id\""
+	OwnerID          *string                                                 "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PirschAccessLink *string                                                 "json:\"pirschAccessLink,omitempty\" graphql:\"pirschAccessLink\""
+	PreviewSetting   *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting "json:\"previewSetting,omitempty\" graphql:\"previewSetting\""
+	Setting          *GetTrustCenters_TrustCenters_Edges_Node_Setting        "json:\"setting,omitempty\" graphql:\"setting\""
+	Slug             *string                                                 "json:\"slug,omitempty\" graphql:\"slug\""
+	Tags             []string                                                "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetTrustCenters_TrustCenters_Edges_Node) GetCreatedAt() *time.Time {
@@ -69681,6 +69703,12 @@ func (t *GetTrustCenters_TrustCenters_Edges_Node) GetOwnerID() *string {
 		t = &GetTrustCenters_TrustCenters_Edges_Node{}
 	}
 	return t.OwnerID
+}
+func (t *GetTrustCenters_TrustCenters_Edges_Node) GetPirschAccessLink() *string {
+	if t == nil {
+		t = &GetTrustCenters_TrustCenters_Edges_Node{}
+	}
+	return t.PirschAccessLink
 }
 func (t *GetTrustCenters_TrustCenters_Edges_Node) GetPreviewSetting() *GetTrustCenters_TrustCenters_Edges_Node_PreviewSetting {
 	if t == nil {
@@ -69905,17 +69933,18 @@ func (t *UpdateTrustCenter_UpdateTrustCenter_TrustCenter_Setting) GetTitle() *st
 }
 
 type UpdateTrustCenter_UpdateTrustCenter_TrustCenter struct {
-	CreatedAt      *time.Time                                                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy      *string                                                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CustomDomain   *UpdateTrustCenter_UpdateTrustCenter_TrustCenter_CustomDomain "json:\"customDomain,omitempty\" graphql:\"customDomain\""
-	CustomDomainID *string                                                       "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
-	ID             string                                                        "json:\"id\" graphql:\"id\""
-	OwnerID        *string                                                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Setting        *UpdateTrustCenter_UpdateTrustCenter_TrustCenter_Setting      "json:\"setting,omitempty\" graphql:\"setting\""
-	Slug           *string                                                       "json:\"slug,omitempty\" graphql:\"slug\""
-	Tags           []string                                                      "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt      *time.Time                                                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy      *string                                                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	CreatedAt        *time.Time                                                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                                                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CustomDomain     *UpdateTrustCenter_UpdateTrustCenter_TrustCenter_CustomDomain "json:\"customDomain,omitempty\" graphql:\"customDomain\""
+	CustomDomainID   *string                                                       "json:\"customDomainID,omitempty\" graphql:\"customDomainID\""
+	ID               string                                                        "json:\"id\" graphql:\"id\""
+	OwnerID          *string                                                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PirschAccessLink *string                                                       "json:\"pirschAccessLink,omitempty\" graphql:\"pirschAccessLink\""
+	Setting          *UpdateTrustCenter_UpdateTrustCenter_TrustCenter_Setting      "json:\"setting,omitempty\" graphql:\"setting\""
+	Slug             *string                                                       "json:\"slug,omitempty\" graphql:\"slug\""
+	Tags             []string                                                      "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                                                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                                                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *UpdateTrustCenter_UpdateTrustCenter_TrustCenter) GetCreatedAt() *time.Time {
@@ -69953,6 +69982,12 @@ func (t *UpdateTrustCenter_UpdateTrustCenter_TrustCenter) GetOwnerID() *string {
 		t = &UpdateTrustCenter_UpdateTrustCenter_TrustCenter{}
 	}
 	return t.OwnerID
+}
+func (t *UpdateTrustCenter_UpdateTrustCenter_TrustCenter) GetPirschAccessLink() *string {
+	if t == nil {
+		t = &UpdateTrustCenter_UpdateTrustCenter_TrustCenter{}
+	}
+	return t.PirschAccessLink
 }
 func (t *UpdateTrustCenter_UpdateTrustCenter_TrustCenter) GetSetting() *UpdateTrustCenter_UpdateTrustCenter_TrustCenter_Setting {
 	if t == nil {
@@ -110444,6 +110479,7 @@ const CreateTrustCenterDocument = `mutation CreateTrustCenter ($input: CreateTru
 			customDomainID
 			id
 			ownerID
+			pirschAccessLink
 			slug
 			tags
 			updatedAt
@@ -110539,6 +110575,7 @@ const GetAllTrustCentersDocument = `query GetAllTrustCenters ($first: Int, $last
 				customDomainID
 				id
 				ownerID
+				pirschAccessLink
 				slug
 				tags
 				updatedAt
@@ -110625,6 +110662,7 @@ const GetTrustCenterByIDDocument = `query GetTrustCenterByID ($trustCenterId: ID
 			id
 			displayName
 		}
+		pirschAccessLink
 		pirschDomainID
 		pirschIdentificationCode
 		slug
@@ -110729,6 +110767,7 @@ const GetTrustCentersDocument = `query GetTrustCenters ($first: Int, $last: Int,
 				customDomainID
 				id
 				ownerID
+				pirschAccessLink
 				slug
 				tags
 				updatedAt
@@ -110817,6 +110856,7 @@ const UpdateTrustCenterDocument = `mutation UpdateTrustCenter ($updateTrustCente
 			customDomainID
 			id
 			ownerID
+			pirschAccessLink
 			slug
 			tags
 			updatedAt

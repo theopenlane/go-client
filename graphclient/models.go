@@ -7993,6 +7993,8 @@ type CreateTrustCenterInput struct {
 	PirschDomainID *string `json:"pirschDomainID,omitempty"`
 	// Pirsch ID code
 	PirschIdentificationCode *string `json:"pirschIdentificationCode,omitempty"`
+	// Pirsch access link
+	PirschAccessLink *string `json:"pirschAccessLink,omitempty"`
 	// preview status of the trust center
 	PreviewStatus *enums.TrustCenterPreviewStatus `json:"previewStatus,omitempty"`
 	// External URL for the trust center subprocessors
@@ -30668,6 +30670,8 @@ type TrustCenter struct {
 	PirschDomainID *string `json:"pirschDomainID,omitempty"`
 	// Pirsch ID code
 	PirschIdentificationCode *string `json:"pirschIdentificationCode,omitempty"`
+	// Pirsch access link
+	PirschAccessLink *string `json:"pirschAccessLink,omitempty"`
 	// preview status of the trust center
 	PreviewStatus *enums.TrustCenterPreviewStatus `json:"previewStatus,omitempty"`
 	// External URL for the trust center subprocessors
@@ -32955,6 +32959,22 @@ type TrustCenterWhereInput struct {
 	PirschIdentificationCodeNotNil       *bool    `json:"pirschIdentificationCodeNotNil,omitempty"`
 	PirschIdentificationCodeEqualFold    *string  `json:"pirschIdentificationCodeEqualFold,omitempty"`
 	PirschIdentificationCodeContainsFold *string  `json:"pirschIdentificationCodeContainsFold,omitempty"`
+	// pirsch_access_link field predicates
+	PirschAccessLink             *string  `json:"pirschAccessLink,omitempty"`
+	PirschAccessLinkNeq          *string  `json:"pirschAccessLinkNEQ,omitempty"`
+	PirschAccessLinkIn           []string `json:"pirschAccessLinkIn,omitempty"`
+	PirschAccessLinkNotIn        []string `json:"pirschAccessLinkNotIn,omitempty"`
+	PirschAccessLinkGt           *string  `json:"pirschAccessLinkGT,omitempty"`
+	PirschAccessLinkGte          *string  `json:"pirschAccessLinkGTE,omitempty"`
+	PirschAccessLinkLt           *string  `json:"pirschAccessLinkLT,omitempty"`
+	PirschAccessLinkLte          *string  `json:"pirschAccessLinkLTE,omitempty"`
+	PirschAccessLinkContains     *string  `json:"pirschAccessLinkContains,omitempty"`
+	PirschAccessLinkHasPrefix    *string  `json:"pirschAccessLinkHasPrefix,omitempty"`
+	PirschAccessLinkHasSuffix    *string  `json:"pirschAccessLinkHasSuffix,omitempty"`
+	PirschAccessLinkIsNil        *bool    `json:"pirschAccessLinkIsNil,omitempty"`
+	PirschAccessLinkNotNil       *bool    `json:"pirschAccessLinkNotNil,omitempty"`
+	PirschAccessLinkEqualFold    *string  `json:"pirschAccessLinkEqualFold,omitempty"`
+	PirschAccessLinkContainsFold *string  `json:"pirschAccessLinkContainsFold,omitempty"`
 	// preview_status field predicates
 	PreviewStatus       *enums.TrustCenterPreviewStatus  `json:"previewStatus,omitempty"`
 	PreviewStatusNeq    *enums.TrustCenterPreviewStatus  `json:"previewStatusNEQ,omitempty"`
@@ -37727,6 +37747,9 @@ type UpdateTrustCenterInput struct {
 	// Pirsch ID code
 	PirschIdentificationCode      *string `json:"pirschIdentificationCode,omitempty"`
 	ClearPirschIdentificationCode *bool   `json:"clearPirschIdentificationCode,omitempty"`
+	// Pirsch access link
+	PirschAccessLink      *string `json:"pirschAccessLink,omitempty"`
+	ClearPirschAccessLink *bool   `json:"clearPirschAccessLink,omitempty"`
 	// preview status of the trust center
 	PreviewStatus      *enums.TrustCenterPreviewStatus `json:"previewStatus,omitempty"`
 	ClearPreviewStatus *bool                           `json:"clearPreviewStatus,omitempty"`
@@ -40942,6 +40965,22 @@ type WorkflowEventWhereInput struct {
 	HasWorkflowInstanceWith []*WorkflowInstanceWhereInput `json:"hasWorkflowInstanceWith,omitempty"`
 }
 
+// WorkflowFieldDiff describes a proposed change for a single field.
+type WorkflowFieldDiff struct {
+	// Field name (snake_case)
+	Field string `json:"field"`
+	// Human-friendly field label when available
+	Label *string `json:"label,omitempty"`
+	// Field type metadata when available
+	Type *string `json:"type,omitempty"`
+	// Current field value
+	CurrentValue any `json:"currentValue,omitempty"`
+	// Proposed field value
+	ProposedValue any `json:"proposedValue,omitempty"`
+	// Unified diff for the field (when applicable)
+	Diff *string `json:"diff,omitempty"`
+}
+
 // Metadata for a workflow-eligible field
 type WorkflowFieldMetadata struct {
 	// The field name (snake_case)
@@ -41024,6 +41063,9 @@ type WorkflowInstance struct {
 	WorkflowAssignments *WorkflowAssignmentConnection `json:"workflowAssignments"`
 	WorkflowEvents      *WorkflowEventConnection      `json:"workflowEvents"`
 	WorkflowObjectRefs  *WorkflowObjectRefConnection  `json:"workflowObjectRefs"`
+	// Precomputed proposal preview (diff + values) for approval workflows.
+	// Only available to editors/owners of the target object.
+	ProposalPreview *WorkflowProposalPreview `json:"proposalPreview,omitempty"`
 }
 
 func (WorkflowInstance) IsNode() {}
@@ -41948,6 +41990,26 @@ type WorkflowObjectTypeMetadata struct {
 	EligibleFields []*WorkflowFieldMetadata `json:"eligibleFields"`
 	// Available resolver keys for this object type
 	ResolverKeys []string `json:"resolverKeys"`
+}
+
+// WorkflowProposalPreview describes the proposed changes alongside current values and diffs.
+type WorkflowProposalPreview struct {
+	// ID of the workflow proposal
+	ProposalID string `json:"proposalID"`
+	// Stable key representing the approval domain for this proposal
+	DomainKey string `json:"domainKey"`
+	// Current state of the proposal
+	State enums.WorkflowProposalState `json:"state"`
+	// Timestamp when the proposal was submitted
+	SubmittedAt *models.DateTime `json:"submittedAt,omitempty"`
+	// User who submitted the proposal
+	SubmittedByUserID *string `json:"submittedByUserID,omitempty"`
+	// Proposed changes for the approval domain
+	ProposedChanges map[string]any `json:"proposedChanges,omitempty"`
+	// Current values for the proposed fields
+	CurrentValues map[string]any `json:"currentValues,omitempty"`
+	// Field-level diffs for the proposed changes
+	Diffs []*WorkflowFieldDiff `json:"diffs"`
 }
 
 // Properties by which APIToken connections can be ordered.
