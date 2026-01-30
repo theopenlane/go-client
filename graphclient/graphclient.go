@@ -519,6 +519,14 @@ type GraphClient interface {
 	CreateTrustCenterNda(ctx context.Context, input CreateTrustCenterNDAInput, templateFiles []*graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterNda, error)
 	SubmitTrustCenterNDAResponse(ctx context.Context, input SubmitTrustCenterNDAResponseInput, interceptors ...clientv2.RequestInterceptor) (*SubmitTrustCenterNDAResponse, error)
 	UpdateTrustCenterNda(ctx context.Context, id string, templateFiles []*graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterNda, error)
+	CreateBulkCSVTrustCenterNDARequest(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVTrustCenterNDARequest, error)
+	CreateBulkTrustCenterNDARequest(ctx context.Context, input []*CreateTrustCenterNDARequestInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkTrustCenterNDARequest, error)
+	CreateTrustCenterNDARequest(ctx context.Context, input CreateTrustCenterNDARequestInput, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterNDARequest, error)
+	DeleteTrustCenterNDARequest(ctx context.Context, deleteTrustCenterNDARequestID string, interceptors ...clientv2.RequestInterceptor) (*DeleteTrustCenterNDARequest, error)
+	GetAllTrustCenterNDARequests(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*TrustCenterNDARequestOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllTrustCenterNDARequests, error)
+	GetTrustCenterNDARequestByID(ctx context.Context, trustCenterNDARequestID string, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterNDARequestByID, error)
+	GetTrustCenterNDARequests(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*TrustCenterNDARequestOrder, where *TrustCenterNDARequestWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterNDARequests, error)
+	UpdateTrustCenterNDARequest(ctx context.Context, updateTrustCenterNDARequestID string, input UpdateTrustCenterNDARequestInput, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterNDARequest, error)
 	CreateTrustCenterPreviewSetting(ctx context.Context, input CreateTrustCenterPreviewSettingInput, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterPreviewSetting, error)
 	CreateTrustCenterSetting(ctx context.Context, input CreateTrustCenterSettingInput, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterSetting, error)
 	DeleteTrustCenterSetting(ctx context.Context, deleteTrustCenterSettingID string, interceptors ...clientv2.RequestInterceptor) (*DeleteTrustCenterSetting, error)
@@ -72448,6 +72456,995 @@ func (t *UpdateTrustCenterNda_UpdateTrustCenterNda) GetTemplate() *UpdateTrustCe
 	return &t.Template
 }
 
+type CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests struct {
+	AccessLevel   *enums.TrustCenterNDARequestAccessLevel "json:\"accessLevel,omitempty\" graphql:\"accessLevel\""
+	CompanyName   *string                                 "json:\"companyName,omitempty\" graphql:\"companyName\""
+	CreatedAt     *time.Time                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy     *string                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Email         string                                  "json:\"email\" graphql:\"email\""
+	FirstName     string                                  "json:\"firstName\" graphql:\"firstName\""
+	ID            string                                  "json:\"id\" graphql:\"id\""
+	LastName      string                                  "json:\"lastName\" graphql:\"lastName\""
+	Reason        *string                                 "json:\"reason,omitempty\" graphql:\"reason\""
+	Status        *enums.TrustCenterNDARequestStatus      "json:\"status,omitempty\" graphql:\"status\""
+	Tags          []string                                "json:\"tags,omitempty\" graphql:\"tags\""
+	TrustCenterID *string                                 "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt     *time.Time                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy     *string                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetAccessLevel() *enums.TrustCenterNDARequestAccessLevel {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.AccessLevel
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetCompanyName() *string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.CompanyName
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetEmail() string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.Email
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetFirstName() string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.FirstName
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetID() string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.ID
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetLastName() string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.LastName
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetReason() *string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.Reason
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetStatus() *enums.TrustCenterNDARequestStatus {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.Status
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetTags() []string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.Tags
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetTrustCenterID() *string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.TrustCenterID
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest struct {
+	TrustCenterNDARequests []*CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests "json:\"trustCenterNDARequests,omitempty\" graphql:\"trustCenterNDARequests\""
+}
+
+func (t *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest) GetTrustCenterNDARequests() []*CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest_TrustCenterNDARequests {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest{}
+	}
+	return t.TrustCenterNDARequests
+}
+
+type CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests struct {
+	AccessLevel   *enums.TrustCenterNDARequestAccessLevel "json:\"accessLevel,omitempty\" graphql:\"accessLevel\""
+	CompanyName   *string                                 "json:\"companyName,omitempty\" graphql:\"companyName\""
+	CreatedAt     *time.Time                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy     *string                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Email         string                                  "json:\"email\" graphql:\"email\""
+	FirstName     string                                  "json:\"firstName\" graphql:\"firstName\""
+	ID            string                                  "json:\"id\" graphql:\"id\""
+	LastName      string                                  "json:\"lastName\" graphql:\"lastName\""
+	Reason        *string                                 "json:\"reason,omitempty\" graphql:\"reason\""
+	Status        *enums.TrustCenterNDARequestStatus      "json:\"status,omitempty\" graphql:\"status\""
+	Tags          []string                                "json:\"tags,omitempty\" graphql:\"tags\""
+	TrustCenterID *string                                 "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt     *time.Time                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy     *string                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetAccessLevel() *enums.TrustCenterNDARequestAccessLevel {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.AccessLevel
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetCompanyName() *string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.CompanyName
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetEmail() string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.Email
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetFirstName() string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.FirstName
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetID() string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.ID
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetLastName() string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.LastName
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetReason() *string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.Reason
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetStatus() *enums.TrustCenterNDARequestStatus {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.Status
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetTags() []string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.Tags
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetTrustCenterID() *string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.TrustCenterID
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest struct {
+	TrustCenterNDARequests []*CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests "json:\"trustCenterNDARequests,omitempty\" graphql:\"trustCenterNDARequests\""
+}
+
+func (t *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest) GetTrustCenterNDARequests() []*CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest_TrustCenterNDARequests {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest{}
+	}
+	return t.TrustCenterNDARequests
+}
+
+type CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest struct {
+	AccessLevel   *enums.TrustCenterNDARequestAccessLevel "json:\"accessLevel,omitempty\" graphql:\"accessLevel\""
+	CompanyName   *string                                 "json:\"companyName,omitempty\" graphql:\"companyName\""
+	CreatedAt     *time.Time                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy     *string                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Email         string                                  "json:\"email\" graphql:\"email\""
+	FirstName     string                                  "json:\"firstName\" graphql:\"firstName\""
+	ID            string                                  "json:\"id\" graphql:\"id\""
+	LastName      string                                  "json:\"lastName\" graphql:\"lastName\""
+	Reason        *string                                 "json:\"reason,omitempty\" graphql:\"reason\""
+	Status        *enums.TrustCenterNDARequestStatus      "json:\"status,omitempty\" graphql:\"status\""
+	Tags          []string                                "json:\"tags,omitempty\" graphql:\"tags\""
+	TrustCenterID *string                                 "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt     *time.Time                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy     *string                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetAccessLevel() *enums.TrustCenterNDARequestAccessLevel {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.AccessLevel
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetCompanyName() *string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.CompanyName
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetEmail() string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.Email
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetFirstName() string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.FirstName
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetID() string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.ID
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetLastName() string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.LastName
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetReason() *string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.Reason
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetStatus() *enums.TrustCenterNDARequestStatus {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.Status
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetTags() []string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.Tags
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetTrustCenterID() *string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.TrustCenterID
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateTrustCenterNDARequest_CreateTrustCenterNDARequest struct {
+	TrustCenterNDARequest CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest "json:\"trustCenterNDARequest\" graphql:\"trustCenterNDARequest\""
+}
+
+func (t *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest) GetTrustCenterNDARequest() *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest_TrustCenterNDARequest {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest_CreateTrustCenterNDARequest{}
+	}
+	return &t.TrustCenterNDARequest
+}
+
+type DeleteTrustCenterNDARequest_DeleteTrustCenterNDARequest struct {
+	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
+}
+
+func (t *DeleteTrustCenterNDARequest_DeleteTrustCenterNDARequest) GetDeletedID() string {
+	if t == nil {
+		t = &DeleteTrustCenterNDARequest_DeleteTrustCenterNDARequest{}
+	}
+	return t.DeletedID
+}
+
+type GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node struct {
+	AccessLevel    *enums.TrustCenterNDARequestAccessLevel "json:\"accessLevel,omitempty\" graphql:\"accessLevel\""
+	ApprovedAt     *models.DateTime                        "json:\"approvedAt,omitempty\" graphql:\"approvedAt\""
+	CompanyName    *string                                 "json:\"companyName,omitempty\" graphql:\"companyName\""
+	CreatedAt      *time.Time                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy      *string                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DocumentDataID *string                                 "json:\"documentDataID,omitempty\" graphql:\"documentDataID\""
+	Email          string                                  "json:\"email\" graphql:\"email\""
+	FirstName      string                                  "json:\"firstName\" graphql:\"firstName\""
+	ID             string                                  "json:\"id\" graphql:\"id\""
+	LastName       string                                  "json:\"lastName\" graphql:\"lastName\""
+	Reason         *string                                 "json:\"reason,omitempty\" graphql:\"reason\""
+	SignedAt       *models.DateTime                        "json:\"signedAt,omitempty\" graphql:\"signedAt\""
+	Status         *enums.TrustCenterNDARequestStatus      "json:\"status,omitempty\" graphql:\"status\""
+	Tags           []string                                "json:\"tags,omitempty\" graphql:\"tags\""
+	TrustCenterID  *string                                 "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt      *time.Time                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy      *string                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetAccessLevel() *enums.TrustCenterNDARequestAccessLevel {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.AccessLevel
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetApprovedAt() *models.DateTime {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.ApprovedAt
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetCompanyName() *string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.CompanyName
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.CreatedAt
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.CreatedBy
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetDocumentDataID() *string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.DocumentDataID
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetEmail() string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.Email
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetFirstName() string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.FirstName
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetLastName() string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.LastName
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetReason() *string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.Reason
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetSignedAt() *models.DateTime {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.SignedAt
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetStatus() *enums.TrustCenterNDARequestStatus {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.Status
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetTags() []string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.Tags
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetTrustCenterID() *string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.TrustCenterID
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.UpdatedBy
+}
+
+type GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges struct {
+	Node *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges) GetNode() *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges{}
+	}
+	return t.Node
+}
+
+type GetAllTrustCenterNDARequests_TrustCenterNdaRequests struct {
+	Edges      []*GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo   GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+	TotalCount int64                                                        "json:\"totalCount\" graphql:\"totalCount\""
+}
+
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests) GetEdges() []*GetAllTrustCenterNDARequests_TrustCenterNdaRequests_Edges {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests{}
+	}
+	return t.Edges
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests) GetPageInfo() *GetAllTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests{}
+	}
+	return &t.PageInfo
+}
+func (t *GetAllTrustCenterNDARequests_TrustCenterNdaRequests) GetTotalCount() int64 {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests_TrustCenterNdaRequests{}
+	}
+	return t.TotalCount
+}
+
+type GetTrustCenterNDARequestByID_TrustCenterNDARequest struct {
+	AccessLevel    *enums.TrustCenterNDARequestAccessLevel "json:\"accessLevel,omitempty\" graphql:\"accessLevel\""
+	ApprovedAt     *models.DateTime                        "json:\"approvedAt,omitempty\" graphql:\"approvedAt\""
+	CompanyName    *string                                 "json:\"companyName,omitempty\" graphql:\"companyName\""
+	CreatedAt      *time.Time                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy      *string                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DocumentDataID *string                                 "json:\"documentDataID,omitempty\" graphql:\"documentDataID\""
+	Email          string                                  "json:\"email\" graphql:\"email\""
+	FirstName      string                                  "json:\"firstName\" graphql:\"firstName\""
+	ID             string                                  "json:\"id\" graphql:\"id\""
+	LastName       string                                  "json:\"lastName\" graphql:\"lastName\""
+	Reason         *string                                 "json:\"reason,omitempty\" graphql:\"reason\""
+	SignedAt       *models.DateTime                        "json:\"signedAt,omitempty\" graphql:\"signedAt\""
+	Status         *enums.TrustCenterNDARequestStatus      "json:\"status,omitempty\" graphql:\"status\""
+	Tags           []string                                "json:\"tags,omitempty\" graphql:\"tags\""
+	TrustCenterID  *string                                 "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt      *time.Time                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy      *string                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetAccessLevel() *enums.TrustCenterNDARequestAccessLevel {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.AccessLevel
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetApprovedAt() *models.DateTime {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.ApprovedAt
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetCompanyName() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.CompanyName
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.CreatedAt
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.CreatedBy
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetDocumentDataID() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.DocumentDataID
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetEmail() string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.Email
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetFirstName() string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.FirstName
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetID() string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.ID
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetLastName() string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.LastName
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetReason() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.Reason
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetSignedAt() *models.DateTime {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.SignedAt
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetStatus() *enums.TrustCenterNDARequestStatus {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.Status
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetTags() []string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.Tags
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetTrustCenterID() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.TrustCenterID
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetTrustCenterNDARequestByID_TrustCenterNDARequest) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID_TrustCenterNDARequest{}
+	}
+	return t.UpdatedBy
+}
+
+type GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node struct {
+	AccessLevel    *enums.TrustCenterNDARequestAccessLevel "json:\"accessLevel,omitempty\" graphql:\"accessLevel\""
+	ApprovedAt     *models.DateTime                        "json:\"approvedAt,omitempty\" graphql:\"approvedAt\""
+	CompanyName    *string                                 "json:\"companyName,omitempty\" graphql:\"companyName\""
+	CreatedAt      *time.Time                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy      *string                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DocumentDataID *string                                 "json:\"documentDataID,omitempty\" graphql:\"documentDataID\""
+	Email          string                                  "json:\"email\" graphql:\"email\""
+	FirstName      string                                  "json:\"firstName\" graphql:\"firstName\""
+	ID             string                                  "json:\"id\" graphql:\"id\""
+	LastName       string                                  "json:\"lastName\" graphql:\"lastName\""
+	Reason         *string                                 "json:\"reason,omitempty\" graphql:\"reason\""
+	SignedAt       *models.DateTime                        "json:\"signedAt,omitempty\" graphql:\"signedAt\""
+	Status         *enums.TrustCenterNDARequestStatus      "json:\"status,omitempty\" graphql:\"status\""
+	Tags           []string                                "json:\"tags,omitempty\" graphql:\"tags\""
+	TrustCenterID  *string                                 "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt      *time.Time                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy      *string                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetAccessLevel() *enums.TrustCenterNDARequestAccessLevel {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.AccessLevel
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetApprovedAt() *models.DateTime {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.ApprovedAt
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetCompanyName() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.CompanyName
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.CreatedAt
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.CreatedBy
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetDocumentDataID() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.DocumentDataID
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetEmail() string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.Email
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetFirstName() string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.FirstName
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetLastName() string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.LastName
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetReason() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.Reason
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetSignedAt() *models.DateTime {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.SignedAt
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetStatus() *enums.TrustCenterNDARequestStatus {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.Status
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetTags() []string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.Tags
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetTrustCenterID() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.TrustCenterID
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node{}
+	}
+	return t.UpdatedBy
+}
+
+type GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges struct {
+	Node *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges) GetNode() *GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges_Node {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges{}
+	}
+	return t.Node
+}
+
+type GetTrustCenterNDARequests_TrustCenterNdaRequests struct {
+	Edges      []*GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo   GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+	TotalCount int64                                                     "json:\"totalCount\" graphql:\"totalCount\""
+}
+
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests) GetEdges() []*GetTrustCenterNDARequests_TrustCenterNdaRequests_Edges {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests{}
+	}
+	return t.Edges
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests) GetPageInfo() *GetTrustCenterNDARequests_TrustCenterNdaRequests_PageInfo {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests{}
+	}
+	return &t.PageInfo
+}
+func (t *GetTrustCenterNDARequests_TrustCenterNdaRequests) GetTotalCount() int64 {
+	if t == nil {
+		t = &GetTrustCenterNDARequests_TrustCenterNdaRequests{}
+	}
+	return t.TotalCount
+}
+
+type UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest struct {
+	AccessLevel    *enums.TrustCenterNDARequestAccessLevel "json:\"accessLevel,omitempty\" graphql:\"accessLevel\""
+	ApprovedAt     *models.DateTime                        "json:\"approvedAt,omitempty\" graphql:\"approvedAt\""
+	CompanyName    *string                                 "json:\"companyName,omitempty\" graphql:\"companyName\""
+	CreatedAt      *time.Time                              "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy      *string                                 "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DocumentDataID *string                                 "json:\"documentDataID,omitempty\" graphql:\"documentDataID\""
+	Email          string                                  "json:\"email\" graphql:\"email\""
+	FirstName      string                                  "json:\"firstName\" graphql:\"firstName\""
+	ID             string                                  "json:\"id\" graphql:\"id\""
+	LastName       string                                  "json:\"lastName\" graphql:\"lastName\""
+	Reason         *string                                 "json:\"reason,omitempty\" graphql:\"reason\""
+	SignedAt       *models.DateTime                        "json:\"signedAt,omitempty\" graphql:\"signedAt\""
+	Status         *enums.TrustCenterNDARequestStatus      "json:\"status,omitempty\" graphql:\"status\""
+	Tags           []string                                "json:\"tags,omitempty\" graphql:\"tags\""
+	TrustCenterID  *string                                 "json:\"trustCenterID,omitempty\" graphql:\"trustCenterID\""
+	UpdatedAt      *time.Time                              "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy      *string                                 "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetAccessLevel() *enums.TrustCenterNDARequestAccessLevel {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.AccessLevel
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetApprovedAt() *models.DateTime {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.ApprovedAt
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetCompanyName() *string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.CompanyName
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetDocumentDataID() *string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.DocumentDataID
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetEmail() string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.Email
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetFirstName() string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.FirstName
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetID() string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.ID
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetLastName() string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.LastName
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetReason() *string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.Reason
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetSignedAt() *models.DateTime {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.SignedAt
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetStatus() *enums.TrustCenterNDARequestStatus {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.Status
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetTags() []string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.Tags
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetTrustCenterID() *string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.TrustCenterID
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest{}
+	}
+	return t.UpdatedBy
+}
+
+type UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest struct {
+	TrustCenterNDARequest UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest "json:\"trustCenterNDARequest\" graphql:\"trustCenterNDARequest\""
+}
+
+func (t *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest) GetTrustCenterNDARequest() *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest_TrustCenterNDARequest {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest{}
+	}
+	return &t.TrustCenterNDARequest
+}
+
 type CreateTrustCenterPreviewSetting_CreateTrustCenterPreviewSetting_TrustCenterSetting struct {
 	AccentColor        *string                       "json:\"accentColor,omitempty\" graphql:\"accentColor\""
 	BackgroundColor    *string                       "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
@@ -88146,6 +89143,94 @@ func (t *UpdateTrustCenterNda) GetUpdateTrustCenterNda() *UpdateTrustCenterNda_U
 		t = &UpdateTrustCenterNda{}
 	}
 	return &t.UpdateTrustCenterNda
+}
+
+type CreateBulkCSVTrustCenterNDARequest struct {
+	CreateBulkCSVTrustCenterNDARequest CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest "json:\"createBulkCSVTrustCenterNDARequest\" graphql:\"createBulkCSVTrustCenterNDARequest\""
+}
+
+func (t *CreateBulkCSVTrustCenterNDARequest) GetCreateBulkCSVTrustCenterNDARequest() *CreateBulkCSVTrustCenterNDARequest_CreateBulkCSVTrustCenterNDARequest {
+	if t == nil {
+		t = &CreateBulkCSVTrustCenterNDARequest{}
+	}
+	return &t.CreateBulkCSVTrustCenterNDARequest
+}
+
+type CreateBulkTrustCenterNDARequest struct {
+	CreateBulkTrustCenterNDARequest CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest "json:\"createBulkTrustCenterNDARequest\" graphql:\"createBulkTrustCenterNDARequest\""
+}
+
+func (t *CreateBulkTrustCenterNDARequest) GetCreateBulkTrustCenterNDARequest() *CreateBulkTrustCenterNDARequest_CreateBulkTrustCenterNDARequest {
+	if t == nil {
+		t = &CreateBulkTrustCenterNDARequest{}
+	}
+	return &t.CreateBulkTrustCenterNDARequest
+}
+
+type CreateTrustCenterNDARequest struct {
+	CreateTrustCenterNDARequest CreateTrustCenterNDARequest_CreateTrustCenterNDARequest "json:\"createTrustCenterNDARequest\" graphql:\"createTrustCenterNDARequest\""
+}
+
+func (t *CreateTrustCenterNDARequest) GetCreateTrustCenterNDARequest() *CreateTrustCenterNDARequest_CreateTrustCenterNDARequest {
+	if t == nil {
+		t = &CreateTrustCenterNDARequest{}
+	}
+	return &t.CreateTrustCenterNDARequest
+}
+
+type DeleteTrustCenterNDARequest struct {
+	DeleteTrustCenterNDARequest DeleteTrustCenterNDARequest_DeleteTrustCenterNDARequest "json:\"deleteTrustCenterNDARequest\" graphql:\"deleteTrustCenterNDARequest\""
+}
+
+func (t *DeleteTrustCenterNDARequest) GetDeleteTrustCenterNDARequest() *DeleteTrustCenterNDARequest_DeleteTrustCenterNDARequest {
+	if t == nil {
+		t = &DeleteTrustCenterNDARequest{}
+	}
+	return &t.DeleteTrustCenterNDARequest
+}
+
+type GetAllTrustCenterNDARequests struct {
+	TrustCenterNdaRequests GetAllTrustCenterNDARequests_TrustCenterNdaRequests "json:\"trustCenterNdaRequests\" graphql:\"trustCenterNdaRequests\""
+}
+
+func (t *GetAllTrustCenterNDARequests) GetTrustCenterNdaRequests() *GetAllTrustCenterNDARequests_TrustCenterNdaRequests {
+	if t == nil {
+		t = &GetAllTrustCenterNDARequests{}
+	}
+	return &t.TrustCenterNdaRequests
+}
+
+type GetTrustCenterNDARequestByID struct {
+	TrustCenterNDARequest GetTrustCenterNDARequestByID_TrustCenterNDARequest "json:\"trustCenterNDARequest\" graphql:\"trustCenterNDARequest\""
+}
+
+func (t *GetTrustCenterNDARequestByID) GetTrustCenterNDARequest() *GetTrustCenterNDARequestByID_TrustCenterNDARequest {
+	if t == nil {
+		t = &GetTrustCenterNDARequestByID{}
+	}
+	return &t.TrustCenterNDARequest
+}
+
+type GetTrustCenterNDARequests struct {
+	TrustCenterNdaRequests GetTrustCenterNDARequests_TrustCenterNdaRequests "json:\"trustCenterNdaRequests\" graphql:\"trustCenterNdaRequests\""
+}
+
+func (t *GetTrustCenterNDARequests) GetTrustCenterNdaRequests() *GetTrustCenterNDARequests_TrustCenterNdaRequests {
+	if t == nil {
+		t = &GetTrustCenterNDARequests{}
+	}
+	return &t.TrustCenterNdaRequests
+}
+
+type UpdateTrustCenterNDARequest struct {
+	UpdateTrustCenterNDARequest UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest "json:\"updateTrustCenterNDARequest\" graphql:\"updateTrustCenterNDARequest\""
+}
+
+func (t *UpdateTrustCenterNDARequest) GetUpdateTrustCenterNDARequest() *UpdateTrustCenterNDARequest_UpdateTrustCenterNDARequest {
+	if t == nil {
+		t = &UpdateTrustCenterNDARequest{}
+	}
+	return &t.UpdateTrustCenterNDARequest
 }
 
 type CreateTrustCenterPreviewSetting struct {
@@ -111669,6 +112754,341 @@ func (c *Client) UpdateTrustCenterNda(ctx context.Context, id string, templateFi
 	return &res, nil
 }
 
+const CreateBulkCSVTrustCenterNDARequestDocument = `mutation CreateBulkCSVTrustCenterNDARequest ($input: Upload!) {
+	createBulkCSVTrustCenterNDARequest(input: $input) {
+		trustCenterNDARequests {
+			accessLevel
+			companyName
+			createdAt
+			createdBy
+			email
+			firstName
+			id
+			lastName
+			reason
+			status
+			tags
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateBulkCSVTrustCenterNDARequest(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVTrustCenterNDARequest, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateBulkCSVTrustCenterNDARequest
+	if err := c.Client.Post(ctx, "CreateBulkCSVTrustCenterNDARequest", CreateBulkCSVTrustCenterNDARequestDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateBulkTrustCenterNDARequestDocument = `mutation CreateBulkTrustCenterNDARequest ($input: [CreateTrustCenterNDARequestInput!]) {
+	createBulkTrustCenterNDARequest(input: $input) {
+		trustCenterNDARequests {
+			accessLevel
+			companyName
+			createdAt
+			createdBy
+			email
+			firstName
+			id
+			lastName
+			reason
+			status
+			tags
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateBulkTrustCenterNDARequest(ctx context.Context, input []*CreateTrustCenterNDARequestInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkTrustCenterNDARequest, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateBulkTrustCenterNDARequest
+	if err := c.Client.Post(ctx, "CreateBulkTrustCenterNDARequest", CreateBulkTrustCenterNDARequestDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateTrustCenterNDARequestDocument = `mutation CreateTrustCenterNDARequest ($input: CreateTrustCenterNDARequestInput!) {
+	createTrustCenterNDARequest(input: $input) {
+		trustCenterNDARequest {
+			accessLevel
+			companyName
+			createdAt
+			createdBy
+			email
+			firstName
+			id
+			lastName
+			reason
+			status
+			tags
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateTrustCenterNDARequest(ctx context.Context, input CreateTrustCenterNDARequestInput, interceptors ...clientv2.RequestInterceptor) (*CreateTrustCenterNDARequest, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateTrustCenterNDARequest
+	if err := c.Client.Post(ctx, "CreateTrustCenterNDARequest", CreateTrustCenterNDARequestDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const DeleteTrustCenterNDARequestDocument = `mutation DeleteTrustCenterNDARequest ($deleteTrustCenterNDARequestId: ID!) {
+	deleteTrustCenterNDARequest(id: $deleteTrustCenterNDARequestId) {
+		deletedID
+	}
+}
+`
+
+func (c *Client) DeleteTrustCenterNDARequest(ctx context.Context, deleteTrustCenterNDARequestID string, interceptors ...clientv2.RequestInterceptor) (*DeleteTrustCenterNDARequest, error) {
+	vars := map[string]any{
+		"deleteTrustCenterNDARequestId": deleteTrustCenterNDARequestID,
+	}
+
+	var res DeleteTrustCenterNDARequest
+	if err := c.Client.Post(ctx, "DeleteTrustCenterNDARequest", DeleteTrustCenterNDARequestDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetAllTrustCenterNDARequestsDocument = `query GetAllTrustCenterNDARequests ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterNDARequestOrder!]) {
+	trustCenterNdaRequests(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				accessLevel
+				companyName
+				createdAt
+				createdBy
+				email
+				firstName
+				id
+				lastName
+				reason
+				status
+				tags
+				trustCenterID
+				updatedAt
+				updatedBy
+				approvedAt
+				signedAt
+				documentDataID
+			}
+		}
+	}
+}
+`
+
+func (c *Client) GetAllTrustCenterNDARequests(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*TrustCenterNDARequestOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllTrustCenterNDARequests, error) {
+	vars := map[string]any{
+		"first":   first,
+		"last":    last,
+		"after":   after,
+		"before":  before,
+		"orderBy": orderBy,
+	}
+
+	var res GetAllTrustCenterNDARequests
+	if err := c.Client.Post(ctx, "GetAllTrustCenterNDARequests", GetAllTrustCenterNDARequestsDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetTrustCenterNDARequestByIDDocument = `query GetTrustCenterNDARequestByID ($trustCenterNDARequestId: ID!) {
+	trustCenterNDARequest(id: $trustCenterNDARequestId) {
+		accessLevel
+		companyName
+		createdAt
+		createdBy
+		email
+		firstName
+		id
+		lastName
+		reason
+		status
+		tags
+		trustCenterID
+		updatedAt
+		updatedBy
+		approvedAt
+		signedAt
+		documentDataID
+	}
+}
+`
+
+func (c *Client) GetTrustCenterNDARequestByID(ctx context.Context, trustCenterNDARequestID string, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterNDARequestByID, error) {
+	vars := map[string]any{
+		"trustCenterNDARequestId": trustCenterNDARequestID,
+	}
+
+	var res GetTrustCenterNDARequestByID
+	if err := c.Client.Post(ctx, "GetTrustCenterNDARequestByID", GetTrustCenterNDARequestByIDDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetTrustCenterNDARequestsDocument = `query GetTrustCenterNDARequests ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterNDARequestOrder!], $where: TrustCenterNDARequestWhereInput) {
+	trustCenterNdaRequests(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy, where: $where) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				accessLevel
+				companyName
+				createdAt
+				createdBy
+				email
+				firstName
+				id
+				lastName
+				reason
+				status
+				tags
+				trustCenterID
+				updatedAt
+				updatedBy
+				approvedAt
+				signedAt
+				documentDataID
+			}
+		}
+	}
+}
+`
+
+func (c *Client) GetTrustCenterNDARequests(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*TrustCenterNDARequestOrder, where *TrustCenterNDARequestWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetTrustCenterNDARequests, error) {
+	vars := map[string]any{
+		"first":   first,
+		"last":    last,
+		"after":   after,
+		"before":  before,
+		"orderBy": orderBy,
+		"where":   where,
+	}
+
+	var res GetTrustCenterNDARequests
+	if err := c.Client.Post(ctx, "GetTrustCenterNDARequests", GetTrustCenterNDARequestsDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateTrustCenterNDARequestDocument = `mutation UpdateTrustCenterNDARequest ($updateTrustCenterNDARequestId: ID!, $input: UpdateTrustCenterNDARequestInput!) {
+	updateTrustCenterNDARequest(id: $updateTrustCenterNDARequestId, input: $input) {
+		trustCenterNDARequest {
+			accessLevel
+			companyName
+			createdAt
+			createdBy
+			email
+			firstName
+			id
+			lastName
+			reason
+			status
+			tags
+			trustCenterID
+			updatedAt
+			updatedBy
+			approvedAt
+			signedAt
+			documentDataID
+		}
+	}
+}
+`
+
+func (c *Client) UpdateTrustCenterNDARequest(ctx context.Context, updateTrustCenterNDARequestID string, input UpdateTrustCenterNDARequestInput, interceptors ...clientv2.RequestInterceptor) (*UpdateTrustCenterNDARequest, error) {
+	vars := map[string]any{
+		"updateTrustCenterNDARequestId": updateTrustCenterNDARequestID,
+		"input":                         input,
+	}
+
+	var res UpdateTrustCenterNDARequest
+	if err := c.Client.Post(ctx, "UpdateTrustCenterNDARequest", UpdateTrustCenterNDARequestDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
 const CreateTrustCenterPreviewSettingDocument = `mutation CreateTrustCenterPreviewSetting ($input: CreateTrustCenterPreviewSettingInput!) {
 	createTrustCenterPreviewSetting(input: $input) {
 		trustCenterSetting {
@@ -115322,6 +116742,14 @@ var DocumentOperationNames = map[string]string{
 	CreateTrustCenterNdaDocument:                 "CreateTrustCenterNda",
 	SubmitTrustCenterNDAResponseDocument:         "SubmitTrustCenterNDAResponse",
 	UpdateTrustCenterNdaDocument:                 "UpdateTrustCenterNda",
+	CreateBulkCSVTrustCenterNDARequestDocument:   "CreateBulkCSVTrustCenterNDARequest",
+	CreateBulkTrustCenterNDARequestDocument:      "CreateBulkTrustCenterNDARequest",
+	CreateTrustCenterNDARequestDocument:          "CreateTrustCenterNDARequest",
+	DeleteTrustCenterNDARequestDocument:          "DeleteTrustCenterNDARequest",
+	GetAllTrustCenterNDARequestsDocument:         "GetAllTrustCenterNDARequests",
+	GetTrustCenterNDARequestByIDDocument:         "GetTrustCenterNDARequestByID",
+	GetTrustCenterNDARequestsDocument:            "GetTrustCenterNDARequests",
+	UpdateTrustCenterNDARequestDocument:          "UpdateTrustCenterNDARequest",
 	CreateTrustCenterPreviewSettingDocument:      "CreateTrustCenterPreviewSetting",
 	CreateTrustCenterSettingDocument:             "CreateTrustCenterSetting",
 	DeleteTrustCenterSettingDocument:             "DeleteTrustCenterSetting",
