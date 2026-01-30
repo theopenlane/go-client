@@ -158,7 +158,7 @@ type GraphClient interface {
 	CreateDocumentData(ctx context.Context, input CreateDocumentDataInput, interceptors ...clientv2.RequestInterceptor) (*CreateDocumentData, error)
 	DeleteDocumentData(ctx context.Context, deleteDocumentDataID string, interceptors ...clientv2.RequestInterceptor) (*DeleteDocumentData, error)
 	GetDocumentDataByID(ctx context.Context, documentDataID string, interceptors ...clientv2.RequestInterceptor) (*GetDocumentDataByID, error)
-	UpdateDocumentData(ctx context.Context, updateDocumentDataID string, input UpdateDocumentDataInput, interceptors ...clientv2.RequestInterceptor) (*UpdateDocumentData, error)
+	UpdateDocumentData(ctx context.Context, updateDocumentDataID string, input UpdateDocumentDataInput, documentDataFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateDocumentData, error)
 	CreateBulkCSVEntity(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVEntity, error)
 	CreateBulkEntity(ctx context.Context, input []*CreateEntityInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkEntity, error)
 	CreateEntity(ctx context.Context, input CreateEntityInput, interceptors ...clientv2.RequestInterceptor) (*CreateEntity, error)
@@ -96398,8 +96398,8 @@ func (c *Client) GetDocumentDataByID(ctx context.Context, documentDataID string,
 	return &res, nil
 }
 
-const UpdateDocumentDataDocument = `mutation UpdateDocumentData ($updateDocumentDataId: ID!, $input: UpdateDocumentDataInput!) {
-	updateDocumentData(id: $updateDocumentDataId, input: $input) {
+const UpdateDocumentDataDocument = `mutation UpdateDocumentData ($updateDocumentDataId: ID!, $input: UpdateDocumentDataInput!, $documentDataFile: Upload) {
+	updateDocumentData(id: $updateDocumentDataId, input: $input, documentDataFile: $documentDataFile) {
 		documentData {
 			createdAt
 			createdBy
@@ -96415,10 +96415,11 @@ const UpdateDocumentDataDocument = `mutation UpdateDocumentData ($updateDocument
 }
 `
 
-func (c *Client) UpdateDocumentData(ctx context.Context, updateDocumentDataID string, input UpdateDocumentDataInput, interceptors ...clientv2.RequestInterceptor) (*UpdateDocumentData, error) {
+func (c *Client) UpdateDocumentData(ctx context.Context, updateDocumentDataID string, input UpdateDocumentDataInput, documentDataFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateDocumentData, error) {
 	vars := map[string]any{
 		"updateDocumentDataId": updateDocumentDataID,
 		"input":                input,
+		"documentDataFile":     documentDataFile,
 	}
 
 	var res UpdateDocumentData
