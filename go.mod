@@ -8,8 +8,8 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.52.0
-	github.com/theopenlane/core/common v1.0.4
-	github.com/theopenlane/entx v0.20.5
+	github.com/theopenlane/core/common v1.0.5
+	github.com/theopenlane/entx v0.21.3
 	github.com/theopenlane/httpsling v0.3.0
 	github.com/theopenlane/iam v0.23.3
 	github.com/theopenlane/utils v0.6.2
@@ -52,7 +52,7 @@ require (
 	github.com/invopop/jsonschema v0.13.0 // indirect
 	github.com/knadh/koanf/maps v0.1.2 // indirect
 	github.com/knadh/koanf/parsers/yaml v1.1.0 // indirect
-	github.com/knadh/koanf/v2 v2.3.0 // indirect
+	github.com/knadh/koanf/v2 v2.3.2 // indirect
 	github.com/lestrrat-go/blackmagic v1.0.4 // indirect
 	github.com/lestrrat-go/httpcc v1.0.1 // indirect
 	github.com/lestrrat-go/httprc/v3 v3.0.3 // indirect

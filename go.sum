@@ -102,8 +102,8 @@ github.com/knadh/koanf/maps v0.1.2 h1:RBfmAW5CnZT+PJ1CVc1QSJKf4Xu9kxfQgYVQSu8hpb
 github.com/knadh/koanf/maps v0.1.2/go.mod h1:npD/QZY3V6ghQDdcQzl1W4ICNVTkohC8E73eI2xW4yI=
 github.com/knadh/koanf/parsers/yaml v1.1.0 h1:3ltfm9ljprAHt4jxgeYLlFPmUaunuCgu1yILuTXRdM4=
 github.com/knadh/koanf/parsers/yaml v1.1.0/go.mod h1:HHmcHXUrp9cOPcuC+2wrr44GTUB0EC+PyfN3HZD9tFg=
-github.com/knadh/koanf/v2 v2.3.0 h1:Qg076dDRFHvqnKG97ZEsi9TAg2/nFTa9hCdcSa1lvlM=
-github.com/knadh/koanf/v2 v2.3.0/go.mod h1:gRb40VRAbd4iJMYYD5IxZ6hfuopFcXBpc9bbQpZwo28=
+github.com/knadh/koanf/v2 v2.3.2 h1:Ee6tuzQYFwcZXQpc2MiVeC6qHMandf5SMUJJNoFp/c4=
+github.com/knadh/koanf/v2 v2.3.2/go.mod h1:gRb40VRAbd4iJMYYD5IxZ6hfuopFcXBpc9bbQpZwo28=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
 github.com/kr/text v0.2.0 h1:5Nx0Ya0ZqY2ygV366QzturHI13Jq95ApcVaJBhpS+AY=
@@ -180,12 +180,12 @@ github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
-github.com/theopenlane/core/common v1.0.4 h1:im5MWihsBODAwCmUe0SAs1sfSdralks/y6fLS3FR+XU=
-github.com/theopenlane/core/common v1.0.4/go.mod h1:yZ2mx9HD5Gou0q+TXQqs/d08jZaQ/AZZkpgNVe9niFs=
+github.com/theopenlane/core/common v1.0.5 h1:oCzx19PmYOIsuR8F4y02UQGbp4ybWVScP6T/aOXc3AU=
+github.com/theopenlane/core/common v1.0.5/go.mod h1:EZ1ndAi+8VcbgHSqmW+7ervFG4JzEwUXvMj5hIe8YmI=
 github.com/theopenlane/echox v0.3.0 h1:uwOKEw+r1utGQoOR6dZQqAVuY5j8TcasqnTwO5+rMsA=
 github.com/theopenlane/echox v0.3.0/go.mod h1:yTrXnj7s3VNIg0FCvB7Dut2Elr+LqJKU/nruxx1E1cM=
-github.com/theopenlane/entx v0.20.5 h1:G4pzJI4Wy7wRGi+cP8jC6Uv+849Us9HkBW+fAGFt5x8=
-github.com/theopenlane/entx v0.20.5/go.mod h1:AqYlfu6IdIW6v0yZ5TGWKftzfjklhBipXormMnA/PMc=
+github.com/theopenlane/entx v0.21.3 h1:UcDsWPpmtlORXnXzsrGl8vXNFezXeXhqqYSIbDPSfyg=
+github.com/theopenlane/entx v0.21.3/go.mod h1:3h/ndLos3U+L4yVgy908oAHRsceX+voQrm77PQ3ga9M=
 github.com/theopenlane/httpsling v0.3.0 h1:Bad0dGdqCqAB8UVDyVo+YCevzRvGHhmkK22F7T3pXtY=
 github.com/theopenlane/httpsling v0.3.0/go.mod h1:iJc3XRLYTFIpfCnPpLZVMBP0xsWIPAb7ozARtQoclAE=
 github.com/theopenlane/iam v0.23.3 h1:eKURC25+ASVF0JXmbrqD809kM/3xUcb2RTagfNSa7ZI=
