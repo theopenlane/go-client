@@ -1,7 +1,6 @@
 mutation CreateBulkCSVTrustCenterSubprocessor($input: Upload!) {
   createBulkCSVTrustCenterSubprocessor(input: $input) {
     trustCenterSubprocessors {
-      category
       countries
       createdAt
       createdBy
@@ -17,7 +16,6 @@ mutation CreateBulkCSVTrustCenterSubprocessor($input: Upload!) {
 mutation CreateBulkTrustCenterSubprocessor($input: [CreateTrustCenterSubprocessorInput!]) {
   createBulkTrustCenterSubprocessor(input: $input) {
     trustCenterSubprocessors {
-      category
       countries
       createdAt
       createdBy
@@ -33,7 +31,6 @@ mutation CreateBulkTrustCenterSubprocessor($input: [CreateTrustCenterSubprocesso
 mutation CreateTrustCenterSubprocessor($input: CreateTrustCenterSubprocessorInput!) {
   createTrustCenterSubprocessor(input: $input) {
     trustCenterSubprocessor {
-      category
       countries
       createdAt
       createdBy
@@ -75,7 +72,6 @@ query GetAllTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $b
     }
     edges {
       node {
-        category
         countries
         createdAt
         createdBy
@@ -98,7 +94,6 @@ query GetAllTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $b
 
 query GetTrustCenterSubprocessorByID($trustCenterSubprocessorId: ID!) {
   trustCenterSubprocessor(id: $trustCenterSubprocessorId) {
-    category
     countries
     createdAt
     createdBy
@@ -135,7 +130,6 @@ query GetTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $befo
     }
     edges {
       node {
-        category
         countries
         createdAt
         createdBy
@@ -159,7 +153,6 @@ query GetTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $befo
 mutation UpdateBulkTrustCenterSubprocessor($ids: [ID!]!, $input: UpdateTrustCenterSubprocessorInput!) {
   updateBulkTrustCenterSubprocessor(ids: $ids, input: $input) {
     trustCenterSubprocessors {
-      category
       countries
       createdAt
       createdBy
@@ -185,7 +178,6 @@ mutation UpdateTrustCenterSubprocessor($updateTrustCenterSubprocessorId: ID!, $i
     input: $input
   ) {
     trustCenterSubprocessor {
-      category
       countries
       createdAt
       createdBy
