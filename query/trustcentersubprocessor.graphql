@@ -1,6 +1,7 @@
 mutation CreateBulkCSVTrustCenterSubprocessor($input: Upload!) {
   createBulkCSVTrustCenterSubprocessor(input: $input) {
     trustCenterSubprocessors {
+      trustCenterSubprocessorKindName
       countries
       createdAt
       createdBy
@@ -16,6 +17,7 @@ mutation CreateBulkCSVTrustCenterSubprocessor($input: Upload!) {
 mutation CreateBulkTrustCenterSubprocessor($input: [CreateTrustCenterSubprocessorInput!]) {
   createBulkTrustCenterSubprocessor(input: $input) {
     trustCenterSubprocessors {
+      trustCenterSubprocessorKindName
       countries
       createdAt
       createdBy
@@ -31,6 +33,7 @@ mutation CreateBulkTrustCenterSubprocessor($input: [CreateTrustCenterSubprocesso
 mutation CreateTrustCenterSubprocessor($input: CreateTrustCenterSubprocessorInput!) {
   createTrustCenterSubprocessor(input: $input) {
     trustCenterSubprocessor {
+      trustCenterSubprocessorKindName
       countries
       createdAt
       createdBy
@@ -72,6 +75,7 @@ query GetAllTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $b
     }
     edges {
       node {
+        trustCenterSubprocessorKindName
         countries
         createdAt
         createdBy
@@ -94,6 +98,7 @@ query GetAllTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $b
 
 query GetTrustCenterSubprocessorByID($trustCenterSubprocessorId: ID!) {
   trustCenterSubprocessor(id: $trustCenterSubprocessorId) {
+    trustCenterSubprocessorKindName
     countries
     createdAt
     createdBy
@@ -130,6 +135,7 @@ query GetTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $befo
     }
     edges {
       node {
+        trustCenterSubprocessorKindName
         countries
         createdAt
         createdBy
@@ -153,6 +159,7 @@ query GetTrustCenterSubprocessors($first: Int, $last: Int, $after: Cursor, $befo
 mutation UpdateBulkTrustCenterSubprocessor($ids: [ID!]!, $input: UpdateTrustCenterSubprocessorInput!) {
   updateBulkTrustCenterSubprocessor(ids: $ids, input: $input) {
     trustCenterSubprocessors {
+      trustCenterSubprocessorKindName
       countries
       createdAt
       createdBy
@@ -178,6 +185,7 @@ mutation UpdateTrustCenterSubprocessor($updateTrustCenterSubprocessorId: ID!, $i
     input: $input
   ) {
     trustCenterSubprocessor {
+      trustCenterSubprocessorKindName
       countries
       createdAt
       createdBy
