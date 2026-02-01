@@ -19771,11 +19771,11 @@ Return response for updateBulkDocumentData mutation
 """
 type DocumentDataBulkUpdatePayload {
 	"""
-	Updated documentData
+	Updated documentDatas
 	"""
 	documentData: [DocumentData!]
 	"""
-	IDs of the updated documentData
+	IDs of the updated documentDatas
 	"""
 	updatedIDs: [ID!]
 }
@@ -38462,21 +38462,21 @@ type Mutation {
 		ids: [ID!]!
 	): DocumentDataBulkDeletePayload!
 	"""
-	Update multiple existing documentData
+	Update multiple existing documentDatas
 	"""
 	updateBulkDocumentData(
 		"""
-		IDs of the documentData to update
+		IDs of the documentDatas to update
 		"""
 		ids: [ID!]!
 
 		"""
-		values to update the documentData with
+		values to update the documentDatas with
 		"""
 		input: UpdateDocumentDataInput!
 	): DocumentDataBulkUpdatePayload!
 	"""
-	Update multiple existing documentData via file upload
+	Update multiple existing documentDatas via file upload
 	"""
 	updateBulkCSVDocumentData(
 		"""

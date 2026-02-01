@@ -11331,9 +11331,9 @@ type DocumentDataBulkDeletePayload struct {
 
 // Return response for updateBulkDocumentData mutation
 type DocumentDataBulkUpdatePayload struct {
-	// Updated documentData
+	// Updated documentDatas
 	DocumentData []*DocumentData `json:"documentData,omitempty"`
-	// IDs of the updated documentData
+	// IDs of the updated documentDatas
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
 }
 
