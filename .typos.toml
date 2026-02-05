@@ -1,5 +1,5 @@
 [files]
-extend-exclude = ["go.mod","go.sum"]
+extend-exclude = ["go.mod","go.sum", "graphclient/models.go", "schema.graphql"]
 ignore-hidden = true
 ignore-files = true
 ignore-dot = true
