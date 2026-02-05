@@ -163,6 +163,7 @@ query GetTrustCenterByID($trustCenterId: ID!) {
       overview
       title
       companyDomain
+      companyName
       securityContact
       primaryColor
       logoRemoteURL
@@ -185,7 +186,10 @@ query GetTrustCenterByID($trustCenterId: ID!) {
       id
       overview
       title
+      companyDomain
+      companyName
       primaryColor
+      securityContact
       logoRemoteURL
       logoLocalFileID
       logoFile {
