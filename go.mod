@@ -1,6 +1,6 @@
 module github.com/theopenlane/go-client
 
-go 1.25.5
+go 1.25.6
 
 require (
 	github.com/99designs/gqlgen v0.17.86
@@ -8,10 +8,10 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.52.0
-	github.com/theopenlane/core/common v1.0.5
-	github.com/theopenlane/entx v0.21.3
+	github.com/theopenlane/core/common v1.0.7
+	github.com/theopenlane/entx v0.22.2
 	github.com/theopenlane/httpsling v0.3.0
-	github.com/theopenlane/iam v0.23.3
+	github.com/theopenlane/iam v0.23.5
 	github.com/theopenlane/utils v0.6.2
 	github.com/vektah/gqlparser/v2 v2.5.31
 	golang.org/x/oauth2 v0.34.0
@@ -38,10 +38,10 @@ require (
 	github.com/go-openapi/inflect v0.21.5 // indirect
 	github.com/go-viper/mapstructure/v2 v2.5.0 // indirect
 	github.com/go-webauthn/webauthn v0.15.0 // indirect
-	github.com/go-webauthn/x v0.1.27 // indirect
+	github.com/go-webauthn/x v0.1.28 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/goccy/go-yaml v1.19.2 // indirect
-	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect
+	github.com/golang-jwt/jwt/v5 v5.3.1 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/google/go-tpm v0.9.8 // indirect
