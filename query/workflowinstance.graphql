@@ -1,4 +1,4 @@
-query GetAllWorkflowInstances($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowInstanceOrder!]){
+query GetAllWorkflowInstances($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [WorkflowInstanceOrder!]) {
   workflowInstances(
     first: $first
     last: $last
@@ -28,10 +28,45 @@ query GetAllWorkflowInstances($first: Int, $last: Int, $after: Cursor, $before: 
         updatedAt
         updatedBy
         workflowDefinitionID
+        workflowProposalID
+        controlID
+        internalPolicyID
+        evidenceID
+        subcontrolID
+        actionPlanID
+        procedureID
+        campaignID
+        campaignTargetID
+        identityHolderID
+        platformID
+        workflowAssignments {
+          edges {
+            node {
+              id
+              displayID
+              status
+              role
+              label
+              required
+              workflowAssignmentTargets {
+                edges {
+                  node {
+                    id
+                    targetType
+                    targetUserID
+                    targetGroupID
+                    resolverKey
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 }
+
 query GetWorkflowInstanceByID($workflowInstanceId: ID!) {
   workflowInstance(id: $workflowInstanceId) {
     context
@@ -47,11 +82,45 @@ query GetWorkflowInstanceByID($workflowInstanceId: ID!) {
     updatedAt
     updatedBy
     workflowDefinitionID
+    workflowProposalID
+    controlID
+    internalPolicyID
+    evidenceID
+    subcontrolID
+    actionPlanID
+    procedureID
+    campaignID
+    campaignTargetID
+    identityHolderID
+    platformID
+    workflowAssignments {
+      edges {
+        node {
+          id
+          displayID
+          status
+          role
+          label
+          required
+          workflowAssignmentTargets {
+            edges {
+              node {
+                id
+                targetType
+                targetUserID
+                targetGroupID
+                resolverKey
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
 query GetWorkflowInstances($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: WorkflowInstanceWhereInput, $orderBy: [WorkflowInstanceOrder!]) {
-workflowInstances(
+  workflowInstances(
     first: $first
     last: $last
     after: $after
@@ -81,6 +150,40 @@ workflowInstances(
         updatedAt
         updatedBy
         workflowDefinitionID
+        workflowProposalID
+        controlID
+        internalPolicyID
+        evidenceID
+        subcontrolID
+        actionPlanID
+        procedureID
+        campaignID
+        campaignTargetID
+        identityHolderID
+        platformID
+        workflowAssignments {
+          edges {
+            node {
+              id
+              displayID
+              status
+              role
+              label
+              required
+              workflowAssignmentTargets {
+                edges {
+                  node {
+                    id
+                    targetType
+                    targetUserID
+                    targetGroupID
+                    resolverKey
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
