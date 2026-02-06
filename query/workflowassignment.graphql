@@ -100,6 +100,17 @@ query GetWorkflowAssignments($first: Int, $last: Int, $after: Cursor, $before: C
         updatedAt
         updatedBy
         workflowInstanceID
+        workflowAssignmentTargets {
+          edges {
+            node {
+              id
+              targetType
+              targetUserID
+              targetGroupID
+              resolverKey
+            }
+          }
+        }
       }
     }
   }
