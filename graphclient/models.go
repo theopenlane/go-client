@@ -33876,6 +33876,12 @@ type TrustCenterNDARequestBulkCreatePayload struct {
 	TrustCenterNDARequests []*TrustCenterNDARequest `json:"trustCenterNDARequests,omitempty"`
 }
 
+// Return response for deleteBulkTrustCenterNDARequest mutation
+type TrustCenterNDARequestBulkDeletePayload struct {
+	// Deleted trustCenterNDARequest IDs
+	DeletedIDs []string `json:"deletedIDs"`
+}
+
 // A connection to a list of items.
 type TrustCenterNDARequestConnection struct {
 	// A list of edges.
