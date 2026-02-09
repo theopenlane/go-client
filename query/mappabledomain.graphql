@@ -49,7 +49,7 @@ mutation DeleteMappableDomain($deleteMappableDomainId: ID!) {
   }
 }
 
-query GetAllMappableDomains($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [MappableDomainOrder!]){
+query GetAllMappableDomains($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [MappableDomainOrder!]) {
   mappableDomains(
     first: $first
     last: $last
@@ -93,7 +93,7 @@ query GetMappableDomainByID($mappableDomainId: ID!) {
 }
 
 query GetMappableDomains($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: MappableDomainWhereInput, $orderBy: [MappableDomainOrder!]) {
-mappableDomains(
+  mappableDomains(
     first: $first
     last: $last
     after: $after

@@ -67,7 +67,7 @@ mutation DeleteCustomTypeEnum($deleteCustomTypeEnumId: ID!) {
   }
 }
 
-query GetAllCustomTypeEnums($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [CustomTypeEnumOrder!]){
+query GetAllCustomTypeEnums($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [CustomTypeEnumOrder!]) {
   customTypeEnums(
     first: $first
     last: $last
@@ -123,7 +123,7 @@ query GetCustomTypeEnumByID($customTypeEnumId: ID!) {
 }
 
 query GetCustomTypeEnums($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: CustomTypeEnumWhereInput, $orderBy: [CustomTypeEnumOrder!]) {
-customTypeEnums(
+  customTypeEnums(
     first: $first
     last: $last
     after: $after

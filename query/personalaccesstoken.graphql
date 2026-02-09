@@ -117,7 +117,7 @@ query GetPersonalAccessTokenByID($personalAccessTokenId: ID!) {
 }
 
 query GetPersonalAccessTokens($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: PersonalAccessTokenWhereInput, $orderBy: [PersonalAccessTokenOrder!]) {
-personalAccessTokens(
+  personalAccessTokens(
     first: $first
     last: $last
     after: $after

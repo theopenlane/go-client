@@ -9,7 +9,7 @@ mutation CreateTFASetting($input: CreateTFASettingInput!) {
   }
 }
 
-query GetAllTFASettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TFASettingOrder!]){
+query GetAllTFASettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TFASettingOrder!]) {
   tfaSettings(
     first: $first
     last: $last

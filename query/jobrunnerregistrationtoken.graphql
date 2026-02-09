@@ -72,7 +72,7 @@ query GetJobRunnerRegistrationTokenByID($jobRunnerRegistrationTokenId: ID!) {
 }
 
 query GetJobRunnerRegistrationTokens($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: JobRunnerRegistrationTokenWhereInput, $orderBy: [JobRunnerRegistrationTokenOrder!]) {
-jobRunnerRegistrationTokens(
+  jobRunnerRegistrationTokens(
     first: $first
     last: $last
     after: $after
