@@ -58,7 +58,7 @@ mutation DeleteNarrative($deleteNarrativeId: ID!) {
   }
 }
 
-query GetAllNarratives($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [NarrativeOrder!]){
+query GetAllNarratives($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [NarrativeOrder!]) {
   narratives(
     first: $first
     last: $last
@@ -108,7 +108,7 @@ query GetNarrativeByID($narrativeId: ID!) {
 }
 
 query GetNarratives($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: NarrativeWhereInput, $orderBy: [NarrativeOrder!]) {
-narratives(
+  narratives(
     first: $first
     last: $last
     after: $after
