@@ -4,8 +4,8 @@ import (
 	"context"
 	"os"
 
-	"github.com/gqlgo/gqlgenc /config"
 	"github.com/gqlgo/gqlgenc /generator"
+	"github.com/gqlgo/gqlgenc/config"
 	"github.com/rs/zerolog/log"
 )
 
