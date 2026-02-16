@@ -1077,7 +1077,9 @@ type AssessmentResponse struct {
 	// when the assessment response is due
 	DueDate *time.Time `json:"dueDate,omitempty"`
 	// the document containing the user's response data
-	DocumentDataID *string         `json:"documentDataID,omitempty"`
+	DocumentDataID *string `json:"documentDataID,omitempty"`
+	// is this a draft response? can the user resume from where they left?
+	IsDraft        bool            `json:"isDraft"`
 	Owner          *Organization   `json:"owner,omitempty"`
 	Assessment     *Assessment     `json:"assessment"`
 	Campaign       *Campaign       `json:"campaign,omitempty"`
@@ -1412,6 +1414,9 @@ type AssessmentResponseWhereInput struct {
 	DueDateLte    *time.Time   `json:"dueDateLTE,omitempty"`
 	DueDateIsNil  *bool        `json:"dueDateIsNil,omitempty"`
 	DueDateNotNil *bool        `json:"dueDateNotNil,omitempty"`
+	// is_draft field predicates
+	IsDraft    *bool `json:"isDraft,omitempty"`
+	IsDraftNeq *bool `json:"isDraftNEQ,omitempty"`
 	// owner edge predicates
 	HasOwner     *bool                     `json:"hasOwner,omitempty"`
 	HasOwnerWith []*OrganizationWhereInput `json:"hasOwnerWith,omitempty"`
@@ -6265,7 +6270,7 @@ type CreateEntityInput struct {
 	// domains associated with the entity
 	Domains []string `json:"domains,omitempty"`
 	// status of the entity
-	Status *string `json:"status,omitempty"`
+	Status *enums.EntityStatus `json:"status,omitempty"`
 	// whether the entity is approved for use
 	ApprovedForUse *bool `json:"approvedForUse,omitempty"`
 	// asset identifiers linked to the entity
@@ -12801,7 +12806,7 @@ type Entity struct {
 	// The type of the entity
 	EntityTypeID *string `json:"entityTypeID,omitempty"`
 	// status of the entity
-	Status *string `json:"status,omitempty"`
+	Status *enums.EntityStatus `json:"status,omitempty"`
 	// whether the entity is approved for use
 	ApprovedForUse *bool `json:"approvedForUse,omitempty"`
 	// asset identifiers linked to the entity
@@ -13626,21 +13631,12 @@ type EntityWhereInput struct {
 	EntityTypeIDEqualFold    *string  `json:"entityTypeIDEqualFold,omitempty"`
 	EntityTypeIDContainsFold *string  `json:"entityTypeIDContainsFold,omitempty"`
 	// status field predicates
-	Status             *string  `json:"status,omitempty"`
-	StatusNeq          *string  `json:"statusNEQ,omitempty"`
-	StatusIn           []string `json:"statusIn,omitempty"`
-	StatusNotIn        []string `json:"statusNotIn,omitempty"`
-	StatusGt           *string  `json:"statusGT,omitempty"`
-	StatusGte          *string  `json:"statusGTE,omitempty"`
-	StatusLt           *string  `json:"statusLT,omitempty"`
-	StatusLte          *string  `json:"statusLTE,omitempty"`
-	StatusContains     *string  `json:"statusContains,omitempty"`
-	StatusHasPrefix    *string  `json:"statusHasPrefix,omitempty"`
-	StatusHasSuffix    *string  `json:"statusHasSuffix,omitempty"`
-	StatusIsNil        *bool    `json:"statusIsNil,omitempty"`
-	StatusNotNil       *bool    `json:"statusNotNil,omitempty"`
-	StatusEqualFold    *string  `json:"statusEqualFold,omitempty"`
-	StatusContainsFold *string  `json:"statusContainsFold,omitempty"`
+	Status       *enums.EntityStatus  `json:"status,omitempty"`
+	StatusNeq    *enums.EntityStatus  `json:"statusNEQ,omitempty"`
+	StatusIn     []enums.EntityStatus `json:"statusIn,omitempty"`
+	StatusNotIn  []enums.EntityStatus `json:"statusNotIn,omitempty"`
+	StatusIsNil  *bool                `json:"statusIsNil,omitempty"`
+	StatusNotNil *bool                `json:"statusNotNil,omitempty"`
 	// approved_for_use field predicates
 	ApprovedForUse       *bool `json:"approvedForUse,omitempty"`
 	ApprovedForUseNeq    *bool `json:"approvedForUseNEQ,omitempty"`
@@ -37178,8 +37174,8 @@ type UpdateEntityInput struct {
 	AppendDomains []string `json:"appendDomains,omitempty"`
 	ClearDomains  *bool    `json:"clearDomains,omitempty"`
 	// status of the entity
-	Status      *string `json:"status,omitempty"`
-	ClearStatus *bool   `json:"clearStatus,omitempty"`
+	Status      *enums.EntityStatus `json:"status,omitempty"`
+	ClearStatus *bool               `json:"clearStatus,omitempty"`
 	// whether the entity is approved for use
 	ApprovedForUse      *bool `json:"approvedForUse,omitempty"`
 	ClearApprovedForUse *bool `json:"clearApprovedForUse,omitempty"`
@@ -45444,6 +45440,7 @@ const (
 	AssessmentResponseOrderFieldStartedAt        AssessmentResponseOrderField = "started_at"
 	AssessmentResponseOrderFieldCompletedAt      AssessmentResponseOrderField = "completed_at"
 	AssessmentResponseOrderFieldDueDate          AssessmentResponseOrderField = "due_date"
+	AssessmentResponseOrderFieldIsDraft          AssessmentResponseOrderField = "is_draft"
 )
 
 var AllAssessmentResponseOrderField = []AssessmentResponseOrderField{
@@ -45462,11 +45459,12 @@ var AllAssessmentResponseOrderField = []AssessmentResponseOrderField{
 	AssessmentResponseOrderFieldStartedAt,
 	AssessmentResponseOrderFieldCompletedAt,
 	AssessmentResponseOrderFieldDueDate,
+	AssessmentResponseOrderFieldIsDraft,
 }
 
 func (e AssessmentResponseOrderField) IsValid() bool {
 	switch e {
-	case AssessmentResponseOrderFieldCreatedAt, AssessmentResponseOrderFieldUpdatedAt, AssessmentResponseOrderFieldEmail, AssessmentResponseOrderFieldSendAttempts, AssessmentResponseOrderFieldEmailDeliveredAt, AssessmentResponseOrderFieldEmailOpenedAt, AssessmentResponseOrderFieldEmailClickedAt, AssessmentResponseOrderFieldEmailOpenCount, AssessmentResponseOrderFieldEmailClickCount, AssessmentResponseOrderFieldLastEmailEventAt, AssessmentResponseOrderFieldStatus, AssessmentResponseOrderFieldAssignedAt, AssessmentResponseOrderFieldStartedAt, AssessmentResponseOrderFieldCompletedAt, AssessmentResponseOrderFieldDueDate:
+	case AssessmentResponseOrderFieldCreatedAt, AssessmentResponseOrderFieldUpdatedAt, AssessmentResponseOrderFieldEmail, AssessmentResponseOrderFieldSendAttempts, AssessmentResponseOrderFieldEmailDeliveredAt, AssessmentResponseOrderFieldEmailOpenedAt, AssessmentResponseOrderFieldEmailClickedAt, AssessmentResponseOrderFieldEmailOpenCount, AssessmentResponseOrderFieldEmailClickCount, AssessmentResponseOrderFieldLastEmailEventAt, AssessmentResponseOrderFieldStatus, AssessmentResponseOrderFieldAssignedAt, AssessmentResponseOrderFieldStartedAt, AssessmentResponseOrderFieldCompletedAt, AssessmentResponseOrderFieldDueDate, AssessmentResponseOrderFieldIsDraft:
 		return true
 	}
 	return false
