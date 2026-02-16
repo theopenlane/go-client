@@ -2218,6 +2218,10 @@ type AssessmentResponse implements Node {
 	the document containing the user's response data
 	"""
 	documentDataID: ID
+	"""
+	is this a draft response? can the user resume from where they left?
+	"""
+	isDraft: Boolean!
 	owner: Organization
 	assessment: Assessment!
 	campaign: Campaign
@@ -2233,6 +2237,7 @@ enum AssessmentResponseAssessmentResponseStatus @goModel(model: "github.com/theo
 	SENT
 	COMPLETED
 	OVERDUE
+	DRAFT
 }
 """
 A connection to a list of items.
@@ -2314,6 +2319,7 @@ enum AssessmentResponseOrderField {
 	started_at
 	completed_at
 	due_date
+	is_draft
 }
 """
 AssessmentResponseWhereInput is used for filtering AssessmentResponse objects.
@@ -2651,6 +2657,11 @@ input AssessmentResponseWhereInput {
 	dueDateLTE: Time
 	dueDateIsNil: Boolean
 	dueDateNotNil: Boolean
+	"""
+	is_draft field predicates
+	"""
+	isDraft: Boolean
+	isDraftNEQ: Boolean
 	"""
 	owner edge predicates
 	"""
@@ -5119,6 +5130,7 @@ enum CampaignTargetAssessmentResponseStatus @goModel(model: "github.com/theopenl
 	SENT
 	COMPLETED
 	OVERDUE
+	DRAFT
 }
 """
 Return response for createBulkCampaignTarget mutation
@@ -11621,7 +11633,7 @@ input CreateEntityInput {
 	"""
 	status of the entity
 	"""
-	status: String
+	status: EntityEntityStatus
 	"""
 	whether the entity is approved for use
 	"""
@@ -22094,7 +22106,7 @@ type Entity implements Node {
 	"""
 	status of the entity
 	"""
-	status: String
+	status: EntityEntityStatus
 	"""
 	whether the entity is approved for use
 	"""
@@ -22874,6 +22886,20 @@ type EntityEdge {
 	A cursor for use in pagination.
 	"""
 	cursor: Cursor!
+}
+"""
+EntityEntityStatus is enum for the field status
+"""
+enum EntityEntityStatus @goModel(model: "github.com/theopenlane/core/common/enums.EntityStatus") {
+	DRAFT
+	UNDER_REVIEW
+	APPROVED
+	RESTRICTED
+	REJECTED
+	ACTIVE
+	SUSPENDED
+	OFFBOARDING
+	TERMINATED
 }
 """
 EntityFrequency is enum for the field review_frequency
@@ -23789,21 +23815,12 @@ input EntityWhereInput {
 	"""
 	status field predicates
 	"""
-	status: String
-	statusNEQ: String
-	statusIn: [String!]
-	statusNotIn: [String!]
-	statusGT: String
-	statusGTE: String
-	statusLT: String
-	statusLTE: String
-	statusContains: String
-	statusHasPrefix: String
-	statusHasSuffix: String
+	status: EntityEntityStatus
+	statusNEQ: EntityEntityStatus
+	statusIn: [EntityEntityStatus!]
+	statusNotIn: [EntityEntityStatus!]
 	statusIsNil: Boolean
 	statusNotNil: Boolean
-	statusEqualFold: String
-	statusContainsFold: String
 	"""
 	approved_for_use field predicates
 	"""
@@ -26086,10 +26103,13 @@ enum ExportExportStatus @goModel(model: "github.com/theopenlane/core/common/enum
 ExportExportType is enum for the field export_type
 """
 enum ExportExportType @goModel(model: "github.com/theopenlane/core/common/enums.ExportType") {
+	ASSET
 	CONTROL
 	DIRECTORY_MEMBERSHIP
+	ENTITY
 	EVIDENCE
 	FINDING
+	IDENTITY_HOLDER
 	INTERNAL_POLICY
 	PROCEDURE
 	REMEDIATION
@@ -40773,6 +40793,11 @@ type Mutation {
 		values of the entity
 		"""
 		input: CreateEntityInput!
+
+		"""
+		entity type name allows the name of the entity type to be passed in over an id
+		"""
+		entityTypeName: String
 	): EntityCreatePayload!
 	"""
 	Create multiple new entities
@@ -80275,7 +80300,7 @@ input UpdateEntityInput {
 	"""
 	status of the entity
 	"""
-	status: String
+	status: EntityEntityStatus
 	clearStatus: Boolean
 	"""
 	whether the entity is approved for use
