@@ -1,19 +1,42 @@
 mutation CreateAsset($input: CreateAssetInput!) {
   createAsset(input: $input) {
     asset {
+      id
+      name
+      internalOwner
+      internalOwnerGroup {
+        id
+        displayName
+      }
+      internalOwnerUser {
+        id
+        displayName
+      }
+      accessModelName
+      assetDataClassificationName
+      assetSubtypeName
       assetType
-      categories
+      containsPii
+      costCenter
       cpe
       createdAt
       createdBy
-      description
-      id
-      identifier
-      name
-      ownerID
-      tags
       updatedAt
       updatedBy
+      criticalityName
+      description
+      encryptionStatusName
+      environmentName
+      estimatedMonthlyCost
+      identifier
+      physicalLocation
+      purchaseDate
+      region
+      scopeName
+      securityTierName
+      sourceIdentifier
+      sourceType
+      tags
       website
     }
   }
@@ -22,19 +45,42 @@ mutation CreateAsset($input: CreateAssetInput!) {
 mutation CreateBulkAsset($input: [CreateAssetInput!]) {
   createBulkAsset(input: $input) {
     assets {
+      id
+      name
+      internalOwner
+      internalOwnerGroup {
+        id
+        displayName
+      }
+      internalOwnerUser {
+        id
+        displayName
+      }
+      accessModelName
+      assetDataClassificationName
+      assetSubtypeName
       assetType
-      categories
+      containsPii
+      costCenter
       cpe
       createdAt
       createdBy
-      description
-      id
-      identifier
-      name
-      ownerID
-      tags
       updatedAt
       updatedBy
+      criticalityName
+      description
+      encryptionStatusName
+      environmentName
+      estimatedMonthlyCost
+      identifier
+      physicalLocation
+      purchaseDate
+      region
+      scopeName
+      securityTierName
+      sourceIdentifier
+      sourceType
+      tags
       website
     }
   }
@@ -43,19 +89,42 @@ mutation CreateBulkAsset($input: [CreateAssetInput!]) {
 mutation CreateBulkCSVAsset($input: Upload!) {
   createBulkCSVAsset(input: $input) {
     assets {
+      id
+      name
+      internalOwner
+      internalOwnerGroup {
+        id
+        displayName
+      }
+      internalOwnerUser {
+        id
+        displayName
+      }
+      accessModelName
+      assetDataClassificationName
+      assetSubtypeName
       assetType
-      categories
+      containsPii
+      costCenter
       cpe
       createdAt
       createdBy
-      description
-      id
-      identifier
-      name
-      ownerID
-      tags
       updatedAt
       updatedBy
+      criticalityName
+      description
+      encryptionStatusName
+      environmentName
+      estimatedMonthlyCost
+      identifier
+      physicalLocation
+      purchaseDate
+      region
+      scopeName
+      securityTierName
+      sourceIdentifier
+      sourceType
+      tags
       website
     }
   }
@@ -84,19 +153,42 @@ query GetAllAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
     }
     edges {
       node {
+        id
+        name
+        internalOwner
+        internalOwnerGroup {
+          id
+          displayName
+        }
+        internalOwnerUser {
+          id
+          displayName
+        }
+        accessModelName
+        assetDataClassificationName
+        assetSubtypeName
         assetType
-        categories
+        containsPii
+        costCenter
         cpe
         createdAt
         createdBy
-        description
-        id
-        identifier
-        name
-        ownerID
-        tags
         updatedAt
         updatedBy
+        criticalityName
+        description
+        encryptionStatusName
+        environmentName
+        estimatedMonthlyCost
+        identifier
+        physicalLocation
+        purchaseDate
+        region
+        scopeName
+        securityTierName
+        sourceIdentifier
+        sourceType
+        tags
         website
       }
     }
@@ -105,19 +197,42 @@ query GetAllAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
 
 query GetAssetByID($assetId: ID!) {
   asset(id: $assetId) {
+    id
+    name
+    internalOwner
+    internalOwnerGroup {
+      id
+      displayName
+    }
+    internalOwnerUser {
+      id
+      displayName
+    }
+    accessModelName
+    assetDataClassificationName
+    assetSubtypeName
     assetType
-    categories
+    containsPii
+    costCenter
     cpe
     createdAt
     createdBy
-    description
-    id
-    identifier
-    name
-    ownerID
-    tags
     updatedAt
     updatedBy
+    criticalityName
+    description
+    encryptionStatusName
+    environmentName
+    estimatedMonthlyCost
+    identifier
+    physicalLocation
+    purchaseDate
+    region
+    scopeName
+    securityTierName
+    sourceIdentifier
+    sourceType
+    tags
     website
   }
 }
@@ -140,19 +255,42 @@ query GetAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where
     }
     edges {
       node {
+        id
+        name
+        internalOwner
+        internalOwnerGroup {
+          id
+          displayName
+        }
+        internalOwnerUser {
+          id
+          displayName
+        }
+        accessModelName
+        assetDataClassificationName
+        assetSubtypeName
         assetType
-        categories
+        containsPii
+        costCenter
         cpe
         createdAt
         createdBy
-        description
-        id
-        identifier
-        name
-        ownerID
-        tags
         updatedAt
         updatedBy
+        criticalityName
+        description
+        encryptionStatusName
+        environmentName
+        estimatedMonthlyCost
+        identifier
+        physicalLocation
+        purchaseDate
+        region
+        scopeName
+        securityTierName
+        sourceIdentifier
+        sourceType
+        tags
         website
       }
     }
@@ -162,19 +300,42 @@ query GetAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where
 mutation UpdateAsset($updateAssetId: ID!, $input: UpdateAssetInput!) {
   updateAsset(id: $updateAssetId, input: $input) {
     asset {
+      id
+      name
+      internalOwner
+      internalOwnerGroup {
+        id
+        displayName
+      }
+      internalOwnerUser {
+        id
+        displayName
+      }
+      accessModelName
+      assetDataClassificationName
+      assetSubtypeName
       assetType
-      categories
+      containsPii
+      costCenter
       cpe
       createdAt
       createdBy
-      description
-      id
-      identifier
-      name
-      ownerID
-      tags
       updatedAt
       updatedBy
+      criticalityName
+      description
+      encryptionStatusName
+      environmentName
+      estimatedMonthlyCost
+      identifier
+      physicalLocation
+      purchaseDate
+      region
+      scopeName
+      securityTierName
+      sourceIdentifier
+      sourceType
+      tags
       website
     }
   }
