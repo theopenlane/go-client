@@ -1,19 +1,55 @@
 mutation CreateBulkCSVEntity($input: Upload!) {
   createBulkCSVEntity(input: $input) {
     entities {
+      annualSpend
+      approvedForUse
+      autoRenews
+      billingModel
+      contractEndDate
+      contractRenewalAt
+      contractStartDate
       createdAt
       createdBy
       description
       displayName
-      domains
+      entityRelationshipStateID
+      entityRelationshipStateName
+      entitySecurityQuestionnaireStatusID
+      entitySecurityQuestionnaireStatusName
+      entitySourceTypeID
+      entitySourceTypeName
       entityTypeID
+      environmentID
+      environmentName
+      hasSoc2
       id
+      internalOwner
+      internalOwnerGroupID
+      internalOwnerUserID
+      lastReviewedAt
+      mfaEnforced
+      mfaSupported
       name
-      ownerID
-      status
+      nextReviewAt
+      renewalRisk
+      reviewedBy
+      reviewedByGroupID
+      reviewedByUserID
+      riskRating
+      riskScore
+      scopeID
+      scopeName
+      soc2PeriodEnd
+      spendCurrency
+      ssoEnforced
+      statusPageURL
+      systemOwned
       tags
+      terminationNoticeDays
+      tier
       updatedAt
       updatedBy
+      vendorMetadata
     }
   }
 }
@@ -21,39 +57,111 @@ mutation CreateBulkCSVEntity($input: Upload!) {
 mutation CreateBulkEntity($input: [CreateEntityInput!]) {
   createBulkEntity(input: $input) {
     entities {
+      annualSpend
+      approvedForUse
+      autoRenews
+      billingModel
+      contractEndDate
+      contractRenewalAt
+      contractStartDate
       createdAt
       createdBy
       description
       displayName
-      domains
+      entityRelationshipStateID
+      entityRelationshipStateName
+      entitySecurityQuestionnaireStatusID
+      entitySecurityQuestionnaireStatusName
+      entitySourceTypeID
+      entitySourceTypeName
       entityTypeID
+      environmentID
+      environmentName
+      hasSoc2
       id
+      internalOwner
+      internalOwnerGroupID
+      internalOwnerUserID
+      lastReviewedAt
+      mfaEnforced
+      mfaSupported
       name
-      ownerID
-      status
+      nextReviewAt
+      renewalRisk
+      reviewedBy
+      reviewedByGroupID
+      reviewedByUserID
+      riskRating
+      riskScore
+      scopeID
+      scopeName
+      soc2PeriodEnd
+      spendCurrency
+      ssoEnforced
+      statusPageURL
+      systemOwned
       tags
+      terminationNoticeDays
+      tier
       updatedAt
       updatedBy
+      vendorMetadata
     }
   }
 }
 
-mutation CreateEntity($input: CreateEntityInput!) {
-  createEntity(input: $input) {
+mutation CreateEntity($input: CreateEntityInput!, $entityTypeName: String) {
+  createEntity(input: $input, entityTypeName: $entityTypeName) {
     entity {
+      annualSpend
+      approvedForUse
+      autoRenews
+      billingModel
+      contractEndDate
+      contractRenewalAt
+      contractStartDate
       createdAt
       createdBy
       description
       displayName
-      domains
+      entityRelationshipStateID
+      entityRelationshipStateName
+      entitySecurityQuestionnaireStatusID
+      entitySecurityQuestionnaireStatusName
+      entitySourceTypeID
+      entitySourceTypeName
       entityTypeID
+      environmentID
+      environmentName
+      hasSoc2
       id
+      internalOwner
+      internalOwnerGroupID
+      internalOwnerUserID
+      lastReviewedAt
+      mfaEnforced
+      mfaSupported
       name
-      ownerID
-      status
+      nextReviewAt
+      renewalRisk
+      reviewedBy
+      reviewedByGroupID
+      reviewedByUserID
+      riskRating
+      riskScore
+      scopeID
+      scopeName
+      soc2PeriodEnd
+      spendCurrency
+      ssoEnforced
+      statusPageURL
+      systemOwned
       tags
+      terminationNoticeDays
+      tier
       updatedAt
       updatedBy
+      vendorMetadata
     }
   }
 }
@@ -81,19 +189,55 @@ query GetAllEntities($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
     }
     edges {
       node {
+        annualSpend
+        approvedForUse
+        autoRenews
+        billingModel
+        contractEndDate
+        contractRenewalAt
+        contractStartDate
         createdAt
         createdBy
         description
         displayName
-        domains
+        entityRelationshipStateID
+        entityRelationshipStateName
+        entitySecurityQuestionnaireStatusID
+        entitySecurityQuestionnaireStatusName
+        entitySourceTypeID
+        entitySourceTypeName
         entityTypeID
+        environmentID
+        environmentName
+        hasSoc2
         id
+        internalOwner
+        internalOwnerGroupID
+        internalOwnerUserID
+        lastReviewedAt
+        mfaEnforced
+        mfaSupported
         name
-        ownerID
-        status
+        nextReviewAt
+        renewalRisk
+        reviewedBy
+        reviewedByGroupID
+        reviewedByUserID
+        riskRating
+        riskScore
+        scopeID
+        scopeName
+        soc2PeriodEnd
+        spendCurrency
+        ssoEnforced
+        statusPageURL
+        systemOwned
         tags
+        terminationNoticeDays
+        tier
         updatedAt
         updatedBy
+        vendorMetadata
       }
     }
   }
@@ -117,19 +261,55 @@ query GetEntities($first: Int, $last: Int, $after: Cursor, $before: Cursor, $whe
     }
     edges {
       node {
+        annualSpend
+        approvedForUse
+        autoRenews
+        billingModel
+        contractEndDate
+        contractRenewalAt
+        contractStartDate
         createdAt
         createdBy
         description
         displayName
-        domains
+        entityRelationshipStateID
+        entityRelationshipStateName
+        entitySecurityQuestionnaireStatusID
+        entitySecurityQuestionnaireStatusName
+        entitySourceTypeID
+        entitySourceTypeName
         entityTypeID
+        environmentID
+        environmentName
+        hasSoc2
         id
+        internalOwner
+        internalOwnerGroupID
+        internalOwnerUserID
+        lastReviewedAt
+        mfaEnforced
+        mfaSupported
         name
-        ownerID
-        status
+        nextReviewAt
+        renewalRisk
+        reviewedBy
+        reviewedByGroupID
+        reviewedByUserID
+        riskRating
+        riskScore
+        scopeID
+        scopeName
+        soc2PeriodEnd
+        spendCurrency
+        ssoEnforced
+        statusPageURL
+        systemOwned
         tags
+        terminationNoticeDays
+        tier
         updatedAt
         updatedBy
+        vendorMetadata
       }
     }
   }
@@ -137,38 +317,110 @@ query GetEntities($first: Int, $last: Int, $after: Cursor, $before: Cursor, $whe
 
 query GetEntityByID($entityId: ID!) {
   entity(id: $entityId) {
+    annualSpend
+    approvedForUse
+    autoRenews
+    billingModel
+    contractEndDate
+    contractRenewalAt
+    contractStartDate
     createdAt
     createdBy
     description
     displayName
-    domains
+    entityRelationshipStateID
+    entityRelationshipStateName
+    entitySecurityQuestionnaireStatusID
+    entitySecurityQuestionnaireStatusName
+    entitySourceTypeID
+    entitySourceTypeName
     entityTypeID
+    environmentID
+    environmentName
+    hasSoc2
     id
+    internalOwner
+    internalOwnerGroupID
+    internalOwnerUserID
+    lastReviewedAt
+    mfaEnforced
+    mfaSupported
     name
-    ownerID
-    status
+    nextReviewAt
+    renewalRisk
+    reviewedBy
+    reviewedByGroupID
+    reviewedByUserID
+    riskRating
+    riskScore
+    scopeID
+    scopeName
+    soc2PeriodEnd
+    spendCurrency
+    ssoEnforced
+    statusPageURL
+    systemOwned
     tags
+    terminationNoticeDays
+    tier
     updatedAt
     updatedBy
+    vendorMetadata
   }
 }
 
 mutation UpdateEntity($updateEntityId: ID!, $input: UpdateEntityInput!) {
   updateEntity(id: $updateEntityId, input: $input) {
     entity {
+      annualSpend
+      approvedForUse
+      autoRenews
+      billingModel
+      contractEndDate
+      contractRenewalAt
+      contractStartDate
       createdAt
       createdBy
       description
       displayName
-      domains
+      entityRelationshipStateID
+      entityRelationshipStateName
+      entitySecurityQuestionnaireStatusID
+      entitySecurityQuestionnaireStatusName
+      entitySourceTypeID
+      entitySourceTypeName
       entityTypeID
+      environmentID
+      environmentName
+      hasSoc2
       id
+      internalOwner
+      internalOwnerGroupID
+      internalOwnerUserID
+      lastReviewedAt
+      mfaEnforced
+      mfaSupported
       name
-      ownerID
-      status
+      nextReviewAt
+      renewalRisk
+      reviewedBy
+      reviewedByGroupID
+      reviewedByUserID
+      riskRating
+      riskScore
+      scopeID
+      scopeName
+      soc2PeriodEnd
+      spendCurrency
+      ssoEnforced
+      statusPageURL
+      systemOwned
       tags
+      terminationNoticeDays
+      tier
       updatedAt
       updatedBy
+      vendorMetadata
     }
   }
 }
