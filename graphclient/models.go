@@ -1664,7 +1664,9 @@ type Asset struct {
 	// the type of the asset, e.g. technology, domain, device, etc
 	AssetType enums.AssetType `json:"assetType"`
 	// the name of the asset, e.g. matts computer, office router, IP address, etc
-	Name        string  `json:"name"`
+	Name string `json:"name"`
+	// the display name of the asset
+	DisplayName *string `json:"displayName,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// unique identifier like domain, device id, etc
 	Identifier *string `json:"identifier,omitempty"`
@@ -2230,6 +2232,22 @@ type AssetWhereInput struct {
 	NameHasSuffix    *string  `json:"nameHasSuffix,omitempty"`
 	NameEqualFold    *string  `json:"nameEqualFold,omitempty"`
 	NameContainsFold *string  `json:"nameContainsFold,omitempty"`
+	// display_name field predicates
+	DisplayName             *string  `json:"displayName,omitempty"`
+	DisplayNameNeq          *string  `json:"displayNameNEQ,omitempty"`
+	DisplayNameIn           []string `json:"displayNameIn,omitempty"`
+	DisplayNameNotIn        []string `json:"displayNameNotIn,omitempty"`
+	DisplayNameGt           *string  `json:"displayNameGT,omitempty"`
+	DisplayNameGte          *string  `json:"displayNameGTE,omitempty"`
+	DisplayNameLt           *string  `json:"displayNameLT,omitempty"`
+	DisplayNameLte          *string  `json:"displayNameLTE,omitempty"`
+	DisplayNameContains     *string  `json:"displayNameContains,omitempty"`
+	DisplayNameHasPrefix    *string  `json:"displayNameHasPrefix,omitempty"`
+	DisplayNameHasSuffix    *string  `json:"displayNameHasSuffix,omitempty"`
+	DisplayNameIsNil        *bool    `json:"displayNameIsNil,omitempty"`
+	DisplayNameNotNil       *bool    `json:"displayNameNotNil,omitempty"`
+	DisplayNameEqualFold    *string  `json:"displayNameEqualFold,omitempty"`
+	DisplayNameContainsFold *string  `json:"displayNameContainsFold,omitempty"`
 	// description field predicates
 	Description             *string  `json:"description,omitempty"`
 	DescriptionNeq          *string  `json:"descriptionNEQ,omitempty"`
@@ -3902,17 +3920,21 @@ type Control struct {
 	// the unique reference code for the control
 	RefCode string `json:"refCode"`
 	// the id of the standard that the control belongs to, if applicable
-	StandardID        *string                     `json:"standardID,omitempty"`
-	Evidence          *EvidenceConnection         `json:"evidence"`
-	ControlObjectives *ControlObjectiveConnection `json:"controlObjectives"`
-	Tasks             *TaskConnection             `json:"tasks"`
-	Narratives        *NarrativeConnection        `json:"narratives"`
-	Risks             *RiskConnection             `json:"risks"`
-	ActionPlans       *ActionPlanConnection       `json:"actionPlans"`
-	Procedures        *ProcedureConnection        `json:"procedures"`
-	InternalPolicies  *InternalPolicyConnection   `json:"internalPolicies"`
-	Comments          *NoteConnection             `json:"comments"`
-	Discussions       *DiscussionConnection       `json:"discussions"`
+	StandardID *string `json:"standardID,omitempty"`
+	// visibility of the control on the trust center, controls the publishing state for trust center display
+	TrustCenterVisibility *enums.TrustCenterControlVisibility `json:"trustCenterVisibility,omitempty"`
+	// indicates the control is derived from the trust center standard, set by the system during control clone
+	IsTrustCenterControl *bool                       `json:"isTrustCenterControl,omitempty"`
+	Evidence             *EvidenceConnection         `json:"evidence"`
+	ControlObjectives    *ControlObjectiveConnection `json:"controlObjectives"`
+	Tasks                *TaskConnection             `json:"tasks"`
+	Narratives           *NarrativeConnection        `json:"narratives"`
+	Risks                *RiskConnection             `json:"risks"`
+	ActionPlans          *ActionPlanConnection       `json:"actionPlans"`
+	Procedures           *ProcedureConnection        `json:"procedures"`
+	InternalPolicies     *InternalPolicyConnection   `json:"internalPolicies"`
+	Comments             *NoteConnection             `json:"comments"`
+	Discussions          *DiscussionConnection       `json:"discussions"`
 	// the group of users who are responsible for the control, will be assigned tasks, approval, etc.
 	ControlOwner *Group `json:"controlOwner,omitempty"`
 	// temporary delegate for the control, used for temporary control ownership
@@ -5238,6 +5260,18 @@ type ControlWhereInput struct {
 	StandardIDNotNil       *bool    `json:"standardIDNotNil,omitempty"`
 	StandardIDEqualFold    *string  `json:"standardIDEqualFold,omitempty"`
 	StandardIDContainsFold *string  `json:"standardIDContainsFold,omitempty"`
+	// trust_center_visibility field predicates
+	TrustCenterVisibility       *enums.TrustCenterControlVisibility  `json:"trustCenterVisibility,omitempty"`
+	TrustCenterVisibilityNeq    *enums.TrustCenterControlVisibility  `json:"trustCenterVisibilityNEQ,omitempty"`
+	TrustCenterVisibilityIn     []enums.TrustCenterControlVisibility `json:"trustCenterVisibilityIn,omitempty"`
+	TrustCenterVisibilityNotIn  []enums.TrustCenterControlVisibility `json:"trustCenterVisibilityNotIn,omitempty"`
+	TrustCenterVisibilityIsNil  *bool                                `json:"trustCenterVisibilityIsNil,omitempty"`
+	TrustCenterVisibilityNotNil *bool                                `json:"trustCenterVisibilityNotNil,omitempty"`
+	// is_trust_center_control field predicates
+	IsTrustCenterControl       *bool `json:"isTrustCenterControl,omitempty"`
+	IsTrustCenterControlNeq    *bool `json:"isTrustCenterControlNEQ,omitempty"`
+	IsTrustCenterControlIsNil  *bool `json:"isTrustCenterControlIsNil,omitempty"`
+	IsTrustCenterControlNotNil *bool `json:"isTrustCenterControlNotNil,omitempty"`
 	// evidence edge predicates
 	HasEvidence     *bool                 `json:"hasEvidence,omitempty"`
 	HasEvidenceWith []*EvidenceWhereInput `json:"hasEvidenceWith,omitempty"`
@@ -5532,7 +5566,9 @@ type CreateAssetInput struct {
 	// the type of the asset, e.g. technology, domain, device, etc
 	AssetType *enums.AssetType `json:"assetType,omitempty"`
 	// the name of the asset, e.g. matts computer, office router, IP address, etc
-	Name        string  `json:"name"`
+	Name string `json:"name"`
+	// the display name of the asset
+	DisplayName *string `json:"displayName,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// unique identifier like domain, device id, etc
 	Identifier *string `json:"identifier,omitempty"`
@@ -5805,36 +5841,38 @@ type CreateControlInput struct {
 	// internal marker field for workflow eligibility, not exposed in API
 	WorkflowEligibleMarker *bool `json:"workflowEligibleMarker,omitempty"`
 	// the unique reference code for the control
-	RefCode                  string   `json:"refCode"`
-	EvidenceIDs              []string `json:"evidenceIDs,omitempty"`
-	ControlObjectiveIDs      []string `json:"controlObjectiveIDs,omitempty"`
-	TaskIDs                  []string `json:"taskIDs,omitempty"`
-	NarrativeIDs             []string `json:"narrativeIDs,omitempty"`
-	RiskIDs                  []string `json:"riskIDs,omitempty"`
-	ActionPlanIDs            []string `json:"actionPlanIDs,omitempty"`
-	ProcedureIDs             []string `json:"procedureIDs,omitempty"`
-	InternalPolicyIDs        []string `json:"internalPolicyIDs,omitempty"`
-	CommentIDs               []string `json:"commentIDs,omitempty"`
-	DiscussionIDs            []string `json:"discussionIDs,omitempty"`
-	ControlOwnerID           *string  `json:"controlOwnerID,omitempty"`
-	DelegateID               *string  `json:"delegateID,omitempty"`
-	ResponsiblePartyID       *string  `json:"responsiblePartyID,omitempty"`
-	OwnerID                  *string  `json:"ownerID,omitempty"`
-	BlockedGroupIDs          []string `json:"blockedGroupIDs,omitempty"`
-	EditorIDs                []string `json:"editorIDs,omitempty"`
-	ControlKindID            *string  `json:"controlKindID,omitempty"`
-	EnvironmentID            *string  `json:"environmentID,omitempty"`
-	ScopeID                  *string  `json:"scopeID,omitempty"`
-	StandardID               *string  `json:"standardID,omitempty"`
-	ProgramIDs               []string `json:"programIDs,omitempty"`
-	PlatformIDs              []string `json:"platformIDs,omitempty"`
-	AssetIDs                 []string `json:"assetIDs,omitempty"`
-	ScanIDs                  []string `json:"scanIDs,omitempty"`
-	FindingIDs               []string `json:"findingIDs,omitempty"`
-	ControlImplementationIDs []string `json:"controlImplementationIDs,omitempty"`
-	SubcontrolIDs            []string `json:"subcontrolIDs,omitempty"`
-	ScheduledJobIDs          []string `json:"scheduledJobIDs,omitempty"`
-	WorkflowObjectRefIDs     []string `json:"workflowObjectRefIDs,omitempty"`
+	RefCode string `json:"refCode"`
+	// visibility of the control on the trust center, controls the publishing state for trust center display
+	TrustCenterVisibility    *enums.TrustCenterControlVisibility `json:"trustCenterVisibility,omitempty"`
+	EvidenceIDs              []string                            `json:"evidenceIDs,omitempty"`
+	ControlObjectiveIDs      []string                            `json:"controlObjectiveIDs,omitempty"`
+	TaskIDs                  []string                            `json:"taskIDs,omitempty"`
+	NarrativeIDs             []string                            `json:"narrativeIDs,omitempty"`
+	RiskIDs                  []string                            `json:"riskIDs,omitempty"`
+	ActionPlanIDs            []string                            `json:"actionPlanIDs,omitempty"`
+	ProcedureIDs             []string                            `json:"procedureIDs,omitempty"`
+	InternalPolicyIDs        []string                            `json:"internalPolicyIDs,omitempty"`
+	CommentIDs               []string                            `json:"commentIDs,omitempty"`
+	DiscussionIDs            []string                            `json:"discussionIDs,omitempty"`
+	ControlOwnerID           *string                             `json:"controlOwnerID,omitempty"`
+	DelegateID               *string                             `json:"delegateID,omitempty"`
+	ResponsiblePartyID       *string                             `json:"responsiblePartyID,omitempty"`
+	OwnerID                  *string                             `json:"ownerID,omitempty"`
+	BlockedGroupIDs          []string                            `json:"blockedGroupIDs,omitempty"`
+	EditorIDs                []string                            `json:"editorIDs,omitempty"`
+	ControlKindID            *string                             `json:"controlKindID,omitempty"`
+	EnvironmentID            *string                             `json:"environmentID,omitempty"`
+	ScopeID                  *string                             `json:"scopeID,omitempty"`
+	StandardID               *string                             `json:"standardID,omitempty"`
+	ProgramIDs               []string                            `json:"programIDs,omitempty"`
+	PlatformIDs              []string                            `json:"platformIDs,omitempty"`
+	AssetIDs                 []string                            `json:"assetIDs,omitempty"`
+	ScanIDs                  []string                            `json:"scanIDs,omitempty"`
+	FindingIDs               []string                            `json:"findingIDs,omitempty"`
+	ControlImplementationIDs []string                            `json:"controlImplementationIDs,omitempty"`
+	SubcontrolIDs            []string                            `json:"subcontrolIDs,omitempty"`
+	ScheduledJobIDs          []string                            `json:"scheduledJobIDs,omitempty"`
+	WorkflowObjectRefIDs     []string                            `json:"workflowObjectRefIDs,omitempty"`
 }
 
 // CreateControlObjectiveInput is used for create ControlObjective object.
@@ -7122,18 +7160,19 @@ type CreateNoteInput struct {
 	// ref location of the note
 	NoteRef *string `json:"noteRef,omitempty"`
 	// whether the note has been edited
-	IsEdited         *bool    `json:"isEdited,omitempty"`
-	OwnerID          *string  `json:"ownerID,omitempty"`
-	TaskID           *string  `json:"taskID,omitempty"`
-	ControlID        *string  `json:"controlID,omitempty"`
-	SubcontrolID     *string  `json:"subcontrolID,omitempty"`
-	ProcedureID      *string  `json:"procedureID,omitempty"`
-	RiskID           *string  `json:"riskID,omitempty"`
-	InternalPolicyID *string  `json:"internalPolicyID,omitempty"`
-	EvidenceID       *string  `json:"evidenceID,omitempty"`
-	TrustCenterID    *string  `json:"trustCenterID,omitempty"`
-	DiscussionID     *string  `json:"discussionID,omitempty"`
-	FileIDs          []string `json:"fileIDs,omitempty"`
+	IsEdited          *bool    `json:"isEdited,omitempty"`
+	OwnerID           *string  `json:"ownerID,omitempty"`
+	TaskID            *string  `json:"taskID,omitempty"`
+	ControlID         *string  `json:"controlID,omitempty"`
+	SubcontrolID      *string  `json:"subcontrolID,omitempty"`
+	ProcedureID       *string  `json:"procedureID,omitempty"`
+	RiskID            *string  `json:"riskID,omitempty"`
+	InternalPolicyID  *string  `json:"internalPolicyID,omitempty"`
+	EvidenceID        *string  `json:"evidenceID,omitempty"`
+	TrustCenterID     *string  `json:"trustCenterID,omitempty"`
+	DiscussionID      *string  `json:"discussionID,omitempty"`
+	TrustCenterFaqIDs []string `json:"trustCenterFaqIDs,omitempty"`
+	FileIDs           []string `json:"fileIDs,omitempty"`
 }
 
 // CreateNotificationInput is used for create Notification object.
@@ -7178,9 +7217,9 @@ type CreateNotificationPreferenceInput struct {
 	Cadence *enums.NotificationCadence `json:"cadence,omitempty"`
 	// optional priority override for this preference
 	Priority *enums.Priority `json:"priority,omitempty"`
-	// soiree topic names or wildcard patterns this preference applies to; empty means all
+	// topic names or wildcard patterns this preference applies to; empty means all
 	TopicPatterns []string `json:"topicPatterns,omitempty"`
-	// optional per-topic overrides (e.g. template_id, cadence, priority) keyed by soiree topic name
+	// optional per-topic overrides (e.g. template_id, cadence, priority) keyed by topic name
 	TopicOverrides map[string]any `json:"topicOverrides,omitempty"`
 	// mute notifications until this time
 	MuteUntil *time.Time `json:"muteUntil,omitempty"`
@@ -7224,7 +7263,7 @@ type CreateNotificationTemplateInput struct {
 	Format *enums.NotificationTemplateFormat `json:"format,omitempty"`
 	// locale for the template, e.g. en-US
 	Locale *string `json:"locale,omitempty"`
-	// soiree topic name or wildcard pattern this template targets
+	// topic name or wildcard pattern this template targets
 	TopicPattern string `json:"topicPattern"`
 	// title template for external channel messages
 	TitleTemplate *string `json:"titleTemplate,omitempty"`
@@ -8335,6 +8374,23 @@ type CreateTrustCenterEntityInput struct {
 	EntityTypeID    *string  `json:"entityTypeID,omitempty"`
 }
 
+// CreateTrustCenterFAQInput is used for create TrustCenterFAQ object.
+// Input was generated by ent.
+type CreateTrustCenterFAQInput struct {
+	// the kind of the trust_center_faq
+	TrustCenterFaqKindName *string `json:"trustCenterFaqKindName,omitempty"`
+	// optional reference link for the FAQ
+	ReferenceLink *string `json:"referenceLink,omitempty"`
+	// display order of the FAQ
+	DisplayOrder         *int64           `json:"displayOrder,omitempty"`
+	TrustCenterFaqKindID *string          `json:"trustCenterFaqKindID,omitempty"`
+	BlockedGroupIDs      []string         `json:"blockedGroupIDs,omitempty"`
+	EditorIDs            []string         `json:"editorIDs,omitempty"`
+	TrustCenterID        *string          `json:"trustCenterID,omitempty"`
+	NoteID               string           `json:"noteID"`
+	CreateNote           *CreateNoteInput `json:"createNote,omitempty"`
+}
+
 // CreateTrustCenterInput is used for create TrustCenter object.
 // Input was generated by ent.
 type CreateTrustCenterInput struct {
@@ -8365,6 +8421,7 @@ type CreateTrustCenterInput struct {
 	PostIDs                    []string                       `json:"postIDs,omitempty"`
 	TrustCenterEntityIDs       []string                       `json:"trustCenterEntityIDs,omitempty"`
 	TrustCenterNdaRequestIDs   []string                       `json:"trustCenterNdaRequestIDs,omitempty"`
+	TrustCenterFaqIDs          []string                       `json:"trustCenterFaqIDs,omitempty"`
 	CreateTrustCenterSetting   *CreateTrustCenterSettingInput `json:"createTrustCenterSetting,omitempty"`
 }
 
@@ -21842,18 +21899,19 @@ type Note struct {
 	// whether the note has been edited
 	IsEdited bool `json:"isEdited"`
 	// the trust center this note belongs to, if applicable
-	TrustCenterID  *string         `json:"trustCenterID,omitempty"`
-	Owner          *Organization   `json:"owner,omitempty"`
-	Task           *Task           `json:"task,omitempty"`
-	Control        *Control        `json:"control,omitempty"`
-	Subcontrol     *Subcontrol     `json:"subcontrol,omitempty"`
-	Procedure      *Procedure      `json:"procedure,omitempty"`
-	Risk           *Risk           `json:"risk,omitempty"`
-	InternalPolicy *InternalPolicy `json:"internalPolicy,omitempty"`
-	Evidence       *Evidence       `json:"evidence,omitempty"`
-	TrustCenter    *TrustCenter    `json:"trustCenter,omitempty"`
-	Discussion     *Discussion     `json:"discussion,omitempty"`
-	Files          *FileConnection `json:"files"`
+	TrustCenterID   *string                   `json:"trustCenterID,omitempty"`
+	Owner           *Organization             `json:"owner,omitempty"`
+	Task            *Task                     `json:"task,omitempty"`
+	Control         *Control                  `json:"control,omitempty"`
+	Subcontrol      *Subcontrol               `json:"subcontrol,omitempty"`
+	Procedure       *Procedure                `json:"procedure,omitempty"`
+	Risk            *Risk                     `json:"risk,omitempty"`
+	InternalPolicy  *InternalPolicy           `json:"internalPolicy,omitempty"`
+	Evidence        *Evidence                 `json:"evidence,omitempty"`
+	TrustCenter     *TrustCenter              `json:"trustCenter,omitempty"`
+	Discussion      *Discussion               `json:"discussion,omitempty"`
+	TrustCenterFaqs *TrustCenterFAQConnection `json:"trustCenterFaqs"`
+	Files           *FileConnection           `json:"files"`
 }
 
 func (Note) IsNode() {}
@@ -22102,6 +22160,9 @@ type NoteWhereInput struct {
 	// discussion edge predicates
 	HasDiscussion     *bool                   `json:"hasDiscussion,omitempty"`
 	HasDiscussionWith []*DiscussionWhereInput `json:"hasDiscussionWith,omitempty"`
+	// trust_center_faqs edge predicates
+	HasTrustCenterFaqs     *bool                       `json:"hasTrustCenterFaqs,omitempty"`
+	HasTrustCenterFaqsWith []*TrustCenterFAQWhereInput `json:"hasTrustCenterFaqsWith,omitempty"`
 	// files edge predicates
 	HasFiles     *bool             `json:"hasFiles,omitempty"`
 	HasFilesWith []*FileWhereInput `json:"hasFilesWith,omitempty"`
@@ -22195,9 +22256,9 @@ type NotificationPreference struct {
 	Cadence enums.NotificationCadence `json:"cadence"`
 	// optional priority override for this preference
 	Priority *enums.Priority `json:"priority,omitempty"`
-	// soiree topic names or wildcard patterns this preference applies to; empty means all
+	// topic names or wildcard patterns this preference applies to; empty means all
 	TopicPatterns []string `json:"topicPatterns,omitempty"`
-	// optional per-topic overrides (e.g. template_id, cadence, priority) keyed by soiree topic name
+	// optional per-topic overrides (e.g. template_id, cadence, priority) keyed by topic name
 	TopicOverrides map[string]any `json:"topicOverrides,omitempty"`
 	// optional template to use by default for this preference (external channels only)
 	TemplateID *string `json:"templateID,omitempty"`
@@ -22603,7 +22664,7 @@ type NotificationTemplate struct {
 	Format enums.NotificationTemplateFormat `json:"format"`
 	// locale for the template, e.g. en-US
 	Locale string `json:"locale"`
-	// soiree topic name or wildcard pattern this template targets
+	// topic name or wildcard pattern this template targets
 	TopicPattern string `json:"topicPattern"`
 	// integration associated with this template
 	IntegrationID *string `json:"integrationID,omitempty"`
@@ -33226,6 +33287,7 @@ type TrustCenter struct {
 	Posts                    *NoteConnection                    `json:"posts"`
 	TrustCenterEntities      *TrustCenterEntityConnection       `json:"trustCenterEntities"`
 	TrustCenterNdaRequests   *TrustCenterNDARequestConnection   `json:"trustCenterNdaRequests"`
+	TrustCenterFaqs          *TrustCenterFAQConnection          `json:"trustCenterFaqs"`
 }
 
 func (TrustCenter) IsNode() {}
@@ -34024,6 +34086,274 @@ type TrustCenterEntityWhereInput struct {
 	// entity_type edge predicates
 	HasEntityType     *bool                   `json:"hasEntityType,omitempty"`
 	HasEntityTypeWith []*EntityTypeWhereInput `json:"hasEntityTypeWith,omitempty"`
+}
+
+type TrustCenterFaq struct {
+	ID        string     `json:"id"`
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	CreatedBy *string    `json:"createdBy,omitempty"`
+	UpdatedBy *string    `json:"updatedBy,omitempty"`
+	// the kind of the trust_center_faq
+	TrustCenterFaqKindName *string `json:"trustCenterFaqKindName,omitempty"`
+	// the kind of the trust_center_faq
+	TrustCenterFaqKindID *string `json:"trustCenterFaqKindID,omitempty"`
+	// ID of the note containing the FAQ question and answer
+	NoteID string `json:"noteID"`
+	// ID of the trust center
+	TrustCenterID *string `json:"trustCenterID,omitempty"`
+	// optional reference link for the FAQ
+	ReferenceLink *string `json:"referenceLink,omitempty"`
+	// display order of the FAQ
+	DisplayOrder       *int64           `json:"displayOrder,omitempty"`
+	TrustCenterFaqKind *CustomTypeEnum  `json:"trustCenterFaqKind,omitempty"`
+	BlockedGroups      *GroupConnection `json:"blockedGroups"`
+	Editors            *GroupConnection `json:"editors"`
+	TrustCenter        *TrustCenter     `json:"trustCenter,omitempty"`
+	Note               *Note            `json:"note"`
+}
+
+func (TrustCenterFaq) IsNode() {}
+
+// Return response for createBulkTrustCenterFAQ mutation
+type TrustCenterFAQBulkCreatePayload struct {
+	// Created trustCenterFAQs
+	TrustCenterFAQs []*TrustCenterFaq `json:"trustCenterFAQs,omitempty"`
+}
+
+// Return response for deleteBulkTrustCenterFAQ mutation
+type TrustCenterFAQBulkDeletePayload struct {
+	// Deleted trustCenterFAQ IDs
+	DeletedIDs []string `json:"deletedIDs"`
+}
+
+// Return response for updateBulkTrustCenterFAQ mutation
+type TrustCenterFAQBulkUpdatePayload struct {
+	// Updated trustCenterFAQs
+	TrustCenterFAQs []*TrustCenterFaq `json:"trustCenterFAQs,omitempty"`
+	// IDs of the updated trustCenterFAQs
+	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+}
+
+// A connection to a list of items.
+type TrustCenterFAQConnection struct {
+	// A list of edges.
+	Edges []*TrustCenterFAQEdge `json:"edges,omitempty"`
+	// Information to aid in pagination.
+	PageInfo *PageInfo `json:"pageInfo"`
+	// Identifies the total count of items in the connection.
+	TotalCount int64 `json:"totalCount"`
+}
+
+// Return response for createTrustCenterFAQ mutation
+type TrustCenterFAQCreatePayload struct {
+	// Created trustCenterFAQ
+	TrustCenterFaq *TrustCenterFaq `json:"trustCenterFAQ"`
+}
+
+// Return response for deleteTrustCenterFAQ mutation
+type TrustCenterFAQDeletePayload struct {
+	// Deleted trustCenterFAQ ID
+	DeletedID string `json:"deletedID"`
+}
+
+// An edge in a connection.
+type TrustCenterFAQEdge struct {
+	// The item at the end of the edge.
+	Node *TrustCenterFaq `json:"node,omitempty"`
+	// A cursor for use in pagination.
+	Cursor string `json:"cursor"`
+}
+
+// Ordering options for TrustCenterFAQ connections
+type TrustCenterFAQOrder struct {
+	// The ordering direction.
+	Direction OrderDirection `json:"direction"`
+	// The field by which to order TrustCenterFAQs.
+	Field TrustCenterFAQOrderField `json:"field"`
+}
+
+// Return response for updateTrustCenterFAQ mutation
+type TrustCenterFAQUpdatePayload struct {
+	// Updated trustCenterFAQ
+	TrustCenterFaq *TrustCenterFaq `json:"trustCenterFAQ"`
+}
+
+// TrustCenterFAQWhereInput is used for filtering TrustCenterFAQ objects.
+// Input was generated by ent.
+type TrustCenterFAQWhereInput struct {
+	Not *TrustCenterFAQWhereInput   `json:"not,omitempty"`
+	And []*TrustCenterFAQWhereInput `json:"and,omitempty"`
+	Or  []*TrustCenterFAQWhereInput `json:"or,omitempty"`
+	// id field predicates
+	ID             *string  `json:"id,omitempty"`
+	IDNeq          *string  `json:"idNEQ,omitempty"`
+	IDIn           []string `json:"idIn,omitempty"`
+	IDNotIn        []string `json:"idNotIn,omitempty"`
+	IDGt           *string  `json:"idGT,omitempty"`
+	IDGte          *string  `json:"idGTE,omitempty"`
+	IDLt           *string  `json:"idLT,omitempty"`
+	IDLte          *string  `json:"idLTE,omitempty"`
+	IDEqualFold    *string  `json:"idEqualFold,omitempty"`
+	IDContainsFold *string  `json:"idContainsFold,omitempty"`
+	// created_at field predicates
+	CreatedAt       *time.Time   `json:"createdAt,omitempty"`
+	CreatedAtNeq    *time.Time   `json:"createdAtNEQ,omitempty"`
+	CreatedAtIn     []*time.Time `json:"createdAtIn,omitempty"`
+	CreatedAtNotIn  []*time.Time `json:"createdAtNotIn,omitempty"`
+	CreatedAtGt     *time.Time   `json:"createdAtGT,omitempty"`
+	CreatedAtGte    *time.Time   `json:"createdAtGTE,omitempty"`
+	CreatedAtLt     *time.Time   `json:"createdAtLT,omitempty"`
+	CreatedAtLte    *time.Time   `json:"createdAtLTE,omitempty"`
+	CreatedAtIsNil  *bool        `json:"createdAtIsNil,omitempty"`
+	CreatedAtNotNil *bool        `json:"createdAtNotNil,omitempty"`
+	// updated_at field predicates
+	UpdatedAt       *time.Time   `json:"updatedAt,omitempty"`
+	UpdatedAtNeq    *time.Time   `json:"updatedAtNEQ,omitempty"`
+	UpdatedAtIn     []*time.Time `json:"updatedAtIn,omitempty"`
+	UpdatedAtNotIn  []*time.Time `json:"updatedAtNotIn,omitempty"`
+	UpdatedAtGt     *time.Time   `json:"updatedAtGT,omitempty"`
+	UpdatedAtGte    *time.Time   `json:"updatedAtGTE,omitempty"`
+	UpdatedAtLt     *time.Time   `json:"updatedAtLT,omitempty"`
+	UpdatedAtLte    *time.Time   `json:"updatedAtLTE,omitempty"`
+	UpdatedAtIsNil  *bool        `json:"updatedAtIsNil,omitempty"`
+	UpdatedAtNotNil *bool        `json:"updatedAtNotNil,omitempty"`
+	// created_by field predicates
+	CreatedBy             *string  `json:"createdBy,omitempty"`
+	CreatedByNeq          *string  `json:"createdByNEQ,omitempty"`
+	CreatedByIn           []string `json:"createdByIn,omitempty"`
+	CreatedByNotIn        []string `json:"createdByNotIn,omitempty"`
+	CreatedByGt           *string  `json:"createdByGT,omitempty"`
+	CreatedByGte          *string  `json:"createdByGTE,omitempty"`
+	CreatedByLt           *string  `json:"createdByLT,omitempty"`
+	CreatedByLte          *string  `json:"createdByLTE,omitempty"`
+	CreatedByContains     *string  `json:"createdByContains,omitempty"`
+	CreatedByHasPrefix    *string  `json:"createdByHasPrefix,omitempty"`
+	CreatedByHasSuffix    *string  `json:"createdByHasSuffix,omitempty"`
+	CreatedByIsNil        *bool    `json:"createdByIsNil,omitempty"`
+	CreatedByNotNil       *bool    `json:"createdByNotNil,omitempty"`
+	CreatedByEqualFold    *string  `json:"createdByEqualFold,omitempty"`
+	CreatedByContainsFold *string  `json:"createdByContainsFold,omitempty"`
+	// updated_by field predicates
+	UpdatedBy             *string  `json:"updatedBy,omitempty"`
+	UpdatedByNeq          *string  `json:"updatedByNEQ,omitempty"`
+	UpdatedByIn           []string `json:"updatedByIn,omitempty"`
+	UpdatedByNotIn        []string `json:"updatedByNotIn,omitempty"`
+	UpdatedByGt           *string  `json:"updatedByGT,omitempty"`
+	UpdatedByGte          *string  `json:"updatedByGTE,omitempty"`
+	UpdatedByLt           *string  `json:"updatedByLT,omitempty"`
+	UpdatedByLte          *string  `json:"updatedByLTE,omitempty"`
+	UpdatedByContains     *string  `json:"updatedByContains,omitempty"`
+	UpdatedByHasPrefix    *string  `json:"updatedByHasPrefix,omitempty"`
+	UpdatedByHasSuffix    *string  `json:"updatedByHasSuffix,omitempty"`
+	UpdatedByIsNil        *bool    `json:"updatedByIsNil,omitempty"`
+	UpdatedByNotNil       *bool    `json:"updatedByNotNil,omitempty"`
+	UpdatedByEqualFold    *string  `json:"updatedByEqualFold,omitempty"`
+	UpdatedByContainsFold *string  `json:"updatedByContainsFold,omitempty"`
+	// trust_center_faq_kind_name field predicates
+	TrustCenterFaqKindName             *string  `json:"trustCenterFaqKindName,omitempty"`
+	TrustCenterFaqKindNameNeq          *string  `json:"trustCenterFaqKindNameNEQ,omitempty"`
+	TrustCenterFaqKindNameIn           []string `json:"trustCenterFaqKindNameIn,omitempty"`
+	TrustCenterFaqKindNameNotIn        []string `json:"trustCenterFaqKindNameNotIn,omitempty"`
+	TrustCenterFaqKindNameGt           *string  `json:"trustCenterFaqKindNameGT,omitempty"`
+	TrustCenterFaqKindNameGte          *string  `json:"trustCenterFaqKindNameGTE,omitempty"`
+	TrustCenterFaqKindNameLt           *string  `json:"trustCenterFaqKindNameLT,omitempty"`
+	TrustCenterFaqKindNameLte          *string  `json:"trustCenterFaqKindNameLTE,omitempty"`
+	TrustCenterFaqKindNameContains     *string  `json:"trustCenterFaqKindNameContains,omitempty"`
+	TrustCenterFaqKindNameHasPrefix    *string  `json:"trustCenterFaqKindNameHasPrefix,omitempty"`
+	TrustCenterFaqKindNameHasSuffix    *string  `json:"trustCenterFaqKindNameHasSuffix,omitempty"`
+	TrustCenterFaqKindNameIsNil        *bool    `json:"trustCenterFaqKindNameIsNil,omitempty"`
+	TrustCenterFaqKindNameNotNil       *bool    `json:"trustCenterFaqKindNameNotNil,omitempty"`
+	TrustCenterFaqKindNameEqualFold    *string  `json:"trustCenterFaqKindNameEqualFold,omitempty"`
+	TrustCenterFaqKindNameContainsFold *string  `json:"trustCenterFaqKindNameContainsFold,omitempty"`
+	// trust_center_faq_kind_id field predicates
+	TrustCenterFaqKindID             *string  `json:"trustCenterFaqKindID,omitempty"`
+	TrustCenterFaqKindIdneq          *string  `json:"trustCenterFaqKindIDNEQ,omitempty"`
+	TrustCenterFaqKindIDIn           []string `json:"trustCenterFaqKindIDIn,omitempty"`
+	TrustCenterFaqKindIDNotIn        []string `json:"trustCenterFaqKindIDNotIn,omitempty"`
+	TrustCenterFaqKindIdgt           *string  `json:"trustCenterFaqKindIDGT,omitempty"`
+	TrustCenterFaqKindIdgte          *string  `json:"trustCenterFaqKindIDGTE,omitempty"`
+	TrustCenterFaqKindIdlt           *string  `json:"trustCenterFaqKindIDLT,omitempty"`
+	TrustCenterFaqKindIdlte          *string  `json:"trustCenterFaqKindIDLTE,omitempty"`
+	TrustCenterFaqKindIDContains     *string  `json:"trustCenterFaqKindIDContains,omitempty"`
+	TrustCenterFaqKindIDHasPrefix    *string  `json:"trustCenterFaqKindIDHasPrefix,omitempty"`
+	TrustCenterFaqKindIDHasSuffix    *string  `json:"trustCenterFaqKindIDHasSuffix,omitempty"`
+	TrustCenterFaqKindIDIsNil        *bool    `json:"trustCenterFaqKindIDIsNil,omitempty"`
+	TrustCenterFaqKindIDNotNil       *bool    `json:"trustCenterFaqKindIDNotNil,omitempty"`
+	TrustCenterFaqKindIDEqualFold    *string  `json:"trustCenterFaqKindIDEqualFold,omitempty"`
+	TrustCenterFaqKindIDContainsFold *string  `json:"trustCenterFaqKindIDContainsFold,omitempty"`
+	// note_id field predicates
+	NoteID             *string  `json:"noteID,omitempty"`
+	NoteIdneq          *string  `json:"noteIDNEQ,omitempty"`
+	NoteIDIn           []string `json:"noteIDIn,omitempty"`
+	NoteIDNotIn        []string `json:"noteIDNotIn,omitempty"`
+	NoteIdgt           *string  `json:"noteIDGT,omitempty"`
+	NoteIdgte          *string  `json:"noteIDGTE,omitempty"`
+	NoteIdlt           *string  `json:"noteIDLT,omitempty"`
+	NoteIdlte          *string  `json:"noteIDLTE,omitempty"`
+	NoteIDContains     *string  `json:"noteIDContains,omitempty"`
+	NoteIDHasPrefix    *string  `json:"noteIDHasPrefix,omitempty"`
+	NoteIDHasSuffix    *string  `json:"noteIDHasSuffix,omitempty"`
+	NoteIDEqualFold    *string  `json:"noteIDEqualFold,omitempty"`
+	NoteIDContainsFold *string  `json:"noteIDContainsFold,omitempty"`
+	// trust_center_id field predicates
+	TrustCenterID             *string  `json:"trustCenterID,omitempty"`
+	TrustCenterIdneq          *string  `json:"trustCenterIDNEQ,omitempty"`
+	TrustCenterIDIn           []string `json:"trustCenterIDIn,omitempty"`
+	TrustCenterIDNotIn        []string `json:"trustCenterIDNotIn,omitempty"`
+	TrustCenterIdgt           *string  `json:"trustCenterIDGT,omitempty"`
+	TrustCenterIdgte          *string  `json:"trustCenterIDGTE,omitempty"`
+	TrustCenterIdlt           *string  `json:"trustCenterIDLT,omitempty"`
+	TrustCenterIdlte          *string  `json:"trustCenterIDLTE,omitempty"`
+	TrustCenterIDContains     *string  `json:"trustCenterIDContains,omitempty"`
+	TrustCenterIDHasPrefix    *string  `json:"trustCenterIDHasPrefix,omitempty"`
+	TrustCenterIDHasSuffix    *string  `json:"trustCenterIDHasSuffix,omitempty"`
+	TrustCenterIDIsNil        *bool    `json:"trustCenterIDIsNil,omitempty"`
+	TrustCenterIDNotNil       *bool    `json:"trustCenterIDNotNil,omitempty"`
+	TrustCenterIDEqualFold    *string  `json:"trustCenterIDEqualFold,omitempty"`
+	TrustCenterIDContainsFold *string  `json:"trustCenterIDContainsFold,omitempty"`
+	// reference_link field predicates
+	ReferenceLink             *string  `json:"referenceLink,omitempty"`
+	ReferenceLinkNeq          *string  `json:"referenceLinkNEQ,omitempty"`
+	ReferenceLinkIn           []string `json:"referenceLinkIn,omitempty"`
+	ReferenceLinkNotIn        []string `json:"referenceLinkNotIn,omitempty"`
+	ReferenceLinkGt           *string  `json:"referenceLinkGT,omitempty"`
+	ReferenceLinkGte          *string  `json:"referenceLinkGTE,omitempty"`
+	ReferenceLinkLt           *string  `json:"referenceLinkLT,omitempty"`
+	ReferenceLinkLte          *string  `json:"referenceLinkLTE,omitempty"`
+	ReferenceLinkContains     *string  `json:"referenceLinkContains,omitempty"`
+	ReferenceLinkHasPrefix    *string  `json:"referenceLinkHasPrefix,omitempty"`
+	ReferenceLinkHasSuffix    *string  `json:"referenceLinkHasSuffix,omitempty"`
+	ReferenceLinkIsNil        *bool    `json:"referenceLinkIsNil,omitempty"`
+	ReferenceLinkNotNil       *bool    `json:"referenceLinkNotNil,omitempty"`
+	ReferenceLinkEqualFold    *string  `json:"referenceLinkEqualFold,omitempty"`
+	ReferenceLinkContainsFold *string  `json:"referenceLinkContainsFold,omitempty"`
+	// display_order field predicates
+	DisplayOrder       *int64  `json:"displayOrder,omitempty"`
+	DisplayOrderNeq    *int64  `json:"displayOrderNEQ,omitempty"`
+	DisplayOrderIn     []int64 `json:"displayOrderIn,omitempty"`
+	DisplayOrderNotIn  []int64 `json:"displayOrderNotIn,omitempty"`
+	DisplayOrderGt     *int64  `json:"displayOrderGT,omitempty"`
+	DisplayOrderGte    *int64  `json:"displayOrderGTE,omitempty"`
+	DisplayOrderLt     *int64  `json:"displayOrderLT,omitempty"`
+	DisplayOrderLte    *int64  `json:"displayOrderLTE,omitempty"`
+	DisplayOrderIsNil  *bool   `json:"displayOrderIsNil,omitempty"`
+	DisplayOrderNotNil *bool   `json:"displayOrderNotNil,omitempty"`
+	// trust_center_faq_kind edge predicates
+	HasTrustCenterFaqKind     *bool                       `json:"hasTrustCenterFaqKind,omitempty"`
+	HasTrustCenterFaqKindWith []*CustomTypeEnumWhereInput `json:"hasTrustCenterFaqKindWith,omitempty"`
+	// blocked_groups edge predicates
+	HasBlockedGroups     *bool              `json:"hasBlockedGroups,omitempty"`
+	HasBlockedGroupsWith []*GroupWhereInput `json:"hasBlockedGroupsWith,omitempty"`
+	// editors edge predicates
+	HasEditors     *bool              `json:"hasEditors,omitempty"`
+	HasEditorsWith []*GroupWhereInput `json:"hasEditorsWith,omitempty"`
+	// trust_center edge predicates
+	HasTrustCenter     *bool                    `json:"hasTrustCenter,omitempty"`
+	HasTrustCenterWith []*TrustCenterWhereInput `json:"hasTrustCenterWith,omitempty"`
+	// note edge predicates
+	HasNote     *bool             `json:"hasNote,omitempty"`
+	HasNoteWith []*NoteWhereInput `json:"hasNoteWith,omitempty"`
 }
 
 type TrustCenterNDACreatePayload struct {
@@ -35737,6 +36067,9 @@ type TrustCenterWhereInput struct {
 	// trust_center_nda_requests edge predicates
 	HasTrustCenterNdaRequests     *bool                              `json:"hasTrustCenterNdaRequests,omitempty"`
 	HasTrustCenterNdaRequestsWith []*TrustCenterNDARequestWhereInput `json:"hasTrustCenterNdaRequestsWith,omitempty"`
+	// trust_center_faqs edge predicates
+	HasTrustCenterFaqs     *bool                       `json:"hasTrustCenterFaqs,omitempty"`
+	HasTrustCenterFaqsWith []*TrustCenterFAQWhereInput `json:"hasTrustCenterFaqsWith,omitempty"`
 	// Filter for tagsHas to contain a specific value
 	TagsHas *string `json:"tagsHas,omitempty"`
 }
@@ -36018,7 +36351,10 @@ type UpdateAssetInput struct {
 	// the type of the asset, e.g. technology, domain, device, etc
 	AssetType *enums.AssetType `json:"assetType,omitempty"`
 	// the name of the asset, e.g. matts computer, office router, IP address, etc
-	Name             *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty"`
+	// the display name of the asset
+	DisplayName      *string `json:"displayName,omitempty"`
+	ClearDisplayName *bool   `json:"clearDisplayName,omitempty"`
 	Description      *string `json:"description,omitempty"`
 	ClearDescription *bool   `json:"clearDescription,omitempty"`
 	// unique identifier like domain, device id, etc
@@ -36460,89 +36796,92 @@ type UpdateControlInput struct {
 	WorkflowEligibleMarker      *bool `json:"workflowEligibleMarker,omitempty"`
 	ClearWorkflowEligibleMarker *bool `json:"clearWorkflowEligibleMarker,omitempty"`
 	// the unique reference code for the control
-	RefCode                        *string                 `json:"refCode,omitempty"`
-	AddEvidenceIDs                 []string                `json:"addEvidenceIDs,omitempty"`
-	RemoveEvidenceIDs              []string                `json:"removeEvidenceIDs,omitempty"`
-	ClearEvidence                  *bool                   `json:"clearEvidence,omitempty"`
-	AddControlObjectiveIDs         []string                `json:"addControlObjectiveIDs,omitempty"`
-	RemoveControlObjectiveIDs      []string                `json:"removeControlObjectiveIDs,omitempty"`
-	ClearControlObjectives         *bool                   `json:"clearControlObjectives,omitempty"`
-	AddTaskIDs                     []string                `json:"addTaskIDs,omitempty"`
-	RemoveTaskIDs                  []string                `json:"removeTaskIDs,omitempty"`
-	ClearTasks                     *bool                   `json:"clearTasks,omitempty"`
-	AddNarrativeIDs                []string                `json:"addNarrativeIDs,omitempty"`
-	RemoveNarrativeIDs             []string                `json:"removeNarrativeIDs,omitempty"`
-	ClearNarratives                *bool                   `json:"clearNarratives,omitempty"`
-	AddRiskIDs                     []string                `json:"addRiskIDs,omitempty"`
-	RemoveRiskIDs                  []string                `json:"removeRiskIDs,omitempty"`
-	ClearRisks                     *bool                   `json:"clearRisks,omitempty"`
-	AddActionPlanIDs               []string                `json:"addActionPlanIDs,omitempty"`
-	RemoveActionPlanIDs            []string                `json:"removeActionPlanIDs,omitempty"`
-	ClearActionPlans               *bool                   `json:"clearActionPlans,omitempty"`
-	AddProcedureIDs                []string                `json:"addProcedureIDs,omitempty"`
-	RemoveProcedureIDs             []string                `json:"removeProcedureIDs,omitempty"`
-	ClearProcedures                *bool                   `json:"clearProcedures,omitempty"`
-	AddInternalPolicyIDs           []string                `json:"addInternalPolicyIDs,omitempty"`
-	RemoveInternalPolicyIDs        []string                `json:"removeInternalPolicyIDs,omitempty"`
-	ClearInternalPolicies          *bool                   `json:"clearInternalPolicies,omitempty"`
-	AddCommentIDs                  []string                `json:"addCommentIDs,omitempty"`
-	RemoveCommentIDs               []string                `json:"removeCommentIDs,omitempty"`
-	ClearComments                  *bool                   `json:"clearComments,omitempty"`
-	AddDiscussionIDs               []string                `json:"addDiscussionIDs,omitempty"`
-	RemoveDiscussionIDs            []string                `json:"removeDiscussionIDs,omitempty"`
-	ClearDiscussions               *bool                   `json:"clearDiscussions,omitempty"`
-	ControlOwnerID                 *string                 `json:"controlOwnerID,omitempty"`
-	ClearControlOwner              *bool                   `json:"clearControlOwner,omitempty"`
-	DelegateID                     *string                 `json:"delegateID,omitempty"`
-	ClearDelegate                  *bool                   `json:"clearDelegate,omitempty"`
-	ResponsiblePartyID             *string                 `json:"responsiblePartyID,omitempty"`
-	ClearResponsibleParty          *bool                   `json:"clearResponsibleParty,omitempty"`
-	AddBlockedGroupIDs             []string                `json:"addBlockedGroupIDs,omitempty"`
-	RemoveBlockedGroupIDs          []string                `json:"removeBlockedGroupIDs,omitempty"`
-	ClearBlockedGroups             *bool                   `json:"clearBlockedGroups,omitempty"`
-	AddEditorIDs                   []string                `json:"addEditorIDs,omitempty"`
-	RemoveEditorIDs                []string                `json:"removeEditorIDs,omitempty"`
-	ClearEditors                   *bool                   `json:"clearEditors,omitempty"`
-	ControlKindID                  *string                 `json:"controlKindID,omitempty"`
-	ClearControlKind               *bool                   `json:"clearControlKind,omitempty"`
-	EnvironmentID                  *string                 `json:"environmentID,omitempty"`
-	ClearEnvironment               *bool                   `json:"clearEnvironment,omitempty"`
-	ScopeID                        *string                 `json:"scopeID,omitempty"`
-	ClearScope                     *bool                   `json:"clearScope,omitempty"`
-	StandardID                     *string                 `json:"standardID,omitempty"`
-	ClearStandard                  *bool                   `json:"clearStandard,omitempty"`
-	AddProgramIDs                  []string                `json:"addProgramIDs,omitempty"`
-	RemoveProgramIDs               []string                `json:"removeProgramIDs,omitempty"`
-	ClearPrograms                  *bool                   `json:"clearPrograms,omitempty"`
-	AddPlatformIDs                 []string                `json:"addPlatformIDs,omitempty"`
-	RemovePlatformIDs              []string                `json:"removePlatformIDs,omitempty"`
-	ClearPlatforms                 *bool                   `json:"clearPlatforms,omitempty"`
-	AddAssetIDs                    []string                `json:"addAssetIDs,omitempty"`
-	RemoveAssetIDs                 []string                `json:"removeAssetIDs,omitempty"`
-	ClearAssets                    *bool                   `json:"clearAssets,omitempty"`
-	AddScanIDs                     []string                `json:"addScanIDs,omitempty"`
-	RemoveScanIDs                  []string                `json:"removeScanIDs,omitempty"`
-	ClearScans                     *bool                   `json:"clearScans,omitempty"`
-	AddFindingIDs                  []string                `json:"addFindingIDs,omitempty"`
-	RemoveFindingIDs               []string                `json:"removeFindingIDs,omitempty"`
-	ClearFindings                  *bool                   `json:"clearFindings,omitempty"`
-	AddControlImplementationIDs    []string                `json:"addControlImplementationIDs,omitempty"`
-	RemoveControlImplementationIDs []string                `json:"removeControlImplementationIDs,omitempty"`
-	ClearControlImplementations    *bool                   `json:"clearControlImplementations,omitempty"`
-	AddSubcontrolIDs               []string                `json:"addSubcontrolIDs,omitempty"`
-	RemoveSubcontrolIDs            []string                `json:"removeSubcontrolIDs,omitempty"`
-	ClearSubcontrols               *bool                   `json:"clearSubcontrols,omitempty"`
-	AddScheduledJobIDs             []string                `json:"addScheduledJobIDs,omitempty"`
-	RemoveScheduledJobIDs          []string                `json:"removeScheduledJobIDs,omitempty"`
-	ClearScheduledJobs             *bool                   `json:"clearScheduledJobs,omitempty"`
-	AddWorkflowObjectRefIDs        []string                `json:"addWorkflowObjectRefIDs,omitempty"`
-	RemoveWorkflowObjectRefIDs     []string                `json:"removeWorkflowObjectRefIDs,omitempty"`
-	ClearWorkflowObjectRefs        *bool                   `json:"clearWorkflowObjectRefs,omitempty"`
-	AddDiscussion                  *CreateDiscussionInput  `json:"addDiscussion,omitempty"`
-	UpdateDiscussion               *UpdateDiscussionsInput `json:"updateDiscussion,omitempty"`
-	DeleteDiscussion               *string                 `json:"deleteDiscussion,omitempty"`
-	AddComment                     *CreateNoteInput        `json:"addComment,omitempty"`
-	DeleteComment                  *string                 `json:"deleteComment,omitempty"`
+	RefCode *string `json:"refCode,omitempty"`
+	// visibility of the control on the trust center, controls the publishing state for trust center display
+	TrustCenterVisibility          *enums.TrustCenterControlVisibility `json:"trustCenterVisibility,omitempty"`
+	ClearTrustCenterVisibility     *bool                               `json:"clearTrustCenterVisibility,omitempty"`
+	AddEvidenceIDs                 []string                            `json:"addEvidenceIDs,omitempty"`
+	RemoveEvidenceIDs              []string                            `json:"removeEvidenceIDs,omitempty"`
+	ClearEvidence                  *bool                               `json:"clearEvidence,omitempty"`
+	AddControlObjectiveIDs         []string                            `json:"addControlObjectiveIDs,omitempty"`
+	RemoveControlObjectiveIDs      []string                            `json:"removeControlObjectiveIDs,omitempty"`
+	ClearControlObjectives         *bool                               `json:"clearControlObjectives,omitempty"`
+	AddTaskIDs                     []string                            `json:"addTaskIDs,omitempty"`
+	RemoveTaskIDs                  []string                            `json:"removeTaskIDs,omitempty"`
+	ClearTasks                     *bool                               `json:"clearTasks,omitempty"`
+	AddNarrativeIDs                []string                            `json:"addNarrativeIDs,omitempty"`
+	RemoveNarrativeIDs             []string                            `json:"removeNarrativeIDs,omitempty"`
+	ClearNarratives                *bool                               `json:"clearNarratives,omitempty"`
+	AddRiskIDs                     []string                            `json:"addRiskIDs,omitempty"`
+	RemoveRiskIDs                  []string                            `json:"removeRiskIDs,omitempty"`
+	ClearRisks                     *bool                               `json:"clearRisks,omitempty"`
+	AddActionPlanIDs               []string                            `json:"addActionPlanIDs,omitempty"`
+	RemoveActionPlanIDs            []string                            `json:"removeActionPlanIDs,omitempty"`
+	ClearActionPlans               *bool                               `json:"clearActionPlans,omitempty"`
+	AddProcedureIDs                []string                            `json:"addProcedureIDs,omitempty"`
+	RemoveProcedureIDs             []string                            `json:"removeProcedureIDs,omitempty"`
+	ClearProcedures                *bool                               `json:"clearProcedures,omitempty"`
+	AddInternalPolicyIDs           []string                            `json:"addInternalPolicyIDs,omitempty"`
+	RemoveInternalPolicyIDs        []string                            `json:"removeInternalPolicyIDs,omitempty"`
+	ClearInternalPolicies          *bool                               `json:"clearInternalPolicies,omitempty"`
+	AddCommentIDs                  []string                            `json:"addCommentIDs,omitempty"`
+	RemoveCommentIDs               []string                            `json:"removeCommentIDs,omitempty"`
+	ClearComments                  *bool                               `json:"clearComments,omitempty"`
+	AddDiscussionIDs               []string                            `json:"addDiscussionIDs,omitempty"`
+	RemoveDiscussionIDs            []string                            `json:"removeDiscussionIDs,omitempty"`
+	ClearDiscussions               *bool                               `json:"clearDiscussions,omitempty"`
+	ControlOwnerID                 *string                             `json:"controlOwnerID,omitempty"`
+	ClearControlOwner              *bool                               `json:"clearControlOwner,omitempty"`
+	DelegateID                     *string                             `json:"delegateID,omitempty"`
+	ClearDelegate                  *bool                               `json:"clearDelegate,omitempty"`
+	ResponsiblePartyID             *string                             `json:"responsiblePartyID,omitempty"`
+	ClearResponsibleParty          *bool                               `json:"clearResponsibleParty,omitempty"`
+	AddBlockedGroupIDs             []string                            `json:"addBlockedGroupIDs,omitempty"`
+	RemoveBlockedGroupIDs          []string                            `json:"removeBlockedGroupIDs,omitempty"`
+	ClearBlockedGroups             *bool                               `json:"clearBlockedGroups,omitempty"`
+	AddEditorIDs                   []string                            `json:"addEditorIDs,omitempty"`
+	RemoveEditorIDs                []string                            `json:"removeEditorIDs,omitempty"`
+	ClearEditors                   *bool                               `json:"clearEditors,omitempty"`
+	ControlKindID                  *string                             `json:"controlKindID,omitempty"`
+	ClearControlKind               *bool                               `json:"clearControlKind,omitempty"`
+	EnvironmentID                  *string                             `json:"environmentID,omitempty"`
+	ClearEnvironment               *bool                               `json:"clearEnvironment,omitempty"`
+	ScopeID                        *string                             `json:"scopeID,omitempty"`
+	ClearScope                     *bool                               `json:"clearScope,omitempty"`
+	StandardID                     *string                             `json:"standardID,omitempty"`
+	ClearStandard                  *bool                               `json:"clearStandard,omitempty"`
+	AddProgramIDs                  []string                            `json:"addProgramIDs,omitempty"`
+	RemoveProgramIDs               []string                            `json:"removeProgramIDs,omitempty"`
+	ClearPrograms                  *bool                               `json:"clearPrograms,omitempty"`
+	AddPlatformIDs                 []string                            `json:"addPlatformIDs,omitempty"`
+	RemovePlatformIDs              []string                            `json:"removePlatformIDs,omitempty"`
+	ClearPlatforms                 *bool                               `json:"clearPlatforms,omitempty"`
+	AddAssetIDs                    []string                            `json:"addAssetIDs,omitempty"`
+	RemoveAssetIDs                 []string                            `json:"removeAssetIDs,omitempty"`
+	ClearAssets                    *bool                               `json:"clearAssets,omitempty"`
+	AddScanIDs                     []string                            `json:"addScanIDs,omitempty"`
+	RemoveScanIDs                  []string                            `json:"removeScanIDs,omitempty"`
+	ClearScans                     *bool                               `json:"clearScans,omitempty"`
+	AddFindingIDs                  []string                            `json:"addFindingIDs,omitempty"`
+	RemoveFindingIDs               []string                            `json:"removeFindingIDs,omitempty"`
+	ClearFindings                  *bool                               `json:"clearFindings,omitempty"`
+	AddControlImplementationIDs    []string                            `json:"addControlImplementationIDs,omitempty"`
+	RemoveControlImplementationIDs []string                            `json:"removeControlImplementationIDs,omitempty"`
+	ClearControlImplementations    *bool                               `json:"clearControlImplementations,omitempty"`
+	AddSubcontrolIDs               []string                            `json:"addSubcontrolIDs,omitempty"`
+	RemoveSubcontrolIDs            []string                            `json:"removeSubcontrolIDs,omitempty"`
+	ClearSubcontrols               *bool                               `json:"clearSubcontrols,omitempty"`
+	AddScheduledJobIDs             []string                            `json:"addScheduledJobIDs,omitempty"`
+	RemoveScheduledJobIDs          []string                            `json:"removeScheduledJobIDs,omitempty"`
+	ClearScheduledJobs             *bool                               `json:"clearScheduledJobs,omitempty"`
+	AddWorkflowObjectRefIDs        []string                            `json:"addWorkflowObjectRefIDs,omitempty"`
+	RemoveWorkflowObjectRefIDs     []string                            `json:"removeWorkflowObjectRefIDs,omitempty"`
+	ClearWorkflowObjectRefs        *bool                               `json:"clearWorkflowObjectRefs,omitempty"`
+	AddDiscussion                  *CreateDiscussionInput              `json:"addDiscussion,omitempty"`
+	UpdateDiscussion               *UpdateDiscussionsInput             `json:"updateDiscussion,omitempty"`
+	DeleteDiscussion               *string                             `json:"deleteDiscussion,omitempty"`
+	AddComment                     *CreateNoteInput                    `json:"addComment,omitempty"`
+	DeleteComment                  *string                             `json:"deleteComment,omitempty"`
 }
 
 // UpdateControlObjectiveInput is used for update ControlObjective object.
@@ -38609,28 +38948,31 @@ type UpdateNoteInput struct {
 	NoteRef      *string `json:"noteRef,omitempty"`
 	ClearNoteRef *bool   `json:"clearNoteRef,omitempty"`
 	// whether the note has been edited
-	IsEdited            *bool    `json:"isEdited,omitempty"`
-	TaskID              *string  `json:"taskID,omitempty"`
-	ClearTask           *bool    `json:"clearTask,omitempty"`
-	ControlID           *string  `json:"controlID,omitempty"`
-	ClearControl        *bool    `json:"clearControl,omitempty"`
-	SubcontrolID        *string  `json:"subcontrolID,omitempty"`
-	ClearSubcontrol     *bool    `json:"clearSubcontrol,omitempty"`
-	ProcedureID         *string  `json:"procedureID,omitempty"`
-	ClearProcedure      *bool    `json:"clearProcedure,omitempty"`
-	RiskID              *string  `json:"riskID,omitempty"`
-	ClearRisk           *bool    `json:"clearRisk,omitempty"`
-	InternalPolicyID    *string  `json:"internalPolicyID,omitempty"`
-	ClearInternalPolicy *bool    `json:"clearInternalPolicy,omitempty"`
-	EvidenceID          *string  `json:"evidenceID,omitempty"`
-	ClearEvidence       *bool    `json:"clearEvidence,omitempty"`
-	TrustCenterID       *string  `json:"trustCenterID,omitempty"`
-	ClearTrustCenter    *bool    `json:"clearTrustCenter,omitempty"`
-	DiscussionID        *string  `json:"discussionID,omitempty"`
-	ClearDiscussion     *bool    `json:"clearDiscussion,omitempty"`
-	AddFileIDs          []string `json:"addFileIDs,omitempty"`
-	RemoveFileIDs       []string `json:"removeFileIDs,omitempty"`
-	ClearFiles          *bool    `json:"clearFiles,omitempty"`
+	IsEdited                *bool    `json:"isEdited,omitempty"`
+	TaskID                  *string  `json:"taskID,omitempty"`
+	ClearTask               *bool    `json:"clearTask,omitempty"`
+	ControlID               *string  `json:"controlID,omitempty"`
+	ClearControl            *bool    `json:"clearControl,omitempty"`
+	SubcontrolID            *string  `json:"subcontrolID,omitempty"`
+	ClearSubcontrol         *bool    `json:"clearSubcontrol,omitempty"`
+	ProcedureID             *string  `json:"procedureID,omitempty"`
+	ClearProcedure          *bool    `json:"clearProcedure,omitempty"`
+	RiskID                  *string  `json:"riskID,omitempty"`
+	ClearRisk               *bool    `json:"clearRisk,omitempty"`
+	InternalPolicyID        *string  `json:"internalPolicyID,omitempty"`
+	ClearInternalPolicy     *bool    `json:"clearInternalPolicy,omitempty"`
+	EvidenceID              *string  `json:"evidenceID,omitempty"`
+	ClearEvidence           *bool    `json:"clearEvidence,omitempty"`
+	TrustCenterID           *string  `json:"trustCenterID,omitempty"`
+	ClearTrustCenter        *bool    `json:"clearTrustCenter,omitempty"`
+	DiscussionID            *string  `json:"discussionID,omitempty"`
+	ClearDiscussion         *bool    `json:"clearDiscussion,omitempty"`
+	AddTrustCenterFaqIDs    []string `json:"addTrustCenterFaqIDs,omitempty"`
+	RemoveTrustCenterFaqIDs []string `json:"removeTrustCenterFaqIDs,omitempty"`
+	ClearTrustCenterFaqs    *bool    `json:"clearTrustCenterFaqs,omitempty"`
+	AddFileIDs              []string `json:"addFileIDs,omitempty"`
+	RemoveFileIDs           []string `json:"removeFileIDs,omitempty"`
+	ClearFiles              *bool    `json:"clearFiles,omitempty"`
 }
 
 // UpdateNotificationInput is used for update Notification object.
@@ -38670,11 +39012,11 @@ type UpdateNotificationPreferenceInput struct {
 	// optional priority override for this preference
 	Priority      *enums.Priority `json:"priority,omitempty"`
 	ClearPriority *bool           `json:"clearPriority,omitempty"`
-	// soiree topic names or wildcard patterns this preference applies to; empty means all
+	// topic names or wildcard patterns this preference applies to; empty means all
 	TopicPatterns       []string `json:"topicPatterns,omitempty"`
 	AppendTopicPatterns []string `json:"appendTopicPatterns,omitempty"`
 	ClearTopicPatterns  *bool    `json:"clearTopicPatterns,omitempty"`
-	// optional per-topic overrides (e.g. template_id, cadence, priority) keyed by soiree topic name
+	// optional per-topic overrides (e.g. template_id, cadence, priority) keyed by topic name
 	TopicOverrides      map[string]any `json:"topicOverrides,omitempty"`
 	ClearTopicOverrides *bool          `json:"clearTopicOverrides,omitempty"`
 	// mute notifications until this time
@@ -38731,7 +39073,7 @@ type UpdateNotificationTemplateInput struct {
 	Format *enums.NotificationTemplateFormat `json:"format,omitempty"`
 	// locale for the template, e.g. en-US
 	Locale *string `json:"locale,omitempty"`
-	// soiree topic name or wildcard pattern this template targets
+	// topic name or wildcard pattern this template targets
 	TopicPattern *string `json:"topicPattern,omitempty"`
 	// title template for external channel messages
 	TitleTemplate      *string `json:"titleTemplate,omitempty"`
@@ -40691,6 +41033,30 @@ type UpdateTrustCenterEntityInput struct {
 	ClearLogoFile         *bool    `json:"clearLogoFile,omitempty"`
 }
 
+// UpdateTrustCenterFAQInput is used for update TrustCenterFAQ object.
+// Input was generated by ent.
+type UpdateTrustCenterFAQInput struct {
+	// the kind of the trust_center_faq
+	TrustCenterFaqKindName      *string `json:"trustCenterFaqKindName,omitempty"`
+	ClearTrustCenterFaqKindName *bool   `json:"clearTrustCenterFaqKindName,omitempty"`
+	// optional reference link for the FAQ
+	ReferenceLink      *string `json:"referenceLink,omitempty"`
+	ClearReferenceLink *bool   `json:"clearReferenceLink,omitempty"`
+	// display order of the FAQ
+	DisplayOrder            *int64           `json:"displayOrder,omitempty"`
+	ClearDisplayOrder       *bool            `json:"clearDisplayOrder,omitempty"`
+	TrustCenterFaqKindID    *string          `json:"trustCenterFaqKindID,omitempty"`
+	ClearTrustCenterFaqKind *bool            `json:"clearTrustCenterFaqKind,omitempty"`
+	AddBlockedGroupIDs      []string         `json:"addBlockedGroupIDs,omitempty"`
+	RemoveBlockedGroupIDs   []string         `json:"removeBlockedGroupIDs,omitempty"`
+	ClearBlockedGroups      *bool            `json:"clearBlockedGroups,omitempty"`
+	AddEditorIDs            []string         `json:"addEditorIDs,omitempty"`
+	RemoveEditorIDs         []string         `json:"removeEditorIDs,omitempty"`
+	ClearEditors            *bool            `json:"clearEditors,omitempty"`
+	AddComment              *CreateNoteInput `json:"addComment,omitempty"`
+	DeleteComment           *string          `json:"deleteComment,omitempty"`
+}
+
 // UpdateTrustCenterInput is used for update TrustCenter object.
 // Input was generated by ent.
 type UpdateTrustCenterInput struct {
@@ -40752,6 +41118,9 @@ type UpdateTrustCenterInput struct {
 	AddTrustCenterNdaRequestIDs      []string `json:"addTrustCenterNdaRequestIDs,omitempty"`
 	RemoveTrustCenterNdaRequestIDs   []string `json:"removeTrustCenterNdaRequestIDs,omitempty"`
 	ClearTrustCenterNdaRequests      *bool    `json:"clearTrustCenterNdaRequests,omitempty"`
+	AddTrustCenterFaqIDs             []string `json:"addTrustCenterFaqIDs,omitempty"`
+	RemoveTrustCenterFaqIDs          []string `json:"removeTrustCenterFaqIDs,omitempty"`
+	ClearTrustCenterFaqs             *bool    `json:"clearTrustCenterFaqs,omitempty"`
 	// adds a post for the trust center feed
 	AddPost *CreateNoteInput `json:"addPost,omitempty"`
 	// delete a post from the trust center feed
@@ -45514,6 +45883,7 @@ const (
 	AssetOrderFieldInternalOwner        AssetOrderField = "internal_owner"
 	AssetOrderFieldAssetType            AssetOrderField = "ASSET_TYPE"
 	AssetOrderFieldName                 AssetOrderField = "name"
+	AssetOrderFieldDisplayName          AssetOrderField = "display_name"
 	AssetOrderFieldPhysicalLocation     AssetOrderField = "physical_location"
 	AssetOrderFieldRegion               AssetOrderField = "region"
 	AssetOrderFieldContainsPii          AssetOrderField = "contains_pii"
@@ -45530,6 +45900,7 @@ var AllAssetOrderField = []AssetOrderField{
 	AssetOrderFieldInternalOwner,
 	AssetOrderFieldAssetType,
 	AssetOrderFieldName,
+	AssetOrderFieldDisplayName,
 	AssetOrderFieldPhysicalLocation,
 	AssetOrderFieldRegion,
 	AssetOrderFieldContainsPii,
@@ -45542,7 +45913,7 @@ var AllAssetOrderField = []AssetOrderField{
 
 func (e AssetOrderField) IsValid() bool {
 	switch e {
-	case AssetOrderFieldCreatedAt, AssetOrderFieldUpdatedAt, AssetOrderFieldInternalOwner, AssetOrderFieldAssetType, AssetOrderFieldName, AssetOrderFieldPhysicalLocation, AssetOrderFieldRegion, AssetOrderFieldContainsPii, AssetOrderFieldSourceType, AssetOrderFieldSourceIdentifier, AssetOrderFieldCostCenter, AssetOrderFieldEstimatedMonthlyCost, AssetOrderFieldPurchaseDate:
+	case AssetOrderFieldCreatedAt, AssetOrderFieldUpdatedAt, AssetOrderFieldInternalOwner, AssetOrderFieldAssetType, AssetOrderFieldName, AssetOrderFieldDisplayName, AssetOrderFieldPhysicalLocation, AssetOrderFieldRegion, AssetOrderFieldContainsPii, AssetOrderFieldSourceType, AssetOrderFieldSourceIdentifier, AssetOrderFieldCostCenter, AssetOrderFieldEstimatedMonthlyCost, AssetOrderFieldPurchaseDate:
 		return true
 	}
 	return false
@@ -50238,6 +50609,62 @@ func (e *TrustCenterEntityOrderField) UnmarshalJSON(b []byte) error {
 }
 
 func (e TrustCenterEntityOrderField) MarshalJSON() ([]byte, error) {
+	var buf bytes.Buffer
+	e.MarshalGQL(&buf)
+	return buf.Bytes(), nil
+}
+
+// Properties by which TrustCenterFAQ connections can be ordered.
+type TrustCenterFAQOrderField string
+
+const (
+	TrustCenterFAQOrderFieldCreatedAt TrustCenterFAQOrderField = "created_at"
+	TrustCenterFAQOrderFieldUpdatedAt TrustCenterFAQOrderField = "updated_at"
+)
+
+var AllTrustCenterFAQOrderField = []TrustCenterFAQOrderField{
+	TrustCenterFAQOrderFieldCreatedAt,
+	TrustCenterFAQOrderFieldUpdatedAt,
+}
+
+func (e TrustCenterFAQOrderField) IsValid() bool {
+	switch e {
+	case TrustCenterFAQOrderFieldCreatedAt, TrustCenterFAQOrderFieldUpdatedAt:
+		return true
+	}
+	return false
+}
+
+func (e TrustCenterFAQOrderField) String() string {
+	return string(e)
+}
+
+func (e *TrustCenterFAQOrderField) UnmarshalGQL(v any) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = TrustCenterFAQOrderField(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid TrustCenterFAQOrderField", str)
+	}
+	return nil
+}
+
+func (e TrustCenterFAQOrderField) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+func (e *TrustCenterFAQOrderField) UnmarshalJSON(b []byte) error {
+	s, err := strconv.Unquote(string(b))
+	if err != nil {
+		return err
+	}
+	return e.UnmarshalGQL(s)
+}
+
+func (e TrustCenterFAQOrderField) MarshalJSON() ([]byte, error) {
 	var buf bytes.Buffer
 	e.MarshalGQL(&buf)
 	return buf.Bytes(), nil
