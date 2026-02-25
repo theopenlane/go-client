@@ -19959,14 +19959,14 @@ type CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccoun
 	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
+	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
 	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
 	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
 	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
 	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
+	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
 	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
 	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
@@ -20015,7 +20015,7 @@ func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAc
 	}
 	return t.Department
 }
-func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetDirectorySyncRunID() string {
+func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetDirectorySyncRunID() *string {
 	if t == nil {
 		t = &CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts{}
 	}
@@ -20057,7 +20057,7 @@ func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAc
 	}
 	return t.ID
 }
-func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetIntegrationID() string {
+func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetIntegrationID() *string {
 	if t == nil {
 		t = &CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts{}
 	}
@@ -20177,14 +20177,14 @@ type CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts str
 	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
+	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
 	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
 	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
 	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
 	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
+	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
 	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
 	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
@@ -20233,7 +20233,7 @@ func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts
 	}
 	return t.Department
 }
-func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetDirectorySyncRunID() string {
+func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetDirectorySyncRunID() *string {
 	if t == nil {
 		t = &CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts{}
 	}
@@ -20275,7 +20275,7 @@ func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts
 	}
 	return t.ID
 }
-func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetIntegrationID() string {
+func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetIntegrationID() *string {
 	if t == nil {
 		t = &CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts{}
 	}
@@ -20395,14 +20395,14 @@ type CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount struct {
 	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
+	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
 	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
 	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
 	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
 	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
+	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
 	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
 	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
@@ -20451,7 +20451,7 @@ func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetDepa
 	}
 	return t.Department
 }
-func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetDirectorySyncRunID() string {
+func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetDirectorySyncRunID() *string {
 	if t == nil {
 		t = &CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount{}
 	}
@@ -20493,7 +20493,7 @@ func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetID()
 	}
 	return t.ID
 }
-func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetIntegrationID() string {
+func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetIntegrationID() *string {
 	if t == nil {
 		t = &CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount{}
 	}
@@ -20656,14 +20656,14 @@ type GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node struct {
 	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
+	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
 	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
 	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
 	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
 	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
+	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
 	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
 	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
@@ -20712,7 +20712,7 @@ func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDepartment() *
 	}
 	return t.Department
 }
-func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDirectorySyncRunID() string {
+func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDirectorySyncRunID() *string {
 	if t == nil {
 		t = &GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node{}
 	}
@@ -20754,7 +20754,7 @@ func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetID() string {
 	}
 	return t.ID
 }
-func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetIntegrationID() string {
+func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetIntegrationID() *string {
 	if t == nil {
 		t = &GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node{}
 	}
@@ -20899,14 +20899,14 @@ type GetDirectoryAccountByID_DirectoryAccount struct {
 	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
+	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
 	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
 	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
 	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
 	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
+	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
 	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
 	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
@@ -20955,7 +20955,7 @@ func (t *GetDirectoryAccountByID_DirectoryAccount) GetDepartment() *string {
 	}
 	return t.Department
 }
-func (t *GetDirectoryAccountByID_DirectoryAccount) GetDirectorySyncRunID() string {
+func (t *GetDirectoryAccountByID_DirectoryAccount) GetDirectorySyncRunID() *string {
 	if t == nil {
 		t = &GetDirectoryAccountByID_DirectoryAccount{}
 	}
@@ -20997,7 +20997,7 @@ func (t *GetDirectoryAccountByID_DirectoryAccount) GetID() string {
 	}
 	return t.ID
 }
-func (t *GetDirectoryAccountByID_DirectoryAccount) GetIntegrationID() string {
+func (t *GetDirectoryAccountByID_DirectoryAccount) GetIntegrationID() *string {
 	if t == nil {
 		t = &GetDirectoryAccountByID_DirectoryAccount{}
 	}
@@ -21138,14 +21138,14 @@ type GetDirectoryAccounts_DirectoryAccounts_Edges_Node struct {
 	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
+	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
 	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
 	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
 	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
 	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
+	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
 	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
 	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
@@ -21194,7 +21194,7 @@ func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDepartment() *str
 	}
 	return t.Department
 }
-func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDirectorySyncRunID() string {
+func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDirectorySyncRunID() *string {
 	if t == nil {
 		t = &GetDirectoryAccounts_DirectoryAccounts_Edges_Node{}
 	}
@@ -21236,7 +21236,7 @@ func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetID() string {
 	}
 	return t.ID
 }
-func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetIntegrationID() string {
+func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetIntegrationID() *string {
 	if t == nil {
 		t = &GetDirectoryAccounts_DirectoryAccounts_Edges_Node{}
 	}
@@ -21381,14 +21381,14 @@ type UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount struct {
 	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
+	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
 	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
 	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
 	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
 	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
+	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
 	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
 	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
@@ -21437,7 +21437,7 @@ func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetDepa
 	}
 	return t.Department
 }
-func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetDirectorySyncRunID() string {
+func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetDirectorySyncRunID() *string {
 	if t == nil {
 		t = &UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount{}
 	}
@@ -21479,7 +21479,7 @@ func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetID()
 	}
 	return t.ID
 }
-func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetIntegrationID() string {
+func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetIntegrationID() *string {
 	if t == nil {
 		t = &UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount{}
 	}
