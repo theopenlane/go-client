@@ -2578,6 +2578,7 @@ type Campaign struct {
 	Users               *UserConnection               `json:"users"`
 	Groups              *GroupConnection              `json:"groups"`
 	IdentityHolders     *IdentityHolderConnection     `json:"identityHolders"`
+	Controls            *ControlConnection            `json:"controls"`
 	WorkflowObjectRefs  *WorkflowObjectRefConnection  `json:"workflowObjectRefs"`
 	// Indicates if this campaign has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
@@ -3473,6 +3474,9 @@ type CampaignWhereInput struct {
 	// identity_holders edge predicates
 	HasIdentityHolders     *bool                       `json:"hasIdentityHolders,omitempty"`
 	HasIdentityHoldersWith []*IdentityHolderWhereInput `json:"hasIdentityHoldersWith,omitempty"`
+	// controls edge predicates
+	HasControls     *bool                `json:"hasControls,omitempty"`
+	HasControlsWith []*ControlWhereInput `json:"hasControlsWith,omitempty"`
 	// workflow_object_refs edge predicates
 	HasWorkflowObjectRefs     *bool                          `json:"hasWorkflowObjectRefs,omitempty"`
 	HasWorkflowObjectRefsWith []*WorkflowObjectRefWhereInput `json:"hasWorkflowObjectRefsWith,omitempty"`
@@ -3845,6 +3849,8 @@ type Control struct {
 	DisplayID string `json:"displayID"`
 	// tags associated with the object
 	Tags []string `json:"tags,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// human readable title of the control for quick identification
 	Title *string `json:"title,omitempty"`
 	// description of what the control is supposed to accomplish
@@ -3861,6 +3867,10 @@ type Control struct {
 	ResponsiblePartyID *string `json:"responsiblePartyID,omitempty"`
 	// status of the control
 	Status *enums.ControlStatus `json:"status,omitempty"`
+	// OSCAL-aligned implementation status of the control
+	ImplementationStatus *enums.ControlImplementationStatus `json:"implementationStatus,omitempty"`
+	// narrative describing current implementation state for OSCAL export
+	ImplementationDescription *string `json:"implementationDescription,omitempty"`
 	// source of the control, e.g. framework, template, custom, etc.
 	Source *enums.ControlSource `json:"source,omitempty"`
 	// the reference framework for the control if it came from a standard, empty if not associated with a standard
@@ -3952,6 +3962,11 @@ type Control struct {
 	Platforms              *PlatformConnection              `json:"platforms"`
 	Assets                 *AssetConnection                 `json:"assets"`
 	Scans                  *ScanConnection                  `json:"scans"`
+	Entities               *EntityConnection                `json:"entities"`
+	IdentityHolders        *IdentityHolderConnection        `json:"identityHolders"`
+	Campaigns              *CampaignConnection              `json:"campaigns"`
+	Remediations           *RemediationConnection           `json:"remediations"`
+	Reviews                *ReviewConnection                `json:"reviews"`
 	Findings               *FindingConnection               `json:"findings"`
 	ControlImplementations *ControlImplementationConnection `json:"controlImplementations"`
 	Subcontrols            *SubcontrolConnection            `json:"subcontrols"`
@@ -4019,6 +4034,16 @@ type ControlCategoryOrder struct {
 	Field ControlCategoryOrderField `json:"field"`
 }
 
+// ControlChange describes the diffs for a single control identified by refCode
+type ControlChange struct {
+	// The ref_code of the control
+	RefCode string `json:"refCode"`
+	// The title of the control at the new revision
+	Title string `json:"title"`
+	// Field-level diffs for this control
+	Diffs []*ControlFieldDiff `json:"diffs"`
+}
+
 // A connection to a list of items.
 type ControlConnection struct {
 	// A list of edges.
@@ -4041,12 +4066,46 @@ type ControlDeletePayload struct {
 	DeletedID string `json:"deletedID"`
 }
 
+// ControlDiffInput is used to compare all controls under a standard across two revisions
+type ControlDiffInput struct {
+	// ID of the standard to compare controls for
+	StandardID string `json:"standardID"`
+	// base revision to compare from (e.g. "v1.0.0")
+	OldRevision string `json:"oldRevision"`
+	// target revision to compare to (e.g. "v2.0.0")
+	NewRevision string `json:"newRevision"`
+}
+
+// ControlDiffPayload contains the field-level diffs between two revisions of all controls under a standard
+type ControlDiffPayload struct {
+	// The standard ID being compared
+	StandardID string `json:"standardID"`
+	// The base revision
+	OldRevision string `json:"oldRevision"`
+	// The target revision
+	NewRevision string `json:"newRevision"`
+	// Per-control changes between the two revisions
+	Changes []*ControlChange `json:"changes"`
+}
+
 // An edge in a connection.
 type ControlEdge struct {
 	// The item at the end of the edge.
 	Node *Control `json:"node,omitempty"`
 	// A cursor for use in pagination.
 	Cursor string `json:"cursor"`
+}
+
+// ControlFieldDiff describes a single field that differs between two control revisions
+type ControlFieldDiff struct {
+	// Field name (snake_case)
+	Field string `json:"field"`
+	// Value in the old revision
+	OldValue any `json:"oldValue,omitempty"`
+	// Value in the new revision
+	NewValue any `json:"newValue,omitempty"`
+	// Unified diff text when applicable
+	Diff *string `json:"diff,omitempty"`
 }
 
 type ControlGroup struct {
@@ -4870,6 +4929,22 @@ type ControlWhereInput struct {
 	DisplayIDHasSuffix    *string  `json:"displayIDHasSuffix,omitempty"`
 	DisplayIDEqualFold    *string  `json:"displayIDEqualFold,omitempty"`
 	DisplayIDContainsFold *string  `json:"displayIDContainsFold,omitempty"`
+	// external_uuid field predicates
+	ExternalUUID             *string  `json:"externalUUID,omitempty"`
+	ExternalUUIDNeq          *string  `json:"externalUUIDNEQ,omitempty"`
+	ExternalUUIDIn           []string `json:"externalUUIDIn,omitempty"`
+	ExternalUUIDNotIn        []string `json:"externalUUIDNotIn,omitempty"`
+	ExternalUUIDGt           *string  `json:"externalUUIDGT,omitempty"`
+	ExternalUUIDGte          *string  `json:"externalUUIDGTE,omitempty"`
+	ExternalUUIDLt           *string  `json:"externalUUIDLT,omitempty"`
+	ExternalUUIDLte          *string  `json:"externalUUIDLTE,omitempty"`
+	ExternalUUIDContains     *string  `json:"externalUUIDContains,omitempty"`
+	ExternalUUIDHasPrefix    *string  `json:"externalUUIDHasPrefix,omitempty"`
+	ExternalUUIDHasSuffix    *string  `json:"externalUUIDHasSuffix,omitempty"`
+	ExternalUUIDIsNil        *bool    `json:"externalUUIDIsNil,omitempty"`
+	ExternalUUIDNotNil       *bool    `json:"externalUUIDNotNil,omitempty"`
+	ExternalUUIDEqualFold    *string  `json:"externalUUIDEqualFold,omitempty"`
+	ExternalUUIDContainsFold *string  `json:"externalUUIDContainsFold,omitempty"`
 	// title field predicates
 	Title             *string  `json:"title,omitempty"`
 	TitleNeq          *string  `json:"titleNEQ,omitempty"`
@@ -4957,6 +5032,29 @@ type ControlWhereInput struct {
 	StatusNotIn  []enums.ControlStatus `json:"statusNotIn,omitempty"`
 	StatusIsNil  *bool                 `json:"statusIsNil,omitempty"`
 	StatusNotNil *bool                 `json:"statusNotNil,omitempty"`
+	// implementation_status field predicates
+	ImplementationStatus       *enums.ControlImplementationStatus  `json:"implementationStatus,omitempty"`
+	ImplementationStatusNeq    *enums.ControlImplementationStatus  `json:"implementationStatusNEQ,omitempty"`
+	ImplementationStatusIn     []enums.ControlImplementationStatus `json:"implementationStatusIn,omitempty"`
+	ImplementationStatusNotIn  []enums.ControlImplementationStatus `json:"implementationStatusNotIn,omitempty"`
+	ImplementationStatusIsNil  *bool                               `json:"implementationStatusIsNil,omitempty"`
+	ImplementationStatusNotNil *bool                               `json:"implementationStatusNotNil,omitempty"`
+	// implementation_description field predicates
+	ImplementationDescription             *string  `json:"implementationDescription,omitempty"`
+	ImplementationDescriptionNeq          *string  `json:"implementationDescriptionNEQ,omitempty"`
+	ImplementationDescriptionIn           []string `json:"implementationDescriptionIn,omitempty"`
+	ImplementationDescriptionNotIn        []string `json:"implementationDescriptionNotIn,omitempty"`
+	ImplementationDescriptionGt           *string  `json:"implementationDescriptionGT,omitempty"`
+	ImplementationDescriptionGte          *string  `json:"implementationDescriptionGTE,omitempty"`
+	ImplementationDescriptionLt           *string  `json:"implementationDescriptionLT,omitempty"`
+	ImplementationDescriptionLte          *string  `json:"implementationDescriptionLTE,omitempty"`
+	ImplementationDescriptionContains     *string  `json:"implementationDescriptionContains,omitempty"`
+	ImplementationDescriptionHasPrefix    *string  `json:"implementationDescriptionHasPrefix,omitempty"`
+	ImplementationDescriptionHasSuffix    *string  `json:"implementationDescriptionHasSuffix,omitempty"`
+	ImplementationDescriptionIsNil        *bool    `json:"implementationDescriptionIsNil,omitempty"`
+	ImplementationDescriptionNotNil       *bool    `json:"implementationDescriptionNotNil,omitempty"`
+	ImplementationDescriptionEqualFold    *string  `json:"implementationDescriptionEqualFold,omitempty"`
+	ImplementationDescriptionContainsFold *string  `json:"implementationDescriptionContainsFold,omitempty"`
 	// source field predicates
 	Source       *enums.ControlSource  `json:"source,omitempty"`
 	SourceNeq    *enums.ControlSource  `json:"sourceNEQ,omitempty"`
@@ -5344,6 +5442,21 @@ type ControlWhereInput struct {
 	// scans edge predicates
 	HasScans     *bool             `json:"hasScans,omitempty"`
 	HasScansWith []*ScanWhereInput `json:"hasScansWith,omitempty"`
+	// entities edge predicates
+	HasEntities     *bool               `json:"hasEntities,omitempty"`
+	HasEntitiesWith []*EntityWhereInput `json:"hasEntitiesWith,omitempty"`
+	// identity_holders edge predicates
+	HasIdentityHolders     *bool                       `json:"hasIdentityHolders,omitempty"`
+	HasIdentityHoldersWith []*IdentityHolderWhereInput `json:"hasIdentityHoldersWith,omitempty"`
+	// campaigns edge predicates
+	HasCampaigns     *bool                 `json:"hasCampaigns,omitempty"`
+	HasCampaignsWith []*CampaignWhereInput `json:"hasCampaignsWith,omitempty"`
+	// remediations edge predicates
+	HasRemediations     *bool                    `json:"hasRemediations,omitempty"`
+	HasRemediationsWith []*RemediationWhereInput `json:"hasRemediationsWith,omitempty"`
+	// reviews edge predicates
+	HasReviews     *bool               `json:"hasReviews,omitempty"`
+	HasReviewsWith []*ReviewWhereInput `json:"hasReviewsWith,omitempty"`
 	// findings edge predicates
 	HasFindings     *bool                `json:"hasFindings,omitempty"`
 	HasFindingsWith []*FindingWhereInput `json:"hasFindingsWith,omitempty"`
@@ -5687,6 +5800,7 @@ type CreateCampaignInput struct {
 	UserIDs               []string       `json:"userIDs,omitempty"`
 	GroupIDs              []string       `json:"groupIDs,omitempty"`
 	IdentityHolderIDs     []string       `json:"identityHolderIDs,omitempty"`
+	ControlIDs            []string       `json:"controlIDs,omitempty"`
 	WorkflowObjectRefIDs  []string       `json:"workflowObjectRefIDs,omitempty"`
 }
 
@@ -5784,6 +5898,8 @@ type CreateControlImplementationInput struct {
 type CreateControlInput struct {
 	// tags associated with the object
 	Tags []string `json:"tags,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// human readable title of the control for quick identification
 	Title *string `json:"title,omitempty"`
 	// description of what the control is supposed to accomplish
@@ -5798,6 +5914,10 @@ type CreateControlInput struct {
 	AuditorReferenceID *string `json:"auditorReferenceID,omitempty"`
 	// status of the control
 	Status *enums.ControlStatus `json:"status,omitempty"`
+	// OSCAL-aligned implementation status of the control
+	ImplementationStatus *enums.ControlImplementationStatus `json:"implementationStatus,omitempty"`
+	// narrative describing current implementation state for OSCAL export
+	ImplementationDescription *string `json:"implementationDescription,omitempty"`
 	// source of the control, e.g. framework, template, custom, etc.
 	Source *enums.ControlSource `json:"source,omitempty"`
 	// the reference framework for the control if it came from a standard, empty if not associated with a standard
@@ -5868,6 +5988,11 @@ type CreateControlInput struct {
 	PlatformIDs              []string                            `json:"platformIDs,omitempty"`
 	AssetIDs                 []string                            `json:"assetIDs,omitempty"`
 	ScanIDs                  []string                            `json:"scanIDs,omitempty"`
+	EntityIDs                []string                            `json:"entityIDs,omitempty"`
+	IdentityHolderIDs        []string                            `json:"identityHolderIDs,omitempty"`
+	CampaignIDs              []string                            `json:"campaignIDs,omitempty"`
+	RemediationIDs           []string                            `json:"remediationIDs,omitempty"`
+	ReviewIDs                []string                            `json:"reviewIDs,omitempty"`
 	FindingIDs               []string                            `json:"findingIDs,omitempty"`
 	ControlImplementationIDs []string                            `json:"controlImplementationIDs,omitempty"`
 	SubcontrolIDs            []string                            `json:"subcontrolIDs,omitempty"`
@@ -6006,7 +6131,7 @@ type CreateDirectoryAccountInput struct {
 	EnvironmentName *string `json:"environmentName,omitempty"`
 	// the scope of the directory_account
 	ScopeName *string `json:"scopeName,omitempty"`
-	// directory source label set by the integration (e.g. google_workspace, github, slack)
+	// directory source label set by the integration (e.g. googleworkspace, github, slack)
 	DirectoryName *string `json:"directoryName,omitempty"`
 	// stable identifier from the directory system
 	ExternalID string `json:"externalID"`
@@ -6398,6 +6523,7 @@ type CreateEntityInput struct {
 	AuthMethodIDs                       []string         `json:"authMethodIDs,omitempty"`
 	EmployerIdentityHolderIDs           []string         `json:"employerIdentityHolderIDs,omitempty"`
 	IdentityHolderIDs                   []string         `json:"identityHolderIDs,omitempty"`
+	ControlIDs                          []string         `json:"controlIDs,omitempty"`
 	PlatformIDs                         []string         `json:"platformIDs,omitempty"`
 	OutOfScopePlatformIDs               []string         `json:"outOfScopePlatformIDs,omitempty"`
 	SourcePlatformIDs                   []string         `json:"sourcePlatformIDs,omitempty"`
@@ -6452,6 +6578,8 @@ type CreateEvidenceInput struct {
 	ScopeName *string `json:"scopeName,omitempty"`
 	// internal marker field for workflow eligibility, not exposed in API
 	WorkflowEligibleMarker *bool `json:"workflowEligibleMarker,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the name of the evidence
 	Name string `json:"name"`
 	// the description of the evidence, what is contained in the uploaded file(s) or url(s)
@@ -6496,10 +6624,14 @@ type CreateExportInput struct {
 	// the specific fields to include in the export (defaults to only the id if not provided)
 	Fields []string `json:"fields,omitempty"`
 	// the specific filters to run against the exported data. This should be a well formatted graphql query
-	Filters  *string  `json:"filters,omitempty"`
-	OwnerID  *string  `json:"ownerID,omitempty"`
-	EventIDs []string `json:"eventIDs,omitempty"`
-	FileIDs  []string `json:"fileIDs,omitempty"`
+	Filters *string `json:"filters,omitempty"`
+	// the mode of export, e.g., flat or folder
+	Mode *enums.ExportMode `json:"mode,omitempty"`
+	// metadata for the export record
+	ExportMetadata *string  `json:"exportMetadata,omitempty"`
+	OwnerID        *string  `json:"ownerID,omitempty"`
+	EventIDs       []string `json:"eventIDs,omitempty"`
+	FileIDs        []string `json:"fileIDs,omitempty"`
 }
 
 // CreateFileInput is used for create File object.
@@ -6559,6 +6691,7 @@ type CreateFileInput struct {
 	ProgramIDs                []string   `json:"programIDs,omitempty"`
 	PlatformIDs               []string   `json:"platformIDs,omitempty"`
 	EvidenceIDs               []string   `json:"evidenceIDs,omitempty"`
+	IdentityHolderIDs         []string   `json:"identityHolderIDs,omitempty"`
 	ScanIDs                   []string   `json:"scanIDs,omitempty"`
 	EventIDs                  []string   `json:"eventIDs,omitempty"`
 	IntegrationIDs            []string   `json:"integrationIDs,omitempty"`
@@ -6605,7 +6738,7 @@ type CreateFindingInput struct {
 	ExternalID *string `json:"externalID,omitempty"`
 	// the owner of the finding
 	ExternalOwnerID *string `json:"externalOwnerID,omitempty"`
-	// system that produced the finding, e.g. gcp_scc
+	// system that produced the finding, e.g. gcpscc
 	Source *string `json:"source,omitempty"`
 	// resource identifier provided by the source system
 	ResourceName *string `json:"resourceName,omitempty"`
@@ -6724,6 +6857,12 @@ type CreateGroupInput struct {
 	LogoURL *string `json:"logoURL,omitempty"`
 	// The group's displayed 'friendly' name
 	DisplayName *string `json:"displayName,omitempty"`
+	// OSCAL role identifier used for role-based responsibility mapping
+	OscalRole *string `json:"oscalRole,omitempty"`
+	// OSCAL party UUID linked to this group for responsibility mapping
+	OscalPartyUUID *string `json:"oscalPartyUUID,omitempty"`
+	// OSCAL contact UUID references associated with this group
+	OscalContactUuids []string `json:"oscalContactUuids,omitempty"`
 	// the SCIM external ID for the group
 	ScimExternalID *string `json:"scimExternalID,omitempty"`
 	// the SCIM displayname for the group
@@ -6896,9 +7035,11 @@ type CreateIdentityHolderInput struct {
 	AssetIDs              []string       `json:"assetIDs,omitempty"`
 	EntityIDs             []string       `json:"entityIDs,omitempty"`
 	DirectoryAccountIDs   []string       `json:"directoryAccountIDs,omitempty"`
+	ControlIDs            []string       `json:"controlIDs,omitempty"`
 	PlatformIDs           []string       `json:"platformIDs,omitempty"`
 	CampaignIDs           []string       `json:"campaignIDs,omitempty"`
 	TaskIDs               []string       `json:"taskIDs,omitempty"`
+	FileIDs               []string       `json:"fileIDs,omitempty"`
 	FindingIDs            []string       `json:"findingIDs,omitempty"`
 	WorkflowObjectRefIDs  []string       `json:"workflowObjectRefIDs,omitempty"`
 	AccessPlatformIDs     []string       `json:"accessPlatformIDs,omitempty"`
@@ -6951,7 +7092,9 @@ type CreateInternalPolicyInput struct {
 	// the scope of the internal_policy
 	ScopeName *string `json:"scopeName,omitempty"`
 	// internal marker field for workflow eligibility, not exposed in API
-	WorkflowEligibleMarker   *bool    `json:"workflowEligibleMarker,omitempty"`
+	WorkflowEligibleMarker *bool `json:"workflowEligibleMarker,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID             *string  `json:"externalUUID,omitempty"`
 	OwnerID                  *string  `json:"ownerID,omitempty"`
 	BlockedGroupIDs          []string `json:"blockedGroupIDs,omitempty"`
 	EditorIDs                []string `json:"editorIDs,omitempty"`
@@ -7402,6 +7545,7 @@ type CreateOrganizationInput struct {
 	NoteIDs                           []string                        `json:"noteIDs,omitempty"`
 	TaskIDs                           []string                        `json:"taskIDs,omitempty"`
 	ProgramIDs                        []string                        `json:"programIDs,omitempty"`
+	SystemDetailIDs                   []string                        `json:"systemDetailIDs,omitempty"`
 	ProcedureIDs                      []string                        `json:"procedureIDs,omitempty"`
 	InternalPolicyIDs                 []string                        `json:"internalPolicyIDs,omitempty"`
 	RiskIDs                           []string                        `json:"riskIDs,omitempty"`
@@ -7554,6 +7698,8 @@ type CreatePlatformInput struct {
 	CriticalityName *string `json:"criticalityName,omitempty"`
 	// internal marker field for workflow eligibility, not exposed in API
 	WorkflowEligibleMarker *bool `json:"workflowEligibleMarker,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the name of the platform
 	Name string `json:"name"`
 	// the description of the platform boundary
@@ -7630,6 +7776,7 @@ type CreatePlatformInput struct {
 	ApplicableFrameworkIDs       []string       `json:"applicableFrameworkIDs,omitempty"`
 	GeneratedScanIDs             []string       `json:"generatedScanIDs,omitempty"`
 	PlatformOwnerID              *string        `json:"platformOwnerID,omitempty"`
+	SystemDetailID               *string        `json:"systemDetailID,omitempty"`
 }
 
 // CreateProcedureInput is used for create Procedure object.
@@ -7707,6 +7854,8 @@ type CreateProgramInput struct {
 	Tags []string `json:"tags,omitempty"`
 	// the kind of the program
 	ProgramKindName *string `json:"programKindName,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the name of the program
 	Name string `json:"name"`
 	// the description of the program
@@ -7748,6 +7897,7 @@ type CreateProgramInput struct {
 	EvidenceIDs         []string `json:"evidenceIDs,omitempty"`
 	NarrativeIDs        []string `json:"narrativeIDs,omitempty"`
 	ActionPlanIDs       []string `json:"actionPlanIDs,omitempty"`
+	SystemDetailID      *string  `json:"systemDetailID,omitempty"`
 	ProgramOwnerID      *string  `json:"programOwnerID,omitempty"`
 }
 
@@ -7931,6 +8081,8 @@ type CreateRiskInput struct {
 	EnvironmentName *string `json:"environmentName,omitempty"`
 	// the scope of the risk
 	ScopeName *string `json:"scopeName,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the name of the risk
 	Name string `json:"name"`
 	// status of the risk - identified, mitigated, accepted, closed, transferred, and archived.
@@ -8116,6 +8268,8 @@ type CreateStandardInput struct {
 type CreateSubcontrolInput struct {
 	// tags associated with the object
 	Tags []string `json:"tags,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// human readable title of the control for quick identification
 	Title *string `json:"title,omitempty"`
 	// description of what the control is supposed to accomplish
@@ -8130,6 +8284,10 @@ type CreateSubcontrolInput struct {
 	AuditorReferenceID *string `json:"auditorReferenceID,omitempty"`
 	// status of the control
 	Status *enums.ControlStatus `json:"status,omitempty"`
+	// OSCAL-aligned implementation status of the control
+	ImplementationStatus *enums.ControlImplementationStatus `json:"implementationStatus,omitempty"`
+	// narrative describing current implementation state for OSCAL export
+	ImplementationDescription *string `json:"implementationDescription,omitempty"`
 	// source of the control, e.g. framework, template, custom, etc.
 	Source *enums.ControlSource `json:"source,omitempty"`
 	// the reference framework for the control if it came from a standard, empty if not associated with a standard
@@ -8225,6 +8383,32 @@ type CreateSubscriberInput struct {
 	EventIDs    []string `json:"eventIDs,omitempty"`
 }
 
+// CreateSystemDetailInput is used for create SystemDetail object.
+// Input was generated by ent.
+type CreateSystemDetailInput struct {
+	// tags associated with the object
+	Tags []string `json:"tags,omitempty"`
+	// system name used in OSCAL metadata
+	SystemName string `json:"systemName"`
+	// system version used in OSCAL metadata
+	Version *string `json:"version,omitempty"`
+	// system description used in OSCAL metadata
+	Description *string `json:"description,omitempty"`
+	// authorization boundary narrative for OSCAL export
+	AuthorizationBoundary *string `json:"authorizationBoundary,omitempty"`
+	// security sensitivity level of the system
+	SensitivityLevel *enums.SystemSensitivityLevel `json:"sensitivityLevel,omitempty"`
+	// timestamp when metadata was last reviewed
+	LastReviewed *models.DateTime `json:"lastReviewed,omitempty"`
+	// structured revision history for OSCAL metadata
+	RevisionHistory []any `json:"revisionHistory,omitempty"`
+	// optional escape hatch for additional OSCAL metadata fields
+	OscalMetadataJSON map[string]any `json:"oscalMetadataJSON,omitempty"`
+	OwnerID           *string        `json:"ownerID,omitempty"`
+	ProgramID         *string        `json:"programID,omitempty"`
+	PlatformID        *string        `json:"platformID,omitempty"`
+}
+
 // CreateTFASettingInput is used for create TFASetting object.
 // Input was generated by ent.
 type CreateTFASettingInput struct {
@@ -8261,6 +8445,8 @@ type CreateTaskInput struct {
 	EnvironmentName *string `json:"environmentName,omitempty"`
 	// the scope of the task
 	ScopeName *string `json:"scopeName,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the title of the task
 	Title string `json:"title"`
 	// the details of the task
@@ -9798,7 +9984,7 @@ type DirectoryAccount struct {
 	PlatformID *string `json:"platformID,omitempty"`
 	// deduplicated identity holder linked to this directory account
 	IdentityHolderID *string `json:"identityHolderID,omitempty"`
-	// directory source label set by the integration (e.g. google_workspace, github, slack)
+	// directory source label set by the integration (e.g. googleworkspace, github, slack)
 	DirectoryName *string `json:"directoryName,omitempty"`
 	// stable identifier from the directory system
 	ExternalID string `json:"externalID"`
@@ -13138,6 +13324,7 @@ type Entity struct {
 	AuthMethods                       *CustomTypeEnumConnection     `json:"authMethods"`
 	EmployerIdentityHolders           *IdentityHolderConnection     `json:"employerIdentityHolders"`
 	IdentityHolders                   *IdentityHolderConnection     `json:"identityHolders"`
+	Controls                          *ControlConnection            `json:"controls"`
 	Platforms                         *PlatformConnection           `json:"platforms"`
 	OutOfScopePlatforms               *PlatformConnection           `json:"outOfScopePlatforms"`
 	SourcePlatforms                   *PlatformConnection           `json:"sourcePlatforms"`
@@ -14191,6 +14378,9 @@ type EntityWhereInput struct {
 	// identity_holders edge predicates
 	HasIdentityHolders     *bool                       `json:"hasIdentityHolders,omitempty"`
 	HasIdentityHoldersWith []*IdentityHolderWhereInput `json:"hasIdentityHoldersWith,omitempty"`
+	// controls edge predicates
+	HasControls     *bool                `json:"hasControls,omitempty"`
+	HasControlsWith []*ControlWhereInput `json:"hasControlsWith,omitempty"`
 	// platforms edge predicates
 	HasPlatforms     *bool                 `json:"hasPlatforms,omitempty"`
 	HasPlatformsWith []*PlatformWhereInput `json:"hasPlatformsWith,omitempty"`
@@ -14486,6 +14676,8 @@ type Evidence struct {
 	ScopeID *string `json:"scopeID,omitempty"`
 	// internal marker field for workflow eligibility, not exposed in API
 	WorkflowEligibleMarker *bool `json:"workflowEligibleMarker,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the name of the evidence
 	Name string `json:"name"`
 	// the description of the evidence, what is contained in the uploaded file(s) or url(s)
@@ -14764,6 +14956,22 @@ type EvidenceWhereInput struct {
 	WorkflowEligibleMarkerNeq    *bool `json:"workflowEligibleMarkerNEQ,omitempty"`
 	WorkflowEligibleMarkerIsNil  *bool `json:"workflowEligibleMarkerIsNil,omitempty"`
 	WorkflowEligibleMarkerNotNil *bool `json:"workflowEligibleMarkerNotNil,omitempty"`
+	// external_uuid field predicates
+	ExternalUUID             *string  `json:"externalUUID,omitempty"`
+	ExternalUUIDNeq          *string  `json:"externalUUIDNEQ,omitempty"`
+	ExternalUUIDIn           []string `json:"externalUUIDIn,omitempty"`
+	ExternalUUIDNotIn        []string `json:"externalUUIDNotIn,omitempty"`
+	ExternalUUIDGt           *string  `json:"externalUUIDGT,omitempty"`
+	ExternalUUIDGte          *string  `json:"externalUUIDGTE,omitempty"`
+	ExternalUUIDLt           *string  `json:"externalUUIDLT,omitempty"`
+	ExternalUUIDLte          *string  `json:"externalUUIDLTE,omitempty"`
+	ExternalUUIDContains     *string  `json:"externalUUIDContains,omitempty"`
+	ExternalUUIDHasPrefix    *string  `json:"externalUUIDHasPrefix,omitempty"`
+	ExternalUUIDHasSuffix    *string  `json:"externalUUIDHasSuffix,omitempty"`
+	ExternalUUIDIsNil        *bool    `json:"externalUUIDIsNil,omitempty"`
+	ExternalUUIDNotNil       *bool    `json:"externalUUIDNotNil,omitempty"`
+	ExternalUUIDEqualFold    *string  `json:"externalUUIDEqualFold,omitempty"`
+	ExternalUUIDContainsFold *string  `json:"externalUUIDContainsFold,omitempty"`
 	// name field predicates
 	Name             *string  `json:"name,omitempty"`
 	NameNeq          *string  `json:"nameNEQ,omitempty"`
@@ -14941,10 +15149,14 @@ type Export struct {
 	// the specific filters to run against the exported data. This should be a well formatted graphql query
 	Filters *string `json:"filters,omitempty"`
 	// if we try to export and it fails, the error message will be stored here
-	ErrorMessage *string          `json:"errorMessage,omitempty"`
-	Owner        *Organization    `json:"owner,omitempty"`
-	Events       *EventConnection `json:"events"`
-	Files        *FileConnection  `json:"files"`
+	ErrorMessage *string `json:"errorMessage,omitempty"`
+	// the mode of export, e.g., flat or folder
+	Mode enums.ExportMode `json:"mode"`
+	// metadata for the export record
+	ExportMetadata *string          `json:"exportMetadata,omitempty"`
+	Owner          *Organization    `json:"owner,omitempty"`
+	Events         *EventConnection `json:"events"`
+	Files          *FileConnection  `json:"files"`
 }
 
 func (Export) IsNode() {}
@@ -15155,6 +15367,11 @@ type ExportWhereInput struct {
 	ErrorMessageNotNil       *bool    `json:"errorMessageNotNil,omitempty"`
 	ErrorMessageEqualFold    *string  `json:"errorMessageEqualFold,omitempty"`
 	ErrorMessageContainsFold *string  `json:"errorMessageContainsFold,omitempty"`
+	// mode field predicates
+	Mode      *enums.ExportMode  `json:"mode,omitempty"`
+	ModeNeq   *enums.ExportMode  `json:"modeNEQ,omitempty"`
+	ModeIn    []enums.ExportMode `json:"modeIn,omitempty"`
+	ModeNotIn []enums.ExportMode `json:"modeNotIn,omitempty"`
 	// owner edge predicates
 	HasOwner     *bool                     `json:"hasOwner,omitempty"`
 	HasOwnerWith []*OrganizationWhereInput `json:"hasOwnerWith,omitempty"`
@@ -15234,6 +15451,7 @@ type File struct {
 	Program                []*Program                   `json:"program,omitempty"`
 	Platform               []*Platform                  `json:"platform,omitempty"`
 	Evidence               []*Evidence                  `json:"evidence,omitempty"`
+	IdentityHolder         []*IdentityHolder            `json:"identityHolder,omitempty"`
 	Scan                   []*Scan                      `json:"scan,omitempty"`
 	Events                 *EventConnection             `json:"events"`
 	Integrations           *IntegrationConnection       `json:"integrations"`
@@ -15722,6 +15940,9 @@ type FileWhereInput struct {
 	// evidence edge predicates
 	HasEvidence     *bool                 `json:"hasEvidence,omitempty"`
 	HasEvidenceWith []*EvidenceWhereInput `json:"hasEvidenceWith,omitempty"`
+	// identity_holder edge predicates
+	HasIdentityHolder     *bool                       `json:"hasIdentityHolder,omitempty"`
+	HasIdentityHolderWith []*IdentityHolderWhereInput `json:"hasIdentityHolderWith,omitempty"`
 	// scan edge predicates
 	HasScan     *bool             `json:"hasScan,omitempty"`
 	HasScanWith []*ScanWhereInput `json:"hasScanWith,omitempty"`
@@ -15777,7 +15998,7 @@ type Finding struct {
 	ExternalID *string `json:"externalID,omitempty"`
 	// the owner of the finding
 	ExternalOwnerID *string `json:"externalOwnerID,omitempty"`
-	// system that produced the finding, e.g. gcp_scc
+	// system that produced the finding, e.g. gcpscc
 	Source *string `json:"source,omitempty"`
 	// resource identifier provided by the source system
 	ResourceName *string `json:"resourceName,omitempty"`
@@ -15880,6 +16101,20 @@ func (Finding) IsNode() {}
 type FindingBulkCreatePayload struct {
 	// Created findings
 	Findings []*Finding `json:"findings,omitempty"`
+}
+
+// Return response for deleteBulkFinding mutation
+type FindingBulkDeletePayload struct {
+	// Deleted finding IDs
+	DeletedIDs []string `json:"deletedIDs"`
+}
+
+// Return response for updateBulkFinding mutation
+type FindingBulkUpdatePayload struct {
+	// Updated findings
+	Findings []*Finding `json:"findings,omitempty"`
+	// IDs of the updated findings
+	UpdatedIDs []string `json:"updatedIDs,omitempty"`
 }
 
 // A connection to a list of items.
@@ -16853,6 +17088,12 @@ type Group struct {
 	LogoURL *string `json:"logoURL,omitempty"`
 	// The group's displayed 'friendly' name
 	DisplayName string `json:"displayName"`
+	// OSCAL role identifier used for role-based responsibility mapping
+	OscalRole *string `json:"oscalRole,omitempty"`
+	// OSCAL party UUID linked to this group for responsibility mapping
+	OscalPartyUUID *string `json:"oscalPartyUUID,omitempty"`
+	// OSCAL contact UUID references associated with this group
+	OscalContactUuids []string `json:"oscalContactUuids,omitempty"`
 	// the SCIM external ID for the group
 	ScimExternalID *string `json:"scimExternalID,omitempty"`
 	// the SCIM displayname for the group
@@ -17574,6 +17815,38 @@ type GroupWhereInput struct {
 	DisplayNameHasSuffix    *string  `json:"displayNameHasSuffix,omitempty"`
 	DisplayNameEqualFold    *string  `json:"displayNameEqualFold,omitempty"`
 	DisplayNameContainsFold *string  `json:"displayNameContainsFold,omitempty"`
+	// oscal_role field predicates
+	OscalRole             *string  `json:"oscalRole,omitempty"`
+	OscalRoleNeq          *string  `json:"oscalRoleNEQ,omitempty"`
+	OscalRoleIn           []string `json:"oscalRoleIn,omitempty"`
+	OscalRoleNotIn        []string `json:"oscalRoleNotIn,omitempty"`
+	OscalRoleGt           *string  `json:"oscalRoleGT,omitempty"`
+	OscalRoleGte          *string  `json:"oscalRoleGTE,omitempty"`
+	OscalRoleLt           *string  `json:"oscalRoleLT,omitempty"`
+	OscalRoleLte          *string  `json:"oscalRoleLTE,omitempty"`
+	OscalRoleContains     *string  `json:"oscalRoleContains,omitempty"`
+	OscalRoleHasPrefix    *string  `json:"oscalRoleHasPrefix,omitempty"`
+	OscalRoleHasSuffix    *string  `json:"oscalRoleHasSuffix,omitempty"`
+	OscalRoleIsNil        *bool    `json:"oscalRoleIsNil,omitempty"`
+	OscalRoleNotNil       *bool    `json:"oscalRoleNotNil,omitempty"`
+	OscalRoleEqualFold    *string  `json:"oscalRoleEqualFold,omitempty"`
+	OscalRoleContainsFold *string  `json:"oscalRoleContainsFold,omitempty"`
+	// oscal_party_uuid field predicates
+	OscalPartyUUID             *string  `json:"oscalPartyUUID,omitempty"`
+	OscalPartyUUIDNeq          *string  `json:"oscalPartyUUIDNEQ,omitempty"`
+	OscalPartyUUIDIn           []string `json:"oscalPartyUUIDIn,omitempty"`
+	OscalPartyUUIDNotIn        []string `json:"oscalPartyUUIDNotIn,omitempty"`
+	OscalPartyUUIDGt           *string  `json:"oscalPartyUUIDGT,omitempty"`
+	OscalPartyUUIDGte          *string  `json:"oscalPartyUUIDGTE,omitempty"`
+	OscalPartyUUIDLt           *string  `json:"oscalPartyUUIDLT,omitempty"`
+	OscalPartyUUIDLte          *string  `json:"oscalPartyUUIDLTE,omitempty"`
+	OscalPartyUUIDContains     *string  `json:"oscalPartyUUIDContains,omitempty"`
+	OscalPartyUUIDHasPrefix    *string  `json:"oscalPartyUUIDHasPrefix,omitempty"`
+	OscalPartyUUIDHasSuffix    *string  `json:"oscalPartyUUIDHasSuffix,omitempty"`
+	OscalPartyUUIDIsNil        *bool    `json:"oscalPartyUUIDIsNil,omitempty"`
+	OscalPartyUUIDNotNil       *bool    `json:"oscalPartyUUIDNotNil,omitempty"`
+	OscalPartyUUIDEqualFold    *string  `json:"oscalPartyUUIDEqualFold,omitempty"`
+	OscalPartyUUIDContainsFold *string  `json:"oscalPartyUUIDContainsFold,omitempty"`
 	// scim_external_id field predicates
 	ScimExternalID             *string  `json:"scimExternalID,omitempty"`
 	ScimExternalIdneq          *string  `json:"scimExternalIDNEQ,omitempty"`
@@ -17773,6 +18046,8 @@ type GroupWhereInput struct {
 	HasMembersWith []*GroupMembershipWhereInput `json:"hasMembersWith,omitempty"`
 	// Filter for tagsHas to contain a specific value
 	TagsHas *string `json:"tagsHas,omitempty"`
+	// Filter for oscalContactUuidsHas to contain a specific value
+	OscalContactUuidsHas *string `json:"oscalContactUuidsHas,omitempty"`
 }
 
 type Hush struct {
@@ -18163,9 +18438,11 @@ type IdentityHolder struct {
 	Assets              *AssetConnection              `json:"assets"`
 	Entities            *EntityConnection             `json:"entities"`
 	DirectoryAccounts   *DirectoryAccountConnection   `json:"directoryAccounts"`
+	Controls            *ControlConnection            `json:"controls"`
 	Platforms           *PlatformConnection           `json:"platforms"`
 	Campaigns           *CampaignConnection           `json:"campaigns"`
 	Tasks               *TaskConnection               `json:"tasks"`
+	Files               *FileConnection               `json:"files"`
 	Findings            *FindingConnection            `json:"findings"`
 	WorkflowObjectRefs  *WorkflowObjectRefConnection  `json:"workflowObjectRefs"`
 	AccessPlatforms     *PlatformConnection           `json:"accessPlatforms"`
@@ -18737,6 +19014,9 @@ type IdentityHolderWhereInput struct {
 	// directory_accounts edge predicates
 	HasDirectoryAccounts     *bool                         `json:"hasDirectoryAccounts,omitempty"`
 	HasDirectoryAccountsWith []*DirectoryAccountWhereInput `json:"hasDirectoryAccountsWith,omitempty"`
+	// controls edge predicates
+	HasControls     *bool                `json:"hasControls,omitempty"`
+	HasControlsWith []*ControlWhereInput `json:"hasControlsWith,omitempty"`
 	// platforms edge predicates
 	HasPlatforms     *bool                 `json:"hasPlatforms,omitempty"`
 	HasPlatformsWith []*PlatformWhereInput `json:"hasPlatformsWith,omitempty"`
@@ -18746,6 +19026,9 @@ type IdentityHolderWhereInput struct {
 	// tasks edge predicates
 	HasTasks     *bool             `json:"hasTasks,omitempty"`
 	HasTasksWith []*TaskWhereInput `json:"hasTasksWith,omitempty"`
+	// files edge predicates
+	HasFiles     *bool             `json:"hasFiles,omitempty"`
+	HasFilesWith []*FileWhereInput `json:"hasFilesWith,omitempty"`
 	// findings edge predicates
 	HasFindings     *bool                `json:"hasFindings,omitempty"`
 	HasFindingsWith []*FindingWhereInput `json:"hasFindingsWith,omitempty"`
@@ -19237,10 +19520,12 @@ type InternalPolicy struct {
 	// the scope of the internal_policy
 	ScopeID *string `json:"scopeID,omitempty"`
 	// internal marker field for workflow eligibility, not exposed in API
-	WorkflowEligibleMarker *bool            `json:"workflowEligibleMarker,omitempty"`
-	Owner                  *Organization    `json:"owner,omitempty"`
-	BlockedGroups          *GroupConnection `json:"blockedGroups"`
-	Editors                *GroupConnection `json:"editors"`
+	WorkflowEligibleMarker *bool `json:"workflowEligibleMarker,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID  *string          `json:"externalUUID,omitempty"`
+	Owner         *Organization    `json:"owner,omitempty"`
+	BlockedGroups *GroupConnection `json:"blockedGroups"`
+	Editors       *GroupConnection `json:"editors"`
 	// the group of users who are responsible for approving the policy
 	Approver *Group `json:"approver,omitempty"`
 	// temporary delegates for the policy, used for temporary approval
@@ -19716,6 +20001,22 @@ type InternalPolicyWhereInput struct {
 	WorkflowEligibleMarkerNeq    *bool `json:"workflowEligibleMarkerNEQ,omitempty"`
 	WorkflowEligibleMarkerIsNil  *bool `json:"workflowEligibleMarkerIsNil,omitempty"`
 	WorkflowEligibleMarkerNotNil *bool `json:"workflowEligibleMarkerNotNil,omitempty"`
+	// external_uuid field predicates
+	ExternalUUID             *string  `json:"externalUUID,omitempty"`
+	ExternalUUIDNeq          *string  `json:"externalUUIDNEQ,omitempty"`
+	ExternalUUIDIn           []string `json:"externalUUIDIn,omitempty"`
+	ExternalUUIDNotIn        []string `json:"externalUUIDNotIn,omitempty"`
+	ExternalUUIDGt           *string  `json:"externalUUIDGT,omitempty"`
+	ExternalUUIDGte          *string  `json:"externalUUIDGTE,omitempty"`
+	ExternalUUIDLt           *string  `json:"externalUUIDLT,omitempty"`
+	ExternalUUIDLte          *string  `json:"externalUUIDLTE,omitempty"`
+	ExternalUUIDContains     *string  `json:"externalUUIDContains,omitempty"`
+	ExternalUUIDHasPrefix    *string  `json:"externalUUIDHasPrefix,omitempty"`
+	ExternalUUIDHasSuffix    *string  `json:"externalUUIDHasSuffix,omitempty"`
+	ExternalUUIDIsNil        *bool    `json:"externalUUIDIsNil,omitempty"`
+	ExternalUUIDNotNil       *bool    `json:"externalUUIDNotNil,omitempty"`
+	ExternalUUIDEqualFold    *string  `json:"externalUUIDEqualFold,omitempty"`
+	ExternalUUIDContainsFold *string  `json:"externalUUIDContainsFold,omitempty"`
 	// owner edge predicates
 	HasOwner     *bool                     `json:"hasOwner,omitempty"`
 	HasOwnerWith []*OrganizationWhereInput `json:"hasOwnerWith,omitempty"`
@@ -23884,6 +24185,7 @@ type Organization struct {
 	Notes                           *NoteConnection                       `json:"notes"`
 	Tasks                           *TaskConnection                       `json:"tasks"`
 	Programs                        *ProgramConnection                    `json:"programs"`
+	SystemDetails                   *SystemDetailConnection               `json:"systemDetails"`
 	Procedures                      *ProcedureConnection                  `json:"procedures"`
 	InternalPolicies                *InternalPolicyConnection             `json:"internalPolicies"`
 	Risks                           *RiskConnection                       `json:"risks"`
@@ -24771,6 +25073,9 @@ type OrganizationWhereInput struct {
 	// programs edge predicates
 	HasPrograms     *bool                `json:"hasPrograms,omitempty"`
 	HasProgramsWith []*ProgramWhereInput `json:"hasProgramsWith,omitempty"`
+	// system_details edge predicates
+	HasSystemDetails     *bool                     `json:"hasSystemDetails,omitempty"`
+	HasSystemDetailsWith []*SystemDetailWhereInput `json:"hasSystemDetailsWith,omitempty"`
 	// procedures edge predicates
 	HasProcedures     *bool                  `json:"hasProcedures,omitempty"`
 	HasProceduresWith []*ProcedureWhereInput `json:"hasProceduresWith,omitempty"`
@@ -25253,6 +25558,8 @@ type Platform struct {
 	CriticalityID *string `json:"criticalityID,omitempty"`
 	// internal marker field for workflow eligibility, not exposed in API
 	WorkflowEligibleMarker *bool `json:"workflowEligibleMarker,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the name of the platform
 	Name string `json:"name"`
 	// the description of the platform boundary
@@ -25332,6 +25639,7 @@ type Platform struct {
 	ApplicableFrameworks       *StandardConnection            `json:"applicableFrameworks"`
 	GeneratedScans             *ScanConnection                `json:"generatedScans"`
 	PlatformOwner              *User                          `json:"platformOwner,omitempty"`
+	SystemDetail               *SystemDetail                  `json:"systemDetail,omitempty"`
 	// Indicates if this platform has pending changes awaiting workflow approval
 	HasPendingWorkflow bool `json:"hasPendingWorkflow"`
 	// Indicates if this platform has any workflow history (completed or failed instances)
@@ -25948,6 +26256,22 @@ type PlatformWhereInput struct {
 	WorkflowEligibleMarkerNeq    *bool `json:"workflowEligibleMarkerNEQ,omitempty"`
 	WorkflowEligibleMarkerIsNil  *bool `json:"workflowEligibleMarkerIsNil,omitempty"`
 	WorkflowEligibleMarkerNotNil *bool `json:"workflowEligibleMarkerNotNil,omitempty"`
+	// external_uuid field predicates
+	ExternalUUID             *string  `json:"externalUUID,omitempty"`
+	ExternalUUIDNeq          *string  `json:"externalUUIDNEQ,omitempty"`
+	ExternalUUIDIn           []string `json:"externalUUIDIn,omitempty"`
+	ExternalUUIDNotIn        []string `json:"externalUUIDNotIn,omitempty"`
+	ExternalUUIDGt           *string  `json:"externalUUIDGT,omitempty"`
+	ExternalUUIDGte          *string  `json:"externalUUIDGTE,omitempty"`
+	ExternalUUIDLt           *string  `json:"externalUUIDLT,omitempty"`
+	ExternalUUIDLte          *string  `json:"externalUUIDLTE,omitempty"`
+	ExternalUUIDContains     *string  `json:"externalUUIDContains,omitempty"`
+	ExternalUUIDHasPrefix    *string  `json:"externalUUIDHasPrefix,omitempty"`
+	ExternalUUIDHasSuffix    *string  `json:"externalUUIDHasSuffix,omitempty"`
+	ExternalUUIDIsNil        *bool    `json:"externalUUIDIsNil,omitempty"`
+	ExternalUUIDNotNil       *bool    `json:"externalUUIDNotNil,omitempty"`
+	ExternalUUIDEqualFold    *string  `json:"externalUUIDEqualFold,omitempty"`
+	ExternalUUIDContainsFold *string  `json:"externalUUIDContainsFold,omitempty"`
 	// name field predicates
 	Name             *string  `json:"name,omitempty"`
 	NameNeq          *string  `json:"nameNEQ,omitempty"`
@@ -26256,6 +26580,9 @@ type PlatformWhereInput struct {
 	// platform_owner edge predicates
 	HasPlatformOwner     *bool             `json:"hasPlatformOwner,omitempty"`
 	HasPlatformOwnerWith []*UserWhereInput `json:"hasPlatformOwnerWith,omitempty"`
+	// system_detail edge predicates
+	HasSystemDetail     *bool                     `json:"hasSystemDetail,omitempty"`
+	HasSystemDetailWith []*SystemDetailWhereInput `json:"hasSystemDetailWith,omitempty"`
 	// Filter for tagsHas to contain a specific value
 	TagsHas *string `json:"tagsHas,omitempty"`
 }
@@ -26894,6 +27221,8 @@ type Program struct {
 	ProgramKindName *string `json:"programKindName,omitempty"`
 	// the kind of the program
 	ProgramKindID *string `json:"programKindID,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the name of the program
 	Name string `json:"name"`
 	// the description of the program
@@ -26937,6 +27266,7 @@ type Program struct {
 	Evidence          *EvidenceConnection          `json:"evidence"`
 	Narratives        *NarrativeConnection         `json:"narratives"`
 	ActionPlans       *ActionPlanConnection        `json:"actionPlans"`
+	SystemDetail      *SystemDetail                `json:"systemDetail,omitempty"`
 	Users             *UserConnection              `json:"users"`
 	ProgramOwner      *User                        `json:"programOwner,omitempty"`
 	Members           *ProgramMembershipConnection `json:"members"`
@@ -27300,6 +27630,22 @@ type ProgramWhereInput struct {
 	ProgramKindIDNotNil       *bool    `json:"programKindIDNotNil,omitempty"`
 	ProgramKindIDEqualFold    *string  `json:"programKindIDEqualFold,omitempty"`
 	ProgramKindIDContainsFold *string  `json:"programKindIDContainsFold,omitempty"`
+	// external_uuid field predicates
+	ExternalUUID             *string  `json:"externalUUID,omitempty"`
+	ExternalUUIDNeq          *string  `json:"externalUUIDNEQ,omitempty"`
+	ExternalUUIDIn           []string `json:"externalUUIDIn,omitempty"`
+	ExternalUUIDNotIn        []string `json:"externalUUIDNotIn,omitempty"`
+	ExternalUUIDGt           *string  `json:"externalUUIDGT,omitempty"`
+	ExternalUUIDGte          *string  `json:"externalUUIDGTE,omitempty"`
+	ExternalUUIDLt           *string  `json:"externalUUIDLT,omitempty"`
+	ExternalUUIDLte          *string  `json:"externalUUIDLTE,omitempty"`
+	ExternalUUIDContains     *string  `json:"externalUUIDContains,omitempty"`
+	ExternalUUIDHasPrefix    *string  `json:"externalUUIDHasPrefix,omitempty"`
+	ExternalUUIDHasSuffix    *string  `json:"externalUUIDHasSuffix,omitempty"`
+	ExternalUUIDIsNil        *bool    `json:"externalUUIDIsNil,omitempty"`
+	ExternalUUIDNotNil       *bool    `json:"externalUUIDNotNil,omitempty"`
+	ExternalUUIDEqualFold    *string  `json:"externalUUIDEqualFold,omitempty"`
+	ExternalUUIDContainsFold *string  `json:"externalUUIDContainsFold,omitempty"`
 	// name field predicates
 	Name             *string  `json:"name,omitempty"`
 	NameNeq          *string  `json:"nameNEQ,omitempty"`
@@ -27497,6 +27843,9 @@ type ProgramWhereInput struct {
 	// action_plans edge predicates
 	HasActionPlans     *bool                   `json:"hasActionPlans,omitempty"`
 	HasActionPlansWith []*ActionPlanWhereInput `json:"hasActionPlansWith,omitempty"`
+	// system_detail edge predicates
+	HasSystemDetail     *bool                     `json:"hasSystemDetail,omitempty"`
+	HasSystemDetailWith []*SystemDetailWhereInput `json:"hasSystemDetailWith,omitempty"`
 	// users edge predicates
 	HasUsers     *bool             `json:"hasUsers,omitempty"`
 	HasUsersWith []*UserWhereInput `json:"hasUsersWith,omitempty"`
@@ -27614,6 +27963,20 @@ func (Remediation) IsNode() {}
 type RemediationBulkCreatePayload struct {
 	// Created remediations
 	Remediations []*Remediation `json:"remediations,omitempty"`
+}
+
+// Return response for deleteBulkRemediation mutation
+type RemediationBulkDeletePayload struct {
+	// Deleted remediation IDs
+	DeletedIDs []string `json:"deletedIDs"`
+}
+
+// Return response for updateBulkRemediation mutation
+type RemediationBulkUpdatePayload struct {
+	// Updated remediations
+	Remediations []*Remediation `json:"remediations,omitempty"`
+	// IDs of the updated remediations
+	UpdatedIDs []string `json:"updatedIDs,omitempty"`
 }
 
 // A connection to a list of items.
@@ -28875,6 +29238,8 @@ type Risk struct {
 	ScopeName *string `json:"scopeName,omitempty"`
 	// the scope of the risk
 	ScopeID *string `json:"scopeID,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the name of the risk
 	Name string `json:"name"`
 	// status of the risk - identified, mitigated, accepted, closed, transferred, and archived.
@@ -29223,6 +29588,22 @@ type RiskWhereInput struct {
 	ScopeIDNotNil       *bool    `json:"scopeIDNotNil,omitempty"`
 	ScopeIDEqualFold    *string  `json:"scopeIDEqualFold,omitempty"`
 	ScopeIDContainsFold *string  `json:"scopeIDContainsFold,omitempty"`
+	// external_uuid field predicates
+	ExternalUUID             *string  `json:"externalUUID,omitempty"`
+	ExternalUUIDNeq          *string  `json:"externalUUIDNEQ,omitempty"`
+	ExternalUUIDIn           []string `json:"externalUUIDIn,omitempty"`
+	ExternalUUIDNotIn        []string `json:"externalUUIDNotIn,omitempty"`
+	ExternalUUIDGt           *string  `json:"externalUUIDGT,omitempty"`
+	ExternalUUIDGte          *string  `json:"externalUUIDGTE,omitempty"`
+	ExternalUUIDLt           *string  `json:"externalUUIDLT,omitempty"`
+	ExternalUUIDLte          *string  `json:"externalUUIDLTE,omitempty"`
+	ExternalUUIDContains     *string  `json:"externalUUIDContains,omitempty"`
+	ExternalUUIDHasPrefix    *string  `json:"externalUUIDHasPrefix,omitempty"`
+	ExternalUUIDHasSuffix    *string  `json:"externalUUIDHasSuffix,omitempty"`
+	ExternalUUIDIsNil        *bool    `json:"externalUUIDIsNil,omitempty"`
+	ExternalUUIDNotNil       *bool    `json:"externalUUIDNotNil,omitempty"`
+	ExternalUUIDEqualFold    *string  `json:"externalUUIDEqualFold,omitempty"`
+	ExternalUUIDContainsFold *string  `json:"externalUUIDContainsFold,omitempty"`
 	// name field predicates
 	Name             *string  `json:"name,omitempty"`
 	NameNeq          *string  `json:"nameNEQ,omitempty"`
@@ -30509,6 +30890,7 @@ type SearchResults struct {
 	Subcontrols           *SubcontrolConnection           `json:"subcontrols,omitempty"`
 	Subprocessors         *SubprocessorConnection         `json:"subprocessors,omitempty"`
 	Subscribers           *SubscriberConnection           `json:"subscribers,omitempty"`
+	SystemDetails         *SystemDetailConnection         `json:"systemDetails,omitempty"`
 	TagDefinitions        *TagDefinitionConnection        `json:"tagDefinitions,omitempty"`
 	Tasks                 *TaskConnection                 `json:"tasks,omitempty"`
 	Templates             *TemplateConnection             `json:"templates,omitempty"`
@@ -30980,6 +31362,8 @@ type Subcontrol struct {
 	DisplayID string `json:"displayID"`
 	// tags associated with the object
 	Tags []string `json:"tags,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// human readable title of the control for quick identification
 	Title *string `json:"title,omitempty"`
 	// description of what the control is supposed to accomplish
@@ -30996,6 +31380,10 @@ type Subcontrol struct {
 	ResponsiblePartyID *string `json:"responsiblePartyID,omitempty"`
 	// status of the control
 	Status *enums.ControlStatus `json:"status,omitempty"`
+	// OSCAL-aligned implementation status of the control
+	ImplementationStatus *enums.ControlImplementationStatus `json:"implementationStatus,omitempty"`
+	// narrative describing current implementation state for OSCAL export
+	ImplementationDescription *string `json:"implementationDescription,omitempty"`
 	// source of the control, e.g. framework, template, custom, etc.
 	Source *enums.ControlSource `json:"source,omitempty"`
 	// the reference framework for the control if it came from a standard, empty if not associated with a standard
@@ -31231,6 +31619,22 @@ type SubcontrolWhereInput struct {
 	DisplayIDHasSuffix    *string  `json:"displayIDHasSuffix,omitempty"`
 	DisplayIDEqualFold    *string  `json:"displayIDEqualFold,omitempty"`
 	DisplayIDContainsFold *string  `json:"displayIDContainsFold,omitempty"`
+	// external_uuid field predicates
+	ExternalUUID             *string  `json:"externalUUID,omitempty"`
+	ExternalUUIDNeq          *string  `json:"externalUUIDNEQ,omitempty"`
+	ExternalUUIDIn           []string `json:"externalUUIDIn,omitempty"`
+	ExternalUUIDNotIn        []string `json:"externalUUIDNotIn,omitempty"`
+	ExternalUUIDGt           *string  `json:"externalUUIDGT,omitempty"`
+	ExternalUUIDGte          *string  `json:"externalUUIDGTE,omitempty"`
+	ExternalUUIDLt           *string  `json:"externalUUIDLT,omitempty"`
+	ExternalUUIDLte          *string  `json:"externalUUIDLTE,omitempty"`
+	ExternalUUIDContains     *string  `json:"externalUUIDContains,omitempty"`
+	ExternalUUIDHasPrefix    *string  `json:"externalUUIDHasPrefix,omitempty"`
+	ExternalUUIDHasSuffix    *string  `json:"externalUUIDHasSuffix,omitempty"`
+	ExternalUUIDIsNil        *bool    `json:"externalUUIDIsNil,omitempty"`
+	ExternalUUIDNotNil       *bool    `json:"externalUUIDNotNil,omitempty"`
+	ExternalUUIDEqualFold    *string  `json:"externalUUIDEqualFold,omitempty"`
+	ExternalUUIDContainsFold *string  `json:"externalUUIDContainsFold,omitempty"`
 	// title field predicates
 	Title             *string  `json:"title,omitempty"`
 	TitleNeq          *string  `json:"titleNEQ,omitempty"`
@@ -31318,6 +31722,29 @@ type SubcontrolWhereInput struct {
 	StatusNotIn  []enums.ControlStatus `json:"statusNotIn,omitempty"`
 	StatusIsNil  *bool                 `json:"statusIsNil,omitempty"`
 	StatusNotNil *bool                 `json:"statusNotNil,omitempty"`
+	// implementation_status field predicates
+	ImplementationStatus       *enums.ControlImplementationStatus  `json:"implementationStatus,omitempty"`
+	ImplementationStatusNeq    *enums.ControlImplementationStatus  `json:"implementationStatusNEQ,omitempty"`
+	ImplementationStatusIn     []enums.ControlImplementationStatus `json:"implementationStatusIn,omitempty"`
+	ImplementationStatusNotIn  []enums.ControlImplementationStatus `json:"implementationStatusNotIn,omitempty"`
+	ImplementationStatusIsNil  *bool                               `json:"implementationStatusIsNil,omitempty"`
+	ImplementationStatusNotNil *bool                               `json:"implementationStatusNotNil,omitempty"`
+	// implementation_description field predicates
+	ImplementationDescription             *string  `json:"implementationDescription,omitempty"`
+	ImplementationDescriptionNeq          *string  `json:"implementationDescriptionNEQ,omitempty"`
+	ImplementationDescriptionIn           []string `json:"implementationDescriptionIn,omitempty"`
+	ImplementationDescriptionNotIn        []string `json:"implementationDescriptionNotIn,omitempty"`
+	ImplementationDescriptionGt           *string  `json:"implementationDescriptionGT,omitempty"`
+	ImplementationDescriptionGte          *string  `json:"implementationDescriptionGTE,omitempty"`
+	ImplementationDescriptionLt           *string  `json:"implementationDescriptionLT,omitempty"`
+	ImplementationDescriptionLte          *string  `json:"implementationDescriptionLTE,omitempty"`
+	ImplementationDescriptionContains     *string  `json:"implementationDescriptionContains,omitempty"`
+	ImplementationDescriptionHasPrefix    *string  `json:"implementationDescriptionHasPrefix,omitempty"`
+	ImplementationDescriptionHasSuffix    *string  `json:"implementationDescriptionHasSuffix,omitempty"`
+	ImplementationDescriptionIsNil        *bool    `json:"implementationDescriptionIsNil,omitempty"`
+	ImplementationDescriptionNotNil       *bool    `json:"implementationDescriptionNotNil,omitempty"`
+	ImplementationDescriptionEqualFold    *string  `json:"implementationDescriptionEqualFold,omitempty"`
+	ImplementationDescriptionContainsFold *string  `json:"implementationDescriptionContainsFold,omitempty"`
 	// source field predicates
 	Source       *enums.ControlSource  `json:"source,omitempty"`
 	SourceNeq    *enums.ControlSource  `json:"sourceNEQ,omitempty"`
@@ -32162,6 +32589,337 @@ type SubscriberWhereInput struct {
 type Subscription struct {
 }
 
+type SystemDetail struct {
+	ID        string     `json:"id"`
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	CreatedBy *string    `json:"createdBy,omitempty"`
+	UpdatedBy *string    `json:"updatedBy,omitempty"`
+	// a shortened prefixed id field to use as a human readable identifier
+	DisplayID string `json:"displayID"`
+	// tags associated with the object
+	Tags []string `json:"tags,omitempty"`
+	// the ID of the organization owner of the object
+	OwnerID *string `json:"ownerID,omitempty"`
+	// optional program anchor for this system detail
+	ProgramID *string `json:"programID,omitempty"`
+	// optional platform anchor for this system detail
+	PlatformID *string `json:"platformID,omitempty"`
+	// system name used in OSCAL metadata
+	SystemName string `json:"systemName"`
+	// system version used in OSCAL metadata
+	Version *string `json:"version,omitempty"`
+	// system description used in OSCAL metadata
+	Description *string `json:"description,omitempty"`
+	// authorization boundary narrative for OSCAL export
+	AuthorizationBoundary *string `json:"authorizationBoundary,omitempty"`
+	// security sensitivity level of the system
+	SensitivityLevel *enums.SystemSensitivityLevel `json:"sensitivityLevel,omitempty"`
+	// timestamp when metadata was last reviewed
+	LastReviewed *models.DateTime `json:"lastReviewed,omitempty"`
+	// structured revision history for OSCAL metadata
+	RevisionHistory []any `json:"revisionHistory,omitempty"`
+	// optional escape hatch for additional OSCAL metadata fields
+	OscalMetadataJSON map[string]any `json:"oscalMetadataJSON,omitempty"`
+	Owner             *Organization  `json:"owner,omitempty"`
+	// optional program this detail belongs to
+	Program *Program `json:"program,omitempty"`
+	// optional platform this detail belongs to
+	Platform *Platform `json:"platform,omitempty"`
+}
+
+func (SystemDetail) IsNode() {}
+
+// Return response for createBulkSystemDetail mutation
+type SystemDetailBulkCreatePayload struct {
+	// Created systemDetails
+	SystemDetails []*SystemDetail `json:"systemDetails,omitempty"`
+}
+
+// Return response for deleteBulkSystemDetail mutation
+type SystemDetailBulkDeletePayload struct {
+	// Deleted systemDetail IDs
+	DeletedIDs []string `json:"deletedIDs"`
+}
+
+// Return response for updateBulkSystemDetail mutation
+type SystemDetailBulkUpdatePayload struct {
+	// Updated systemDetails
+	SystemDetails []*SystemDetail `json:"systemDetails,omitempty"`
+	// IDs of the updated systemDetails
+	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+}
+
+// A connection to a list of items.
+type SystemDetailConnection struct {
+	// A list of edges.
+	Edges []*SystemDetailEdge `json:"edges,omitempty"`
+	// Information to aid in pagination.
+	PageInfo *PageInfo `json:"pageInfo"`
+	// Identifies the total count of items in the connection.
+	TotalCount int64 `json:"totalCount"`
+}
+
+// Return response for createSystemDetail mutation
+type SystemDetailCreatePayload struct {
+	// Created systemDetail
+	SystemDetail *SystemDetail `json:"systemDetail"`
+}
+
+// Return response for deleteSystemDetail mutation
+type SystemDetailDeletePayload struct {
+	// Deleted systemDetail ID
+	DeletedID string `json:"deletedID"`
+}
+
+// An edge in a connection.
+type SystemDetailEdge struct {
+	// The item at the end of the edge.
+	Node *SystemDetail `json:"node,omitempty"`
+	// A cursor for use in pagination.
+	Cursor string `json:"cursor"`
+}
+
+// Ordering options for SystemDetail connections
+type SystemDetailOrder struct {
+	// The ordering direction.
+	Direction OrderDirection `json:"direction"`
+	// The field by which to order SystemDetails.
+	Field SystemDetailOrderField `json:"field"`
+}
+
+// Return response for updateSystemDetail mutation
+type SystemDetailUpdatePayload struct {
+	// Updated systemDetail
+	SystemDetail *SystemDetail `json:"systemDetail"`
+}
+
+// SystemDetailWhereInput is used for filtering SystemDetail objects.
+// Input was generated by ent.
+type SystemDetailWhereInput struct {
+	Not *SystemDetailWhereInput   `json:"not,omitempty"`
+	And []*SystemDetailWhereInput `json:"and,omitempty"`
+	Or  []*SystemDetailWhereInput `json:"or,omitempty"`
+	// id field predicates
+	ID             *string  `json:"id,omitempty"`
+	IDNeq          *string  `json:"idNEQ,omitempty"`
+	IDIn           []string `json:"idIn,omitempty"`
+	IDNotIn        []string `json:"idNotIn,omitempty"`
+	IDGt           *string  `json:"idGT,omitempty"`
+	IDGte          *string  `json:"idGTE,omitempty"`
+	IDLt           *string  `json:"idLT,omitempty"`
+	IDLte          *string  `json:"idLTE,omitempty"`
+	IDEqualFold    *string  `json:"idEqualFold,omitempty"`
+	IDContainsFold *string  `json:"idContainsFold,omitempty"`
+	// created_at field predicates
+	CreatedAt       *time.Time   `json:"createdAt,omitempty"`
+	CreatedAtNeq    *time.Time   `json:"createdAtNEQ,omitempty"`
+	CreatedAtIn     []*time.Time `json:"createdAtIn,omitempty"`
+	CreatedAtNotIn  []*time.Time `json:"createdAtNotIn,omitempty"`
+	CreatedAtGt     *time.Time   `json:"createdAtGT,omitempty"`
+	CreatedAtGte    *time.Time   `json:"createdAtGTE,omitempty"`
+	CreatedAtLt     *time.Time   `json:"createdAtLT,omitempty"`
+	CreatedAtLte    *time.Time   `json:"createdAtLTE,omitempty"`
+	CreatedAtIsNil  *bool        `json:"createdAtIsNil,omitempty"`
+	CreatedAtNotNil *bool        `json:"createdAtNotNil,omitempty"`
+	// updated_at field predicates
+	UpdatedAt       *time.Time   `json:"updatedAt,omitempty"`
+	UpdatedAtNeq    *time.Time   `json:"updatedAtNEQ,omitempty"`
+	UpdatedAtIn     []*time.Time `json:"updatedAtIn,omitempty"`
+	UpdatedAtNotIn  []*time.Time `json:"updatedAtNotIn,omitempty"`
+	UpdatedAtGt     *time.Time   `json:"updatedAtGT,omitempty"`
+	UpdatedAtGte    *time.Time   `json:"updatedAtGTE,omitempty"`
+	UpdatedAtLt     *time.Time   `json:"updatedAtLT,omitempty"`
+	UpdatedAtLte    *time.Time   `json:"updatedAtLTE,omitempty"`
+	UpdatedAtIsNil  *bool        `json:"updatedAtIsNil,omitempty"`
+	UpdatedAtNotNil *bool        `json:"updatedAtNotNil,omitempty"`
+	// created_by field predicates
+	CreatedBy             *string  `json:"createdBy,omitempty"`
+	CreatedByNeq          *string  `json:"createdByNEQ,omitempty"`
+	CreatedByIn           []string `json:"createdByIn,omitempty"`
+	CreatedByNotIn        []string `json:"createdByNotIn,omitempty"`
+	CreatedByGt           *string  `json:"createdByGT,omitempty"`
+	CreatedByGte          *string  `json:"createdByGTE,omitempty"`
+	CreatedByLt           *string  `json:"createdByLT,omitempty"`
+	CreatedByLte          *string  `json:"createdByLTE,omitempty"`
+	CreatedByContains     *string  `json:"createdByContains,omitempty"`
+	CreatedByHasPrefix    *string  `json:"createdByHasPrefix,omitempty"`
+	CreatedByHasSuffix    *string  `json:"createdByHasSuffix,omitempty"`
+	CreatedByIsNil        *bool    `json:"createdByIsNil,omitempty"`
+	CreatedByNotNil       *bool    `json:"createdByNotNil,omitempty"`
+	CreatedByEqualFold    *string  `json:"createdByEqualFold,omitempty"`
+	CreatedByContainsFold *string  `json:"createdByContainsFold,omitempty"`
+	// updated_by field predicates
+	UpdatedBy             *string  `json:"updatedBy,omitempty"`
+	UpdatedByNeq          *string  `json:"updatedByNEQ,omitempty"`
+	UpdatedByIn           []string `json:"updatedByIn,omitempty"`
+	UpdatedByNotIn        []string `json:"updatedByNotIn,omitempty"`
+	UpdatedByGt           *string  `json:"updatedByGT,omitempty"`
+	UpdatedByGte          *string  `json:"updatedByGTE,omitempty"`
+	UpdatedByLt           *string  `json:"updatedByLT,omitempty"`
+	UpdatedByLte          *string  `json:"updatedByLTE,omitempty"`
+	UpdatedByContains     *string  `json:"updatedByContains,omitempty"`
+	UpdatedByHasPrefix    *string  `json:"updatedByHasPrefix,omitempty"`
+	UpdatedByHasSuffix    *string  `json:"updatedByHasSuffix,omitempty"`
+	UpdatedByIsNil        *bool    `json:"updatedByIsNil,omitempty"`
+	UpdatedByNotNil       *bool    `json:"updatedByNotNil,omitempty"`
+	UpdatedByEqualFold    *string  `json:"updatedByEqualFold,omitempty"`
+	UpdatedByContainsFold *string  `json:"updatedByContainsFold,omitempty"`
+	// display_id field predicates
+	DisplayID             *string  `json:"displayID,omitempty"`
+	DisplayIdneq          *string  `json:"displayIDNEQ,omitempty"`
+	DisplayIDIn           []string `json:"displayIDIn,omitempty"`
+	DisplayIDNotIn        []string `json:"displayIDNotIn,omitempty"`
+	DisplayIdgt           *string  `json:"displayIDGT,omitempty"`
+	DisplayIdgte          *string  `json:"displayIDGTE,omitempty"`
+	DisplayIdlt           *string  `json:"displayIDLT,omitempty"`
+	DisplayIdlte          *string  `json:"displayIDLTE,omitempty"`
+	DisplayIDContains     *string  `json:"displayIDContains,omitempty"`
+	DisplayIDHasPrefix    *string  `json:"displayIDHasPrefix,omitempty"`
+	DisplayIDHasSuffix    *string  `json:"displayIDHasSuffix,omitempty"`
+	DisplayIDEqualFold    *string  `json:"displayIDEqualFold,omitempty"`
+	DisplayIDContainsFold *string  `json:"displayIDContainsFold,omitempty"`
+	// owner_id field predicates
+	OwnerID             *string  `json:"ownerID,omitempty"`
+	OwnerIdneq          *string  `json:"ownerIDNEQ,omitempty"`
+	OwnerIDIn           []string `json:"ownerIDIn,omitempty"`
+	OwnerIDNotIn        []string `json:"ownerIDNotIn,omitempty"`
+	OwnerIdgt           *string  `json:"ownerIDGT,omitempty"`
+	OwnerIdgte          *string  `json:"ownerIDGTE,omitempty"`
+	OwnerIdlt           *string  `json:"ownerIDLT,omitempty"`
+	OwnerIdlte          *string  `json:"ownerIDLTE,omitempty"`
+	OwnerIDContains     *string  `json:"ownerIDContains,omitempty"`
+	OwnerIDHasPrefix    *string  `json:"ownerIDHasPrefix,omitempty"`
+	OwnerIDHasSuffix    *string  `json:"ownerIDHasSuffix,omitempty"`
+	OwnerIDIsNil        *bool    `json:"ownerIDIsNil,omitempty"`
+	OwnerIDNotNil       *bool    `json:"ownerIDNotNil,omitempty"`
+	OwnerIDEqualFold    *string  `json:"ownerIDEqualFold,omitempty"`
+	OwnerIDContainsFold *string  `json:"ownerIDContainsFold,omitempty"`
+	// program_id field predicates
+	ProgramID             *string  `json:"programID,omitempty"`
+	ProgramIdneq          *string  `json:"programIDNEQ,omitempty"`
+	ProgramIDIn           []string `json:"programIDIn,omitempty"`
+	ProgramIDNotIn        []string `json:"programIDNotIn,omitempty"`
+	ProgramIdgt           *string  `json:"programIDGT,omitempty"`
+	ProgramIdgte          *string  `json:"programIDGTE,omitempty"`
+	ProgramIdlt           *string  `json:"programIDLT,omitempty"`
+	ProgramIdlte          *string  `json:"programIDLTE,omitempty"`
+	ProgramIDContains     *string  `json:"programIDContains,omitempty"`
+	ProgramIDHasPrefix    *string  `json:"programIDHasPrefix,omitempty"`
+	ProgramIDHasSuffix    *string  `json:"programIDHasSuffix,omitempty"`
+	ProgramIDIsNil        *bool    `json:"programIDIsNil,omitempty"`
+	ProgramIDNotNil       *bool    `json:"programIDNotNil,omitempty"`
+	ProgramIDEqualFold    *string  `json:"programIDEqualFold,omitempty"`
+	ProgramIDContainsFold *string  `json:"programIDContainsFold,omitempty"`
+	// platform_id field predicates
+	PlatformID             *string  `json:"platformID,omitempty"`
+	PlatformIdneq          *string  `json:"platformIDNEQ,omitempty"`
+	PlatformIDIn           []string `json:"platformIDIn,omitempty"`
+	PlatformIDNotIn        []string `json:"platformIDNotIn,omitempty"`
+	PlatformIdgt           *string  `json:"platformIDGT,omitempty"`
+	PlatformIdgte          *string  `json:"platformIDGTE,omitempty"`
+	PlatformIdlt           *string  `json:"platformIDLT,omitempty"`
+	PlatformIdlte          *string  `json:"platformIDLTE,omitempty"`
+	PlatformIDContains     *string  `json:"platformIDContains,omitempty"`
+	PlatformIDHasPrefix    *string  `json:"platformIDHasPrefix,omitempty"`
+	PlatformIDHasSuffix    *string  `json:"platformIDHasSuffix,omitempty"`
+	PlatformIDIsNil        *bool    `json:"platformIDIsNil,omitempty"`
+	PlatformIDNotNil       *bool    `json:"platformIDNotNil,omitempty"`
+	PlatformIDEqualFold    *string  `json:"platformIDEqualFold,omitempty"`
+	PlatformIDContainsFold *string  `json:"platformIDContainsFold,omitempty"`
+	// system_name field predicates
+	SystemName             *string  `json:"systemName,omitempty"`
+	SystemNameNeq          *string  `json:"systemNameNEQ,omitempty"`
+	SystemNameIn           []string `json:"systemNameIn,omitempty"`
+	SystemNameNotIn        []string `json:"systemNameNotIn,omitempty"`
+	SystemNameGt           *string  `json:"systemNameGT,omitempty"`
+	SystemNameGte          *string  `json:"systemNameGTE,omitempty"`
+	SystemNameLt           *string  `json:"systemNameLT,omitempty"`
+	SystemNameLte          *string  `json:"systemNameLTE,omitempty"`
+	SystemNameContains     *string  `json:"systemNameContains,omitempty"`
+	SystemNameHasPrefix    *string  `json:"systemNameHasPrefix,omitempty"`
+	SystemNameHasSuffix    *string  `json:"systemNameHasSuffix,omitempty"`
+	SystemNameEqualFold    *string  `json:"systemNameEqualFold,omitempty"`
+	SystemNameContainsFold *string  `json:"systemNameContainsFold,omitempty"`
+	// version field predicates
+	Version             *string  `json:"version,omitempty"`
+	VersionNeq          *string  `json:"versionNEQ,omitempty"`
+	VersionIn           []string `json:"versionIn,omitempty"`
+	VersionNotIn        []string `json:"versionNotIn,omitempty"`
+	VersionGt           *string  `json:"versionGT,omitempty"`
+	VersionGte          *string  `json:"versionGTE,omitempty"`
+	VersionLt           *string  `json:"versionLT,omitempty"`
+	VersionLte          *string  `json:"versionLTE,omitempty"`
+	VersionContains     *string  `json:"versionContains,omitempty"`
+	VersionHasPrefix    *string  `json:"versionHasPrefix,omitempty"`
+	VersionHasSuffix    *string  `json:"versionHasSuffix,omitempty"`
+	VersionIsNil        *bool    `json:"versionIsNil,omitempty"`
+	VersionNotNil       *bool    `json:"versionNotNil,omitempty"`
+	VersionEqualFold    *string  `json:"versionEqualFold,omitempty"`
+	VersionContainsFold *string  `json:"versionContainsFold,omitempty"`
+	// description field predicates
+	Description             *string  `json:"description,omitempty"`
+	DescriptionNeq          *string  `json:"descriptionNEQ,omitempty"`
+	DescriptionIn           []string `json:"descriptionIn,omitempty"`
+	DescriptionNotIn        []string `json:"descriptionNotIn,omitempty"`
+	DescriptionGt           *string  `json:"descriptionGT,omitempty"`
+	DescriptionGte          *string  `json:"descriptionGTE,omitempty"`
+	DescriptionLt           *string  `json:"descriptionLT,omitempty"`
+	DescriptionLte          *string  `json:"descriptionLTE,omitempty"`
+	DescriptionContains     *string  `json:"descriptionContains,omitempty"`
+	DescriptionHasPrefix    *string  `json:"descriptionHasPrefix,omitempty"`
+	DescriptionHasSuffix    *string  `json:"descriptionHasSuffix,omitempty"`
+	DescriptionIsNil        *bool    `json:"descriptionIsNil,omitempty"`
+	DescriptionNotNil       *bool    `json:"descriptionNotNil,omitempty"`
+	DescriptionEqualFold    *string  `json:"descriptionEqualFold,omitempty"`
+	DescriptionContainsFold *string  `json:"descriptionContainsFold,omitempty"`
+	// authorization_boundary field predicates
+	AuthorizationBoundary             *string  `json:"authorizationBoundary,omitempty"`
+	AuthorizationBoundaryNeq          *string  `json:"authorizationBoundaryNEQ,omitempty"`
+	AuthorizationBoundaryIn           []string `json:"authorizationBoundaryIn,omitempty"`
+	AuthorizationBoundaryNotIn        []string `json:"authorizationBoundaryNotIn,omitempty"`
+	AuthorizationBoundaryGt           *string  `json:"authorizationBoundaryGT,omitempty"`
+	AuthorizationBoundaryGte          *string  `json:"authorizationBoundaryGTE,omitempty"`
+	AuthorizationBoundaryLt           *string  `json:"authorizationBoundaryLT,omitempty"`
+	AuthorizationBoundaryLte          *string  `json:"authorizationBoundaryLTE,omitempty"`
+	AuthorizationBoundaryContains     *string  `json:"authorizationBoundaryContains,omitempty"`
+	AuthorizationBoundaryHasPrefix    *string  `json:"authorizationBoundaryHasPrefix,omitempty"`
+	AuthorizationBoundaryHasSuffix    *string  `json:"authorizationBoundaryHasSuffix,omitempty"`
+	AuthorizationBoundaryIsNil        *bool    `json:"authorizationBoundaryIsNil,omitempty"`
+	AuthorizationBoundaryNotNil       *bool    `json:"authorizationBoundaryNotNil,omitempty"`
+	AuthorizationBoundaryEqualFold    *string  `json:"authorizationBoundaryEqualFold,omitempty"`
+	AuthorizationBoundaryContainsFold *string  `json:"authorizationBoundaryContainsFold,omitempty"`
+	// sensitivity_level field predicates
+	SensitivityLevel       *enums.SystemSensitivityLevel  `json:"sensitivityLevel,omitempty"`
+	SensitivityLevelNeq    *enums.SystemSensitivityLevel  `json:"sensitivityLevelNEQ,omitempty"`
+	SensitivityLevelIn     []enums.SystemSensitivityLevel `json:"sensitivityLevelIn,omitempty"`
+	SensitivityLevelNotIn  []enums.SystemSensitivityLevel `json:"sensitivityLevelNotIn,omitempty"`
+	SensitivityLevelIsNil  *bool                          `json:"sensitivityLevelIsNil,omitempty"`
+	SensitivityLevelNotNil *bool                          `json:"sensitivityLevelNotNil,omitempty"`
+	// last_reviewed field predicates
+	LastReviewed       *models.DateTime   `json:"lastReviewed,omitempty"`
+	LastReviewedNeq    *models.DateTime   `json:"lastReviewedNEQ,omitempty"`
+	LastReviewedIn     []*models.DateTime `json:"lastReviewedIn,omitempty"`
+	LastReviewedNotIn  []*models.DateTime `json:"lastReviewedNotIn,omitempty"`
+	LastReviewedGt     *models.DateTime   `json:"lastReviewedGT,omitempty"`
+	LastReviewedGte    *models.DateTime   `json:"lastReviewedGTE,omitempty"`
+	LastReviewedLt     *models.DateTime   `json:"lastReviewedLT,omitempty"`
+	LastReviewedLte    *models.DateTime   `json:"lastReviewedLTE,omitempty"`
+	LastReviewedIsNil  *bool              `json:"lastReviewedIsNil,omitempty"`
+	LastReviewedNotNil *bool              `json:"lastReviewedNotNil,omitempty"`
+	// owner edge predicates
+	HasOwner     *bool                     `json:"hasOwner,omitempty"`
+	HasOwnerWith []*OrganizationWhereInput `json:"hasOwnerWith,omitempty"`
+	// program edge predicates
+	HasProgram     *bool                `json:"hasProgram,omitempty"`
+	HasProgramWith []*ProgramWhereInput `json:"hasProgramWith,omitempty"`
+	// platform edge predicates
+	HasPlatform     *bool                 `json:"hasPlatform,omitempty"`
+	HasPlatformWith []*PlatformWhereInput `json:"hasPlatformWith,omitempty"`
+	// Filter for tagsHas to contain a specific value
+	TagsHas *string `json:"tagsHas,omitempty"`
+}
+
 type TFASetting struct {
 	ID        string     `json:"id"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
@@ -32600,6 +33358,8 @@ type Task struct {
 	ScopeName *string `json:"scopeName,omitempty"`
 	// the scope of the task
 	ScopeID *string `json:"scopeID,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID *string `json:"externalUUID,omitempty"`
 	// the title of the task
 	Title string `json:"title"`
 	// the details of the task
@@ -32913,6 +33673,22 @@ type TaskWhereInput struct {
 	ScopeIDNotNil       *bool    `json:"scopeIDNotNil,omitempty"`
 	ScopeIDEqualFold    *string  `json:"scopeIDEqualFold,omitempty"`
 	ScopeIDContainsFold *string  `json:"scopeIDContainsFold,omitempty"`
+	// external_uuid field predicates
+	ExternalUUID             *string  `json:"externalUUID,omitempty"`
+	ExternalUUIDNeq          *string  `json:"externalUUIDNEQ,omitempty"`
+	ExternalUUIDIn           []string `json:"externalUUIDIn,omitempty"`
+	ExternalUUIDNotIn        []string `json:"externalUUIDNotIn,omitempty"`
+	ExternalUUIDGt           *string  `json:"externalUUIDGT,omitempty"`
+	ExternalUUIDGte          *string  `json:"externalUUIDGTE,omitempty"`
+	ExternalUUIDLt           *string  `json:"externalUUIDLT,omitempty"`
+	ExternalUUIDLte          *string  `json:"externalUUIDLTE,omitempty"`
+	ExternalUUIDContains     *string  `json:"externalUUIDContains,omitempty"`
+	ExternalUUIDHasPrefix    *string  `json:"externalUUIDHasPrefix,omitempty"`
+	ExternalUUIDHasSuffix    *string  `json:"externalUUIDHasSuffix,omitempty"`
+	ExternalUUIDIsNil        *bool    `json:"externalUUIDIsNil,omitempty"`
+	ExternalUUIDNotNil       *bool    `json:"externalUUIDNotNil,omitempty"`
+	ExternalUUIDEqualFold    *string  `json:"externalUUIDEqualFold,omitempty"`
+	ExternalUUIDContainsFold *string  `json:"externalUUIDContainsFold,omitempty"`
 	// title field predicates
 	Title             *string  `json:"title,omitempty"`
 	TitleNeq          *string  `json:"titleNEQ,omitempty"`
@@ -36823,6 +37599,9 @@ type UpdateCampaignInput struct {
 	AddIdentityHolderIDs        []string       `json:"addIdentityHolderIDs,omitempty"`
 	RemoveIdentityHolderIDs     []string       `json:"removeIdentityHolderIDs,omitempty"`
 	ClearIdentityHolders        *bool          `json:"clearIdentityHolders,omitempty"`
+	AddControlIDs               []string       `json:"addControlIDs,omitempty"`
+	RemoveControlIDs            []string       `json:"removeControlIDs,omitempty"`
+	ClearControls               *bool          `json:"clearControls,omitempty"`
 	AddWorkflowObjectRefIDs     []string       `json:"addWorkflowObjectRefIDs,omitempty"`
 	RemoveWorkflowObjectRefIDs  []string       `json:"removeWorkflowObjectRefIDs,omitempty"`
 	ClearWorkflowObjectRefs     *bool          `json:"clearWorkflowObjectRefs,omitempty"`
@@ -36964,6 +37743,9 @@ type UpdateControlInput struct {
 	Tags       []string `json:"tags,omitempty"`
 	AppendTags []string `json:"appendTags,omitempty"`
 	ClearTags  *bool    `json:"clearTags,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID      *string `json:"externalUUID,omitempty"`
+	ClearExternalUUID *bool   `json:"clearExternalUUID,omitempty"`
 	// human readable title of the control for quick identification
 	Title      *string `json:"title,omitempty"`
 	ClearTitle *bool   `json:"clearTitle,omitempty"`
@@ -36987,6 +37769,12 @@ type UpdateControlInput struct {
 	// status of the control
 	Status      *enums.ControlStatus `json:"status,omitempty"`
 	ClearStatus *bool                `json:"clearStatus,omitempty"`
+	// OSCAL-aligned implementation status of the control
+	ImplementationStatus      *enums.ControlImplementationStatus `json:"implementationStatus,omitempty"`
+	ClearImplementationStatus *bool                              `json:"clearImplementationStatus,omitempty"`
+	// narrative describing current implementation state for OSCAL export
+	ImplementationDescription      *string `json:"implementationDescription,omitempty"`
+	ClearImplementationDescription *bool   `json:"clearImplementationDescription,omitempty"`
 	// source of the control, e.g. framework, template, custom, etc.
 	Source      *enums.ControlSource `json:"source,omitempty"`
 	ClearSource *bool                `json:"clearSource,omitempty"`
@@ -37123,6 +37911,21 @@ type UpdateControlInput struct {
 	AddScanIDs                     []string                            `json:"addScanIDs,omitempty"`
 	RemoveScanIDs                  []string                            `json:"removeScanIDs,omitempty"`
 	ClearScans                     *bool                               `json:"clearScans,omitempty"`
+	AddEntityIDs                   []string                            `json:"addEntityIDs,omitempty"`
+	RemoveEntityIDs                []string                            `json:"removeEntityIDs,omitempty"`
+	ClearEntities                  *bool                               `json:"clearEntities,omitempty"`
+	AddIdentityHolderIDs           []string                            `json:"addIdentityHolderIDs,omitempty"`
+	RemoveIdentityHolderIDs        []string                            `json:"removeIdentityHolderIDs,omitempty"`
+	ClearIdentityHolders           *bool                               `json:"clearIdentityHolders,omitempty"`
+	AddCampaignIDs                 []string                            `json:"addCampaignIDs,omitempty"`
+	RemoveCampaignIDs              []string                            `json:"removeCampaignIDs,omitempty"`
+	ClearCampaigns                 *bool                               `json:"clearCampaigns,omitempty"`
+	AddRemediationIDs              []string                            `json:"addRemediationIDs,omitempty"`
+	RemoveRemediationIDs           []string                            `json:"removeRemediationIDs,omitempty"`
+	ClearRemediations              *bool                               `json:"clearRemediations,omitempty"`
+	AddReviewIDs                   []string                            `json:"addReviewIDs,omitempty"`
+	RemoveReviewIDs                []string                            `json:"removeReviewIDs,omitempty"`
+	ClearReviews                   *bool                               `json:"clearReviews,omitempty"`
 	AddFindingIDs                  []string                            `json:"addFindingIDs,omitempty"`
 	RemoveFindingIDs               []string                            `json:"removeFindingIDs,omitempty"`
 	ClearFindings                  *bool                               `json:"clearFindings,omitempty"`
@@ -37345,7 +38148,7 @@ type UpdateDirectoryAccountInput struct {
 	// the scope of the directory_account
 	ScopeName      *string `json:"scopeName,omitempty"`
 	ClearScopeName *bool   `json:"clearScopeName,omitempty"`
-	// directory source label set by the integration (e.g. google_workspace, github, slack)
+	// directory source label set by the integration (e.g. googleworkspace, github, slack)
 	DirectoryName      *string `json:"directoryName,omitempty"`
 	ClearDirectoryName *bool   `json:"clearDirectoryName,omitempty"`
 	// optional secondary identifier such as Azure immutable ID
@@ -37936,6 +38739,9 @@ type UpdateEntityInput struct {
 	AddIdentityHolderIDs                   []string         `json:"addIdentityHolderIDs,omitempty"`
 	RemoveIdentityHolderIDs                []string         `json:"removeIdentityHolderIDs,omitempty"`
 	ClearIdentityHolders                   *bool            `json:"clearIdentityHolders,omitempty"`
+	AddControlIDs                          []string         `json:"addControlIDs,omitempty"`
+	RemoveControlIDs                       []string         `json:"removeControlIDs,omitempty"`
+	ClearControls                          *bool            `json:"clearControls,omitempty"`
 	AddPlatformIDs                         []string         `json:"addPlatformIDs,omitempty"`
 	RemovePlatformIDs                      []string         `json:"removePlatformIDs,omitempty"`
 	ClearPlatforms                         *bool            `json:"clearPlatforms,omitempty"`
@@ -38034,6 +38840,9 @@ type UpdateEvidenceInput struct {
 	// internal marker field for workflow eligibility, not exposed in API
 	WorkflowEligibleMarker      *bool `json:"workflowEligibleMarker,omitempty"`
 	ClearWorkflowEligibleMarker *bool `json:"clearWorkflowEligibleMarker,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID      *string `json:"externalUUID,omitempty"`
+	ClearExternalUUID *bool   `json:"clearExternalUUID,omitempty"`
 	// the name of the evidence
 	Name *string `json:"name,omitempty"`
 	// the description of the evidence, what is contained in the uploaded file(s) or url(s)
@@ -38106,16 +38915,19 @@ type UpdateExportInput struct {
 	// the status of the export, e.g., pending, ready, failed
 	Status *enums.ExportStatus `json:"status,omitempty"`
 	// if we try to export and it fails, the error message will be stored here
-	ErrorMessage      *string  `json:"errorMessage,omitempty"`
-	ClearErrorMessage *bool    `json:"clearErrorMessage,omitempty"`
-	OwnerID           *string  `json:"ownerID,omitempty"`
-	ClearOwner        *bool    `json:"clearOwner,omitempty"`
-	AddEventIDs       []string `json:"addEventIDs,omitempty"`
-	RemoveEventIDs    []string `json:"removeEventIDs,omitempty"`
-	ClearEvents       *bool    `json:"clearEvents,omitempty"`
-	AddFileIDs        []string `json:"addFileIDs,omitempty"`
-	RemoveFileIDs     []string `json:"removeFileIDs,omitempty"`
-	ClearFiles        *bool    `json:"clearFiles,omitempty"`
+	ErrorMessage      *string `json:"errorMessage,omitempty"`
+	ClearErrorMessage *bool   `json:"clearErrorMessage,omitempty"`
+	// metadata for the export record
+	ExportMetadata      *string  `json:"exportMetadata,omitempty"`
+	ClearExportMetadata *bool    `json:"clearExportMetadata,omitempty"`
+	OwnerID             *string  `json:"ownerID,omitempty"`
+	ClearOwner          *bool    `json:"clearOwner,omitempty"`
+	AddEventIDs         []string `json:"addEventIDs,omitempty"`
+	RemoveEventIDs      []string `json:"removeEventIDs,omitempty"`
+	ClearEvents         *bool    `json:"clearEvents,omitempty"`
+	AddFileIDs          []string `json:"addFileIDs,omitempty"`
+	RemoveFileIDs       []string `json:"removeFileIDs,omitempty"`
+	ClearFiles          *bool    `json:"clearFiles,omitempty"`
 }
 
 // UpdateFileInput is used for update File object.
@@ -38217,6 +39029,9 @@ type UpdateFileInput struct {
 	AddEvidenceIDs                  []string   `json:"addEvidenceIDs,omitempty"`
 	RemoveEvidenceIDs               []string   `json:"removeEvidenceIDs,omitempty"`
 	ClearEvidence                   *bool      `json:"clearEvidence,omitempty"`
+	AddIdentityHolderIDs            []string   `json:"addIdentityHolderIDs,omitempty"`
+	RemoveIdentityHolderIDs         []string   `json:"removeIdentityHolderIDs,omitempty"`
+	ClearIdentityHolder             *bool      `json:"clearIdentityHolder,omitempty"`
 	AddScanIDs                      []string   `json:"addScanIDs,omitempty"`
 	RemoveScanIDs                   []string   `json:"removeScanIDs,omitempty"`
 	ClearScan                       *bool      `json:"clearScan,omitempty"`
@@ -38288,7 +39103,7 @@ type UpdateFindingInput struct {
 	// the owner of the finding
 	ExternalOwnerID      *string `json:"externalOwnerID,omitempty"`
 	ClearExternalOwnerID *bool   `json:"clearExternalOwnerID,omitempty"`
-	// system that produced the finding, e.g. gcp_scc
+	// system that produced the finding, e.g. gcpscc
 	Source      *string `json:"source,omitempty"`
 	ClearSource *bool   `json:"clearSource,omitempty"`
 	// resource identifier provided by the source system
@@ -38483,6 +39298,16 @@ type UpdateGroupInput struct {
 	ClearLogoURL *bool   `json:"clearLogoURL,omitempty"`
 	// The group's displayed 'friendly' name
 	DisplayName *string `json:"displayName,omitempty"`
+	// OSCAL role identifier used for role-based responsibility mapping
+	OscalRole      *string `json:"oscalRole,omitempty"`
+	ClearOscalRole *bool   `json:"clearOscalRole,omitempty"`
+	// OSCAL party UUID linked to this group for responsibility mapping
+	OscalPartyUUID      *string `json:"oscalPartyUUID,omitempty"`
+	ClearOscalPartyUUID *bool   `json:"clearOscalPartyUUID,omitempty"`
+	// OSCAL contact UUID references associated with this group
+	OscalContactUuids       []string `json:"oscalContactUuids,omitempty"`
+	AppendOscalContactUuids []string `json:"appendOscalContactUuids,omitempty"`
+	ClearOscalContactUuids  *bool    `json:"clearOscalContactUuids,omitempty"`
 	// the SCIM external ID for the group
 	ScimExternalID      *string `json:"scimExternalID,omitempty"`
 	ClearScimExternalID *bool   `json:"clearScimExternalID,omitempty"`
@@ -38808,6 +39633,9 @@ type UpdateIdentityHolderInput struct {
 	AddDirectoryAccountIDs      []string       `json:"addDirectoryAccountIDs,omitempty"`
 	RemoveDirectoryAccountIDs   []string       `json:"removeDirectoryAccountIDs,omitempty"`
 	ClearDirectoryAccounts      *bool          `json:"clearDirectoryAccounts,omitempty"`
+	AddControlIDs               []string       `json:"addControlIDs,omitempty"`
+	RemoveControlIDs            []string       `json:"removeControlIDs,omitempty"`
+	ClearControls               *bool          `json:"clearControls,omitempty"`
 	AddPlatformIDs              []string       `json:"addPlatformIDs,omitempty"`
 	RemovePlatformIDs           []string       `json:"removePlatformIDs,omitempty"`
 	ClearPlatforms              *bool          `json:"clearPlatforms,omitempty"`
@@ -38817,6 +39645,9 @@ type UpdateIdentityHolderInput struct {
 	AddTaskIDs                  []string       `json:"addTaskIDs,omitempty"`
 	RemoveTaskIDs               []string       `json:"removeTaskIDs,omitempty"`
 	ClearTasks                  *bool          `json:"clearTasks,omitempty"`
+	AddFileIDs                  []string       `json:"addFileIDs,omitempty"`
+	RemoveFileIDs               []string       `json:"removeFileIDs,omitempty"`
+	ClearFiles                  *bool          `json:"clearFiles,omitempty"`
 	AddFindingIDs               []string       `json:"addFindingIDs,omitempty"`
 	RemoveFindingIDs            []string       `json:"removeFindingIDs,omitempty"`
 	ClearFindings               *bool          `json:"clearFindings,omitempty"`
@@ -38904,8 +39735,11 @@ type UpdateInternalPolicyInput struct {
 	ScopeName      *string `json:"scopeName,omitempty"`
 	ClearScopeName *bool   `json:"clearScopeName,omitempty"`
 	// internal marker field for workflow eligibility, not exposed in API
-	WorkflowEligibleMarker         *bool                   `json:"workflowEligibleMarker,omitempty"`
-	ClearWorkflowEligibleMarker    *bool                   `json:"clearWorkflowEligibleMarker,omitempty"`
+	WorkflowEligibleMarker      *bool `json:"workflowEligibleMarker,omitempty"`
+	ClearWorkflowEligibleMarker *bool `json:"clearWorkflowEligibleMarker,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID                   *string                 `json:"externalUUID,omitempty"`
+	ClearExternalUUID              *bool                   `json:"clearExternalUUID,omitempty"`
 	OwnerID                        *string                 `json:"ownerID,omitempty"`
 	ClearOwner                     *bool                   `json:"clearOwner,omitempty"`
 	AddBlockedGroupIDs             []string                `json:"addBlockedGroupIDs,omitempty"`
@@ -39577,6 +40411,9 @@ type UpdateOrganizationInput struct {
 	AddProgramIDs                           []string                        `json:"addProgramIDs,omitempty"`
 	RemoveProgramIDs                        []string                        `json:"removeProgramIDs,omitempty"`
 	ClearPrograms                           *bool                           `json:"clearPrograms,omitempty"`
+	AddSystemDetailIDs                      []string                        `json:"addSystemDetailIDs,omitempty"`
+	RemoveSystemDetailIDs                   []string                        `json:"removeSystemDetailIDs,omitempty"`
+	ClearSystemDetails                      *bool                           `json:"clearSystemDetails,omitempty"`
 	AddProcedureIDs                         []string                        `json:"addProcedureIDs,omitempty"`
 	RemoveProcedureIDs                      []string                        `json:"removeProcedureIDs,omitempty"`
 	ClearProcedures                         *bool                           `json:"clearProcedures,omitempty"`
@@ -39877,6 +40714,9 @@ type UpdatePlatformInput struct {
 	// internal marker field for workflow eligibility, not exposed in API
 	WorkflowEligibleMarker      *bool `json:"workflowEligibleMarker,omitempty"`
 	ClearWorkflowEligibleMarker *bool `json:"clearWorkflowEligibleMarker,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID      *string `json:"externalUUID,omitempty"`
+	ClearExternalUUID *bool   `json:"clearExternalUUID,omitempty"`
 	// the name of the platform
 	Name *string `json:"name,omitempty"`
 	// the description of the platform boundary
@@ -40031,6 +40871,8 @@ type UpdatePlatformInput struct {
 	ClearGeneratedScans             *bool          `json:"clearGeneratedScans,omitempty"`
 	PlatformOwnerID                 *string        `json:"platformOwnerID,omitempty"`
 	ClearPlatformOwner              *bool          `json:"clearPlatformOwner,omitempty"`
+	SystemDetailID                  *string        `json:"systemDetailID,omitempty"`
+	ClearSystemDetail               *bool          `json:"clearSystemDetail,omitempty"`
 }
 
 // UpdateProcedureInput is used for update Procedure object.
@@ -40177,6 +41019,9 @@ type UpdateProgramInput struct {
 	// the kind of the program
 	ProgramKindName      *string `json:"programKindName,omitempty"`
 	ClearProgramKindName *bool   `json:"clearProgramKindName,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID      *string `json:"externalUUID,omitempty"`
+	ClearExternalUUID *bool   `json:"clearExternalUUID,omitempty"`
 	// the name of the program
 	Name *string `json:"name,omitempty"`
 	// the description of the program
@@ -40257,6 +41102,8 @@ type UpdateProgramInput struct {
 	AddActionPlanIDs          []string                     `json:"addActionPlanIDs,omitempty"`
 	RemoveActionPlanIDs       []string                     `json:"removeActionPlanIDs,omitempty"`
 	ClearActionPlans          *bool                        `json:"clearActionPlans,omitempty"`
+	SystemDetailID            *string                      `json:"systemDetailID,omitempty"`
+	ClearSystemDetail         *bool                        `json:"clearSystemDetail,omitempty"`
 	ProgramOwnerID            *string                      `json:"programOwnerID,omitempty"`
 	ClearProgramOwner         *bool                        `json:"clearProgramOwner,omitempty"`
 	AddProgramMembers         []*AddProgramMembershipInput `json:"addProgramMembers,omitempty"`
@@ -40552,6 +41399,9 @@ type UpdateRiskInput struct {
 	// the scope of the risk
 	ScopeName      *string `json:"scopeName,omitempty"`
 	ClearScopeName *bool   `json:"clearScopeName,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID      *string `json:"externalUUID,omitempty"`
+	ClearExternalUUID *bool   `json:"clearExternalUUID,omitempty"`
 	// the name of the risk
 	Name *string `json:"name,omitempty"`
 	// status of the risk - identified, mitigated, accepted, closed, transferred, and archived.
@@ -40875,6 +41725,9 @@ type UpdateSubcontrolInput struct {
 	Tags       []string `json:"tags,omitempty"`
 	AppendTags []string `json:"appendTags,omitempty"`
 	ClearTags  *bool    `json:"clearTags,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID      *string `json:"externalUUID,omitempty"`
+	ClearExternalUUID *bool   `json:"clearExternalUUID,omitempty"`
 	// human readable title of the control for quick identification
 	Title      *string `json:"title,omitempty"`
 	ClearTitle *bool   `json:"clearTitle,omitempty"`
@@ -40898,6 +41751,12 @@ type UpdateSubcontrolInput struct {
 	// status of the control
 	Status      *enums.ControlStatus `json:"status,omitempty"`
 	ClearStatus *bool                `json:"clearStatus,omitempty"`
+	// OSCAL-aligned implementation status of the control
+	ImplementationStatus      *enums.ControlImplementationStatus `json:"implementationStatus,omitempty"`
+	ClearImplementationStatus *bool                              `json:"clearImplementationStatus,omitempty"`
+	// narrative describing current implementation state for OSCAL export
+	ImplementationDescription      *string `json:"implementationDescription,omitempty"`
+	ClearImplementationDescription *bool   `json:"clearImplementationDescription,omitempty"`
 	// source of the control, e.g. framework, template, custom, etc.
 	Source      *enums.ControlSource `json:"source,omitempty"`
 	ClearSource *bool                `json:"clearSource,omitempty"`
@@ -41070,6 +41929,43 @@ type UpdateSubscriberInput struct {
 	ClearEvents    *bool    `json:"clearEvents,omitempty"`
 }
 
+// UpdateSystemDetailInput is used for update SystemDetail object.
+// Input was generated by ent.
+type UpdateSystemDetailInput struct {
+	// tags associated with the object
+	Tags       []string `json:"tags,omitempty"`
+	AppendTags []string `json:"appendTags,omitempty"`
+	ClearTags  *bool    `json:"clearTags,omitempty"`
+	// system name used in OSCAL metadata
+	SystemName *string `json:"systemName,omitempty"`
+	// system version used in OSCAL metadata
+	Version      *string `json:"version,omitempty"`
+	ClearVersion *bool   `json:"clearVersion,omitempty"`
+	// system description used in OSCAL metadata
+	Description      *string `json:"description,omitempty"`
+	ClearDescription *bool   `json:"clearDescription,omitempty"`
+	// authorization boundary narrative for OSCAL export
+	AuthorizationBoundary      *string `json:"authorizationBoundary,omitempty"`
+	ClearAuthorizationBoundary *bool   `json:"clearAuthorizationBoundary,omitempty"`
+	// security sensitivity level of the system
+	SensitivityLevel      *enums.SystemSensitivityLevel `json:"sensitivityLevel,omitempty"`
+	ClearSensitivityLevel *bool                         `json:"clearSensitivityLevel,omitempty"`
+	// timestamp when metadata was last reviewed
+	LastReviewed      *models.DateTime `json:"lastReviewed,omitempty"`
+	ClearLastReviewed *bool            `json:"clearLastReviewed,omitempty"`
+	// structured revision history for OSCAL metadata
+	RevisionHistory       []any `json:"revisionHistory,omitempty"`
+	AppendRevisionHistory []any `json:"appendRevisionHistory,omitempty"`
+	ClearRevisionHistory  *bool `json:"clearRevisionHistory,omitempty"`
+	// optional escape hatch for additional OSCAL metadata fields
+	OscalMetadataJSON      map[string]any `json:"oscalMetadataJSON,omitempty"`
+	ClearOscalMetadataJSON *bool          `json:"clearOscalMetadataJSON,omitempty"`
+	ProgramID              *string        `json:"programID,omitempty"`
+	ClearProgram           *bool          `json:"clearProgram,omitempty"`
+	PlatformID             *string        `json:"platformID,omitempty"`
+	ClearPlatform          *bool          `json:"clearPlatform,omitempty"`
+}
+
 // UpdateTFASettingInput is used for update TFASetting object.
 // Input was generated by ent.
 type UpdateTFASettingInput struct {
@@ -41121,6 +42017,9 @@ type UpdateTaskInput struct {
 	// the scope of the task
 	ScopeName      *string `json:"scopeName,omitempty"`
 	ClearScopeName *bool   `json:"clearScopeName,omitempty"`
+	// stable external UUID for deterministic OSCAL export and round-tripping
+	ExternalUUID      *string `json:"externalUUID,omitempty"`
+	ClearExternalUUID *bool   `json:"clearExternalUUID,omitempty"`
 	// the title of the task
 	Title *string `json:"title,omitempty"`
 	// the details of the task
@@ -42855,6 +43754,20 @@ func (Vulnerability) IsNode() {}
 type VulnerabilityBulkCreatePayload struct {
 	// Created vulnerabilitys
 	Vulnerabilities []*Vulnerability `json:"vulnerabilities,omitempty"`
+}
+
+// Return response for deleteBulkVulnerability mutation
+type VulnerabilityBulkDeletePayload struct {
+	// Deleted vulnerability IDs
+	DeletedIDs []string `json:"deletedIDs"`
+}
+
+// Return response for updateBulkVulnerability mutation
+type VulnerabilityBulkUpdatePayload struct {
+	// Updated vulnerabilities
+	Vulnerabilities []*Vulnerability `json:"vulnerabilities,omitempty"`
+	// IDs of the updated vulnerabilities
+	UpdatedIDs []string `json:"updatedIDs,omitempty"`
 }
 
 // A connection to a list of items.
@@ -47701,6 +48614,7 @@ const (
 	ExportOrderFieldExportType ExportOrderField = "export_type"
 	ExportOrderFieldFormat     ExportOrderField = "format"
 	ExportOrderFieldStatus     ExportOrderField = "status"
+	ExportOrderFieldMode       ExportOrderField = "mode"
 )
 
 var AllExportOrderField = []ExportOrderField{
@@ -47709,11 +48623,12 @@ var AllExportOrderField = []ExportOrderField{
 	ExportOrderFieldExportType,
 	ExportOrderFieldFormat,
 	ExportOrderFieldStatus,
+	ExportOrderFieldMode,
 }
 
 func (e ExportOrderField) IsValid() bool {
 	switch e {
-	case ExportOrderFieldCreatedAt, ExportOrderFieldUpdatedAt, ExportOrderFieldExportType, ExportOrderFieldFormat, ExportOrderFieldStatus:
+	case ExportOrderFieldCreatedAt, ExportOrderFieldUpdatedAt, ExportOrderFieldExportType, ExportOrderFieldFormat, ExportOrderFieldStatus, ExportOrderFieldMode:
 		return true
 	}
 	return false
@@ -50503,6 +51418,64 @@ func (e *SubscriberOrderField) UnmarshalJSON(b []byte) error {
 }
 
 func (e SubscriberOrderField) MarshalJSON() ([]byte, error) {
+	var buf bytes.Buffer
+	e.MarshalGQL(&buf)
+	return buf.Bytes(), nil
+}
+
+// Properties by which SystemDetail connections can be ordered.
+type SystemDetailOrderField string
+
+const (
+	SystemDetailOrderFieldCreatedAt  SystemDetailOrderField = "created_at"
+	SystemDetailOrderFieldUpdatedAt  SystemDetailOrderField = "updated_at"
+	SystemDetailOrderFieldSystemName SystemDetailOrderField = "system_name"
+)
+
+var AllSystemDetailOrderField = []SystemDetailOrderField{
+	SystemDetailOrderFieldCreatedAt,
+	SystemDetailOrderFieldUpdatedAt,
+	SystemDetailOrderFieldSystemName,
+}
+
+func (e SystemDetailOrderField) IsValid() bool {
+	switch e {
+	case SystemDetailOrderFieldCreatedAt, SystemDetailOrderFieldUpdatedAt, SystemDetailOrderFieldSystemName:
+		return true
+	}
+	return false
+}
+
+func (e SystemDetailOrderField) String() string {
+	return string(e)
+}
+
+func (e *SystemDetailOrderField) UnmarshalGQL(v any) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = SystemDetailOrderField(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid SystemDetailOrderField", str)
+	}
+	return nil
+}
+
+func (e SystemDetailOrderField) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+func (e *SystemDetailOrderField) UnmarshalJSON(b []byte) error {
+	s, err := strconv.Unquote(string(b))
+	if err != nil {
+		return err
+	}
+	return e.UnmarshalGQL(s)
+}
+
+func (e SystemDetailOrderField) MarshalJSON() ([]byte, error) {
 	var buf bytes.Buffer
 	e.MarshalGQL(&buf)
 	return buf.Bytes(), nil
