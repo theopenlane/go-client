@@ -4835,6 +4835,37 @@ type Campaign implements Node {
 		"""
 		where: IdentityHolderWhereInput
 	): IdentityHolderConnection!
+	controls(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for Controls returned from the connection.
+		"""
+		orderBy: [ControlOrder!]
+
+		"""
+		Filtering options for Controls returned from the connection.
+		"""
+		where: ControlWhereInput
+	): ControlConnection!
 	workflowObjectRefs(
 		"""
 		Returns the elements in the list that come after the specified cursor.
@@ -6130,6 +6161,11 @@ input CampaignWhereInput {
 	hasIdentityHolders: Boolean
 	hasIdentityHoldersWith: [IdentityHolderWhereInput!]
 	"""
+	controls edge predicates
+	"""
+	hasControls: Boolean
+	hasControlsWith: [ControlWhereInput!]
+	"""
 	workflow_object_refs edge predicates
 	"""
 	hasWorkflowObjectRefs: Boolean
@@ -6793,6 +6829,10 @@ type Control implements Node {
 	"""
 	tags: [String!]
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	human readable title of the control for quick identification
 	"""
 	title: String @externalSource(source: FRAMEWORK)
@@ -6824,6 +6864,14 @@ type Control implements Node {
 	status of the control
 	"""
 	status: ControlControlStatus
+	"""
+	OSCAL-aligned implementation status of the control
+	"""
+	implementationStatus: ControlControlImplementationStatus
+	"""
+	narrative describing current implementation state for OSCAL export
+	"""
+	implementationDescription: String
 	"""
 	source of the control, e.g. framework, template, custom, etc.
 	"""
@@ -7465,6 +7513,161 @@ type Control implements Node {
 		"""
 		where: ScanWhereInput
 	): ScanConnection!
+	entities(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for Entities returned from the connection.
+		"""
+		orderBy: [EntityOrder!]
+
+		"""
+		Filtering options for Entities returned from the connection.
+		"""
+		where: EntityWhereInput
+	): EntityConnection!
+	identityHolders(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for IdentityHolders returned from the connection.
+		"""
+		orderBy: [IdentityHolderOrder!]
+
+		"""
+		Filtering options for IdentityHolders returned from the connection.
+		"""
+		where: IdentityHolderWhereInput
+	): IdentityHolderConnection!
+	campaigns(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for Campaigns returned from the connection.
+		"""
+		orderBy: [CampaignOrder!]
+
+		"""
+		Filtering options for Campaigns returned from the connection.
+		"""
+		where: CampaignWhereInput
+	): CampaignConnection!
+	remediations(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for Remediations returned from the connection.
+		"""
+		orderBy: [RemediationOrder!]
+
+		"""
+		Filtering options for Remediations returned from the connection.
+		"""
+		where: RemediationWhereInput
+	): RemediationConnection!
+	reviews(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for Reviews returned from the connection.
+		"""
+		orderBy: [ReviewOrder!]
+
+		"""
+		Filtering options for Reviews returned from the connection.
+		"""
+		where: ReviewWhereInput
+	): ReviewConnection!
 	findings(
 		"""
 		Returns the elements in the list that come after the specified cursor.
@@ -7750,6 +7953,23 @@ enum ControlCategoryOrderField {
 	referenceFramework
 }
 """
+ControlChange describes the diffs for a single control identified by refCode
+"""
+type ControlChange {
+	"""
+	The ref_code of the control
+	"""
+	refCode: String!
+	"""
+	The title of the control at the new revision
+	"""
+	title: String!
+	"""
+	Field-level diffs for this control
+	"""
+	diffs: [ControlFieldDiff!]!
+}
+"""
 A connection to a list of items.
 """
 type ControlConnection {
@@ -7765,6 +7985,16 @@ type ControlConnection {
 	Identifies the total count of items in the connection.
 	"""
 	totalCount: Int!
+}
+"""
+ControlControlImplementationStatus is enum for the field implementation_status
+"""
+enum ControlControlImplementationStatus @goModel(model: "github.com/theopenlane/core/common/enums.ControlImplementationStatus") {
+	PLANNED
+	IMPLEMENTED
+	PARTIALLY_IMPLEMENTED
+	INHERITED
+	NOT_APPLICABLE
 }
 """
 ControlControlSource is enum for the field source
@@ -7806,6 +8036,44 @@ type ControlDeletePayload {
 	deletedID: ID!
 }
 """
+ControlDiffInput is used to compare all controls under a standard across two revisions
+"""
+input ControlDiffInput {
+	"""
+	ID of the standard to compare controls for
+	"""
+	standardID: ID!
+	"""
+	base revision to compare from (e.g. "v1.0.0")
+	"""
+	oldRevision: String!
+	"""
+	target revision to compare to (e.g. "v2.0.0")
+	"""
+	newRevision: String!
+}
+"""
+ControlDiffPayload contains the field-level diffs between two revisions of all controls under a standard
+"""
+type ControlDiffPayload {
+	"""
+	The standard ID being compared
+	"""
+	standardID: ID!
+	"""
+	The base revision
+	"""
+	oldRevision: String!
+	"""
+	The target revision
+	"""
+	newRevision: String!
+	"""
+	Per-control changes between the two revisions
+	"""
+	changes: [ControlChange!]!
+}
+"""
 An edge in a connection.
 """
 type ControlEdge {
@@ -7817,6 +8085,27 @@ type ControlEdge {
 	A cursor for use in pagination.
 	"""
 	cursor: Cursor!
+}
+"""
+ControlFieldDiff describes a single field that differs between two control revisions
+"""
+type ControlFieldDiff {
+	"""
+	Field name (snake_case)
+	"""
+	field: String!
+	"""
+	Value in the old revision
+	"""
+	oldValue: Any
+	"""
+	Value in the new revision
+	"""
+	newValue: Any
+	"""
+	Unified diff text when applicable
+	"""
+	diff: String
 }
 type ControlGroup {
 	category: String!
@@ -9505,6 +9794,24 @@ input ControlWhereInput {
 	displayIDEqualFold: String
 	displayIDContainsFold: String
 	"""
+	external_uuid field predicates
+	"""
+	externalUUID: String
+	externalUUIDNEQ: String
+	externalUUIDIn: [String!]
+	externalUUIDNotIn: [String!]
+	externalUUIDGT: String
+	externalUUIDGTE: String
+	externalUUIDLT: String
+	externalUUIDLTE: String
+	externalUUIDContains: String
+	externalUUIDHasPrefix: String
+	externalUUIDHasSuffix: String
+	externalUUIDIsNil: Boolean
+	externalUUIDNotNil: Boolean
+	externalUUIDEqualFold: String
+	externalUUIDContainsFold: String
+	"""
 	title field predicates
 	"""
 	title: String
@@ -9603,6 +9910,33 @@ input ControlWhereInput {
 	statusNotIn: [ControlControlStatus!]
 	statusIsNil: Boolean
 	statusNotNil: Boolean
+	"""
+	implementation_status field predicates
+	"""
+	implementationStatus: ControlControlImplementationStatus
+	implementationStatusNEQ: ControlControlImplementationStatus
+	implementationStatusIn: [ControlControlImplementationStatus!]
+	implementationStatusNotIn: [ControlControlImplementationStatus!]
+	implementationStatusIsNil: Boolean
+	implementationStatusNotNil: Boolean
+	"""
+	implementation_description field predicates
+	"""
+	implementationDescription: String
+	implementationDescriptionNEQ: String
+	implementationDescriptionIn: [String!]
+	implementationDescriptionNotIn: [String!]
+	implementationDescriptionGT: String
+	implementationDescriptionGTE: String
+	implementationDescriptionLT: String
+	implementationDescriptionLTE: String
+	implementationDescriptionContains: String
+	implementationDescriptionHasPrefix: String
+	implementationDescriptionHasSuffix: String
+	implementationDescriptionIsNil: Boolean
+	implementationDescriptionNotNil: Boolean
+	implementationDescriptionEqualFold: String
+	implementationDescriptionContainsFold: String
 	"""
 	source field predicates
 	"""
@@ -10084,6 +10418,31 @@ input ControlWhereInput {
 	"""
 	hasScans: Boolean
 	hasScansWith: [ScanWhereInput!]
+	"""
+	entities edge predicates
+	"""
+	hasEntities: Boolean
+	hasEntitiesWith: [EntityWhereInput!]
+	"""
+	identity_holders edge predicates
+	"""
+	hasIdentityHolders: Boolean
+	hasIdentityHoldersWith: [IdentityHolderWhereInput!]
+	"""
+	campaigns edge predicates
+	"""
+	hasCampaigns: Boolean
+	hasCampaignsWith: [CampaignWhereInput!]
+	"""
+	remediations edge predicates
+	"""
+	hasRemediations: Boolean
+	hasRemediationsWith: [RemediationWhereInput!]
+	"""
+	reviews edge predicates
+	"""
+	hasReviews: Boolean
+	hasReviewsWith: [ReviewWhereInput!]
 	"""
 	findings edge predicates
 	"""
@@ -10661,6 +11020,7 @@ input CreateCampaignInput {
 	userIDs: [ID!]
 	groupIDs: [ID!]
 	identityHolderIDs: [ID!]
+	controlIDs: [ID!]
 	workflowObjectRefIDs: [ID!]
 }
 """
@@ -10818,6 +11178,10 @@ input CreateControlInput {
 	"""
 	tags: [String!]
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	human readable title of the control for quick identification
 	"""
 	title: String @externalReadOnly(source: FRAMEWORK)
@@ -10845,6 +11209,14 @@ input CreateControlInput {
 	status of the control
 	"""
 	status: ControlControlStatus
+	"""
+	OSCAL-aligned implementation status of the control
+	"""
+	implementationStatus: ControlControlImplementationStatus
+	"""
+	narrative describing current implementation state for OSCAL export
+	"""
+	implementationDescription: String
 	"""
 	source of the control, e.g. framework, template, custom, etc.
 	"""
@@ -10961,6 +11333,11 @@ input CreateControlInput {
 	platformIDs: [ID!]
 	assetIDs: [ID!]
 	scanIDs: [ID!]
+	entityIDs: [ID!]
+	identityHolderIDs: [ID!]
+	campaignIDs: [ID!]
+	remediationIDs: [ID!]
+	reviewIDs: [ID!]
 	findingIDs: [ID!]
 	controlImplementationIDs: [ID!]
 	subcontrolIDs: [ID!]
@@ -11178,7 +11555,7 @@ input CreateDirectoryAccountInput {
 	"""
 	scopeName: String
 	"""
-	directory source label set by the integration (e.g. google_workspace, github, slack)
+	directory source label set by the integration (e.g. googleworkspace, github, slack)
 	"""
 	directoryName: String
 	"""
@@ -11841,6 +12218,7 @@ input CreateEntityInput {
 	authMethodIDs: [ID!]
 	employerIdentityHolderIDs: [ID!]
 	identityHolderIDs: [ID!]
+	controlIDs: [ID!]
 	platformIDs: [ID!]
 	outOfScopePlatformIDs: [ID!]
 	sourcePlatformIDs: [ID!]
@@ -11917,6 +12295,10 @@ input CreateEvidenceInput {
 	"""
 	workflowEligibleMarker: Boolean
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	the name of the evidence
 	"""
 	name: String!
@@ -11988,6 +12370,14 @@ input CreateExportInput {
 	the specific filters to run against the exported data. This should be a well formatted graphql query
 	"""
 	filters: String
+	"""
+	the mode of export, e.g., flat or folder
+	"""
+	mode: ExportExportMode
+	"""
+	metadata for the export record
+	"""
+	exportMetadata: ExportMetadata
 	ownerID: ID
 	eventIDs: [ID!]
 	fileIDs: [ID!]
@@ -12091,6 +12481,7 @@ input CreateFileInput {
 	programIDs: [ID!]
 	platformIDs: [ID!]
 	evidenceIDs: [ID!]
+	identityHolderIDs: [ID!]
 	scanIDs: [ID!]
 	eventIDs: [ID!]
 	integrationIDs: [ID!]
@@ -12166,7 +12557,7 @@ input CreateFindingInput {
 	"""
 	externalOwnerID: String
 	"""
-	system that produced the finding, e.g. gcp_scc
+	system that produced the finding, e.g. gcpscc
 	"""
 	source: String
 	"""
@@ -12364,6 +12755,18 @@ input CreateGroupInput {
 	The group's displayed 'friendly' name
 	"""
 	displayName: String
+	"""
+	OSCAL role identifier used for role-based responsibility mapping
+	"""
+	oscalRole: String
+	"""
+	OSCAL party UUID linked to this group for responsibility mapping
+	"""
+	oscalPartyUUID: String
+	"""
+	OSCAL contact UUID references associated with this group
+	"""
+	oscalContactUuids: [String!]
 	"""
 	the SCIM external ID for the group
 	"""
@@ -12620,9 +13023,11 @@ input CreateIdentityHolderInput {
 	assetIDs: [ID!]
 	entityIDs: [ID!]
 	directoryAccountIDs: [ID!]
+	controlIDs: [ID!]
 	platformIDs: [ID!]
 	campaignIDs: [ID!]
 	taskIDs: [ID!]
+	fileIDs: [ID!]
 	findingIDs: [ID!]
 	workflowObjectRefIDs: [ID!]
 	accessPlatformIDs: [ID!]
@@ -12721,6 +13126,10 @@ input CreateInternalPolicyInput {
 	internal marker field for workflow eligibility, not exposed in API
 	"""
 	workflowEligibleMarker: Boolean
+	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
 	ownerID: ID
 	blockedGroupIDs: [ID!]
 	editorIDs: [ID!]
@@ -13420,6 +13829,7 @@ input CreateOrganizationInput {
 	noteIDs: [ID!]
 	taskIDs: [ID!]
 	programIDs: [ID!]
+	systemDetailIDs: [ID!]
 	procedureIDs: [ID!]
 	internalPolicyIDs: [ID!]
 	riskIDs: [ID!]
@@ -13660,6 +14070,10 @@ input CreatePlatformInput {
 	"""
 	workflowEligibleMarker: Boolean
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	the name of the platform
 	"""
 	name: String!
@@ -13769,6 +14183,7 @@ input CreatePlatformInput {
 	applicableFrameworkIDs: [ID!]
 	generatedScanIDs: [ID!]
 	platformOwnerID: ID
+	systemDetailID: ID
 }
 """
 CreateProcedureInput is used for create Procedure object.
@@ -13897,6 +14312,10 @@ input CreateProgramInput {
 	"""
 	programKindName: String
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	the name of the program
 	"""
 	name: String!
@@ -13961,6 +14380,7 @@ input CreateProgramInput {
 	evidenceIDs: [ID!]
 	narrativeIDs: [ID!]
 	actionPlanIDs: [ID!]
+	systemDetailID: ID
 	programOwnerID: ID
 }
 """
@@ -14262,6 +14682,10 @@ input CreateRiskInput {
 	"""
 	scopeName: String
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	the name of the risk
 	"""
 	name: String!
@@ -14550,6 +14974,10 @@ input CreateSubcontrolInput {
 	"""
 	tags: [String!]
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	human readable title of the control for quick identification
 	"""
 	title: String @externalReadOnly(source: FRAMEWORK)
@@ -14577,6 +15005,14 @@ input CreateSubcontrolInput {
 	status of the control
 	"""
 	status: SubcontrolControlStatus
+	"""
+	OSCAL-aligned implementation status of the control
+	"""
+	implementationStatus: SubcontrolControlImplementationStatus
+	"""
+	narrative describing current implementation state for OSCAL export
+	"""
+	implementationDescription: String
 	"""
 	source of the control, e.g. framework, template, custom, etc.
 	"""
@@ -14732,6 +15168,51 @@ input CreateSubscriberInput {
 	eventIDs: [ID!]
 }
 """
+CreateSystemDetailInput is used for create SystemDetail object.
+Input was generated by ent.
+"""
+input CreateSystemDetailInput {
+	"""
+	tags associated with the object
+	"""
+	tags: [String!]
+	"""
+	system name used in OSCAL metadata
+	"""
+	systemName: String!
+	"""
+	system version used in OSCAL metadata
+	"""
+	version: String
+	"""
+	system description used in OSCAL metadata
+	"""
+	description: String
+	"""
+	authorization boundary narrative for OSCAL export
+	"""
+	authorizationBoundary: String
+	"""
+	security sensitivity level of the system
+	"""
+	sensitivityLevel: SystemDetailSystemSensitivityLevel
+	"""
+	timestamp when metadata was last reviewed
+	"""
+	lastReviewed: DateTime
+	"""
+	structured revision history for OSCAL metadata
+	"""
+	revisionHistory: [Any!]
+	"""
+	optional escape hatch for additional OSCAL metadata fields
+	"""
+	oscalMetadataJSON: Map
+	ownerID: ID
+	programID: ID
+	platformID: ID
+}
+"""
 CreateTFASettingInput is used for create TFASetting object.
 Input was generated by ent.
 """
@@ -14793,6 +15274,10 @@ input CreateTaskInput {
 	the scope of the task
 	"""
 	scopeName: String
+	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
 	"""
 	the title of the task
 	"""
@@ -17398,7 +17883,7 @@ type DirectoryAccount implements Node {
 	"""
 	identityHolderID: ID
 	"""
-	directory source label set by the integration (e.g. google_workspace, github, slack)
+	directory source label set by the integration (e.g. googleworkspace, github, slack)
 	"""
 	directoryName: String
 	"""
@@ -23094,6 +23579,37 @@ type Entity implements Node {
 		"""
 		where: IdentityHolderWhereInput
 	): IdentityHolderConnection!
+	controls(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for Controls returned from the connection.
+		"""
+		orderBy: [ControlOrder!]
+
+		"""
+		Filtering options for Controls returned from the connection.
+		"""
+		where: ControlWhereInput
+	): ControlConnection!
 	platforms(
 		"""
 		Returns the elements in the list that come after the specified cursor.
@@ -24596,6 +25112,11 @@ input EntityWhereInput {
 	hasIdentityHolders: Boolean
 	hasIdentityHoldersWith: [IdentityHolderWhereInput!]
 	"""
+	controls edge predicates
+	"""
+	hasControls: Boolean
+	hasControlsWith: [ControlWhereInput!]
+	"""
 	platforms edge predicates
 	"""
 	hasPlatforms: Boolean
@@ -25370,6 +25891,10 @@ type Evidence implements Node {
 	"""
 	workflowEligibleMarker: Boolean
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	the name of the evidence
 	"""
 	name: String!
@@ -26091,6 +26616,24 @@ input EvidenceWhereInput {
 	workflowEligibleMarkerIsNil: Boolean
 	workflowEligibleMarkerNotNil: Boolean
 	"""
+	external_uuid field predicates
+	"""
+	externalUUID: String
+	externalUUIDNEQ: String
+	externalUUIDIn: [String!]
+	externalUUIDNotIn: [String!]
+	externalUUIDGT: String
+	externalUUIDGTE: String
+	externalUUIDLT: String
+	externalUUIDLTE: String
+	externalUUIDContains: String
+	externalUUIDHasPrefix: String
+	externalUUIDHasSuffix: String
+	externalUUIDIsNil: Boolean
+	externalUUIDNotNil: Boolean
+	externalUUIDEqualFold: String
+	externalUUIDContainsFold: String
+	"""
 	name field predicates
 	"""
 	name: String
@@ -26335,6 +26878,14 @@ type Export implements Node {
 	if we try to export and it fails, the error message will be stored here
 	"""
 	errorMessage: String
+	"""
+	the mode of export, e.g., flat or folder
+	"""
+	mode: ExportExportMode!
+	"""
+	metadata for the export record
+	"""
+	exportMetadata: ExportMetadata
 	owner: Organization
 	events(
 		"""
@@ -26472,6 +27023,13 @@ enum ExportExportFormat @goModel(model: "github.com/theopenlane/core/common/enum
 	CSV
 }
 """
+ExportExportMode is enum for the field mode
+"""
+enum ExportExportMode @goModel(model: "github.com/theopenlane/core/common/enums.ExportMode") {
+	FLAT
+	FOLDER
+}
+"""
 ExportExportStatus is enum for the field status
 """
 enum ExportExportStatus @goModel(model: "github.com/theopenlane/core/common/enums.ExportStatus") {
@@ -26498,11 +27056,16 @@ enum ExportExportType @goModel(model: "github.com/theopenlane/core/common/enums.
 	RISK
 	SUBPROCESSOR
 	SUBSCRIBER
+	SYSTEM_DETAIL
 	TASK
 	TRUST_CENTER_FAQ
 	TRUST_CENTER_SUBPROCESSOR
 	VULNERABILITY
 }
+"""
+ExportMetadata contains metadata for an export record
+"""
+scalar ExportMetadata
 """
 Ordering options for Export connections
 """
@@ -26525,6 +27088,7 @@ enum ExportOrderField {
 	export_type
 	format
 	status
+	mode
 }
 """
 Return response for updateExport mutation
@@ -26712,6 +27276,13 @@ input ExportWhereInput {
 	errorMessageEqualFold: String
 	errorMessageContainsFold: String
 	"""
+	mode field predicates
+	"""
+	mode: ExportExportMode
+	modeNEQ: ExportExportMode
+	modeIn: [ExportExportMode!]
+	modeNotIn: [ExportExportMode!]
+	"""
 	owner edge predicates
 	"""
 	hasOwner: Boolean
@@ -26873,6 +27444,7 @@ type File implements Node {
 	program: [Program!]
 	platform: [Platform!]
 	evidence: [Evidence!]
+	identityHolder: [IdentityHolder!]
 	scan: [Scan!]
 	events(
 		"""
@@ -27589,6 +28161,11 @@ input FileWhereInput {
 	hasEvidence: Boolean
 	hasEvidenceWith: [EvidenceWhereInput!]
 	"""
+	identity_holder edge predicates
+	"""
+	hasIdentityHolder: Boolean
+	hasIdentityHolderWith: [IdentityHolderWhereInput!]
+	"""
 	scan edge predicates
 	"""
 	hasScan: Boolean
@@ -27683,7 +28260,7 @@ type Finding implements Node {
 	"""
 	externalOwnerID: String
 	"""
-	system that produced the finding, e.g. gcp_scc
+	system that produced the finding, e.g. gcpscc
 	"""
 	source: String
 	"""
@@ -28516,6 +29093,28 @@ type FindingBulkCreatePayload {
 	Created findings
 	"""
 	findings: [Finding!]
+}
+"""
+Return response for deleteBulkFinding mutation
+"""
+type FindingBulkDeletePayload {
+	"""
+	Deleted finding IDs
+	"""
+	deletedIDs: [ID!]!
+}
+"""
+Return response for updateBulkFinding mutation
+"""
+type FindingBulkUpdatePayload {
+	"""
+	Updated findings
+	"""
+	findings: [Finding!]
+	"""
+	IDs of the updated findings
+	"""
+	updatedIDs: [ID!]
 }
 """
 A connection to a list of items.
@@ -29764,6 +30363,18 @@ type Group implements Node {
 	The group's displayed 'friendly' name
 	"""
 	displayName: String!
+	"""
+	OSCAL role identifier used for role-based responsibility mapping
+	"""
+	oscalRole: String
+	"""
+	OSCAL party UUID linked to this group for responsibility mapping
+	"""
+	oscalPartyUUID: String
+	"""
+	OSCAL contact UUID references associated with this group
+	"""
+	oscalContactUuids: [String!]
 	"""
 	the SCIM external ID for the group
 	"""
@@ -32185,6 +32796,42 @@ input GroupWhereInput {
 	displayNameEqualFold: String
 	displayNameContainsFold: String
 	"""
+	oscal_role field predicates
+	"""
+	oscalRole: String
+	oscalRoleNEQ: String
+	oscalRoleIn: [String!]
+	oscalRoleNotIn: [String!]
+	oscalRoleGT: String
+	oscalRoleGTE: String
+	oscalRoleLT: String
+	oscalRoleLTE: String
+	oscalRoleContains: String
+	oscalRoleHasPrefix: String
+	oscalRoleHasSuffix: String
+	oscalRoleIsNil: Boolean
+	oscalRoleNotNil: Boolean
+	oscalRoleEqualFold: String
+	oscalRoleContainsFold: String
+	"""
+	oscal_party_uuid field predicates
+	"""
+	oscalPartyUUID: String
+	oscalPartyUUIDNEQ: String
+	oscalPartyUUIDIn: [String!]
+	oscalPartyUUIDNotIn: [String!]
+	oscalPartyUUIDGT: String
+	oscalPartyUUIDGTE: String
+	oscalPartyUUIDLT: String
+	oscalPartyUUIDLTE: String
+	oscalPartyUUIDContains: String
+	oscalPartyUUIDHasPrefix: String
+	oscalPartyUUIDHasSuffix: String
+	oscalPartyUUIDIsNil: Boolean
+	oscalPartyUUIDNotNil: Boolean
+	oscalPartyUUIDEqualFold: String
+	oscalPartyUUIDContainsFold: String
+	"""
 	scim_external_id field predicates
 	"""
 	scimExternalID: String
@@ -32489,6 +33136,10 @@ input GroupWhereInput {
 	Filter for tagsHas to contain a specific value
 	"""
 	tagsHas: String
+	"""
+	Filter for oscalContactUuidsHas to contain a specific value
+	"""
+	oscalContactUuidsHas: String
 }
 type Hush implements Node {
 	id: ID!
@@ -33402,6 +34053,37 @@ type IdentityHolder implements Node {
 		"""
 		where: DirectoryAccountWhereInput
 	): DirectoryAccountConnection!
+	controls(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for Controls returned from the connection.
+		"""
+		orderBy: [ControlOrder!]
+
+		"""
+		Filtering options for Controls returned from the connection.
+		"""
+		where: ControlWhereInput
+	): ControlConnection!
 	platforms(
 		"""
 		Returns the elements in the list that come after the specified cursor.
@@ -33495,6 +34177,37 @@ type IdentityHolder implements Node {
 		"""
 		where: TaskWhereInput
 	): TaskConnection!
+	files(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for Files returned from the connection.
+		"""
+		orderBy: [FileOrder!]
+
+		"""
+		Filtering options for Files returned from the connection.
+		"""
+		where: FileWhereInput
+	): FileConnection!
 	findings(
 		"""
 		Returns the elements in the list that come after the specified cursor.
@@ -34337,6 +35050,11 @@ input IdentityHolderWhereInput {
 	hasDirectoryAccounts: Boolean
 	hasDirectoryAccountsWith: [DirectoryAccountWhereInput!]
 	"""
+	controls edge predicates
+	"""
+	hasControls: Boolean
+	hasControlsWith: [ControlWhereInput!]
+	"""
 	platforms edge predicates
 	"""
 	hasPlatforms: Boolean
@@ -34351,6 +35069,11 @@ input IdentityHolderWhereInput {
 	"""
 	hasTasks: Boolean
 	hasTasksWith: [TaskWhereInput!]
+	"""
+	files edge predicates
+	"""
+	hasFiles: Boolean
+	hasFilesWith: [FileWhereInput!]
 	"""
 	findings edge predicates
 	"""
@@ -35534,6 +36257,10 @@ type InternalPolicy implements Node {
 	internal marker field for workflow eligibility, not exposed in API
 	"""
 	workflowEligibleMarker: Boolean
+	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
 	owner: Organization
 	blockedGroups(
 		"""
@@ -36567,6 +37294,24 @@ input InternalPolicyWhereInput {
 	workflowEligibleMarkerNEQ: Boolean
 	workflowEligibleMarkerIsNil: Boolean
 	workflowEligibleMarkerNotNil: Boolean
+	"""
+	external_uuid field predicates
+	"""
+	externalUUID: String
+	externalUUIDNEQ: String
+	externalUUIDIn: [String!]
+	externalUUIDNotIn: [String!]
+	externalUUIDGT: String
+	externalUUIDGTE: String
+	externalUUIDLT: String
+	externalUUIDLTE: String
+	externalUUIDContains: String
+	externalUUIDHasPrefix: String
+	externalUUIDHasSuffix: String
+	externalUUIDIsNil: Boolean
+	externalUUIDNotNil: Boolean
+	externalUUIDEqualFold: String
+	externalUUIDContainsFold: String
 	"""
 	owner edge predicates
 	"""
@@ -41355,7 +42100,7 @@ type Mutation {
 		entity type name allows the name of the entity type to be passed in over an id
 		"""
 		entityTypeName: String
-	): EntityCreatePayload!
+	entityFiles: [Upload!]): EntityCreatePayload!
 	"""
 	Create multiple new entities
 	"""
@@ -41397,7 +42142,7 @@ type Mutation {
 		New values for the entity
 		"""
 		input: UpdateEntityInput!
-	): EntityUpdatePayload!
+	entityFiles: [Upload!]): EntityUpdatePayload!
 	"""
 	Delete an existing entity
 	"""
@@ -41790,6 +42535,38 @@ type Mutation {
 		"""
 		id: ID!
 	): FindingDeletePayload!
+	"""
+	Update multiple existing findings
+	"""
+	updateBulkFinding(
+		"""
+		IDs of the findings to update
+		"""
+		ids: [ID!]!
+
+		"""
+		values to update the findings with
+		"""
+		input: UpdateFindingInput!
+	): FindingBulkUpdatePayload!
+	"""
+	Update multiple existing findings via file upload
+	"""
+	updateBulkCSVFinding(
+		"""
+		csv file containing values of the finding, must include ID column
+		"""
+		input: Upload!
+	): FindingBulkUpdatePayload!
+	"""
+	Delete multiple findings
+	"""
+	deleteBulkFinding(
+		"""
+		IDs of the findings to delete
+		"""
+		ids: [ID!]!
+	): FindingBulkDeletePayload!
 	"""
 	Create a new findingControl
 	"""
@@ -42216,7 +42993,7 @@ type Mutation {
 		values of the identityHolder
 		"""
 		input: CreateIdentityHolderInput!
-	): IdentityHolderCreatePayload!
+	identityHolderFiles: [Upload!]): IdentityHolderCreatePayload!
 	"""
 	Create multiple new identityHolders
 	"""
@@ -42248,7 +43025,7 @@ type Mutation {
 		New values for the identityHolder
 		"""
 		input: UpdateIdentityHolderInput!
-	): IdentityHolderUpdatePayload!
+	identityHolderFiles: [Upload!]): IdentityHolderUpdatePayload!
 	"""
 	Delete an existing identityHolder
 	"""
@@ -43945,6 +44722,38 @@ type Mutation {
 		id: ID!
 	): RemediationDeletePayload!
 	"""
+	Update multiple existing remediations
+	"""
+	updateBulkRemediation(
+		"""
+		IDs of the remediations to update
+		"""
+		ids: [ID!]!
+
+		"""
+		values to update the remediations with
+		"""
+		input: UpdateRemediationInput!
+	): RemediationBulkUpdatePayload!
+	"""
+	Update multiple existing remediations via file upload
+	"""
+	updateBulkCSVRemediation(
+		"""
+		csv file containing values of the remediation, must include ID column
+		"""
+		input: Upload!
+	): RemediationBulkUpdatePayload!
+	"""
+	Delete multiple remediations
+	"""
+	deleteBulkRemediation(
+		"""
+		IDs of the remediations to delete
+		"""
+		ids: [ID!]!
+	): RemediationBulkDeletePayload!
+	"""
 	Create a new review
 	"""
 	createReview(
@@ -44543,6 +45352,88 @@ type Mutation {
 		"""
 		ownerID: ID
 	): SubscriberDeletePayload!
+	"""
+	Create a new systemDetail
+	"""
+	createSystemDetail(
+		"""
+		values of the systemDetail
+		"""
+		input: CreateSystemDetailInput!
+	): SystemDetailCreatePayload!
+	"""
+	Create multiple new systemDetails
+	"""
+	createBulkSystemDetail(
+		"""
+		values of the systemDetail
+		"""
+		input: [CreateSystemDetailInput!]
+	): SystemDetailBulkCreatePayload!
+	"""
+	Create multiple new systemDetails via file upload
+	"""
+	createBulkCSVSystemDetail(
+		"""
+		csv file containing values of the systemDetail
+		"""
+		input: Upload!
+	): SystemDetailBulkCreatePayload!
+	"""
+	Update multiple existing systemDetails
+	"""
+	updateBulkSystemDetail(
+		"""
+		IDs of the systemDetails to update
+		"""
+		ids: [ID!]!
+
+		"""
+		values to update the systemDetails with
+		"""
+		input: UpdateSystemDetailInput!
+	): SystemDetailBulkUpdatePayload!
+	"""
+	Update multiple existing systemDetails via file upload
+	"""
+	updateBulkCSVSystemDetail(
+		"""
+		csv file containing values of the systemDetail, must include ID column
+		"""
+		input: Upload!
+	): SystemDetailBulkUpdatePayload!
+	"""
+	Update an existing systemDetail
+	"""
+	updateSystemDetail(
+		"""
+		ID of the systemDetail
+		"""
+		id: ID!
+
+		"""
+		New values for the systemDetail
+		"""
+		input: UpdateSystemDetailInput!
+	): SystemDetailUpdatePayload!
+	"""
+	Delete an existing systemDetail
+	"""
+	deleteSystemDetail(
+		"""
+		ID of the systemDetail
+		"""
+		id: ID!
+	): SystemDetailDeletePayload!
+	"""
+	Delete multiple systemDetails
+	"""
+	deleteBulkSystemDetail(
+		"""
+		IDs of the systemDetails to delete
+		"""
+		ids: [ID!]!
+	): SystemDetailBulkDeletePayload!
 	"""
 	Create a new tagDefinition
 	"""
@@ -45565,6 +46456,38 @@ type Mutation {
 		"""
 		id: ID!
 	): VulnerabilityDeletePayload!
+	"""
+	Update multiple existing vulnerabilities
+	"""
+	updateBulkVulnerability(
+		"""
+		IDs of the vulnerabilities to update
+		"""
+		ids: [ID!]!
+
+		"""
+		values to update the vulnerabilities with
+		"""
+		input: UpdateVulnerabilityInput!
+	): VulnerabilityBulkUpdatePayload!
+	"""
+	Update multiple existing vulnerabilities via file upload
+	"""
+	updateBulkCSVVulnerability(
+		"""
+		csv file containing values of the vulnerability, must include ID column
+		"""
+		input: Upload!
+	): VulnerabilityBulkUpdatePayload!
+	"""
+	Delete multiple vulnerabilities
+	"""
+	deleteBulkVulnerability(
+		"""
+		IDs of the vulnerabilities to delete
+		"""
+		ids: [ID!]!
+	): VulnerabilityBulkDeletePayload!
 	"""
 	Resolve a vulnerability and optionally capture a review record.
 	"""
@@ -46939,6 +47862,7 @@ enum NotificationNotificationTopic @goModel(model: "github.com/theopenlane/core/
 	APPROVAL
 	MENTION
 	EXPORT
+	STANDARD_UPDATE
 }
 """
 NotificationNotificationType is enum for the field notification_type
@@ -50484,6 +51408,37 @@ type Organization implements Node {
 		"""
 		where: ProgramWhereInput
 	): ProgramConnection!
+	systemDetails(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for SystemDetails returned from the connection.
+		"""
+		orderBy: [SystemDetailOrder!]
+
+		"""
+		Filtering options for SystemDetails returned from the connection.
+		"""
+		where: SystemDetailWhereInput
+	): SystemDetailConnection!
 	procedures(
 		"""
 		Returns the elements in the list that come after the specified cursor.
@@ -53159,6 +54114,11 @@ input OrganizationWhereInput {
 	hasPrograms: Boolean
 	hasProgramsWith: [ProgramWhereInput!]
 	"""
+	system_details edge predicates
+	"""
+	hasSystemDetails: Boolean
+	hasSystemDetailsWith: [SystemDetailWhereInput!]
+	"""
 	procedures edge predicates
 	"""
 	hasProcedures: Boolean
@@ -53967,6 +54927,10 @@ type Platform implements Node {
 	internal marker field for workflow eligibility, not exposed in API
 	"""
 	workflowEligibleMarker: Boolean
+	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
 	"""
 	the name of the platform
 	"""
@@ -54832,6 +55796,7 @@ type Platform implements Node {
 		where: ScanWhereInput
 	): ScanConnection!
 	platformOwner: User
+	systemDetail: SystemDetail
 	"""
 	Indicates if this platform has pending changes awaiting workflow approval
 	"""
@@ -55597,6 +56562,24 @@ input PlatformWhereInput {
 	workflowEligibleMarkerIsNil: Boolean
 	workflowEligibleMarkerNotNil: Boolean
 	"""
+	external_uuid field predicates
+	"""
+	externalUUID: String
+	externalUUIDNEQ: String
+	externalUUIDIn: [String!]
+	externalUUIDNotIn: [String!]
+	externalUUIDGT: String
+	externalUUIDGTE: String
+	externalUUIDLT: String
+	externalUUIDLTE: String
+	externalUUIDContains: String
+	externalUUIDHasPrefix: String
+	externalUUIDHasSuffix: String
+	externalUUIDIsNil: Boolean
+	externalUUIDNotNil: Boolean
+	externalUUIDEqualFold: String
+	externalUUIDContainsFold: String
+	"""
 	name field predicates
 	"""
 	name: String
@@ -56018,6 +57001,11 @@ input PlatformWhereInput {
 	"""
 	hasPlatformOwner: Boolean
 	hasPlatformOwnerWith: [UserWhereInput!]
+	"""
+	system_detail edge predicates
+	"""
+	hasSystemDetail: Boolean
+	hasSystemDetailWith: [SystemDetailWhereInput!]
 	"""
 	Filter for tagsHas to contain a specific value
 	"""
@@ -57280,6 +58268,10 @@ type Program implements Node {
 	"""
 	programKindID: ID
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	the name of the program
 	"""
 	name: String!
@@ -57798,6 +58790,7 @@ type Program implements Node {
 		"""
 		where: ActionPlanWhereInput
 	): ActionPlanConnection!
+	systemDetail: SystemDetail
 	users(
 		"""
 		Returns the elements in the list that come after the specified cursor.
@@ -58361,6 +59354,24 @@ input ProgramWhereInput {
 	programKindIDEqualFold: ID
 	programKindIDContainsFold: ID
 	"""
+	external_uuid field predicates
+	"""
+	externalUUID: String
+	externalUUIDNEQ: String
+	externalUUIDIn: [String!]
+	externalUUIDNotIn: [String!]
+	externalUUIDGT: String
+	externalUUIDGTE: String
+	externalUUIDLT: String
+	externalUUIDLTE: String
+	externalUUIDContains: String
+	externalUUIDHasPrefix: String
+	externalUUIDHasSuffix: String
+	externalUUIDIsNil: Boolean
+	externalUUIDNotNil: Boolean
+	externalUUIDEqualFold: String
+	externalUUIDContainsFold: String
+	"""
 	name field predicates
 	"""
 	name: String
@@ -58617,6 +59628,11 @@ input ProgramWhereInput {
 	"""
 	hasActionPlans: Boolean
 	hasActionPlansWith: [ActionPlanWhereInput!]
+	"""
+	system_detail edge predicates
+	"""
+	hasSystemDetail: Boolean
+	hasSystemDetailWith: [SystemDetailWhereInput!]
 	"""
 	users edge predicates
 	"""
@@ -60764,6 +61780,37 @@ type Query {
 		"""
 		where: SubscriberWhereInput
 	): SubscriberConnection!
+	systemDetails(
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+
+		"""
+		Ordering options for SystemDetails returned from the connection.
+		"""
+		orderBy: [SystemDetailOrder!]
+
+		"""
+		Filtering options for SystemDetails returned from the connection.
+		"""
+		where: SystemDetailWhereInput
+	): SystemDetailConnection!
 	tfaSettings(
 		"""
 		Returns the elements in the list that come after the specified cursor.
@@ -61558,6 +62605,10 @@ type Query {
 		"""
 		id: ID!
 	): Control!
+	"""
+	Compare a system-owned control between two framework revisions to see which fields changed
+	"""
+	controlDiff(input: ControlDiffInput!): ControlDiffPayload!
 	"""
 	All existing categories or domains used in the organization @deprecated
 	"""
@@ -63173,6 +64224,35 @@ type Query {
 		last: Int
 	): SubscriberConnection
 	"""
+	Search across SystemDetail objects
+	"""
+	systemDetailSearch(
+		"""
+		Query string to search across objects
+		"""
+		query: String!
+
+		"""
+		Returns the elements in the list that come after the specified cursor.
+		"""
+		after: Cursor
+
+		"""
+		Returns the first _n_ elements from the list.
+		"""
+		first: Int
+
+		"""
+		Returns the elements in the list that come before the specified cursor.
+		"""
+		before: Cursor
+
+		"""
+		Returns the last _n_ elements from the list.
+		"""
+		last: Int
+	): SystemDetailConnection
+	"""
 	Search across TagDefinition objects
 	"""
 	tagDefinitionSearch(
@@ -63382,6 +64462,15 @@ type Query {
 		"""
 		email: String!
 	): Subscriber!
+	"""
+	Look up systemDetail by ID
+	"""
+	systemDetail(
+		"""
+		ID of the systemDetail
+		"""
+		id: ID!
+	): SystemDetail!
 	"""
 	Look up tagDefinition by ID
 	"""
@@ -64413,6 +65502,28 @@ type RemediationBulkCreatePayload {
 	Created remediations
 	"""
 	remediations: [Remediation!]
+}
+"""
+Return response for deleteBulkRemediation mutation
+"""
+type RemediationBulkDeletePayload {
+	"""
+	Deleted remediation IDs
+	"""
+	deletedIDs: [ID!]!
+}
+"""
+Return response for updateBulkRemediation mutation
+"""
+type RemediationBulkUpdatePayload {
+	"""
+	Updated remediations
+	"""
+	remediations: [Remediation!]
+	"""
+	IDs of the updated remediations
+	"""
+	updatedIDs: [ID!]
 }
 """
 A connection to a list of items.
@@ -66568,6 +67679,10 @@ type Risk implements Node {
 	"""
 	scopeID: ID
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	the name of the risk
 	"""
 	name: String!
@@ -67535,6 +68650,24 @@ input RiskWhereInput {
 	scopeIDNotNil: Boolean
 	scopeIDEqualFold: ID
 	scopeIDContainsFold: ID
+	"""
+	external_uuid field predicates
+	"""
+	externalUUID: String
+	externalUUIDNEQ: String
+	externalUUIDIn: [String!]
+	externalUUIDNotIn: [String!]
+	externalUUIDGT: String
+	externalUUIDGTE: String
+	externalUUIDLT: String
+	externalUUIDLTE: String
+	externalUUIDContains: String
+	externalUUIDHasPrefix: String
+	externalUUIDHasSuffix: String
+	externalUUIDIsNil: Boolean
+	externalUUIDNotNil: Boolean
+	externalUUIDEqualFold: String
+	externalUUIDContainsFold: String
 	"""
 	name field predicates
 	"""
@@ -69744,6 +70877,7 @@ type SearchResults {
 	subcontrols: SubcontrolConnection
 	subprocessors: SubprocessorConnection
 	subscribers: SubscriberConnection
+	systemDetails: SystemDetailConnection
 	tagDefinitions: TagDefinitionConnection
 	tasks: TaskConnection
 	templates: TemplateConnection
@@ -70508,6 +71642,10 @@ type Subcontrol implements Node {
 	"""
 	tags: [String!]
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	"""
 	human readable title of the control for quick identification
 	"""
 	title: String @externalSource(source: FRAMEWORK)
@@ -70539,6 +71677,14 @@ type Subcontrol implements Node {
 	status of the control
 	"""
 	status: SubcontrolControlStatus
+	"""
+	OSCAL-aligned implementation status of the control
+	"""
+	implementationStatus: SubcontrolControlImplementationStatus
+	"""
+	narrative describing current implementation state for OSCAL export
+	"""
+	implementationDescription: String
 	"""
 	source of the control, e.g. framework, template, custom, etc.
 	"""
@@ -71127,6 +72273,16 @@ type SubcontrolConnection {
 	totalCount: Int!
 }
 """
+SubcontrolControlImplementationStatus is enum for the field implementation_status
+"""
+enum SubcontrolControlImplementationStatus @goModel(model: "github.com/theopenlane/core/common/enums.ControlImplementationStatus") {
+	PLANNED
+	IMPLEMENTED
+	PARTIALLY_IMPLEMENTED
+	INHERITED
+	NOT_APPLICABLE
+}
+"""
 SubcontrolControlSource is enum for the field source
 """
 enum SubcontrolControlSource @goModel(model: "github.com/theopenlane/core/common/enums.ControlSource") {
@@ -71317,6 +72473,24 @@ input SubcontrolWhereInput {
 	displayIDEqualFold: String
 	displayIDContainsFold: String
 	"""
+	external_uuid field predicates
+	"""
+	externalUUID: String
+	externalUUIDNEQ: String
+	externalUUIDIn: [String!]
+	externalUUIDNotIn: [String!]
+	externalUUIDGT: String
+	externalUUIDGTE: String
+	externalUUIDLT: String
+	externalUUIDLTE: String
+	externalUUIDContains: String
+	externalUUIDHasPrefix: String
+	externalUUIDHasSuffix: String
+	externalUUIDIsNil: Boolean
+	externalUUIDNotNil: Boolean
+	externalUUIDEqualFold: String
+	externalUUIDContainsFold: String
+	"""
 	title field predicates
 	"""
 	title: String
@@ -71415,6 +72589,33 @@ input SubcontrolWhereInput {
 	statusNotIn: [SubcontrolControlStatus!]
 	statusIsNil: Boolean
 	statusNotNil: Boolean
+	"""
+	implementation_status field predicates
+	"""
+	implementationStatus: SubcontrolControlImplementationStatus
+	implementationStatusNEQ: SubcontrolControlImplementationStatus
+	implementationStatusIn: [SubcontrolControlImplementationStatus!]
+	implementationStatusNotIn: [SubcontrolControlImplementationStatus!]
+	implementationStatusIsNil: Boolean
+	implementationStatusNotNil: Boolean
+	"""
+	implementation_description field predicates
+	"""
+	implementationDescription: String
+	implementationDescriptionNEQ: String
+	implementationDescriptionIn: [String!]
+	implementationDescriptionNotIn: [String!]
+	implementationDescriptionGT: String
+	implementationDescriptionGTE: String
+	implementationDescriptionLT: String
+	implementationDescriptionLTE: String
+	implementationDescriptionContains: String
+	implementationDescriptionHasPrefix: String
+	implementationDescriptionHasSuffix: String
+	implementationDescriptionIsNil: Boolean
+	implementationDescriptionNotNil: Boolean
+	implementationDescriptionEqualFold: String
+	implementationDescriptionContainsFold: String
 	"""
 	source field predicates
 	"""
@@ -72618,6 +73819,457 @@ type Subscription {
 	"""
 	notificationCreated: Notification!
 }
+type SystemDetail implements Node {
+	id: ID!
+	createdAt: Time
+	updatedAt: Time
+	createdBy: String
+	updatedBy: String
+	"""
+	a shortened prefixed id field to use as a human readable identifier
+	"""
+	displayID: String!
+	"""
+	tags associated with the object
+	"""
+	tags: [String!]
+	"""
+	the ID of the organization owner of the object
+	"""
+	ownerID: ID
+	"""
+	optional program anchor for this system detail
+	"""
+	programID: ID
+	"""
+	optional platform anchor for this system detail
+	"""
+	platformID: ID
+	"""
+	system name used in OSCAL metadata
+	"""
+	systemName: String!
+	"""
+	system version used in OSCAL metadata
+	"""
+	version: String
+	"""
+	system description used in OSCAL metadata
+	"""
+	description: String
+	"""
+	authorization boundary narrative for OSCAL export
+	"""
+	authorizationBoundary: String
+	"""
+	security sensitivity level of the system
+	"""
+	sensitivityLevel: SystemDetailSystemSensitivityLevel
+	"""
+	timestamp when metadata was last reviewed
+	"""
+	lastReviewed: DateTime
+	"""
+	structured revision history for OSCAL metadata
+	"""
+	revisionHistory: [Any!]
+	"""
+	optional escape hatch for additional OSCAL metadata fields
+	"""
+	oscalMetadataJSON: Map
+	owner: Organization
+	"""
+	optional program this detail belongs to
+	"""
+	program: Program
+	"""
+	optional platform this detail belongs to
+	"""
+	platform: Platform
+}
+"""
+Return response for createBulkSystemDetail mutation
+"""
+type SystemDetailBulkCreatePayload {
+	"""
+	Created systemDetails
+	"""
+	systemDetails: [SystemDetail!]
+}
+"""
+Return response for deleteBulkSystemDetail mutation
+"""
+type SystemDetailBulkDeletePayload {
+	"""
+	Deleted systemDetail IDs
+	"""
+	deletedIDs: [ID!]!
+}
+"""
+Return response for updateBulkSystemDetail mutation
+"""
+type SystemDetailBulkUpdatePayload {
+	"""
+	Updated systemDetails
+	"""
+	systemDetails: [SystemDetail!]
+	"""
+	IDs of the updated systemDetails
+	"""
+	updatedIDs: [ID!]
+}
+"""
+A connection to a list of items.
+"""
+type SystemDetailConnection {
+	"""
+	A list of edges.
+	"""
+	edges: [SystemDetailEdge]
+	"""
+	Information to aid in pagination.
+	"""
+	pageInfo: PageInfo!
+	"""
+	Identifies the total count of items in the connection.
+	"""
+	totalCount: Int!
+}
+"""
+Return response for createSystemDetail mutation
+"""
+type SystemDetailCreatePayload {
+	"""
+	Created systemDetail
+	"""
+	systemDetail: SystemDetail!
+}
+"""
+Return response for deleteSystemDetail mutation
+"""
+type SystemDetailDeletePayload {
+	"""
+	Deleted systemDetail ID
+	"""
+	deletedID: ID!
+}
+"""
+An edge in a connection.
+"""
+type SystemDetailEdge {
+	"""
+	The item at the end of the edge.
+	"""
+	node: SystemDetail
+	"""
+	A cursor for use in pagination.
+	"""
+	cursor: Cursor!
+}
+"""
+Ordering options for SystemDetail connections
+"""
+input SystemDetailOrder {
+	"""
+	The ordering direction.
+	"""
+	direction: OrderDirection! = ASC
+	"""
+	The field by which to order SystemDetails.
+	"""
+	field: SystemDetailOrderField!
+}
+"""
+Properties by which SystemDetail connections can be ordered.
+"""
+enum SystemDetailOrderField {
+	created_at
+	updated_at
+	system_name
+}
+"""
+SystemDetailSystemSensitivityLevel is enum for the field sensitivity_level
+"""
+enum SystemDetailSystemSensitivityLevel @goModel(model: "github.com/theopenlane/core/common/enums.SystemSensitivityLevel") {
+	LOW
+	MODERATE
+	HIGH
+	UNKNOWN
+}
+"""
+Return response for updateSystemDetail mutation
+"""
+type SystemDetailUpdatePayload {
+	"""
+	Updated systemDetail
+	"""
+	systemDetail: SystemDetail!
+}
+"""
+SystemDetailWhereInput is used for filtering SystemDetail objects.
+Input was generated by ent.
+"""
+input SystemDetailWhereInput {
+	not: SystemDetailWhereInput
+	and: [SystemDetailWhereInput!]
+	or: [SystemDetailWhereInput!]
+	"""
+	id field predicates
+	"""
+	id: ID
+	idNEQ: ID
+	idIn: [ID!]
+	idNotIn: [ID!]
+	idGT: ID
+	idGTE: ID
+	idLT: ID
+	idLTE: ID
+	idEqualFold: ID
+	idContainsFold: ID
+	"""
+	created_at field predicates
+	"""
+	createdAt: Time
+	createdAtNEQ: Time
+	createdAtIn: [Time!]
+	createdAtNotIn: [Time!]
+	createdAtGT: Time
+	createdAtGTE: Time
+	createdAtLT: Time
+	createdAtLTE: Time
+	createdAtIsNil: Boolean
+	createdAtNotNil: Boolean
+	"""
+	updated_at field predicates
+	"""
+	updatedAt: Time
+	updatedAtNEQ: Time
+	updatedAtIn: [Time!]
+	updatedAtNotIn: [Time!]
+	updatedAtGT: Time
+	updatedAtGTE: Time
+	updatedAtLT: Time
+	updatedAtLTE: Time
+	updatedAtIsNil: Boolean
+	updatedAtNotNil: Boolean
+	"""
+	created_by field predicates
+	"""
+	createdBy: String
+	createdByNEQ: String
+	createdByIn: [String!]
+	createdByNotIn: [String!]
+	createdByGT: String
+	createdByGTE: String
+	createdByLT: String
+	createdByLTE: String
+	createdByContains: String
+	createdByHasPrefix: String
+	createdByHasSuffix: String
+	createdByIsNil: Boolean
+	createdByNotNil: Boolean
+	createdByEqualFold: String
+	createdByContainsFold: String
+	"""
+	updated_by field predicates
+	"""
+	updatedBy: String
+	updatedByNEQ: String
+	updatedByIn: [String!]
+	updatedByNotIn: [String!]
+	updatedByGT: String
+	updatedByGTE: String
+	updatedByLT: String
+	updatedByLTE: String
+	updatedByContains: String
+	updatedByHasPrefix: String
+	updatedByHasSuffix: String
+	updatedByIsNil: Boolean
+	updatedByNotNil: Boolean
+	updatedByEqualFold: String
+	updatedByContainsFold: String
+	"""
+	display_id field predicates
+	"""
+	displayID: String
+	displayIDNEQ: String
+	displayIDIn: [String!]
+	displayIDNotIn: [String!]
+	displayIDGT: String
+	displayIDGTE: String
+	displayIDLT: String
+	displayIDLTE: String
+	displayIDContains: String
+	displayIDHasPrefix: String
+	displayIDHasSuffix: String
+	displayIDEqualFold: String
+	displayIDContainsFold: String
+	"""
+	owner_id field predicates
+	"""
+	ownerID: ID
+	ownerIDNEQ: ID
+	ownerIDIn: [ID!]
+	ownerIDNotIn: [ID!]
+	ownerIDGT: ID
+	ownerIDGTE: ID
+	ownerIDLT: ID
+	ownerIDLTE: ID
+	ownerIDContains: ID
+	ownerIDHasPrefix: ID
+	ownerIDHasSuffix: ID
+	ownerIDIsNil: Boolean
+	ownerIDNotNil: Boolean
+	ownerIDEqualFold: ID
+	ownerIDContainsFold: ID
+	"""
+	program_id field predicates
+	"""
+	programID: ID
+	programIDNEQ: ID
+	programIDIn: [ID!]
+	programIDNotIn: [ID!]
+	programIDGT: ID
+	programIDGTE: ID
+	programIDLT: ID
+	programIDLTE: ID
+	programIDContains: ID
+	programIDHasPrefix: ID
+	programIDHasSuffix: ID
+	programIDIsNil: Boolean
+	programIDNotNil: Boolean
+	programIDEqualFold: ID
+	programIDContainsFold: ID
+	"""
+	platform_id field predicates
+	"""
+	platformID: ID
+	platformIDNEQ: ID
+	platformIDIn: [ID!]
+	platformIDNotIn: [ID!]
+	platformIDGT: ID
+	platformIDGTE: ID
+	platformIDLT: ID
+	platformIDLTE: ID
+	platformIDContains: ID
+	platformIDHasPrefix: ID
+	platformIDHasSuffix: ID
+	platformIDIsNil: Boolean
+	platformIDNotNil: Boolean
+	platformIDEqualFold: ID
+	platformIDContainsFold: ID
+	"""
+	system_name field predicates
+	"""
+	systemName: String
+	systemNameNEQ: String
+	systemNameIn: [String!]
+	systemNameNotIn: [String!]
+	systemNameGT: String
+	systemNameGTE: String
+	systemNameLT: String
+	systemNameLTE: String
+	systemNameContains: String
+	systemNameHasPrefix: String
+	systemNameHasSuffix: String
+	systemNameEqualFold: String
+	systemNameContainsFold: String
+	"""
+	version field predicates
+	"""
+	version: String
+	versionNEQ: String
+	versionIn: [String!]
+	versionNotIn: [String!]
+	versionGT: String
+	versionGTE: String
+	versionLT: String
+	versionLTE: String
+	versionContains: String
+	versionHasPrefix: String
+	versionHasSuffix: String
+	versionIsNil: Boolean
+	versionNotNil: Boolean
+	versionEqualFold: String
+	versionContainsFold: String
+	"""
+	description field predicates
+	"""
+	description: String
+	descriptionNEQ: String
+	descriptionIn: [String!]
+	descriptionNotIn: [String!]
+	descriptionGT: String
+	descriptionGTE: String
+	descriptionLT: String
+	descriptionLTE: String
+	descriptionContains: String
+	descriptionHasPrefix: String
+	descriptionHasSuffix: String
+	descriptionIsNil: Boolean
+	descriptionNotNil: Boolean
+	descriptionEqualFold: String
+	descriptionContainsFold: String
+	"""
+	authorization_boundary field predicates
+	"""
+	authorizationBoundary: String
+	authorizationBoundaryNEQ: String
+	authorizationBoundaryIn: [String!]
+	authorizationBoundaryNotIn: [String!]
+	authorizationBoundaryGT: String
+	authorizationBoundaryGTE: String
+	authorizationBoundaryLT: String
+	authorizationBoundaryLTE: String
+	authorizationBoundaryContains: String
+	authorizationBoundaryHasPrefix: String
+	authorizationBoundaryHasSuffix: String
+	authorizationBoundaryIsNil: Boolean
+	authorizationBoundaryNotNil: Boolean
+	authorizationBoundaryEqualFold: String
+	authorizationBoundaryContainsFold: String
+	"""
+	sensitivity_level field predicates
+	"""
+	sensitivityLevel: SystemDetailSystemSensitivityLevel
+	sensitivityLevelNEQ: SystemDetailSystemSensitivityLevel
+	sensitivityLevelIn: [SystemDetailSystemSensitivityLevel!]
+	sensitivityLevelNotIn: [SystemDetailSystemSensitivityLevel!]
+	sensitivityLevelIsNil: Boolean
+	sensitivityLevelNotNil: Boolean
+	"""
+	last_reviewed field predicates
+	"""
+	lastReviewed: DateTime
+	lastReviewedNEQ: DateTime
+	lastReviewedIn: [DateTime!]
+	lastReviewedNotIn: [DateTime!]
+	lastReviewedGT: DateTime
+	lastReviewedGTE: DateTime
+	lastReviewedLT: DateTime
+	lastReviewedLTE: DateTime
+	lastReviewedIsNil: Boolean
+	lastReviewedNotNil: Boolean
+	"""
+	owner edge predicates
+	"""
+	hasOwner: Boolean
+	hasOwnerWith: [OrganizationWhereInput!]
+	"""
+	program edge predicates
+	"""
+	hasProgram: Boolean
+	hasProgramWith: [ProgramWhereInput!]
+	"""
+	platform edge predicates
+	"""
+	hasPlatform: Boolean
+	hasPlatformWith: [PlatformWhereInput!]
+	"""
+	Filter for tagsHas to contain a specific value
+	"""
+	tagsHas: String
+}
 type TFASetting implements Node {
 	id: ID!
 	createdAt: Time
@@ -73206,6 +74858,10 @@ type Task implements Node {
 	the scope of the task
 	"""
 	scopeID: ID
+	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
 	"""
 	the title of the task
 	"""
@@ -74106,6 +75762,24 @@ input TaskWhereInput {
 	scopeIDNotNil: Boolean
 	scopeIDEqualFold: ID
 	scopeIDContainsFold: ID
+	"""
+	external_uuid field predicates
+	"""
+	externalUUID: String
+	externalUUIDNEQ: String
+	externalUUIDIn: [String!]
+	externalUUIDNotIn: [String!]
+	externalUUIDGT: String
+	externalUUIDGTE: String
+	externalUUIDLT: String
+	externalUUIDLTE: String
+	externalUUIDContains: String
+	externalUUIDHasPrefix: String
+	externalUUIDHasSuffix: String
+	externalUUIDIsNil: Boolean
+	externalUUIDNotNil: Boolean
+	externalUUIDEqualFold: String
+	externalUUIDContainsFold: String
 	"""
 	title field predicates
 	"""
@@ -80377,6 +82051,9 @@ input UpdateCampaignInput {
 	addIdentityHolderIDs: [ID!]
 	removeIdentityHolderIDs: [ID!]
 	clearIdentityHolders: Boolean
+	addControlIDs: [ID!]
+	removeControlIDs: [ID!]
+	clearControls: Boolean
 	addWorkflowObjectRefIDs: [ID!]
 	removeWorkflowObjectRefIDs: [ID!]
 	clearWorkflowObjectRefs: Boolean
@@ -80573,6 +82250,11 @@ input UpdateControlInput {
 	appendTags: [String!]
 	clearTags: Boolean
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	clearExternalUUID: Boolean
+	"""
 	human readable title of the control for quick identification
 	"""
 	title: String @externalReadOnly(source: FRAMEWORK)
@@ -80609,6 +82291,16 @@ input UpdateControlInput {
 	"""
 	status: ControlControlStatus
 	clearStatus: Boolean
+	"""
+	OSCAL-aligned implementation status of the control
+	"""
+	implementationStatus: ControlControlImplementationStatus
+	clearImplementationStatus: Boolean
+	"""
+	narrative describing current implementation state for OSCAL export
+	"""
+	implementationDescription: String
+	clearImplementationDescription: Boolean
 	"""
 	source of the control, e.g. framework, template, custom, etc.
 	"""
@@ -80789,6 +82481,21 @@ input UpdateControlInput {
 	addScanIDs: [ID!]
 	removeScanIDs: [ID!]
 	clearScans: Boolean
+	addEntityIDs: [ID!]
+	removeEntityIDs: [ID!]
+	clearEntities: Boolean
+	addIdentityHolderIDs: [ID!]
+	removeIdentityHolderIDs: [ID!]
+	clearIdentityHolders: Boolean
+	addCampaignIDs: [ID!]
+	removeCampaignIDs: [ID!]
+	clearCampaigns: Boolean
+	addRemediationIDs: [ID!]
+	removeRemediationIDs: [ID!]
+	clearRemediations: Boolean
+	addReviewIDs: [ID!]
+	removeReviewIDs: [ID!]
+	clearReviews: Boolean
 	addFindingIDs: [ID!]
 	removeFindingIDs: [ID!]
 	clearFindings: Boolean
@@ -81083,7 +82790,7 @@ input UpdateDirectoryAccountInput {
 	scopeName: String
 	clearScopeName: Boolean
 	"""
-	directory source label set by the integration (e.g. google_workspace, github, slack)
+	directory source label set by the integration (e.g. googleworkspace, github, slack)
 	"""
 	directoryName: String
 	clearDirectoryName: Boolean
@@ -81938,6 +83645,9 @@ input UpdateEntityInput {
 	addIdentityHolderIDs: [ID!]
 	removeIdentityHolderIDs: [ID!]
 	clearIdentityHolders: Boolean
+	addControlIDs: [ID!]
+	removeControlIDs: [ID!]
+	clearControls: Boolean
 	addPlatformIDs: [ID!]
 	removePlatformIDs: [ID!]
 	clearPlatforms: Boolean
@@ -82058,6 +83768,11 @@ input UpdateEvidenceInput {
 	workflowEligibleMarker: Boolean
 	clearWorkflowEligibleMarker: Boolean
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	clearExternalUUID: Boolean
+	"""
 	the name of the evidence
 	"""
 	name: String
@@ -82154,6 +83869,11 @@ input UpdateExportInput {
 	"""
 	errorMessage: String
 	clearErrorMessage: Boolean
+	"""
+	metadata for the export record
+	"""
+	exportMetadata: ExportMetadata
+	clearExportMetadata: Boolean
 	ownerID: ID
 	clearOwner: Boolean
 	addEventIDs: [ID!]
@@ -82304,6 +84024,9 @@ input UpdateFileInput {
 	addEvidenceIDs: [ID!]
 	removeEvidenceIDs: [ID!]
 	clearEvidence: Boolean
+	addIdentityHolderIDs: [ID!]
+	removeIdentityHolderIDs: [ID!]
+	clearIdentityHolder: Boolean
 	addScanIDs: [ID!]
 	removeScanIDs: [ID!]
 	clearScan: Boolean
@@ -82404,7 +84127,7 @@ input UpdateFindingInput {
 	externalOwnerID: String
 	clearExternalOwnerID: Boolean
 	"""
-	system that produced the finding, e.g. gcp_scc
+	system that produced the finding, e.g. gcpscc
 	"""
 	source: String
 	clearSource: Boolean
@@ -82679,6 +84402,22 @@ input UpdateGroupInput {
 	The group's displayed 'friendly' name
 	"""
 	displayName: String
+	"""
+	OSCAL role identifier used for role-based responsibility mapping
+	"""
+	oscalRole: String
+	clearOscalRole: Boolean
+	"""
+	OSCAL party UUID linked to this group for responsibility mapping
+	"""
+	oscalPartyUUID: String
+	clearOscalPartyUUID: Boolean
+	"""
+	OSCAL contact UUID references associated with this group
+	"""
+	oscalContactUuids: [String!]
+	appendOscalContactUuids: [String!]
+	clearOscalContactUuids: Boolean
 	"""
 	the SCIM external ID for the group
 	"""
@@ -83086,6 +84825,9 @@ input UpdateIdentityHolderInput {
 	addDirectoryAccountIDs: [ID!]
 	removeDirectoryAccountIDs: [ID!]
 	clearDirectoryAccounts: Boolean
+	addControlIDs: [ID!]
+	removeControlIDs: [ID!]
+	clearControls: Boolean
 	addPlatformIDs: [ID!]
 	removePlatformIDs: [ID!]
 	clearPlatforms: Boolean
@@ -83095,6 +84837,9 @@ input UpdateIdentityHolderInput {
 	addTaskIDs: [ID!]
 	removeTaskIDs: [ID!]
 	clearTasks: Boolean
+	addFileIDs: [ID!]
+	removeFileIDs: [ID!]
+	clearFiles: Boolean
 	addFindingIDs: [ID!]
 	removeFindingIDs: [ID!]
 	clearFindings: Boolean
@@ -83229,6 +84974,11 @@ input UpdateInternalPolicyInput {
 	"""
 	workflowEligibleMarker: Boolean
 	clearWorkflowEligibleMarker: Boolean
+	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	clearExternalUUID: Boolean
 	ownerID: ID
 	clearOwner: Boolean
 	addBlockedGroupIDs: [ID!]
@@ -84099,6 +85849,9 @@ input UpdateOrganizationInput {
 	addProgramIDs: [ID!]
 	removeProgramIDs: [ID!]
 	clearPrograms: Boolean
+	addSystemDetailIDs: [ID!]
+	removeSystemDetailIDs: [ID!]
+	clearSystemDetails: Boolean
 	addProcedureIDs: [ID!]
 	removeProcedureIDs: [ID!]
 	clearProcedures: Boolean
@@ -84487,6 +86240,11 @@ input UpdatePlatformInput {
 	workflowEligibleMarker: Boolean
 	clearWorkflowEligibleMarker: Boolean
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	clearExternalUUID: Boolean
+	"""
 	the name of the platform
 	"""
 	name: String
@@ -84674,6 +86432,8 @@ input UpdatePlatformInput {
 	clearGeneratedScans: Boolean
 	platformOwnerID: ID
 	clearPlatformOwner: Boolean
+	systemDetailID: ID
+	clearSystemDetail: Boolean
 }
 """
 UpdateProcedureInput is used for update Procedure object.
@@ -84871,6 +86631,11 @@ input UpdateProgramInput {
 	programKindName: String
 	clearProgramKindName: Boolean
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	clearExternalUUID: Boolean
+	"""
 	the name of the program
 	"""
 	name: String
@@ -84974,6 +86739,8 @@ input UpdateProgramInput {
 	addActionPlanIDs: [ID!]
 	removeActionPlanIDs: [ID!]
 	clearActionPlans: Boolean
+	systemDetailID: ID
+	clearSystemDetail: Boolean
 	programOwnerID: ID
 	clearProgramOwner: Boolean
 	addProgramMembers: [AddProgramMembershipInput!]
@@ -85375,6 +87142,11 @@ input UpdateRiskInput {
 	"""
 	scopeName: String
 	clearScopeName: Boolean
+	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	clearExternalUUID: Boolean
 	"""
 	the name of the risk
 	"""
@@ -85798,6 +87570,11 @@ input UpdateSubcontrolInput {
 	appendTags: [String!]
 	clearTags: Boolean
 	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	clearExternalUUID: Boolean
+	"""
 	human readable title of the control for quick identification
 	"""
 	title: String @externalReadOnly(source: FRAMEWORK)
@@ -85834,6 +87611,16 @@ input UpdateSubcontrolInput {
 	"""
 	status: SubcontrolControlStatus
 	clearStatus: Boolean
+	"""
+	OSCAL-aligned implementation status of the control
+	"""
+	implementationStatus: SubcontrolControlImplementationStatus
+	clearImplementationStatus: Boolean
+	"""
+	narrative describing current implementation state for OSCAL export
+	"""
+	implementationDescription: String
+	clearImplementationDescription: Boolean
 	"""
 	source of the control, e.g. framework, template, custom, etc.
 	"""
@@ -86066,6 +87853,62 @@ input UpdateSubscriberInput {
 	clearEvents: Boolean
 }
 """
+UpdateSystemDetailInput is used for update SystemDetail object.
+Input was generated by ent.
+"""
+input UpdateSystemDetailInput {
+	"""
+	tags associated with the object
+	"""
+	tags: [String!]
+	appendTags: [String!]
+	clearTags: Boolean
+	"""
+	system name used in OSCAL metadata
+	"""
+	systemName: String
+	"""
+	system version used in OSCAL metadata
+	"""
+	version: String
+	clearVersion: Boolean
+	"""
+	system description used in OSCAL metadata
+	"""
+	description: String
+	clearDescription: Boolean
+	"""
+	authorization boundary narrative for OSCAL export
+	"""
+	authorizationBoundary: String
+	clearAuthorizationBoundary: Boolean
+	"""
+	security sensitivity level of the system
+	"""
+	sensitivityLevel: SystemDetailSystemSensitivityLevel
+	clearSensitivityLevel: Boolean
+	"""
+	timestamp when metadata was last reviewed
+	"""
+	lastReviewed: DateTime
+	clearLastReviewed: Boolean
+	"""
+	structured revision history for OSCAL metadata
+	"""
+	revisionHistory: [Any!]
+	appendRevisionHistory: [Any!]
+	clearRevisionHistory: Boolean
+	"""
+	optional escape hatch for additional OSCAL metadata fields
+	"""
+	oscalMetadataJSON: Map
+	clearOscalMetadataJSON: Boolean
+	programID: ID
+	clearProgram: Boolean
+	platformID: ID
+	clearPlatform: Boolean
+}
+"""
 UpdateTFASettingInput is used for update TFASetting object.
 Input was generated by ent.
 """
@@ -86144,6 +87987,11 @@ input UpdateTaskInput {
 	"""
 	scopeName: String
 	clearScopeName: Boolean
+	"""
+	stable external UUID for deterministic OSCAL export and round-tripping
+	"""
+	externalUUID: String
+	clearExternalUUID: Boolean
 	"""
 	the title of the task
 	"""
@@ -89682,6 +91530,28 @@ type VulnerabilityBulkCreatePayload {
 	Created vulnerabilitys
 	"""
 	vulnerabilities: [Vulnerability!]
+}
+"""
+Return response for deleteBulkVulnerability mutation
+"""
+type VulnerabilityBulkDeletePayload {
+	"""
+	Deleted vulnerability IDs
+	"""
+	deletedIDs: [ID!]!
+}
+"""
+Return response for updateBulkVulnerability mutation
+"""
+type VulnerabilityBulkUpdatePayload {
+	"""
+	Updated vulnerabilities
+	"""
+	vulnerabilities: [Vulnerability!]
+	"""
+	IDs of the updated vulnerabilities
+	"""
+	updatedIDs: [ID!]
 }
 """
 A connection to a list of items.
