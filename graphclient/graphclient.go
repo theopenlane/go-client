@@ -550,13 +550,13 @@ type GraphClient interface {
 	CreateBulkCSVSystemDetail(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVSystemDetail, error)
 	CreateBulkSystemDetail(ctx context.Context, input []*CreateSystemDetailInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkSystemDetail, error)
 	CreateSystemDetail(ctx context.Context, input CreateSystemDetailInput, interceptors ...clientv2.RequestInterceptor) (*CreateSystemDetail, error)
-	DeleteSystemDetail(ctx context.Context, deleteSystemDetailID string, interceptors ...clientv2.RequestInterceptor) (*DeleteSystemDetail, error)
-	UpdateBulkSystemDetail(ctx context.Context, ids []string, input UpdateSystemDetailInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkSystemDetail, error)
-	UpdateBulkCSVSystemDetail(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVSystemDetail, error)
 	DeleteBulkSystemDetail(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkSystemDetail, error)
+	DeleteSystemDetail(ctx context.Context, deleteSystemDetailID string, interceptors ...clientv2.RequestInterceptor) (*DeleteSystemDetail, error)
 	GetAllSystemDetails(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*SystemDetailOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllSystemDetails, error)
 	GetSystemDetailByID(ctx context.Context, systemDetailID string, interceptors ...clientv2.RequestInterceptor) (*GetSystemDetailByID, error)
 	GetSystemDetails(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*SystemDetailOrder, where *SystemDetailWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetSystemDetails, error)
+	UpdateBulkCSVSystemDetail(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVSystemDetail, error)
+	UpdateBulkSystemDetail(ctx context.Context, ids []string, input UpdateSystemDetailInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkSystemDetail, error)
 	UpdateSystemDetail(ctx context.Context, updateSystemDetailID string, input UpdateSystemDetailInput, interceptors ...clientv2.RequestInterceptor) (*UpdateSystemDetail, error)
 	CreateBulkCSVTagDefinition(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVTagDefinition, error)
 	CreateBulkTagDefinition(ctx context.Context, input []*CreateTagDefinitionInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkTagDefinition, error)
@@ -85753,313 +85753,6 @@ func (t *CreateSystemDetail_CreateSystemDetail) GetSystemDetail() *CreateSystemD
 	return &t.SystemDetail
 }
 
-type DeleteSystemDetail_DeleteSystemDetail struct {
-	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
-}
-
-func (t *DeleteSystemDetail_DeleteSystemDetail) GetDeletedID() string {
-	if t == nil {
-		t = &DeleteSystemDetail_DeleteSystemDetail{}
-	}
-	return t.DeletedID
-}
-
-type UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails struct {
-	AuthorizationBoundary *string                       "json:\"authorizationBoundary,omitempty\" graphql:\"authorizationBoundary\""
-	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description           *string                       "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID             string                        "json:\"displayID\" graphql:\"displayID\""
-	ID                    string                        "json:\"id\" graphql:\"id\""
-	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
-	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
-	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
-	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
-	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
-	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
-	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version               *string                       "json:\"version,omitempty\" graphql:\"version\""
-}
-
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetAuthorizationBoundary() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.AuthorizationBoundary
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetDescription() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.Description
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetDisplayID() string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.DisplayID
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetID() string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.ID
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetLastReviewed() *models.DateTime {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.LastReviewed
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetOscalMetadataJSON() map[string]any {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.OscalMetadataJSON
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetPlatformID() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.PlatformID
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetProgramID() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.ProgramID
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetRevisionHistory() []any {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.RevisionHistory
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetSensitivityLevel() *enums.SystemSensitivityLevel {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.SensitivityLevel
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetSystemName() string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.SystemName
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetTags() []string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.Tags
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.UpdatedBy
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetVersion() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.Version
-}
-
-type UpdateBulkSystemDetail_UpdateBulkSystemDetail struct {
-	SystemDetails []*UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails "json:\"systemDetails,omitempty\" graphql:\"systemDetails\""
-	UpdatedIDs    []string                                                       "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
-}
-
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail) GetSystemDetails() []*UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail{}
-	}
-	return t.SystemDetails
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail) GetUpdatedIDs() []string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail{}
-	}
-	return t.UpdatedIDs
-}
-
-type UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails struct {
-	AuthorizationBoundary *string                       "json:\"authorizationBoundary,omitempty\" graphql:\"authorizationBoundary\""
-	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description           *string                       "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID             string                        "json:\"displayID\" graphql:\"displayID\""
-	ID                    string                        "json:\"id\" graphql:\"id\""
-	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
-	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
-	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
-	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
-	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
-	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
-	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version               *string                       "json:\"version,omitempty\" graphql:\"version\""
-}
-
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetAuthorizationBoundary() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.AuthorizationBoundary
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetDescription() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.Description
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetDisplayID() string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.DisplayID
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetID() string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.ID
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetLastReviewed() *models.DateTime {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.LastReviewed
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetOscalMetadataJSON() map[string]any {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.OscalMetadataJSON
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetPlatformID() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.PlatformID
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetProgramID() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.ProgramID
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetRevisionHistory() []any {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.RevisionHistory
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetSensitivityLevel() *enums.SystemSensitivityLevel {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.SensitivityLevel
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetSystemName() string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.SystemName
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetTags() []string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.Tags
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.UpdatedBy
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetVersion() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.Version
-}
-
-type UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail struct {
-	SystemDetails []*UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails "json:\"systemDetails,omitempty\" graphql:\"systemDetails\""
-	UpdatedIDs    []string                                                             "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
-}
-
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail) GetSystemDetails() []*UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail{}
-	}
-	return t.SystemDetails
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail) GetUpdatedIDs() []string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail{}
-	}
-	return t.UpdatedIDs
-}
-
 type DeleteBulkSystemDetail_DeleteBulkSystemDetail struct {
 	DeletedIDs []string "json:\"deletedIDs\" graphql:\"deletedIDs\""
 }
@@ -86069,6 +85762,17 @@ func (t *DeleteBulkSystemDetail_DeleteBulkSystemDetail) GetDeletedIDs() []string
 		t = &DeleteBulkSystemDetail_DeleteBulkSystemDetail{}
 	}
 	return t.DeletedIDs
+}
+
+type DeleteSystemDetail_DeleteSystemDetail struct {
+	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
+}
+
+func (t *DeleteSystemDetail_DeleteSystemDetail) GetDeletedID() string {
+	if t == nil {
+		t = &DeleteSystemDetail_DeleteSystemDetail{}
+	}
+	return t.DeletedID
 }
 
 type GetAllSystemDetails_SystemDetails_PageInfo struct {
@@ -86595,6 +86299,302 @@ func (t *GetSystemDetails_SystemDetails) GetTotalCount() int64 {
 		t = &GetSystemDetails_SystemDetails{}
 	}
 	return t.TotalCount
+}
+
+type UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails struct {
+	AuthorizationBoundary *string                       "json:\"authorizationBoundary,omitempty\" graphql:\"authorizationBoundary\""
+	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Description           *string                       "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID             string                        "json:\"displayID\" graphql:\"displayID\""
+	ID                    string                        "json:\"id\" graphql:\"id\""
+	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
+	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
+	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
+	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
+	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
+	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
+	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
+	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version               *string                       "json:\"version,omitempty\" graphql:\"version\""
+}
+
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetAuthorizationBoundary() *string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.AuthorizationBoundary
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetDescription() *string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.Description
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetDisplayID() string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.DisplayID
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetID() string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.ID
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetLastReviewed() *models.DateTime {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.LastReviewed
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetOscalMetadataJSON() map[string]any {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.OscalMetadataJSON
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetOwnerID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.OwnerID
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetPlatformID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.PlatformID
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetProgramID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.ProgramID
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetRevisionHistory() []any {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.RevisionHistory
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetSensitivityLevel() *enums.SystemSensitivityLevel {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.SensitivityLevel
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetSystemName() string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.SystemName
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetTags() []string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.Tags
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.UpdatedBy
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetVersion() *string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
+	}
+	return t.Version
+}
+
+type UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail struct {
+	SystemDetails []*UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails "json:\"systemDetails,omitempty\" graphql:\"systemDetails\""
+	UpdatedIDs    []string                                                             "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
+}
+
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail) GetSystemDetails() []*UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail{}
+	}
+	return t.SystemDetails
+}
+func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail) GetUpdatedIDs() []string {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail{}
+	}
+	return t.UpdatedIDs
+}
+
+type UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails struct {
+	AuthorizationBoundary *string                       "json:\"authorizationBoundary,omitempty\" graphql:\"authorizationBoundary\""
+	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Description           *string                       "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID             string                        "json:\"displayID\" graphql:\"displayID\""
+	ID                    string                        "json:\"id\" graphql:\"id\""
+	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
+	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
+	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
+	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
+	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
+	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
+	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
+	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version               *string                       "json:\"version,omitempty\" graphql:\"version\""
+}
+
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetAuthorizationBoundary() *string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.AuthorizationBoundary
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetDescription() *string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.Description
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetDisplayID() string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.DisplayID
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetID() string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.ID
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetLastReviewed() *models.DateTime {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.LastReviewed
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetOscalMetadataJSON() map[string]any {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.OscalMetadataJSON
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetOwnerID() *string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.OwnerID
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetPlatformID() *string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.PlatformID
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetProgramID() *string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.ProgramID
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetRevisionHistory() []any {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.RevisionHistory
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetSensitivityLevel() *enums.SystemSensitivityLevel {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.SensitivityLevel
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetSystemName() string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.SystemName
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetTags() []string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.Tags
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.UpdatedBy
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetVersion() *string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
+	}
+	return t.Version
+}
+
+type UpdateBulkSystemDetail_UpdateBulkSystemDetail struct {
+	SystemDetails []*UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails "json:\"systemDetails,omitempty\" graphql:\"systemDetails\""
+	UpdatedIDs    []string                                                       "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
+}
+
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail) GetSystemDetails() []*UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail{}
+	}
+	return t.SystemDetails
+}
+func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail) GetUpdatedIDs() []string {
+	if t == nil {
+		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail{}
+	}
+	return t.UpdatedIDs
 }
 
 type UpdateSystemDetail_UpdateSystemDetail_SystemDetail struct {
@@ -113113,39 +113113,6 @@ func (t *CreateSystemDetail) GetCreateSystemDetail() *CreateSystemDetail_CreateS
 	return &t.CreateSystemDetail
 }
 
-type DeleteSystemDetail struct {
-	DeleteSystemDetail DeleteSystemDetail_DeleteSystemDetail "json:\"deleteSystemDetail\" graphql:\"deleteSystemDetail\""
-}
-
-func (t *DeleteSystemDetail) GetDeleteSystemDetail() *DeleteSystemDetail_DeleteSystemDetail {
-	if t == nil {
-		t = &DeleteSystemDetail{}
-	}
-	return &t.DeleteSystemDetail
-}
-
-type UpdateBulkSystemDetail struct {
-	UpdateBulkSystemDetail UpdateBulkSystemDetail_UpdateBulkSystemDetail "json:\"updateBulkSystemDetail\" graphql:\"updateBulkSystemDetail\""
-}
-
-func (t *UpdateBulkSystemDetail) GetUpdateBulkSystemDetail() *UpdateBulkSystemDetail_UpdateBulkSystemDetail {
-	if t == nil {
-		t = &UpdateBulkSystemDetail{}
-	}
-	return &t.UpdateBulkSystemDetail
-}
-
-type UpdateBulkCSVSystemDetail struct {
-	UpdateBulkCSVSystemDetail UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail "json:\"updateBulkCSVSystemDetail\" graphql:\"updateBulkCSVSystemDetail\""
-}
-
-func (t *UpdateBulkCSVSystemDetail) GetUpdateBulkCSVSystemDetail() *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail{}
-	}
-	return &t.UpdateBulkCSVSystemDetail
-}
-
 type DeleteBulkSystemDetail struct {
 	DeleteBulkSystemDetail DeleteBulkSystemDetail_DeleteBulkSystemDetail "json:\"deleteBulkSystemDetail\" graphql:\"deleteBulkSystemDetail\""
 }
@@ -113155,6 +113122,17 @@ func (t *DeleteBulkSystemDetail) GetDeleteBulkSystemDetail() *DeleteBulkSystemDe
 		t = &DeleteBulkSystemDetail{}
 	}
 	return &t.DeleteBulkSystemDetail
+}
+
+type DeleteSystemDetail struct {
+	DeleteSystemDetail DeleteSystemDetail_DeleteSystemDetail "json:\"deleteSystemDetail\" graphql:\"deleteSystemDetail\""
+}
+
+func (t *DeleteSystemDetail) GetDeleteSystemDetail() *DeleteSystemDetail_DeleteSystemDetail {
+	if t == nil {
+		t = &DeleteSystemDetail{}
+	}
+	return &t.DeleteSystemDetail
 }
 
 type GetAllSystemDetails struct {
@@ -113188,6 +113166,28 @@ func (t *GetSystemDetails) GetSystemDetails() *GetSystemDetails_SystemDetails {
 		t = &GetSystemDetails{}
 	}
 	return &t.SystemDetails
+}
+
+type UpdateBulkCSVSystemDetail struct {
+	UpdateBulkCSVSystemDetail UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail "json:\"updateBulkCSVSystemDetail\" graphql:\"updateBulkCSVSystemDetail\""
+}
+
+func (t *UpdateBulkCSVSystemDetail) GetUpdateBulkCSVSystemDetail() *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail {
+	if t == nil {
+		t = &UpdateBulkCSVSystemDetail{}
+	}
+	return &t.UpdateBulkCSVSystemDetail
+}
+
+type UpdateBulkSystemDetail struct {
+	UpdateBulkSystemDetail UpdateBulkSystemDetail_UpdateBulkSystemDetail "json:\"updateBulkSystemDetail\" graphql:\"updateBulkSystemDetail\""
+}
+
+func (t *UpdateBulkSystemDetail) GetUpdateBulkSystemDetail() *UpdateBulkSystemDetail_UpdateBulkSystemDetail {
+	if t == nil {
+		t = &UpdateBulkSystemDetail{}
+	}
+	return &t.UpdateBulkSystemDetail
 }
 
 type UpdateSystemDetail struct {
@@ -140023,119 +140023,6 @@ func (c *Client) CreateSystemDetail(ctx context.Context, input CreateSystemDetai
 	return &res, nil
 }
 
-const DeleteSystemDetailDocument = `mutation DeleteSystemDetail ($deleteSystemDetailId: ID!) {
-	deleteSystemDetail(id: $deleteSystemDetailId) {
-		deletedID
-	}
-}
-`
-
-func (c *Client) DeleteSystemDetail(ctx context.Context, deleteSystemDetailID string, interceptors ...clientv2.RequestInterceptor) (*DeleteSystemDetail, error) {
-	vars := map[string]any{
-		"deleteSystemDetailId": deleteSystemDetailID,
-	}
-
-	var res DeleteSystemDetail
-	if err := c.Client.Post(ctx, "DeleteSystemDetail", DeleteSystemDetailDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateBulkSystemDetailDocument = `mutation UpdateBulkSystemDetail ($ids: [ID!]!, $input: UpdateSystemDetailInput!) {
-	updateBulkSystemDetail(ids: $ids, input: $input) {
-		systemDetails {
-			authorizationBoundary
-			createdAt
-			createdBy
-			description
-			displayID
-			id
-			lastReviewed
-			oscalMetadataJSON
-			ownerID
-			platformID
-			programID
-			revisionHistory
-			sensitivityLevel
-			systemName
-			tags
-			updatedAt
-			updatedBy
-			version
-		}
-		updatedIDs
-	}
-}
-`
-
-func (c *Client) UpdateBulkSystemDetail(ctx context.Context, ids []string, input UpdateSystemDetailInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkSystemDetail, error) {
-	vars := map[string]any{
-		"ids":   ids,
-		"input": input,
-	}
-
-	var res UpdateBulkSystemDetail
-	if err := c.Client.Post(ctx, "UpdateBulkSystemDetail", UpdateBulkSystemDetailDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateBulkCSVSystemDetailDocument = `mutation UpdateBulkCSVSystemDetail ($input: Upload!) {
-	updateBulkCSVSystemDetail(input: $input) {
-		systemDetails {
-			authorizationBoundary
-			createdAt
-			createdBy
-			description
-			displayID
-			id
-			lastReviewed
-			oscalMetadataJSON
-			ownerID
-			platformID
-			programID
-			revisionHistory
-			sensitivityLevel
-			systemName
-			tags
-			updatedAt
-			updatedBy
-			version
-		}
-		updatedIDs
-	}
-}
-`
-
-func (c *Client) UpdateBulkCSVSystemDetail(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVSystemDetail, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res UpdateBulkCSVSystemDetail
-	if err := c.Client.Post(ctx, "UpdateBulkCSVSystemDetail", UpdateBulkCSVSystemDetailDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const DeleteBulkSystemDetailDocument = `mutation DeleteBulkSystemDetail ($ids: [ID!]!) {
 	deleteBulkSystemDetail(ids: $ids) {
 		deletedIDs
@@ -140150,6 +140037,30 @@ func (c *Client) DeleteBulkSystemDetail(ctx context.Context, ids []string, inter
 
 	var res DeleteBulkSystemDetail
 	if err := c.Client.Post(ctx, "DeleteBulkSystemDetail", DeleteBulkSystemDetailDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const DeleteSystemDetailDocument = `mutation DeleteSystemDetail ($deleteSystemDetailId: ID!) {
+	deleteSystemDetail(id: $deleteSystemDetailId) {
+		deletedID
+	}
+}
+`
+
+func (c *Client) DeleteSystemDetail(ctx context.Context, deleteSystemDetailID string, interceptors ...clientv2.RequestInterceptor) (*DeleteSystemDetail, error) {
+	vars := map[string]any{
+		"deleteSystemDetailId": deleteSystemDetailID,
+	}
+
+	var res DeleteSystemDetail
+	if err := c.Client.Post(ctx, "DeleteSystemDetail", DeleteSystemDetailDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -140304,6 +140215,95 @@ func (c *Client) GetSystemDetails(ctx context.Context, first *int64, last *int64
 
 	var res GetSystemDetails
 	if err := c.Client.Post(ctx, "GetSystemDetails", GetSystemDetailsDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateBulkCSVSystemDetailDocument = `mutation UpdateBulkCSVSystemDetail ($input: Upload!) {
+	updateBulkCSVSystemDetail(input: $input) {
+		systemDetails {
+			authorizationBoundary
+			createdAt
+			createdBy
+			description
+			displayID
+			id
+			lastReviewed
+			oscalMetadataJSON
+			ownerID
+			platformID
+			programID
+			revisionHistory
+			sensitivityLevel
+			systemName
+			tags
+			updatedAt
+			updatedBy
+			version
+		}
+		updatedIDs
+	}
+}
+`
+
+func (c *Client) UpdateBulkCSVSystemDetail(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVSystemDetail, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res UpdateBulkCSVSystemDetail
+	if err := c.Client.Post(ctx, "UpdateBulkCSVSystemDetail", UpdateBulkCSVSystemDetailDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateBulkSystemDetailDocument = `mutation UpdateBulkSystemDetail ($ids: [ID!]!, $input: UpdateSystemDetailInput!) {
+	updateBulkSystemDetail(ids: $ids, input: $input) {
+		systemDetails {
+			authorizationBoundary
+			createdAt
+			createdBy
+			description
+			displayID
+			id
+			lastReviewed
+			oscalMetadataJSON
+			ownerID
+			platformID
+			programID
+			revisionHistory
+			sensitivityLevel
+			systemName
+			tags
+			updatedAt
+			updatedBy
+			version
+		}
+		updatedIDs
+	}
+}
+`
+
+func (c *Client) UpdateBulkSystemDetail(ctx context.Context, ids []string, input UpdateSystemDetailInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkSystemDetail, error) {
+	vars := map[string]any{
+		"ids":   ids,
+		"input": input,
+	}
+
+	var res UpdateBulkSystemDetail
+	if err := c.Client.Post(ctx, "UpdateBulkSystemDetail", UpdateBulkSystemDetailDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -147125,13 +147125,13 @@ var DocumentOperationNames = map[string]string{
 	CreateBulkCSVSystemDetailDocument:            "CreateBulkCSVSystemDetail",
 	CreateBulkSystemDetailDocument:               "CreateBulkSystemDetail",
 	CreateSystemDetailDocument:                   "CreateSystemDetail",
-	DeleteSystemDetailDocument:                   "DeleteSystemDetail",
-	UpdateBulkSystemDetailDocument:               "UpdateBulkSystemDetail",
-	UpdateBulkCSVSystemDetailDocument:            "UpdateBulkCSVSystemDetail",
 	DeleteBulkSystemDetailDocument:               "DeleteBulkSystemDetail",
+	DeleteSystemDetailDocument:                   "DeleteSystemDetail",
 	GetAllSystemDetailsDocument:                  "GetAllSystemDetails",
 	GetSystemDetailByIDDocument:                  "GetSystemDetailByID",
 	GetSystemDetailsDocument:                     "GetSystemDetails",
+	UpdateBulkCSVSystemDetailDocument:            "UpdateBulkCSVSystemDetail",
+	UpdateBulkSystemDetailDocument:               "UpdateBulkSystemDetail",
 	UpdateSystemDetailDocument:                   "UpdateSystemDetail",
 	CreateBulkCSVTagDefinitionDocument:           "CreateBulkCSVTagDefinition",
 	CreateBulkTagDefinitionDocument:              "CreateBulkTagDefinition",
