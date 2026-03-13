@@ -3,7 +3,7 @@ module github.com/theopenlane/go-client
 go 1.25.7
 
 require (
-	github.com/99designs/gqlgen v0.17.87
+	github.com/99designs/gqlgen v0.17.88
 	github.com/gqlgo/gqlgenc v0.33.1
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.34.0
@@ -72,7 +72,7 @@ require (
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/samber/mo v1.16.0 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
-	github.com/sosodev/duration v1.3.1 // indirect
+	github.com/sosodev/duration v1.4.0 // indirect
 	github.com/stoewer/go-strcase v1.3.1 // indirect
 	github.com/theopenlane/core v1.11.9 // indirect
 	github.com/theopenlane/echox v0.3.0 // indirect
