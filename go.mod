@@ -14,7 +14,7 @@ require (
 	github.com/theopenlane/iam v0.25.0
 	github.com/theopenlane/utils v0.7.0
 	github.com/vektah/gqlparser/v2 v2.5.32
-	golang.org/x/oauth2 v0.35.0
+	golang.org/x/oauth2 v0.36.0
 )
 
 require (
