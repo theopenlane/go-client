@@ -148,6 +148,8 @@ query GetTrustCenterByID($trustCenterId: ID!) {
     previewDomain {
       cnameRecord
       dnsVerification {
+        id
+        cloudflareHostnameID
         dnsTxtRecord
         dnsTxtValue
         dnsVerificationStatus
