@@ -91217,11 +91217,13 @@ type GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification struct {
 	AcmeChallengePath           *string                     "json:\"acmeChallengePath,omitempty\" graphql:\"acmeChallengePath\""
 	AcmeChallengeStatus         enums.SSLVerificationStatus "json:\"acmeChallengeStatus\" graphql:\"acmeChallengeStatus\""
 	AcmeChallengeStatusReason   *string                     "json:\"acmeChallengeStatusReason,omitempty\" graphql:\"acmeChallengeStatusReason\""
+	CloudflareHostnameID        string                      "json:\"cloudflareHostnameID\" graphql:\"cloudflareHostnameID\""
 	DNSTxtRecord                string                      "json:\"dnsTxtRecord\" graphql:\"dnsTxtRecord\""
 	DNSTxtValue                 string                      "json:\"dnsTxtValue\" graphql:\"dnsTxtValue\""
 	DNSVerificationStatus       enums.DNSVerificationStatus "json:\"dnsVerificationStatus\" graphql:\"dnsVerificationStatus\""
 	DNSVerificationStatusReason *string                     "json:\"dnsVerificationStatusReason,omitempty\" graphql:\"dnsVerificationStatusReason\""
 	ExpectedAcmeChallengeValue  *string                     "json:\"expectedAcmeChallengeValue,omitempty\" graphql:\"expectedAcmeChallengeValue\""
+	ID                          string                      "json:\"id\" graphql:\"id\""
 }
 
 func (t *GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification) GetAcmeChallengePath() *string {
@@ -91241,6 +91243,12 @@ func (t *GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification) GetAcmeCh
 		t = &GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification{}
 	}
 	return t.AcmeChallengeStatusReason
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification) GetCloudflareHostnameID() string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification{}
+	}
+	return t.CloudflareHostnameID
 }
 func (t *GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification) GetDNSTxtRecord() string {
 	if t == nil {
@@ -91271,6 +91279,12 @@ func (t *GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification) GetExpect
 		t = &GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification{}
 	}
 	return t.ExpectedAcmeChallengeValue
+}
+func (t *GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification) GetID() string {
+	if t == nil {
+		t = &GetTrustCenterByID_TrustCenter_PreviewDomain_DNSVerification{}
+	}
+	return t.ID
 }
 
 type GetTrustCenterByID_TrustCenter_PreviewDomain struct {
@@ -141811,6 +141825,8 @@ const GetTrustCenterByIDDocument = `query GetTrustCenterByID ($trustCenterId: ID
 		previewDomain {
 			cnameRecord
 			dnsVerification {
+				id
+				cloudflareHostnameID
 				dnsTxtRecord
 				dnsTxtValue
 				dnsVerificationStatus
