@@ -44375,6 +44375,15 @@ type Mutation {
 		input: UpdateNotificationInput!
 	): NotificationUpdatePayload!
 	"""
+	Create a new notification
+	"""
+	createNotification(
+		"""
+		values of the notification
+		"""
+		input: CreateNotificationInput!
+	): NotificationCreatePayload!
+	"""
 	Update multiple existing notifications
 	"""
 	markNotificationsAsRead(
@@ -48652,6 +48661,15 @@ type NotificationPreferenceConnection {
 	Identifies the total count of items in the connection.
 	"""
 	totalCount: Int!
+}
+"""
+Return response for createNotification mutation
+"""
+type NotificationCreatePayload {
+	"""
+	Created notification
+	"""
+	notification: Notification!
 }
 """
 Return response for createNotificationPreference mutation
