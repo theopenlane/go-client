@@ -3,15 +3,15 @@ module github.com/theopenlane/go-client
 go 1.25.8
 
 require (
-	github.com/99designs/gqlgen v0.17.88
+	github.com/99designs/gqlgen v0.17.89
 	github.com/gqlgo/gqlgenc v0.33.1
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.53.0
-	github.com/theopenlane/core/common v1.0.14
+	github.com/theopenlane/core/common v1.0.15
 	github.com/theopenlane/entx v0.23.0
 	github.com/theopenlane/httpsling v0.3.0
-	github.com/theopenlane/iam v0.27.4
+	github.com/theopenlane/iam v0.27.5
 	github.com/theopenlane/utils v0.7.0
 	github.com/vektah/gqlparser/v2 v2.5.32
 	golang.org/x/oauth2 v0.36.0
@@ -20,7 +20,7 @@ require (
 require (
 	ariga.io/atlas v1.1.0 // indirect
 	entgo.io/contrib v0.7.0 // indirect
-	entgo.io/ent v0.14.6-0.20260317212542-e0ba79d911cc // indirect
+	entgo.io/ent v0.14.6 // indirect
 	github.com/XSAM/otelsql v0.41.0 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/agnivade/levenshtein v1.2.1 // indirect
@@ -66,7 +66,7 @@ require (
 	github.com/samber/mo v1.16.0 // indirect
 	github.com/sosodev/duration v1.4.0 // indirect
 	github.com/stoewer/go-strcase v1.3.1 // indirect
-	github.com/theopenlane/core v1.12.4 // indirect
+	github.com/theopenlane/core v1.13.5 // indirect
 	github.com/theopenlane/echox v0.3.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
