@@ -9,7 +9,7 @@ require (
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.53.0
 	github.com/theopenlane/core/common v1.0.15
-	github.com/theopenlane/entx v0.23.0
+	github.com/theopenlane/entx v0.24.0
 	github.com/theopenlane/httpsling v0.3.0
 	github.com/theopenlane/iam v0.27.5
 	github.com/theopenlane/utils v0.7.0
