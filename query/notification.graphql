@@ -10,7 +10,6 @@ mutation CreateNotification($input: CreateNotificationInput!) {
       notificationType
       objectType
       ownerID
-      readAt
       tags
       title
       topic

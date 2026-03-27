@@ -56043,7 +56043,6 @@ type CreateNotification_CreateNotification_Notification struct {
 	NotificationType enums.NotificationType   "json:\"notificationType\" graphql:\"notificationType\""
 	ObjectType       string                   "json:\"objectType\" graphql:\"objectType\""
 	OwnerID          *string                  "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	ReadAt           *models.DateTime         "json:\"readAt,omitempty\" graphql:\"readAt\""
 	Tags             []string                 "json:\"tags,omitempty\" graphql:\"tags\""
 	Title            string                   "json:\"title\" graphql:\"title\""
 	Topic            *enums.NotificationTopic "json:\"topic,omitempty\" graphql:\"topic\""
@@ -56105,12 +56104,6 @@ func (t *CreateNotification_CreateNotification_Notification) GetOwnerID() *strin
 		t = &CreateNotification_CreateNotification_Notification{}
 	}
 	return t.OwnerID
-}
-func (t *CreateNotification_CreateNotification_Notification) GetReadAt() *models.DateTime {
-	if t == nil {
-		t = &CreateNotification_CreateNotification_Notification{}
-	}
-	return t.ReadAt
 }
 func (t *CreateNotification_CreateNotification_Notification) GetTags() []string {
 	if t == nil {
@@ -131750,7 +131743,6 @@ const CreateNotificationDocument = `mutation CreateNotification ($input: CreateN
 			notificationType
 			objectType
 			ownerID
-			readAt
 			tags
 			title
 			topic
