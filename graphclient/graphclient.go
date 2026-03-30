@@ -37010,6 +37010,7 @@ type CreateBulkCSVFinding_CreateBulkCSVFinding_Findings struct {
 	ExternalOwnerID    *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
 	ExternalURI        *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
 	FindingClass       *string          "json:\"findingClass,omitempty\" graphql:\"findingClass\""
+	FindingStatusName  *string          "json:\"findingStatusName,omitempty\" graphql:\"findingStatusName\""
 	ID                 string           "json:\"id\" graphql:\"id\""
 	Impact             *float64         "json:\"impact,omitempty\" graphql:\"impact\""
 	Metadata           map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
@@ -37030,7 +37031,6 @@ type CreateBulkCSVFinding_CreateBulkCSVFinding_Findings struct {
 	Source             *string          "json:\"source,omitempty\" graphql:\"source\""
 	SourceUpdatedAt    *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
 	State              *string          "json:\"state,omitempty\" graphql:\"state\""
-	Status             *string          "json:\"status,omitempty\" graphql:\"status\""
 	StepsToReproduce   []string         "json:\"stepsToReproduce,omitempty\" graphql:\"stepsToReproduce\""
 	Tags               []string         "json:\"tags,omitempty\" graphql:\"tags\""
 	TargetDetails      map[string]any   "json:\"targetDetails,omitempty\" graphql:\"targetDetails\""
@@ -37124,6 +37124,12 @@ func (t *CreateBulkCSVFinding_CreateBulkCSVFinding_Findings) GetFindingClass() *
 		t = &CreateBulkCSVFinding_CreateBulkCSVFinding_Findings{}
 	}
 	return t.FindingClass
+}
+func (t *CreateBulkCSVFinding_CreateBulkCSVFinding_Findings) GetFindingStatusName() *string {
+	if t == nil {
+		t = &CreateBulkCSVFinding_CreateBulkCSVFinding_Findings{}
+	}
+	return t.FindingStatusName
 }
 func (t *CreateBulkCSVFinding_CreateBulkCSVFinding_Findings) GetID() string {
 	if t == nil {
@@ -37245,12 +37251,6 @@ func (t *CreateBulkCSVFinding_CreateBulkCSVFinding_Findings) GetState() *string 
 	}
 	return t.State
 }
-func (t *CreateBulkCSVFinding_CreateBulkCSVFinding_Findings) GetStatus() *string {
-	if t == nil {
-		t = &CreateBulkCSVFinding_CreateBulkCSVFinding_Findings{}
-	}
-	return t.Status
-}
 func (t *CreateBulkCSVFinding_CreateBulkCSVFinding_Findings) GetStepsToReproduce() []string {
 	if t == nil {
 		t = &CreateBulkCSVFinding_CreateBulkCSVFinding_Findings{}
@@ -37326,6 +37326,7 @@ type CreateBulkFinding_CreateBulkFinding_Findings struct {
 	ExternalOwnerID    *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
 	ExternalURI        *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
 	FindingClass       *string          "json:\"findingClass,omitempty\" graphql:\"findingClass\""
+	FindingStatusName  *string          "json:\"findingStatusName,omitempty\" graphql:\"findingStatusName\""
 	ID                 string           "json:\"id\" graphql:\"id\""
 	Impact             *float64         "json:\"impact,omitempty\" graphql:\"impact\""
 	Metadata           map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
@@ -37346,7 +37347,6 @@ type CreateBulkFinding_CreateBulkFinding_Findings struct {
 	Source             *string          "json:\"source,omitempty\" graphql:\"source\""
 	SourceUpdatedAt    *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
 	State              *string          "json:\"state,omitempty\" graphql:\"state\""
-	Status             *string          "json:\"status,omitempty\" graphql:\"status\""
 	StepsToReproduce   []string         "json:\"stepsToReproduce,omitempty\" graphql:\"stepsToReproduce\""
 	Tags               []string         "json:\"tags,omitempty\" graphql:\"tags\""
 	TargetDetails      map[string]any   "json:\"targetDetails,omitempty\" graphql:\"targetDetails\""
@@ -37440,6 +37440,12 @@ func (t *CreateBulkFinding_CreateBulkFinding_Findings) GetFindingClass() *string
 		t = &CreateBulkFinding_CreateBulkFinding_Findings{}
 	}
 	return t.FindingClass
+}
+func (t *CreateBulkFinding_CreateBulkFinding_Findings) GetFindingStatusName() *string {
+	if t == nil {
+		t = &CreateBulkFinding_CreateBulkFinding_Findings{}
+	}
+	return t.FindingStatusName
 }
 func (t *CreateBulkFinding_CreateBulkFinding_Findings) GetID() string {
 	if t == nil {
@@ -37561,12 +37567,6 @@ func (t *CreateBulkFinding_CreateBulkFinding_Findings) GetState() *string {
 	}
 	return t.State
 }
-func (t *CreateBulkFinding_CreateBulkFinding_Findings) GetStatus() *string {
-	if t == nil {
-		t = &CreateBulkFinding_CreateBulkFinding_Findings{}
-	}
-	return t.Status
-}
 func (t *CreateBulkFinding_CreateBulkFinding_Findings) GetStepsToReproduce() []string {
 	if t == nil {
 		t = &CreateBulkFinding_CreateBulkFinding_Findings{}
@@ -37642,6 +37642,7 @@ type CreateFinding_CreateFinding_Finding struct {
 	ExternalOwnerID    *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
 	ExternalURI        *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
 	FindingClass       *string          "json:\"findingClass,omitempty\" graphql:\"findingClass\""
+	FindingStatusName  *string          "json:\"findingStatusName,omitempty\" graphql:\"findingStatusName\""
 	ID                 string           "json:\"id\" graphql:\"id\""
 	Impact             *float64         "json:\"impact,omitempty\" graphql:\"impact\""
 	Metadata           map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
@@ -37662,7 +37663,6 @@ type CreateFinding_CreateFinding_Finding struct {
 	Source             *string          "json:\"source,omitempty\" graphql:\"source\""
 	SourceUpdatedAt    *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
 	State              *string          "json:\"state,omitempty\" graphql:\"state\""
-	Status             *string          "json:\"status,omitempty\" graphql:\"status\""
 	StepsToReproduce   []string         "json:\"stepsToReproduce,omitempty\" graphql:\"stepsToReproduce\""
 	Tags               []string         "json:\"tags,omitempty\" graphql:\"tags\""
 	TargetDetails      map[string]any   "json:\"targetDetails,omitempty\" graphql:\"targetDetails\""
@@ -37756,6 +37756,12 @@ func (t *CreateFinding_CreateFinding_Finding) GetFindingClass() *string {
 		t = &CreateFinding_CreateFinding_Finding{}
 	}
 	return t.FindingClass
+}
+func (t *CreateFinding_CreateFinding_Finding) GetFindingStatusName() *string {
+	if t == nil {
+		t = &CreateFinding_CreateFinding_Finding{}
+	}
+	return t.FindingStatusName
 }
 func (t *CreateFinding_CreateFinding_Finding) GetID() string {
 	if t == nil {
@@ -37876,12 +37882,6 @@ func (t *CreateFinding_CreateFinding_Finding) GetState() *string {
 		t = &CreateFinding_CreateFinding_Finding{}
 	}
 	return t.State
-}
-func (t *CreateFinding_CreateFinding_Finding) GetStatus() *string {
-	if t == nil {
-		t = &CreateFinding_CreateFinding_Finding{}
-	}
-	return t.Status
 }
 func (t *CreateFinding_CreateFinding_Finding) GetStepsToReproduce() []string {
 	if t == nil {
@@ -38109,6 +38109,7 @@ type GetAllFindings_Findings_Edges_Node struct {
 	ExternalOwnerID    *string                                            "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
 	ExternalURI        *string                                            "json:\"externalURI,omitempty\" graphql:\"externalURI\""
 	FindingClass       *string                                            "json:\"findingClass,omitempty\" graphql:\"findingClass\""
+	FindingStatusName  *string                                            "json:\"findingStatusName,omitempty\" graphql:\"findingStatusName\""
 	ID                 string                                             "json:\"id\" graphql:\"id\""
 	Impact             *float64                                           "json:\"impact,omitempty\" graphql:\"impact\""
 	Metadata           map[string]any                                     "json:\"metadata,omitempty\" graphql:\"metadata\""
@@ -38130,7 +38131,6 @@ type GetAllFindings_Findings_Edges_Node struct {
 	Source             *string                                            "json:\"source,omitempty\" graphql:\"source\""
 	SourceUpdatedAt    *models.DateTime                                   "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
 	State              *string                                            "json:\"state,omitempty\" graphql:\"state\""
-	Status             *string                                            "json:\"status,omitempty\" graphql:\"status\""
 	StepsToReproduce   []string                                           "json:\"stepsToReproduce,omitempty\" graphql:\"stepsToReproduce\""
 	Tags               []string                                           "json:\"tags,omitempty\" graphql:\"tags\""
 	TargetDetails      map[string]any                                     "json:\"targetDetails,omitempty\" graphql:\"targetDetails\""
@@ -38225,6 +38225,12 @@ func (t *GetAllFindings_Findings_Edges_Node) GetFindingClass() *string {
 		t = &GetAllFindings_Findings_Edges_Node{}
 	}
 	return t.FindingClass
+}
+func (t *GetAllFindings_Findings_Edges_Node) GetFindingStatusName() *string {
+	if t == nil {
+		t = &GetAllFindings_Findings_Edges_Node{}
+	}
+	return t.FindingStatusName
 }
 func (t *GetAllFindings_Findings_Edges_Node) GetID() string {
 	if t == nil {
@@ -38351,12 +38357,6 @@ func (t *GetAllFindings_Findings_Edges_Node) GetState() *string {
 		t = &GetAllFindings_Findings_Edges_Node{}
 	}
 	return t.State
-}
-func (t *GetAllFindings_Findings_Edges_Node) GetStatus() *string {
-	if t == nil {
-		t = &GetAllFindings_Findings_Edges_Node{}
-	}
-	return t.Status
 }
 func (t *GetAllFindings_Findings_Edges_Node) GetStepsToReproduce() []string {
 	if t == nil {
@@ -38572,6 +38572,7 @@ type GetFindingByID_Finding struct {
 	ExternalOwnerID    *string                                "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
 	ExternalURI        *string                                "json:\"externalURI,omitempty\" graphql:\"externalURI\""
 	FindingClass       *string                                "json:\"findingClass,omitempty\" graphql:\"findingClass\""
+	FindingStatusName  *string                                "json:\"findingStatusName,omitempty\" graphql:\"findingStatusName\""
 	ID                 string                                 "json:\"id\" graphql:\"id\""
 	Impact             *float64                               "json:\"impact,omitempty\" graphql:\"impact\""
 	Metadata           map[string]any                         "json:\"metadata,omitempty\" graphql:\"metadata\""
@@ -38593,7 +38594,6 @@ type GetFindingByID_Finding struct {
 	Source             *string                                "json:\"source,omitempty\" graphql:\"source\""
 	SourceUpdatedAt    *models.DateTime                       "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
 	State              *string                                "json:\"state,omitempty\" graphql:\"state\""
-	Status             *string                                "json:\"status,omitempty\" graphql:\"status\""
 	StepsToReproduce   []string                               "json:\"stepsToReproduce,omitempty\" graphql:\"stepsToReproduce\""
 	Tags               []string                               "json:\"tags,omitempty\" graphql:\"tags\""
 	TargetDetails      map[string]any                         "json:\"targetDetails,omitempty\" graphql:\"targetDetails\""
@@ -38688,6 +38688,12 @@ func (t *GetFindingByID_Finding) GetFindingClass() *string {
 		t = &GetFindingByID_Finding{}
 	}
 	return t.FindingClass
+}
+func (t *GetFindingByID_Finding) GetFindingStatusName() *string {
+	if t == nil {
+		t = &GetFindingByID_Finding{}
+	}
+	return t.FindingStatusName
 }
 func (t *GetFindingByID_Finding) GetID() string {
 	if t == nil {
@@ -38814,12 +38820,6 @@ func (t *GetFindingByID_Finding) GetState() *string {
 		t = &GetFindingByID_Finding{}
 	}
 	return t.State
-}
-func (t *GetFindingByID_Finding) GetStatus() *string {
-	if t == nil {
-		t = &GetFindingByID_Finding{}
-	}
-	return t.Status
 }
 func (t *GetFindingByID_Finding) GetStepsToReproduce() []string {
 	if t == nil {
@@ -39031,6 +39031,7 @@ type GetFindings_Findings_Edges_Node struct {
 	ExternalOwnerID    *string                                         "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
 	ExternalURI        *string                                         "json:\"externalURI,omitempty\" graphql:\"externalURI\""
 	FindingClass       *string                                         "json:\"findingClass,omitempty\" graphql:\"findingClass\""
+	FindingStatusName  *string                                         "json:\"findingStatusName,omitempty\" graphql:\"findingStatusName\""
 	ID                 string                                          "json:\"id\" graphql:\"id\""
 	Impact             *float64                                        "json:\"impact,omitempty\" graphql:\"impact\""
 	Metadata           map[string]any                                  "json:\"metadata,omitempty\" graphql:\"metadata\""
@@ -39052,7 +39053,6 @@ type GetFindings_Findings_Edges_Node struct {
 	Source             *string                                         "json:\"source,omitempty\" graphql:\"source\""
 	SourceUpdatedAt    *models.DateTime                                "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
 	State              *string                                         "json:\"state,omitempty\" graphql:\"state\""
-	Status             *string                                         "json:\"status,omitempty\" graphql:\"status\""
 	StepsToReproduce   []string                                        "json:\"stepsToReproduce,omitempty\" graphql:\"stepsToReproduce\""
 	Tags               []string                                        "json:\"tags,omitempty\" graphql:\"tags\""
 	TargetDetails      map[string]any                                  "json:\"targetDetails,omitempty\" graphql:\"targetDetails\""
@@ -39147,6 +39147,12 @@ func (t *GetFindings_Findings_Edges_Node) GetFindingClass() *string {
 		t = &GetFindings_Findings_Edges_Node{}
 	}
 	return t.FindingClass
+}
+func (t *GetFindings_Findings_Edges_Node) GetFindingStatusName() *string {
+	if t == nil {
+		t = &GetFindings_Findings_Edges_Node{}
+	}
+	return t.FindingStatusName
 }
 func (t *GetFindings_Findings_Edges_Node) GetID() string {
 	if t == nil {
@@ -39274,12 +39280,6 @@ func (t *GetFindings_Findings_Edges_Node) GetState() *string {
 	}
 	return t.State
 }
-func (t *GetFindings_Findings_Edges_Node) GetStatus() *string {
-	if t == nil {
-		t = &GetFindings_Findings_Edges_Node{}
-	}
-	return t.Status
-}
 func (t *GetFindings_Findings_Edges_Node) GetStepsToReproduce() []string {
 	if t == nil {
 		t = &GetFindings_Findings_Edges_Node{}
@@ -39386,6 +39386,7 @@ type UpdateFinding_UpdateFinding_Finding struct {
 	ExternalOwnerID    *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
 	ExternalURI        *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
 	FindingClass       *string          "json:\"findingClass,omitempty\" graphql:\"findingClass\""
+	FindingStatusName  *string          "json:\"findingStatusName,omitempty\" graphql:\"findingStatusName\""
 	ID                 string           "json:\"id\" graphql:\"id\""
 	Impact             *float64         "json:\"impact,omitempty\" graphql:\"impact\""
 	Metadata           map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
@@ -39406,7 +39407,6 @@ type UpdateFinding_UpdateFinding_Finding struct {
 	Source             *string          "json:\"source,omitempty\" graphql:\"source\""
 	SourceUpdatedAt    *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
 	State              *string          "json:\"state,omitempty\" graphql:\"state\""
-	Status             *string          "json:\"status,omitempty\" graphql:\"status\""
 	StepsToReproduce   []string         "json:\"stepsToReproduce,omitempty\" graphql:\"stepsToReproduce\""
 	Tags               []string         "json:\"tags,omitempty\" graphql:\"tags\""
 	TargetDetails      map[string]any   "json:\"targetDetails,omitempty\" graphql:\"targetDetails\""
@@ -39500,6 +39500,12 @@ func (t *UpdateFinding_UpdateFinding_Finding) GetFindingClass() *string {
 		t = &UpdateFinding_UpdateFinding_Finding{}
 	}
 	return t.FindingClass
+}
+func (t *UpdateFinding_UpdateFinding_Finding) GetFindingStatusName() *string {
+	if t == nil {
+		t = &UpdateFinding_UpdateFinding_Finding{}
+	}
+	return t.FindingStatusName
 }
 func (t *UpdateFinding_UpdateFinding_Finding) GetID() string {
 	if t == nil {
@@ -39620,12 +39626,6 @@ func (t *UpdateFinding_UpdateFinding_Finding) GetState() *string {
 		t = &UpdateFinding_UpdateFinding_Finding{}
 	}
 	return t.State
-}
-func (t *UpdateFinding_UpdateFinding_Finding) GetStatus() *string {
-	if t == nil {
-		t = &UpdateFinding_UpdateFinding_Finding{}
-	}
-	return t.Status
 }
 func (t *UpdateFinding_UpdateFinding_Finding) GetStepsToReproduce() []string {
 	if t == nil {
@@ -100342,41 +100342,41 @@ func (t *UpdateUserSetting_UpdateUserSetting) GetUserSetting() *UpdateUserSettin
 }
 
 type CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities struct {
-	Blocking        *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
-	Category        *string          "json:\"category,omitempty\" graphql:\"category\""
-	CreatedAt       *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CveID           *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
-	Description     *string          "json:\"description,omitempty\" graphql:\"description\""
-	DiscoveredAt    *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
-	DisplayName     *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
-	Exploitability  *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
-	ExternalID      string           "json:\"externalID\" graphql:\"externalID\""
-	ExternalOwnerID *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
-	ExternalURI     *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
-	ID              string           "json:\"id\" graphql:\"id\""
-	Impact          *float64         "json:\"impact,omitempty\" graphql:\"impact\""
-	Impacts         []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
-	Metadata        map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Open            *bool            "json:\"open,omitempty\" graphql:\"open\""
-	Priority        *string          "json:\"priority,omitempty\" graphql:\"priority\""
-	Production      *bool            "json:\"production,omitempty\" graphql:\"production\""
-	Public          *bool            "json:\"public,omitempty\" graphql:\"public\""
-	PublishedAt     *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	RawPayload      map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
-	References      []string         "json:\"references,omitempty\" graphql:\"references\""
-	RemediationSLA  *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
-	Score           *float64         "json:\"score,omitempty\" graphql:\"score\""
-	Severity        *string          "json:\"severity,omitempty\" graphql:\"severity\""
-	Source          *string          "json:\"source,omitempty\" graphql:\"source\""
-	SourceUpdatedAt *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
-	Status          *string          "json:\"status,omitempty\" graphql:\"status\""
-	Summary         *string          "json:\"summary,omitempty\" graphql:\"summary\""
-	Tags            []string         "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt       *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Validated       *bool            "json:\"validated,omitempty\" graphql:\"validated\""
-	Vector          *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	Blocking                *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
+	Category                *string          "json:\"category,omitempty\" graphql:\"category\""
+	CreatedAt               *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy               *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CveID                   *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
+	Description             *string          "json:\"description,omitempty\" graphql:\"description\""
+	DiscoveredAt            *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
+	DisplayName             *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
+	Exploitability          *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
+	ExternalID              string           "json:\"externalID\" graphql:\"externalID\""
+	ExternalOwnerID         *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
+	ExternalURI             *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID                      string           "json:\"id\" graphql:\"id\""
+	Impact                  *float64         "json:\"impact,omitempty\" graphql:\"impact\""
+	Impacts                 []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
+	Metadata                map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Open                    *bool            "json:\"open,omitempty\" graphql:\"open\""
+	Priority                *string          "json:\"priority,omitempty\" graphql:\"priority\""
+	Production              *bool            "json:\"production,omitempty\" graphql:\"production\""
+	Public                  *bool            "json:\"public,omitempty\" graphql:\"public\""
+	PublishedAt             *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	RawPayload              map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
+	References              []string         "json:\"references,omitempty\" graphql:\"references\""
+	RemediationSLA          *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
+	Score                   *float64         "json:\"score,omitempty\" graphql:\"score\""
+	Severity                *string          "json:\"severity,omitempty\" graphql:\"severity\""
+	Source                  *string          "json:\"source,omitempty\" graphql:\"source\""
+	SourceUpdatedAt         *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
+	Summary                 *string          "json:\"summary,omitempty\" graphql:\"summary\""
+	Tags                    []string         "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt               *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy               *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Validated               *bool            "json:\"validated,omitempty\" graphql:\"validated\""
+	Vector                  *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	VulnerabilityStatusName *string          "json:\"vulnerabilityStatusName,omitempty\" graphql:\"vulnerabilityStatusName\""
 }
 
 func (t *CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities) GetBlocking() *bool {
@@ -100547,12 +100547,6 @@ func (t *CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities) 
 	}
 	return t.SourceUpdatedAt
 }
-func (t *CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities) GetStatus() *string {
-	if t == nil {
-		t = &CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities{}
-	}
-	return t.Status
-}
 func (t *CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities) GetSummary() *string {
 	if t == nil {
 		t = &CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities{}
@@ -100589,6 +100583,12 @@ func (t *CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities) 
 	}
 	return t.Vector
 }
+func (t *CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities) GetVulnerabilityStatusName() *string {
+	if t == nil {
+		t = &CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities{}
+	}
+	return t.VulnerabilityStatusName
+}
 
 type CreateBulkCSVVulnerability_CreateBulkCSVVulnerability struct {
 	Vulnerabilities []*CreateBulkCSVVulnerability_CreateBulkCSVVulnerability_Vulnerabilities "json:\"vulnerabilities,omitempty\" graphql:\"vulnerabilities\""
@@ -100602,41 +100602,41 @@ func (t *CreateBulkCSVVulnerability_CreateBulkCSVVulnerability) GetVulnerabiliti
 }
 
 type CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities struct {
-	Blocking        *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
-	Category        *string          "json:\"category,omitempty\" graphql:\"category\""
-	CreatedAt       *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CveID           *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
-	Description     *string          "json:\"description,omitempty\" graphql:\"description\""
-	DiscoveredAt    *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
-	DisplayName     *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
-	Exploitability  *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
-	ExternalID      string           "json:\"externalID\" graphql:\"externalID\""
-	ExternalOwnerID *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
-	ExternalURI     *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
-	ID              string           "json:\"id\" graphql:\"id\""
-	Impact          *float64         "json:\"impact,omitempty\" graphql:\"impact\""
-	Impacts         []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
-	Metadata        map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Open            *bool            "json:\"open,omitempty\" graphql:\"open\""
-	Priority        *string          "json:\"priority,omitempty\" graphql:\"priority\""
-	Production      *bool            "json:\"production,omitempty\" graphql:\"production\""
-	Public          *bool            "json:\"public,omitempty\" graphql:\"public\""
-	PublishedAt     *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	RawPayload      map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
-	References      []string         "json:\"references,omitempty\" graphql:\"references\""
-	RemediationSLA  *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
-	Score           *float64         "json:\"score,omitempty\" graphql:\"score\""
-	Severity        *string          "json:\"severity,omitempty\" graphql:\"severity\""
-	Source          *string          "json:\"source,omitempty\" graphql:\"source\""
-	SourceUpdatedAt *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
-	Status          *string          "json:\"status,omitempty\" graphql:\"status\""
-	Summary         *string          "json:\"summary,omitempty\" graphql:\"summary\""
-	Tags            []string         "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt       *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Validated       *bool            "json:\"validated,omitempty\" graphql:\"validated\""
-	Vector          *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	Blocking                *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
+	Category                *string          "json:\"category,omitempty\" graphql:\"category\""
+	CreatedAt               *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy               *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CveID                   *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
+	Description             *string          "json:\"description,omitempty\" graphql:\"description\""
+	DiscoveredAt            *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
+	DisplayName             *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
+	Exploitability          *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
+	ExternalID              string           "json:\"externalID\" graphql:\"externalID\""
+	ExternalOwnerID         *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
+	ExternalURI             *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID                      string           "json:\"id\" graphql:\"id\""
+	Impact                  *float64         "json:\"impact,omitempty\" graphql:\"impact\""
+	Impacts                 []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
+	Metadata                map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Open                    *bool            "json:\"open,omitempty\" graphql:\"open\""
+	Priority                *string          "json:\"priority,omitempty\" graphql:\"priority\""
+	Production              *bool            "json:\"production,omitempty\" graphql:\"production\""
+	Public                  *bool            "json:\"public,omitempty\" graphql:\"public\""
+	PublishedAt             *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	RawPayload              map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
+	References              []string         "json:\"references,omitempty\" graphql:\"references\""
+	RemediationSLA          *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
+	Score                   *float64         "json:\"score,omitempty\" graphql:\"score\""
+	Severity                *string          "json:\"severity,omitempty\" graphql:\"severity\""
+	Source                  *string          "json:\"source,omitempty\" graphql:\"source\""
+	SourceUpdatedAt         *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
+	Summary                 *string          "json:\"summary,omitempty\" graphql:\"summary\""
+	Tags                    []string         "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt               *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy               *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Validated               *bool            "json:\"validated,omitempty\" graphql:\"validated\""
+	Vector                  *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	VulnerabilityStatusName *string          "json:\"vulnerabilityStatusName,omitempty\" graphql:\"vulnerabilityStatusName\""
 }
 
 func (t *CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities) GetBlocking() *bool {
@@ -100807,12 +100807,6 @@ func (t *CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities) GetSou
 	}
 	return t.SourceUpdatedAt
 }
-func (t *CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities) GetStatus() *string {
-	if t == nil {
-		t = &CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities{}
-	}
-	return t.Status
-}
 func (t *CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities) GetSummary() *string {
 	if t == nil {
 		t = &CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities{}
@@ -100849,6 +100843,12 @@ func (t *CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities) GetVec
 	}
 	return t.Vector
 }
+func (t *CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities) GetVulnerabilityStatusName() *string {
+	if t == nil {
+		t = &CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities{}
+	}
+	return t.VulnerabilityStatusName
+}
 
 type CreateBulkVulnerability_CreateBulkVulnerability struct {
 	Vulnerabilities []*CreateBulkVulnerability_CreateBulkVulnerability_Vulnerabilities "json:\"vulnerabilities,omitempty\" graphql:\"vulnerabilities\""
@@ -100862,41 +100862,41 @@ func (t *CreateBulkVulnerability_CreateBulkVulnerability) GetVulnerabilities() [
 }
 
 type CreateVulnerability_CreateVulnerability_Vulnerability struct {
-	Blocking        *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
-	Category        *string          "json:\"category,omitempty\" graphql:\"category\""
-	CreatedAt       *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CveID           *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
-	Description     *string          "json:\"description,omitempty\" graphql:\"description\""
-	DiscoveredAt    *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
-	DisplayName     *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
-	Exploitability  *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
-	ExternalID      string           "json:\"externalID\" graphql:\"externalID\""
-	ExternalOwnerID *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
-	ExternalURI     *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
-	ID              string           "json:\"id\" graphql:\"id\""
-	Impact          *float64         "json:\"impact,omitempty\" graphql:\"impact\""
-	Impacts         []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
-	Metadata        map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Open            *bool            "json:\"open,omitempty\" graphql:\"open\""
-	Priority        *string          "json:\"priority,omitempty\" graphql:\"priority\""
-	Production      *bool            "json:\"production,omitempty\" graphql:\"production\""
-	Public          *bool            "json:\"public,omitempty\" graphql:\"public\""
-	PublishedAt     *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	RawPayload      map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
-	References      []string         "json:\"references,omitempty\" graphql:\"references\""
-	RemediationSLA  *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
-	Score           *float64         "json:\"score,omitempty\" graphql:\"score\""
-	Severity        *string          "json:\"severity,omitempty\" graphql:\"severity\""
-	Source          *string          "json:\"source,omitempty\" graphql:\"source\""
-	SourceUpdatedAt *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
-	Status          *string          "json:\"status,omitempty\" graphql:\"status\""
-	Summary         *string          "json:\"summary,omitempty\" graphql:\"summary\""
-	Tags            []string         "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt       *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Validated       *bool            "json:\"validated,omitempty\" graphql:\"validated\""
-	Vector          *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	Blocking                *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
+	Category                *string          "json:\"category,omitempty\" graphql:\"category\""
+	CreatedAt               *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy               *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CveID                   *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
+	Description             *string          "json:\"description,omitempty\" graphql:\"description\""
+	DiscoveredAt            *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
+	DisplayName             *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
+	Exploitability          *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
+	ExternalID              string           "json:\"externalID\" graphql:\"externalID\""
+	ExternalOwnerID         *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
+	ExternalURI             *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID                      string           "json:\"id\" graphql:\"id\""
+	Impact                  *float64         "json:\"impact,omitempty\" graphql:\"impact\""
+	Impacts                 []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
+	Metadata                map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Open                    *bool            "json:\"open,omitempty\" graphql:\"open\""
+	Priority                *string          "json:\"priority,omitempty\" graphql:\"priority\""
+	Production              *bool            "json:\"production,omitempty\" graphql:\"production\""
+	Public                  *bool            "json:\"public,omitempty\" graphql:\"public\""
+	PublishedAt             *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	RawPayload              map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
+	References              []string         "json:\"references,omitempty\" graphql:\"references\""
+	RemediationSLA          *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
+	Score                   *float64         "json:\"score,omitempty\" graphql:\"score\""
+	Severity                *string          "json:\"severity,omitempty\" graphql:\"severity\""
+	Source                  *string          "json:\"source,omitempty\" graphql:\"source\""
+	SourceUpdatedAt         *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
+	Summary                 *string          "json:\"summary,omitempty\" graphql:\"summary\""
+	Tags                    []string         "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt               *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy               *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Validated               *bool            "json:\"validated,omitempty\" graphql:\"validated\""
+	Vector                  *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	VulnerabilityStatusName *string          "json:\"vulnerabilityStatusName,omitempty\" graphql:\"vulnerabilityStatusName\""
 }
 
 func (t *CreateVulnerability_CreateVulnerability_Vulnerability) GetBlocking() *bool {
@@ -101067,12 +101067,6 @@ func (t *CreateVulnerability_CreateVulnerability_Vulnerability) GetSourceUpdated
 	}
 	return t.SourceUpdatedAt
 }
-func (t *CreateVulnerability_CreateVulnerability_Vulnerability) GetStatus() *string {
-	if t == nil {
-		t = &CreateVulnerability_CreateVulnerability_Vulnerability{}
-	}
-	return t.Status
-}
 func (t *CreateVulnerability_CreateVulnerability_Vulnerability) GetSummary() *string {
 	if t == nil {
 		t = &CreateVulnerability_CreateVulnerability_Vulnerability{}
@@ -101108,6 +101102,12 @@ func (t *CreateVulnerability_CreateVulnerability_Vulnerability) GetVector() *str
 		t = &CreateVulnerability_CreateVulnerability_Vulnerability{}
 	}
 	return t.Vector
+}
+func (t *CreateVulnerability_CreateVulnerability_Vulnerability) GetVulnerabilityStatusName() *string {
+	if t == nil {
+		t = &CreateVulnerability_CreateVulnerability_Vulnerability{}
+	}
+	return t.VulnerabilityStatusName
 }
 
 type CreateVulnerability_CreateVulnerability struct {
@@ -101165,41 +101165,41 @@ func (t *GetAllVulnerabilities_Vulnerabilities_PageInfo) GetStartCursor() *strin
 }
 
 type GetAllVulnerabilities_Vulnerabilities_Edges_Node struct {
-	Blocking        *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
-	Category        *string          "json:\"category,omitempty\" graphql:\"category\""
-	CreatedAt       *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CveID           *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
-	Description     *string          "json:\"description,omitempty\" graphql:\"description\""
-	DiscoveredAt    *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
-	DisplayName     *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
-	Exploitability  *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
-	ExternalID      string           "json:\"externalID\" graphql:\"externalID\""
-	ExternalOwnerID *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
-	ExternalURI     *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
-	ID              string           "json:\"id\" graphql:\"id\""
-	Impact          *float64         "json:\"impact,omitempty\" graphql:\"impact\""
-	Impacts         []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
-	Metadata        map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Open            *bool            "json:\"open,omitempty\" graphql:\"open\""
-	Priority        *string          "json:\"priority,omitempty\" graphql:\"priority\""
-	Production      *bool            "json:\"production,omitempty\" graphql:\"production\""
-	Public          *bool            "json:\"public,omitempty\" graphql:\"public\""
-	PublishedAt     *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	RawPayload      map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
-	References      []string         "json:\"references,omitempty\" graphql:\"references\""
-	RemediationSLA  *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
-	Score           *float64         "json:\"score,omitempty\" graphql:\"score\""
-	Severity        *string          "json:\"severity,omitempty\" graphql:\"severity\""
-	Source          *string          "json:\"source,omitempty\" graphql:\"source\""
-	SourceUpdatedAt *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
-	Status          *string          "json:\"status,omitempty\" graphql:\"status\""
-	Summary         *string          "json:\"summary,omitempty\" graphql:\"summary\""
-	Tags            []string         "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt       *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Validated       *bool            "json:\"validated,omitempty\" graphql:\"validated\""
-	Vector          *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	Blocking                *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
+	Category                *string          "json:\"category,omitempty\" graphql:\"category\""
+	CreatedAt               *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy               *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CveID                   *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
+	Description             *string          "json:\"description,omitempty\" graphql:\"description\""
+	DiscoveredAt            *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
+	DisplayName             *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
+	Exploitability          *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
+	ExternalID              string           "json:\"externalID\" graphql:\"externalID\""
+	ExternalOwnerID         *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
+	ExternalURI             *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID                      string           "json:\"id\" graphql:\"id\""
+	Impact                  *float64         "json:\"impact,omitempty\" graphql:\"impact\""
+	Impacts                 []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
+	Metadata                map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Open                    *bool            "json:\"open,omitempty\" graphql:\"open\""
+	Priority                *string          "json:\"priority,omitempty\" graphql:\"priority\""
+	Production              *bool            "json:\"production,omitempty\" graphql:\"production\""
+	Public                  *bool            "json:\"public,omitempty\" graphql:\"public\""
+	PublishedAt             *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	RawPayload              map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
+	References              []string         "json:\"references,omitempty\" graphql:\"references\""
+	RemediationSLA          *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
+	Score                   *float64         "json:\"score,omitempty\" graphql:\"score\""
+	Severity                *string          "json:\"severity,omitempty\" graphql:\"severity\""
+	Source                  *string          "json:\"source,omitempty\" graphql:\"source\""
+	SourceUpdatedAt         *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
+	Summary                 *string          "json:\"summary,omitempty\" graphql:\"summary\""
+	Tags                    []string         "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt               *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy               *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Validated               *bool            "json:\"validated,omitempty\" graphql:\"validated\""
+	Vector                  *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	VulnerabilityStatusName *string          "json:\"vulnerabilityStatusName,omitempty\" graphql:\"vulnerabilityStatusName\""
 }
 
 func (t *GetAllVulnerabilities_Vulnerabilities_Edges_Node) GetBlocking() *bool {
@@ -101370,12 +101370,6 @@ func (t *GetAllVulnerabilities_Vulnerabilities_Edges_Node) GetSourceUpdatedAt() 
 	}
 	return t.SourceUpdatedAt
 }
-func (t *GetAllVulnerabilities_Vulnerabilities_Edges_Node) GetStatus() *string {
-	if t == nil {
-		t = &GetAllVulnerabilities_Vulnerabilities_Edges_Node{}
-	}
-	return t.Status
-}
 func (t *GetAllVulnerabilities_Vulnerabilities_Edges_Node) GetSummary() *string {
 	if t == nil {
 		t = &GetAllVulnerabilities_Vulnerabilities_Edges_Node{}
@@ -101411,6 +101405,12 @@ func (t *GetAllVulnerabilities_Vulnerabilities_Edges_Node) GetVector() *string {
 		t = &GetAllVulnerabilities_Vulnerabilities_Edges_Node{}
 	}
 	return t.Vector
+}
+func (t *GetAllVulnerabilities_Vulnerabilities_Edges_Node) GetVulnerabilityStatusName() *string {
+	if t == nil {
+		t = &GetAllVulnerabilities_Vulnerabilities_Edges_Node{}
+	}
+	return t.VulnerabilityStatusName
 }
 
 type GetAllVulnerabilities_Vulnerabilities_Edges struct {
@@ -101450,41 +101450,41 @@ func (t *GetAllVulnerabilities_Vulnerabilities) GetTotalCount() int64 {
 }
 
 type GetVulnerabilityByID_Vulnerability struct {
-	Blocking        *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
-	Category        *string          "json:\"category,omitempty\" graphql:\"category\""
-	CreatedAt       *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CveID           *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
-	Description     *string          "json:\"description,omitempty\" graphql:\"description\""
-	DiscoveredAt    *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
-	DisplayName     *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
-	Exploitability  *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
-	ExternalID      string           "json:\"externalID\" graphql:\"externalID\""
-	ExternalOwnerID *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
-	ExternalURI     *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
-	ID              string           "json:\"id\" graphql:\"id\""
-	Impact          *float64         "json:\"impact,omitempty\" graphql:\"impact\""
-	Impacts         []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
-	Metadata        map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Open            *bool            "json:\"open,omitempty\" graphql:\"open\""
-	Priority        *string          "json:\"priority,omitempty\" graphql:\"priority\""
-	Production      *bool            "json:\"production,omitempty\" graphql:\"production\""
-	Public          *bool            "json:\"public,omitempty\" graphql:\"public\""
-	PublishedAt     *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	RawPayload      map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
-	References      []string         "json:\"references,omitempty\" graphql:\"references\""
-	RemediationSLA  *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
-	Score           *float64         "json:\"score,omitempty\" graphql:\"score\""
-	Severity        *string          "json:\"severity,omitempty\" graphql:\"severity\""
-	Source          *string          "json:\"source,omitempty\" graphql:\"source\""
-	SourceUpdatedAt *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
-	Status          *string          "json:\"status,omitempty\" graphql:\"status\""
-	Summary         *string          "json:\"summary,omitempty\" graphql:\"summary\""
-	Tags            []string         "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt       *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Validated       *bool            "json:\"validated,omitempty\" graphql:\"validated\""
-	Vector          *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	Blocking                *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
+	Category                *string          "json:\"category,omitempty\" graphql:\"category\""
+	CreatedAt               *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy               *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CveID                   *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
+	Description             *string          "json:\"description,omitempty\" graphql:\"description\""
+	DiscoveredAt            *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
+	DisplayName             *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
+	Exploitability          *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
+	ExternalID              string           "json:\"externalID\" graphql:\"externalID\""
+	ExternalOwnerID         *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
+	ExternalURI             *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID                      string           "json:\"id\" graphql:\"id\""
+	Impact                  *float64         "json:\"impact,omitempty\" graphql:\"impact\""
+	Impacts                 []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
+	Metadata                map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Open                    *bool            "json:\"open,omitempty\" graphql:\"open\""
+	Priority                *string          "json:\"priority,omitempty\" graphql:\"priority\""
+	Production              *bool            "json:\"production,omitempty\" graphql:\"production\""
+	Public                  *bool            "json:\"public,omitempty\" graphql:\"public\""
+	PublishedAt             *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	RawPayload              map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
+	References              []string         "json:\"references,omitempty\" graphql:\"references\""
+	RemediationSLA          *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
+	Score                   *float64         "json:\"score,omitempty\" graphql:\"score\""
+	Severity                *string          "json:\"severity,omitempty\" graphql:\"severity\""
+	Source                  *string          "json:\"source,omitempty\" graphql:\"source\""
+	SourceUpdatedAt         *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
+	Summary                 *string          "json:\"summary,omitempty\" graphql:\"summary\""
+	Tags                    []string         "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt               *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy               *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Validated               *bool            "json:\"validated,omitempty\" graphql:\"validated\""
+	Vector                  *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	VulnerabilityStatusName *string          "json:\"vulnerabilityStatusName,omitempty\" graphql:\"vulnerabilityStatusName\""
 }
 
 func (t *GetVulnerabilityByID_Vulnerability) GetBlocking() *bool {
@@ -101655,12 +101655,6 @@ func (t *GetVulnerabilityByID_Vulnerability) GetSourceUpdatedAt() *models.DateTi
 	}
 	return t.SourceUpdatedAt
 }
-func (t *GetVulnerabilityByID_Vulnerability) GetStatus() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Status
-}
 func (t *GetVulnerabilityByID_Vulnerability) GetSummary() *string {
 	if t == nil {
 		t = &GetVulnerabilityByID_Vulnerability{}
@@ -101697,6 +101691,12 @@ func (t *GetVulnerabilityByID_Vulnerability) GetVector() *string {
 	}
 	return t.Vector
 }
+func (t *GetVulnerabilityByID_Vulnerability) GetVulnerabilityStatusName() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.VulnerabilityStatusName
+}
 
 type GetVulnerabilities_Vulnerabilities_PageInfo struct {
 	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
@@ -101731,41 +101731,41 @@ func (t *GetVulnerabilities_Vulnerabilities_PageInfo) GetStartCursor() *string {
 }
 
 type GetVulnerabilities_Vulnerabilities_Edges_Node struct {
-	Blocking        *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
-	Category        *string          "json:\"category,omitempty\" graphql:\"category\""
-	CreatedAt       *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CveID           *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
-	Description     *string          "json:\"description,omitempty\" graphql:\"description\""
-	DiscoveredAt    *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
-	DisplayName     *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
-	Exploitability  *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
-	ExternalID      string           "json:\"externalID\" graphql:\"externalID\""
-	ExternalOwnerID *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
-	ExternalURI     *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
-	ID              string           "json:\"id\" graphql:\"id\""
-	Impact          *float64         "json:\"impact,omitempty\" graphql:\"impact\""
-	Impacts         []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
-	Metadata        map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Open            *bool            "json:\"open,omitempty\" graphql:\"open\""
-	Priority        *string          "json:\"priority,omitempty\" graphql:\"priority\""
-	Production      *bool            "json:\"production,omitempty\" graphql:\"production\""
-	Public          *bool            "json:\"public,omitempty\" graphql:\"public\""
-	PublishedAt     *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	RawPayload      map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
-	References      []string         "json:\"references,omitempty\" graphql:\"references\""
-	RemediationSLA  *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
-	Score           *float64         "json:\"score,omitempty\" graphql:\"score\""
-	Severity        *string          "json:\"severity,omitempty\" graphql:\"severity\""
-	Source          *string          "json:\"source,omitempty\" graphql:\"source\""
-	SourceUpdatedAt *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
-	Status          *string          "json:\"status,omitempty\" graphql:\"status\""
-	Summary         *string          "json:\"summary,omitempty\" graphql:\"summary\""
-	Tags            []string         "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt       *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Validated       *bool            "json:\"validated,omitempty\" graphql:\"validated\""
-	Vector          *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	Blocking                *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
+	Category                *string          "json:\"category,omitempty\" graphql:\"category\""
+	CreatedAt               *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy               *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CveID                   *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
+	Description             *string          "json:\"description,omitempty\" graphql:\"description\""
+	DiscoveredAt            *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
+	DisplayName             *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
+	Exploitability          *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
+	ExternalID              string           "json:\"externalID\" graphql:\"externalID\""
+	ExternalOwnerID         *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
+	ExternalURI             *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID                      string           "json:\"id\" graphql:\"id\""
+	Impact                  *float64         "json:\"impact,omitempty\" graphql:\"impact\""
+	Impacts                 []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
+	Metadata                map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Open                    *bool            "json:\"open,omitempty\" graphql:\"open\""
+	Priority                *string          "json:\"priority,omitempty\" graphql:\"priority\""
+	Production              *bool            "json:\"production,omitempty\" graphql:\"production\""
+	Public                  *bool            "json:\"public,omitempty\" graphql:\"public\""
+	PublishedAt             *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	RawPayload              map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
+	References              []string         "json:\"references,omitempty\" graphql:\"references\""
+	RemediationSLA          *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
+	Score                   *float64         "json:\"score,omitempty\" graphql:\"score\""
+	Severity                *string          "json:\"severity,omitempty\" graphql:\"severity\""
+	Source                  *string          "json:\"source,omitempty\" graphql:\"source\""
+	SourceUpdatedAt         *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
+	Summary                 *string          "json:\"summary,omitempty\" graphql:\"summary\""
+	Tags                    []string         "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt               *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy               *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Validated               *bool            "json:\"validated,omitempty\" graphql:\"validated\""
+	Vector                  *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	VulnerabilityStatusName *string          "json:\"vulnerabilityStatusName,omitempty\" graphql:\"vulnerabilityStatusName\""
 }
 
 func (t *GetVulnerabilities_Vulnerabilities_Edges_Node) GetBlocking() *bool {
@@ -101936,12 +101936,6 @@ func (t *GetVulnerabilities_Vulnerabilities_Edges_Node) GetSourceUpdatedAt() *mo
 	}
 	return t.SourceUpdatedAt
 }
-func (t *GetVulnerabilities_Vulnerabilities_Edges_Node) GetStatus() *string {
-	if t == nil {
-		t = &GetVulnerabilities_Vulnerabilities_Edges_Node{}
-	}
-	return t.Status
-}
 func (t *GetVulnerabilities_Vulnerabilities_Edges_Node) GetSummary() *string {
 	if t == nil {
 		t = &GetVulnerabilities_Vulnerabilities_Edges_Node{}
@@ -101977,6 +101971,12 @@ func (t *GetVulnerabilities_Vulnerabilities_Edges_Node) GetVector() *string {
 		t = &GetVulnerabilities_Vulnerabilities_Edges_Node{}
 	}
 	return t.Vector
+}
+func (t *GetVulnerabilities_Vulnerabilities_Edges_Node) GetVulnerabilityStatusName() *string {
+	if t == nil {
+		t = &GetVulnerabilities_Vulnerabilities_Edges_Node{}
+	}
+	return t.VulnerabilityStatusName
 }
 
 type GetVulnerabilities_Vulnerabilities_Edges struct {
@@ -102016,41 +102016,41 @@ func (t *GetVulnerabilities_Vulnerabilities) GetTotalCount() int64 {
 }
 
 type UpdateVulnerability_UpdateVulnerability_Vulnerability struct {
-	Blocking        *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
-	Category        *string          "json:\"category,omitempty\" graphql:\"category\""
-	CreatedAt       *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CveID           *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
-	Description     *string          "json:\"description,omitempty\" graphql:\"description\""
-	DiscoveredAt    *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
-	DisplayName     *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
-	Exploitability  *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
-	ExternalID      string           "json:\"externalID\" graphql:\"externalID\""
-	ExternalOwnerID *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
-	ExternalURI     *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
-	ID              string           "json:\"id\" graphql:\"id\""
-	Impact          *float64         "json:\"impact,omitempty\" graphql:\"impact\""
-	Impacts         []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
-	Metadata        map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Open            *bool            "json:\"open,omitempty\" graphql:\"open\""
-	Priority        *string          "json:\"priority,omitempty\" graphql:\"priority\""
-	Production      *bool            "json:\"production,omitempty\" graphql:\"production\""
-	Public          *bool            "json:\"public,omitempty\" graphql:\"public\""
-	PublishedAt     *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	RawPayload      map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
-	References      []string         "json:\"references,omitempty\" graphql:\"references\""
-	RemediationSLA  *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
-	Score           *float64         "json:\"score,omitempty\" graphql:\"score\""
-	Severity        *string          "json:\"severity,omitempty\" graphql:\"severity\""
-	Source          *string          "json:\"source,omitempty\" graphql:\"source\""
-	SourceUpdatedAt *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
-	Status          *string          "json:\"status,omitempty\" graphql:\"status\""
-	Summary         *string          "json:\"summary,omitempty\" graphql:\"summary\""
-	Tags            []string         "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt       *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Validated       *bool            "json:\"validated,omitempty\" graphql:\"validated\""
-	Vector          *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	Blocking                *bool            "json:\"blocking,omitempty\" graphql:\"blocking\""
+	Category                *string          "json:\"category,omitempty\" graphql:\"category\""
+	CreatedAt               *time.Time       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy               *string          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CveID                   *string          "json:\"cveID,omitempty\" graphql:\"cveID\""
+	Description             *string          "json:\"description,omitempty\" graphql:\"description\""
+	DiscoveredAt            *models.DateTime "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
+	DisplayName             *string          "json:\"displayName,omitempty\" graphql:\"displayName\""
+	Exploitability          *float64         "json:\"exploitability,omitempty\" graphql:\"exploitability\""
+	ExternalID              string           "json:\"externalID\" graphql:\"externalID\""
+	ExternalOwnerID         *string          "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
+	ExternalURI             *string          "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID                      string           "json:\"id\" graphql:\"id\""
+	Impact                  *float64         "json:\"impact,omitempty\" graphql:\"impact\""
+	Impacts                 []string         "json:\"impacts,omitempty\" graphql:\"impacts\""
+	Metadata                map[string]any   "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Open                    *bool            "json:\"open,omitempty\" graphql:\"open\""
+	Priority                *string          "json:\"priority,omitempty\" graphql:\"priority\""
+	Production              *bool            "json:\"production,omitempty\" graphql:\"production\""
+	Public                  *bool            "json:\"public,omitempty\" graphql:\"public\""
+	PublishedAt             *models.DateTime "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	RawPayload              map[string]any   "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
+	References              []string         "json:\"references,omitempty\" graphql:\"references\""
+	RemediationSLA          *int64           "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
+	Score                   *float64         "json:\"score,omitempty\" graphql:\"score\""
+	Severity                *string          "json:\"severity,omitempty\" graphql:\"severity\""
+	Source                  *string          "json:\"source,omitempty\" graphql:\"source\""
+	SourceUpdatedAt         *models.DateTime "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
+	Summary                 *string          "json:\"summary,omitempty\" graphql:\"summary\""
+	Tags                    []string         "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt               *time.Time       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy               *string          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Validated               *bool            "json:\"validated,omitempty\" graphql:\"validated\""
+	Vector                  *string          "json:\"vector,omitempty\" graphql:\"vector\""
+	VulnerabilityStatusName *string          "json:\"vulnerabilityStatusName,omitempty\" graphql:\"vulnerabilityStatusName\""
 }
 
 func (t *UpdateVulnerability_UpdateVulnerability_Vulnerability) GetBlocking() *bool {
@@ -102221,12 +102221,6 @@ func (t *UpdateVulnerability_UpdateVulnerability_Vulnerability) GetSourceUpdated
 	}
 	return t.SourceUpdatedAt
 }
-func (t *UpdateVulnerability_UpdateVulnerability_Vulnerability) GetStatus() *string {
-	if t == nil {
-		t = &UpdateVulnerability_UpdateVulnerability_Vulnerability{}
-	}
-	return t.Status
-}
 func (t *UpdateVulnerability_UpdateVulnerability_Vulnerability) GetSummary() *string {
 	if t == nil {
 		t = &UpdateVulnerability_UpdateVulnerability_Vulnerability{}
@@ -102262,6 +102256,12 @@ func (t *UpdateVulnerability_UpdateVulnerability_Vulnerability) GetVector() *str
 		t = &UpdateVulnerability_UpdateVulnerability_Vulnerability{}
 	}
 	return t.Vector
+}
+func (t *UpdateVulnerability_UpdateVulnerability_Vulnerability) GetVulnerabilityStatusName() *string {
+	if t == nil {
+		t = &UpdateVulnerability_UpdateVulnerability_Vulnerability{}
+	}
+	return t.VulnerabilityStatusName
 }
 
 type UpdateVulnerability_UpdateVulnerability struct {
@@ -125514,7 +125514,7 @@ const CreateBulkCSVFindingDocument = `mutation CreateBulkCSVFinding ($input: Upl
 			source
 			sourceUpdatedAt
 			state
-			status
+			findingStatusName
 			stepsToReproduce
 			tags
 			targetDetails
@@ -125582,7 +125582,7 @@ const CreateBulkFindingDocument = `mutation CreateBulkFinding ($input: [CreateFi
 			source
 			sourceUpdatedAt
 			state
-			status
+			findingStatusName
 			stepsToReproduce
 			tags
 			targetDetails
@@ -125650,7 +125650,7 @@ const CreateFindingDocument = `mutation CreateFinding ($input: CreateFindingInpu
 			source
 			sourceUpdatedAt
 			state
-			status
+			findingStatusName
 			stepsToReproduce
 			tags
 			targetDetails
@@ -125750,7 +125750,7 @@ const GetAllFindingsDocument = `query GetAllFindings ($first: Int, $last: Int, $
 				source
 				sourceUpdatedAt
 				state
-				status
+				findingStatusName
 				stepsToReproduce
 				tags
 				targetDetails
@@ -125842,7 +125842,7 @@ const GetFindingByIDDocument = `query GetFindingByID ($findingId: ID!) {
 		source
 		sourceUpdatedAt
 		state
-		status
+		findingStatusName
 		stepsToReproduce
 		tags
 		targetDetails
@@ -125937,7 +125937,7 @@ const GetFindingsDocument = `query GetFindings ($first: Int, $last: Int, $after:
 				source
 				sourceUpdatedAt
 				state
-				status
+				findingStatusName
 				stepsToReproduce
 				tags
 				targetDetails
@@ -126031,7 +126031,7 @@ const UpdateFindingDocument = `mutation UpdateFinding ($updateFindingId: ID!, $i
 			source
 			sourceUpdatedAt
 			state
-			status
+			findingStatusName
 			stepsToReproduce
 			tags
 			targetDetails
@@ -144735,7 +144735,7 @@ const CreateBulkCSVVulnerabilityDocument = `mutation CreateBulkCSVVulnerability 
 			severity
 			source
 			sourceUpdatedAt
-			status
+			vulnerabilityStatusName
 			summary
 			tags
 			updatedAt
@@ -144795,7 +144795,7 @@ const CreateBulkVulnerabilityDocument = `mutation CreateBulkVulnerability ($inpu
 			severity
 			source
 			sourceUpdatedAt
-			status
+			vulnerabilityStatusName
 			summary
 			tags
 			updatedAt
@@ -144855,7 +144855,7 @@ const CreateVulnerabilityDocument = `mutation CreateVulnerability ($input: Creat
 			severity
 			source
 			sourceUpdatedAt
-			status
+			vulnerabilityStatusName
 			summary
 			tags
 			updatedAt
@@ -144947,7 +144947,7 @@ const GetAllVulnerabilitiesDocument = `query GetAllVulnerabilities ($first: Int,
 				severity
 				source
 				sourceUpdatedAt
-				status
+				vulnerabilityStatusName
 				summary
 				tags
 				updatedAt
@@ -145011,7 +145011,7 @@ const GetVulnerabilityByIDDocument = `query GetVulnerabilityByID ($vulnerability
 		severity
 		source
 		sourceUpdatedAt
-		status
+		vulnerabilityStatusName
 		summary
 		tags
 		updatedAt
@@ -145078,7 +145078,7 @@ const GetVulnerabilitiesDocument = `query GetVulnerabilities ($first: Int, $last
 				severity
 				source
 				sourceUpdatedAt
-				status
+				vulnerabilityStatusName
 				summary
 				tags
 				updatedAt
@@ -145144,7 +145144,7 @@ const UpdateVulnerabilityDocument = `mutation UpdateVulnerability ($updateVulner
 			severity
 			source
 			sourceUpdatedAt
-			status
+			vulnerabilityStatusName
 			summary
 			tags
 			updatedAt
