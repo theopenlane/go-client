@@ -17941,16 +17941,17 @@ func (t *UpdateControlObjective_UpdateControlObjective) GetControlObjective() *U
 }
 
 type CreateBulkCSVCustomDomain_CreateBulkCSVCustomDomain_CustomDomains struct {
-	CnameRecord       string     "json:\"cnameRecord\" graphql:\"cnameRecord\""
-	CreatedAt         *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DNSVerificationID *string    "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
-	ID                string     "json:\"id\" graphql:\"id\""
-	MappableDomainID  string     "json:\"mappableDomainID\" graphql:\"mappableDomainID\""
-	OwnerID           *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Tags              []string   "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt         *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	CnameRecord       string                 "json:\"cnameRecord\" graphql:\"cnameRecord\""
+	CreatedAt         *time.Time             "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy         *string                "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DNSVerificationID *string                "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
+	DomainType        enums.CustomDomainType "json:\"domainType\" graphql:\"domainType\""
+	ID                string                 "json:\"id\" graphql:\"id\""
+	MappableDomainID  string                 "json:\"mappableDomainID\" graphql:\"mappableDomainID\""
+	OwnerID           *string                "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Tags              []string               "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt         *time.Time             "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy         *string                "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *CreateBulkCSVCustomDomain_CreateBulkCSVCustomDomain_CustomDomains) GetCnameRecord() string {
@@ -17976,6 +17977,12 @@ func (t *CreateBulkCSVCustomDomain_CreateBulkCSVCustomDomain_CustomDomains) GetD
 		t = &CreateBulkCSVCustomDomain_CreateBulkCSVCustomDomain_CustomDomains{}
 	}
 	return t.DNSVerificationID
+}
+func (t *CreateBulkCSVCustomDomain_CreateBulkCSVCustomDomain_CustomDomains) GetDomainType() *enums.CustomDomainType {
+	if t == nil {
+		t = &CreateBulkCSVCustomDomain_CreateBulkCSVCustomDomain_CustomDomains{}
+	}
+	return &t.DomainType
 }
 func (t *CreateBulkCSVCustomDomain_CreateBulkCSVCustomDomain_CustomDomains) GetID() string {
 	if t == nil {
@@ -18026,16 +18033,17 @@ func (t *CreateBulkCSVCustomDomain_CreateBulkCSVCustomDomain) GetCustomDomains()
 }
 
 type CreateBulkCustomDomain_CreateBulkCustomDomain_CustomDomains struct {
-	CnameRecord       string     "json:\"cnameRecord\" graphql:\"cnameRecord\""
-	CreatedAt         *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DNSVerificationID *string    "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
-	ID                string     "json:\"id\" graphql:\"id\""
-	MappableDomainID  string     "json:\"mappableDomainID\" graphql:\"mappableDomainID\""
-	OwnerID           *string    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Tags              []string   "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt         *time.Time "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	CnameRecord       string                 "json:\"cnameRecord\" graphql:\"cnameRecord\""
+	CreatedAt         *time.Time             "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy         *string                "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DNSVerificationID *string                "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
+	DomainType        enums.CustomDomainType "json:\"domainType\" graphql:\"domainType\""
+	ID                string                 "json:\"id\" graphql:\"id\""
+	MappableDomainID  string                 "json:\"mappableDomainID\" graphql:\"mappableDomainID\""
+	OwnerID           *string                "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Tags              []string               "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt         *time.Time             "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy         *string                "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *CreateBulkCustomDomain_CreateBulkCustomDomain_CustomDomains) GetCnameRecord() string {
@@ -18061,6 +18069,12 @@ func (t *CreateBulkCustomDomain_CreateBulkCustomDomain_CustomDomains) GetDNSVeri
 		t = &CreateBulkCustomDomain_CreateBulkCustomDomain_CustomDomains{}
 	}
 	return t.DNSVerificationID
+}
+func (t *CreateBulkCustomDomain_CreateBulkCustomDomain_CustomDomains) GetDomainType() *enums.CustomDomainType {
+	if t == nil {
+		t = &CreateBulkCustomDomain_CreateBulkCustomDomain_CustomDomains{}
+	}
+	return &t.DomainType
 }
 func (t *CreateBulkCustomDomain_CreateBulkCustomDomain_CustomDomains) GetID() string {
 	if t == nil {
@@ -18148,6 +18162,7 @@ type CreateCustomDomain_CreateCustomDomain_CustomDomain struct {
 	CreatedBy         *string                                                             "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DNSVerification   *CreateCustomDomain_CreateCustomDomain_CustomDomain_DNSVerification "json:\"dnsVerification,omitempty\" graphql:\"dnsVerification\""
 	DNSVerificationID *string                                                             "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
+	DomainType        enums.CustomDomainType                                              "json:\"domainType\" graphql:\"domainType\""
 	ID                string                                                              "json:\"id\" graphql:\"id\""
 	MappableDomainID  string                                                              "json:\"mappableDomainID\" graphql:\"mappableDomainID\""
 	OwnerID           *string                                                             "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -18185,6 +18200,12 @@ func (t *CreateCustomDomain_CreateCustomDomain_CustomDomain) GetDNSVerificationI
 		t = &CreateCustomDomain_CreateCustomDomain_CustomDomain{}
 	}
 	return t.DNSVerificationID
+}
+func (t *CreateCustomDomain_CreateCustomDomain_CustomDomain) GetDomainType() *enums.CustomDomainType {
+	if t == nil {
+		t = &CreateCustomDomain_CreateCustomDomain_CustomDomain{}
+	}
+	return &t.DomainType
 }
 func (t *CreateCustomDomain_CreateCustomDomain_CustomDomain) GetID() string {
 	if t == nil {
@@ -18382,6 +18403,7 @@ type GetAllCustomDomains_CustomDomains_Edges_Node struct {
 	CreatedBy         *string                                                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DNSVerification   *GetAllCustomDomains_CustomDomains_Edges_Node_DNSVerification "json:\"dnsVerification,omitempty\" graphql:\"dnsVerification\""
 	DNSVerificationID *string                                                       "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
+	DomainType        enums.CustomDomainType                                        "json:\"domainType\" graphql:\"domainType\""
 	ID                string                                                        "json:\"id\" graphql:\"id\""
 	MappableDomain    GetAllCustomDomains_CustomDomains_Edges_Node_MappableDomain   "json:\"mappableDomain\" graphql:\"mappableDomain\""
 	OwnerID           *string                                                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -18419,6 +18441,12 @@ func (t *GetAllCustomDomains_CustomDomains_Edges_Node) GetDNSVerificationID() *s
 		t = &GetAllCustomDomains_CustomDomains_Edges_Node{}
 	}
 	return t.DNSVerificationID
+}
+func (t *GetAllCustomDomains_CustomDomains_Edges_Node) GetDomainType() *enums.CustomDomainType {
+	if t == nil {
+		t = &GetAllCustomDomains_CustomDomains_Edges_Node{}
+	}
+	return &t.DomainType
 }
 func (t *GetAllCustomDomains_CustomDomains_Edges_Node) GetID() string {
 	if t == nil {
@@ -18598,6 +18626,7 @@ type GetCustomDomainByID_CustomDomain struct {
 	CreatedBy         *string                                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DNSVerification   *GetCustomDomainByID_CustomDomain_DNSVerification "json:\"dnsVerification,omitempty\" graphql:\"dnsVerification\""
 	DNSVerificationID *string                                           "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
+	DomainType        enums.CustomDomainType                            "json:\"domainType\" graphql:\"domainType\""
 	ID                string                                            "json:\"id\" graphql:\"id\""
 	MappableDomain    GetCustomDomainByID_CustomDomain_MappableDomain   "json:\"mappableDomain\" graphql:\"mappableDomain\""
 	MappableDomainID  string                                            "json:\"mappableDomainID\" graphql:\"mappableDomainID\""
@@ -18636,6 +18665,12 @@ func (t *GetCustomDomainByID_CustomDomain) GetDNSVerificationID() *string {
 		t = &GetCustomDomainByID_CustomDomain{}
 	}
 	return t.DNSVerificationID
+}
+func (t *GetCustomDomainByID_CustomDomain) GetDomainType() *enums.CustomDomainType {
+	if t == nil {
+		t = &GetCustomDomainByID_CustomDomain{}
+	}
+	return &t.DomainType
 }
 func (t *GetCustomDomainByID_CustomDomain) GetID() string {
 	if t == nil {
@@ -18817,6 +18852,7 @@ type GetCustomDomains_CustomDomains_Edges_Node struct {
 	CreatedBy         *string                                                    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DNSVerification   *GetCustomDomains_CustomDomains_Edges_Node_DNSVerification "json:\"dnsVerification,omitempty\" graphql:\"dnsVerification\""
 	DNSVerificationID *string                                                    "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
+	DomainType        enums.CustomDomainType                                     "json:\"domainType\" graphql:\"domainType\""
 	ID                string                                                     "json:\"id\" graphql:\"id\""
 	MappableDomain    GetCustomDomains_CustomDomains_Edges_Node_MappableDomain   "json:\"mappableDomain\" graphql:\"mappableDomain\""
 	MappableDomainID  string                                                     "json:\"mappableDomainID\" graphql:\"mappableDomainID\""
@@ -18855,6 +18891,12 @@ func (t *GetCustomDomains_CustomDomains_Edges_Node) GetDNSVerificationID() *stri
 		t = &GetCustomDomains_CustomDomains_Edges_Node{}
 	}
 	return t.DNSVerificationID
+}
+func (t *GetCustomDomains_CustomDomains_Edges_Node) GetDomainType() *enums.CustomDomainType {
+	if t == nil {
+		t = &GetCustomDomains_CustomDomains_Edges_Node{}
+	}
+	return &t.DomainType
 }
 func (t *GetCustomDomains_CustomDomains_Edges_Node) GetID() string {
 	if t == nil {
@@ -18973,6 +19015,7 @@ type UpdateCustomDomain_UpdateCustomDomain_CustomDomain struct {
 	CreatedBy         *string                                                             "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DNSVerification   *UpdateCustomDomain_UpdateCustomDomain_CustomDomain_DNSVerification "json:\"dnsVerification,omitempty\" graphql:\"dnsVerification\""
 	DNSVerificationID *string                                                             "json:\"dnsVerificationID,omitempty\" graphql:\"dnsVerificationID\""
+	DomainType        enums.CustomDomainType                                              "json:\"domainType\" graphql:\"domainType\""
 	ID                string                                                              "json:\"id\" graphql:\"id\""
 	MappableDomainID  string                                                              "json:\"mappableDomainID\" graphql:\"mappableDomainID\""
 	OwnerID           *string                                                             "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -19010,6 +19053,12 @@ func (t *UpdateCustomDomain_UpdateCustomDomain_CustomDomain) GetDNSVerificationI
 		t = &UpdateCustomDomain_UpdateCustomDomain_CustomDomain{}
 	}
 	return t.DNSVerificationID
+}
+func (t *UpdateCustomDomain_UpdateCustomDomain_CustomDomain) GetDomainType() *enums.CustomDomainType {
+	if t == nil {
+		t = &UpdateCustomDomain_UpdateCustomDomain_CustomDomain{}
+	}
+	return &t.DomainType
 }
 func (t *UpdateCustomDomain_UpdateCustomDomain_CustomDomain) GetID() string {
 	if t == nil {
@@ -119467,6 +119516,7 @@ const CreateBulkCSVCustomDomainDocument = `mutation CreateBulkCSVCustomDomain ($
 			createdAt
 			createdBy
 			dnsVerificationID
+			domainType
 			id
 			mappableDomainID
 			ownerID
@@ -119502,6 +119552,7 @@ const CreateBulkCustomDomainDocument = `mutation CreateBulkCustomDomain ($input:
 			createdAt
 			createdBy
 			dnsVerificationID
+			domainType
 			id
 			mappableDomainID
 			ownerID
@@ -119543,6 +119594,7 @@ const CreateCustomDomainDocument = `mutation CreateCustomDomain ($input: CreateC
 				dnsTxtValue
 				dnsVerificationStatus
 			}
+			domainType
 			id
 			mappableDomainID
 			ownerID
@@ -119622,6 +119674,7 @@ const GetAllCustomDomainsDocument = `query GetAllCustomDomains ($first: Int, $la
 					acmeChallengeStatusReason
 					cloudflareHostnameID
 				}
+				domainType
 				id
 				mappableDomain {
 					id
@@ -119677,6 +119730,7 @@ const GetCustomDomainByIDDocument = `query GetCustomDomainByID ($customDomainId:
 			acmeChallengeStatusReason
 			cloudflareHostnameID
 		}
+		domainType
 		mappableDomain {
 			id
 			name
@@ -119736,6 +119790,7 @@ const GetCustomDomainsDocument = `query GetCustomDomains ($first: Int, $last: In
 					acmeChallengeStatusReason
 					cloudflareHostnameID
 				}
+				domainType
 				id
 				mappableDomainID
 				mappableDomain {
@@ -119788,6 +119843,7 @@ const UpdateCustomDomainDocument = `mutation UpdateCustomDomain ($updateCustomDo
 				dnsTxtValue
 				dnsVerificationStatus
 			}
+			domainType
 			id
 			mappableDomainID
 			ownerID
