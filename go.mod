@@ -6,7 +6,7 @@ require (
 	github.com/99designs/gqlgen v0.17.89
 	github.com/gqlgo/gqlgenc v0.33.1
 	github.com/pkg/errors v0.9.1
-	github.com/rs/zerolog v1.34.0
+	github.com/rs/zerolog v1.35.0
 	github.com/samber/lo v1.53.0
 	github.com/theopenlane/core/common v1.0.15
 	github.com/theopenlane/entx v0.24.0
