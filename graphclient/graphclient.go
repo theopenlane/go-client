@@ -28584,7 +28584,6 @@ type CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates struct
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	EmailBrandingID      *string                          "json:\"emailBrandingID,omitempty\" graphql:\"emailBrandingID\""
 	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
 	ID                   string                           "json:\"id\" graphql:\"id\""
 	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
@@ -28637,12 +28636,6 @@ func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) G
 		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
 	}
 	return t.Description
-}
-func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetEmailBrandingID() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.EmailBrandingID
 }
 func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetFormat() *enums.NotificationTemplateFormat {
 	if t == nil {
@@ -28788,7 +28781,6 @@ type CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates struct {
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	EmailBrandingID      *string                          "json:\"emailBrandingID,omitempty\" graphql:\"emailBrandingID\""
 	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
 	ID                   string                           "json:\"id\" graphql:\"id\""
 	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
@@ -28841,12 +28833,6 @@ func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetDesc
 		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
 	}
 	return t.Description
-}
-func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetEmailBrandingID() *string {
-	if t == nil {
-		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.EmailBrandingID
 }
 func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetFormat() *enums.NotificationTemplateFormat {
 	if t == nil {
@@ -28992,7 +28978,6 @@ type CreateEmailTemplate_CreateEmailTemplate_EmailTemplate struct {
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	EmailBrandingID      *string                          "json:\"emailBrandingID,omitempty\" graphql:\"emailBrandingID\""
 	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
 	ID                   string                           "json:\"id\" graphql:\"id\""
 	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
@@ -29045,12 +29030,6 @@ func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetDescription()
 		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
 	}
 	return t.Description
-}
-func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetEmailBrandingID() *string {
-	if t == nil {
-		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
-	}
-	return t.EmailBrandingID
 }
 func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetFormat() *enums.NotificationTemplateFormat {
 	if t == nil {
@@ -29250,7 +29229,6 @@ type GetAllEmailTemplates_EmailTemplates_Edges_Node struct {
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	EmailBrandingID      *string                          "json:\"emailBrandingID,omitempty\" graphql:\"emailBrandingID\""
 	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
 	ID                   string                           "json:\"id\" graphql:\"id\""
 	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
@@ -29303,12 +29281,6 @@ func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetDescription() *strin
 		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
 	}
 	return t.Description
-}
-func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetEmailBrandingID() *string {
-	if t == nil {
-		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.EmailBrandingID
 }
 func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetFormat() *enums.NotificationTemplateFormat {
 	if t == nil {
@@ -29479,7 +29451,6 @@ type GetEmailTemplateByID_EmailTemplate struct {
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	EmailBrandingID      *string                          "json:\"emailBrandingID,omitempty\" graphql:\"emailBrandingID\""
 	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
 	ID                   string                           "json:\"id\" graphql:\"id\""
 	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
@@ -29532,12 +29503,6 @@ func (t *GetEmailTemplateByID_EmailTemplate) GetDescription() *string {
 		t = &GetEmailTemplateByID_EmailTemplate{}
 	}
 	return t.Description
-}
-func (t *GetEmailTemplateByID_EmailTemplate) GetEmailBrandingID() *string {
-	if t == nil {
-		t = &GetEmailTemplateByID_EmailTemplate{}
-	}
-	return t.EmailBrandingID
 }
 func (t *GetEmailTemplateByID_EmailTemplate) GetFormat() *enums.NotificationTemplateFormat {
 	if t == nil {
@@ -29704,7 +29669,6 @@ type GetEmailTemplates_EmailTemplates_Edges_Node struct {
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	EmailBrandingID      *string                          "json:\"emailBrandingID,omitempty\" graphql:\"emailBrandingID\""
 	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
 	ID                   string                           "json:\"id\" graphql:\"id\""
 	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
@@ -29757,12 +29721,6 @@ func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetDescription() *string {
 		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
 	}
 	return t.Description
-}
-func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetEmailBrandingID() *string {
-	if t == nil {
-		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.EmailBrandingID
 }
 func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetFormat() *enums.NotificationTemplateFormat {
 	if t == nil {
@@ -29933,7 +29891,6 @@ type UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates struct
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	EmailBrandingID      *string                          "json:\"emailBrandingID,omitempty\" graphql:\"emailBrandingID\""
 	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
 	ID                   string                           "json:\"id\" graphql:\"id\""
 	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
@@ -29986,12 +29943,6 @@ func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) G
 		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
 	}
 	return t.Description
-}
-func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetEmailBrandingID() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.EmailBrandingID
 }
 func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetFormat() *enums.NotificationTemplateFormat {
 	if t == nil {
@@ -30144,7 +30095,6 @@ type UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates struct {
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	EmailBrandingID      *string                          "json:\"emailBrandingID,omitempty\" graphql:\"emailBrandingID\""
 	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
 	ID                   string                           "json:\"id\" graphql:\"id\""
 	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
@@ -30197,12 +30147,6 @@ func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetDesc
 		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
 	}
 	return t.Description
-}
-func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetEmailBrandingID() *string {
-	if t == nil {
-		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.EmailBrandingID
 }
 func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetFormat() *enums.NotificationTemplateFormat {
 	if t == nil {
@@ -30355,7 +30299,6 @@ type UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate struct {
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	EmailBrandingID      *string                          "json:\"emailBrandingID,omitempty\" graphql:\"emailBrandingID\""
 	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
 	ID                   string                           "json:\"id\" graphql:\"id\""
 	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
@@ -30408,12 +30351,6 @@ func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetDescription()
 		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
 	}
 	return t.Description
-}
-func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetEmailBrandingID() *string {
-	if t == nil {
-		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
-	}
-	return t.EmailBrandingID
 }
 func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetFormat() *enums.NotificationTemplateFormat {
 	if t == nil {
@@ -34585,7 +34522,7 @@ type CreateEvidence_CreateEvidence_Evidence struct {
 	Controls            CreateEvidence_CreateEvidence_Evidence_Controls "json:\"controls\" graphql:\"controls\""
 	CreatedAt           *time.Time                                      "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy           *string                                         "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CreationDate        time.Time                                       "json:\"creationDate\" graphql:\"creationDate\""
+	CreationDate        models.DateTime                                 "json:\"creationDate\" graphql:\"creationDate\""
 	Description         *string                                         "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID           string                                          "json:\"displayID\" graphql:\"displayID\""
 	Files               CreateEvidence_CreateEvidence_Evidence_Files    "json:\"files\" graphql:\"files\""
@@ -34593,7 +34530,7 @@ type CreateEvidence_CreateEvidence_Evidence struct {
 	IsAutomated         *bool                                           "json:\"isAutomated,omitempty\" graphql:\"isAutomated\""
 	Name                string                                          "json:\"name\" graphql:\"name\""
 	OwnerID             *string                                         "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RenewalDate         *time.Time                                      "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
+	RenewalDate         *models.DateTime                                "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
 	Source              *string                                         "json:\"source,omitempty\" graphql:\"source\""
 	Status              *enums.EvidenceStatus                           "json:\"status,omitempty\" graphql:\"status\""
 	Tags                []string                                        "json:\"tags,omitempty\" graphql:\"tags\""
@@ -34626,7 +34563,7 @@ func (t *CreateEvidence_CreateEvidence_Evidence) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *CreateEvidence_CreateEvidence_Evidence) GetCreationDate() *time.Time {
+func (t *CreateEvidence_CreateEvidence_Evidence) GetCreationDate() *models.DateTime {
 	if t == nil {
 		t = &CreateEvidence_CreateEvidence_Evidence{}
 	}
@@ -34674,7 +34611,7 @@ func (t *CreateEvidence_CreateEvidence_Evidence) GetOwnerID() *string {
 	}
 	return t.OwnerID
 }
-func (t *CreateEvidence_CreateEvidence_Evidence) GetRenewalDate() *time.Time {
+func (t *CreateEvidence_CreateEvidence_Evidence) GetRenewalDate() *models.DateTime {
 	if t == nil {
 		t = &CreateEvidence_CreateEvidence_Evidence{}
 	}
@@ -34863,7 +34800,7 @@ type GetAllEvidences_Evidences_Edges_Node struct {
 	Controls            GetAllEvidences_Evidences_Edges_Node_Controls "json:\"controls\" graphql:\"controls\""
 	CreatedAt           *time.Time                                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy           *string                                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CreationDate        time.Time                                     "json:\"creationDate\" graphql:\"creationDate\""
+	CreationDate        models.DateTime                               "json:\"creationDate\" graphql:\"creationDate\""
 	Description         *string                                       "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID           string                                        "json:\"displayID\" graphql:\"displayID\""
 	Files               GetAllEvidences_Evidences_Edges_Node_Files    "json:\"files\" graphql:\"files\""
@@ -34871,7 +34808,7 @@ type GetAllEvidences_Evidences_Edges_Node struct {
 	IsAutomated         *bool                                         "json:\"isAutomated,omitempty\" graphql:\"isAutomated\""
 	Name                string                                        "json:\"name\" graphql:\"name\""
 	OwnerID             *string                                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RenewalDate         *time.Time                                    "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
+	RenewalDate         *models.DateTime                              "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
 	Source              *string                                       "json:\"source,omitempty\" graphql:\"source\""
 	Status              *enums.EvidenceStatus                         "json:\"status,omitempty\" graphql:\"status\""
 	Tags                []string                                      "json:\"tags,omitempty\" graphql:\"tags\""
@@ -34904,7 +34841,7 @@ func (t *GetAllEvidences_Evidences_Edges_Node) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *GetAllEvidences_Evidences_Edges_Node) GetCreationDate() *time.Time {
+func (t *GetAllEvidences_Evidences_Edges_Node) GetCreationDate() *models.DateTime {
 	if t == nil {
 		t = &GetAllEvidences_Evidences_Edges_Node{}
 	}
@@ -34952,7 +34889,7 @@ func (t *GetAllEvidences_Evidences_Edges_Node) GetOwnerID() *string {
 	}
 	return t.OwnerID
 }
-func (t *GetAllEvidences_Evidences_Edges_Node) GetRenewalDate() *time.Time {
+func (t *GetAllEvidences_Evidences_Edges_Node) GetRenewalDate() *models.DateTime {
 	if t == nil {
 		t = &GetAllEvidences_Evidences_Edges_Node{}
 	}
@@ -35123,7 +35060,7 @@ type GetEvidenceByID_Evidence struct {
 	Controls            GetEvidenceByID_Evidence_Controls "json:\"controls\" graphql:\"controls\""
 	CreatedAt           *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy           *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CreationDate        time.Time                         "json:\"creationDate\" graphql:\"creationDate\""
+	CreationDate        models.DateTime                   "json:\"creationDate\" graphql:\"creationDate\""
 	Description         *string                           "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID           string                            "json:\"displayID\" graphql:\"displayID\""
 	Files               GetEvidenceByID_Evidence_Files    "json:\"files\" graphql:\"files\""
@@ -35131,7 +35068,7 @@ type GetEvidenceByID_Evidence struct {
 	IsAutomated         *bool                             "json:\"isAutomated,omitempty\" graphql:\"isAutomated\""
 	Name                string                            "json:\"name\" graphql:\"name\""
 	OwnerID             *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RenewalDate         *time.Time                        "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
+	RenewalDate         *models.DateTime                  "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
 	Source              *string                           "json:\"source,omitempty\" graphql:\"source\""
 	Status              *enums.EvidenceStatus             "json:\"status,omitempty\" graphql:\"status\""
 	Tags                []string                          "json:\"tags,omitempty\" graphql:\"tags\""
@@ -35164,7 +35101,7 @@ func (t *GetEvidenceByID_Evidence) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *GetEvidenceByID_Evidence) GetCreationDate() *time.Time {
+func (t *GetEvidenceByID_Evidence) GetCreationDate() *models.DateTime {
 	if t == nil {
 		t = &GetEvidenceByID_Evidence{}
 	}
@@ -35212,7 +35149,7 @@ func (t *GetEvidenceByID_Evidence) GetOwnerID() *string {
 	}
 	return t.OwnerID
 }
-func (t *GetEvidenceByID_Evidence) GetRenewalDate() *time.Time {
+func (t *GetEvidenceByID_Evidence) GetRenewalDate() *models.DateTime {
 	if t == nil {
 		t = &GetEvidenceByID_Evidence{}
 	}
@@ -35379,7 +35316,7 @@ type GetEvidences_Evidences_Edges_Node struct {
 	Controls            GetEvidences_Evidences_Edges_Node_Controls "json:\"controls\" graphql:\"controls\""
 	CreatedAt           *time.Time                                 "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy           *string                                    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CreationDate        time.Time                                  "json:\"creationDate\" graphql:\"creationDate\""
+	CreationDate        models.DateTime                            "json:\"creationDate\" graphql:\"creationDate\""
 	Description         *string                                    "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID           string                                     "json:\"displayID\" graphql:\"displayID\""
 	Files               GetEvidences_Evidences_Edges_Node_Files    "json:\"files\" graphql:\"files\""
@@ -35387,7 +35324,7 @@ type GetEvidences_Evidences_Edges_Node struct {
 	IsAutomated         *bool                                      "json:\"isAutomated,omitempty\" graphql:\"isAutomated\""
 	Name                string                                     "json:\"name\" graphql:\"name\""
 	OwnerID             *string                                    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RenewalDate         *time.Time                                 "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
+	RenewalDate         *models.DateTime                           "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
 	Source              *string                                    "json:\"source,omitempty\" graphql:\"source\""
 	Status              *enums.EvidenceStatus                      "json:\"status,omitempty\" graphql:\"status\""
 	Tags                []string                                   "json:\"tags,omitempty\" graphql:\"tags\""
@@ -35420,7 +35357,7 @@ func (t *GetEvidences_Evidences_Edges_Node) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *GetEvidences_Evidences_Edges_Node) GetCreationDate() *time.Time {
+func (t *GetEvidences_Evidences_Edges_Node) GetCreationDate() *models.DateTime {
 	if t == nil {
 		t = &GetEvidences_Evidences_Edges_Node{}
 	}
@@ -35468,7 +35405,7 @@ func (t *GetEvidences_Evidences_Edges_Node) GetOwnerID() *string {
 	}
 	return t.OwnerID
 }
-func (t *GetEvidences_Evidences_Edges_Node) GetRenewalDate() *time.Time {
+func (t *GetEvidences_Evidences_Edges_Node) GetRenewalDate() *models.DateTime {
 	if t == nil {
 		t = &GetEvidences_Evidences_Edges_Node{}
 	}
@@ -35639,7 +35576,7 @@ type UpdateEvidence_UpdateEvidence_Evidence struct {
 	Controls            UpdateEvidence_UpdateEvidence_Evidence_Controls "json:\"controls\" graphql:\"controls\""
 	CreatedAt           *time.Time                                      "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy           *string                                         "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CreationDate        time.Time                                       "json:\"creationDate\" graphql:\"creationDate\""
+	CreationDate        models.DateTime                                 "json:\"creationDate\" graphql:\"creationDate\""
 	Description         *string                                         "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID           string                                          "json:\"displayID\" graphql:\"displayID\""
 	Files               UpdateEvidence_UpdateEvidence_Evidence_Files    "json:\"files\" graphql:\"files\""
@@ -35647,7 +35584,7 @@ type UpdateEvidence_UpdateEvidence_Evidence struct {
 	IsAutomated         *bool                                           "json:\"isAutomated,omitempty\" graphql:\"isAutomated\""
 	Name                string                                          "json:\"name\" graphql:\"name\""
 	OwnerID             *string                                         "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RenewalDate         *time.Time                                      "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
+	RenewalDate         *models.DateTime                                "json:\"renewalDate,omitempty\" graphql:\"renewalDate\""
 	Source              *string                                         "json:\"source,omitempty\" graphql:\"source\""
 	Status              *enums.EvidenceStatus                           "json:\"status,omitempty\" graphql:\"status\""
 	Tags                []string                                        "json:\"tags,omitempty\" graphql:\"tags\""
@@ -35680,7 +35617,7 @@ func (t *UpdateEvidence_UpdateEvidence_Evidence) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
-func (t *UpdateEvidence_UpdateEvidence_Evidence) GetCreationDate() *time.Time {
+func (t *UpdateEvidence_UpdateEvidence_Evidence) GetCreationDate() *models.DateTime {
 	if t == nil {
 		t = &UpdateEvidence_UpdateEvidence_Evidence{}
 	}
@@ -35728,7 +35665,7 @@ func (t *UpdateEvidence_UpdateEvidence_Evidence) GetOwnerID() *string {
 	}
 	return t.OwnerID
 }
-func (t *UpdateEvidence_UpdateEvidence_Evidence) GetRenewalDate() *time.Time {
+func (t *UpdateEvidence_UpdateEvidence_Evidence) GetRenewalDate() *models.DateTime {
 	if t == nil {
 		t = &UpdateEvidence_UpdateEvidence_Evidence{}
 	}
@@ -123002,7 +122939,6 @@ const CreateBulkCSVEmailTemplateDocument = `mutation CreateBulkCSVEmailTemplate 
 			createdAt
 			createdBy
 			description
-			emailBrandingID
 			format
 			id
 			integrationID
@@ -123054,7 +122990,6 @@ const CreateBulkEmailTemplateDocument = `mutation CreateBulkEmailTemplate ($inpu
 			createdAt
 			createdBy
 			description
-			emailBrandingID
 			format
 			id
 			integrationID
@@ -123106,7 +123041,6 @@ const CreateEmailTemplateDocument = `mutation CreateEmailTemplate ($input: Creat
 			createdAt
 			createdBy
 			description
-			emailBrandingID
 			format
 			id
 			integrationID
@@ -123214,7 +123148,6 @@ const GetAllEmailTemplatesDocument = `query GetAllEmailTemplates ($first: Int, $
 				createdAt
 				createdBy
 				description
-				emailBrandingID
 				format
 				id
 				integrationID
@@ -123270,7 +123203,6 @@ const GetEmailTemplateByIDDocument = `query GetEmailTemplateByID ($emailTemplate
 		createdAt
 		createdBy
 		description
-		emailBrandingID
 		format
 		id
 		integrationID
@@ -123329,7 +123261,6 @@ const GetEmailTemplatesDocument = `query GetEmailTemplates ($first: Int, $last: 
 				createdAt
 				createdBy
 				description
-				emailBrandingID
 				format
 				id
 				integrationID
@@ -123387,7 +123318,6 @@ const UpdateBulkCSVEmailTemplateDocument = `mutation UpdateBulkCSVEmailTemplate 
 			createdAt
 			createdBy
 			description
-			emailBrandingID
 			format
 			id
 			integrationID
@@ -123440,7 +123370,6 @@ const UpdateBulkEmailTemplateDocument = `mutation UpdateBulkEmailTemplate ($ids:
 			createdAt
 			createdBy
 			description
-			emailBrandingID
 			format
 			id
 			integrationID
@@ -123494,7 +123423,6 @@ const UpdateEmailTemplateDocument = `mutation UpdateEmailTemplate ($updateEmailT
 			createdAt
 			createdBy
 			description
-			emailBrandingID
 			format
 			id
 			integrationID
