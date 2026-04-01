@@ -6,7 +6,6 @@ mutation CreateBulkCSVEmailTemplate($input: Upload!) {
       createdAt
       createdBy
       description
-      emailBrandingID
       format
       id
       integrationID
@@ -40,7 +39,6 @@ mutation CreateBulkEmailTemplate($input: [CreateEmailTemplateInput!]) {
       createdAt
       createdBy
       description
-      emailBrandingID
       format
       id
       integrationID
@@ -74,7 +72,6 @@ mutation CreateEmailTemplate($input: CreateEmailTemplateInput!) {
       createdAt
       createdBy
       description
-      emailBrandingID
       format
       id
       integrationID
@@ -134,7 +131,6 @@ query GetAllEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cur
         createdAt
         createdBy
         description
-        emailBrandingID
         format
         id
         integrationID
@@ -168,7 +164,6 @@ query GetEmailTemplateByID($emailTemplateId: ID!) {
     createdAt
     createdBy
     description
-    emailBrandingID
     format
     id
     integrationID
@@ -216,7 +211,6 @@ query GetEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cursor
         createdAt
         createdBy
         description
-        emailBrandingID
         format
         id
         integrationID
@@ -251,7 +245,6 @@ mutation UpdateBulkCSVEmailTemplate($input: Upload!) {
       createdAt
       createdBy
       description
-      emailBrandingID
       format
       id
       integrationID
@@ -286,7 +279,6 @@ mutation UpdateBulkEmailTemplate($ids: [ID!]!, $input: UpdateEmailTemplateInput!
       createdAt
       createdBy
       description
-      emailBrandingID
       format
       id
       integrationID
@@ -321,7 +313,6 @@ mutation UpdateEmailTemplate($updateEmailTemplateId: ID!, $input: UpdateEmailTem
       createdAt
       createdBy
       description
-      emailBrandingID
       format
       id
       integrationID

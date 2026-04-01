@@ -5,6 +5,7 @@ mutation CreateBulkCSVCustomDomain($input: Upload!) {
       createdAt
       createdBy
       dnsVerificationID
+      domainType
       id
       mappableDomainID
       ownerID
@@ -22,6 +23,7 @@ mutation CreateBulkCustomDomain($input: [CreateCustomDomainInput!]) {
       createdAt
       createdBy
       dnsVerificationID
+      domainType
       id
       mappableDomainID
       ownerID
@@ -45,6 +47,7 @@ mutation CreateCustomDomain($input: CreateCustomDomainInput!) {
         dnsTxtValue
         dnsVerificationStatus
       }
+      domainType
       id
       mappableDomainID
       ownerID
@@ -61,7 +64,7 @@ mutation DeleteCustomDomain($deleteCustomDomainId: ID!) {
   }
 }
 
-query GetAllCustomDomains($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [CustomDomainOrder!]){
+query GetAllCustomDomains($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [CustomDomainOrder!]) {
   customDomains(
     first: $first
     last: $last
@@ -94,6 +97,7 @@ query GetAllCustomDomains($first: Int, $last: Int, $after: Cursor, $before: Curs
           acmeChallengeStatusReason
           cloudflareHostnameID
         }
+        domainType
         id
         mappableDomain {
           id
@@ -127,6 +131,7 @@ query GetCustomDomainByID($customDomainId: ID!) {
       acmeChallengeStatusReason
       cloudflareHostnameID
     }
+    domainType
     mappableDomain {
       id
       name
@@ -142,7 +147,7 @@ query GetCustomDomainByID($customDomainId: ID!) {
 }
 
 query GetCustomDomains($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: CustomDomainWhereInput, $orderBy: [CustomDomainOrder!]) {
-customDomains(
+  customDomains(
     first: $first
     last: $last
     after: $after
@@ -175,6 +180,7 @@ customDomains(
           acmeChallengeStatusReason
           cloudflareHostnameID
         }
+        domainType
         id
         mappableDomainID
         mappableDomain {
@@ -204,6 +210,7 @@ mutation UpdateCustomDomain($updateCustomDomainId: ID!, $input: UpdateCustomDoma
         dnsTxtValue
         dnsVerificationStatus
       }
+      domainType
       id
       mappableDomainID
       ownerID
