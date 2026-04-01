@@ -1,0 +1,21 @@
+mutation CreateNotification($input: CreateNotificationInput!) {
+  createNotification(input: $input) {
+    notification {
+      body
+      channels
+      createdAt
+      createdBy
+      data
+      id
+      notificationType
+      objectType
+      ownerID
+      tags
+      title
+      topic
+      updatedAt
+      updatedBy
+      userID
+    }
+  }
+}
