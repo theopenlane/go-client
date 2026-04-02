@@ -380,6 +380,7 @@ type GraphClient interface {
 	GetNarratives(ctx context.Context, first *int64, last *int64, after *string, before *string, where *NarrativeWhereInput, orderBy []*NarrativeOrder, interceptors ...clientv2.RequestInterceptor) (*GetNarratives, error)
 	UpdateNarrative(ctx context.Context, updateNarrativeID string, input UpdateNarrativeInput, interceptors ...clientv2.RequestInterceptor) (*UpdateNarrative, error)
 	DeleteNote(ctx context.Context, noteID string, interceptors ...clientv2.RequestInterceptor) (*DeleteNote, error)
+	CreateNotification(ctx context.Context, input CreateNotificationInput, interceptors ...clientv2.RequestInterceptor) (*CreateNotification, error)
 	CreateBulkCSVNotificationPreference(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVNotificationPreference, error)
 	CreateBulkNotificationPreference(ctx context.Context, input []*CreateNotificationPreferenceInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkNotificationPreference, error)
 	CreateNotificationPreference(ctx context.Context, input CreateNotificationPreferenceInput, interceptors ...clientv2.RequestInterceptor) (*CreateNotificationPreference, error)
@@ -56018,6 +56019,126 @@ func (t *DeleteNote_DeleteNote) GetDeletedID() string {
 	return t.DeletedID
 }
 
+type CreateNotification_CreateNotification_Notification struct {
+	Body             string                   "json:\"body\" graphql:\"body\""
+	Channels         []string                 "json:\"channels,omitempty\" graphql:\"channels\""
+	CreatedAt        *time.Time               "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                  "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Data             map[string]any           "json:\"data,omitempty\" graphql:\"data\""
+	ID               string                   "json:\"id\" graphql:\"id\""
+	NotificationType enums.NotificationType   "json:\"notificationType\" graphql:\"notificationType\""
+	ObjectType       string                   "json:\"objectType\" graphql:\"objectType\""
+	OwnerID          *string                  "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Tags             []string                 "json:\"tags,omitempty\" graphql:\"tags\""
+	Title            string                   "json:\"title\" graphql:\"title\""
+	Topic            *enums.NotificationTopic "json:\"topic,omitempty\" graphql:\"topic\""
+	UpdatedAt        *time.Time               "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                  "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	UserID           *string                  "json:\"userID,omitempty\" graphql:\"userID\""
+}
+
+func (t *CreateNotification_CreateNotification_Notification) GetBody() string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.Body
+}
+func (t *CreateNotification_CreateNotification_Notification) GetChannels() []string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.Channels
+}
+func (t *CreateNotification_CreateNotification_Notification) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateNotification_CreateNotification_Notification) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateNotification_CreateNotification_Notification) GetData() map[string]any {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.Data
+}
+func (t *CreateNotification_CreateNotification_Notification) GetID() string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.ID
+}
+func (t *CreateNotification_CreateNotification_Notification) GetNotificationType() *enums.NotificationType {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return &t.NotificationType
+}
+func (t *CreateNotification_CreateNotification_Notification) GetObjectType() string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.ObjectType
+}
+func (t *CreateNotification_CreateNotification_Notification) GetOwnerID() *string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.OwnerID
+}
+func (t *CreateNotification_CreateNotification_Notification) GetTags() []string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.Tags
+}
+func (t *CreateNotification_CreateNotification_Notification) GetTitle() string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.Title
+}
+func (t *CreateNotification_CreateNotification_Notification) GetTopic() *enums.NotificationTopic {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.Topic
+}
+func (t *CreateNotification_CreateNotification_Notification) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateNotification_CreateNotification_Notification) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.UpdatedBy
+}
+func (t *CreateNotification_CreateNotification_Notification) GetUserID() *string {
+	if t == nil {
+		t = &CreateNotification_CreateNotification_Notification{}
+	}
+	return t.UserID
+}
+
+type CreateNotification_CreateNotification struct {
+	Notification CreateNotification_CreateNotification_Notification "json:\"notification\" graphql:\"notification\""
+}
+
+func (t *CreateNotification_CreateNotification) GetNotification() *CreateNotification_CreateNotification_Notification {
+	if t == nil {
+		t = &CreateNotification_CreateNotification{}
+	}
+	return &t.Notification
+}
+
 type CreateBulkCSVNotificationPreference_CreateBulkCSVNotificationPreference_NotificationPreferences struct {
 	Cadence         enums.NotificationCadence       "json:\"cadence\" graphql:\"cadence\""
 	Channel         enums.Channel                   "json:\"channel\" graphql:\"channel\""
@@ -111243,6 +111364,17 @@ func (t *DeleteNote) GetDeleteNote() *DeleteNote_DeleteNote {
 	return &t.DeleteNote
 }
 
+type CreateNotification struct {
+	CreateNotification CreateNotification_CreateNotification "json:\"createNotification\" graphql:\"createNotification\""
+}
+
+func (t *CreateNotification) GetCreateNotification() *CreateNotification_CreateNotification {
+	if t == nil {
+		t = &CreateNotification{}
+	}
+	return &t.CreateNotification
+}
+
 type CreateBulkCSVNotificationPreference struct {
 	CreateBulkCSVNotificationPreference CreateBulkCSVNotificationPreference_CreateBulkCSVNotificationPreference "json:\"createBulkCSVNotificationPreference\" graphql:\"createBulkCSVNotificationPreference\""
 }
@@ -131583,6 +131715,46 @@ func (c *Client) DeleteNote(ctx context.Context, noteID string, interceptors ...
 	return &res, nil
 }
 
+const CreateNotificationDocument = `mutation CreateNotification ($input: CreateNotificationInput!) {
+	createNotification(input: $input) {
+		notification {
+			body
+			channels
+			createdAt
+			createdBy
+			data
+			id
+			notificationType
+			objectType
+			ownerID
+			tags
+			title
+			topic
+			updatedAt
+			updatedBy
+			userID
+		}
+	}
+}
+`
+
+func (c *Client) CreateNotification(ctx context.Context, input CreateNotificationInput, interceptors ...clientv2.RequestInterceptor) (*CreateNotification, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateNotification
+	if err := c.Client.Post(ctx, "CreateNotification", CreateNotificationDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
 const CreateBulkCSVNotificationPreferenceDocument = `mutation CreateBulkCSVNotificationPreference ($input: Upload!) {
 	createBulkCSVNotificationPreference(input: $input) {
 		notificationPreferences {
@@ -146955,6 +147127,7 @@ var DocumentOperationNames = map[string]string{
 	GetNarrativesDocument:                        "GetNarratives",
 	UpdateNarrativeDocument:                      "UpdateNarrative",
 	DeleteNoteDocument:                           "DeleteNote",
+	CreateNotificationDocument:                   "CreateNotification",
 	CreateBulkCSVNotificationPreferenceDocument:  "CreateBulkCSVNotificationPreference",
 	CreateBulkNotificationPreferenceDocument:     "CreateBulkNotificationPreference",
 	CreateNotificationPreferenceDocument:         "CreateNotificationPreference",
