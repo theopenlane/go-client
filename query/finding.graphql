@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVFinding($input: Upload!) {
   createBulkCSVFinding(input: $input) {
     findings {
@@ -155,7 +154,7 @@ mutation DeleteFinding($deleteFindingId: ID!) {
   }
 }
 
-query GetAllFindings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [FindingOrder!]){
+query GetAllFindings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [FindingOrder!]) {
   findings(
     first: $first
     last: $last
@@ -239,6 +238,7 @@ query GetAllFindings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
     }
   }
 }
+
 query GetFindingByID($findingId: ID!) {
   finding(id: $findingId) {
     assessmentID
@@ -308,7 +308,7 @@ query GetFindingByID($findingId: ID!) {
 }
 
 query GetFindings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: FindingWhereInput, $orderBy: [FindingOrder!]) {
-findings(
+  findings(
     first: $first
     last: $last
     after: $after
