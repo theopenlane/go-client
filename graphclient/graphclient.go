@@ -86,8 +86,8 @@ type GraphClient interface {
 	GetControlByID(ctx context.Context, controlID string, interceptors ...clientv2.RequestInterceptor) (*GetControlByID, error)
 	GetControls(ctx context.Context, first *int64, last *int64, after *string, before *string, where *ControlWhereInput, orderBy []*ControlOrder, interceptors ...clientv2.RequestInterceptor) (*GetControls, error)
 	UpdateControl(ctx context.Context, updateControlID string, input UpdateControlInput, interceptors ...clientv2.RequestInterceptor) (*UpdateControl, error)
-	CreateControlsByClone(ctx context.Context, input CloneControlInput, interceptors ...clientv2.RequestInterceptor) (*CreateControlsByClone, error)
 	CloneBulkCSVControl(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CloneBulkCSVControl, error)
+	CreateControlsByClone(ctx context.Context, input CloneControlInput, interceptors ...clientv2.RequestInterceptor) (*CreateControlsByClone, error)
 	CreateControlsByCloneReturnID(ctx context.Context, input CloneControlInput, interceptors ...clientv2.RequestInterceptor) (*CreateControlsByCloneReturnID, error)
 	GetControlCategories(ctx context.Context, interceptors ...clientv2.RequestInterceptor) (*GetControlCategories, error)
 	GetControlCategoriesWithFramework(ctx context.Context, where *ControlWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetControlCategoriesWithFramework, error)
@@ -14320,278 +14320,6 @@ func (t *UpdateControl_UpdateControl) GetControl() *UpdateControl_UpdateControl_
 	return &t.Control
 }
 
-type CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node struct {
-	ID      string  "json:\"id\" graphql:\"id\""
-	RefCode string  "json:\"refCode\" graphql:\"refCode\""
-	Title   *string "json:\"title,omitempty\" graphql:\"title\""
-}
-
-func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node) GetID() string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node{}
-	}
-	return t.ID
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node) GetRefCode() string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node{}
-	}
-	return t.RefCode
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node) GetTitle() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node{}
-	}
-	return t.Title
-}
-
-type CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges struct {
-	Node *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
-}
-
-func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges) GetNode() *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges{}
-	}
-	return t.Node
-}
-
-type CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols struct {
-	Edges []*CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges "json:\"edges,omitempty\" graphql:\"edges\""
-}
-
-func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols) GetEdges() []*CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols{}
-	}
-	return t.Edges
-}
-
-type CreateControlsByClone_CreateControlsByClone_Controls struct {
-	AssessmentMethods          []*models.AssessmentMethod                                       "json:\"assessmentMethods,omitempty\" graphql:\"assessmentMethods\""
-	AssessmentObjectives       []*models.AssessmentObjective                                    "json:\"assessmentObjectives,omitempty\" graphql:\"assessmentObjectives\""
-	Category                   *string                                                          "json:\"category,omitempty\" graphql:\"category\""
-	CategoryID                 *string                                                          "json:\"categoryID,omitempty\" graphql:\"categoryID\""
-	ControlKindName            *string                                                          "json:\"controlKindName,omitempty\" graphql:\"controlKindName\""
-	ControlQuestions           []string                                                         "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
-	CreatedAt                  *time.Time                                                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy                  *string                                                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description                *string                                                          "json:\"description,omitempty\" graphql:\"description\""
-	DisplayID                  string                                                           "json:\"displayID\" graphql:\"displayID\""
-	EvidenceRequests           []*models.EvidenceRequests                                       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
-	ExampleEvidence            []*models.ExampleEvidence                                        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
-	ID                         string                                                           "json:\"id\" graphql:\"id\""
-	ImplementationGuidance     []*models.ImplementationGuidance                                 "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
-	MappedCategories           []string                                                         "json:\"mappedCategories,omitempty\" graphql:\"mappedCategories\""
-	OwnerID                    *string                                                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RefCode                    string                                                           "json:\"refCode\" graphql:\"refCode\""
-	ReferenceFramework         *string                                                          "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
-	ReferenceFrameworkRevision *string                                                          "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
-	References                 []*models.Reference                                              "json:\"references,omitempty\" graphql:\"references\""
-	Source                     *enums.ControlSource                                             "json:\"source,omitempty\" graphql:\"source\""
-	StandardID                 *string                                                          "json:\"standardID,omitempty\" graphql:\"standardID\""
-	Status                     *enums.ControlStatus                                             "json:\"status,omitempty\" graphql:\"status\""
-	Subcategory                *string                                                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
-	Subcontrols                CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols "json:\"subcontrols\" graphql:\"subcontrols\""
-	Tags                       []string                                                         "json:\"tags,omitempty\" graphql:\"tags\""
-	TestingProcedures          []*models.TestingProcedures                                      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
-	Title                      *string                                                          "json:\"title,omitempty\" graphql:\"title\""
-	UpdatedAt                  *time.Time                                                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy                  *string                                                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetAssessmentMethods() []*models.AssessmentMethod {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.AssessmentMethods
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetAssessmentObjectives() []*models.AssessmentObjective {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.AssessmentObjectives
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetCategory() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.Category
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetCategoryID() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.CategoryID
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetControlKindName() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.ControlKindName
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetControlQuestions() []string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.ControlQuestions
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetDescription() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.Description
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetDisplayID() string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.DisplayID
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetEvidenceRequests() []*models.EvidenceRequests {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.EvidenceRequests
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetExampleEvidence() []*models.ExampleEvidence {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.ExampleEvidence
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetID() string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.ID
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetImplementationGuidance() []*models.ImplementationGuidance {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.ImplementationGuidance
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetMappedCategories() []string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.MappedCategories
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.OwnerID
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetRefCode() string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.RefCode
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetReferenceFramework() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.ReferenceFramework
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetReferenceFrameworkRevision() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.ReferenceFrameworkRevision
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetReferences() []*models.Reference {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.References
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetSource() *enums.ControlSource {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.Source
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetStandardID() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.StandardID
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetStatus() *enums.ControlStatus {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.Status
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetSubcategory() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.Subcategory
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetSubcontrols() *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return &t.Subcontrols
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetTags() []string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.Tags
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetTestingProcedures() []*models.TestingProcedures {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.TestingProcedures
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetTitle() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.Title
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
-	}
-	return t.UpdatedBy
-}
-
-type CreateControlsByClone_CreateControlsByClone struct {
-	Controls []*CreateControlsByClone_CreateControlsByClone_Controls "json:\"controls,omitempty\" graphql:\"controls\""
-}
-
-func (t *CreateControlsByClone_CreateControlsByClone) GetControls() []*CreateControlsByClone_CreateControlsByClone_Controls {
-	if t == nil {
-		t = &CreateControlsByClone_CreateControlsByClone{}
-	}
-	return t.Controls
-}
-
 type CloneBulkCSVControl_CloneBulkCSVControl_Controls_Subcontrols_Edges_Node struct {
 	ID      string  "json:\"id\" graphql:\"id\""
 	RefCode string  "json:\"refCode\" graphql:\"refCode\""
@@ -14867,6 +14595,278 @@ type CloneBulkCSVControl_CloneBulkCSVControl struct {
 func (t *CloneBulkCSVControl_CloneBulkCSVControl) GetControls() []*CloneBulkCSVControl_CloneBulkCSVControl_Controls {
 	if t == nil {
 		t = &CloneBulkCSVControl_CloneBulkCSVControl{}
+	}
+	return t.Controls
+}
+
+type CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node struct {
+	ID      string  "json:\"id\" graphql:\"id\""
+	RefCode string  "json:\"refCode\" graphql:\"refCode\""
+	Title   *string "json:\"title,omitempty\" graphql:\"title\""
+}
+
+func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node) GetID() string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node) GetRefCode() string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node{}
+	}
+	return t.RefCode
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node) GetTitle() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node{}
+	}
+	return t.Title
+}
+
+type CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges struct {
+	Node *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges) GetNode() *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges_Node {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges{}
+	}
+	return t.Node
+}
+
+type CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols struct {
+	Edges []*CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+}
+
+func (t *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols) GetEdges() []*CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols_Edges {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols{}
+	}
+	return t.Edges
+}
+
+type CreateControlsByClone_CreateControlsByClone_Controls struct {
+	AssessmentMethods          []*models.AssessmentMethod                                       "json:\"assessmentMethods,omitempty\" graphql:\"assessmentMethods\""
+	AssessmentObjectives       []*models.AssessmentObjective                                    "json:\"assessmentObjectives,omitempty\" graphql:\"assessmentObjectives\""
+	Category                   *string                                                          "json:\"category,omitempty\" graphql:\"category\""
+	CategoryID                 *string                                                          "json:\"categoryID,omitempty\" graphql:\"categoryID\""
+	ControlKindName            *string                                                          "json:\"controlKindName,omitempty\" graphql:\"controlKindName\""
+	ControlQuestions           []string                                                         "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
+	CreatedAt                  *time.Time                                                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy                  *string                                                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Description                *string                                                          "json:\"description,omitempty\" graphql:\"description\""
+	DisplayID                  string                                                           "json:\"displayID\" graphql:\"displayID\""
+	EvidenceRequests           []*models.EvidenceRequests                                       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
+	ExampleEvidence            []*models.ExampleEvidence                                        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
+	ID                         string                                                           "json:\"id\" graphql:\"id\""
+	ImplementationGuidance     []*models.ImplementationGuidance                                 "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
+	MappedCategories           []string                                                         "json:\"mappedCategories,omitempty\" graphql:\"mappedCategories\""
+	OwnerID                    *string                                                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	RefCode                    string                                                           "json:\"refCode\" graphql:\"refCode\""
+	ReferenceFramework         *string                                                          "json:\"referenceFramework,omitempty\" graphql:\"referenceFramework\""
+	ReferenceFrameworkRevision *string                                                          "json:\"referenceFrameworkRevision,omitempty\" graphql:\"referenceFrameworkRevision\""
+	References                 []*models.Reference                                              "json:\"references,omitempty\" graphql:\"references\""
+	Source                     *enums.ControlSource                                             "json:\"source,omitempty\" graphql:\"source\""
+	StandardID                 *string                                                          "json:\"standardID,omitempty\" graphql:\"standardID\""
+	Status                     *enums.ControlStatus                                             "json:\"status,omitempty\" graphql:\"status\""
+	Subcategory                *string                                                          "json:\"subcategory,omitempty\" graphql:\"subcategory\""
+	Subcontrols                CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols "json:\"subcontrols\" graphql:\"subcontrols\""
+	Tags                       []string                                                         "json:\"tags,omitempty\" graphql:\"tags\""
+	TestingProcedures          []*models.TestingProcedures                                      "json:\"testingProcedures,omitempty\" graphql:\"testingProcedures\""
+	Title                      *string                                                          "json:\"title,omitempty\" graphql:\"title\""
+	UpdatedAt                  *time.Time                                                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy                  *string                                                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetAssessmentMethods() []*models.AssessmentMethod {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.AssessmentMethods
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetAssessmentObjectives() []*models.AssessmentObjective {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.AssessmentObjectives
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetCategory() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.Category
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetCategoryID() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.CategoryID
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetControlKindName() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.ControlKindName
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetControlQuestions() []string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.ControlQuestions
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetDescription() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.Description
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetDisplayID() string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.DisplayID
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetEvidenceRequests() []*models.EvidenceRequests {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.EvidenceRequests
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetExampleEvidence() []*models.ExampleEvidence {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.ExampleEvidence
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetID() string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.ID
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetImplementationGuidance() []*models.ImplementationGuidance {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.ImplementationGuidance
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetMappedCategories() []string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.MappedCategories
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetOwnerID() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.OwnerID
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetRefCode() string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.RefCode
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetReferenceFramework() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.ReferenceFramework
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetReferenceFrameworkRevision() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.ReferenceFrameworkRevision
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetReferences() []*models.Reference {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.References
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetSource() *enums.ControlSource {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.Source
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetStandardID() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.StandardID
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetStatus() *enums.ControlStatus {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.Status
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetSubcategory() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.Subcategory
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetSubcontrols() *CreateControlsByClone_CreateControlsByClone_Controls_Subcontrols {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return &t.Subcontrols
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetTags() []string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.Tags
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetTestingProcedures() []*models.TestingProcedures {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.TestingProcedures
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetTitle() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.Title
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateControlsByClone_CreateControlsByClone_Controls) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone_Controls{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateControlsByClone_CreateControlsByClone struct {
+	Controls []*CreateControlsByClone_CreateControlsByClone_Controls "json:\"controls,omitempty\" graphql:\"controls\""
+}
+
+func (t *CreateControlsByClone_CreateControlsByClone) GetControls() []*CreateControlsByClone_CreateControlsByClone_Controls {
+	if t == nil {
+		t = &CreateControlsByClone_CreateControlsByClone{}
 	}
 	return t.Controls
 }
@@ -108130,17 +108130,6 @@ func (t *UpdateControl) GetUpdateControl() *UpdateControl_UpdateControl {
 	return &t.UpdateControl
 }
 
-type CreateControlsByClone struct {
-	CreateControlsByClone CreateControlsByClone_CreateControlsByClone "json:\"createControlsByClone\" graphql:\"createControlsByClone\""
-}
-
-func (t *CreateControlsByClone) GetCreateControlsByClone() *CreateControlsByClone_CreateControlsByClone {
-	if t == nil {
-		t = &CreateControlsByClone{}
-	}
-	return &t.CreateControlsByClone
-}
-
 type CloneBulkCSVControl struct {
 	CloneBulkCSVControl CloneBulkCSVControl_CloneBulkCSVControl "json:\"cloneBulkCSVControl\" graphql:\"cloneBulkCSVControl\""
 }
@@ -108150,6 +108139,17 @@ func (t *CloneBulkCSVControl) GetCloneBulkCSVControl() *CloneBulkCSVControl_Clon
 		t = &CloneBulkCSVControl{}
 	}
 	return &t.CloneBulkCSVControl
+}
+
+type CreateControlsByClone struct {
+	CreateControlsByClone CreateControlsByClone_CreateControlsByClone "json:\"createControlsByClone\" graphql:\"createControlsByClone\""
+}
+
+func (t *CreateControlsByClone) GetCreateControlsByClone() *CreateControlsByClone_CreateControlsByClone {
+	if t == nil {
+		t = &CreateControlsByClone{}
+	}
+	return &t.CreateControlsByClone
 }
 
 type CreateControlsByCloneReturnID struct {
@@ -118515,69 +118515,6 @@ func (c *Client) UpdateControl(ctx context.Context, updateControlID string, inpu
 	return &res, nil
 }
 
-const CreateControlsByCloneDocument = `mutation CreateControlsByClone ($input: CloneControlInput!) {
-	createControlsByClone(input: $input) {
-		controls {
-			assessmentMethods
-			assessmentObjectives
-			category
-			categoryID
-			controlQuestions
-			controlKindName
-			createdAt
-			createdBy
-			description
-			displayID
-			exampleEvidence
-			id
-			implementationGuidance
-			mappedCategories
-			ownerID
-			refCode
-			references
-			referenceFramework
-			referenceFrameworkRevision
-			source
-			standardID
-			status
-			subcategory
-			tags
-			testingProcedures
-			evidenceRequests
-			title
-			updatedAt
-			updatedBy
-			subcontrols {
-				edges {
-					node {
-						id
-						refCode
-						title
-					}
-				}
-			}
-		}
-	}
-}
-`
-
-func (c *Client) CreateControlsByClone(ctx context.Context, input CloneControlInput, interceptors ...clientv2.RequestInterceptor) (*CreateControlsByClone, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateControlsByClone
-	if err := c.Client.Post(ctx, "CreateControlsByClone", CreateControlsByCloneDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const CloneBulkCSVControlDocument = `mutation CloneBulkCSVControl ($input: Upload!) {
 	cloneBulkCSVControl(input: $input) {
 		controls {
@@ -118632,6 +118569,69 @@ func (c *Client) CloneBulkCSVControl(ctx context.Context, input graphql.Upload, 
 
 	var res CloneBulkCSVControl
 	if err := c.Client.Post(ctx, "CloneBulkCSVControl", CloneBulkCSVControlDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateControlsByCloneDocument = `mutation CreateControlsByClone ($input: CloneControlInput!) {
+	createControlsByClone(input: $input) {
+		controls {
+			assessmentMethods
+			assessmentObjectives
+			category
+			categoryID
+			controlQuestions
+			controlKindName
+			createdAt
+			createdBy
+			description
+			displayID
+			exampleEvidence
+			id
+			implementationGuidance
+			mappedCategories
+			ownerID
+			refCode
+			references
+			referenceFramework
+			referenceFrameworkRevision
+			source
+			standardID
+			status
+			subcategory
+			tags
+			testingProcedures
+			evidenceRequests
+			title
+			updatedAt
+			updatedBy
+			subcontrols {
+				edges {
+					node {
+						id
+						refCode
+						title
+					}
+				}
+			}
+		}
+	}
+}
+`
+
+func (c *Client) CreateControlsByClone(ctx context.Context, input CloneControlInput, interceptors ...clientv2.RequestInterceptor) (*CreateControlsByClone, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateControlsByClone
+	if err := c.Client.Post(ctx, "CreateControlsByClone", CreateControlsByCloneDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -146833,8 +146833,8 @@ var DocumentOperationNames = map[string]string{
 	GetControlByIDDocument:                       "GetControlByID",
 	GetControlsDocument:                          "GetControls",
 	UpdateControlDocument:                        "UpdateControl",
-	CreateControlsByCloneDocument:                "CreateControlsByClone",
 	CloneBulkCSVControlDocument:                  "CloneBulkCSVControl",
+	CreateControlsByCloneDocument:                "CreateControlsByClone",
 	CreateControlsByCloneReturnIDDocument:        "CreateControlsByCloneReturnID",
 	GetControlCategoriesDocument:                 "GetControlCategories",
 	GetControlCategoriesWithFrameworkDocument:    "GetControlCategoriesWithFramework",

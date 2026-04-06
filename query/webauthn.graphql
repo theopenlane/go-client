@@ -4,7 +4,7 @@ mutation DeleteWebauthn($deleteWebauthnId: ID!) {
   }
 }
 
-query GetAllWebauthns($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: WebauthnOrder){
+query GetAllWebauthns($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: WebauthnOrder) {
   webauthns(
     first: $first
     last: $last

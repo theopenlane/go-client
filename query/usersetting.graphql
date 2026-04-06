@@ -19,7 +19,7 @@ mutation CreateUserSetting($input: CreateUserSettingInput!) {
   }
 }
 
-query GetAllUserSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [UserSettingOrder!]){
+query GetAllUserSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [UserSettingOrder!]) {
   userSettings(
     first: $first
     last: $last
@@ -75,7 +75,7 @@ query GetUserSettingByID($userSettingId: ID!) {
 }
 
 query GetUserSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: UserSettingWhereInput, $orderBy: [UserSettingOrder!]) {
-userSettings(
+  userSettings(
     first: $first
     last: $last
     after: $after

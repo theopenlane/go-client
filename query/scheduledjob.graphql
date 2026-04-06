@@ -61,7 +61,7 @@ mutation DeleteScheduledJob($deleteScheduledJobId: ID!) {
   }
 }
 
-query GetAllScheduledJobs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ScheduledJobOrder!]){
+query GetAllScheduledJobs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ScheduledJobOrder!]) {
   scheduledJobs(
     first: $first
     last: $last
@@ -113,7 +113,7 @@ query GetScheduledJobByID($scheduledJobId: ID!) {
 }
 
 query GetScheduledJobs($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ScheduledJobWhereInput, $orderBy: [ScheduledJobOrder!]) {
-scheduledJobs(
+  scheduledJobs(
     first: $first
     last: $last
     after: $after

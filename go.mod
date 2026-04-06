@@ -4,11 +4,11 @@ go 1.25.8
 
 require (
 	github.com/99designs/gqlgen v0.17.89
-	github.com/gqlgo/gqlgenc v0.33.1
+	github.com/gqlgo/gqlgenc v0.35.1
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.0
 	github.com/samber/lo v1.53.0
-	github.com/theopenlane/core/common v1.0.16
+	github.com/theopenlane/core/common v1.0.17
 	github.com/theopenlane/entx v0.24.0
 	github.com/theopenlane/httpsling v0.3.0
 	github.com/theopenlane/iam v0.27.5

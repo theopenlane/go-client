@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVInvite($input: Upload!) {
   createBulkCSVInvite(input: $input) {
     invites {
@@ -62,7 +61,7 @@ mutation DeleteInvite($deleteInviteId: ID!) {
   }
 }
 
-query GetAllInvites($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [InviteOrder!]){
+query GetAllInvites($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [InviteOrder!]) {
   invites(
     first: $first
     last: $last
@@ -95,6 +94,7 @@ query GetAllInvites($first: Int, $last: Int, $after: Cursor, $before: Cursor, $o
     }
   }
 }
+
 query GetInviteByID($inviteId: ID!) {
   invite(id: $inviteId) {
     createdAt
@@ -113,7 +113,7 @@ query GetInviteByID($inviteId: ID!) {
 }
 
 query GetInvites($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: InviteWhereInput, $orderBy: [InviteOrder!]) {
-invites(
+  invites(
     first: $first
     last: $last
     after: $after
@@ -146,6 +146,7 @@ invites(
     }
   }
 }
+
 mutation UpdateInvite($updateInviteId: ID!, $input: UpdateInviteInput!) {
   updateInvite(id: $updateInviteId, input: $input) {
     invite {
