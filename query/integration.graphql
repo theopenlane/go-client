@@ -4,7 +4,7 @@ mutation DeleteIntegration($deleteIntegrationId: ID!) {
   }
 }
 
-query GetAllIntegrations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [IntegrationOrder!]){
+query GetAllIntegrations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [IntegrationOrder!]) {
   integrations(
     first: $first
     last: $last
@@ -23,11 +23,19 @@ query GetAllIntegrations($first: Int, $last: Int, $after: Cursor, $before: Curso
       node {
         createdAt
         createdBy
+        definitionID
+        definitionSlug
+        definitionVersion
         description
+        family
         id
+        integrationType
         kind
+        metadata
         name
         ownerID
+        providerMetadataSnapshot
+        status
         tags
         updatedAt
         updatedBy
@@ -40,11 +48,19 @@ query GetIntegrationByID($integrationId: ID!) {
   integration(id: $integrationId) {
     createdAt
     createdBy
+    definitionID
+    definitionSlug
+    definitionVersion
     description
+    family
     id
+    integrationType
     kind
+    metadata
     name
     ownerID
+    providerMetadataSnapshot
+    status
     tags
     updatedAt
     updatedBy
@@ -52,7 +68,7 @@ query GetIntegrationByID($integrationId: ID!) {
 }
 
 query GetIntegrations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: IntegrationWhereInput, $orderBy: [IntegrationOrder!]) {
-integrations(
+  integrations(
     first: $first
     last: $last
     after: $after
@@ -71,11 +87,19 @@ integrations(
       node {
         createdAt
         createdBy
+        definitionID
+        definitionSlug
+        definitionVersion
         description
+        family
         id
+        integrationType
         kind
+        metadata
         name
         ownerID
+        providerMetadataSnapshot
+        status
         tags
         updatedAt
         updatedBy
@@ -83,4 +107,3 @@ integrations(
     }
   }
 }
-
