@@ -45,6 +45,14 @@ type RestClient interface {
 	AccountFeatures(context.Context, *api.AccountFeaturesRequest) (*api.AccountFeaturesReply, error)
 	// RegisterRunner registers a new job runner node with the server
 	RegisterRunner(context.Context, *api.JobRunnerRegistrationRequest) (*api.JobRunnerRegistrationReply, error)
+	// ListIntegrationProviders lists available integration provider definitions
+	ListIntegrationProviders(context.Context) (*IntegrationProvidersResponse, error)
+	// ConfigureIntegration stores non-OAuth credentials for a provider definition
+	ConfigureIntegration(context.Context, *api.ConfigureIntegrationRequest) (*api.ConfigureIntegrationResponse, error)
+	// DisconnectIntegration executes the definition-driven teardown flow for an installed integration
+	DisconnectIntegration(context.Context, *api.DisconnectIntegrationRequest) (*api.DeleteIntegrationResponse, error)
+	// RunIntegrationOperation executes or queues a provider operation
+	RunIntegrationOperation(context.Context, *api.RunIntegrationOperationRequest) (*api.RunIntegrationOperationResponse, error)
 }
 
 // NewRestClient creates a new API v1 client that implements the Openlane Client interface
