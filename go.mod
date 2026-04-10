@@ -8,8 +8,8 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.0
 	github.com/samber/lo v1.53.0
-	github.com/theopenlane/core/common v1.0.18
-	github.com/theopenlane/entx v0.24.0
+	github.com/theopenlane/core/common v1.0.19
+	github.com/theopenlane/entx v0.24.1
 	github.com/theopenlane/httpsling v0.3.0
 	github.com/theopenlane/iam v0.27.5
 	github.com/theopenlane/utils v0.7.0
@@ -53,7 +53,7 @@ require (
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/sosodev/duration v1.4.0 // indirect
 	github.com/stoewer/go-strcase v1.3.1 // indirect
-	github.com/theopenlane/core v1.15.9 // indirect
+	github.com/theopenlane/core v1.16.5 // indirect
 	github.com/theopenlane/echox v0.3.0 // indirect
 	github.com/tinylib/msgp v1.6.3 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
@@ -64,9 +64,9 @@ require (
 	github.com/zclconf/go-cty v1.18.0 // indirect
 	github.com/zclconf/go-cty-yaml v1.2.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
-	go.opentelemetry.io/otel v1.42.0 // indirect
-	go.opentelemetry.io/otel/metric v1.42.0 // indirect
-	go.opentelemetry.io/otel/trace v1.42.0 // indirect
+	go.opentelemetry.io/otel v1.43.0 // indirect
+	go.opentelemetry.io/otel/metric v1.43.0 // indirect
+	go.opentelemetry.io/otel/trace v1.43.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	golang.org/x/crypto v0.49.0 // indirect
 	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90 // indirect
