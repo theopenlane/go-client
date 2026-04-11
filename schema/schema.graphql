@@ -13351,6 +13351,10 @@ input CreateIdentityHolderInput {
 	"""
 	alternateEmail: String
 	"""
+	alternate email address for the identity holder in an array
+	"""
+	emailAliases: [String!]
+	"""
 	phone number for the identity holder
 	"""
 	phoneNumber: String
@@ -15013,6 +15017,10 @@ input CreateReviewInput {
 	state of the review
 	"""
 	state: String
+	"""
+	status of the review
+	"""
+	status: ReviewReviewStatus
 	"""
 	category for the review record
 	"""
@@ -35089,6 +35097,10 @@ type IdentityHolder implements Node {
 	"""
 	alternateEmail: String
 	"""
+	alternate email address for the identity holder in an array
+	"""
+	emailAliases: [String!]
+	"""
 	phone number for the identity holder
 	"""
 	phoneNumber: String
@@ -36559,6 +36571,10 @@ input IdentityHolderWhereInput {
 	Filter for tagsHas to contain a specific value
 	"""
 	tagsHas: String
+	"""
+	Filter for emailAliasesHas to contain a specific value
+	"""
+	emailAliasesHas: String
 }
 """
 The `ImplementationGuidance` scalar type that represents steps to take to implement a control; they can come directly from the control source or pulled from external sources
@@ -68871,6 +68887,10 @@ type Review implements Node {
 	"""
 	state: String
 	"""
+	status of the review
+	"""
+	status: ReviewReviewStatus
+	"""
 	category for the review record
 	"""
 	category: String
@@ -69596,6 +69616,16 @@ enum ReviewOrderField {
 	state
 }
 """
+ReviewReviewStatus is enum for the field status
+"""
+enum ReviewReviewStatus @goModel(model: "github.com/theopenlane/core/common/enums.ReviewStatus") {
+	OPEN
+	IN_PROGRESS
+	IN_REVIEW
+	COMPLETED
+	WONT_DO
+}
+"""
 Return response for updateReview mutation
 """
 type ReviewUpdatePayload {
@@ -69890,6 +69920,15 @@ input ReviewWhereInput {
 	stateNotNil: Boolean
 	stateEqualFold: String
 	stateContainsFold: String
+	"""
+	status field predicates
+	"""
+	status: ReviewReviewStatus
+	statusNEQ: ReviewReviewStatus
+	statusIn: [ReviewReviewStatus!]
+	statusNotIn: [ReviewReviewStatus!]
+	statusIsNil: Boolean
+	statusNotNil: Boolean
 	"""
 	category field predicates
 	"""
@@ -88527,6 +88566,12 @@ input UpdateIdentityHolderInput {
 	alternateEmail: String
 	clearAlternateEmail: Boolean
 	"""
+	alternate email address for the identity holder in an array
+	"""
+	emailAliases: [String!]
+	appendEmailAliases: [String!]
+	clearEmailAliases: Boolean
+	"""
 	phone number for the identity holder
 	"""
 	phoneNumber: String
@@ -90855,6 +90900,11 @@ input UpdateReviewInput {
 	"""
 	state: String
 	clearState: Boolean
+	"""
+	status of the review
+	"""
+	status: ReviewReviewStatus
+	clearStatus: Boolean
 	"""
 	category for the review record
 	"""
