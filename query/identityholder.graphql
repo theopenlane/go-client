@@ -7,6 +7,7 @@ mutation CreateBulkCSVIdentityHolder($input: Upload!) {
       department
       displayID
       email
+      emailAliases
       employerEntityID
       endDate
       environmentID
@@ -49,6 +50,7 @@ mutation CreateBulkIdentityHolder($input: [CreateIdentityHolderInput!]) {
       department
       displayID
       email
+      emailAliases
       employerEntityID
       endDate
       environmentID
@@ -91,6 +93,7 @@ mutation CreateIdentityHolder($input: CreateIdentityHolderInput!) {
       department
       displayID
       email
+      emailAliases
       employerEntityID
       endDate
       environmentID
@@ -153,6 +156,7 @@ query GetAllIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Cu
         department
         displayID
         email
+        emailAliases
         employerEntityID
         endDate
         environmentID
@@ -192,6 +196,20 @@ query GetAllIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Cu
             }
           }
         }
+        directoryAccounts {
+          edges {
+            node {
+              id
+              integrationID
+              externalID
+              canonicalEmail
+              displayName
+              directoryName
+              avatarRemoteURL
+              avatarLocalFileID
+            }
+          }
+        }
       }
     }
   }
@@ -205,6 +223,7 @@ query GetIdentityHolderByID($identityHolderId: ID!) {
     department
     displayID
     email
+    emailAliases
     employerEntityID
     endDate
     environmentID
@@ -244,6 +263,94 @@ query GetIdentityHolderByID($identityHolderId: ID!) {
         }
       }
     }
+    directoryAccounts {
+      edges {
+        node {
+          id
+          integrationID
+          externalID
+          canonicalEmail
+          displayName
+          directoryName
+          avatarRemoteURL
+          avatarLocalFileID
+        }
+      }
+    }
+  }
+}
+
+query GetIdentityHolderDirectoryAccounts($identityHolderId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectoryAccountOrder!], $where: DirectoryAccountWhereInput) {
+  identityHolder(id: $identityHolderId) {
+    id
+    email
+    fullName
+    directoryAccounts(
+      first: $first
+      last: $last
+      after: $after
+      before: $before
+      orderBy: $orderBy
+      where: $where
+    ) {
+      totalCount
+      pageInfo {
+        startCursor
+        endCursor
+        hasPreviousPage
+        hasNextPage
+      }
+      edges {
+        node {
+          accountType
+          addedAt
+          avatarLocalFileID
+          avatarRemoteURL
+          avatarUpdatedAt
+          canonicalEmail
+          createdAt
+          createdBy
+          department
+          directoryInstanceID
+          directoryName
+          directorySyncRunID
+          displayID
+          displayName
+          environmentID
+          environmentName
+          externalID
+          familyName
+          firstSeenAt
+          givenName
+          id
+          identityHolderID
+          integrationID
+          jobTitle
+          lastLoginAt
+          lastSeenAt
+          lastSeenIP
+          metadata
+          mfaState
+          observedAt
+          organizationUnit
+          ownerID
+          platformID
+          primarySource
+          profile
+          profileHash
+          rawProfileFileID
+          removedAt
+          scopeID
+          scopeName
+          secondaryKey
+          sourceVersion
+          status
+          tags
+          updatedAt
+          updatedBy
+        }
+      }
+    }
   }
 }
 
@@ -271,6 +378,7 @@ query GetIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Curso
         department
         displayID
         email
+        emailAliases
         employerEntityID
         endDate
         environmentID
@@ -324,6 +432,7 @@ mutation UpdateIdentityHolder($updateIdentityHolderId: ID!, $input: UpdateIdenti
       department
       displayID
       email
+      emailAliases
       employerEntityID
       endDate
       environmentID

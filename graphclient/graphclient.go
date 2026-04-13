@@ -297,6 +297,7 @@ type GraphClient interface {
 	DeleteIdentityHolder(ctx context.Context, deleteIdentityHolderID string, interceptors ...clientv2.RequestInterceptor) (*DeleteIdentityHolder, error)
 	GetAllIdentityHolders(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*IdentityHolderOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllIdentityHolders, error)
 	GetIdentityHolderByID(ctx context.Context, identityHolderID string, interceptors ...clientv2.RequestInterceptor) (*GetIdentityHolderByID, error)
+	GetIdentityHolderDirectoryAccounts(ctx context.Context, identityHolderID string, first *int64, last *int64, after *string, before *string, orderBy []*DirectoryAccountOrder, where *DirectoryAccountWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetIdentityHolderDirectoryAccounts, error)
 	GetIdentityHolders(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*IdentityHolderOrder, where *IdentityHolderWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetIdentityHolders, error)
 	UpdateIdentityHolder(ctx context.Context, updateIdentityHolderID string, input UpdateIdentityHolderInput, interceptors ...clientv2.RequestInterceptor) (*UpdateIdentityHolder, error)
 	DeleteIntegration(ctx context.Context, deleteIntegrationID string, interceptors ...clientv2.RequestInterceptor) (*DeleteIntegration, error)
@@ -44035,6 +44036,7 @@ type CreateBulkCSVIdentityHolder_CreateBulkCSVIdentityHolder_IdentityHolders str
 	Department             *string                  "json:\"department,omitempty\" graphql:\"department\""
 	DisplayID              string                   "json:\"displayID\" graphql:\"displayID\""
 	Email                  string                   "json:\"email\" graphql:\"email\""
+	EmailAliases           []string                 "json:\"emailAliases,omitempty\" graphql:\"emailAliases\""
 	EmployerEntityID       *string                  "json:\"employerEntityID,omitempty\" graphql:\"employerEntityID\""
 	EndDate                *models.DateTime         "json:\"endDate,omitempty\" graphql:\"endDate\""
 	EnvironmentID          *string                  "json:\"environmentID,omitempty\" graphql:\"environmentID\""
@@ -44101,6 +44103,12 @@ func (t *CreateBulkCSVIdentityHolder_CreateBulkCSVIdentityHolder_IdentityHolders
 		t = &CreateBulkCSVIdentityHolder_CreateBulkCSVIdentityHolder_IdentityHolders{}
 	}
 	return t.Email
+}
+func (t *CreateBulkCSVIdentityHolder_CreateBulkCSVIdentityHolder_IdentityHolders) GetEmailAliases() []string {
+	if t == nil {
+		t = &CreateBulkCSVIdentityHolder_CreateBulkCSVIdentityHolder_IdentityHolders{}
+	}
+	return t.EmailAliases
 }
 func (t *CreateBulkCSVIdentityHolder_CreateBulkCSVIdentityHolder_IdentityHolders) GetEmployerEntityID() *string {
 	if t == nil {
@@ -44295,6 +44303,7 @@ type CreateBulkIdentityHolder_CreateBulkIdentityHolder_IdentityHolders struct {
 	Department             *string                  "json:\"department,omitempty\" graphql:\"department\""
 	DisplayID              string                   "json:\"displayID\" graphql:\"displayID\""
 	Email                  string                   "json:\"email\" graphql:\"email\""
+	EmailAliases           []string                 "json:\"emailAliases,omitempty\" graphql:\"emailAliases\""
 	EmployerEntityID       *string                  "json:\"employerEntityID,omitempty\" graphql:\"employerEntityID\""
 	EndDate                *models.DateTime         "json:\"endDate,omitempty\" graphql:\"endDate\""
 	EnvironmentID          *string                  "json:\"environmentID,omitempty\" graphql:\"environmentID\""
@@ -44361,6 +44370,12 @@ func (t *CreateBulkIdentityHolder_CreateBulkIdentityHolder_IdentityHolders) GetE
 		t = &CreateBulkIdentityHolder_CreateBulkIdentityHolder_IdentityHolders{}
 	}
 	return t.Email
+}
+func (t *CreateBulkIdentityHolder_CreateBulkIdentityHolder_IdentityHolders) GetEmailAliases() []string {
+	if t == nil {
+		t = &CreateBulkIdentityHolder_CreateBulkIdentityHolder_IdentityHolders{}
+	}
+	return t.EmailAliases
 }
 func (t *CreateBulkIdentityHolder_CreateBulkIdentityHolder_IdentityHolders) GetEmployerEntityID() *string {
 	if t == nil {
@@ -44555,6 +44570,7 @@ type CreateIdentityHolder_CreateIdentityHolder_IdentityHolder struct {
 	Department             *string                  "json:\"department,omitempty\" graphql:\"department\""
 	DisplayID              string                   "json:\"displayID\" graphql:\"displayID\""
 	Email                  string                   "json:\"email\" graphql:\"email\""
+	EmailAliases           []string                 "json:\"emailAliases,omitempty\" graphql:\"emailAliases\""
 	EmployerEntityID       *string                  "json:\"employerEntityID,omitempty\" graphql:\"employerEntityID\""
 	EndDate                *models.DateTime         "json:\"endDate,omitempty\" graphql:\"endDate\""
 	EnvironmentID          *string                  "json:\"environmentID,omitempty\" graphql:\"environmentID\""
@@ -44621,6 +44637,12 @@ func (t *CreateIdentityHolder_CreateIdentityHolder_IdentityHolder) GetEmail() st
 		t = &CreateIdentityHolder_CreateIdentityHolder_IdentityHolder{}
 	}
 	return t.Email
+}
+func (t *CreateIdentityHolder_CreateIdentityHolder_IdentityHolder) GetEmailAliases() []string {
+	if t == nil {
+		t = &CreateIdentityHolder_CreateIdentityHolder_IdentityHolder{}
+	}
+	return t.EmailAliases
 }
 func (t *CreateIdentityHolder_CreateIdentityHolder_IdentityHolder) GetEmployerEntityID() *string {
 	if t == nil {
@@ -44905,43 +44927,127 @@ func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_Campaigns) GetEdges() 
 	return t.Edges
 }
 
+type GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node struct {
+	AvatarLocalFileID *string "json:\"avatarLocalFileID,omitempty\" graphql:\"avatarLocalFileID\""
+	AvatarRemoteURL   *string "json:\"avatarRemoteURL,omitempty\" graphql:\"avatarRemoteURL\""
+	CanonicalEmail    *string "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	DirectoryName     *string "json:\"directoryName,omitempty\" graphql:\"directoryName\""
+	DisplayName       *string "json:\"displayName,omitempty\" graphql:\"displayName\""
+	ExternalID        string  "json:\"externalID\" graphql:\"externalID\""
+	ID                string  "json:\"id\" graphql:\"id\""
+	IntegrationID     *string "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+}
+
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node) GetAvatarLocalFileID() *string {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node{}
+	}
+	return t.AvatarLocalFileID
+}
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node) GetAvatarRemoteURL() *string {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node{}
+	}
+	return t.AvatarRemoteURL
+}
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node) GetCanonicalEmail() *string {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node{}
+	}
+	return t.CanonicalEmail
+}
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node) GetDirectoryName() *string {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node{}
+	}
+	return t.DirectoryName
+}
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node) GetDisplayName() *string {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node{}
+	}
+	return t.DisplayName
+}
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node) GetExternalID() string {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node{}
+	}
+	return t.ExternalID
+}
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node) GetIntegrationID() *string {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node{}
+	}
+	return t.IntegrationID
+}
+
+type GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges struct {
+	Node *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges) GetNode() *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges_Node {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges{}
+	}
+	return t.Node
+}
+
+type GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts struct {
+	Edges []*GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+}
+
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts) GetEdges() []*GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts_Edges {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts{}
+	}
+	return t.Edges
+}
+
 type GetAllIdentityHolders_IdentityHolders_Edges_Node struct {
-	AlternateEmail         *string                                                    "json:\"alternateEmail,omitempty\" graphql:\"alternateEmail\""
-	Campaigns              GetAllIdentityHolders_IdentityHolders_Edges_Node_Campaigns "json:\"campaigns\" graphql:\"campaigns\""
-	CreatedAt              *time.Time                                                 "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy              *string                                                    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department             *string                                                    "json:\"department,omitempty\" graphql:\"department\""
-	DisplayID              string                                                     "json:\"displayID\" graphql:\"displayID\""
-	Email                  string                                                     "json:\"email\" graphql:\"email\""
-	EmployerEntityID       *string                                                    "json:\"employerEntityID,omitempty\" graphql:\"employerEntityID\""
-	EndDate                *models.DateTime                                           "json:\"endDate,omitempty\" graphql:\"endDate\""
-	EnvironmentID          *string                                                    "json:\"environmentID,omitempty\" graphql:\"environmentID\""
-	EnvironmentName        *string                                                    "json:\"environmentName,omitempty\" graphql:\"environmentName\""
-	ExternalReferenceID    *string                                                    "json:\"externalReferenceID,omitempty\" graphql:\"externalReferenceID\""
-	ExternalUserID         *string                                                    "json:\"externalUserID,omitempty\" graphql:\"externalUserID\""
-	FullName               string                                                     "json:\"fullName\" graphql:\"fullName\""
-	ID                     string                                                     "json:\"id\" graphql:\"id\""
-	IdentityHolderType     enums.IdentityHolderType                                   "json:\"identityHolderType\" graphql:\"identityHolderType\""
-	InternalOwner          *string                                                    "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
-	InternalOwnerGroupID   *string                                                    "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
-	InternalOwnerUserID    *string                                                    "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
-	IsActive               bool                                                       "json:\"isActive\" graphql:\"isActive\""
-	IsOpenlaneUser         *bool                                                      "json:\"isOpenlaneUser,omitempty\" graphql:\"isOpenlaneUser\""
-	Location               *string                                                    "json:\"location,omitempty\" graphql:\"location\""
-	Metadata               map[string]any                                             "json:\"metadata,omitempty\" graphql:\"metadata\""
-	OwnerID                *string                                                    "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PhoneNumber            *string                                                    "json:\"phoneNumber,omitempty\" graphql:\"phoneNumber\""
-	ScopeID                *string                                                    "json:\"scopeID,omitempty\" graphql:\"scopeID\""
-	ScopeName              *string                                                    "json:\"scopeName,omitempty\" graphql:\"scopeName\""
-	StartDate              *models.DateTime                                           "json:\"startDate,omitempty\" graphql:\"startDate\""
-	Status                 enums.UserStatus                                           "json:\"status\" graphql:\"status\""
-	Tags                   []string                                                   "json:\"tags,omitempty\" graphql:\"tags\""
-	Team                   *string                                                    "json:\"team,omitempty\" graphql:\"team\""
-	Title                  *string                                                    "json:\"title,omitempty\" graphql:\"title\""
-	UpdatedAt              *time.Time                                                 "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy              *string                                                    "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	UserID                 *string                                                    "json:\"userID,omitempty\" graphql:\"userID\""
-	WorkflowEligibleMarker *bool                                                      "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
+	AlternateEmail         *string                                                            "json:\"alternateEmail,omitempty\" graphql:\"alternateEmail\""
+	Campaigns              GetAllIdentityHolders_IdentityHolders_Edges_Node_Campaigns         "json:\"campaigns\" graphql:\"campaigns\""
+	CreatedAt              *time.Time                                                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy              *string                                                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department             *string                                                            "json:\"department,omitempty\" graphql:\"department\""
+	DirectoryAccounts      GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts "json:\"directoryAccounts\" graphql:\"directoryAccounts\""
+	DisplayID              string                                                             "json:\"displayID\" graphql:\"displayID\""
+	Email                  string                                                             "json:\"email\" graphql:\"email\""
+	EmailAliases           []string                                                           "json:\"emailAliases,omitempty\" graphql:\"emailAliases\""
+	EmployerEntityID       *string                                                            "json:\"employerEntityID,omitempty\" graphql:\"employerEntityID\""
+	EndDate                *models.DateTime                                                   "json:\"endDate,omitempty\" graphql:\"endDate\""
+	EnvironmentID          *string                                                            "json:\"environmentID,omitempty\" graphql:\"environmentID\""
+	EnvironmentName        *string                                                            "json:\"environmentName,omitempty\" graphql:\"environmentName\""
+	ExternalReferenceID    *string                                                            "json:\"externalReferenceID,omitempty\" graphql:\"externalReferenceID\""
+	ExternalUserID         *string                                                            "json:\"externalUserID,omitempty\" graphql:\"externalUserID\""
+	FullName               string                                                             "json:\"fullName\" graphql:\"fullName\""
+	ID                     string                                                             "json:\"id\" graphql:\"id\""
+	IdentityHolderType     enums.IdentityHolderType                                           "json:\"identityHolderType\" graphql:\"identityHolderType\""
+	InternalOwner          *string                                                            "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
+	InternalOwnerGroupID   *string                                                            "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
+	InternalOwnerUserID    *string                                                            "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
+	IsActive               bool                                                               "json:\"isActive\" graphql:\"isActive\""
+	IsOpenlaneUser         *bool                                                              "json:\"isOpenlaneUser,omitempty\" graphql:\"isOpenlaneUser\""
+	Location               *string                                                            "json:\"location,omitempty\" graphql:\"location\""
+	Metadata               map[string]any                                                     "json:\"metadata,omitempty\" graphql:\"metadata\""
+	OwnerID                *string                                                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PhoneNumber            *string                                                            "json:\"phoneNumber,omitempty\" graphql:\"phoneNumber\""
+	ScopeID                *string                                                            "json:\"scopeID,omitempty\" graphql:\"scopeID\""
+	ScopeName              *string                                                            "json:\"scopeName,omitempty\" graphql:\"scopeName\""
+	StartDate              *models.DateTime                                                   "json:\"startDate,omitempty\" graphql:\"startDate\""
+	Status                 enums.UserStatus                                                   "json:\"status\" graphql:\"status\""
+	Tags                   []string                                                           "json:\"tags,omitempty\" graphql:\"tags\""
+	Team                   *string                                                            "json:\"team,omitempty\" graphql:\"team\""
+	Title                  *string                                                            "json:\"title,omitempty\" graphql:\"title\""
+	UpdatedAt              *time.Time                                                         "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy              *string                                                            "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	UserID                 *string                                                            "json:\"userID,omitempty\" graphql:\"userID\""
+	WorkflowEligibleMarker *bool                                                              "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
 func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node) GetAlternateEmail() *string {
@@ -44974,6 +45080,12 @@ func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node) GetDepartment() *stri
 	}
 	return t.Department
 }
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node) GetDirectoryAccounts() *GetAllIdentityHolders_IdentityHolders_Edges_Node_DirectoryAccounts {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node{}
+	}
+	return &t.DirectoryAccounts
+}
 func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node) GetDisplayID() string {
 	if t == nil {
 		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node{}
@@ -44985,6 +45097,12 @@ func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node) GetEmail() string {
 		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node{}
 	}
 	return t.Email
+}
+func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node) GetEmailAliases() []string {
+	if t == nil {
+		t = &GetAllIdentityHolders_IdentityHolders_Edges_Node{}
+	}
+	return t.EmailAliases
 }
 func (t *GetAllIdentityHolders_IdentityHolders_Edges_Node) GetEmployerEntityID() *string {
 	if t == nil {
@@ -45251,43 +45369,127 @@ func (t *GetIdentityHolderByID_IdentityHolder_Campaigns) GetEdges() []*GetIdenti
 	return t.Edges
 }
 
+type GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node struct {
+	AvatarLocalFileID *string "json:\"avatarLocalFileID,omitempty\" graphql:\"avatarLocalFileID\""
+	AvatarRemoteURL   *string "json:\"avatarRemoteURL,omitempty\" graphql:\"avatarRemoteURL\""
+	CanonicalEmail    *string "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	DirectoryName     *string "json:\"directoryName,omitempty\" graphql:\"directoryName\""
+	DisplayName       *string "json:\"displayName,omitempty\" graphql:\"displayName\""
+	ExternalID        string  "json:\"externalID\" graphql:\"externalID\""
+	ID                string  "json:\"id\" graphql:\"id\""
+	IntegrationID     *string "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+}
+
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node) GetAvatarLocalFileID() *string {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.AvatarLocalFileID
+}
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node) GetAvatarRemoteURL() *string {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.AvatarRemoteURL
+}
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node) GetCanonicalEmail() *string {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.CanonicalEmail
+}
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node) GetDirectoryName() *string {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.DirectoryName
+}
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node) GetDisplayName() *string {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.DisplayName
+}
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node) GetExternalID() string {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.ExternalID
+}
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node) GetIntegrationID() *string {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.IntegrationID
+}
+
+type GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges struct {
+	Node *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges) GetNode() *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges_Node {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges{}
+	}
+	return t.Node
+}
+
+type GetIdentityHolderByID_IdentityHolder_DirectoryAccounts struct {
+	Edges []*GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+}
+
+func (t *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts) GetEdges() []*GetIdentityHolderByID_IdentityHolder_DirectoryAccounts_Edges {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder_DirectoryAccounts{}
+	}
+	return t.Edges
+}
+
 type GetIdentityHolderByID_IdentityHolder struct {
-	AlternateEmail         *string                                        "json:\"alternateEmail,omitempty\" graphql:\"alternateEmail\""
-	Campaigns              GetIdentityHolderByID_IdentityHolder_Campaigns "json:\"campaigns\" graphql:\"campaigns\""
-	CreatedAt              *time.Time                                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy              *string                                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department             *string                                        "json:\"department,omitempty\" graphql:\"department\""
-	DisplayID              string                                         "json:\"displayID\" graphql:\"displayID\""
-	Email                  string                                         "json:\"email\" graphql:\"email\""
-	EmployerEntityID       *string                                        "json:\"employerEntityID,omitempty\" graphql:\"employerEntityID\""
-	EndDate                *models.DateTime                               "json:\"endDate,omitempty\" graphql:\"endDate\""
-	EnvironmentID          *string                                        "json:\"environmentID,omitempty\" graphql:\"environmentID\""
-	EnvironmentName        *string                                        "json:\"environmentName,omitempty\" graphql:\"environmentName\""
-	ExternalReferenceID    *string                                        "json:\"externalReferenceID,omitempty\" graphql:\"externalReferenceID\""
-	ExternalUserID         *string                                        "json:\"externalUserID,omitempty\" graphql:\"externalUserID\""
-	FullName               string                                         "json:\"fullName\" graphql:\"fullName\""
-	ID                     string                                         "json:\"id\" graphql:\"id\""
-	IdentityHolderType     enums.IdentityHolderType                       "json:\"identityHolderType\" graphql:\"identityHolderType\""
-	InternalOwner          *string                                        "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
-	InternalOwnerGroupID   *string                                        "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
-	InternalOwnerUserID    *string                                        "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
-	IsActive               bool                                           "json:\"isActive\" graphql:\"isActive\""
-	IsOpenlaneUser         *bool                                          "json:\"isOpenlaneUser,omitempty\" graphql:\"isOpenlaneUser\""
-	Location               *string                                        "json:\"location,omitempty\" graphql:\"location\""
-	Metadata               map[string]any                                 "json:\"metadata,omitempty\" graphql:\"metadata\""
-	OwnerID                *string                                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PhoneNumber            *string                                        "json:\"phoneNumber,omitempty\" graphql:\"phoneNumber\""
-	ScopeID                *string                                        "json:\"scopeID,omitempty\" graphql:\"scopeID\""
-	ScopeName              *string                                        "json:\"scopeName,omitempty\" graphql:\"scopeName\""
-	StartDate              *models.DateTime                               "json:\"startDate,omitempty\" graphql:\"startDate\""
-	Status                 enums.UserStatus                               "json:\"status\" graphql:\"status\""
-	Tags                   []string                                       "json:\"tags,omitempty\" graphql:\"tags\""
-	Team                   *string                                        "json:\"team,omitempty\" graphql:\"team\""
-	Title                  *string                                        "json:\"title,omitempty\" graphql:\"title\""
-	UpdatedAt              *time.Time                                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy              *string                                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	UserID                 *string                                        "json:\"userID,omitempty\" graphql:\"userID\""
-	WorkflowEligibleMarker *bool                                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
+	AlternateEmail         *string                                                "json:\"alternateEmail,omitempty\" graphql:\"alternateEmail\""
+	Campaigns              GetIdentityHolderByID_IdentityHolder_Campaigns         "json:\"campaigns\" graphql:\"campaigns\""
+	CreatedAt              *time.Time                                             "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy              *string                                                "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department             *string                                                "json:\"department,omitempty\" graphql:\"department\""
+	DirectoryAccounts      GetIdentityHolderByID_IdentityHolder_DirectoryAccounts "json:\"directoryAccounts\" graphql:\"directoryAccounts\""
+	DisplayID              string                                                 "json:\"displayID\" graphql:\"displayID\""
+	Email                  string                                                 "json:\"email\" graphql:\"email\""
+	EmailAliases           []string                                               "json:\"emailAliases,omitempty\" graphql:\"emailAliases\""
+	EmployerEntityID       *string                                                "json:\"employerEntityID,omitempty\" graphql:\"employerEntityID\""
+	EndDate                *models.DateTime                                       "json:\"endDate,omitempty\" graphql:\"endDate\""
+	EnvironmentID          *string                                                "json:\"environmentID,omitempty\" graphql:\"environmentID\""
+	EnvironmentName        *string                                                "json:\"environmentName,omitempty\" graphql:\"environmentName\""
+	ExternalReferenceID    *string                                                "json:\"externalReferenceID,omitempty\" graphql:\"externalReferenceID\""
+	ExternalUserID         *string                                                "json:\"externalUserID,omitempty\" graphql:\"externalUserID\""
+	FullName               string                                                 "json:\"fullName\" graphql:\"fullName\""
+	ID                     string                                                 "json:\"id\" graphql:\"id\""
+	IdentityHolderType     enums.IdentityHolderType                               "json:\"identityHolderType\" graphql:\"identityHolderType\""
+	InternalOwner          *string                                                "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
+	InternalOwnerGroupID   *string                                                "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
+	InternalOwnerUserID    *string                                                "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
+	IsActive               bool                                                   "json:\"isActive\" graphql:\"isActive\""
+	IsOpenlaneUser         *bool                                                  "json:\"isOpenlaneUser,omitempty\" graphql:\"isOpenlaneUser\""
+	Location               *string                                                "json:\"location,omitempty\" graphql:\"location\""
+	Metadata               map[string]any                                         "json:\"metadata,omitempty\" graphql:\"metadata\""
+	OwnerID                *string                                                "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PhoneNumber            *string                                                "json:\"phoneNumber,omitempty\" graphql:\"phoneNumber\""
+	ScopeID                *string                                                "json:\"scopeID,omitempty\" graphql:\"scopeID\""
+	ScopeName              *string                                                "json:\"scopeName,omitempty\" graphql:\"scopeName\""
+	StartDate              *models.DateTime                                       "json:\"startDate,omitempty\" graphql:\"startDate\""
+	Status                 enums.UserStatus                                       "json:\"status\" graphql:\"status\""
+	Tags                   []string                                               "json:\"tags,omitempty\" graphql:\"tags\""
+	Team                   *string                                                "json:\"team,omitempty\" graphql:\"team\""
+	Title                  *string                                                "json:\"title,omitempty\" graphql:\"title\""
+	UpdatedAt              *time.Time                                             "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy              *string                                                "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	UserID                 *string                                                "json:\"userID,omitempty\" graphql:\"userID\""
+	WorkflowEligibleMarker *bool                                                  "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
 func (t *GetIdentityHolderByID_IdentityHolder) GetAlternateEmail() *string {
@@ -45320,6 +45522,12 @@ func (t *GetIdentityHolderByID_IdentityHolder) GetDepartment() *string {
 	}
 	return t.Department
 }
+func (t *GetIdentityHolderByID_IdentityHolder) GetDirectoryAccounts() *GetIdentityHolderByID_IdentityHolder_DirectoryAccounts {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder{}
+	}
+	return &t.DirectoryAccounts
+}
 func (t *GetIdentityHolderByID_IdentityHolder) GetDisplayID() string {
 	if t == nil {
 		t = &GetIdentityHolderByID_IdentityHolder{}
@@ -45331,6 +45539,12 @@ func (t *GetIdentityHolderByID_IdentityHolder) GetEmail() string {
 		t = &GetIdentityHolderByID_IdentityHolder{}
 	}
 	return t.Email
+}
+func (t *GetIdentityHolderByID_IdentityHolder) GetEmailAliases() []string {
+	if t == nil {
+		t = &GetIdentityHolderByID_IdentityHolder{}
+	}
+	return t.EmailAliases
 }
 func (t *GetIdentityHolderByID_IdentityHolder) GetEmployerEntityID() *string {
 	if t == nil {
@@ -45507,6 +45721,432 @@ func (t *GetIdentityHolderByID_IdentityHolder) GetWorkflowEligibleMarker() *bool
 	return t.WorkflowEligibleMarker
 }
 
+type GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node struct {
+	AccountType         *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
+	AddedAt             *time.Time                     "json:\"addedAt,omitempty\" graphql:\"addedAt\""
+	AvatarLocalFileID   *string                        "json:\"avatarLocalFileID,omitempty\" graphql:\"avatarLocalFileID\""
+	AvatarRemoteURL     *string                        "json:\"avatarRemoteURL,omitempty\" graphql:\"avatarRemoteURL\""
+	AvatarUpdatedAt     *time.Time                     "json:\"avatarUpdatedAt,omitempty\" graphql:\"avatarUpdatedAt\""
+	CanonicalEmail      *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	CreatedAt           *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy           *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department          *string                        "json:\"department,omitempty\" graphql:\"department\""
+	DirectoryInstanceID *string                        "json:\"directoryInstanceID,omitempty\" graphql:\"directoryInstanceID\""
+	DirectoryName       *string                        "json:\"directoryName,omitempty\" graphql:\"directoryName\""
+	DirectorySyncRunID  *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
+	DisplayID           string                         "json:\"displayID\" graphql:\"displayID\""
+	DisplayName         *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
+	EnvironmentID       *string                        "json:\"environmentID,omitempty\" graphql:\"environmentID\""
+	EnvironmentName     *string                        "json:\"environmentName,omitempty\" graphql:\"environmentName\""
+	ExternalID          string                         "json:\"externalID\" graphql:\"externalID\""
+	FamilyName          *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
+	FirstSeenAt         *time.Time                     "json:\"firstSeenAt,omitempty\" graphql:\"firstSeenAt\""
+	GivenName           *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
+	ID                  string                         "json:\"id\" graphql:\"id\""
+	IdentityHolderID    *string                        "json:\"identityHolderID,omitempty\" graphql:\"identityHolderID\""
+	IntegrationID       *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	JobTitle            *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
+	LastLoginAt         *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
+	LastSeenAt          *time.Time                     "json:\"lastSeenAt,omitempty\" graphql:\"lastSeenAt\""
+	LastSeenIP          *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
+	Metadata            map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
+	MfaState            enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
+	ObservedAt          time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
+	OrganizationUnit    *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
+	OwnerID             *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PlatformID          *string                        "json:\"platformID,omitempty\" graphql:\"platformID\""
+	PrimarySource       bool                           "json:\"primarySource\" graphql:\"primarySource\""
+	Profile             map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
+	ProfileHash         string                         "json:\"profileHash\" graphql:\"profileHash\""
+	RawProfileFileID    *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
+	RemovedAt           *time.Time                     "json:\"removedAt,omitempty\" graphql:\"removedAt\""
+	ScopeID             *string                        "json:\"scopeID,omitempty\" graphql:\"scopeID\""
+	ScopeName           *string                        "json:\"scopeName,omitempty\" graphql:\"scopeName\""
+	SecondaryKey        *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
+	SourceVersion       *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
+	Status              enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
+	Tags                []string                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt           *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy           *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetAccountType() *enums.DirectoryAccountType {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.AccountType
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetAddedAt() *time.Time {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.AddedAt
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetAvatarLocalFileID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.AvatarLocalFileID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetAvatarRemoteURL() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.AvatarRemoteURL
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetAvatarUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.AvatarUpdatedAt
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetCanonicalEmail() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.CanonicalEmail
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.CreatedAt
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.CreatedBy
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDepartment() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.Department
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDirectoryInstanceID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.DirectoryInstanceID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDirectoryName() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.DirectoryName
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDirectorySyncRunID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.DirectorySyncRunID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDisplayID() string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.DisplayID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDisplayName() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.DisplayName
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetEnvironmentID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.EnvironmentID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetEnvironmentName() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.EnvironmentName
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetExternalID() string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.ExternalID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetFamilyName() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.FamilyName
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetFirstSeenAt() *time.Time {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.FirstSeenAt
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetGivenName() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.GivenName
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetIdentityHolderID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.IdentityHolderID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetIntegrationID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.IntegrationID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetJobTitle() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.JobTitle
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetLastLoginAt() *time.Time {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.LastLoginAt
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetLastSeenAt() *time.Time {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.LastSeenAt
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetLastSeenIP() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.LastSeenIP
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetMetadata() map[string]any {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.Metadata
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetMfaState() *enums.DirectoryAccountMFAState {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return &t.MfaState
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetObservedAt() *time.Time {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return &t.ObservedAt
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetOrganizationUnit() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.OrganizationUnit
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetOwnerID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.OwnerID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetPlatformID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.PlatformID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetPrimarySource() bool {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.PrimarySource
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetProfile() map[string]any {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.Profile
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetProfileHash() string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.ProfileHash
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetRawProfileFileID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.RawProfileFileID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetRemovedAt() *time.Time {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.RemovedAt
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetScopeID() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.ScopeID
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetScopeName() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.ScopeName
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetSecondaryKey() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.SecondaryKey
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetSourceVersion() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.SourceVersion
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetStatus() *enums.DirectoryAccountStatus {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return &t.Status
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetTags() []string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.Tags
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
+	}
+	return t.UpdatedBy
+}
+
+type GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges struct {
+	Node *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges) GetNode() *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges{}
+	}
+	return t.Node
+}
+
+type GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts struct {
+	Edges      []*GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo   GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+	TotalCount int64                                                                        "json:\"totalCount\" graphql:\"totalCount\""
+}
+
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts) GetEdges() []*GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts{}
+	}
+	return t.Edges
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts) GetPageInfo() *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_PageInfo {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts{}
+	}
+	return &t.PageInfo
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts) GetTotalCount() int64 {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts{}
+	}
+	return t.TotalCount
+}
+
+type GetIdentityHolderDirectoryAccounts_IdentityHolder struct {
+	DirectoryAccounts GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts "json:\"directoryAccounts\" graphql:\"directoryAccounts\""
+	Email             string                                                              "json:\"email\" graphql:\"email\""
+	FullName          string                                                              "json:\"fullName\" graphql:\"fullName\""
+	ID                string                                                              "json:\"id\" graphql:\"id\""
+}
+
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder) GetDirectoryAccounts() *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder{}
+	}
+	return &t.DirectoryAccounts
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder) GetEmail() string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder{}
+	}
+	return t.Email
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder) GetFullName() string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder{}
+	}
+	return t.FullName
+}
+func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder) GetID() string {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder{}
+	}
+	return t.ID
+}
+
 type GetIdentityHolders_IdentityHolders_PageInfo struct {
 	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
 	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
@@ -45601,6 +46241,7 @@ type GetIdentityHolders_IdentityHolders_Edges_Node struct {
 	Department             *string                                                 "json:\"department,omitempty\" graphql:\"department\""
 	DisplayID              string                                                  "json:\"displayID\" graphql:\"displayID\""
 	Email                  string                                                  "json:\"email\" graphql:\"email\""
+	EmailAliases           []string                                                "json:\"emailAliases,omitempty\" graphql:\"emailAliases\""
 	EmployerEntityID       *string                                                 "json:\"employerEntityID,omitempty\" graphql:\"employerEntityID\""
 	EndDate                *models.DateTime                                        "json:\"endDate,omitempty\" graphql:\"endDate\""
 	EnvironmentID          *string                                                 "json:\"environmentID,omitempty\" graphql:\"environmentID\""
@@ -45673,6 +46314,12 @@ func (t *GetIdentityHolders_IdentityHolders_Edges_Node) GetEmail() string {
 		t = &GetIdentityHolders_IdentityHolders_Edges_Node{}
 	}
 	return t.Email
+}
+func (t *GetIdentityHolders_IdentityHolders_Edges_Node) GetEmailAliases() []string {
+	if t == nil {
+		t = &GetIdentityHolders_IdentityHolders_Edges_Node{}
+	}
+	return t.EmailAliases
 }
 func (t *GetIdentityHolders_IdentityHolders_Edges_Node) GetEmployerEntityID() *string {
 	if t == nil {
@@ -45892,6 +46539,7 @@ type UpdateIdentityHolder_UpdateIdentityHolder_IdentityHolder struct {
 	Department             *string                  "json:\"department,omitempty\" graphql:\"department\""
 	DisplayID              string                   "json:\"displayID\" graphql:\"displayID\""
 	Email                  string                   "json:\"email\" graphql:\"email\""
+	EmailAliases           []string                 "json:\"emailAliases,omitempty\" graphql:\"emailAliases\""
 	EmployerEntityID       *string                  "json:\"employerEntityID,omitempty\" graphql:\"employerEntityID\""
 	EndDate                *models.DateTime         "json:\"endDate,omitempty\" graphql:\"endDate\""
 	EnvironmentID          *string                  "json:\"environmentID,omitempty\" graphql:\"environmentID\""
@@ -45958,6 +46606,12 @@ func (t *UpdateIdentityHolder_UpdateIdentityHolder_IdentityHolder) GetEmail() st
 		t = &UpdateIdentityHolder_UpdateIdentityHolder_IdentityHolder{}
 	}
 	return t.Email
+}
+func (t *UpdateIdentityHolder_UpdateIdentityHolder_IdentityHolder) GetEmailAliases() []string {
+	if t == nil {
+		t = &UpdateIdentityHolder_UpdateIdentityHolder_IdentityHolder{}
+	}
+	return t.EmailAliases
 }
 func (t *UpdateIdentityHolder_UpdateIdentityHolder_IdentityHolder) GetEmployerEntityID() *string {
 	if t == nil {
@@ -110619,6 +111273,17 @@ func (t *GetIdentityHolderByID) GetIdentityHolder() *GetIdentityHolderByID_Ident
 	return &t.IdentityHolder
 }
 
+type GetIdentityHolderDirectoryAccounts struct {
+	IdentityHolder GetIdentityHolderDirectoryAccounts_IdentityHolder "json:\"identityHolder\" graphql:\"identityHolder\""
+}
+
+func (t *GetIdentityHolderDirectoryAccounts) GetIdentityHolder() *GetIdentityHolderDirectoryAccounts_IdentityHolder {
+	if t == nil {
+		t = &GetIdentityHolderDirectoryAccounts{}
+	}
+	return &t.IdentityHolder
+}
+
 type GetIdentityHolders struct {
 	IdentityHolders GetIdentityHolders_IdentityHolders "json:\"identityHolders\" graphql:\"identityHolders\""
 }
@@ -127953,6 +128618,7 @@ const CreateBulkCSVIdentityHolderDocument = `mutation CreateBulkCSVIdentityHolde
 			department
 			displayID
 			email
+			emailAliases
 			employerEntityID
 			endDate
 			environmentID
@@ -128013,6 +128679,7 @@ const CreateBulkIdentityHolderDocument = `mutation CreateBulkIdentityHolder ($in
 			department
 			displayID
 			email
+			emailAliases
 			employerEntityID
 			endDate
 			environmentID
@@ -128073,6 +128740,7 @@ const CreateIdentityHolderDocument = `mutation CreateIdentityHolder ($input: Cre
 			department
 			displayID
 			email
+			emailAliases
 			employerEntityID
 			endDate
 			environmentID
@@ -128165,6 +128833,7 @@ const GetAllIdentityHoldersDocument = `query GetAllIdentityHolders ($first: Int,
 				department
 				displayID
 				email
+				emailAliases
 				employerEntityID
 				endDate
 				environmentID
@@ -128204,6 +128873,20 @@ const GetAllIdentityHoldersDocument = `query GetAllIdentityHolders ($first: Int,
 						}
 					}
 				}
+				directoryAccounts {
+					edges {
+						node {
+							id
+							integrationID
+							externalID
+							canonicalEmail
+							displayName
+							directoryName
+							avatarRemoteURL
+							avatarLocalFileID
+						}
+					}
+				}
 			}
 		}
 	}
@@ -128239,6 +128922,7 @@ const GetIdentityHolderByIDDocument = `query GetIdentityHolderByID ($identityHol
 		department
 		displayID
 		email
+		emailAliases
 		employerEntityID
 		endDate
 		environmentID
@@ -128278,6 +128962,20 @@ const GetIdentityHolderByIDDocument = `query GetIdentityHolderByID ($identityHol
 				}
 			}
 		}
+		directoryAccounts {
+			edges {
+				node {
+					id
+					integrationID
+					externalID
+					canonicalEmail
+					displayName
+					directoryName
+					avatarRemoteURL
+					avatarLocalFileID
+				}
+			}
+		}
 	}
 }
 `
@@ -128289,6 +128987,97 @@ func (c *Client) GetIdentityHolderByID(ctx context.Context, identityHolderID str
 
 	var res GetIdentityHolderByID
 	if err := c.Client.Post(ctx, "GetIdentityHolderByID", GetIdentityHolderByIDDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetIdentityHolderDirectoryAccountsDocument = `query GetIdentityHolderDirectoryAccounts ($identityHolderId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectoryAccountOrder!], $where: DirectoryAccountWhereInput) {
+	identityHolder(id: $identityHolderId) {
+		id
+		email
+		fullName
+		directoryAccounts(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy, where: $where) {
+			totalCount
+			pageInfo {
+				startCursor
+				endCursor
+				hasPreviousPage
+				hasNextPage
+			}
+			edges {
+				node {
+					accountType
+					addedAt
+					avatarLocalFileID
+					avatarRemoteURL
+					avatarUpdatedAt
+					canonicalEmail
+					createdAt
+					createdBy
+					department
+					directoryInstanceID
+					directoryName
+					directorySyncRunID
+					displayID
+					displayName
+					environmentID
+					environmentName
+					externalID
+					familyName
+					firstSeenAt
+					givenName
+					id
+					identityHolderID
+					integrationID
+					jobTitle
+					lastLoginAt
+					lastSeenAt
+					lastSeenIP
+					metadata
+					mfaState
+					observedAt
+					organizationUnit
+					ownerID
+					platformID
+					primarySource
+					profile
+					profileHash
+					rawProfileFileID
+					removedAt
+					scopeID
+					scopeName
+					secondaryKey
+					sourceVersion
+					status
+					tags
+					updatedAt
+					updatedBy
+				}
+			}
+		}
+	}
+}
+`
+
+func (c *Client) GetIdentityHolderDirectoryAccounts(ctx context.Context, identityHolderID string, first *int64, last *int64, after *string, before *string, orderBy []*DirectoryAccountOrder, where *DirectoryAccountWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetIdentityHolderDirectoryAccounts, error) {
+	vars := map[string]any{
+		"identityHolderId": identityHolderID,
+		"first":            first,
+		"last":             last,
+		"after":            after,
+		"before":           before,
+		"orderBy":          orderBy,
+		"where":            where,
+	}
+
+	var res GetIdentityHolderDirectoryAccounts
+	if err := c.Client.Post(ctx, "GetIdentityHolderDirectoryAccounts", GetIdentityHolderDirectoryAccountsDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -128316,6 +129105,7 @@ const GetIdentityHoldersDocument = `query GetIdentityHolders ($first: Int, $last
 				department
 				displayID
 				email
+				emailAliases
 				employerEntityID
 				endDate
 				environmentID
@@ -128392,6 +129182,7 @@ const UpdateIdentityHolderDocument = `mutation UpdateIdentityHolder ($updateIden
 			department
 			displayID
 			email
+			emailAliases
 			employerEntityID
 			endDate
 			environmentID
@@ -147236,6 +148027,7 @@ var DocumentOperationNames = map[string]string{
 	DeleteIdentityHolderDocument:                 "DeleteIdentityHolder",
 	GetAllIdentityHoldersDocument:                "GetAllIdentityHolders",
 	GetIdentityHolderByIDDocument:                "GetIdentityHolderByID",
+	GetIdentityHolderDirectoryAccountsDocument:   "GetIdentityHolderDirectoryAccounts",
 	GetIdentityHoldersDocument:                   "GetIdentityHolders",
 	UpdateIdentityHolderDocument:                 "UpdateIdentityHolder",
 	DeleteIntegrationDocument:                    "DeleteIntegration",
