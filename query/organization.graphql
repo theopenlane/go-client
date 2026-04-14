@@ -56,6 +56,10 @@ query GetAllOrganizations($first: Int, $last: Int, $after: Cursor, $before: Curs
         tags
         updatedAt
         updatedBy
+        setting {
+          id
+          paymentMethodAdded
+        }
       }
     }
   }

@@ -226,6 +226,13 @@ organizationSettings(
         taxIdentifier
         updatedAt
         updatedBy
+        paymentMethodAdded
+        pendingDeletionAt
+        organization {
+          id
+          createdAt
+          name
+        }
       }
     }
   }
