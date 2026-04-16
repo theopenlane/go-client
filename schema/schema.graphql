@@ -1103,6 +1103,7 @@ enum ActionPlanDocumentStatus @goModel(model: "github.com/theopenlane/core/commo
 	NEEDS_APPROVAL
 	APPROVED
 	ARCHIVED
+	PENDING
 }
 """
 An edge in a connection.
@@ -8663,6 +8664,7 @@ enum ControlImplementationDocumentStatus @goModel(model: "github.com/theopenlane
 	NEEDS_APPROVAL
 	APPROVED
 	ARCHIVED
+	PENDING
 }
 """
 An edge in a connection.
@@ -12730,6 +12732,10 @@ input CreateEvidenceInput {
 	the status of the evidence, ready, approved, needs renewal, missing artifact, rejected
 	"""
 	status: EvidenceEvidenceStatus
+	"""
+	the cadence for reviewing the evidence
+	"""
+	reviewFrequency: EvidenceFrequency
 	ownerID: ID
 	environmentID: ID
 	scopeID: ID
@@ -27236,6 +27242,10 @@ type Evidence implements Node {
 	the status of the evidence, ready, approved, needs renewal, missing artifact, rejected
 	"""
 	status: EvidenceEvidenceStatus
+	"""
+	the cadence for reviewing the evidence
+	"""
+	reviewFrequency: EvidenceFrequency
 	owner: Organization
 	environment: CustomTypeEnum
 	scope: CustomTypeEnum
@@ -27691,6 +27701,16 @@ enum EvidenceEvidenceStatus @goModel(model: "github.com/theopenlane/core/common/
 	REJECTED
 }
 """
+EvidenceFrequency is enum for the field review_frequency
+"""
+enum EvidenceFrequency @goModel(model: "github.com/theopenlane/core/common/enums.Frequency") {
+	YEARLY
+	QUARTERLY
+	BIANNUALLY
+	MONTHLY
+	NONE
+}
+"""
 Ordering options for Evidence connections
 """
 input EvidenceOrder {
@@ -27713,6 +27733,7 @@ enum EvidenceOrderField {
 	creation_date
 	renewal_date
 	STATUS
+	REVIEW_FREQUENCY
 }
 """
 The EvidenceRequests scalar type that represents documents or artifacts that can be collected to demonstrate compliance with a control
@@ -28069,6 +28090,15 @@ input EvidenceWhereInput {
 	statusNotIn: [EvidenceEvidenceStatus!]
 	statusIsNil: Boolean
 	statusNotNil: Boolean
+	"""
+	review_frequency field predicates
+	"""
+	reviewFrequency: EvidenceFrequency
+	reviewFrequencyNEQ: EvidenceFrequency
+	reviewFrequencyIn: [EvidenceFrequency!]
+	reviewFrequencyNotIn: [EvidenceFrequency!]
+	reviewFrequencyIsNil: Boolean
+	reviewFrequencyNotNil: Boolean
 	"""
 	owner edge predicates
 	"""
@@ -38569,6 +38599,7 @@ enum InternalPolicyDocumentStatus @goModel(model: "github.com/theopenlane/core/c
 	NEEDS_APPROVAL
 	APPROVED
 	ARCHIVED
+	PENDING
 }
 """
 An edge in a connection.
@@ -60007,6 +60038,7 @@ enum ProcedureDocumentStatus @goModel(model: "github.com/theopenlane/core/common
 	NEEDS_APPROVAL
 	APPROVED
 	ARCHIVED
+	PENDING
 }
 """
 An edge in a connection.
@@ -87677,6 +87709,11 @@ input UpdateEvidenceInput {
 	"""
 	status: EvidenceEvidenceStatus
 	clearStatus: Boolean
+	"""
+	the cadence for reviewing the evidence
+	"""
+	reviewFrequency: EvidenceFrequency
+	clearReviewFrequency: Boolean
 	environmentID: ID
 	clearEnvironment: Boolean
 	scopeID: ID
