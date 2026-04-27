@@ -137,3 +137,23 @@ mutation UpdateOrgMembership($updateOrgMembershipId: ID!, $input: UpdateOrgMembe
     }
   }
 }
+
+query GetOrgMembersByOrgID ($where: OrgMembershipWhereInput) {
+	orgMemberships(where: $where) {
+		edges {
+			node {
+				id
+				organizationID
+				userID
+				role
+				user {
+					firstName
+					lastName
+					id
+					displayName
+					email
+				}
+			}
+		}
+	}
+}
