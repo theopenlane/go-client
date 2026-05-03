@@ -136,7 +136,7 @@ func (c *Client) SetAuthTokens(access, refresh string) error {
 	// Set the cookies on the client
 	cookies := make([]*http.Cookie, 0, 2) //nolint:mnd
 	if access != "" {
-		cookies = append(cookies, &http.Cookie{
+		cookies = append(cookies, &http.Cookie{ //nolint:gosec
 			Name:     auth.AccessTokenCookie,
 			Value:    access,
 			Expires:  time.Now().Add(cookieExpiryMinutes),
@@ -146,7 +146,7 @@ func (c *Client) SetAuthTokens(access, refresh string) error {
 	}
 
 	if refresh != "" {
-		cookies = append(cookies, &http.Cookie{
+		cookies = append(cookies, &http.Cookie{ //nolint:gosec
 			Name:    auth.RefreshTokenCookie,
 			Value:   refresh,
 			Expires: time.Now().Add(cookieExpiryMinutes),
