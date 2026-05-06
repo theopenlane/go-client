@@ -9,8 +9,10 @@ mutation CreateBulkCampaign($input: [CreateCampaignInput!]) {
       description
       displayID
       dueDate
+      emailTemplateID
       entityID
       id
+      integrationID
       internalOwner
       internalOwnerGroupID
       internalOwnerUserID
@@ -52,8 +54,10 @@ mutation CreateBulkCSVCampaign($input: Upload!) {
       description
       displayID
       dueDate
+      emailTemplateID
       entityID
       id
+      integrationID
       internalOwner
       internalOwnerGroupID
       internalOwnerUserID
@@ -95,8 +99,10 @@ mutation CreateCampaign($input: CreateCampaignInput!) {
       description
       displayID
       dueDate
+      emailTemplateID
       entityID
       id
+      integrationID
       internalOwner
       internalOwnerGroupID
       internalOwnerUserID
@@ -158,8 +164,10 @@ query GetAllCampaigns($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
         description
         displayID
         dueDate
+        emailTemplateID
         entityID
         id
+        integrationID
         internalOwner
         internalOwnerGroupID
         internalOwnerUserID
@@ -214,8 +222,10 @@ query GetCampaignByID($campaignId: ID!) {
     description
     displayID
     dueDate
+    emailTemplateID
     entityID
     id
+    integrationID
     internalOwner
     internalOwnerGroupID
     internalOwnerUserID
@@ -284,8 +294,10 @@ query GetCampaigns($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
         description
         displayID
         dueDate
+        emailTemplateID
         entityID
         id
+        integrationID
         internalOwner
         internalOwnerGroupID
         internalOwnerUserID
@@ -341,8 +353,10 @@ mutation UpdateCampaign($updateCampaignId: ID!, $input: UpdateCampaignInput!) {
       description
       displayID
       dueDate
+      emailTemplateID
       entityID
       id
+      integrationID
       internalOwner
       internalOwnerGroupID
       internalOwnerUserID

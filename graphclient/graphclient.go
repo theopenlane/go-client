@@ -70,6 +70,17 @@ type GraphClient interface {
 	GetCampaignTargetByID(ctx context.Context, campaignTargetID string, interceptors ...clientv2.RequestInterceptor) (*GetCampaignTargetByID, error)
 	GetCampaignTargets(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CampaignTargetOrder, where *CampaignTargetWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetCampaignTargets, error)
 	UpdateCampaignTarget(ctx context.Context, updateCampaignTargetID string, input UpdateCampaignTargetInput, interceptors ...clientv2.RequestInterceptor) (*UpdateCampaignTarget, error)
+	CreateBulkCSVCheckResult(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVCheckResult, error)
+	CreateBulkCheckResult(ctx context.Context, input []*CreateCheckResultInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCheckResult, error)
+	CreateCheckResult(ctx context.Context, input CreateCheckResultInput, interceptors ...clientv2.RequestInterceptor) (*CreateCheckResult, error)
+	DeleteBulkCheckResult(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkCheckResult, error)
+	DeleteCheckResult(ctx context.Context, deleteCheckResultID string, interceptors ...clientv2.RequestInterceptor) (*DeleteCheckResult, error)
+	GetAllCheckResults(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CheckResultOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllCheckResults, error)
+	GetCheckResultByID(ctx context.Context, checkResultID string, interceptors ...clientv2.RequestInterceptor) (*GetCheckResultByID, error)
+	GetCheckResults(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CheckResultOrder, where *CheckResultWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetCheckResults, error)
+	UpdateBulkCSVCheckResult(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVCheckResult, error)
+	UpdateBulkCheckResult(ctx context.Context, ids []string, input UpdateCheckResultInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCheckResult, error)
+	UpdateCheckResult(ctx context.Context, updateCheckResultID string, input UpdateCheckResultInput, interceptors ...clientv2.RequestInterceptor) (*UpdateCheckResult, error)
 	CreateBulkCSVContact(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVContact, error)
 	CreateBulkContact(ctx context.Context, input []*CreateContactInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkContact, error)
 	CreateContact(ctx context.Context, input CreateContactInput, interceptors ...clientv2.RequestInterceptor) (*CreateContact, error)
@@ -180,17 +191,6 @@ type GraphClient interface {
 	DeleteDocumentData(ctx context.Context, deleteDocumentDataID string, interceptors ...clientv2.RequestInterceptor) (*DeleteDocumentData, error)
 	GetDocumentDataByID(ctx context.Context, documentDataID string, interceptors ...clientv2.RequestInterceptor) (*GetDocumentDataByID, error)
 	UpdateDocumentData(ctx context.Context, updateDocumentDataID string, input UpdateDocumentDataInput, documentDataFile *graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateDocumentData, error)
-	CreateBulkCSVEmailBranding(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVEmailBranding, error)
-	CreateBulkEmailBranding(ctx context.Context, input []*CreateEmailBrandingInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkEmailBranding, error)
-	CreateEmailBranding(ctx context.Context, input CreateEmailBrandingInput, interceptors ...clientv2.RequestInterceptor) (*CreateEmailBranding, error)
-	DeleteEmailBranding(ctx context.Context, deleteEmailBrandingID string, interceptors ...clientv2.RequestInterceptor) (*DeleteEmailBranding, error)
-	UpdateBulkEmailBranding(ctx context.Context, ids []string, input UpdateEmailBrandingInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkEmailBranding, error)
-	UpdateBulkCSVEmailBranding(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVEmailBranding, error)
-	DeleteBulkEmailBranding(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkEmailBranding, error)
-	GetAllEmailBrandings(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*EmailBrandingOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllEmailBrandings, error)
-	GetEmailBrandingByID(ctx context.Context, emailBrandingID string, interceptors ...clientv2.RequestInterceptor) (*GetEmailBrandingByID, error)
-	GetEmailBrandings(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*EmailBrandingOrder, where *EmailBrandingWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetEmailBrandings, error)
-	UpdateEmailBranding(ctx context.Context, updateEmailBrandingID string, input UpdateEmailBrandingInput, interceptors ...clientv2.RequestInterceptor) (*UpdateEmailBranding, error)
 	CreateBulkCSVEmailTemplate(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVEmailTemplate, error)
 	CreateBulkEmailTemplate(ctx context.Context, input []*CreateEmailTemplateInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkEmailTemplate, error)
 	CreateEmailTemplate(ctx context.Context, input CreateEmailTemplateInput, interceptors ...clientv2.RequestInterceptor) (*CreateEmailTemplate, error)
@@ -6672,8 +6672,10 @@ type CreateBulkCampaign_CreateBulkCampaign_Campaigns struct {
 	Description            *string              "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string               "json:\"displayID\" graphql:\"displayID\""
 	DueDate                *models.DateTime     "json:\"dueDate,omitempty\" graphql:\"dueDate\""
+	EmailTemplateID        *string              "json:\"emailTemplateID,omitempty\" graphql:\"emailTemplateID\""
 	EntityID               *string              "json:\"entityID,omitempty\" graphql:\"entityID\""
 	ID                     string               "json:\"id\" graphql:\"id\""
+	IntegrationID          *string              "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	InternalOwner          *string              "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
 	InternalOwnerGroupID   *string              "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
 	InternalOwnerUserID    *string              "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
@@ -6750,6 +6752,12 @@ func (t *CreateBulkCampaign_CreateBulkCampaign_Campaigns) GetDueDate() *models.D
 	}
 	return t.DueDate
 }
+func (t *CreateBulkCampaign_CreateBulkCampaign_Campaigns) GetEmailTemplateID() *string {
+	if t == nil {
+		t = &CreateBulkCampaign_CreateBulkCampaign_Campaigns{}
+	}
+	return t.EmailTemplateID
+}
 func (t *CreateBulkCampaign_CreateBulkCampaign_Campaigns) GetEntityID() *string {
 	if t == nil {
 		t = &CreateBulkCampaign_CreateBulkCampaign_Campaigns{}
@@ -6761,6 +6769,12 @@ func (t *CreateBulkCampaign_CreateBulkCampaign_Campaigns) GetID() string {
 		t = &CreateBulkCampaign_CreateBulkCampaign_Campaigns{}
 	}
 	return t.ID
+}
+func (t *CreateBulkCampaign_CreateBulkCampaign_Campaigns) GetIntegrationID() *string {
+	if t == nil {
+		t = &CreateBulkCampaign_CreateBulkCampaign_Campaigns{}
+	}
+	return t.IntegrationID
 }
 func (t *CreateBulkCampaign_CreateBulkCampaign_Campaigns) GetInternalOwner() *string {
 	if t == nil {
@@ -6939,8 +6953,10 @@ type CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns struct {
 	Description            *string              "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string               "json:\"displayID\" graphql:\"displayID\""
 	DueDate                *models.DateTime     "json:\"dueDate,omitempty\" graphql:\"dueDate\""
+	EmailTemplateID        *string              "json:\"emailTemplateID,omitempty\" graphql:\"emailTemplateID\""
 	EntityID               *string              "json:\"entityID,omitempty\" graphql:\"entityID\""
 	ID                     string               "json:\"id\" graphql:\"id\""
+	IntegrationID          *string              "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	InternalOwner          *string              "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
 	InternalOwnerGroupID   *string              "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
 	InternalOwnerUserID    *string              "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
@@ -7017,6 +7033,12 @@ func (t *CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns) GetDueDate() *mo
 	}
 	return t.DueDate
 }
+func (t *CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns) GetEmailTemplateID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns{}
+	}
+	return t.EmailTemplateID
+}
 func (t *CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns) GetEntityID() *string {
 	if t == nil {
 		t = &CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns{}
@@ -7028,6 +7050,12 @@ func (t *CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns) GetID() string {
 		t = &CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns{}
 	}
 	return t.ID
+}
+func (t *CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns) GetIntegrationID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns{}
+	}
+	return t.IntegrationID
 }
 func (t *CreateBulkCSVCampaign_CreateBulkCSVCampaign_Campaigns) GetInternalOwner() *string {
 	if t == nil {
@@ -7206,8 +7234,10 @@ type CreateCampaign_CreateCampaign_Campaign struct {
 	Description            *string              "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string               "json:\"displayID\" graphql:\"displayID\""
 	DueDate                *models.DateTime     "json:\"dueDate,omitempty\" graphql:\"dueDate\""
+	EmailTemplateID        *string              "json:\"emailTemplateID,omitempty\" graphql:\"emailTemplateID\""
 	EntityID               *string              "json:\"entityID,omitempty\" graphql:\"entityID\""
 	ID                     string               "json:\"id\" graphql:\"id\""
+	IntegrationID          *string              "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	InternalOwner          *string              "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
 	InternalOwnerGroupID   *string              "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
 	InternalOwnerUserID    *string              "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
@@ -7284,6 +7314,12 @@ func (t *CreateCampaign_CreateCampaign_Campaign) GetDueDate() *models.DateTime {
 	}
 	return t.DueDate
 }
+func (t *CreateCampaign_CreateCampaign_Campaign) GetEmailTemplateID() *string {
+	if t == nil {
+		t = &CreateCampaign_CreateCampaign_Campaign{}
+	}
+	return t.EmailTemplateID
+}
 func (t *CreateCampaign_CreateCampaign_Campaign) GetEntityID() *string {
 	if t == nil {
 		t = &CreateCampaign_CreateCampaign_Campaign{}
@@ -7295,6 +7331,12 @@ func (t *CreateCampaign_CreateCampaign_Campaign) GetID() string {
 		t = &CreateCampaign_CreateCampaign_Campaign{}
 	}
 	return t.ID
+}
+func (t *CreateCampaign_CreateCampaign_Campaign) GetIntegrationID() *string {
+	if t == nil {
+		t = &CreateCampaign_CreateCampaign_Campaign{}
+	}
+	return t.IntegrationID
 }
 func (t *CreateCampaign_CreateCampaign_Campaign) GetInternalOwner() *string {
 	if t == nil {
@@ -7592,8 +7634,10 @@ type GetAllCampaigns_Campaigns_Edges_Node struct {
 	Description            *string                                              "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                                               "json:\"displayID\" graphql:\"displayID\""
 	DueDate                *models.DateTime                                     "json:\"dueDate,omitempty\" graphql:\"dueDate\""
+	EmailTemplateID        *string                                              "json:\"emailTemplateID,omitempty\" graphql:\"emailTemplateID\""
 	EntityID               *string                                              "json:\"entityID,omitempty\" graphql:\"entityID\""
 	ID                     string                                               "json:\"id\" graphql:\"id\""
+	IntegrationID          *string                                              "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	InternalOwner          *string                                              "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
 	InternalOwnerGroupID   *string                                              "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
 	InternalOwnerUserID    *string                                              "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
@@ -7676,6 +7720,12 @@ func (t *GetAllCampaigns_Campaigns_Edges_Node) GetDueDate() *models.DateTime {
 	}
 	return t.DueDate
 }
+func (t *GetAllCampaigns_Campaigns_Edges_Node) GetEmailTemplateID() *string {
+	if t == nil {
+		t = &GetAllCampaigns_Campaigns_Edges_Node{}
+	}
+	return t.EmailTemplateID
+}
 func (t *GetAllCampaigns_Campaigns_Edges_Node) GetEntityID() *string {
 	if t == nil {
 		t = &GetAllCampaigns_Campaigns_Edges_Node{}
@@ -7687,6 +7737,12 @@ func (t *GetAllCampaigns_Campaigns_Edges_Node) GetID() string {
 		t = &GetAllCampaigns_Campaigns_Edges_Node{}
 	}
 	return t.ID
+}
+func (t *GetAllCampaigns_Campaigns_Edges_Node) GetIntegrationID() *string {
+	if t == nil {
+		t = &GetAllCampaigns_Campaigns_Edges_Node{}
+	}
+	return t.IntegrationID
 }
 func (t *GetAllCampaigns_Campaigns_Edges_Node) GetInternalOwner() *string {
 	if t == nil {
@@ -7966,8 +8022,10 @@ type GetCampaignByID_Campaign struct {
 	Description            *string                                  "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                                   "json:\"displayID\" graphql:\"displayID\""
 	DueDate                *models.DateTime                         "json:\"dueDate,omitempty\" graphql:\"dueDate\""
+	EmailTemplateID        *string                                  "json:\"emailTemplateID,omitempty\" graphql:\"emailTemplateID\""
 	EntityID               *string                                  "json:\"entityID,omitempty\" graphql:\"entityID\""
 	ID                     string                                   "json:\"id\" graphql:\"id\""
+	IntegrationID          *string                                  "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	InternalOwner          *string                                  "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
 	InternalOwnerGroupID   *string                                  "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
 	InternalOwnerUserID    *string                                  "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
@@ -8050,6 +8108,12 @@ func (t *GetCampaignByID_Campaign) GetDueDate() *models.DateTime {
 	}
 	return t.DueDate
 }
+func (t *GetCampaignByID_Campaign) GetEmailTemplateID() *string {
+	if t == nil {
+		t = &GetCampaignByID_Campaign{}
+	}
+	return t.EmailTemplateID
+}
 func (t *GetCampaignByID_Campaign) GetEntityID() *string {
 	if t == nil {
 		t = &GetCampaignByID_Campaign{}
@@ -8061,6 +8125,12 @@ func (t *GetCampaignByID_Campaign) GetID() string {
 		t = &GetCampaignByID_Campaign{}
 	}
 	return t.ID
+}
+func (t *GetCampaignByID_Campaign) GetIntegrationID() *string {
+	if t == nil {
+		t = &GetCampaignByID_Campaign{}
+	}
+	return t.IntegrationID
 }
 func (t *GetCampaignByID_Campaign) GetInternalOwner() *string {
 	if t == nil {
@@ -8336,8 +8406,10 @@ type GetCampaigns_Campaigns_Edges_Node struct {
 	Description            *string                                           "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string                                            "json:\"displayID\" graphql:\"displayID\""
 	DueDate                *models.DateTime                                  "json:\"dueDate,omitempty\" graphql:\"dueDate\""
+	EmailTemplateID        *string                                           "json:\"emailTemplateID,omitempty\" graphql:\"emailTemplateID\""
 	EntityID               *string                                           "json:\"entityID,omitempty\" graphql:\"entityID\""
 	ID                     string                                            "json:\"id\" graphql:\"id\""
+	IntegrationID          *string                                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	InternalOwner          *string                                           "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
 	InternalOwnerGroupID   *string                                           "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
 	InternalOwnerUserID    *string                                           "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
@@ -8420,6 +8492,12 @@ func (t *GetCampaigns_Campaigns_Edges_Node) GetDueDate() *models.DateTime {
 	}
 	return t.DueDate
 }
+func (t *GetCampaigns_Campaigns_Edges_Node) GetEmailTemplateID() *string {
+	if t == nil {
+		t = &GetCampaigns_Campaigns_Edges_Node{}
+	}
+	return t.EmailTemplateID
+}
 func (t *GetCampaigns_Campaigns_Edges_Node) GetEntityID() *string {
 	if t == nil {
 		t = &GetCampaigns_Campaigns_Edges_Node{}
@@ -8431,6 +8509,12 @@ func (t *GetCampaigns_Campaigns_Edges_Node) GetID() string {
 		t = &GetCampaigns_Campaigns_Edges_Node{}
 	}
 	return t.ID
+}
+func (t *GetCampaigns_Campaigns_Edges_Node) GetIntegrationID() *string {
+	if t == nil {
+		t = &GetCampaigns_Campaigns_Edges_Node{}
+	}
+	return t.IntegrationID
 }
 func (t *GetCampaigns_Campaigns_Edges_Node) GetInternalOwner() *string {
 	if t == nil {
@@ -8634,8 +8718,10 @@ type UpdateCampaign_UpdateCampaign_Campaign struct {
 	Description            *string              "json:\"description,omitempty\" graphql:\"description\""
 	DisplayID              string               "json:\"displayID\" graphql:\"displayID\""
 	DueDate                *models.DateTime     "json:\"dueDate,omitempty\" graphql:\"dueDate\""
+	EmailTemplateID        *string              "json:\"emailTemplateID,omitempty\" graphql:\"emailTemplateID\""
 	EntityID               *string              "json:\"entityID,omitempty\" graphql:\"entityID\""
 	ID                     string               "json:\"id\" graphql:\"id\""
+	IntegrationID          *string              "json:\"integrationID,omitempty\" graphql:\"integrationID\""
 	InternalOwner          *string              "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
 	InternalOwnerGroupID   *string              "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
 	InternalOwnerUserID    *string              "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
@@ -8712,6 +8798,12 @@ func (t *UpdateCampaign_UpdateCampaign_Campaign) GetDueDate() *models.DateTime {
 	}
 	return t.DueDate
 }
+func (t *UpdateCampaign_UpdateCampaign_Campaign) GetEmailTemplateID() *string {
+	if t == nil {
+		t = &UpdateCampaign_UpdateCampaign_Campaign{}
+	}
+	return t.EmailTemplateID
+}
 func (t *UpdateCampaign_UpdateCampaign_Campaign) GetEntityID() *string {
 	if t == nil {
 		t = &UpdateCampaign_UpdateCampaign_Campaign{}
@@ -8723,6 +8815,12 @@ func (t *UpdateCampaign_UpdateCampaign_Campaign) GetID() string {
 		t = &UpdateCampaign_UpdateCampaign_Campaign{}
 	}
 	return t.ID
+}
+func (t *UpdateCampaign_UpdateCampaign_Campaign) GetIntegrationID() *string {
+	if t == nil {
+		t = &UpdateCampaign_UpdateCampaign_Campaign{}
+	}
+	return t.IntegrationID
 }
 func (t *UpdateCampaign_UpdateCampaign_Campaign) GetInternalOwner() *string {
 	if t == nil {
@@ -8916,7 +9014,6 @@ type CreateCampaignWithTargets_CreateCampaignWithTargets_Campaign struct {
 	NextRunAt              *models.DateTime     "json:\"nextRunAt,omitempty\" graphql:\"nextRunAt\""
 	OwnerID                *string              "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	RecipientCount         *int64               "json:\"recipientCount,omitempty\" graphql:\"recipientCount\""
-	RecurrenceCron         *string              "json:\"recurrenceCron,omitempty\" graphql:\"recurrenceCron\""
 	RecurrenceEndAt        *models.DateTime     "json:\"recurrenceEndAt,omitempty\" graphql:\"recurrenceEndAt\""
 	RecurrenceFrequency    *enums.Frequency     "json:\"recurrenceFrequency,omitempty\" graphql:\"recurrenceFrequency\""
 	RecurrenceInterval     *int64               "json:\"recurrenceInterval,omitempty\" graphql:\"recurrenceInterval\""
@@ -9068,12 +9165,6 @@ func (t *CreateCampaignWithTargets_CreateCampaignWithTargets_Campaign) GetRecipi
 		t = &CreateCampaignWithTargets_CreateCampaignWithTargets_Campaign{}
 	}
 	return t.RecipientCount
-}
-func (t *CreateCampaignWithTargets_CreateCampaignWithTargets_Campaign) GetRecurrenceCron() *string {
-	if t == nil {
-		t = &CreateCampaignWithTargets_CreateCampaignWithTargets_Campaign{}
-	}
-	return t.RecurrenceCron
 }
 func (t *CreateCampaignWithTargets_CreateCampaignWithTargets_Campaign) GetRecurrenceEndAt() *models.DateTime {
 	if t == nil {
@@ -9313,7 +9404,6 @@ type CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_Campaign struct {
 	NextRunAt              *models.DateTime     "json:\"nextRunAt,omitempty\" graphql:\"nextRunAt\""
 	OwnerID                *string              "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	RecipientCount         *int64               "json:\"recipientCount,omitempty\" graphql:\"recipientCount\""
-	RecurrenceCron         *string              "json:\"recurrenceCron,omitempty\" graphql:\"recurrenceCron\""
 	RecurrenceEndAt        *models.DateTime     "json:\"recurrenceEndAt,omitempty\" graphql:\"recurrenceEndAt\""
 	RecurrenceFrequency    *enums.Frequency     "json:\"recurrenceFrequency,omitempty\" graphql:\"recurrenceFrequency\""
 	RecurrenceInterval     *int64               "json:\"recurrenceInterval,omitempty\" graphql:\"recurrenceInterval\""
@@ -9465,12 +9555,6 @@ func (t *CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_Campaign) Get
 		t = &CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_Campaign{}
 	}
 	return t.RecipientCount
-}
-func (t *CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_Campaign) GetRecurrenceCron() *string {
-	if t == nil {
-		t = &CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_Campaign{}
-	}
-	return t.RecurrenceCron
 }
 func (t *CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_Campaign) GetRecurrenceEndAt() *models.DateTime {
 	if t == nil {
@@ -9710,7 +9794,6 @@ type LaunchCampaign_LaunchCampaign_Campaign struct {
 	NextRunAt              *models.DateTime     "json:\"nextRunAt,omitempty\" graphql:\"nextRunAt\""
 	OwnerID                *string              "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	RecipientCount         *int64               "json:\"recipientCount,omitempty\" graphql:\"recipientCount\""
-	RecurrenceCron         *string              "json:\"recurrenceCron,omitempty\" graphql:\"recurrenceCron\""
 	RecurrenceEndAt        *models.DateTime     "json:\"recurrenceEndAt,omitempty\" graphql:\"recurrenceEndAt\""
 	RecurrenceFrequency    *enums.Frequency     "json:\"recurrenceFrequency,omitempty\" graphql:\"recurrenceFrequency\""
 	RecurrenceInterval     *int64               "json:\"recurrenceInterval,omitempty\" graphql:\"recurrenceInterval\""
@@ -9863,12 +9946,6 @@ func (t *LaunchCampaign_LaunchCampaign_Campaign) GetRecipientCount() *int64 {
 	}
 	return t.RecipientCount
 }
-func (t *LaunchCampaign_LaunchCampaign_Campaign) GetRecurrenceCron() *string {
-	if t == nil {
-		t = &LaunchCampaign_LaunchCampaign_Campaign{}
-	}
-	return t.RecurrenceCron
-}
 func (t *LaunchCampaign_LaunchCampaign_Campaign) GetRecurrenceEndAt() *models.DateTime {
 	if t == nil {
 		t = &LaunchCampaign_LaunchCampaign_Campaign{}
@@ -9991,7 +10068,6 @@ type ResendCampaignIncompleteTargets_ResendCampaignIncompleteTargets_Campaign st
 	NextRunAt              *models.DateTime     "json:\"nextRunAt,omitempty\" graphql:\"nextRunAt\""
 	OwnerID                *string              "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	RecipientCount         *int64               "json:\"recipientCount,omitempty\" graphql:\"recipientCount\""
-	RecurrenceCron         *string              "json:\"recurrenceCron,omitempty\" graphql:\"recurrenceCron\""
 	RecurrenceEndAt        *models.DateTime     "json:\"recurrenceEndAt,omitempty\" graphql:\"recurrenceEndAt\""
 	RecurrenceFrequency    *enums.Frequency     "json:\"recurrenceFrequency,omitempty\" graphql:\"recurrenceFrequency\""
 	RecurrenceInterval     *int64               "json:\"recurrenceInterval,omitempty\" graphql:\"recurrenceInterval\""
@@ -10144,12 +10220,6 @@ func (t *ResendCampaignIncompleteTargets_ResendCampaignIncompleteTargets_Campaig
 	}
 	return t.RecipientCount
 }
-func (t *ResendCampaignIncompleteTargets_ResendCampaignIncompleteTargets_Campaign) GetRecurrenceCron() *string {
-	if t == nil {
-		t = &ResendCampaignIncompleteTargets_ResendCampaignIncompleteTargets_Campaign{}
-	}
-	return t.RecurrenceCron
-}
 func (t *ResendCampaignIncompleteTargets_ResendCampaignIncompleteTargets_Campaign) GetRecurrenceEndAt() *models.DateTime {
 	if t == nil {
 		t = &ResendCampaignIncompleteTargets_ResendCampaignIncompleteTargets_Campaign{}
@@ -10272,7 +10342,6 @@ type SendCampaignTestEmail_SendCampaignTestEmail_Campaign struct {
 	NextRunAt              *models.DateTime     "json:\"nextRunAt,omitempty\" graphql:\"nextRunAt\""
 	OwnerID                *string              "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	RecipientCount         *int64               "json:\"recipientCount,omitempty\" graphql:\"recipientCount\""
-	RecurrenceCron         *string              "json:\"recurrenceCron,omitempty\" graphql:\"recurrenceCron\""
 	RecurrenceEndAt        *models.DateTime     "json:\"recurrenceEndAt,omitempty\" graphql:\"recurrenceEndAt\""
 	RecurrenceFrequency    *enums.Frequency     "json:\"recurrenceFrequency,omitempty\" graphql:\"recurrenceFrequency\""
 	RecurrenceInterval     *int64               "json:\"recurrenceInterval,omitempty\" graphql:\"recurrenceInterval\""
@@ -10424,12 +10493,6 @@ func (t *SendCampaignTestEmail_SendCampaignTestEmail_Campaign) GetRecipientCount
 		t = &SendCampaignTestEmail_SendCampaignTestEmail_Campaign{}
 	}
 	return t.RecipientCount
-}
-func (t *SendCampaignTestEmail_SendCampaignTestEmail_Campaign) GetRecurrenceCron() *string {
-	if t == nil {
-		t = &SendCampaignTestEmail_SendCampaignTestEmail_Campaign{}
-	}
-	return t.RecurrenceCron
 }
 func (t *SendCampaignTestEmail_SendCampaignTestEmail_Campaign) GetRecurrenceEndAt() *models.DateTime {
 	if t == nil {
@@ -11579,6 +11642,1099 @@ func (t *UpdateCampaignTarget_UpdateCampaignTarget) GetCampaignTarget() *UpdateC
 		t = &UpdateCampaignTarget_UpdateCampaignTarget{}
 	}
 	return &t.CampaignTarget
+}
+
+type CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults struct {
+	CreatedAt        *time.Time        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Details          *string           "json:\"details,omitempty\" graphql:\"details\""
+	ExternalURI      *string           "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID               string            "json:\"id\" graphql:\"id\""
+	IntegrationID    *string           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	LastObservedAt   *models.DateTime  "json:\"lastObservedAt,omitempty\" graphql:\"lastObservedAt\""
+	ParentExternalID *string           "json:\"parentExternalID,omitempty\" graphql:\"parentExternalID\""
+	Source           string            "json:\"source\" graphql:\"source\""
+	Status           enums.CheckStatus "json:\"status\" graphql:\"status\""
+	Tags             []string          "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetDetails() *string {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.Details
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetExternalURI() *string {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.ExternalURI
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetID() string {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.ID
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetIntegrationID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.IntegrationID
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetLastObservedAt() *models.DateTime {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.LastObservedAt
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetParentExternalID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.ParentExternalID
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetSource() string {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.Source
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetStatus() *enums.CheckStatus {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return &t.Status
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetTags() []string {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.Tags
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateBulkCSVCheckResult_CreateBulkCSVCheckResult struct {
+	CheckResults []*CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults "json:\"checkResults,omitempty\" graphql:\"checkResults\""
+}
+
+func (t *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult) GetCheckResults() []*CreateBulkCSVCheckResult_CreateBulkCSVCheckResult_CheckResults {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult_CreateBulkCSVCheckResult{}
+	}
+	return t.CheckResults
+}
+
+type CreateBulkCheckResult_CreateBulkCheckResult_CheckResults struct {
+	CreatedAt        *time.Time        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Details          *string           "json:\"details,omitempty\" graphql:\"details\""
+	ExternalURI      *string           "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID               string            "json:\"id\" graphql:\"id\""
+	IntegrationID    *string           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	LastObservedAt   *models.DateTime  "json:\"lastObservedAt,omitempty\" graphql:\"lastObservedAt\""
+	ParentExternalID *string           "json:\"parentExternalID,omitempty\" graphql:\"parentExternalID\""
+	Source           string            "json:\"source\" graphql:\"source\""
+	Status           enums.CheckStatus "json:\"status\" graphql:\"status\""
+	Tags             []string          "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetDetails() *string {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.Details
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetExternalURI() *string {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.ExternalURI
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetID() string {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.ID
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetIntegrationID() *string {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.IntegrationID
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetLastObservedAt() *models.DateTime {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.LastObservedAt
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetParentExternalID() *string {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.ParentExternalID
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetSource() string {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.Source
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetStatus() *enums.CheckStatus {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return &t.Status
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetTags() []string {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.Tags
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateBulkCheckResult_CreateBulkCheckResult_CheckResults) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult_CheckResults{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateBulkCheckResult_CreateBulkCheckResult struct {
+	CheckResults []*CreateBulkCheckResult_CreateBulkCheckResult_CheckResults "json:\"checkResults,omitempty\" graphql:\"checkResults\""
+}
+
+func (t *CreateBulkCheckResult_CreateBulkCheckResult) GetCheckResults() []*CreateBulkCheckResult_CreateBulkCheckResult_CheckResults {
+	if t == nil {
+		t = &CreateBulkCheckResult_CreateBulkCheckResult{}
+	}
+	return t.CheckResults
+}
+
+type CreateCheckResult_CreateCheckResult_CheckResult struct {
+	CreatedAt        *time.Time        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Details          *string           "json:\"details,omitempty\" graphql:\"details\""
+	ExternalURI      *string           "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID               string            "json:\"id\" graphql:\"id\""
+	IntegrationID    *string           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	LastObservedAt   *models.DateTime  "json:\"lastObservedAt,omitempty\" graphql:\"lastObservedAt\""
+	ParentExternalID *string           "json:\"parentExternalID,omitempty\" graphql:\"parentExternalID\""
+	Source           string            "json:\"source\" graphql:\"source\""
+	Status           enums.CheckStatus "json:\"status\" graphql:\"status\""
+	Tags             []string          "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetDetails() *string {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.Details
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetExternalURI() *string {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.ExternalURI
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetID() string {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.ID
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetIntegrationID() *string {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.IntegrationID
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetLastObservedAt() *models.DateTime {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.LastObservedAt
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetParentExternalID() *string {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.ParentExternalID
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetSource() string {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.Source
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetStatus() *enums.CheckStatus {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return &t.Status
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetTags() []string {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.Tags
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateCheckResult_CreateCheckResult_CheckResult) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult_CheckResult{}
+	}
+	return t.UpdatedBy
+}
+
+type CreateCheckResult_CreateCheckResult struct {
+	CheckResult CreateCheckResult_CreateCheckResult_CheckResult "json:\"checkResult\" graphql:\"checkResult\""
+}
+
+func (t *CreateCheckResult_CreateCheckResult) GetCheckResult() *CreateCheckResult_CreateCheckResult_CheckResult {
+	if t == nil {
+		t = &CreateCheckResult_CreateCheckResult{}
+	}
+	return &t.CheckResult
+}
+
+type DeleteBulkCheckResult_DeleteBulkCheckResult struct {
+	DeletedIDs []string "json:\"deletedIDs\" graphql:\"deletedIDs\""
+}
+
+func (t *DeleteBulkCheckResult_DeleteBulkCheckResult) GetDeletedIDs() []string {
+	if t == nil {
+		t = &DeleteBulkCheckResult_DeleteBulkCheckResult{}
+	}
+	return t.DeletedIDs
+}
+
+type DeleteCheckResult_DeleteCheckResult struct {
+	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
+}
+
+func (t *DeleteCheckResult_DeleteCheckResult) GetDeletedID() string {
+	if t == nil {
+		t = &DeleteCheckResult_DeleteCheckResult{}
+	}
+	return t.DeletedID
+}
+
+type GetAllCheckResults_CheckResults_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetAllCheckResults_CheckResults_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetAllCheckResults_CheckResults_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetAllCheckResults_CheckResults_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetAllCheckResults_CheckResults_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetAllCheckResults_CheckResults_Edges_Node struct {
+	CreatedAt        *time.Time        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Details          *string           "json:\"details,omitempty\" graphql:\"details\""
+	ExternalURI      *string           "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID               string            "json:\"id\" graphql:\"id\""
+	IntegrationID    *string           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	LastObservedAt   *models.DateTime  "json:\"lastObservedAt,omitempty\" graphql:\"lastObservedAt\""
+	ParentExternalID *string           "json:\"parentExternalID,omitempty\" graphql:\"parentExternalID\""
+	Source           string            "json:\"source\" graphql:\"source\""
+	Status           enums.CheckStatus "json:\"status\" graphql:\"status\""
+	Tags             []string          "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.CreatedAt
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.CreatedBy
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetDetails() *string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.Details
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetExternalURI() *string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.ExternalURI
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetIntegrationID() *string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.IntegrationID
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetLastObservedAt() *models.DateTime {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.LastObservedAt
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetParentExternalID() *string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.ParentExternalID
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetSource() string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.Source
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetStatus() *enums.CheckStatus {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return &t.Status
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetTags() []string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.Tags
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetAllCheckResults_CheckResults_Edges_Node) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.UpdatedBy
+}
+
+type GetAllCheckResults_CheckResults_Edges struct {
+	Node *GetAllCheckResults_CheckResults_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetAllCheckResults_CheckResults_Edges) GetNode() *GetAllCheckResults_CheckResults_Edges_Node {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults_Edges{}
+	}
+	return t.Node
+}
+
+type GetAllCheckResults_CheckResults struct {
+	Edges      []*GetAllCheckResults_CheckResults_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo   GetAllCheckResults_CheckResults_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+	TotalCount int64                                    "json:\"totalCount\" graphql:\"totalCount\""
+}
+
+func (t *GetAllCheckResults_CheckResults) GetEdges() []*GetAllCheckResults_CheckResults_Edges {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults{}
+	}
+	return t.Edges
+}
+func (t *GetAllCheckResults_CheckResults) GetPageInfo() *GetAllCheckResults_CheckResults_PageInfo {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults{}
+	}
+	return &t.PageInfo
+}
+func (t *GetAllCheckResults_CheckResults) GetTotalCount() int64 {
+	if t == nil {
+		t = &GetAllCheckResults_CheckResults{}
+	}
+	return t.TotalCount
+}
+
+type GetCheckResultByID_CheckResult struct {
+	CreatedAt        *time.Time        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Details          *string           "json:\"details,omitempty\" graphql:\"details\""
+	ExternalURI      *string           "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID               string            "json:\"id\" graphql:\"id\""
+	IntegrationID    *string           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	LastObservedAt   *models.DateTime  "json:\"lastObservedAt,omitempty\" graphql:\"lastObservedAt\""
+	ParentExternalID *string           "json:\"parentExternalID,omitempty\" graphql:\"parentExternalID\""
+	Source           string            "json:\"source\" graphql:\"source\""
+	Status           enums.CheckStatus "json:\"status\" graphql:\"status\""
+	Tags             []string          "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetCheckResultByID_CheckResult) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.CreatedAt
+}
+func (t *GetCheckResultByID_CheckResult) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.CreatedBy
+}
+func (t *GetCheckResultByID_CheckResult) GetDetails() *string {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.Details
+}
+func (t *GetCheckResultByID_CheckResult) GetExternalURI() *string {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.ExternalURI
+}
+func (t *GetCheckResultByID_CheckResult) GetID() string {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.ID
+}
+func (t *GetCheckResultByID_CheckResult) GetIntegrationID() *string {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.IntegrationID
+}
+func (t *GetCheckResultByID_CheckResult) GetLastObservedAt() *models.DateTime {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.LastObservedAt
+}
+func (t *GetCheckResultByID_CheckResult) GetParentExternalID() *string {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.ParentExternalID
+}
+func (t *GetCheckResultByID_CheckResult) GetSource() string {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.Source
+}
+func (t *GetCheckResultByID_CheckResult) GetStatus() *enums.CheckStatus {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return &t.Status
+}
+func (t *GetCheckResultByID_CheckResult) GetTags() []string {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.Tags
+}
+func (t *GetCheckResultByID_CheckResult) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetCheckResultByID_CheckResult) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetCheckResultByID_CheckResult{}
+	}
+	return t.UpdatedBy
+}
+
+type GetCheckResults_CheckResults_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetCheckResults_CheckResults_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetCheckResults_CheckResults_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetCheckResults_CheckResults_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetCheckResults_CheckResults_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_PageInfo{}
+	}
+	return t.StartCursor
+}
+
+type GetCheckResults_CheckResults_Edges_Node struct {
+	CreatedAt        *time.Time        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Details          *string           "json:\"details,omitempty\" graphql:\"details\""
+	ExternalURI      *string           "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID               string            "json:\"id\" graphql:\"id\""
+	IntegrationID    *string           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	LastObservedAt   *models.DateTime  "json:\"lastObservedAt,omitempty\" graphql:\"lastObservedAt\""
+	ParentExternalID *string           "json:\"parentExternalID,omitempty\" graphql:\"parentExternalID\""
+	Source           string            "json:\"source\" graphql:\"source\""
+	Status           enums.CheckStatus "json:\"status\" graphql:\"status\""
+	Tags             []string          "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *GetCheckResults_CheckResults_Edges_Node) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.CreatedAt
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.CreatedBy
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetDetails() *string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.Details
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetExternalURI() *string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.ExternalURI
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetID() string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.ID
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetIntegrationID() *string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.IntegrationID
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetLastObservedAt() *models.DateTime {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.LastObservedAt
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetParentExternalID() *string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.ParentExternalID
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetSource() string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.Source
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetStatus() *enums.CheckStatus {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return &t.Status
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetTags() []string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.Tags
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetCheckResults_CheckResults_Edges_Node) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges_Node{}
+	}
+	return t.UpdatedBy
+}
+
+type GetCheckResults_CheckResults_Edges struct {
+	Node *GetCheckResults_CheckResults_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
+}
+
+func (t *GetCheckResults_CheckResults_Edges) GetNode() *GetCheckResults_CheckResults_Edges_Node {
+	if t == nil {
+		t = &GetCheckResults_CheckResults_Edges{}
+	}
+	return t.Node
+}
+
+type GetCheckResults_CheckResults struct {
+	Edges      []*GetCheckResults_CheckResults_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo   GetCheckResults_CheckResults_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+	TotalCount int64                                 "json:\"totalCount\" graphql:\"totalCount\""
+}
+
+func (t *GetCheckResults_CheckResults) GetEdges() []*GetCheckResults_CheckResults_Edges {
+	if t == nil {
+		t = &GetCheckResults_CheckResults{}
+	}
+	return t.Edges
+}
+func (t *GetCheckResults_CheckResults) GetPageInfo() *GetCheckResults_CheckResults_PageInfo {
+	if t == nil {
+		t = &GetCheckResults_CheckResults{}
+	}
+	return &t.PageInfo
+}
+func (t *GetCheckResults_CheckResults) GetTotalCount() int64 {
+	if t == nil {
+		t = &GetCheckResults_CheckResults{}
+	}
+	return t.TotalCount
+}
+
+type UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults struct {
+	CreatedAt        *time.Time        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Details          *string           "json:\"details,omitempty\" graphql:\"details\""
+	ExternalURI      *string           "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID               string            "json:\"id\" graphql:\"id\""
+	IntegrationID    *string           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	LastObservedAt   *models.DateTime  "json:\"lastObservedAt,omitempty\" graphql:\"lastObservedAt\""
+	ParentExternalID *string           "json:\"parentExternalID,omitempty\" graphql:\"parentExternalID\""
+	Source           string            "json:\"source\" graphql:\"source\""
+	Status           enums.CheckStatus "json:\"status\" graphql:\"status\""
+	Tags             []string          "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetDetails() *string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.Details
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetExternalURI() *string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.ExternalURI
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetID() string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.ID
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetIntegrationID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.IntegrationID
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetLastObservedAt() *models.DateTime {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.LastObservedAt
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetParentExternalID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.ParentExternalID
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetSource() string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.Source
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetStatus() *enums.CheckStatus {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return &t.Status
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetTags() []string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.Tags
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults{}
+	}
+	return t.UpdatedBy
+}
+
+type UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult struct {
+	CheckResults []*UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults "json:\"checkResults,omitempty\" graphql:\"checkResults\""
+	UpdatedIDs   []string                                                          "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
+}
+
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult) GetCheckResults() []*UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult_CheckResults {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult{}
+	}
+	return t.CheckResults
+}
+func (t *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult) GetUpdatedIDs() []string {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult{}
+	}
+	return t.UpdatedIDs
+}
+
+type UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults struct {
+	CreatedAt        *time.Time        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Details          *string           "json:\"details,omitempty\" graphql:\"details\""
+	ExternalURI      *string           "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID               string            "json:\"id\" graphql:\"id\""
+	IntegrationID    *string           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	LastObservedAt   *models.DateTime  "json:\"lastObservedAt,omitempty\" graphql:\"lastObservedAt\""
+	ParentExternalID *string           "json:\"parentExternalID,omitempty\" graphql:\"parentExternalID\""
+	Source           string            "json:\"source\" graphql:\"source\""
+	Status           enums.CheckStatus "json:\"status\" graphql:\"status\""
+	Tags             []string          "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetDetails() *string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.Details
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetExternalURI() *string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.ExternalURI
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetID() string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.ID
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetIntegrationID() *string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.IntegrationID
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetLastObservedAt() *models.DateTime {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.LastObservedAt
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetParentExternalID() *string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.ParentExternalID
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetSource() string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.Source
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetStatus() *enums.CheckStatus {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return &t.Status
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetTags() []string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.Tags
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults{}
+	}
+	return t.UpdatedBy
+}
+
+type UpdateBulkCheckResult_UpdateBulkCheckResult struct {
+	CheckResults []*UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults "json:\"checkResults,omitempty\" graphql:\"checkResults\""
+	UpdatedIDs   []string                                                    "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
+}
+
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult) GetCheckResults() []*UpdateBulkCheckResult_UpdateBulkCheckResult_CheckResults {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult{}
+	}
+	return t.CheckResults
+}
+func (t *UpdateBulkCheckResult_UpdateBulkCheckResult) GetUpdatedIDs() []string {
+	if t == nil {
+		t = &UpdateBulkCheckResult_UpdateBulkCheckResult{}
+	}
+	return t.UpdatedIDs
+}
+
+type UpdateCheckResult_UpdateCheckResult_CheckResult struct {
+	CreatedAt        *time.Time        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Details          *string           "json:\"details,omitempty\" graphql:\"details\""
+	ExternalURI      *string           "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	ID               string            "json:\"id\" graphql:\"id\""
+	IntegrationID    *string           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	LastObservedAt   *models.DateTime  "json:\"lastObservedAt,omitempty\" graphql:\"lastObservedAt\""
+	ParentExternalID *string           "json:\"parentExternalID,omitempty\" graphql:\"parentExternalID\""
+	Source           string            "json:\"source\" graphql:\"source\""
+	Status           enums.CheckStatus "json:\"status\" graphql:\"status\""
+	Tags             []string          "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+}
+
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetDetails() *string {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.Details
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetExternalURI() *string {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.ExternalURI
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetID() string {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.ID
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetIntegrationID() *string {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.IntegrationID
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetLastObservedAt() *models.DateTime {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.LastObservedAt
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetParentExternalID() *string {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.ParentExternalID
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetSource() string {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.Source
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetStatus() *enums.CheckStatus {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return &t.Status
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetTags() []string {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.Tags
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateCheckResult_UpdateCheckResult_CheckResult) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult_CheckResult{}
+	}
+	return t.UpdatedBy
+}
+
+type UpdateCheckResult_UpdateCheckResult struct {
+	CheckResult UpdateCheckResult_UpdateCheckResult_CheckResult "json:\"checkResult\" graphql:\"checkResult\""
+}
+
+func (t *UpdateCheckResult_UpdateCheckResult) GetCheckResult() *UpdateCheckResult_UpdateCheckResult_CheckResult {
+	if t == nil {
+		t = &UpdateCheckResult_UpdateCheckResult{}
+	}
+	return &t.CheckResult
 }
 
 type CreateBulkCSVContact_CreateBulkCSVContact_Contacts struct {
@@ -27159,1504 +28315,30 @@ func (t *UpdateDocumentData_UpdateDocumentData) GetDocumentData() *UpdateDocumen
 	return &t.DocumentData
 }
 
-type CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings struct {
-	BackgroundColor *string     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	BrandName       *string     "json:\"brandName,omitempty\" graphql:\"brandName\""
-	ButtonColor     *string     "json:\"buttonColor,omitempty\" graphql:\"buttonColor\""
-	ButtonTextColor *string     "json:\"buttonTextColor,omitempty\" graphql:\"buttonTextColor\""
-	CreatedAt       *time.Time  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FontFamily      *enums.Font "json:\"fontFamily,omitempty\" graphql:\"fontFamily\""
-	ID              string      "json:\"id\" graphql:\"id\""
-	IsDefault       *bool       "json:\"isDefault,omitempty\" graphql:\"isDefault\""
-	LinkColor       *string     "json:\"linkColor,omitempty\" graphql:\"linkColor\""
-	LogoRemoteURL   *string     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Name            string      "json:\"name\" graphql:\"name\""
-	OwnerID         *string     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PrimaryColor    *string     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	SecondaryColor  *string     "json:\"secondaryColor,omitempty\" graphql:\"secondaryColor\""
-	Tags            []string    "json:\"tags,omitempty\" graphql:\"tags\""
-	TextColor       *string     "json:\"textColor,omitempty\" graphql:\"textColor\""
-	UpdatedAt       *time.Time  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetBackgroundColor() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.BackgroundColor
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetBrandName() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.BrandName
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetButtonColor() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.ButtonColor
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetButtonTextColor() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.ButtonTextColor
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetFontFamily() *enums.Font {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.FontFamily
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetID() string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.ID
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetIsDefault() *bool {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.IsDefault
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetLinkColor() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.LinkColor
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetLogoRemoteURL() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.LogoRemoteURL
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetName() string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.Name
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetPrimaryColor() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.PrimaryColor
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetSecondaryColor() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.SecondaryColor
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetTags() []string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.Tags
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetTextColor() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.TextColor
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.UpdatedBy
-}
-
-type CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding struct {
-	EmailBrandings []*CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings "json:\"emailBrandings,omitempty\" graphql:\"emailBrandings\""
-}
-
-func (t *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding) GetEmailBrandings() []*CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding_EmailBrandings {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding{}
-	}
-	return t.EmailBrandings
-}
-
-type CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings struct {
-	BackgroundColor *string     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	BrandName       *string     "json:\"brandName,omitempty\" graphql:\"brandName\""
-	ButtonColor     *string     "json:\"buttonColor,omitempty\" graphql:\"buttonColor\""
-	ButtonTextColor *string     "json:\"buttonTextColor,omitempty\" graphql:\"buttonTextColor\""
-	CreatedAt       *time.Time  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FontFamily      *enums.Font "json:\"fontFamily,omitempty\" graphql:\"fontFamily\""
-	ID              string      "json:\"id\" graphql:\"id\""
-	IsDefault       *bool       "json:\"isDefault,omitempty\" graphql:\"isDefault\""
-	LinkColor       *string     "json:\"linkColor,omitempty\" graphql:\"linkColor\""
-	LogoRemoteURL   *string     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Name            string      "json:\"name\" graphql:\"name\""
-	OwnerID         *string     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PrimaryColor    *string     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	SecondaryColor  *string     "json:\"secondaryColor,omitempty\" graphql:\"secondaryColor\""
-	Tags            []string    "json:\"tags,omitempty\" graphql:\"tags\""
-	TextColor       *string     "json:\"textColor,omitempty\" graphql:\"textColor\""
-	UpdatedAt       *time.Time  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetBackgroundColor() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.BackgroundColor
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetBrandName() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.BrandName
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetButtonColor() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.ButtonColor
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetButtonTextColor() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.ButtonTextColor
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetFontFamily() *enums.Font {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.FontFamily
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetID() string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.ID
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetIsDefault() *bool {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.IsDefault
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetLinkColor() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.LinkColor
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetLogoRemoteURL() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.LogoRemoteURL
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetName() string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.Name
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetPrimaryColor() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.PrimaryColor
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetSecondaryColor() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.SecondaryColor
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetTags() []string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.Tags
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetTextColor() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.TextColor
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.UpdatedBy
-}
-
-type CreateBulkEmailBranding_CreateBulkEmailBranding struct {
-	EmailBrandings []*CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings "json:\"emailBrandings,omitempty\" graphql:\"emailBrandings\""
-}
-
-func (t *CreateBulkEmailBranding_CreateBulkEmailBranding) GetEmailBrandings() []*CreateBulkEmailBranding_CreateBulkEmailBranding_EmailBrandings {
-	if t == nil {
-		t = &CreateBulkEmailBranding_CreateBulkEmailBranding{}
-	}
-	return t.EmailBrandings
-}
-
-type CreateEmailBranding_CreateEmailBranding_EmailBranding struct {
-	BackgroundColor *string     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	BrandName       *string     "json:\"brandName,omitempty\" graphql:\"brandName\""
-	ButtonColor     *string     "json:\"buttonColor,omitempty\" graphql:\"buttonColor\""
-	ButtonTextColor *string     "json:\"buttonTextColor,omitempty\" graphql:\"buttonTextColor\""
-	CreatedAt       *time.Time  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FontFamily      *enums.Font "json:\"fontFamily,omitempty\" graphql:\"fontFamily\""
-	ID              string      "json:\"id\" graphql:\"id\""
-	IsDefault       *bool       "json:\"isDefault,omitempty\" graphql:\"isDefault\""
-	LinkColor       *string     "json:\"linkColor,omitempty\" graphql:\"linkColor\""
-	LogoRemoteURL   *string     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Name            string      "json:\"name\" graphql:\"name\""
-	OwnerID         *string     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PrimaryColor    *string     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	SecondaryColor  *string     "json:\"secondaryColor,omitempty\" graphql:\"secondaryColor\""
-	Tags            []string    "json:\"tags,omitempty\" graphql:\"tags\""
-	TextColor       *string     "json:\"textColor,omitempty\" graphql:\"textColor\""
-	UpdatedAt       *time.Time  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetBackgroundColor() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.BackgroundColor
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetBrandName() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.BrandName
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetButtonColor() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.ButtonColor
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetButtonTextColor() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.ButtonTextColor
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetFontFamily() *enums.Font {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.FontFamily
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetID() string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.ID
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetIsDefault() *bool {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.IsDefault
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetLinkColor() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.LinkColor
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetLogoRemoteURL() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.LogoRemoteURL
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetName() string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.Name
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.OwnerID
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetPrimaryColor() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.PrimaryColor
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetSecondaryColor() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.SecondaryColor
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetTags() []string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.Tags
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetTextColor() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.TextColor
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateEmailBranding_CreateEmailBranding_EmailBranding) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding_EmailBranding{}
-	}
-	return t.UpdatedBy
-}
-
-type CreateEmailBranding_CreateEmailBranding struct {
-	EmailBranding CreateEmailBranding_CreateEmailBranding_EmailBranding "json:\"emailBranding\" graphql:\"emailBranding\""
-}
-
-func (t *CreateEmailBranding_CreateEmailBranding) GetEmailBranding() *CreateEmailBranding_CreateEmailBranding_EmailBranding {
-	if t == nil {
-		t = &CreateEmailBranding_CreateEmailBranding{}
-	}
-	return &t.EmailBranding
-}
-
-type DeleteEmailBranding_DeleteEmailBranding struct {
-	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
-}
-
-func (t *DeleteEmailBranding_DeleteEmailBranding) GetDeletedID() string {
-	if t == nil {
-		t = &DeleteEmailBranding_DeleteEmailBranding{}
-	}
-	return t.DeletedID
-}
-
-type UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings struct {
-	BackgroundColor *string     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	BrandName       *string     "json:\"brandName,omitempty\" graphql:\"brandName\""
-	ButtonColor     *string     "json:\"buttonColor,omitempty\" graphql:\"buttonColor\""
-	ButtonTextColor *string     "json:\"buttonTextColor,omitempty\" graphql:\"buttonTextColor\""
-	CreatedAt       *time.Time  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FontFamily      *enums.Font "json:\"fontFamily,omitempty\" graphql:\"fontFamily\""
-	ID              string      "json:\"id\" graphql:\"id\""
-	IsDefault       *bool       "json:\"isDefault,omitempty\" graphql:\"isDefault\""
-	LinkColor       *string     "json:\"linkColor,omitempty\" graphql:\"linkColor\""
-	LogoRemoteURL   *string     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Name            string      "json:\"name\" graphql:\"name\""
-	OwnerID         *string     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PrimaryColor    *string     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	SecondaryColor  *string     "json:\"secondaryColor,omitempty\" graphql:\"secondaryColor\""
-	Tags            []string    "json:\"tags,omitempty\" graphql:\"tags\""
-	TextColor       *string     "json:\"textColor,omitempty\" graphql:\"textColor\""
-	UpdatedAt       *time.Time  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetBackgroundColor() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.BackgroundColor
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetBrandName() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.BrandName
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetButtonColor() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.ButtonColor
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetButtonTextColor() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.ButtonTextColor
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetFontFamily() *enums.Font {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.FontFamily
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetID() string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.ID
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetIsDefault() *bool {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.IsDefault
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetLinkColor() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.LinkColor
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetLogoRemoteURL() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.LogoRemoteURL
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetName() string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.Name
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetPrimaryColor() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.PrimaryColor
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetSecondaryColor() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.SecondaryColor
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetTags() []string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.Tags
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetTextColor() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.TextColor
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings{}
-	}
-	return t.UpdatedBy
-}
-
-type UpdateBulkEmailBranding_UpdateBulkEmailBranding struct {
-	EmailBrandings []*UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings "json:\"emailBrandings,omitempty\" graphql:\"emailBrandings\""
-	UpdatedIDs     []string                                                          "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
-}
-
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding) GetEmailBrandings() []*UpdateBulkEmailBranding_UpdateBulkEmailBranding_EmailBrandings {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding{}
-	}
-	return t.EmailBrandings
-}
-func (t *UpdateBulkEmailBranding_UpdateBulkEmailBranding) GetUpdatedIDs() []string {
-	if t == nil {
-		t = &UpdateBulkEmailBranding_UpdateBulkEmailBranding{}
-	}
-	return t.UpdatedIDs
-}
-
-type UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings struct {
-	BackgroundColor *string     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	BrandName       *string     "json:\"brandName,omitempty\" graphql:\"brandName\""
-	ButtonColor     *string     "json:\"buttonColor,omitempty\" graphql:\"buttonColor\""
-	ButtonTextColor *string     "json:\"buttonTextColor,omitempty\" graphql:\"buttonTextColor\""
-	CreatedAt       *time.Time  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FontFamily      *enums.Font "json:\"fontFamily,omitempty\" graphql:\"fontFamily\""
-	ID              string      "json:\"id\" graphql:\"id\""
-	IsDefault       *bool       "json:\"isDefault,omitempty\" graphql:\"isDefault\""
-	LinkColor       *string     "json:\"linkColor,omitempty\" graphql:\"linkColor\""
-	LogoRemoteURL   *string     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Name            string      "json:\"name\" graphql:\"name\""
-	OwnerID         *string     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PrimaryColor    *string     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	SecondaryColor  *string     "json:\"secondaryColor,omitempty\" graphql:\"secondaryColor\""
-	Tags            []string    "json:\"tags,omitempty\" graphql:\"tags\""
-	TextColor       *string     "json:\"textColor,omitempty\" graphql:\"textColor\""
-	UpdatedAt       *time.Time  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetBackgroundColor() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.BackgroundColor
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetBrandName() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.BrandName
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetButtonColor() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.ButtonColor
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetButtonTextColor() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.ButtonTextColor
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetFontFamily() *enums.Font {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.FontFamily
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetID() string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.ID
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetIsDefault() *bool {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.IsDefault
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetLinkColor() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.LinkColor
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetLogoRemoteURL() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.LogoRemoteURL
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetName() string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.Name
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetPrimaryColor() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.PrimaryColor
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetSecondaryColor() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.SecondaryColor
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetTags() []string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.Tags
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetTextColor() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.TextColor
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings{}
-	}
-	return t.UpdatedBy
-}
-
-type UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding struct {
-	EmailBrandings []*UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings "json:\"emailBrandings,omitempty\" graphql:\"emailBrandings\""
-	UpdatedIDs     []string                                                                "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
-}
-
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding) GetEmailBrandings() []*UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding_EmailBrandings {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding{}
-	}
-	return t.EmailBrandings
-}
-func (t *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding) GetUpdatedIDs() []string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding{}
-	}
-	return t.UpdatedIDs
-}
-
-type DeleteBulkEmailBranding_DeleteBulkEmailBranding struct {
-	DeletedIDs []string "json:\"deletedIDs\" graphql:\"deletedIDs\""
-}
-
-func (t *DeleteBulkEmailBranding_DeleteBulkEmailBranding) GetDeletedIDs() []string {
-	if t == nil {
-		t = &DeleteBulkEmailBranding_DeleteBulkEmailBranding{}
-	}
-	return t.DeletedIDs
-}
-
-type GetAllEmailBrandings_EmailBrandings_PageInfo struct {
-	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
-	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
-	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
-	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
-}
-
-func (t *GetAllEmailBrandings_EmailBrandings_PageInfo) GetEndCursor() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_PageInfo{}
-	}
-	return t.EndCursor
-}
-func (t *GetAllEmailBrandings_EmailBrandings_PageInfo) GetHasNextPage() bool {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_PageInfo{}
-	}
-	return t.HasNextPage
-}
-func (t *GetAllEmailBrandings_EmailBrandings_PageInfo) GetHasPreviousPage() bool {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_PageInfo{}
-	}
-	return t.HasPreviousPage
-}
-func (t *GetAllEmailBrandings_EmailBrandings_PageInfo) GetStartCursor() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_PageInfo{}
-	}
-	return t.StartCursor
-}
-
-type GetAllEmailBrandings_EmailBrandings_Edges_Node struct {
-	BackgroundColor *string     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	BrandName       *string     "json:\"brandName,omitempty\" graphql:\"brandName\""
-	ButtonColor     *string     "json:\"buttonColor,omitempty\" graphql:\"buttonColor\""
-	ButtonTextColor *string     "json:\"buttonTextColor,omitempty\" graphql:\"buttonTextColor\""
-	CreatedAt       *time.Time  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FontFamily      *enums.Font "json:\"fontFamily,omitempty\" graphql:\"fontFamily\""
-	ID              string      "json:\"id\" graphql:\"id\""
-	IsDefault       *bool       "json:\"isDefault,omitempty\" graphql:\"isDefault\""
-	LinkColor       *string     "json:\"linkColor,omitempty\" graphql:\"linkColor\""
-	LogoRemoteURL   *string     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Name            string      "json:\"name\" graphql:\"name\""
-	OwnerID         *string     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PrimaryColor    *string     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	SecondaryColor  *string     "json:\"secondaryColor,omitempty\" graphql:\"secondaryColor\""
-	Tags            []string    "json:\"tags,omitempty\" graphql:\"tags\""
-	TextColor       *string     "json:\"textColor,omitempty\" graphql:\"textColor\""
-	UpdatedAt       *time.Time  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetBackgroundColor() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.BackgroundColor
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetBrandName() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.BrandName
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetButtonColor() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.ButtonColor
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetButtonTextColor() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.ButtonTextColor
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.CreatedAt
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetCreatedBy() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.CreatedBy
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetFontFamily() *enums.Font {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.FontFamily
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetID() string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.ID
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetIsDefault() *bool {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.IsDefault
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetLinkColor() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.LinkColor
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetLogoRemoteURL() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.LogoRemoteURL
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetName() string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.Name
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetOwnerID() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.OwnerID
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetPrimaryColor() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.PrimaryColor
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetSecondaryColor() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.SecondaryColor
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetTags() []string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.Tags
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetTextColor() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.TextColor
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.UpdatedAt
-}
-func (t *GetAllEmailBrandings_EmailBrandings_Edges_Node) GetUpdatedBy() *string {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.UpdatedBy
-}
-
-type GetAllEmailBrandings_EmailBrandings_Edges struct {
-	Node *GetAllEmailBrandings_EmailBrandings_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
-}
-
-func (t *GetAllEmailBrandings_EmailBrandings_Edges) GetNode() *GetAllEmailBrandings_EmailBrandings_Edges_Node {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings_Edges{}
-	}
-	return t.Node
-}
-
-type GetAllEmailBrandings_EmailBrandings struct {
-	Edges      []*GetAllEmailBrandings_EmailBrandings_Edges "json:\"edges,omitempty\" graphql:\"edges\""
-	PageInfo   GetAllEmailBrandings_EmailBrandings_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
-	TotalCount int64                                        "json:\"totalCount\" graphql:\"totalCount\""
-}
-
-func (t *GetAllEmailBrandings_EmailBrandings) GetEdges() []*GetAllEmailBrandings_EmailBrandings_Edges {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings{}
-	}
-	return t.Edges
-}
-func (t *GetAllEmailBrandings_EmailBrandings) GetPageInfo() *GetAllEmailBrandings_EmailBrandings_PageInfo {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings{}
-	}
-	return &t.PageInfo
-}
-func (t *GetAllEmailBrandings_EmailBrandings) GetTotalCount() int64 {
-	if t == nil {
-		t = &GetAllEmailBrandings_EmailBrandings{}
-	}
-	return t.TotalCount
-}
-
-type GetEmailBrandingByID_EmailBranding struct {
-	BackgroundColor *string     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	BrandName       *string     "json:\"brandName,omitempty\" graphql:\"brandName\""
-	ButtonColor     *string     "json:\"buttonColor,omitempty\" graphql:\"buttonColor\""
-	ButtonTextColor *string     "json:\"buttonTextColor,omitempty\" graphql:\"buttonTextColor\""
-	CreatedAt       *time.Time  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FontFamily      *enums.Font "json:\"fontFamily,omitempty\" graphql:\"fontFamily\""
-	ID              string      "json:\"id\" graphql:\"id\""
-	IsDefault       *bool       "json:\"isDefault,omitempty\" graphql:\"isDefault\""
-	LinkColor       *string     "json:\"linkColor,omitempty\" graphql:\"linkColor\""
-	LogoRemoteURL   *string     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Name            string      "json:\"name\" graphql:\"name\""
-	OwnerID         *string     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PrimaryColor    *string     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	SecondaryColor  *string     "json:\"secondaryColor,omitempty\" graphql:\"secondaryColor\""
-	Tags            []string    "json:\"tags,omitempty\" graphql:\"tags\""
-	TextColor       *string     "json:\"textColor,omitempty\" graphql:\"textColor\""
-	UpdatedAt       *time.Time  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *GetEmailBrandingByID_EmailBranding) GetBackgroundColor() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.BackgroundColor
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetBrandName() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.BrandName
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetButtonColor() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.ButtonColor
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetButtonTextColor() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.ButtonTextColor
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.CreatedAt
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetCreatedBy() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.CreatedBy
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetFontFamily() *enums.Font {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.FontFamily
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetID() string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.ID
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetIsDefault() *bool {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.IsDefault
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetLinkColor() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.LinkColor
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetLogoRemoteURL() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.LogoRemoteURL
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetName() string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.Name
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetOwnerID() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.OwnerID
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetPrimaryColor() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.PrimaryColor
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetSecondaryColor() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.SecondaryColor
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetTags() []string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.Tags
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetTextColor() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.TextColor
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.UpdatedAt
-}
-func (t *GetEmailBrandingByID_EmailBranding) GetUpdatedBy() *string {
-	if t == nil {
-		t = &GetEmailBrandingByID_EmailBranding{}
-	}
-	return t.UpdatedBy
-}
-
-type GetEmailBrandings_EmailBrandings_PageInfo struct {
-	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
-	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
-	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
-	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
-}
-
-func (t *GetEmailBrandings_EmailBrandings_PageInfo) GetEndCursor() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_PageInfo{}
-	}
-	return t.EndCursor
-}
-func (t *GetEmailBrandings_EmailBrandings_PageInfo) GetHasNextPage() bool {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_PageInfo{}
-	}
-	return t.HasNextPage
-}
-func (t *GetEmailBrandings_EmailBrandings_PageInfo) GetHasPreviousPage() bool {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_PageInfo{}
-	}
-	return t.HasPreviousPage
-}
-func (t *GetEmailBrandings_EmailBrandings_PageInfo) GetStartCursor() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_PageInfo{}
-	}
-	return t.StartCursor
-}
-
-type GetEmailBrandings_EmailBrandings_Edges_Node struct {
-	BackgroundColor *string     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	BrandName       *string     "json:\"brandName,omitempty\" graphql:\"brandName\""
-	ButtonColor     *string     "json:\"buttonColor,omitempty\" graphql:\"buttonColor\""
-	ButtonTextColor *string     "json:\"buttonTextColor,omitempty\" graphql:\"buttonTextColor\""
-	CreatedAt       *time.Time  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FontFamily      *enums.Font "json:\"fontFamily,omitempty\" graphql:\"fontFamily\""
-	ID              string      "json:\"id\" graphql:\"id\""
-	IsDefault       *bool       "json:\"isDefault,omitempty\" graphql:\"isDefault\""
-	LinkColor       *string     "json:\"linkColor,omitempty\" graphql:\"linkColor\""
-	LogoRemoteURL   *string     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Name            string      "json:\"name\" graphql:\"name\""
-	OwnerID         *string     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PrimaryColor    *string     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	SecondaryColor  *string     "json:\"secondaryColor,omitempty\" graphql:\"secondaryColor\""
-	Tags            []string    "json:\"tags,omitempty\" graphql:\"tags\""
-	TextColor       *string     "json:\"textColor,omitempty\" graphql:\"textColor\""
-	UpdatedAt       *time.Time  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetBackgroundColor() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.BackgroundColor
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetBrandName() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.BrandName
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetButtonColor() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.ButtonColor
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetButtonTextColor() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.ButtonTextColor
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.CreatedAt
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetCreatedBy() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.CreatedBy
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetFontFamily() *enums.Font {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.FontFamily
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetID() string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.ID
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetIsDefault() *bool {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.IsDefault
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetLinkColor() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.LinkColor
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetLogoRemoteURL() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.LogoRemoteURL
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetName() string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.Name
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetOwnerID() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.OwnerID
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetPrimaryColor() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.PrimaryColor
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetSecondaryColor() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.SecondaryColor
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetTags() []string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.Tags
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetTextColor() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.TextColor
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.UpdatedAt
-}
-func (t *GetEmailBrandings_EmailBrandings_Edges_Node) GetUpdatedBy() *string {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges_Node{}
-	}
-	return t.UpdatedBy
-}
-
-type GetEmailBrandings_EmailBrandings_Edges struct {
-	Node *GetEmailBrandings_EmailBrandings_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
-}
-
-func (t *GetEmailBrandings_EmailBrandings_Edges) GetNode() *GetEmailBrandings_EmailBrandings_Edges_Node {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings_Edges{}
-	}
-	return t.Node
-}
-
-type GetEmailBrandings_EmailBrandings struct {
-	Edges      []*GetEmailBrandings_EmailBrandings_Edges "json:\"edges,omitempty\" graphql:\"edges\""
-	PageInfo   GetEmailBrandings_EmailBrandings_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
-	TotalCount int64                                     "json:\"totalCount\" graphql:\"totalCount\""
-}
-
-func (t *GetEmailBrandings_EmailBrandings) GetEdges() []*GetEmailBrandings_EmailBrandings_Edges {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings{}
-	}
-	return t.Edges
-}
-func (t *GetEmailBrandings_EmailBrandings) GetPageInfo() *GetEmailBrandings_EmailBrandings_PageInfo {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings{}
-	}
-	return &t.PageInfo
-}
-func (t *GetEmailBrandings_EmailBrandings) GetTotalCount() int64 {
-	if t == nil {
-		t = &GetEmailBrandings_EmailBrandings{}
-	}
-	return t.TotalCount
-}
-
-type UpdateEmailBranding_UpdateEmailBranding_EmailBranding struct {
-	BackgroundColor *string     "json:\"backgroundColor,omitempty\" graphql:\"backgroundColor\""
-	BrandName       *string     "json:\"brandName,omitempty\" graphql:\"brandName\""
-	ButtonColor     *string     "json:\"buttonColor,omitempty\" graphql:\"buttonColor\""
-	ButtonTextColor *string     "json:\"buttonTextColor,omitempty\" graphql:\"buttonTextColor\""
-	CreatedAt       *time.Time  "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string     "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	FontFamily      *enums.Font "json:\"fontFamily,omitempty\" graphql:\"fontFamily\""
-	ID              string      "json:\"id\" graphql:\"id\""
-	IsDefault       *bool       "json:\"isDefault,omitempty\" graphql:\"isDefault\""
-	LinkColor       *string     "json:\"linkColor,omitempty\" graphql:\"linkColor\""
-	LogoRemoteURL   *string     "json:\"logoRemoteURL,omitempty\" graphql:\"logoRemoteURL\""
-	Name            string      "json:\"name\" graphql:\"name\""
-	OwnerID         *string     "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PrimaryColor    *string     "json:\"primaryColor,omitempty\" graphql:\"primaryColor\""
-	SecondaryColor  *string     "json:\"secondaryColor,omitempty\" graphql:\"secondaryColor\""
-	Tags            []string    "json:\"tags,omitempty\" graphql:\"tags\""
-	TextColor       *string     "json:\"textColor,omitempty\" graphql:\"textColor\""
-	UpdatedAt       *time.Time  "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string     "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetBackgroundColor() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.BackgroundColor
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetBrandName() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.BrandName
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetButtonColor() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.ButtonColor
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetButtonTextColor() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.ButtonTextColor
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetFontFamily() *enums.Font {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.FontFamily
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetID() string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.ID
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetIsDefault() *bool {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.IsDefault
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetLinkColor() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.LinkColor
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetLogoRemoteURL() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.LogoRemoteURL
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetName() string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.Name
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetPrimaryColor() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.PrimaryColor
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetSecondaryColor() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.SecondaryColor
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetTags() []string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.Tags
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetTextColor() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.TextColor
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateEmailBranding_UpdateEmailBranding_EmailBranding) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding_EmailBranding{}
-	}
-	return t.UpdatedBy
-}
-
-type UpdateEmailBranding_UpdateEmailBranding struct {
-	EmailBranding UpdateEmailBranding_UpdateEmailBranding_EmailBranding "json:\"emailBranding\" graphql:\"emailBranding\""
-}
-
-func (t *UpdateEmailBranding_UpdateEmailBranding) GetEmailBranding() *UpdateEmailBranding_UpdateEmailBranding_EmailBranding {
-	if t == nil {
-		t = &UpdateEmailBranding_UpdateEmailBranding{}
-	}
-	return &t.EmailBranding
-}
-
 type CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates struct {
-	Active               bool                             "json:\"active\" graphql:\"active\""
-	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
-	ID                   string                           "json:\"id\" graphql:\"id\""
-	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	InternalNotes        *string                          "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	Jsonconfig           map[string]any                   "json:\"jsonconfig,omitempty\" graphql:\"jsonconfig\""
-	Key                  string                           "json:\"key\" graphql:\"key\""
-	Locale               string                           "json:\"locale\" graphql:\"locale\""
-	Metadata             map[string]any                   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Name                 string                           "json:\"name\" graphql:\"name\""
-	OwnerID              *string                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreheaderTemplate    *string                          "json:\"preheaderTemplate,omitempty\" graphql:\"preheaderTemplate\""
-	SubjectTemplate      *string                          "json:\"subjectTemplate,omitempty\" graphql:\"subjectTemplate\""
-	SystemInternalID     *string                          "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned          *bool                            "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	TextTemplate         *string                          "json:\"textTemplate,omitempty\" graphql:\"textTemplate\""
-	Uischema             map[string]any                   "json:\"uischema,omitempty\" graphql:\"uischema\""
-	UpdatedAt            *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version              int64                            "json:\"version\" graphql:\"version\""
-	WorkflowDefinitionID *string                          "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
-	WorkflowInstanceID   *string                          "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
+	Active               bool                              "json:\"active\" graphql:\"active\""
+	CreatedAt            *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy            *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Defaults             map[string]any                    "json:\"defaults,omitempty\" graphql:\"defaults\""
+	Description          *string                           "json:\"description,omitempty\" graphql:\"description\""
+	Format               *enums.NotificationTemplateFormat "json:\"format,omitempty\" graphql:\"format\""
+	ID                   string                            "json:\"id\" graphql:\"id\""
+	IntegrationID        *string                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	InternalNotes        *string                           "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	Key                  string                            "json:\"key\" graphql:\"key\""
+	Locale               string                            "json:\"locale\" graphql:\"locale\""
+	Metadata             map[string]any                    "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Name                 string                            "json:\"name\" graphql:\"name\""
+	OwnerID              *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Revision             *string                           "json:\"revision,omitempty\" graphql:\"revision\""
+	SystemInternalID     *string                           "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned          *bool                             "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	TemplateContext      *enums.TemplateContext            "json:\"templateContext,omitempty\" graphql:\"templateContext\""
+	UpdatedAt            *time.Time                        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy            *string                           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version              int64                             "json:\"version\" graphql:\"version\""
+	WorkflowDefinitionID *string                           "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
+	WorkflowInstanceID   *string                           "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
 }
 
 func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetActive() bool {
@@ -28664,12 +28346,6 @@ func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) G
 		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
 	}
 	return t.Active
-}
-func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetBodyTemplate() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.BodyTemplate
 }
 func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -28683,6 +28359,12 @@ func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) G
 	}
 	return t.CreatedBy
 }
+func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetDefaults() map[string]any {
+	if t == nil {
+		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
+	}
+	return t.Defaults
+}
 func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetDescription() *string {
 	if t == nil {
 		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
@@ -28693,7 +28375,7 @@ func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) G
 	if t == nil {
 		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
 	}
-	return &t.Format
+	return t.Format
 }
 func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetID() string {
 	if t == nil {
@@ -28712,12 +28394,6 @@ func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) G
 		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
 	}
 	return t.InternalNotes
-}
-func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetJsonconfig() map[string]any {
-	if t == nil {
-		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.Jsonconfig
 }
 func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetKey() string {
 	if t == nil {
@@ -28749,17 +28425,11 @@ func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) G
 	}
 	return t.OwnerID
 }
-func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetPreheaderTemplate() *string {
+func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetRevision() *string {
 	if t == nil {
 		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
 	}
-	return t.PreheaderTemplate
-}
-func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetSubjectTemplate() *string {
-	if t == nil {
-		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.SubjectTemplate
+	return t.Revision
 }
 func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetSystemInternalID() *string {
 	if t == nil {
@@ -28773,17 +28443,11 @@ func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) G
 	}
 	return t.SystemOwned
 }
-func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetTextTemplate() *string {
+func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetTemplateContext() *enums.TemplateContext {
 	if t == nil {
 		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
 	}
-	return t.TextTemplate
-}
-func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetUischema() map[string]any {
-	if t == nil {
-		t = &CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.Uischema
+	return t.TemplateContext
 }
 func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate_EmailTemplates) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -28828,32 +28492,29 @@ func (t *CreateBulkCSVEmailTemplate_CreateBulkCSVEmailTemplate) GetEmailTemplate
 }
 
 type CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates struct {
-	Active               bool                             "json:\"active\" graphql:\"active\""
-	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
-	ID                   string                           "json:\"id\" graphql:\"id\""
-	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	InternalNotes        *string                          "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	Jsonconfig           map[string]any                   "json:\"jsonconfig,omitempty\" graphql:\"jsonconfig\""
-	Key                  string                           "json:\"key\" graphql:\"key\""
-	Locale               string                           "json:\"locale\" graphql:\"locale\""
-	Metadata             map[string]any                   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Name                 string                           "json:\"name\" graphql:\"name\""
-	OwnerID              *string                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreheaderTemplate    *string                          "json:\"preheaderTemplate,omitempty\" graphql:\"preheaderTemplate\""
-	SubjectTemplate      *string                          "json:\"subjectTemplate,omitempty\" graphql:\"subjectTemplate\""
-	SystemInternalID     *string                          "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned          *bool                            "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	TextTemplate         *string                          "json:\"textTemplate,omitempty\" graphql:\"textTemplate\""
-	Uischema             map[string]any                   "json:\"uischema,omitempty\" graphql:\"uischema\""
-	UpdatedAt            *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version              int64                            "json:\"version\" graphql:\"version\""
-	WorkflowDefinitionID *string                          "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
-	WorkflowInstanceID   *string                          "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
+	Active               bool                              "json:\"active\" graphql:\"active\""
+	CreatedAt            *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy            *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Defaults             map[string]any                    "json:\"defaults,omitempty\" graphql:\"defaults\""
+	Description          *string                           "json:\"description,omitempty\" graphql:\"description\""
+	Format               *enums.NotificationTemplateFormat "json:\"format,omitempty\" graphql:\"format\""
+	ID                   string                            "json:\"id\" graphql:\"id\""
+	IntegrationID        *string                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	InternalNotes        *string                           "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	Key                  string                            "json:\"key\" graphql:\"key\""
+	Locale               string                            "json:\"locale\" graphql:\"locale\""
+	Metadata             map[string]any                    "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Name                 string                            "json:\"name\" graphql:\"name\""
+	OwnerID              *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Revision             *string                           "json:\"revision,omitempty\" graphql:\"revision\""
+	SystemInternalID     *string                           "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned          *bool                             "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	TemplateContext      *enums.TemplateContext            "json:\"templateContext,omitempty\" graphql:\"templateContext\""
+	UpdatedAt            *time.Time                        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy            *string                           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version              int64                             "json:\"version\" graphql:\"version\""
+	WorkflowDefinitionID *string                           "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
+	WorkflowInstanceID   *string                           "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
 }
 
 func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetActive() bool {
@@ -28861,12 +28522,6 @@ func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetActi
 		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
 	}
 	return t.Active
-}
-func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetBodyTemplate() *string {
-	if t == nil {
-		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.BodyTemplate
 }
 func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -28880,6 +28535,12 @@ func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetCrea
 	}
 	return t.CreatedBy
 }
+func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetDefaults() map[string]any {
+	if t == nil {
+		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
+	}
+	return t.Defaults
+}
 func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetDescription() *string {
 	if t == nil {
 		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
@@ -28890,7 +28551,7 @@ func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetForm
 	if t == nil {
 		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
 	}
-	return &t.Format
+	return t.Format
 }
 func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetID() string {
 	if t == nil {
@@ -28909,12 +28570,6 @@ func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetInte
 		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
 	}
 	return t.InternalNotes
-}
-func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetJsonconfig() map[string]any {
-	if t == nil {
-		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.Jsonconfig
 }
 func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetKey() string {
 	if t == nil {
@@ -28946,17 +28601,11 @@ func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetOwne
 	}
 	return t.OwnerID
 }
-func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetPreheaderTemplate() *string {
+func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetRevision() *string {
 	if t == nil {
 		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
 	}
-	return t.PreheaderTemplate
-}
-func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetSubjectTemplate() *string {
-	if t == nil {
-		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.SubjectTemplate
+	return t.Revision
 }
 func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetSystemInternalID() *string {
 	if t == nil {
@@ -28970,17 +28619,11 @@ func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetSyst
 	}
 	return t.SystemOwned
 }
-func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetTextTemplate() *string {
+func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetTemplateContext() *enums.TemplateContext {
 	if t == nil {
 		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
 	}
-	return t.TextTemplate
-}
-func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetUischema() map[string]any {
-	if t == nil {
-		t = &CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.Uischema
+	return t.TemplateContext
 }
 func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate_EmailTemplates) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -29025,32 +28668,29 @@ func (t *CreateBulkEmailTemplate_CreateBulkEmailTemplate) GetEmailTemplates() []
 }
 
 type CreateEmailTemplate_CreateEmailTemplate_EmailTemplate struct {
-	Active               bool                             "json:\"active\" graphql:\"active\""
-	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
-	ID                   string                           "json:\"id\" graphql:\"id\""
-	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	InternalNotes        *string                          "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	Jsonconfig           map[string]any                   "json:\"jsonconfig,omitempty\" graphql:\"jsonconfig\""
-	Key                  string                           "json:\"key\" graphql:\"key\""
-	Locale               string                           "json:\"locale\" graphql:\"locale\""
-	Metadata             map[string]any                   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Name                 string                           "json:\"name\" graphql:\"name\""
-	OwnerID              *string                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreheaderTemplate    *string                          "json:\"preheaderTemplate,omitempty\" graphql:\"preheaderTemplate\""
-	SubjectTemplate      *string                          "json:\"subjectTemplate,omitempty\" graphql:\"subjectTemplate\""
-	SystemInternalID     *string                          "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned          *bool                            "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	TextTemplate         *string                          "json:\"textTemplate,omitempty\" graphql:\"textTemplate\""
-	Uischema             map[string]any                   "json:\"uischema,omitempty\" graphql:\"uischema\""
-	UpdatedAt            *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version              int64                            "json:\"version\" graphql:\"version\""
-	WorkflowDefinitionID *string                          "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
-	WorkflowInstanceID   *string                          "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
+	Active               bool                              "json:\"active\" graphql:\"active\""
+	CreatedAt            *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy            *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Defaults             map[string]any                    "json:\"defaults,omitempty\" graphql:\"defaults\""
+	Description          *string                           "json:\"description,omitempty\" graphql:\"description\""
+	Format               *enums.NotificationTemplateFormat "json:\"format,omitempty\" graphql:\"format\""
+	ID                   string                            "json:\"id\" graphql:\"id\""
+	IntegrationID        *string                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	InternalNotes        *string                           "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	Key                  string                            "json:\"key\" graphql:\"key\""
+	Locale               string                            "json:\"locale\" graphql:\"locale\""
+	Metadata             map[string]any                    "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Name                 string                            "json:\"name\" graphql:\"name\""
+	OwnerID              *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Revision             *string                           "json:\"revision,omitempty\" graphql:\"revision\""
+	SystemInternalID     *string                           "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned          *bool                             "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	TemplateContext      *enums.TemplateContext            "json:\"templateContext,omitempty\" graphql:\"templateContext\""
+	UpdatedAt            *time.Time                        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy            *string                           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version              int64                             "json:\"version\" graphql:\"version\""
+	WorkflowDefinitionID *string                           "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
+	WorkflowInstanceID   *string                           "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
 }
 
 func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetActive() bool {
@@ -29058,12 +28698,6 @@ func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetActive() bool
 		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
 	}
 	return t.Active
-}
-func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetBodyTemplate() *string {
-	if t == nil {
-		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
-	}
-	return t.BodyTemplate
 }
 func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -29077,6 +28711,12 @@ func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetCreatedBy() *
 	}
 	return t.CreatedBy
 }
+func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetDefaults() map[string]any {
+	if t == nil {
+		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
+	}
+	return t.Defaults
+}
 func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetDescription() *string {
 	if t == nil {
 		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
@@ -29087,7 +28727,7 @@ func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetFormat() *enu
 	if t == nil {
 		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
 	}
-	return &t.Format
+	return t.Format
 }
 func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetID() string {
 	if t == nil {
@@ -29106,12 +28746,6 @@ func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetInternalNotes
 		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
 	}
 	return t.InternalNotes
-}
-func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetJsonconfig() map[string]any {
-	if t == nil {
-		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
-	}
-	return t.Jsonconfig
 }
 func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetKey() string {
 	if t == nil {
@@ -29143,17 +28777,11 @@ func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetOwnerID() *st
 	}
 	return t.OwnerID
 }
-func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetPreheaderTemplate() *string {
+func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetRevision() *string {
 	if t == nil {
 		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
 	}
-	return t.PreheaderTemplate
-}
-func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetSubjectTemplate() *string {
-	if t == nil {
-		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
-	}
-	return t.SubjectTemplate
+	return t.Revision
 }
 func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetSystemInternalID() *string {
 	if t == nil {
@@ -29167,17 +28795,11 @@ func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetSystemOwned()
 	}
 	return t.SystemOwned
 }
-func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetTextTemplate() *string {
+func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetTemplateContext() *enums.TemplateContext {
 	if t == nil {
 		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
 	}
-	return t.TextTemplate
-}
-func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetUischema() map[string]any {
-	if t == nil {
-		t = &CreateEmailTemplate_CreateEmailTemplate_EmailTemplate{}
-	}
-	return t.Uischema
+	return t.TemplateContext
 }
 func (t *CreateEmailTemplate_CreateEmailTemplate_EmailTemplate) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -29276,32 +28898,29 @@ func (t *GetAllEmailTemplates_EmailTemplates_PageInfo) GetStartCursor() *string 
 }
 
 type GetAllEmailTemplates_EmailTemplates_Edges_Node struct {
-	Active               bool                             "json:\"active\" graphql:\"active\""
-	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
-	ID                   string                           "json:\"id\" graphql:\"id\""
-	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	InternalNotes        *string                          "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	Jsonconfig           map[string]any                   "json:\"jsonconfig,omitempty\" graphql:\"jsonconfig\""
-	Key                  string                           "json:\"key\" graphql:\"key\""
-	Locale               string                           "json:\"locale\" graphql:\"locale\""
-	Metadata             map[string]any                   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Name                 string                           "json:\"name\" graphql:\"name\""
-	OwnerID              *string                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreheaderTemplate    *string                          "json:\"preheaderTemplate,omitempty\" graphql:\"preheaderTemplate\""
-	SubjectTemplate      *string                          "json:\"subjectTemplate,omitempty\" graphql:\"subjectTemplate\""
-	SystemInternalID     *string                          "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned          *bool                            "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	TextTemplate         *string                          "json:\"textTemplate,omitempty\" graphql:\"textTemplate\""
-	Uischema             map[string]any                   "json:\"uischema,omitempty\" graphql:\"uischema\""
-	UpdatedAt            *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version              int64                            "json:\"version\" graphql:\"version\""
-	WorkflowDefinitionID *string                          "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
-	WorkflowInstanceID   *string                          "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
+	Active               bool                              "json:\"active\" graphql:\"active\""
+	CreatedAt            *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy            *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Defaults             map[string]any                    "json:\"defaults,omitempty\" graphql:\"defaults\""
+	Description          *string                           "json:\"description,omitempty\" graphql:\"description\""
+	Format               *enums.NotificationTemplateFormat "json:\"format,omitempty\" graphql:\"format\""
+	ID                   string                            "json:\"id\" graphql:\"id\""
+	IntegrationID        *string                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	InternalNotes        *string                           "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	Key                  string                            "json:\"key\" graphql:\"key\""
+	Locale               string                            "json:\"locale\" graphql:\"locale\""
+	Metadata             map[string]any                    "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Name                 string                            "json:\"name\" graphql:\"name\""
+	OwnerID              *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Revision             *string                           "json:\"revision,omitempty\" graphql:\"revision\""
+	SystemInternalID     *string                           "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned          *bool                             "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	TemplateContext      *enums.TemplateContext            "json:\"templateContext,omitempty\" graphql:\"templateContext\""
+	UpdatedAt            *time.Time                        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy            *string                           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version              int64                             "json:\"version\" graphql:\"version\""
+	WorkflowDefinitionID *string                           "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
+	WorkflowInstanceID   *string                           "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
 }
 
 func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetActive() bool {
@@ -29309,12 +28928,6 @@ func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetActive() bool {
 		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
 	}
 	return t.Active
-}
-func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetBodyTemplate() *string {
-	if t == nil {
-		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.BodyTemplate
 }
 func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -29328,6 +28941,12 @@ func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetCreatedBy() *string 
 	}
 	return t.CreatedBy
 }
+func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetDefaults() map[string]any {
+	if t == nil {
+		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
+	}
+	return t.Defaults
+}
 func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetDescription() *string {
 	if t == nil {
 		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
@@ -29338,7 +28957,7 @@ func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetFormat() *enums.Noti
 	if t == nil {
 		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
 	}
-	return &t.Format
+	return t.Format
 }
 func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetID() string {
 	if t == nil {
@@ -29357,12 +28976,6 @@ func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetInternalNotes() *str
 		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
 	}
 	return t.InternalNotes
-}
-func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetJsonconfig() map[string]any {
-	if t == nil {
-		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.Jsonconfig
 }
 func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetKey() string {
 	if t == nil {
@@ -29394,17 +29007,11 @@ func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetOwnerID() *string {
 	}
 	return t.OwnerID
 }
-func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetPreheaderTemplate() *string {
+func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetRevision() *string {
 	if t == nil {
 		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
 	}
-	return t.PreheaderTemplate
-}
-func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetSubjectTemplate() *string {
-	if t == nil {
-		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.SubjectTemplate
+	return t.Revision
 }
 func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetSystemInternalID() *string {
 	if t == nil {
@@ -29418,17 +29025,11 @@ func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetSystemOwned() *bool 
 	}
 	return t.SystemOwned
 }
-func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetTextTemplate() *string {
+func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetTemplateContext() *enums.TemplateContext {
 	if t == nil {
 		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
 	}
-	return t.TextTemplate
-}
-func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetUischema() map[string]any {
-	if t == nil {
-		t = &GetAllEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.Uischema
+	return t.TemplateContext
 }
 func (t *GetAllEmailTemplates_EmailTemplates_Edges_Node) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -29498,32 +29099,29 @@ func (t *GetAllEmailTemplates_EmailTemplates) GetTotalCount() int64 {
 }
 
 type GetEmailTemplateByID_EmailTemplate struct {
-	Active               bool                             "json:\"active\" graphql:\"active\""
-	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
-	ID                   string                           "json:\"id\" graphql:\"id\""
-	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	InternalNotes        *string                          "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	Jsonconfig           map[string]any                   "json:\"jsonconfig,omitempty\" graphql:\"jsonconfig\""
-	Key                  string                           "json:\"key\" graphql:\"key\""
-	Locale               string                           "json:\"locale\" graphql:\"locale\""
-	Metadata             map[string]any                   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Name                 string                           "json:\"name\" graphql:\"name\""
-	OwnerID              *string                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreheaderTemplate    *string                          "json:\"preheaderTemplate,omitempty\" graphql:\"preheaderTemplate\""
-	SubjectTemplate      *string                          "json:\"subjectTemplate,omitempty\" graphql:\"subjectTemplate\""
-	SystemInternalID     *string                          "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned          *bool                            "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	TextTemplate         *string                          "json:\"textTemplate,omitempty\" graphql:\"textTemplate\""
-	Uischema             map[string]any                   "json:\"uischema,omitempty\" graphql:\"uischema\""
-	UpdatedAt            *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version              int64                            "json:\"version\" graphql:\"version\""
-	WorkflowDefinitionID *string                          "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
-	WorkflowInstanceID   *string                          "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
+	Active               bool                              "json:\"active\" graphql:\"active\""
+	CreatedAt            *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy            *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Defaults             map[string]any                    "json:\"defaults,omitempty\" graphql:\"defaults\""
+	Description          *string                           "json:\"description,omitempty\" graphql:\"description\""
+	Format               *enums.NotificationTemplateFormat "json:\"format,omitempty\" graphql:\"format\""
+	ID                   string                            "json:\"id\" graphql:\"id\""
+	IntegrationID        *string                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	InternalNotes        *string                           "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	Key                  string                            "json:\"key\" graphql:\"key\""
+	Locale               string                            "json:\"locale\" graphql:\"locale\""
+	Metadata             map[string]any                    "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Name                 string                            "json:\"name\" graphql:\"name\""
+	OwnerID              *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Revision             *string                           "json:\"revision,omitempty\" graphql:\"revision\""
+	SystemInternalID     *string                           "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned          *bool                             "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	TemplateContext      *enums.TemplateContext            "json:\"templateContext,omitempty\" graphql:\"templateContext\""
+	UpdatedAt            *time.Time                        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy            *string                           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version              int64                             "json:\"version\" graphql:\"version\""
+	WorkflowDefinitionID *string                           "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
+	WorkflowInstanceID   *string                           "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
 }
 
 func (t *GetEmailTemplateByID_EmailTemplate) GetActive() bool {
@@ -29531,12 +29129,6 @@ func (t *GetEmailTemplateByID_EmailTemplate) GetActive() bool {
 		t = &GetEmailTemplateByID_EmailTemplate{}
 	}
 	return t.Active
-}
-func (t *GetEmailTemplateByID_EmailTemplate) GetBodyTemplate() *string {
-	if t == nil {
-		t = &GetEmailTemplateByID_EmailTemplate{}
-	}
-	return t.BodyTemplate
 }
 func (t *GetEmailTemplateByID_EmailTemplate) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -29550,6 +29142,12 @@ func (t *GetEmailTemplateByID_EmailTemplate) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
+func (t *GetEmailTemplateByID_EmailTemplate) GetDefaults() map[string]any {
+	if t == nil {
+		t = &GetEmailTemplateByID_EmailTemplate{}
+	}
+	return t.Defaults
+}
 func (t *GetEmailTemplateByID_EmailTemplate) GetDescription() *string {
 	if t == nil {
 		t = &GetEmailTemplateByID_EmailTemplate{}
@@ -29560,7 +29158,7 @@ func (t *GetEmailTemplateByID_EmailTemplate) GetFormat() *enums.NotificationTemp
 	if t == nil {
 		t = &GetEmailTemplateByID_EmailTemplate{}
 	}
-	return &t.Format
+	return t.Format
 }
 func (t *GetEmailTemplateByID_EmailTemplate) GetID() string {
 	if t == nil {
@@ -29579,12 +29177,6 @@ func (t *GetEmailTemplateByID_EmailTemplate) GetInternalNotes() *string {
 		t = &GetEmailTemplateByID_EmailTemplate{}
 	}
 	return t.InternalNotes
-}
-func (t *GetEmailTemplateByID_EmailTemplate) GetJsonconfig() map[string]any {
-	if t == nil {
-		t = &GetEmailTemplateByID_EmailTemplate{}
-	}
-	return t.Jsonconfig
 }
 func (t *GetEmailTemplateByID_EmailTemplate) GetKey() string {
 	if t == nil {
@@ -29616,17 +29208,11 @@ func (t *GetEmailTemplateByID_EmailTemplate) GetOwnerID() *string {
 	}
 	return t.OwnerID
 }
-func (t *GetEmailTemplateByID_EmailTemplate) GetPreheaderTemplate() *string {
+func (t *GetEmailTemplateByID_EmailTemplate) GetRevision() *string {
 	if t == nil {
 		t = &GetEmailTemplateByID_EmailTemplate{}
 	}
-	return t.PreheaderTemplate
-}
-func (t *GetEmailTemplateByID_EmailTemplate) GetSubjectTemplate() *string {
-	if t == nil {
-		t = &GetEmailTemplateByID_EmailTemplate{}
-	}
-	return t.SubjectTemplate
+	return t.Revision
 }
 func (t *GetEmailTemplateByID_EmailTemplate) GetSystemInternalID() *string {
 	if t == nil {
@@ -29640,17 +29226,11 @@ func (t *GetEmailTemplateByID_EmailTemplate) GetSystemOwned() *bool {
 	}
 	return t.SystemOwned
 }
-func (t *GetEmailTemplateByID_EmailTemplate) GetTextTemplate() *string {
+func (t *GetEmailTemplateByID_EmailTemplate) GetTemplateContext() *enums.TemplateContext {
 	if t == nil {
 		t = &GetEmailTemplateByID_EmailTemplate{}
 	}
-	return t.TextTemplate
-}
-func (t *GetEmailTemplateByID_EmailTemplate) GetUischema() map[string]any {
-	if t == nil {
-		t = &GetEmailTemplateByID_EmailTemplate{}
-	}
-	return t.Uischema
+	return t.TemplateContext
 }
 func (t *GetEmailTemplateByID_EmailTemplate) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -29716,32 +29296,29 @@ func (t *GetEmailTemplates_EmailTemplates_PageInfo) GetStartCursor() *string {
 }
 
 type GetEmailTemplates_EmailTemplates_Edges_Node struct {
-	Active               bool                             "json:\"active\" graphql:\"active\""
-	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
-	ID                   string                           "json:\"id\" graphql:\"id\""
-	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	InternalNotes        *string                          "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	Jsonconfig           map[string]any                   "json:\"jsonconfig,omitempty\" graphql:\"jsonconfig\""
-	Key                  string                           "json:\"key\" graphql:\"key\""
-	Locale               string                           "json:\"locale\" graphql:\"locale\""
-	Metadata             map[string]any                   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Name                 string                           "json:\"name\" graphql:\"name\""
-	OwnerID              *string                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreheaderTemplate    *string                          "json:\"preheaderTemplate,omitempty\" graphql:\"preheaderTemplate\""
-	SubjectTemplate      *string                          "json:\"subjectTemplate,omitempty\" graphql:\"subjectTemplate\""
-	SystemInternalID     *string                          "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned          *bool                            "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	TextTemplate         *string                          "json:\"textTemplate,omitempty\" graphql:\"textTemplate\""
-	Uischema             map[string]any                   "json:\"uischema,omitempty\" graphql:\"uischema\""
-	UpdatedAt            *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version              int64                            "json:\"version\" graphql:\"version\""
-	WorkflowDefinitionID *string                          "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
-	WorkflowInstanceID   *string                          "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
+	Active               bool                              "json:\"active\" graphql:\"active\""
+	CreatedAt            *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy            *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Defaults             map[string]any                    "json:\"defaults,omitempty\" graphql:\"defaults\""
+	Description          *string                           "json:\"description,omitempty\" graphql:\"description\""
+	Format               *enums.NotificationTemplateFormat "json:\"format,omitempty\" graphql:\"format\""
+	ID                   string                            "json:\"id\" graphql:\"id\""
+	IntegrationID        *string                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	InternalNotes        *string                           "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	Key                  string                            "json:\"key\" graphql:\"key\""
+	Locale               string                            "json:\"locale\" graphql:\"locale\""
+	Metadata             map[string]any                    "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Name                 string                            "json:\"name\" graphql:\"name\""
+	OwnerID              *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Revision             *string                           "json:\"revision,omitempty\" graphql:\"revision\""
+	SystemInternalID     *string                           "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned          *bool                             "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	TemplateContext      *enums.TemplateContext            "json:\"templateContext,omitempty\" graphql:\"templateContext\""
+	UpdatedAt            *time.Time                        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy            *string                           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version              int64                             "json:\"version\" graphql:\"version\""
+	WorkflowDefinitionID *string                           "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
+	WorkflowInstanceID   *string                           "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
 }
 
 func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetActive() bool {
@@ -29749,12 +29326,6 @@ func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetActive() bool {
 		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
 	}
 	return t.Active
-}
-func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetBodyTemplate() *string {
-	if t == nil {
-		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.BodyTemplate
 }
 func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -29768,6 +29339,12 @@ func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetCreatedBy() *string {
 	}
 	return t.CreatedBy
 }
+func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetDefaults() map[string]any {
+	if t == nil {
+		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
+	}
+	return t.Defaults
+}
 func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetDescription() *string {
 	if t == nil {
 		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
@@ -29778,7 +29355,7 @@ func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetFormat() *enums.Notific
 	if t == nil {
 		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
 	}
-	return &t.Format
+	return t.Format
 }
 func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetID() string {
 	if t == nil {
@@ -29797,12 +29374,6 @@ func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetInternalNotes() *string
 		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
 	}
 	return t.InternalNotes
-}
-func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetJsonconfig() map[string]any {
-	if t == nil {
-		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.Jsonconfig
 }
 func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetKey() string {
 	if t == nil {
@@ -29834,17 +29405,11 @@ func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetOwnerID() *string {
 	}
 	return t.OwnerID
 }
-func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetPreheaderTemplate() *string {
+func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetRevision() *string {
 	if t == nil {
 		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
 	}
-	return t.PreheaderTemplate
-}
-func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetSubjectTemplate() *string {
-	if t == nil {
-		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.SubjectTemplate
+	return t.Revision
 }
 func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetSystemInternalID() *string {
 	if t == nil {
@@ -29858,17 +29423,11 @@ func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetSystemOwned() *bool {
 	}
 	return t.SystemOwned
 }
-func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetTextTemplate() *string {
+func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetTemplateContext() *enums.TemplateContext {
 	if t == nil {
 		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
 	}
-	return t.TextTemplate
-}
-func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetUischema() map[string]any {
-	if t == nil {
-		t = &GetEmailTemplates_EmailTemplates_Edges_Node{}
-	}
-	return t.Uischema
+	return t.TemplateContext
 }
 func (t *GetEmailTemplates_EmailTemplates_Edges_Node) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -29938,32 +29497,29 @@ func (t *GetEmailTemplates_EmailTemplates) GetTotalCount() int64 {
 }
 
 type UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates struct {
-	Active               bool                             "json:\"active\" graphql:\"active\""
-	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
-	ID                   string                           "json:\"id\" graphql:\"id\""
-	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	InternalNotes        *string                          "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	Jsonconfig           map[string]any                   "json:\"jsonconfig,omitempty\" graphql:\"jsonconfig\""
-	Key                  string                           "json:\"key\" graphql:\"key\""
-	Locale               string                           "json:\"locale\" graphql:\"locale\""
-	Metadata             map[string]any                   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Name                 string                           "json:\"name\" graphql:\"name\""
-	OwnerID              *string                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreheaderTemplate    *string                          "json:\"preheaderTemplate,omitempty\" graphql:\"preheaderTemplate\""
-	SubjectTemplate      *string                          "json:\"subjectTemplate,omitempty\" graphql:\"subjectTemplate\""
-	SystemInternalID     *string                          "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned          *bool                            "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	TextTemplate         *string                          "json:\"textTemplate,omitempty\" graphql:\"textTemplate\""
-	Uischema             map[string]any                   "json:\"uischema,omitempty\" graphql:\"uischema\""
-	UpdatedAt            *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version              int64                            "json:\"version\" graphql:\"version\""
-	WorkflowDefinitionID *string                          "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
-	WorkflowInstanceID   *string                          "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
+	Active               bool                              "json:\"active\" graphql:\"active\""
+	CreatedAt            *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy            *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Defaults             map[string]any                    "json:\"defaults,omitempty\" graphql:\"defaults\""
+	Description          *string                           "json:\"description,omitempty\" graphql:\"description\""
+	Format               *enums.NotificationTemplateFormat "json:\"format,omitempty\" graphql:\"format\""
+	ID                   string                            "json:\"id\" graphql:\"id\""
+	IntegrationID        *string                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	InternalNotes        *string                           "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	Key                  string                            "json:\"key\" graphql:\"key\""
+	Locale               string                            "json:\"locale\" graphql:\"locale\""
+	Metadata             map[string]any                    "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Name                 string                            "json:\"name\" graphql:\"name\""
+	OwnerID              *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Revision             *string                           "json:\"revision,omitempty\" graphql:\"revision\""
+	SystemInternalID     *string                           "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned          *bool                             "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	TemplateContext      *enums.TemplateContext            "json:\"templateContext,omitempty\" graphql:\"templateContext\""
+	UpdatedAt            *time.Time                        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy            *string                           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version              int64                             "json:\"version\" graphql:\"version\""
+	WorkflowDefinitionID *string                           "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
+	WorkflowInstanceID   *string                           "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
 }
 
 func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetActive() bool {
@@ -29971,12 +29527,6 @@ func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) G
 		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
 	}
 	return t.Active
-}
-func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetBodyTemplate() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.BodyTemplate
 }
 func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -29990,6 +29540,12 @@ func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) G
 	}
 	return t.CreatedBy
 }
+func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetDefaults() map[string]any {
+	if t == nil {
+		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
+	}
+	return t.Defaults
+}
 func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetDescription() *string {
 	if t == nil {
 		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
@@ -30000,7 +29556,7 @@ func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) G
 	if t == nil {
 		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
 	}
-	return &t.Format
+	return t.Format
 }
 func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetID() string {
 	if t == nil {
@@ -30019,12 +29575,6 @@ func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) G
 		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
 	}
 	return t.InternalNotes
-}
-func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetJsonconfig() map[string]any {
-	if t == nil {
-		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.Jsonconfig
 }
 func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetKey() string {
 	if t == nil {
@@ -30056,17 +29606,11 @@ func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) G
 	}
 	return t.OwnerID
 }
-func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetPreheaderTemplate() *string {
+func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetRevision() *string {
 	if t == nil {
 		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
 	}
-	return t.PreheaderTemplate
-}
-func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetSubjectTemplate() *string {
-	if t == nil {
-		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.SubjectTemplate
+	return t.Revision
 }
 func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetSystemInternalID() *string {
 	if t == nil {
@@ -30080,17 +29624,11 @@ func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) G
 	}
 	return t.SystemOwned
 }
-func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetTextTemplate() *string {
+func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetTemplateContext() *enums.TemplateContext {
 	if t == nil {
 		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
 	}
-	return t.TextTemplate
-}
-func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetUischema() map[string]any {
-	if t == nil {
-		t = &UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates{}
-	}
-	return t.Uischema
+	return t.TemplateContext
 }
 func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate_EmailTemplates) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -30142,32 +29680,29 @@ func (t *UpdateBulkCSVEmailTemplate_UpdateBulkCSVEmailTemplate) GetUpdatedIDs() 
 }
 
 type UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates struct {
-	Active               bool                             "json:\"active\" graphql:\"active\""
-	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
-	ID                   string                           "json:\"id\" graphql:\"id\""
-	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	InternalNotes        *string                          "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	Jsonconfig           map[string]any                   "json:\"jsonconfig,omitempty\" graphql:\"jsonconfig\""
-	Key                  string                           "json:\"key\" graphql:\"key\""
-	Locale               string                           "json:\"locale\" graphql:\"locale\""
-	Metadata             map[string]any                   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Name                 string                           "json:\"name\" graphql:\"name\""
-	OwnerID              *string                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreheaderTemplate    *string                          "json:\"preheaderTemplate,omitempty\" graphql:\"preheaderTemplate\""
-	SubjectTemplate      *string                          "json:\"subjectTemplate,omitempty\" graphql:\"subjectTemplate\""
-	SystemInternalID     *string                          "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned          *bool                            "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	TextTemplate         *string                          "json:\"textTemplate,omitempty\" graphql:\"textTemplate\""
-	Uischema             map[string]any                   "json:\"uischema,omitempty\" graphql:\"uischema\""
-	UpdatedAt            *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version              int64                            "json:\"version\" graphql:\"version\""
-	WorkflowDefinitionID *string                          "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
-	WorkflowInstanceID   *string                          "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
+	Active               bool                              "json:\"active\" graphql:\"active\""
+	CreatedAt            *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy            *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Defaults             map[string]any                    "json:\"defaults,omitempty\" graphql:\"defaults\""
+	Description          *string                           "json:\"description,omitempty\" graphql:\"description\""
+	Format               *enums.NotificationTemplateFormat "json:\"format,omitempty\" graphql:\"format\""
+	ID                   string                            "json:\"id\" graphql:\"id\""
+	IntegrationID        *string                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	InternalNotes        *string                           "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	Key                  string                            "json:\"key\" graphql:\"key\""
+	Locale               string                            "json:\"locale\" graphql:\"locale\""
+	Metadata             map[string]any                    "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Name                 string                            "json:\"name\" graphql:\"name\""
+	OwnerID              *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Revision             *string                           "json:\"revision,omitempty\" graphql:\"revision\""
+	SystemInternalID     *string                           "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned          *bool                             "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	TemplateContext      *enums.TemplateContext            "json:\"templateContext,omitempty\" graphql:\"templateContext\""
+	UpdatedAt            *time.Time                        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy            *string                           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version              int64                             "json:\"version\" graphql:\"version\""
+	WorkflowDefinitionID *string                           "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
+	WorkflowInstanceID   *string                           "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
 }
 
 func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetActive() bool {
@@ -30175,12 +29710,6 @@ func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetActi
 		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
 	}
 	return t.Active
-}
-func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetBodyTemplate() *string {
-	if t == nil {
-		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.BodyTemplate
 }
 func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -30194,6 +29723,12 @@ func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetCrea
 	}
 	return t.CreatedBy
 }
+func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetDefaults() map[string]any {
+	if t == nil {
+		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
+	}
+	return t.Defaults
+}
 func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetDescription() *string {
 	if t == nil {
 		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
@@ -30204,7 +29739,7 @@ func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetForm
 	if t == nil {
 		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
 	}
-	return &t.Format
+	return t.Format
 }
 func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetID() string {
 	if t == nil {
@@ -30223,12 +29758,6 @@ func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetInte
 		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
 	}
 	return t.InternalNotes
-}
-func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetJsonconfig() map[string]any {
-	if t == nil {
-		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.Jsonconfig
 }
 func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetKey() string {
 	if t == nil {
@@ -30260,17 +29789,11 @@ func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetOwne
 	}
 	return t.OwnerID
 }
-func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetPreheaderTemplate() *string {
+func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetRevision() *string {
 	if t == nil {
 		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
 	}
-	return t.PreheaderTemplate
-}
-func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetSubjectTemplate() *string {
-	if t == nil {
-		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.SubjectTemplate
+	return t.Revision
 }
 func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetSystemInternalID() *string {
 	if t == nil {
@@ -30284,17 +29807,11 @@ func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetSyst
 	}
 	return t.SystemOwned
 }
-func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetTextTemplate() *string {
+func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetTemplateContext() *enums.TemplateContext {
 	if t == nil {
 		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
 	}
-	return t.TextTemplate
-}
-func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetUischema() map[string]any {
-	if t == nil {
-		t = &UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates{}
-	}
-	return t.Uischema
+	return t.TemplateContext
 }
 func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate_EmailTemplates) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -30346,32 +29863,29 @@ func (t *UpdateBulkEmailTemplate_UpdateBulkEmailTemplate) GetUpdatedIDs() []stri
 }
 
 type UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate struct {
-	Active               bool                             "json:\"active\" graphql:\"active\""
-	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
-	Format               enums.NotificationTemplateFormat "json:\"format\" graphql:\"format\""
-	ID                   string                           "json:\"id\" graphql:\"id\""
-	IntegrationID        *string                          "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	InternalNotes        *string                          "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
-	Jsonconfig           map[string]any                   "json:\"jsonconfig,omitempty\" graphql:\"jsonconfig\""
-	Key                  string                           "json:\"key\" graphql:\"key\""
-	Locale               string                           "json:\"locale\" graphql:\"locale\""
-	Metadata             map[string]any                   "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Name                 string                           "json:\"name\" graphql:\"name\""
-	OwnerID              *string                          "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PreheaderTemplate    *string                          "json:\"preheaderTemplate,omitempty\" graphql:\"preheaderTemplate\""
-	SubjectTemplate      *string                          "json:\"subjectTemplate,omitempty\" graphql:\"subjectTemplate\""
-	SystemInternalID     *string                          "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
-	SystemOwned          *bool                            "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
-	TextTemplate         *string                          "json:\"textTemplate,omitempty\" graphql:\"textTemplate\""
-	Uischema             map[string]any                   "json:\"uischema,omitempty\" graphql:\"uischema\""
-	UpdatedAt            *time.Time                       "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy            *string                          "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Version              int64                            "json:\"version\" graphql:\"version\""
-	WorkflowDefinitionID *string                          "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
-	WorkflowInstanceID   *string                          "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
+	Active               bool                              "json:\"active\" graphql:\"active\""
+	CreatedAt            *time.Time                        "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy            *string                           "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Defaults             map[string]any                    "json:\"defaults,omitempty\" graphql:\"defaults\""
+	Description          *string                           "json:\"description,omitempty\" graphql:\"description\""
+	Format               *enums.NotificationTemplateFormat "json:\"format,omitempty\" graphql:\"format\""
+	ID                   string                            "json:\"id\" graphql:\"id\""
+	IntegrationID        *string                           "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	InternalNotes        *string                           "json:\"internalNotes,omitempty\" graphql:\"internalNotes\""
+	Key                  string                            "json:\"key\" graphql:\"key\""
+	Locale               string                            "json:\"locale\" graphql:\"locale\""
+	Metadata             map[string]any                    "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Name                 string                            "json:\"name\" graphql:\"name\""
+	OwnerID              *string                           "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Revision             *string                           "json:\"revision,omitempty\" graphql:\"revision\""
+	SystemInternalID     *string                           "json:\"systemInternalID,omitempty\" graphql:\"systemInternalID\""
+	SystemOwned          *bool                             "json:\"systemOwned,omitempty\" graphql:\"systemOwned\""
+	TemplateContext      *enums.TemplateContext            "json:\"templateContext,omitempty\" graphql:\"templateContext\""
+	UpdatedAt            *time.Time                        "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy            *string                           "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Version              int64                             "json:\"version\" graphql:\"version\""
+	WorkflowDefinitionID *string                           "json:\"workflowDefinitionID,omitempty\" graphql:\"workflowDefinitionID\""
+	WorkflowInstanceID   *string                           "json:\"workflowInstanceID,omitempty\" graphql:\"workflowInstanceID\""
 }
 
 func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetActive() bool {
@@ -30379,12 +29893,6 @@ func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetActive() bool
 		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
 	}
 	return t.Active
-}
-func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetBodyTemplate() *string {
-	if t == nil {
-		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
-	}
-	return t.BodyTemplate
 }
 func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -30398,6 +29906,12 @@ func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetCreatedBy() *
 	}
 	return t.CreatedBy
 }
+func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetDefaults() map[string]any {
+	if t == nil {
+		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
+	}
+	return t.Defaults
+}
 func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetDescription() *string {
 	if t == nil {
 		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
@@ -30408,7 +29922,7 @@ func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetFormat() *enu
 	if t == nil {
 		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
 	}
-	return &t.Format
+	return t.Format
 }
 func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetID() string {
 	if t == nil {
@@ -30427,12 +29941,6 @@ func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetInternalNotes
 		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
 	}
 	return t.InternalNotes
-}
-func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetJsonconfig() map[string]any {
-	if t == nil {
-		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
-	}
-	return t.Jsonconfig
 }
 func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetKey() string {
 	if t == nil {
@@ -30464,17 +29972,11 @@ func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetOwnerID() *st
 	}
 	return t.OwnerID
 }
-func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetPreheaderTemplate() *string {
+func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetRevision() *string {
 	if t == nil {
 		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
 	}
-	return t.PreheaderTemplate
-}
-func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetSubjectTemplate() *string {
-	if t == nil {
-		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
-	}
-	return t.SubjectTemplate
+	return t.Revision
 }
 func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetSystemInternalID() *string {
 	if t == nil {
@@ -30488,17 +29990,11 @@ func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetSystemOwned()
 	}
 	return t.SystemOwned
 }
-func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetTextTemplate() *string {
+func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetTemplateContext() *enums.TemplateContext {
 	if t == nil {
 		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
 	}
-	return t.TextTemplate
-}
-func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetUischema() map[string]any {
-	if t == nil {
-		t = &UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate{}
-	}
-	return t.Uischema
+	return t.TemplateContext
 }
 func (t *UpdateEmailTemplate_UpdateEmailTemplate_EmailTemplate) GetUpdatedAt() *time.Time {
 	if t == nil {
@@ -58941,7 +58437,7 @@ type CreateBulkCSVNotificationTemplate_CreateBulkCSVNotificationTemplate_Notific
 	Active               bool                             "json:\"active\" graphql:\"active\""
 	Blocks               map[string]any                   "json:\"blocks,omitempty\" graphql:\"blocks\""
 	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	Channel              enums.Channel                    "json:\"channel\" graphql:\"channel\""
+	Channel              *enums.Channel                   "json:\"channel,omitempty\" graphql:\"channel\""
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
@@ -58990,7 +58486,7 @@ func (t *CreateBulkCSVNotificationTemplate_CreateBulkCSVNotificationTemplate_Not
 	if t == nil {
 		t = &CreateBulkCSVNotificationTemplate_CreateBulkCSVNotificationTemplate_NotificationTemplates{}
 	}
-	return &t.Channel
+	return t.Channel
 }
 func (t *CreateBulkCSVNotificationTemplate_CreateBulkCSVNotificationTemplate_NotificationTemplates) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -59152,7 +58648,7 @@ type CreateBulkNotificationTemplate_CreateBulkNotificationTemplate_NotificationT
 	Active               bool                             "json:\"active\" graphql:\"active\""
 	Blocks               map[string]any                   "json:\"blocks,omitempty\" graphql:\"blocks\""
 	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	Channel              enums.Channel                    "json:\"channel\" graphql:\"channel\""
+	Channel              *enums.Channel                   "json:\"channel,omitempty\" graphql:\"channel\""
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
@@ -59201,7 +58697,7 @@ func (t *CreateBulkNotificationTemplate_CreateBulkNotificationTemplate_Notificat
 	if t == nil {
 		t = &CreateBulkNotificationTemplate_CreateBulkNotificationTemplate_NotificationTemplates{}
 	}
-	return &t.Channel
+	return t.Channel
 }
 func (t *CreateBulkNotificationTemplate_CreateBulkNotificationTemplate_NotificationTemplates) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -59363,7 +58859,7 @@ type CreateNotificationTemplate_CreateNotificationTemplate_NotificationTemplate 
 	Active               bool                             "json:\"active\" graphql:\"active\""
 	Blocks               map[string]any                   "json:\"blocks,omitempty\" graphql:\"blocks\""
 	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	Channel              enums.Channel                    "json:\"channel\" graphql:\"channel\""
+	Channel              *enums.Channel                   "json:\"channel,omitempty\" graphql:\"channel\""
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
@@ -59412,7 +58908,7 @@ func (t *CreateNotificationTemplate_CreateNotificationTemplate_NotificationTempl
 	if t == nil {
 		t = &CreateNotificationTemplate_CreateNotificationTemplate_NotificationTemplate{}
 	}
-	return &t.Channel
+	return t.Channel
 }
 func (t *CreateNotificationTemplate_CreateNotificationTemplate_NotificationTemplate) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -59628,7 +59124,7 @@ type GetAllNotificationTemplates_NotificationTemplates_Edges_Node struct {
 	Active               bool                             "json:\"active\" graphql:\"active\""
 	Blocks               map[string]any                   "json:\"blocks,omitempty\" graphql:\"blocks\""
 	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	Channel              enums.Channel                    "json:\"channel\" graphql:\"channel\""
+	Channel              *enums.Channel                   "json:\"channel,omitempty\" graphql:\"channel\""
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
@@ -59677,7 +59173,7 @@ func (t *GetAllNotificationTemplates_NotificationTemplates_Edges_Node) GetChanne
 	if t == nil {
 		t = &GetAllNotificationTemplates_NotificationTemplates_Edges_Node{}
 	}
-	return &t.Channel
+	return t.Channel
 }
 func (t *GetAllNotificationTemplates_NotificationTemplates_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -59864,7 +59360,7 @@ type GetNotificationTemplateByID_NotificationTemplate struct {
 	Active               bool                             "json:\"active\" graphql:\"active\""
 	Blocks               map[string]any                   "json:\"blocks,omitempty\" graphql:\"blocks\""
 	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	Channel              enums.Channel                    "json:\"channel\" graphql:\"channel\""
+	Channel              *enums.Channel                   "json:\"channel,omitempty\" graphql:\"channel\""
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
@@ -59913,7 +59409,7 @@ func (t *GetNotificationTemplateByID_NotificationTemplate) GetChannel() *enums.C
 	if t == nil {
 		t = &GetNotificationTemplateByID_NotificationTemplate{}
 	}
-	return &t.Channel
+	return t.Channel
 }
 func (t *GetNotificationTemplateByID_NotificationTemplate) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -60096,7 +59592,7 @@ type GetNotificationTemplates_NotificationTemplates_Edges_Node struct {
 	Active               bool                             "json:\"active\" graphql:\"active\""
 	Blocks               map[string]any                   "json:\"blocks,omitempty\" graphql:\"blocks\""
 	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	Channel              enums.Channel                    "json:\"channel\" graphql:\"channel\""
+	Channel              *enums.Channel                   "json:\"channel,omitempty\" graphql:\"channel\""
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
@@ -60145,7 +59641,7 @@ func (t *GetNotificationTemplates_NotificationTemplates_Edges_Node) GetChannel()
 	if t == nil {
 		t = &GetNotificationTemplates_NotificationTemplates_Edges_Node{}
 	}
-	return &t.Channel
+	return t.Channel
 }
 func (t *GetNotificationTemplates_NotificationTemplates_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -60332,7 +59828,7 @@ type UpdateBulkCSVNotificationTemplate_UpdateBulkCSVNotificationTemplate_Notific
 	Active               bool                             "json:\"active\" graphql:\"active\""
 	Blocks               map[string]any                   "json:\"blocks,omitempty\" graphql:\"blocks\""
 	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	Channel              enums.Channel                    "json:\"channel\" graphql:\"channel\""
+	Channel              *enums.Channel                   "json:\"channel,omitempty\" graphql:\"channel\""
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
@@ -60381,7 +59877,7 @@ func (t *UpdateBulkCSVNotificationTemplate_UpdateBulkCSVNotificationTemplate_Not
 	if t == nil {
 		t = &UpdateBulkCSVNotificationTemplate_UpdateBulkCSVNotificationTemplate_NotificationTemplates{}
 	}
-	return &t.Channel
+	return t.Channel
 }
 func (t *UpdateBulkCSVNotificationTemplate_UpdateBulkCSVNotificationTemplate_NotificationTemplates) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -60550,7 +60046,7 @@ type UpdateBulkNotificationTemplate_UpdateBulkNotificationTemplate_NotificationT
 	Active               bool                             "json:\"active\" graphql:\"active\""
 	Blocks               map[string]any                   "json:\"blocks,omitempty\" graphql:\"blocks\""
 	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	Channel              enums.Channel                    "json:\"channel\" graphql:\"channel\""
+	Channel              *enums.Channel                   "json:\"channel,omitempty\" graphql:\"channel\""
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
@@ -60599,7 +60095,7 @@ func (t *UpdateBulkNotificationTemplate_UpdateBulkNotificationTemplate_Notificat
 	if t == nil {
 		t = &UpdateBulkNotificationTemplate_UpdateBulkNotificationTemplate_NotificationTemplates{}
 	}
-	return &t.Channel
+	return t.Channel
 }
 func (t *UpdateBulkNotificationTemplate_UpdateBulkNotificationTemplate_NotificationTemplates) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -60768,7 +60264,7 @@ type UpdateNotificationTemplate_UpdateNotificationTemplate_NotificationTemplate 
 	Active               bool                             "json:\"active\" graphql:\"active\""
 	Blocks               map[string]any                   "json:\"blocks,omitempty\" graphql:\"blocks\""
 	BodyTemplate         *string                          "json:\"bodyTemplate,omitempty\" graphql:\"bodyTemplate\""
-	Channel              enums.Channel                    "json:\"channel\" graphql:\"channel\""
+	Channel              *enums.Channel                   "json:\"channel,omitempty\" graphql:\"channel\""
 	CreatedAt            *time.Time                       "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy            *string                          "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description          *string                          "json:\"description,omitempty\" graphql:\"description\""
@@ -60817,7 +60313,7 @@ func (t *UpdateNotificationTemplate_UpdateNotificationTemplate_NotificationTempl
 	if t == nil {
 		t = &UpdateNotificationTemplate_UpdateNotificationTemplate_NotificationTemplate{}
 	}
-	return &t.Channel
+	return t.Channel
 }
 func (t *UpdateNotificationTemplate_UpdateNotificationTemplate_NotificationTemplate) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -108948,6 +108444,127 @@ func (t *UpdateCampaignTarget) GetUpdateCampaignTarget() *UpdateCampaignTarget_U
 	return &t.UpdateCampaignTarget
 }
 
+type CreateBulkCSVCheckResult struct {
+	CreateBulkCSVCheckResult CreateBulkCSVCheckResult_CreateBulkCSVCheckResult "json:\"createBulkCSVCheckResult\" graphql:\"createBulkCSVCheckResult\""
+}
+
+func (t *CreateBulkCSVCheckResult) GetCreateBulkCSVCheckResult() *CreateBulkCSVCheckResult_CreateBulkCSVCheckResult {
+	if t == nil {
+		t = &CreateBulkCSVCheckResult{}
+	}
+	return &t.CreateBulkCSVCheckResult
+}
+
+type CreateBulkCheckResult struct {
+	CreateBulkCheckResult CreateBulkCheckResult_CreateBulkCheckResult "json:\"createBulkCheckResult\" graphql:\"createBulkCheckResult\""
+}
+
+func (t *CreateBulkCheckResult) GetCreateBulkCheckResult() *CreateBulkCheckResult_CreateBulkCheckResult {
+	if t == nil {
+		t = &CreateBulkCheckResult{}
+	}
+	return &t.CreateBulkCheckResult
+}
+
+type CreateCheckResult struct {
+	CreateCheckResult CreateCheckResult_CreateCheckResult "json:\"createCheckResult\" graphql:\"createCheckResult\""
+}
+
+func (t *CreateCheckResult) GetCreateCheckResult() *CreateCheckResult_CreateCheckResult {
+	if t == nil {
+		t = &CreateCheckResult{}
+	}
+	return &t.CreateCheckResult
+}
+
+type DeleteBulkCheckResult struct {
+	DeleteBulkCheckResult DeleteBulkCheckResult_DeleteBulkCheckResult "json:\"deleteBulkCheckResult\" graphql:\"deleteBulkCheckResult\""
+}
+
+func (t *DeleteBulkCheckResult) GetDeleteBulkCheckResult() *DeleteBulkCheckResult_DeleteBulkCheckResult {
+	if t == nil {
+		t = &DeleteBulkCheckResult{}
+	}
+	return &t.DeleteBulkCheckResult
+}
+
+type DeleteCheckResult struct {
+	DeleteCheckResult DeleteCheckResult_DeleteCheckResult "json:\"deleteCheckResult\" graphql:\"deleteCheckResult\""
+}
+
+func (t *DeleteCheckResult) GetDeleteCheckResult() *DeleteCheckResult_DeleteCheckResult {
+	if t == nil {
+		t = &DeleteCheckResult{}
+	}
+	return &t.DeleteCheckResult
+}
+
+type GetAllCheckResults struct {
+	CheckResults GetAllCheckResults_CheckResults "json:\"checkResults\" graphql:\"checkResults\""
+}
+
+func (t *GetAllCheckResults) GetCheckResults() *GetAllCheckResults_CheckResults {
+	if t == nil {
+		t = &GetAllCheckResults{}
+	}
+	return &t.CheckResults
+}
+
+type GetCheckResultByID struct {
+	CheckResult GetCheckResultByID_CheckResult "json:\"checkResult\" graphql:\"checkResult\""
+}
+
+func (t *GetCheckResultByID) GetCheckResult() *GetCheckResultByID_CheckResult {
+	if t == nil {
+		t = &GetCheckResultByID{}
+	}
+	return &t.CheckResult
+}
+
+type GetCheckResults struct {
+	CheckResults GetCheckResults_CheckResults "json:\"checkResults\" graphql:\"checkResults\""
+}
+
+func (t *GetCheckResults) GetCheckResults() *GetCheckResults_CheckResults {
+	if t == nil {
+		t = &GetCheckResults{}
+	}
+	return &t.CheckResults
+}
+
+type UpdateBulkCSVCheckResult struct {
+	UpdateBulkCSVCheckResult UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult "json:\"updateBulkCSVCheckResult\" graphql:\"updateBulkCSVCheckResult\""
+}
+
+func (t *UpdateBulkCSVCheckResult) GetUpdateBulkCSVCheckResult() *UpdateBulkCSVCheckResult_UpdateBulkCSVCheckResult {
+	if t == nil {
+		t = &UpdateBulkCSVCheckResult{}
+	}
+	return &t.UpdateBulkCSVCheckResult
+}
+
+type UpdateBulkCheckResult struct {
+	UpdateBulkCheckResult UpdateBulkCheckResult_UpdateBulkCheckResult "json:\"updateBulkCheckResult\" graphql:\"updateBulkCheckResult\""
+}
+
+func (t *UpdateBulkCheckResult) GetUpdateBulkCheckResult() *UpdateBulkCheckResult_UpdateBulkCheckResult {
+	if t == nil {
+		t = &UpdateBulkCheckResult{}
+	}
+	return &t.UpdateBulkCheckResult
+}
+
+type UpdateCheckResult struct {
+	UpdateCheckResult UpdateCheckResult_UpdateCheckResult "json:\"updateCheckResult\" graphql:\"updateCheckResult\""
+}
+
+func (t *UpdateCheckResult) GetUpdateCheckResult() *UpdateCheckResult_UpdateCheckResult {
+	if t == nil {
+		t = &UpdateCheckResult{}
+	}
+	return &t.UpdateCheckResult
+}
+
 type CreateBulkCSVContact struct {
 	CreateBulkCSVContact CreateBulkCSVContact_CreateBulkCSVContact "json:\"createBulkCSVContact\" graphql:\"createBulkCSVContact\""
 }
@@ -110156,127 +109773,6 @@ func (t *UpdateDocumentData) GetUpdateDocumentData() *UpdateDocumentData_UpdateD
 		t = &UpdateDocumentData{}
 	}
 	return &t.UpdateDocumentData
-}
-
-type CreateBulkCSVEmailBranding struct {
-	CreateBulkCSVEmailBranding CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding "json:\"createBulkCSVEmailBranding\" graphql:\"createBulkCSVEmailBranding\""
-}
-
-func (t *CreateBulkCSVEmailBranding) GetCreateBulkCSVEmailBranding() *CreateBulkCSVEmailBranding_CreateBulkCSVEmailBranding {
-	if t == nil {
-		t = &CreateBulkCSVEmailBranding{}
-	}
-	return &t.CreateBulkCSVEmailBranding
-}
-
-type CreateBulkEmailBranding struct {
-	CreateBulkEmailBranding CreateBulkEmailBranding_CreateBulkEmailBranding "json:\"createBulkEmailBranding\" graphql:\"createBulkEmailBranding\""
-}
-
-func (t *CreateBulkEmailBranding) GetCreateBulkEmailBranding() *CreateBulkEmailBranding_CreateBulkEmailBranding {
-	if t == nil {
-		t = &CreateBulkEmailBranding{}
-	}
-	return &t.CreateBulkEmailBranding
-}
-
-type CreateEmailBranding struct {
-	CreateEmailBranding CreateEmailBranding_CreateEmailBranding "json:\"createEmailBranding\" graphql:\"createEmailBranding\""
-}
-
-func (t *CreateEmailBranding) GetCreateEmailBranding() *CreateEmailBranding_CreateEmailBranding {
-	if t == nil {
-		t = &CreateEmailBranding{}
-	}
-	return &t.CreateEmailBranding
-}
-
-type DeleteEmailBranding struct {
-	DeleteEmailBranding DeleteEmailBranding_DeleteEmailBranding "json:\"deleteEmailBranding\" graphql:\"deleteEmailBranding\""
-}
-
-func (t *DeleteEmailBranding) GetDeleteEmailBranding() *DeleteEmailBranding_DeleteEmailBranding {
-	if t == nil {
-		t = &DeleteEmailBranding{}
-	}
-	return &t.DeleteEmailBranding
-}
-
-type UpdateBulkEmailBranding struct {
-	UpdateBulkEmailBranding UpdateBulkEmailBranding_UpdateBulkEmailBranding "json:\"updateBulkEmailBranding\" graphql:\"updateBulkEmailBranding\""
-}
-
-func (t *UpdateBulkEmailBranding) GetUpdateBulkEmailBranding() *UpdateBulkEmailBranding_UpdateBulkEmailBranding {
-	if t == nil {
-		t = &UpdateBulkEmailBranding{}
-	}
-	return &t.UpdateBulkEmailBranding
-}
-
-type UpdateBulkCSVEmailBranding struct {
-	UpdateBulkCSVEmailBranding UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding "json:\"updateBulkCSVEmailBranding\" graphql:\"updateBulkCSVEmailBranding\""
-}
-
-func (t *UpdateBulkCSVEmailBranding) GetUpdateBulkCSVEmailBranding() *UpdateBulkCSVEmailBranding_UpdateBulkCSVEmailBranding {
-	if t == nil {
-		t = &UpdateBulkCSVEmailBranding{}
-	}
-	return &t.UpdateBulkCSVEmailBranding
-}
-
-type DeleteBulkEmailBranding struct {
-	DeleteBulkEmailBranding DeleteBulkEmailBranding_DeleteBulkEmailBranding "json:\"deleteBulkEmailBranding\" graphql:\"deleteBulkEmailBranding\""
-}
-
-func (t *DeleteBulkEmailBranding) GetDeleteBulkEmailBranding() *DeleteBulkEmailBranding_DeleteBulkEmailBranding {
-	if t == nil {
-		t = &DeleteBulkEmailBranding{}
-	}
-	return &t.DeleteBulkEmailBranding
-}
-
-type GetAllEmailBrandings struct {
-	EmailBrandings GetAllEmailBrandings_EmailBrandings "json:\"emailBrandings\" graphql:\"emailBrandings\""
-}
-
-func (t *GetAllEmailBrandings) GetEmailBrandings() *GetAllEmailBrandings_EmailBrandings {
-	if t == nil {
-		t = &GetAllEmailBrandings{}
-	}
-	return &t.EmailBrandings
-}
-
-type GetEmailBrandingByID struct {
-	EmailBranding GetEmailBrandingByID_EmailBranding "json:\"emailBranding\" graphql:\"emailBranding\""
-}
-
-func (t *GetEmailBrandingByID) GetEmailBranding() *GetEmailBrandingByID_EmailBranding {
-	if t == nil {
-		t = &GetEmailBrandingByID{}
-	}
-	return &t.EmailBranding
-}
-
-type GetEmailBrandings struct {
-	EmailBrandings GetEmailBrandings_EmailBrandings "json:\"emailBrandings\" graphql:\"emailBrandings\""
-}
-
-func (t *GetEmailBrandings) GetEmailBrandings() *GetEmailBrandings_EmailBrandings {
-	if t == nil {
-		t = &GetEmailBrandings{}
-	}
-	return &t.EmailBrandings
-}
-
-type UpdateEmailBranding struct {
-	UpdateEmailBranding UpdateEmailBranding_UpdateEmailBranding "json:\"updateEmailBranding\" graphql:\"updateEmailBranding\""
-}
-
-func (t *UpdateEmailBranding) GetUpdateEmailBranding() *UpdateEmailBranding_UpdateEmailBranding {
-	if t == nil {
-		t = &UpdateEmailBranding{}
-	}
-	return &t.UpdateEmailBranding
 }
 
 type CreateBulkCSVEmailTemplate struct {
@@ -117546,8 +117042,10 @@ const CreateBulkCampaignDocument = `mutation CreateBulkCampaign ($input: [Create
 			description
 			displayID
 			dueDate
+			emailTemplateID
 			entityID
 			id
+			integrationID
 			internalOwner
 			internalOwnerGroupID
 			internalOwnerUserID
@@ -117607,8 +117105,10 @@ const CreateBulkCSVCampaignDocument = `mutation CreateBulkCSVCampaign ($input: U
 			description
 			displayID
 			dueDate
+			emailTemplateID
 			entityID
 			id
+			integrationID
 			internalOwner
 			internalOwnerGroupID
 			internalOwnerUserID
@@ -117668,8 +117168,10 @@ const CreateCampaignDocument = `mutation CreateCampaign ($input: CreateCampaignI
 			description
 			displayID
 			dueDate
+			emailTemplateID
 			entityID
 			id
+			integrationID
 			internalOwner
 			internalOwnerGroupID
 			internalOwnerUserID
@@ -117761,8 +117263,10 @@ const GetAllCampaignsDocument = `query GetAllCampaigns ($first: Int, $last: Int,
 				description
 				displayID
 				dueDate
+				emailTemplateID
 				entityID
 				id
+				integrationID
 				internalOwner
 				internalOwnerGroupID
 				internalOwnerUserID
@@ -117839,8 +117343,10 @@ const GetCampaignByIDDocument = `query GetCampaignByID ($campaignId: ID!) {
 		description
 		displayID
 		dueDate
+		emailTemplateID
 		entityID
 		id
+		integrationID
 		internalOwner
 		internalOwnerGroupID
 		internalOwnerUserID
@@ -117920,8 +117426,10 @@ const GetCampaignsDocument = `query GetCampaigns ($first: Int, $last: Int, $afte
 				description
 				displayID
 				dueDate
+				emailTemplateID
 				entityID
 				id
+				integrationID
 				internalOwner
 				internalOwnerGroupID
 				internalOwnerUserID
@@ -118000,8 +117508,10 @@ const UpdateCampaignDocument = `mutation UpdateCampaign ($updateCampaignId: ID!,
 			description
 			displayID
 			dueDate
+			emailTemplateID
 			entityID
 			id
+			integrationID
 			internalOwner
 			internalOwnerGroupID
 			internalOwnerUserID
@@ -118077,7 +117587,6 @@ const CreateCampaignWithTargetsDocument = `mutation CreateCampaignWithTargets ($
 			nextRunAt
 			ownerID
 			recipientCount
-			recurrenceCron
 			recurrenceEndAt
 			recurrenceFrequency
 			recurrenceInterval
@@ -118157,7 +117666,6 @@ const CreateCampaignWithTargetsCSVDocument = `mutation CreateCampaignWithTargets
 			nextRunAt
 			ownerID
 			recipientCount
-			recurrenceCron
 			recurrenceEndAt
 			recurrenceFrequency
 			recurrenceInterval
@@ -118238,7 +117746,6 @@ const LaunchCampaignDocument = `mutation LaunchCampaign ($input: LaunchCampaignI
 			nextRunAt
 			ownerID
 			recipientCount
-			recurrenceCron
 			recurrenceEndAt
 			recurrenceFrequency
 			recurrenceInterval
@@ -118301,7 +117808,6 @@ const ResendCampaignIncompleteTargetsDocument = `mutation ResendCampaignIncomple
 			nextRunAt
 			ownerID
 			recipientCount
-			recurrenceCron
 			recurrenceEndAt
 			recurrenceFrequency
 			recurrenceInterval
@@ -118364,7 +117870,6 @@ const SendCampaignTestEmailDocument = `mutation SendCampaignTestEmail ($input: S
 			nextRunAt
 			ownerID
 			recipientCount
-			recurrenceCron
 			recurrenceEndAt
 			recurrenceFrequency
 			recurrenceInterval
@@ -118735,6 +118240,425 @@ func (c *Client) UpdateCampaignTarget(ctx context.Context, updateCampaignTargetI
 
 	var res UpdateCampaignTarget
 	if err := c.Client.Post(ctx, "UpdateCampaignTarget", UpdateCampaignTargetDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateBulkCSVCheckResultDocument = `mutation CreateBulkCSVCheckResult ($input: Upload!) {
+	createBulkCSVCheckResult(input: $input) {
+		checkResults {
+			createdAt
+			createdBy
+			details
+			externalURI
+			id
+			integrationID
+			lastObservedAt
+			parentExternalID
+			source
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateBulkCSVCheckResult(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVCheckResult, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateBulkCSVCheckResult
+	if err := c.Client.Post(ctx, "CreateBulkCSVCheckResult", CreateBulkCSVCheckResultDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateBulkCheckResultDocument = `mutation CreateBulkCheckResult ($input: [CreateCheckResultInput!]) {
+	createBulkCheckResult(input: $input) {
+		checkResults {
+			createdAt
+			createdBy
+			details
+			externalURI
+			id
+			integrationID
+			lastObservedAt
+			parentExternalID
+			source
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateBulkCheckResult(ctx context.Context, input []*CreateCheckResultInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCheckResult, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateBulkCheckResult
+	if err := c.Client.Post(ctx, "CreateBulkCheckResult", CreateBulkCheckResultDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateCheckResultDocument = `mutation CreateCheckResult ($input: CreateCheckResultInput!) {
+	createCheckResult(input: $input) {
+		checkResult {
+			createdAt
+			createdBy
+			details
+			externalURI
+			id
+			integrationID
+			lastObservedAt
+			parentExternalID
+			source
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) CreateCheckResult(ctx context.Context, input CreateCheckResultInput, interceptors ...clientv2.RequestInterceptor) (*CreateCheckResult, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateCheckResult
+	if err := c.Client.Post(ctx, "CreateCheckResult", CreateCheckResultDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const DeleteBulkCheckResultDocument = `mutation DeleteBulkCheckResult ($ids: [ID!]!) {
+	deleteBulkCheckResult(ids: $ids) {
+		deletedIDs
+	}
+}
+`
+
+func (c *Client) DeleteBulkCheckResult(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkCheckResult, error) {
+	vars := map[string]any{
+		"ids": ids,
+	}
+
+	var res DeleteBulkCheckResult
+	if err := c.Client.Post(ctx, "DeleteBulkCheckResult", DeleteBulkCheckResultDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const DeleteCheckResultDocument = `mutation DeleteCheckResult ($deleteCheckResultId: ID!) {
+	deleteCheckResult(id: $deleteCheckResultId) {
+		deletedID
+	}
+}
+`
+
+func (c *Client) DeleteCheckResult(ctx context.Context, deleteCheckResultID string, interceptors ...clientv2.RequestInterceptor) (*DeleteCheckResult, error) {
+	vars := map[string]any{
+		"deleteCheckResultId": deleteCheckResultID,
+	}
+
+	var res DeleteCheckResult
+	if err := c.Client.Post(ctx, "DeleteCheckResult", DeleteCheckResultDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetAllCheckResultsDocument = `query GetAllCheckResults ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [CheckResultOrder!]) {
+	checkResults(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				details
+				externalURI
+				id
+				integrationID
+				lastObservedAt
+				parentExternalID
+				source
+				status
+				tags
+				updatedAt
+				updatedBy
+			}
+		}
+	}
+}
+`
+
+func (c *Client) GetAllCheckResults(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CheckResultOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllCheckResults, error) {
+	vars := map[string]any{
+		"first":   first,
+		"last":    last,
+		"after":   after,
+		"before":  before,
+		"orderBy": orderBy,
+	}
+
+	var res GetAllCheckResults
+	if err := c.Client.Post(ctx, "GetAllCheckResults", GetAllCheckResultsDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetCheckResultByIDDocument = `query GetCheckResultByID ($checkResultId: ID!) {
+	checkResult(id: $checkResultId) {
+		createdAt
+		createdBy
+		details
+		externalURI
+		id
+		integrationID
+		lastObservedAt
+		parentExternalID
+		source
+		status
+		tags
+		updatedAt
+		updatedBy
+	}
+}
+`
+
+func (c *Client) GetCheckResultByID(ctx context.Context, checkResultID string, interceptors ...clientv2.RequestInterceptor) (*GetCheckResultByID, error) {
+	vars := map[string]any{
+		"checkResultId": checkResultID,
+	}
+
+	var res GetCheckResultByID
+	if err := c.Client.Post(ctx, "GetCheckResultByID", GetCheckResultByIDDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetCheckResultsDocument = `query GetCheckResults ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [CheckResultOrder!], $where: CheckResultWhereInput) {
+	checkResults(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy, where: $where) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				details
+				externalURI
+				id
+				integrationID
+				lastObservedAt
+				parentExternalID
+				source
+				status
+				tags
+				updatedAt
+				updatedBy
+			}
+		}
+	}
+}
+`
+
+func (c *Client) GetCheckResults(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CheckResultOrder, where *CheckResultWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetCheckResults, error) {
+	vars := map[string]any{
+		"first":   first,
+		"last":    last,
+		"after":   after,
+		"before":  before,
+		"orderBy": orderBy,
+		"where":   where,
+	}
+
+	var res GetCheckResults
+	if err := c.Client.Post(ctx, "GetCheckResults", GetCheckResultsDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateBulkCSVCheckResultDocument = `mutation UpdateBulkCSVCheckResult ($input: Upload!) {
+	updateBulkCSVCheckResult(input: $input) {
+		checkResults {
+			createdAt
+			createdBy
+			details
+			externalURI
+			id
+			integrationID
+			lastObservedAt
+			parentExternalID
+			source
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+		updatedIDs
+	}
+}
+`
+
+func (c *Client) UpdateBulkCSVCheckResult(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVCheckResult, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res UpdateBulkCSVCheckResult
+	if err := c.Client.Post(ctx, "UpdateBulkCSVCheckResult", UpdateBulkCSVCheckResultDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateBulkCheckResultDocument = `mutation UpdateBulkCheckResult ($ids: [ID!]!, $input: UpdateCheckResultInput!) {
+	updateBulkCheckResult(ids: $ids, input: $input) {
+		checkResults {
+			createdAt
+			createdBy
+			details
+			externalURI
+			id
+			integrationID
+			lastObservedAt
+			parentExternalID
+			source
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+		updatedIDs
+	}
+}
+`
+
+func (c *Client) UpdateBulkCheckResult(ctx context.Context, ids []string, input UpdateCheckResultInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCheckResult, error) {
+	vars := map[string]any{
+		"ids":   ids,
+		"input": input,
+	}
+
+	var res UpdateBulkCheckResult
+	if err := c.Client.Post(ctx, "UpdateBulkCheckResult", UpdateBulkCheckResultDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateCheckResultDocument = `mutation UpdateCheckResult ($updateCheckResultId: ID!, $input: UpdateCheckResultInput!) {
+	updateCheckResult(id: $updateCheckResultId, input: $input) {
+		checkResult {
+			createdAt
+			createdBy
+			details
+			externalURI
+			id
+			integrationID
+			lastObservedAt
+			parentExternalID
+			source
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
+}
+`
+
+func (c *Client) UpdateCheckResult(ctx context.Context, updateCheckResultID string, input UpdateCheckResultInput, interceptors ...clientv2.RequestInterceptor) (*UpdateCheckResult, error) {
+	vars := map[string]any{
+		"updateCheckResultId": updateCheckResultID,
+		"input":               input,
+	}
+
+	var res UpdateCheckResult
+	if err := c.Client.Post(ctx, "UpdateCheckResult", UpdateCheckResultDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -123662,503 +123586,27 @@ func (c *Client) UpdateDocumentData(ctx context.Context, updateDocumentDataID st
 	return &res, nil
 }
 
-const CreateBulkCSVEmailBrandingDocument = `mutation CreateBulkCSVEmailBranding ($input: Upload!) {
-	createBulkCSVEmailBranding(input: $input) {
-		emailBrandings {
-			backgroundColor
-			brandName
-			buttonColor
-			buttonTextColor
-			createdAt
-			createdBy
-			fontFamily
-			id
-			isDefault
-			linkColor
-			logoRemoteURL
-			name
-			ownerID
-			primaryColor
-			secondaryColor
-			tags
-			textColor
-			updatedAt
-			updatedBy
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkCSVEmailBranding(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVEmailBranding, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkCSVEmailBranding
-	if err := c.Client.Post(ctx, "CreateBulkCSVEmailBranding", CreateBulkCSVEmailBrandingDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateBulkEmailBrandingDocument = `mutation CreateBulkEmailBranding ($input: [CreateEmailBrandingInput!]) {
-	createBulkEmailBranding(input: $input) {
-		emailBrandings {
-			backgroundColor
-			brandName
-			buttonColor
-			buttonTextColor
-			createdAt
-			createdBy
-			fontFamily
-			id
-			isDefault
-			linkColor
-			logoRemoteURL
-			name
-			ownerID
-			primaryColor
-			secondaryColor
-			tags
-			textColor
-			updatedAt
-			updatedBy
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkEmailBranding(ctx context.Context, input []*CreateEmailBrandingInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkEmailBranding, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkEmailBranding
-	if err := c.Client.Post(ctx, "CreateBulkEmailBranding", CreateBulkEmailBrandingDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateEmailBrandingDocument = `mutation CreateEmailBranding ($input: CreateEmailBrandingInput!) {
-	createEmailBranding(input: $input) {
-		emailBranding {
-			backgroundColor
-			brandName
-			buttonColor
-			buttonTextColor
-			createdAt
-			createdBy
-			fontFamily
-			id
-			isDefault
-			linkColor
-			logoRemoteURL
-			name
-			ownerID
-			primaryColor
-			secondaryColor
-			tags
-			textColor
-			updatedAt
-			updatedBy
-		}
-	}
-}
-`
-
-func (c *Client) CreateEmailBranding(ctx context.Context, input CreateEmailBrandingInput, interceptors ...clientv2.RequestInterceptor) (*CreateEmailBranding, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateEmailBranding
-	if err := c.Client.Post(ctx, "CreateEmailBranding", CreateEmailBrandingDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const DeleteEmailBrandingDocument = `mutation DeleteEmailBranding ($deleteEmailBrandingId: ID!) {
-	deleteEmailBranding(id: $deleteEmailBrandingId) {
-		deletedID
-	}
-}
-`
-
-func (c *Client) DeleteEmailBranding(ctx context.Context, deleteEmailBrandingID string, interceptors ...clientv2.RequestInterceptor) (*DeleteEmailBranding, error) {
-	vars := map[string]any{
-		"deleteEmailBrandingId": deleteEmailBrandingID,
-	}
-
-	var res DeleteEmailBranding
-	if err := c.Client.Post(ctx, "DeleteEmailBranding", DeleteEmailBrandingDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateBulkEmailBrandingDocument = `mutation UpdateBulkEmailBranding ($ids: [ID!]!, $input: UpdateEmailBrandingInput!) {
-	updateBulkEmailBranding(ids: $ids, input: $input) {
-		emailBrandings {
-			backgroundColor
-			brandName
-			buttonColor
-			buttonTextColor
-			createdAt
-			createdBy
-			fontFamily
-			id
-			isDefault
-			linkColor
-			logoRemoteURL
-			name
-			ownerID
-			primaryColor
-			secondaryColor
-			tags
-			textColor
-			updatedAt
-			updatedBy
-		}
-		updatedIDs
-	}
-}
-`
-
-func (c *Client) UpdateBulkEmailBranding(ctx context.Context, ids []string, input UpdateEmailBrandingInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkEmailBranding, error) {
-	vars := map[string]any{
-		"ids":   ids,
-		"input": input,
-	}
-
-	var res UpdateBulkEmailBranding
-	if err := c.Client.Post(ctx, "UpdateBulkEmailBranding", UpdateBulkEmailBrandingDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateBulkCSVEmailBrandingDocument = `mutation UpdateBulkCSVEmailBranding ($input: Upload!) {
-	updateBulkCSVEmailBranding(input: $input) {
-		emailBrandings {
-			backgroundColor
-			brandName
-			buttonColor
-			buttonTextColor
-			createdAt
-			createdBy
-			fontFamily
-			id
-			isDefault
-			linkColor
-			logoRemoteURL
-			name
-			ownerID
-			primaryColor
-			secondaryColor
-			tags
-			textColor
-			updatedAt
-			updatedBy
-		}
-		updatedIDs
-	}
-}
-`
-
-func (c *Client) UpdateBulkCSVEmailBranding(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVEmailBranding, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res UpdateBulkCSVEmailBranding
-	if err := c.Client.Post(ctx, "UpdateBulkCSVEmailBranding", UpdateBulkCSVEmailBrandingDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const DeleteBulkEmailBrandingDocument = `mutation DeleteBulkEmailBranding ($ids: [ID!]!) {
-	deleteBulkEmailBranding(ids: $ids) {
-		deletedIDs
-	}
-}
-`
-
-func (c *Client) DeleteBulkEmailBranding(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkEmailBranding, error) {
-	vars := map[string]any{
-		"ids": ids,
-	}
-
-	var res DeleteBulkEmailBranding
-	if err := c.Client.Post(ctx, "DeleteBulkEmailBranding", DeleteBulkEmailBrandingDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const GetAllEmailBrandingsDocument = `query GetAllEmailBrandings ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [EmailBrandingOrder!]) {
-	emailBrandings(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
-		totalCount
-		pageInfo {
-			startCursor
-			endCursor
-			hasPreviousPage
-			hasNextPage
-		}
-		edges {
-			node {
-				backgroundColor
-				brandName
-				buttonColor
-				buttonTextColor
-				createdAt
-				createdBy
-				fontFamily
-				id
-				isDefault
-				linkColor
-				logoRemoteURL
-				name
-				ownerID
-				primaryColor
-				secondaryColor
-				tags
-				textColor
-				updatedAt
-				updatedBy
-			}
-		}
-	}
-}
-`
-
-func (c *Client) GetAllEmailBrandings(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*EmailBrandingOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllEmailBrandings, error) {
-	vars := map[string]any{
-		"first":   first,
-		"last":    last,
-		"after":   after,
-		"before":  before,
-		"orderBy": orderBy,
-	}
-
-	var res GetAllEmailBrandings
-	if err := c.Client.Post(ctx, "GetAllEmailBrandings", GetAllEmailBrandingsDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const GetEmailBrandingByIDDocument = `query GetEmailBrandingByID ($emailBrandingId: ID!) {
-	emailBranding(id: $emailBrandingId) {
-		backgroundColor
-		brandName
-		buttonColor
-		buttonTextColor
-		createdAt
-		createdBy
-		fontFamily
-		id
-		isDefault
-		linkColor
-		logoRemoteURL
-		name
-		ownerID
-		primaryColor
-		secondaryColor
-		tags
-		textColor
-		updatedAt
-		updatedBy
-	}
-}
-`
-
-func (c *Client) GetEmailBrandingByID(ctx context.Context, emailBrandingID string, interceptors ...clientv2.RequestInterceptor) (*GetEmailBrandingByID, error) {
-	vars := map[string]any{
-		"emailBrandingId": emailBrandingID,
-	}
-
-	var res GetEmailBrandingByID
-	if err := c.Client.Post(ctx, "GetEmailBrandingByID", GetEmailBrandingByIDDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const GetEmailBrandingsDocument = `query GetEmailBrandings ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [EmailBrandingOrder!], $where: EmailBrandingWhereInput) {
-	emailBrandings(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy, where: $where) {
-		totalCount
-		pageInfo {
-			startCursor
-			endCursor
-			hasPreviousPage
-			hasNextPage
-		}
-		edges {
-			node {
-				backgroundColor
-				brandName
-				buttonColor
-				buttonTextColor
-				createdAt
-				createdBy
-				fontFamily
-				id
-				isDefault
-				linkColor
-				logoRemoteURL
-				name
-				ownerID
-				primaryColor
-				secondaryColor
-				tags
-				textColor
-				updatedAt
-				updatedBy
-			}
-		}
-	}
-}
-`
-
-func (c *Client) GetEmailBrandings(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*EmailBrandingOrder, where *EmailBrandingWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetEmailBrandings, error) {
-	vars := map[string]any{
-		"first":   first,
-		"last":    last,
-		"after":   after,
-		"before":  before,
-		"orderBy": orderBy,
-		"where":   where,
-	}
-
-	var res GetEmailBrandings
-	if err := c.Client.Post(ctx, "GetEmailBrandings", GetEmailBrandingsDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateEmailBrandingDocument = `mutation UpdateEmailBranding ($updateEmailBrandingId: ID!, $input: UpdateEmailBrandingInput!) {
-	updateEmailBranding(id: $updateEmailBrandingId, input: $input) {
-		emailBranding {
-			backgroundColor
-			brandName
-			buttonColor
-			buttonTextColor
-			createdAt
-			createdBy
-			fontFamily
-			id
-			isDefault
-			linkColor
-			logoRemoteURL
-			name
-			ownerID
-			primaryColor
-			secondaryColor
-			tags
-			textColor
-			updatedAt
-			updatedBy
-		}
-	}
-}
-`
-
-func (c *Client) UpdateEmailBranding(ctx context.Context, updateEmailBrandingID string, input UpdateEmailBrandingInput, interceptors ...clientv2.RequestInterceptor) (*UpdateEmailBranding, error) {
-	vars := map[string]any{
-		"updateEmailBrandingId": updateEmailBrandingID,
-		"input":                 input,
-	}
-
-	var res UpdateEmailBranding
-	if err := c.Client.Post(ctx, "UpdateEmailBranding", UpdateEmailBrandingDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const CreateBulkCSVEmailTemplateDocument = `mutation CreateBulkCSVEmailTemplate ($input: Upload!) {
 	createBulkCSVEmailTemplate(input: $input) {
 		emailTemplates {
 			active
-			bodyTemplate
 			createdAt
 			createdBy
+			defaults
 			description
 			format
 			id
 			integrationID
 			internalNotes
-			jsonconfig
 			key
 			locale
 			metadata
 			name
 			ownerID
-			preheaderTemplate
-			subjectTemplate
+			revision
 			systemInternalID
 			systemOwned
-			textTemplate
-			uischema
+			templateContext
 			updatedAt
 			updatedBy
 			version
@@ -124190,26 +123638,23 @@ const CreateBulkEmailTemplateDocument = `mutation CreateBulkEmailTemplate ($inpu
 	createBulkEmailTemplate(input: $input) {
 		emailTemplates {
 			active
-			bodyTemplate
 			createdAt
 			createdBy
+			defaults
 			description
 			format
 			id
 			integrationID
 			internalNotes
-			jsonconfig
 			key
 			locale
 			metadata
 			name
 			ownerID
-			preheaderTemplate
-			subjectTemplate
+			revision
 			systemInternalID
 			systemOwned
-			textTemplate
-			uischema
+			templateContext
 			updatedAt
 			updatedBy
 			version
@@ -124241,26 +123686,23 @@ const CreateEmailTemplateDocument = `mutation CreateEmailTemplate ($input: Creat
 	createEmailTemplate(input: $input) {
 		emailTemplate {
 			active
-			bodyTemplate
 			createdAt
 			createdBy
+			defaults
 			description
 			format
 			id
 			integrationID
 			internalNotes
-			jsonconfig
 			key
 			locale
 			metadata
 			name
 			ownerID
-			preheaderTemplate
-			subjectTemplate
+			revision
 			systemInternalID
 			systemOwned
-			textTemplate
-			uischema
+			templateContext
 			updatedAt
 			updatedBy
 			version
@@ -124348,26 +123790,23 @@ const GetAllEmailTemplatesDocument = `query GetAllEmailTemplates ($first: Int, $
 		edges {
 			node {
 				active
-				bodyTemplate
 				createdAt
 				createdBy
+				defaults
 				description
 				format
 				id
 				integrationID
 				internalNotes
-				jsonconfig
 				key
 				locale
 				metadata
 				name
 				ownerID
-				preheaderTemplate
-				subjectTemplate
+				revision
 				systemInternalID
 				systemOwned
-				textTemplate
-				uischema
+				templateContext
 				updatedAt
 				updatedBy
 				version
@@ -124403,26 +123842,23 @@ func (c *Client) GetAllEmailTemplates(ctx context.Context, first *int64, last *i
 const GetEmailTemplateByIDDocument = `query GetEmailTemplateByID ($emailTemplateId: ID!) {
 	emailTemplate(id: $emailTemplateId) {
 		active
-		bodyTemplate
 		createdAt
 		createdBy
+		defaults
 		description
 		format
 		id
 		integrationID
 		internalNotes
-		jsonconfig
 		key
 		locale
 		metadata
 		name
 		ownerID
-		preheaderTemplate
-		subjectTemplate
+		revision
 		systemInternalID
 		systemOwned
-		textTemplate
-		uischema
+		templateContext
 		updatedAt
 		updatedBy
 		version
@@ -124461,26 +123897,23 @@ const GetEmailTemplatesDocument = `query GetEmailTemplates ($first: Int, $last: 
 		edges {
 			node {
 				active
-				bodyTemplate
 				createdAt
 				createdBy
+				defaults
 				description
 				format
 				id
 				integrationID
 				internalNotes
-				jsonconfig
 				key
 				locale
 				metadata
 				name
 				ownerID
-				preheaderTemplate
-				subjectTemplate
+				revision
 				systemInternalID
 				systemOwned
-				textTemplate
-				uischema
+				templateContext
 				updatedAt
 				updatedBy
 				version
@@ -124518,26 +123951,23 @@ const UpdateBulkCSVEmailTemplateDocument = `mutation UpdateBulkCSVEmailTemplate 
 	updateBulkCSVEmailTemplate(input: $input) {
 		emailTemplates {
 			active
-			bodyTemplate
 			createdAt
 			createdBy
+			defaults
 			description
 			format
 			id
 			integrationID
 			internalNotes
-			jsonconfig
 			key
 			locale
 			metadata
 			name
 			ownerID
-			preheaderTemplate
-			subjectTemplate
+			revision
 			systemInternalID
 			systemOwned
-			textTemplate
-			uischema
+			templateContext
 			updatedAt
 			updatedBy
 			version
@@ -124570,26 +124000,23 @@ const UpdateBulkEmailTemplateDocument = `mutation UpdateBulkEmailTemplate ($ids:
 	updateBulkEmailTemplate(ids: $ids, input: $input) {
 		emailTemplates {
 			active
-			bodyTemplate
 			createdAt
 			createdBy
+			defaults
 			description
 			format
 			id
 			integrationID
 			internalNotes
-			jsonconfig
 			key
 			locale
 			metadata
 			name
 			ownerID
-			preheaderTemplate
-			subjectTemplate
+			revision
 			systemInternalID
 			systemOwned
-			textTemplate
-			uischema
+			templateContext
 			updatedAt
 			updatedBy
 			version
@@ -124623,26 +124050,23 @@ const UpdateEmailTemplateDocument = `mutation UpdateEmailTemplate ($updateEmailT
 	updateEmailTemplate(id: $updateEmailTemplateId, input: $input) {
 		emailTemplate {
 			active
-			bodyTemplate
 			createdAt
 			createdBy
+			defaults
 			description
 			format
 			id
 			integrationID
 			internalNotes
-			jsonconfig
 			key
 			locale
 			metadata
 			name
 			ownerID
-			preheaderTemplate
-			subjectTemplate
+			revision
 			systemInternalID
 			systemOwned
-			textTemplate
-			uischema
+			templateContext
 			updatedAt
 			updatedBy
 			version
@@ -148032,6 +147456,17 @@ var DocumentOperationNames = map[string]string{
 	GetCampaignTargetByIDDocument:                "GetCampaignTargetByID",
 	GetCampaignTargetsDocument:                   "GetCampaignTargets",
 	UpdateCampaignTargetDocument:                 "UpdateCampaignTarget",
+	CreateBulkCSVCheckResultDocument:             "CreateBulkCSVCheckResult",
+	CreateBulkCheckResultDocument:                "CreateBulkCheckResult",
+	CreateCheckResultDocument:                    "CreateCheckResult",
+	DeleteBulkCheckResultDocument:                "DeleteBulkCheckResult",
+	DeleteCheckResultDocument:                    "DeleteCheckResult",
+	GetAllCheckResultsDocument:                   "GetAllCheckResults",
+	GetCheckResultByIDDocument:                   "GetCheckResultByID",
+	GetCheckResultsDocument:                      "GetCheckResults",
+	UpdateBulkCSVCheckResultDocument:             "UpdateBulkCSVCheckResult",
+	UpdateBulkCheckResultDocument:                "UpdateBulkCheckResult",
+	UpdateCheckResultDocument:                    "UpdateCheckResult",
 	CreateBulkCSVContactDocument:                 "CreateBulkCSVContact",
 	CreateBulkContactDocument:                    "CreateBulkContact",
 	CreateContactDocument:                        "CreateContact",
@@ -148142,17 +147577,6 @@ var DocumentOperationNames = map[string]string{
 	DeleteDocumentDataDocument:                   "DeleteDocumentData",
 	GetDocumentDataByIDDocument:                  "GetDocumentDataByID",
 	UpdateDocumentDataDocument:                   "UpdateDocumentData",
-	CreateBulkCSVEmailBrandingDocument:           "CreateBulkCSVEmailBranding",
-	CreateBulkEmailBrandingDocument:              "CreateBulkEmailBranding",
-	CreateEmailBrandingDocument:                  "CreateEmailBranding",
-	DeleteEmailBrandingDocument:                  "DeleteEmailBranding",
-	UpdateBulkEmailBrandingDocument:              "UpdateBulkEmailBranding",
-	UpdateBulkCSVEmailBrandingDocument:           "UpdateBulkCSVEmailBranding",
-	DeleteBulkEmailBrandingDocument:              "DeleteBulkEmailBranding",
-	GetAllEmailBrandingsDocument:                 "GetAllEmailBrandings",
-	GetEmailBrandingByIDDocument:                 "GetEmailBrandingByID",
-	GetEmailBrandingsDocument:                    "GetEmailBrandings",
-	UpdateEmailBrandingDocument:                  "UpdateEmailBranding",
 	CreateBulkCSVEmailTemplateDocument:           "CreateBulkCSVEmailTemplate",
 	CreateBulkEmailTemplateDocument:              "CreateBulkEmailTemplate",
 	CreateEmailTemplateDocument:                  "CreateEmailTemplate",
