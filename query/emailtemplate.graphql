@@ -2,7 +2,7 @@ mutation CreateBulkCSVEmailTemplate($input: Upload!) {
   createBulkCSVEmailTemplate(input: $input) {
     emailTemplates {
       active
-      bodyTemplate
+      defaults
       createdAt
       createdBy
       description
@@ -10,18 +10,13 @@ mutation CreateBulkCSVEmailTemplate($input: Upload!) {
       id
       integrationID
       internalNotes
-      jsonconfig
       key
       locale
       metadata
       name
       ownerID
-      preheaderTemplate
-      subjectTemplate
       systemInternalID
       systemOwned
-      textTemplate
-      uischema
       updatedAt
       updatedBy
       version
@@ -35,7 +30,7 @@ mutation CreateBulkEmailTemplate($input: [CreateEmailTemplateInput!]) {
   createBulkEmailTemplate(input: $input) {
     emailTemplates {
       active
-      bodyTemplate
+      defaults
       createdAt
       createdBy
       description
@@ -43,18 +38,13 @@ mutation CreateBulkEmailTemplate($input: [CreateEmailTemplateInput!]) {
       id
       integrationID
       internalNotes
-      jsonconfig
       key
       locale
       metadata
       name
       ownerID
-      preheaderTemplate
-      subjectTemplate
       systemInternalID
       systemOwned
-      textTemplate
-      uischema
       updatedAt
       updatedBy
       version
@@ -68,7 +58,7 @@ mutation CreateEmailTemplate($input: CreateEmailTemplateInput!) {
   createEmailTemplate(input: $input) {
     emailTemplate {
       active
-      bodyTemplate
+      defaults
       createdAt
       createdBy
       description
@@ -76,18 +66,13 @@ mutation CreateEmailTemplate($input: CreateEmailTemplateInput!) {
       id
       integrationID
       internalNotes
-      jsonconfig
       key
       locale
       metadata
       name
       ownerID
-      preheaderTemplate
-      subjectTemplate
       systemInternalID
       systemOwned
-      textTemplate
-      uischema
       updatedAt
       updatedBy
       version
@@ -127,7 +112,7 @@ query GetAllEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cur
     edges {
       node {
         active
-        bodyTemplate
+        defaults
         createdAt
         createdBy
         description
@@ -135,18 +120,13 @@ query GetAllEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cur
         id
         integrationID
         internalNotes
-        jsonconfig
         key
         locale
         metadata
         name
         ownerID
-        preheaderTemplate
-        subjectTemplate
         systemInternalID
         systemOwned
-        textTemplate
-        uischema
         updatedAt
         updatedBy
         version
@@ -160,7 +140,7 @@ query GetAllEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cur
 query GetEmailTemplateByID($emailTemplateId: ID!) {
   emailTemplate(id: $emailTemplateId) {
     active
-    bodyTemplate
+    defaults
     createdAt
     createdBy
     description
@@ -168,18 +148,13 @@ query GetEmailTemplateByID($emailTemplateId: ID!) {
     id
     integrationID
     internalNotes
-    jsonconfig
     key
     locale
     metadata
     name
     ownerID
-    preheaderTemplate
-    subjectTemplate
     systemInternalID
     systemOwned
-    textTemplate
-    uischema
     updatedAt
     updatedBy
     version
@@ -207,7 +182,7 @@ query GetEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cursor
     edges {
       node {
         active
-        bodyTemplate
+        defaults
         createdAt
         createdBy
         description
@@ -215,18 +190,13 @@ query GetEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cursor
         id
         integrationID
         internalNotes
-        jsonconfig
         key
         locale
         metadata
         name
         ownerID
-        preheaderTemplate
-        subjectTemplate
         systemInternalID
         systemOwned
-        textTemplate
-        uischema
         updatedAt
         updatedBy
         version
@@ -241,7 +211,7 @@ mutation UpdateBulkCSVEmailTemplate($input: Upload!) {
   updateBulkCSVEmailTemplate(input: $input) {
     emailTemplates {
       active
-      bodyTemplate
+      defaults
       createdAt
       createdBy
       description
@@ -249,18 +219,13 @@ mutation UpdateBulkCSVEmailTemplate($input: Upload!) {
       id
       integrationID
       internalNotes
-      jsonconfig
       key
       locale
       metadata
       name
       ownerID
-      preheaderTemplate
-      subjectTemplate
       systemInternalID
       systemOwned
-      textTemplate
-      uischema
       updatedAt
       updatedBy
       version
@@ -275,7 +240,7 @@ mutation UpdateBulkEmailTemplate($ids: [ID!]!, $input: UpdateEmailTemplateInput!
   updateBulkEmailTemplate(ids: $ids, input: $input) {
     emailTemplates {
       active
-      bodyTemplate
+      defaults
       createdAt
       createdBy
       description
@@ -283,18 +248,13 @@ mutation UpdateBulkEmailTemplate($ids: [ID!]!, $input: UpdateEmailTemplateInput!
       id
       integrationID
       internalNotes
-      jsonconfig
       key
       locale
       metadata
       name
       ownerID
-      preheaderTemplate
-      subjectTemplate
       systemInternalID
       systemOwned
-      textTemplate
-      uischema
       updatedAt
       updatedBy
       version
@@ -309,7 +269,7 @@ mutation UpdateEmailTemplate($updateEmailTemplateId: ID!, $input: UpdateEmailTem
   updateEmailTemplate(id: $updateEmailTemplateId, input: $input) {
     emailTemplate {
       active
-      bodyTemplate
+      defaults
       createdAt
       createdBy
       description
@@ -317,18 +277,13 @@ mutation UpdateEmailTemplate($updateEmailTemplateId: ID!, $input: UpdateEmailTem
       id
       integrationID
       internalNotes
-      jsonconfig
       key
       locale
       metadata
       name
       ownerID
-      preheaderTemplate
-      subjectTemplate
       systemInternalID
       systemOwned
-      textTemplate
-      uischema
       updatedAt
       updatedBy
       version
