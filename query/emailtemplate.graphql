@@ -2,9 +2,9 @@ mutation CreateBulkCSVEmailTemplate($input: Upload!) {
   createBulkCSVEmailTemplate(input: $input) {
     emailTemplates {
       active
-      defaults
       createdAt
       createdBy
+      defaults
       description
       format
       id
@@ -15,8 +15,10 @@ mutation CreateBulkCSVEmailTemplate($input: Upload!) {
       metadata
       name
       ownerID
+      revision
       systemInternalID
       systemOwned
+      templateContext
       updatedAt
       updatedBy
       version
@@ -30,9 +32,9 @@ mutation CreateBulkEmailTemplate($input: [CreateEmailTemplateInput!]) {
   createBulkEmailTemplate(input: $input) {
     emailTemplates {
       active
-      defaults
       createdAt
       createdBy
+      defaults
       description
       format
       id
@@ -43,8 +45,10 @@ mutation CreateBulkEmailTemplate($input: [CreateEmailTemplateInput!]) {
       metadata
       name
       ownerID
+      revision
       systemInternalID
       systemOwned
+      templateContext
       updatedAt
       updatedBy
       version
@@ -58,9 +62,9 @@ mutation CreateEmailTemplate($input: CreateEmailTemplateInput!) {
   createEmailTemplate(input: $input) {
     emailTemplate {
       active
-      defaults
       createdAt
       createdBy
+      defaults
       description
       format
       id
@@ -71,8 +75,10 @@ mutation CreateEmailTemplate($input: CreateEmailTemplateInput!) {
       metadata
       name
       ownerID
+      revision
       systemInternalID
       systemOwned
+      templateContext
       updatedAt
       updatedBy
       version
@@ -112,9 +118,9 @@ query GetAllEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cur
     edges {
       node {
         active
-        defaults
         createdAt
         createdBy
+        defaults
         description
         format
         id
@@ -125,8 +131,10 @@ query GetAllEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cur
         metadata
         name
         ownerID
+        revision
         systemInternalID
         systemOwned
+        templateContext
         updatedAt
         updatedBy
         version
@@ -140,9 +148,9 @@ query GetAllEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cur
 query GetEmailTemplateByID($emailTemplateId: ID!) {
   emailTemplate(id: $emailTemplateId) {
     active
-    defaults
     createdAt
     createdBy
+    defaults
     description
     format
     id
@@ -153,8 +161,10 @@ query GetEmailTemplateByID($emailTemplateId: ID!) {
     metadata
     name
     ownerID
+    revision
     systemInternalID
     systemOwned
+    templateContext
     updatedAt
     updatedBy
     version
@@ -182,9 +192,9 @@ query GetEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cursor
     edges {
       node {
         active
-        defaults
         createdAt
         createdBy
+        defaults
         description
         format
         id
@@ -195,8 +205,10 @@ query GetEmailTemplates($first: Int, $last: Int, $after: Cursor, $before: Cursor
         metadata
         name
         ownerID
+        revision
         systemInternalID
         systemOwned
+        templateContext
         updatedAt
         updatedBy
         version
@@ -211,9 +223,9 @@ mutation UpdateBulkCSVEmailTemplate($input: Upload!) {
   updateBulkCSVEmailTemplate(input: $input) {
     emailTemplates {
       active
-      defaults
       createdAt
       createdBy
+      defaults
       description
       format
       id
@@ -224,8 +236,10 @@ mutation UpdateBulkCSVEmailTemplate($input: Upload!) {
       metadata
       name
       ownerID
+      revision
       systemInternalID
       systemOwned
+      templateContext
       updatedAt
       updatedBy
       version
@@ -240,9 +254,9 @@ mutation UpdateBulkEmailTemplate($ids: [ID!]!, $input: UpdateEmailTemplateInput!
   updateBulkEmailTemplate(ids: $ids, input: $input) {
     emailTemplates {
       active
-      defaults
       createdAt
       createdBy
+      defaults
       description
       format
       id
@@ -253,8 +267,10 @@ mutation UpdateBulkEmailTemplate($ids: [ID!]!, $input: UpdateEmailTemplateInput!
       metadata
       name
       ownerID
+      revision
       systemInternalID
       systemOwned
+      templateContext
       updatedAt
       updatedBy
       version
@@ -269,9 +285,9 @@ mutation UpdateEmailTemplate($updateEmailTemplateId: ID!, $input: UpdateEmailTem
   updateEmailTemplate(id: $updateEmailTemplateId, input: $input) {
     emailTemplate {
       active
-      defaults
       createdAt
       createdBy
+      defaults
       description
       format
       id
@@ -282,8 +298,10 @@ mutation UpdateEmailTemplate($updateEmailTemplateId: ID!, $input: UpdateEmailTem
       metadata
       name
       ownerID
+      revision
       systemInternalID
       systemOwned
+      templateContext
       updatedAt
       updatedBy
       version

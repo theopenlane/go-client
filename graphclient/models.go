@@ -58,6 +58,10 @@ type APITokenBulkCreatePayload struct {
 type APITokenBulkDeletePayload struct {
 	// Deleted apiToken IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkAPIToken mutation
@@ -422,6 +426,10 @@ type ActionPlanBulkCreatePayload struct {
 type ActionPlanBulkDeletePayload struct {
 	// Deleted actionPlan IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkActionPlan mutation
@@ -991,6 +999,10 @@ func (Assessment) IsNode() {}
 type AssessmentBulkDeletePayload struct {
 	// Deleted assessment IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -1744,6 +1756,10 @@ type AssetBulkCreatePayload struct {
 type AssetBulkDeletePayload struct {
 	// Deleted asset IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkAsset mutation
@@ -2582,10 +2598,10 @@ type Campaign struct {
 	RecurrenceFrequency *enums.Frequency `json:"recurrenceFrequency,omitempty"`
 	// the recurrence interval for the campaign, combined with the recurrence frequency
 	RecurrenceInterval *int64 `json:"recurrenceInterval,omitempty"`
-	// cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
-	RecurrenceCron *string `json:"recurrenceCron,omitempty"`
 	// timezone used for the recurrence schedule
 	RecurrenceTimezone *string `json:"recurrenceTimezone,omitempty"`
+	// cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
+	RecurrenceCron *string `json:"recurrenceCron,omitempty"`
 	// when the campaign was last executed
 	LastRunAt *models.DateTime `json:"lastRunAt,omitempty"`
 	// when the campaign is scheduled to run next
@@ -2598,20 +2614,20 @@ type Campaign struct {
 	ResendCount *int64 `json:"resendCount,omitempty"`
 	// when campaign notifications were last resent
 	LastResentAt *models.DateTime `json:"lastResentAt,omitempty"`
-	// the template associated with the campaign
-	TemplateID *string `json:"templateID,omitempty"`
 	// the entity associated with the campaign
 	EntityID *string `json:"entityID,omitempty"`
+	// the template associated with the campaign
+	TemplateID *string `json:"templateID,omitempty"`
 	// the assessment associated with the campaign
 	AssessmentID *string `json:"assessmentID,omitempty"`
 	// additional metadata about the campaign
 	Metadata map[string]any `json:"metadata,omitempty"`
-	// the email branding or theme reference the campaign may use to override the email templates theme
-	EmailBrandingID *string `json:"emailBrandingID,omitempty"`
 	// the email template associated with the campaign
 	EmailTemplateID *string `json:"emailTemplateID,omitempty"`
 	// the email integration used for campaign dispatch
-	IntegrationID       *string                       `json:"integrationID,omitempty"`
+	IntegrationID *string `json:"integrationID,omitempty"`
+	// the email branding associated with the campaign
+	EmailBrandingID     *string                       `json:"emailBrandingID,omitempty"`
 	Owner               *Organization                 `json:"owner,omitempty"`
 	BlockedGroups       *GroupConnection              `json:"blockedGroups"`
 	Editors             *GroupConnection              `json:"editors"`
@@ -3394,22 +3410,6 @@ type CampaignWhereInput struct {
 	LastResentAtLte    *models.DateTime   `json:"lastResentAtLTE,omitempty"`
 	LastResentAtIsNil  *bool              `json:"lastResentAtIsNil,omitempty"`
 	LastResentAtNotNil *bool              `json:"lastResentAtNotNil,omitempty"`
-	// template_id field predicates
-	TemplateID             *string  `json:"templateID,omitempty"`
-	TemplateIdneq          *string  `json:"templateIDNEQ,omitempty"`
-	TemplateIDIn           []string `json:"templateIDIn,omitempty"`
-	TemplateIDNotIn        []string `json:"templateIDNotIn,omitempty"`
-	TemplateIdgt           *string  `json:"templateIDGT,omitempty"`
-	TemplateIdgte          *string  `json:"templateIDGTE,omitempty"`
-	TemplateIdlt           *string  `json:"templateIDLT,omitempty"`
-	TemplateIdlte          *string  `json:"templateIDLTE,omitempty"`
-	TemplateIDContains     *string  `json:"templateIDContains,omitempty"`
-	TemplateIDHasPrefix    *string  `json:"templateIDHasPrefix,omitempty"`
-	TemplateIDHasSuffix    *string  `json:"templateIDHasSuffix,omitempty"`
-	TemplateIDIsNil        *bool    `json:"templateIDIsNil,omitempty"`
-	TemplateIDNotNil       *bool    `json:"templateIDNotNil,omitempty"`
-	TemplateIDEqualFold    *string  `json:"templateIDEqualFold,omitempty"`
-	TemplateIDContainsFold *string  `json:"templateIDContainsFold,omitempty"`
 	// entity_id field predicates
 	EntityID             *string  `json:"entityID,omitempty"`
 	EntityIdneq          *string  `json:"entityIDNEQ,omitempty"`
@@ -3426,6 +3426,22 @@ type CampaignWhereInput struct {
 	EntityIDNotNil       *bool    `json:"entityIDNotNil,omitempty"`
 	EntityIDEqualFold    *string  `json:"entityIDEqualFold,omitempty"`
 	EntityIDContainsFold *string  `json:"entityIDContainsFold,omitempty"`
+	// template_id field predicates
+	TemplateID             *string  `json:"templateID,omitempty"`
+	TemplateIdneq          *string  `json:"templateIDNEQ,omitempty"`
+	TemplateIDIn           []string `json:"templateIDIn,omitempty"`
+	TemplateIDNotIn        []string `json:"templateIDNotIn,omitempty"`
+	TemplateIdgt           *string  `json:"templateIDGT,omitempty"`
+	TemplateIdgte          *string  `json:"templateIDGTE,omitempty"`
+	TemplateIdlt           *string  `json:"templateIDLT,omitempty"`
+	TemplateIdlte          *string  `json:"templateIDLTE,omitempty"`
+	TemplateIDContains     *string  `json:"templateIDContains,omitempty"`
+	TemplateIDHasPrefix    *string  `json:"templateIDHasPrefix,omitempty"`
+	TemplateIDHasSuffix    *string  `json:"templateIDHasSuffix,omitempty"`
+	TemplateIDIsNil        *bool    `json:"templateIDIsNil,omitempty"`
+	TemplateIDNotNil       *bool    `json:"templateIDNotNil,omitempty"`
+	TemplateIDEqualFold    *string  `json:"templateIDEqualFold,omitempty"`
+	TemplateIDContainsFold *string  `json:"templateIDContainsFold,omitempty"`
 	// assessment_id field predicates
 	AssessmentID             *string  `json:"assessmentID,omitempty"`
 	AssessmentIdneq          *string  `json:"assessmentIDNEQ,omitempty"`
@@ -3442,22 +3458,6 @@ type CampaignWhereInput struct {
 	AssessmentIDNotNil       *bool    `json:"assessmentIDNotNil,omitempty"`
 	AssessmentIDEqualFold    *string  `json:"assessmentIDEqualFold,omitempty"`
 	AssessmentIDContainsFold *string  `json:"assessmentIDContainsFold,omitempty"`
-	// email_branding_id field predicates
-	EmailBrandingID             *string  `json:"emailBrandingID,omitempty"`
-	EmailBrandingIdneq          *string  `json:"emailBrandingIDNEQ,omitempty"`
-	EmailBrandingIDIn           []string `json:"emailBrandingIDIn,omitempty"`
-	EmailBrandingIDNotIn        []string `json:"emailBrandingIDNotIn,omitempty"`
-	EmailBrandingIdgt           *string  `json:"emailBrandingIDGT,omitempty"`
-	EmailBrandingIdgte          *string  `json:"emailBrandingIDGTE,omitempty"`
-	EmailBrandingIdlt           *string  `json:"emailBrandingIDLT,omitempty"`
-	EmailBrandingIdlte          *string  `json:"emailBrandingIDLTE,omitempty"`
-	EmailBrandingIDContains     *string  `json:"emailBrandingIDContains,omitempty"`
-	EmailBrandingIDHasPrefix    *string  `json:"emailBrandingIDHasPrefix,omitempty"`
-	EmailBrandingIDHasSuffix    *string  `json:"emailBrandingIDHasSuffix,omitempty"`
-	EmailBrandingIDIsNil        *bool    `json:"emailBrandingIDIsNil,omitempty"`
-	EmailBrandingIDNotNil       *bool    `json:"emailBrandingIDNotNil,omitempty"`
-	EmailBrandingIDEqualFold    *string  `json:"emailBrandingIDEqualFold,omitempty"`
-	EmailBrandingIDContainsFold *string  `json:"emailBrandingIDContainsFold,omitempty"`
 	// email_template_id field predicates
 	EmailTemplateID             *string  `json:"emailTemplateID,omitempty"`
 	EmailTemplateIdneq          *string  `json:"emailTemplateIDNEQ,omitempty"`
@@ -3490,6 +3490,22 @@ type CampaignWhereInput struct {
 	IntegrationIDNotNil       *bool    `json:"integrationIDNotNil,omitempty"`
 	IntegrationIDEqualFold    *string  `json:"integrationIDEqualFold,omitempty"`
 	IntegrationIDContainsFold *string  `json:"integrationIDContainsFold,omitempty"`
+	// email_branding_id field predicates
+	EmailBrandingID             *string  `json:"emailBrandingID,omitempty"`
+	EmailBrandingIdneq          *string  `json:"emailBrandingIDNEQ,omitempty"`
+	EmailBrandingIDIn           []string `json:"emailBrandingIDIn,omitempty"`
+	EmailBrandingIDNotIn        []string `json:"emailBrandingIDNotIn,omitempty"`
+	EmailBrandingIdgt           *string  `json:"emailBrandingIDGT,omitempty"`
+	EmailBrandingIdgte          *string  `json:"emailBrandingIDGTE,omitempty"`
+	EmailBrandingIdlt           *string  `json:"emailBrandingIDLT,omitempty"`
+	EmailBrandingIdlte          *string  `json:"emailBrandingIDLTE,omitempty"`
+	EmailBrandingIDContains     *string  `json:"emailBrandingIDContains,omitempty"`
+	EmailBrandingIDHasPrefix    *string  `json:"emailBrandingIDHasPrefix,omitempty"`
+	EmailBrandingIDHasSuffix    *string  `json:"emailBrandingIDHasSuffix,omitempty"`
+	EmailBrandingIDIsNil        *bool    `json:"emailBrandingIDIsNil,omitempty"`
+	EmailBrandingIDNotNil       *bool    `json:"emailBrandingIDNotNil,omitempty"`
+	EmailBrandingIDEqualFold    *string  `json:"emailBrandingIDEqualFold,omitempty"`
+	EmailBrandingIDContainsFold *string  `json:"emailBrandingIDContainsFold,omitempty"`
 	// owner edge predicates
 	HasOwner     *bool                     `json:"hasOwner,omitempty"`
 	HasOwnerWith []*OrganizationWhereInput `json:"hasOwnerWith,omitempty"`
@@ -3939,6 +3955,10 @@ type ContactBulkCreatePayload struct {
 type ContactBulkDeletePayload struct {
 	// Deleted contact IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkContact mutation
@@ -4404,6 +4424,10 @@ type ControlBulkCreatePayload struct {
 type ControlBulkDeletePayload struct {
 	// Deleted control IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkControl mutation
@@ -4580,6 +4604,10 @@ type ControlImplementationBulkCreatePayload struct {
 type ControlImplementationBulkDeletePayload struct {
 	// Deleted controlImplementation IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkControlImplementation mutation
@@ -4896,6 +4924,10 @@ type ControlObjectiveBulkCreatePayload struct {
 type ControlObjectiveBulkDeletePayload struct {
 	// Deleted controlObjective IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkControlObjective mutation
@@ -6215,10 +6247,10 @@ type CreateCampaignInput struct {
 	RecurrenceFrequency *enums.Frequency `json:"recurrenceFrequency,omitempty"`
 	// the recurrence interval for the campaign, combined with the recurrence frequency
 	RecurrenceInterval *int64 `json:"recurrenceInterval,omitempty"`
-	// cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
-	RecurrenceCron *string `json:"recurrenceCron,omitempty"`
 	// timezone used for the recurrence schedule
 	RecurrenceTimezone *string `json:"recurrenceTimezone,omitempty"`
+	// cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
+	RecurrenceCron *string `json:"recurrenceCron,omitempty"`
 	// when the campaign was last executed
 	LastRunAt *models.DateTime `json:"lastRunAt,omitempty"`
 	// when the campaign is scheduled to run next
@@ -6233,7 +6265,7 @@ type CreateCampaignInput struct {
 	LastResentAt *models.DateTime `json:"lastResentAt,omitempty"`
 	// additional metadata about the campaign
 	Metadata map[string]any `json:"metadata,omitempty"`
-	// the email branding or theme reference the campaign may use to override the email templates theme
+	// the email branding associated with the campaign
 	EmailBrandingID       *string  `json:"emailBrandingID,omitempty"`
 	OwnerID               *string  `json:"ownerID,omitempty"`
 	BlockedGroupIDs       []string `json:"blockedGroupIDs,omitempty"`
@@ -6631,6 +6663,10 @@ type CreateDirectoryAccountInput struct {
 	SecondaryKey *string `json:"secondaryKey,omitempty"`
 	// lower-cased primary email address, if present
 	CanonicalEmail *string `json:"canonicalEmail,omitempty"`
+	// alternate email address for the identity holder in an array
+	EmailAliases []string `json:"emailAliases,omitempty"`
+	// phone number for the identity holder
+	PhoneNumber *string `json:"phoneNumber,omitempty"`
 	// provider supplied display name
 	DisplayName *string `json:"displayName,omitempty"`
 	// URL of the avatar supplied by the directory provider
@@ -7105,21 +7141,23 @@ type CreateEvidenceInput struct {
 	// the url of the evidence if not uploaded directly to the system
 	URL *string `json:"url,omitempty"`
 	// the status of the evidence, ready, approved, needs renewal, missing artifact, rejected
-	Status                   *enums.EvidenceStatus `json:"status,omitempty"`
-	OwnerID                  *string               `json:"ownerID,omitempty"`
-	EnvironmentID            *string               `json:"environmentID,omitempty"`
-	ScopeID                  *string               `json:"scopeID,omitempty"`
-	ControlIDs               []string              `json:"controlIDs,omitempty"`
-	SubcontrolIDs            []string              `json:"subcontrolIDs,omitempty"`
-	ControlObjectiveIDs      []string              `json:"controlObjectiveIDs,omitempty"`
-	ControlImplementationIDs []string              `json:"controlImplementationIDs,omitempty"`
-	FileIDs                  []string              `json:"fileIDs,omitempty"`
-	ProgramIDs               []string              `json:"programIDs,omitempty"`
-	TaskIDs                  []string              `json:"taskIDs,omitempty"`
-	PlatformIDs              []string              `json:"platformIDs,omitempty"`
-	ScanIDs                  []string              `json:"scanIDs,omitempty"`
-	CommentIDs               []string              `json:"commentIDs,omitempty"`
-	WorkflowObjectRefIDs     []string              `json:"workflowObjectRefIDs,omitempty"`
+	Status *enums.EvidenceStatus `json:"status,omitempty"`
+	// the cadence for reviewing the evidence
+	ReviewFrequency          *enums.Frequency `json:"reviewFrequency,omitempty"`
+	OwnerID                  *string          `json:"ownerID,omitempty"`
+	EnvironmentID            *string          `json:"environmentID,omitempty"`
+	ScopeID                  *string          `json:"scopeID,omitempty"`
+	ControlIDs               []string         `json:"controlIDs,omitempty"`
+	SubcontrolIDs            []string         `json:"subcontrolIDs,omitempty"`
+	ControlObjectiveIDs      []string         `json:"controlObjectiveIDs,omitempty"`
+	ControlImplementationIDs []string         `json:"controlImplementationIDs,omitempty"`
+	FileIDs                  []string         `json:"fileIDs,omitempty"`
+	ProgramIDs               []string         `json:"programIDs,omitempty"`
+	TaskIDs                  []string         `json:"taskIDs,omitempty"`
+	PlatformIDs              []string         `json:"platformIDs,omitempty"`
+	ScanIDs                  []string         `json:"scanIDs,omitempty"`
+	CommentIDs               []string         `json:"commentIDs,omitempty"`
+	WorkflowObjectRefIDs     []string         `json:"workflowObjectRefIDs,omitempty"`
 }
 
 // CreateExportInput is used for create Export object.
@@ -7155,6 +7193,10 @@ type CreateFileInput struct {
 	EnvironmentName *string `json:"environmentName,omitempty"`
 	// the scope of the file
 	ScopeName *string `json:"scopeName,omitempty"`
+	// the category of the file
+	CategoryName *string `json:"categoryName,omitempty"`
+	// the user-facing display name of the file
+	Name *string `json:"name,omitempty"`
 	// the name of the file provided in the payload key without the extension
 	ProvidedFileName string `json:"providedFileName"`
 	// the extension of the file provided
@@ -7189,6 +7231,7 @@ type CreateFileInput struct {
 	LastAccessedAt            *time.Time `json:"lastAccessedAt,omitempty"`
 	EnvironmentID             *string    `json:"environmentID,omitempty"`
 	ScopeID                   *string    `json:"scopeID,omitempty"`
+	CategoryID                *string    `json:"categoryID,omitempty"`
 	OrganizationIDs           []string   `json:"organizationIDs,omitempty"`
 	GroupIDs                  []string   `json:"groupIDs,omitempty"`
 	ContactIDs                []string   `json:"contactIDs,omitempty"`
@@ -7532,33 +7575,35 @@ type CreateIdentityHolderInput struct {
 	// external identifier for the identity holder from an upstream roster
 	ExternalReferenceID *string `json:"externalReferenceID,omitempty"`
 	// additional metadata about the identity holder
-	Metadata              map[string]any `json:"metadata,omitempty"`
-	OwnerID               *string        `json:"ownerID,omitempty"`
-	BlockedGroupIDs       []string       `json:"blockedGroupIDs,omitempty"`
-	EditorIDs             []string       `json:"editorIDs,omitempty"`
-	ViewerIDs             []string       `json:"viewerIDs,omitempty"`
-	InternalOwnerUserID   *string        `json:"internalOwnerUserID,omitempty"`
-	InternalOwnerGroupID  *string        `json:"internalOwnerGroupID,omitempty"`
-	EnvironmentID         *string        `json:"environmentID,omitempty"`
-	ScopeID               *string        `json:"scopeID,omitempty"`
-	EmployerID            *string        `json:"employerID,omitempty"`
-	AssessmentResponseIDs []string       `json:"assessmentResponseIDs,omitempty"`
-	AssessmentIDs         []string       `json:"assessmentIDs,omitempty"`
-	TemplateIDs           []string       `json:"templateIDs,omitempty"`
-	AssetIDs              []string       `json:"assetIDs,omitempty"`
-	EntityIDs             []string       `json:"entityIDs,omitempty"`
-	DirectoryAccountIDs   []string       `json:"directoryAccountIDs,omitempty"`
-	ControlIDs            []string       `json:"controlIDs,omitempty"`
-	SubcontrolIDs         []string       `json:"subcontrolIDs,omitempty"`
-	PlatformIDs           []string       `json:"platformIDs,omitempty"`
-	CampaignIDs           []string       `json:"campaignIDs,omitempty"`
-	TaskIDs               []string       `json:"taskIDs,omitempty"`
-	FileIDs               []string       `json:"fileIDs,omitempty"`
-	FindingIDs            []string       `json:"findingIDs,omitempty"`
-	WorkflowObjectRefIDs  []string       `json:"workflowObjectRefIDs,omitempty"`
-	AccessPlatformIDs     []string       `json:"accessPlatformIDs,omitempty"`
-	UserID                *string        `json:"userID,omitempty"`
-	InternalPolicyIDs     []string       `json:"internalPolicyIDs,omitempty"`
+	Metadata map[string]any `json:"metadata,omitempty"`
+	// URL of the avatar of the identity holder
+	AvatarRemoteURL       *string  `json:"avatarRemoteURL,omitempty"`
+	OwnerID               *string  `json:"ownerID,omitempty"`
+	BlockedGroupIDs       []string `json:"blockedGroupIDs,omitempty"`
+	EditorIDs             []string `json:"editorIDs,omitempty"`
+	ViewerIDs             []string `json:"viewerIDs,omitempty"`
+	InternalOwnerUserID   *string  `json:"internalOwnerUserID,omitempty"`
+	InternalOwnerGroupID  *string  `json:"internalOwnerGroupID,omitempty"`
+	EnvironmentID         *string  `json:"environmentID,omitempty"`
+	ScopeID               *string  `json:"scopeID,omitempty"`
+	EmployerID            *string  `json:"employerID,omitempty"`
+	AssessmentResponseIDs []string `json:"assessmentResponseIDs,omitempty"`
+	AssessmentIDs         []string `json:"assessmentIDs,omitempty"`
+	TemplateIDs           []string `json:"templateIDs,omitempty"`
+	AssetIDs              []string `json:"assetIDs,omitempty"`
+	EntityIDs             []string `json:"entityIDs,omitempty"`
+	DirectoryAccountIDs   []string `json:"directoryAccountIDs,omitempty"`
+	ControlIDs            []string `json:"controlIDs,omitempty"`
+	SubcontrolIDs         []string `json:"subcontrolIDs,omitempty"`
+	PlatformIDs           []string `json:"platformIDs,omitempty"`
+	CampaignIDs           []string `json:"campaignIDs,omitempty"`
+	TaskIDs               []string `json:"taskIDs,omitempty"`
+	FileIDs               []string `json:"fileIDs,omitempty"`
+	FindingIDs            []string `json:"findingIDs,omitempty"`
+	WorkflowObjectRefIDs  []string `json:"workflowObjectRefIDs,omitempty"`
+	AccessPlatformIDs     []string `json:"accessPlatformIDs,omitempty"`
+	UserID                *string  `json:"userID,omitempty"`
+	InternalPolicyIDs     []string `json:"internalPolicyIDs,omitempty"`
 }
 
 // CreateInternalPolicyInput is used for create InternalPolicy object.
@@ -9712,6 +9757,10 @@ type CustomDomainBulkCreatePayload struct {
 type CustomDomainBulkDeletePayload struct {
 	// Deleted customDomain IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkCustomDomain mutation
@@ -10358,6 +10407,10 @@ type DNSVerificationBulkCreatePayload struct {
 type DNSVerificationBulkDeletePayload struct {
 	// Deleted dnsVerification IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkDNSVerification mutation
@@ -10663,6 +10716,10 @@ type DirectoryAccount struct {
 	SecondaryKey *string `json:"secondaryKey,omitempty"`
 	// lower-cased primary email address, if present
 	CanonicalEmail *string `json:"canonicalEmail,omitempty"`
+	// alternate email address for the identity holder in an array
+	EmailAliases []string `json:"emailAliases,omitempty"`
+	// phone number for the identity holder
+	PhoneNumber *string `json:"phoneNumber,omitempty"`
 	// provider supplied display name
 	DisplayName *string `json:"displayName,omitempty"`
 	// URL of the avatar supplied by the directory provider
@@ -11091,6 +11148,22 @@ type DirectoryAccountWhereInput struct {
 	CanonicalEmailNotNil       *bool    `json:"canonicalEmailNotNil,omitempty"`
 	CanonicalEmailEqualFold    *string  `json:"canonicalEmailEqualFold,omitempty"`
 	CanonicalEmailContainsFold *string  `json:"canonicalEmailContainsFold,omitempty"`
+	// phone_number field predicates
+	PhoneNumber             *string  `json:"phoneNumber,omitempty"`
+	PhoneNumberNeq          *string  `json:"phoneNumberNEQ,omitempty"`
+	PhoneNumberIn           []string `json:"phoneNumberIn,omitempty"`
+	PhoneNumberNotIn        []string `json:"phoneNumberNotIn,omitempty"`
+	PhoneNumberGt           *string  `json:"phoneNumberGT,omitempty"`
+	PhoneNumberGte          *string  `json:"phoneNumberGTE,omitempty"`
+	PhoneNumberLt           *string  `json:"phoneNumberLT,omitempty"`
+	PhoneNumberLte          *string  `json:"phoneNumberLTE,omitempty"`
+	PhoneNumberContains     *string  `json:"phoneNumberContains,omitempty"`
+	PhoneNumberHasPrefix    *string  `json:"phoneNumberHasPrefix,omitempty"`
+	PhoneNumberHasSuffix    *string  `json:"phoneNumberHasSuffix,omitempty"`
+	PhoneNumberIsNil        *bool    `json:"phoneNumberIsNil,omitempty"`
+	PhoneNumberNotNil       *bool    `json:"phoneNumberNotNil,omitempty"`
+	PhoneNumberEqualFold    *string  `json:"phoneNumberEqualFold,omitempty"`
+	PhoneNumberContainsFold *string  `json:"phoneNumberContainsFold,omitempty"`
 	// display_name field predicates
 	DisplayName             *string  `json:"displayName,omitempty"`
 	DisplayNameNeq          *string  `json:"displayNameNEQ,omitempty"`
@@ -11398,6 +11471,8 @@ type DirectoryAccountWhereInput struct {
 	HasMembershipsWith []*DirectoryMembershipWhereInput `json:"hasMembershipsWith,omitempty"`
 	// Filter for tagsHas to contain a specific value
 	TagsHas *string `json:"tagsHas,omitempty"`
+	// Filter for emailAliasesHas to contain a specific value
+	EmailAliasesHas *string `json:"emailAliasesHas,omitempty"`
 }
 
 type DirectoryGroup struct {
@@ -12997,6 +13072,10 @@ type DocumentDataBulkCreatePayload struct {
 type DocumentDataBulkDeletePayload struct {
 	// Deleted documentData IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkDocumentData mutation
@@ -13306,6 +13385,10 @@ type EmailTemplateBulkCreatePayload struct {
 type EmailTemplateBulkDeletePayload struct {
 	// Deleted emailTemplate IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkEmailTemplate mutation
@@ -13921,6 +14004,10 @@ type EntityBulkCreatePayload struct {
 type EntityBulkDeletePayload struct {
 	// Deleted entity IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkEntity mutation
@@ -14003,6 +14090,10 @@ type EntityTypeBulkCreatePayload struct {
 type EntityTypeBulkDeletePayload struct {
 	// Deleted entityType IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkEntityType mutation
@@ -15078,6 +15169,10 @@ type EventBulkCreatePayload struct {
 type EventBulkDeletePayload struct {
 	// Deleted event IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkEvent mutation
@@ -15330,7 +15425,9 @@ type Evidence struct {
 	// the url of the evidence if not uploaded directly to the system
 	URL *string `json:"url,omitempty"`
 	// the status of the evidence, ready, approved, needs renewal, missing artifact, rejected
-	Status                 *enums.EvidenceStatus            `json:"status,omitempty"`
+	Status *enums.EvidenceStatus `json:"status,omitempty"`
+	// the cadence for reviewing the evidence
+	ReviewFrequency        *enums.Frequency                 `json:"reviewFrequency,omitempty"`
 	Owner                  *Organization                    `json:"owner,omitempty"`
 	Environment            *CustomTypeEnum                  `json:"environment,omitempty"`
 	Scope                  *CustomTypeEnum                  `json:"scope,omitempty"`
@@ -15367,6 +15464,10 @@ type EvidenceBulkCreatePayload struct {
 type EvidenceBulkDeletePayload struct {
 	// Deleted evidence IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkEvidence mutation
@@ -15717,6 +15818,13 @@ type EvidenceWhereInput struct {
 	StatusNotIn  []enums.EvidenceStatus `json:"statusNotIn,omitempty"`
 	StatusIsNil  *bool                  `json:"statusIsNil,omitempty"`
 	StatusNotNil *bool                  `json:"statusNotNil,omitempty"`
+	// review_frequency field predicates
+	ReviewFrequency       *enums.Frequency  `json:"reviewFrequency,omitempty"`
+	ReviewFrequencyNeq    *enums.Frequency  `json:"reviewFrequencyNEQ,omitempty"`
+	ReviewFrequencyIn     []enums.Frequency `json:"reviewFrequencyIn,omitempty"`
+	ReviewFrequencyNotIn  []enums.Frequency `json:"reviewFrequencyNotIn,omitempty"`
+	ReviewFrequencyIsNil  *bool             `json:"reviewFrequencyIsNil,omitempty"`
+	ReviewFrequencyNotNil *bool             `json:"reviewFrequencyNotNil,omitempty"`
 	// owner edge predicates
 	HasOwner     *bool                     `json:"hasOwner,omitempty"`
 	HasOwnerWith []*OrganizationWhereInput `json:"hasOwnerWith,omitempty"`
@@ -15806,6 +15914,10 @@ type ExportBulkCreatePayload struct {
 type ExportBulkDeletePayload struct {
 	// Deleted export IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -16042,6 +16154,12 @@ type File struct {
 	ScopeName *string `json:"scopeName,omitempty"`
 	// the scope of the file
 	ScopeID *string `json:"scopeID,omitempty"`
+	// the category of the file
+	CategoryName *string `json:"categoryName,omitempty"`
+	// the category of the file
+	CategoryID *string `json:"categoryID,omitempty"`
+	// the user-facing display name of the file
+	Name *string `json:"name,omitempty"`
 	// the name of the file provided in the payload key without the extension
 	ProvidedFileName string `json:"providedFileName"`
 	// the extension of the file provided
@@ -16076,6 +16194,7 @@ type File struct {
 	LastAccessedAt         *time.Time                   `json:"lastAccessedAt,omitempty"`
 	Environment            *CustomTypeEnum              `json:"environment,omitempty"`
 	Scope                  *CustomTypeEnum              `json:"scope,omitempty"`
+	Category               *CustomTypeEnum              `json:"category,omitempty"`
 	Organization           []*Organization              `json:"organization,omitempty"`
 	Groups                 *GroupConnection             `json:"groups"`
 	Contact                []*Contact                   `json:"contact,omitempty"`
@@ -16122,6 +16241,13 @@ type FileEdge struct {
 	Node *File `json:"node,omitempty"`
 	// A cursor for use in pagination.
 	Cursor string `json:"cursor"`
+}
+
+type FileMetadataInput struct {
+	// the display name for the file, defaults to the original filename
+	Name *string `json:"name,omitempty"`
+	// additional extracted or client-provided metadata for the file
+	Metadata map[string]any `json:"metadata,omitempty"`
 }
 
 // Ordering options for File connections
@@ -16304,6 +16430,54 @@ type FileWhereInput struct {
 	ScopeIDNotNil       *bool    `json:"scopeIDNotNil,omitempty"`
 	ScopeIDEqualFold    *string  `json:"scopeIDEqualFold,omitempty"`
 	ScopeIDContainsFold *string  `json:"scopeIDContainsFold,omitempty"`
+	// category_name field predicates
+	CategoryName             *string  `json:"categoryName,omitempty"`
+	CategoryNameNeq          *string  `json:"categoryNameNEQ,omitempty"`
+	CategoryNameIn           []string `json:"categoryNameIn,omitempty"`
+	CategoryNameNotIn        []string `json:"categoryNameNotIn,omitempty"`
+	CategoryNameGt           *string  `json:"categoryNameGT,omitempty"`
+	CategoryNameGte          *string  `json:"categoryNameGTE,omitempty"`
+	CategoryNameLt           *string  `json:"categoryNameLT,omitempty"`
+	CategoryNameLte          *string  `json:"categoryNameLTE,omitempty"`
+	CategoryNameContains     *string  `json:"categoryNameContains,omitempty"`
+	CategoryNameHasPrefix    *string  `json:"categoryNameHasPrefix,omitempty"`
+	CategoryNameHasSuffix    *string  `json:"categoryNameHasSuffix,omitempty"`
+	CategoryNameIsNil        *bool    `json:"categoryNameIsNil,omitempty"`
+	CategoryNameNotNil       *bool    `json:"categoryNameNotNil,omitempty"`
+	CategoryNameEqualFold    *string  `json:"categoryNameEqualFold,omitempty"`
+	CategoryNameContainsFold *string  `json:"categoryNameContainsFold,omitempty"`
+	// category_id field predicates
+	CategoryID             *string  `json:"categoryID,omitempty"`
+	CategoryIdneq          *string  `json:"categoryIDNEQ,omitempty"`
+	CategoryIDIn           []string `json:"categoryIDIn,omitempty"`
+	CategoryIDNotIn        []string `json:"categoryIDNotIn,omitempty"`
+	CategoryIdgt           *string  `json:"categoryIDGT,omitempty"`
+	CategoryIdgte          *string  `json:"categoryIDGTE,omitempty"`
+	CategoryIdlt           *string  `json:"categoryIDLT,omitempty"`
+	CategoryIdlte          *string  `json:"categoryIDLTE,omitempty"`
+	CategoryIDContains     *string  `json:"categoryIDContains,omitempty"`
+	CategoryIDHasPrefix    *string  `json:"categoryIDHasPrefix,omitempty"`
+	CategoryIDHasSuffix    *string  `json:"categoryIDHasSuffix,omitempty"`
+	CategoryIDIsNil        *bool    `json:"categoryIDIsNil,omitempty"`
+	CategoryIDNotNil       *bool    `json:"categoryIDNotNil,omitempty"`
+	CategoryIDEqualFold    *string  `json:"categoryIDEqualFold,omitempty"`
+	CategoryIDContainsFold *string  `json:"categoryIDContainsFold,omitempty"`
+	// name field predicates
+	Name             *string  `json:"name,omitempty"`
+	NameNeq          *string  `json:"nameNEQ,omitempty"`
+	NameIn           []string `json:"nameIn,omitempty"`
+	NameNotIn        []string `json:"nameNotIn,omitempty"`
+	NameGt           *string  `json:"nameGT,omitempty"`
+	NameGte          *string  `json:"nameGTE,omitempty"`
+	NameLt           *string  `json:"nameLT,omitempty"`
+	NameLte          *string  `json:"nameLTE,omitempty"`
+	NameContains     *string  `json:"nameContains,omitempty"`
+	NameHasPrefix    *string  `json:"nameHasPrefix,omitempty"`
+	NameHasSuffix    *string  `json:"nameHasSuffix,omitempty"`
+	NameIsNil        *bool    `json:"nameIsNil,omitempty"`
+	NameNotNil       *bool    `json:"nameNotNil,omitempty"`
+	NameEqualFold    *string  `json:"nameEqualFold,omitempty"`
+	NameContainsFold *string  `json:"nameContainsFold,omitempty"`
 	// provided_file_name field predicates
 	ProvidedFileName             *string  `json:"providedFileName,omitempty"`
 	ProvidedFileNameNeq          *string  `json:"providedFileNameNEQ,omitempty"`
@@ -16545,6 +16719,9 @@ type FileWhereInput struct {
 	// scope edge predicates
 	HasScope     *bool                       `json:"hasScope,omitempty"`
 	HasScopeWith []*CustomTypeEnumWhereInput `json:"hasScopeWith,omitempty"`
+	// category edge predicates
+	HasCategory     *bool                       `json:"hasCategory,omitempty"`
+	HasCategoryWith []*CustomTypeEnumWhereInput `json:"hasCategoryWith,omitempty"`
 	// organization edge predicates
 	HasOrganization     *bool                     `json:"hasOrganization,omitempty"`
 	HasOrganizationWith []*OrganizationWhereInput `json:"hasOrganizationWith,omitempty"`
@@ -16748,6 +16925,10 @@ type FindingBulkCreatePayload struct {
 type FindingBulkDeletePayload struct {
 	// Deleted finding IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkFinding mutation
@@ -17839,6 +18020,10 @@ type GroupBulkCreatePayload struct {
 type GroupBulkDeletePayload struct {
 	// Deleted group IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkGroup mutation
@@ -17912,6 +18097,10 @@ type GroupMembershipBulkCreatePayload struct {
 type GroupMembershipBulkDeletePayload struct {
 	// Deleted groupMembership IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkGroupMembership mutation
@@ -18182,6 +18371,10 @@ type GroupSettingBulkCreatePayload struct {
 type GroupSettingBulkDeletePayload struct {
 	// Deleted groupSetting IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkGroupSetting mutation
@@ -18789,6 +18982,10 @@ type HushBulkCreatePayload struct {
 type HushBulkDeletePayload struct {
 	// Deleted hush IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkHush mutation
@@ -19116,7 +19313,9 @@ type IdentityHolder struct {
 	// external identifier for the identity holder from an upstream roster
 	ExternalReferenceID *string `json:"externalReferenceID,omitempty"`
 	// additional metadata about the identity holder
-	Metadata            map[string]any                `json:"metadata,omitempty"`
+	Metadata map[string]any `json:"metadata,omitempty"`
+	// URL of the avatar of the identity holder
+	AvatarRemoteURL     *string                       `json:"avatarRemoteURL,omitempty"`
 	Owner               *Organization                 `json:"owner,omitempty"`
 	BlockedGroups       *GroupConnection              `json:"blockedGroups"`
 	Editors             *GroupConnection              `json:"editors"`
@@ -19165,6 +19364,10 @@ type IdentityHolderBulkCreatePayload struct {
 type IdentityHolderBulkDeletePayload struct {
 	// Deleted identityHolder IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkIdentityHolder mutation
@@ -19665,6 +19868,22 @@ type IdentityHolderWhereInput struct {
 	ExternalReferenceIDNotNil       *bool    `json:"externalReferenceIDNotNil,omitempty"`
 	ExternalReferenceIDEqualFold    *string  `json:"externalReferenceIDEqualFold,omitempty"`
 	ExternalReferenceIDContainsFold *string  `json:"externalReferenceIDContainsFold,omitempty"`
+	// avatar_remote_url field predicates
+	AvatarRemoteURL             *string  `json:"avatarRemoteURL,omitempty"`
+	AvatarRemoteURLNeq          *string  `json:"avatarRemoteURLNEQ,omitempty"`
+	AvatarRemoteURLIn           []string `json:"avatarRemoteURLIn,omitempty"`
+	AvatarRemoteURLNotIn        []string `json:"avatarRemoteURLNotIn,omitempty"`
+	AvatarRemoteURLGt           *string  `json:"avatarRemoteURLGT,omitempty"`
+	AvatarRemoteURLGte          *string  `json:"avatarRemoteURLGTE,omitempty"`
+	AvatarRemoteURLLt           *string  `json:"avatarRemoteURLLT,omitempty"`
+	AvatarRemoteURLLte          *string  `json:"avatarRemoteURLLTE,omitempty"`
+	AvatarRemoteURLContains     *string  `json:"avatarRemoteURLContains,omitempty"`
+	AvatarRemoteURLHasPrefix    *string  `json:"avatarRemoteURLHasPrefix,omitempty"`
+	AvatarRemoteURLHasSuffix    *string  `json:"avatarRemoteURLHasSuffix,omitempty"`
+	AvatarRemoteURLIsNil        *bool    `json:"avatarRemoteURLIsNil,omitempty"`
+	AvatarRemoteURLNotNil       *bool    `json:"avatarRemoteURLNotNil,omitempty"`
+	AvatarRemoteURLEqualFold    *string  `json:"avatarRemoteURLEqualFold,omitempty"`
+	AvatarRemoteURLContainsFold *string  `json:"avatarRemoteURLContainsFold,omitempty"`
 	// owner edge predicates
 	HasOwner     *bool                     `json:"hasOwner,omitempty"`
 	HasOwnerWith []*OrganizationWhereInput `json:"hasOwnerWith,omitempty"`
@@ -20382,6 +20601,10 @@ type InternalPolicyBulkCreatePayload struct {
 type InternalPolicyBulkDeletePayload struct {
 	// Deleted internalPolicy IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkInternalPolicy mutation
@@ -20960,6 +21183,10 @@ type InviteBulkCreatePayload struct {
 type InviteBulkDeletePayload struct {
 	// Deleted invite IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkInvite mutation
@@ -22204,6 +22431,10 @@ type JobTemplateBulkCreatePayload struct {
 type JobTemplateBulkDeletePayload struct {
 	// Deleted jobTemplate IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkJobTemplate mutation
@@ -22478,6 +22709,10 @@ type MappableDomainBulkCreatePayload struct {
 type MappableDomainBulkDeletePayload struct {
 	// Deleted mappableDomain IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkMappableDomain mutation
@@ -22683,6 +22918,10 @@ type MappedControlBulkCreatePayload struct {
 type MappedControlBulkDeletePayload struct {
 	// Deleted mappedControl IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkMappedControl mutation
@@ -22974,6 +23213,10 @@ type NarrativeBulkCreatePayload struct {
 type NarrativeBulkDeletePayload struct {
 	// Deleted narrative IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkNarrative mutation
@@ -23667,6 +23910,10 @@ type NotificationPreferenceBulkCreatePayload struct {
 type NotificationPreferenceBulkDeletePayload struct {
 	// Deleted notificationPreference IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkNotificationPreference mutation
@@ -24087,6 +24334,10 @@ type NotificationTemplateBulkCreatePayload struct {
 type NotificationTemplateBulkDeletePayload struct {
 	// Deleted notificationTemplate IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkNotificationTemplate mutation
@@ -24617,6 +24868,10 @@ type OrgMembershipBulkCreatePayload struct {
 type OrgMembershipBulkDeletePayload struct {
 	// Deleted orgMembership IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkOrgMembership mutation
@@ -25230,6 +25485,10 @@ type OrganizationSettingBulkCreatePayload struct {
 type OrganizationSettingBulkDeletePayload struct {
 	// Deleted organizationSetting IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkOrganizationSetting mutation
@@ -27606,6 +27865,10 @@ type ProcedureBulkCreatePayload struct {
 type ProcedureBulkDeletePayload struct {
 	// Deleted export IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkProcedure mutation
@@ -28191,6 +28454,10 @@ type ProgramBulkCreatePayload struct {
 type ProgramBulkDeletePayload struct {
 	// Deleted program IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkProgram mutation
@@ -28256,6 +28523,10 @@ type ProgramMembershipBulkCreatePayload struct {
 type ProgramMembershipBulkDeletePayload struct {
 	// Deleted programMembership IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkProgramMembership mutation
@@ -28878,6 +29149,10 @@ type RemediationBulkCreatePayload struct {
 type RemediationBulkDeletePayload struct {
 	// Deleted remediation IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkRemediation mutation
@@ -29606,6 +29881,10 @@ type ReviewBulkCreatePayload struct {
 type ReviewBulkDeletePayload struct {
 	// Deleted trustCenterNDARequest IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkReview mutation
@@ -30271,6 +30550,10 @@ type RiskBulkCreatePayload struct {
 type RiskBulkDeletePayload struct {
 	// Deleted risk IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkRisk mutation
@@ -30926,6 +31209,10 @@ type SLADefinitionBulkCreatePayload struct {
 type SLADefinitionBulkDeletePayload struct {
 	// Deleted slaDefinition IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkSLADefinition mutation
@@ -31203,6 +31490,10 @@ type ScanBulkCreatePayload struct {
 type ScanBulkDeletePayload struct {
 	// Deleted scan IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkScan mutation
@@ -31731,6 +32022,10 @@ type ScheduledJobBulkCreatePayload struct {
 type ScheduledJobBulkDeletePayload struct {
 	// Deleted scheduledJob IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkScheduledJob mutation
@@ -32801,6 +33096,10 @@ type SubcontrolBulkCreatePayload struct {
 type SubcontrolBulkDeletePayload struct {
 	// Deleted subcontrol IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkSubcontrol mutation
@@ -33473,6 +33772,10 @@ type SubprocessorBulkCreatePayload struct {
 type SubprocessorBulkDeletePayload struct {
 	// Deleted subprocessor IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkSubprocessor mutation
@@ -34011,6 +34314,10 @@ type SystemDetailBulkCreatePayload struct {
 type SystemDetailBulkDeletePayload struct {
 	// Deleted systemDetail IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkSystemDetail mutation
@@ -34795,6 +35102,10 @@ type TaskBulkCreatePayload struct {
 type TaskBulkDeletePayload struct {
 	// Deleted task IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkTask mutation
@@ -35331,6 +35642,10 @@ type TemplateBulkCreatePayload struct {
 type TemplateBulkDeletePayload struct {
 	// Deleted template IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkTemplate mutation
@@ -35775,6 +36090,10 @@ type TrustCenterComplianceBulkCreatePayload struct {
 type TrustCenterComplianceBulkDeletePayload struct {
 	// Deleted trustCenterCompliance IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkTrustCenterCompliance mutation
@@ -36019,6 +36338,10 @@ type TrustCenterDocBulkCreatePayload struct {
 type TrustCenterDocBulkDeletePayload struct {
 	// Deleted trustCenterDoc IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkTrustCenterDoc mutation
@@ -36573,6 +36896,10 @@ type TrustCenterFAQBulkCreatePayload struct {
 type TrustCenterFAQBulkDeletePayload struct {
 	// Deleted trustCenterFAQ IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkTrustCenterFAQ mutation
@@ -36864,6 +37191,10 @@ type TrustCenterNDARequestBulkCreatePayload struct {
 type TrustCenterNDARequestBulkDeletePayload struct {
 	// Deleted trustCenterNDARequest IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -37775,6 +38106,10 @@ type TrustCenterSubprocessorBulkCreatePayload struct {
 type TrustCenterSubprocessorBulkDeletePayload struct {
 	// Deleted trustCenterSubprocessor IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkTrustCenterSubprocessor mutation
@@ -38973,12 +39308,12 @@ type UpdateCampaignInput struct {
 	// the recurrence interval for the campaign, combined with the recurrence frequency
 	RecurrenceInterval      *int64 `json:"recurrenceInterval,omitempty"`
 	ClearRecurrenceInterval *bool  `json:"clearRecurrenceInterval,omitempty"`
-	// cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
-	RecurrenceCron      *string `json:"recurrenceCron,omitempty"`
-	ClearRecurrenceCron *bool   `json:"clearRecurrenceCron,omitempty"`
 	// timezone used for the recurrence schedule
 	RecurrenceTimezone      *string `json:"recurrenceTimezone,omitempty"`
 	ClearRecurrenceTimezone *bool   `json:"clearRecurrenceTimezone,omitempty"`
+	// cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
+	RecurrenceCron      *string `json:"recurrenceCron,omitempty"`
+	ClearRecurrenceCron *bool   `json:"clearRecurrenceCron,omitempty"`
 	// when the campaign was last executed
 	LastRunAt      *models.DateTime `json:"lastRunAt,omitempty"`
 	ClearLastRunAt *bool            `json:"clearLastRunAt,omitempty"`
@@ -39000,7 +39335,7 @@ type UpdateCampaignInput struct {
 	// additional metadata about the campaign
 	Metadata      map[string]any `json:"metadata,omitempty"`
 	ClearMetadata *bool          `json:"clearMetadata,omitempty"`
-	// the email branding or theme reference the campaign may use to override the email templates theme
+	// the email branding associated with the campaign
 	EmailBrandingID             *string  `json:"emailBrandingID,omitempty"`
 	ClearEmailBrandingID        *bool    `json:"clearEmailBrandingID,omitempty"`
 	AddBlockedGroupIDs          []string `json:"addBlockedGroupIDs,omitempty"`
@@ -39663,6 +39998,13 @@ type UpdateDirectoryAccountInput struct {
 	// lower-cased primary email address, if present
 	CanonicalEmail      *string `json:"canonicalEmail,omitempty"`
 	ClearCanonicalEmail *bool   `json:"clearCanonicalEmail,omitempty"`
+	// alternate email address for the identity holder in an array
+	EmailAliases       []string `json:"emailAliases,omitempty"`
+	AppendEmailAliases []string `json:"appendEmailAliases,omitempty"`
+	ClearEmailAliases  *bool    `json:"clearEmailAliases,omitempty"`
+	// phone number for the identity holder
+	PhoneNumber      *string `json:"phoneNumber,omitempty"`
+	ClearPhoneNumber *bool   `json:"clearPhoneNumber,omitempty"`
 	// provider supplied display name
 	DisplayName      *string `json:"displayName,omitempty"`
 	ClearDisplayName *bool   `json:"clearDisplayName,omitempty"`
@@ -40401,47 +40743,50 @@ type UpdateEvidenceInput struct {
 	URL      *string `json:"url,omitempty"`
 	ClearURL *bool   `json:"clearURL,omitempty"`
 	// the status of the evidence, ready, approved, needs renewal, missing artifact, rejected
-	Status                         *enums.EvidenceStatus `json:"status,omitempty"`
-	ClearStatus                    *bool                 `json:"clearStatus,omitempty"`
-	EnvironmentID                  *string               `json:"environmentID,omitempty"`
-	ClearEnvironment               *bool                 `json:"clearEnvironment,omitempty"`
-	ScopeID                        *string               `json:"scopeID,omitempty"`
-	ClearScope                     *bool                 `json:"clearScope,omitempty"`
-	AddControlIDs                  []string              `json:"addControlIDs,omitempty"`
-	RemoveControlIDs               []string              `json:"removeControlIDs,omitempty"`
-	ClearControls                  *bool                 `json:"clearControls,omitempty"`
-	AddSubcontrolIDs               []string              `json:"addSubcontrolIDs,omitempty"`
-	RemoveSubcontrolIDs            []string              `json:"removeSubcontrolIDs,omitempty"`
-	ClearSubcontrols               *bool                 `json:"clearSubcontrols,omitempty"`
-	AddControlObjectiveIDs         []string              `json:"addControlObjectiveIDs,omitempty"`
-	RemoveControlObjectiveIDs      []string              `json:"removeControlObjectiveIDs,omitempty"`
-	ClearControlObjectives         *bool                 `json:"clearControlObjectives,omitempty"`
-	AddControlImplementationIDs    []string              `json:"addControlImplementationIDs,omitempty"`
-	RemoveControlImplementationIDs []string              `json:"removeControlImplementationIDs,omitempty"`
-	ClearControlImplementations    *bool                 `json:"clearControlImplementations,omitempty"`
-	AddFileIDs                     []string              `json:"addFileIDs,omitempty"`
-	RemoveFileIDs                  []string              `json:"removeFileIDs,omitempty"`
-	ClearFiles                     *bool                 `json:"clearFiles,omitempty"`
-	AddProgramIDs                  []string              `json:"addProgramIDs,omitempty"`
-	RemoveProgramIDs               []string              `json:"removeProgramIDs,omitempty"`
-	ClearPrograms                  *bool                 `json:"clearPrograms,omitempty"`
-	AddTaskIDs                     []string              `json:"addTaskIDs,omitempty"`
-	RemoveTaskIDs                  []string              `json:"removeTaskIDs,omitempty"`
-	ClearTasks                     *bool                 `json:"clearTasks,omitempty"`
-	AddPlatformIDs                 []string              `json:"addPlatformIDs,omitempty"`
-	RemovePlatformIDs              []string              `json:"removePlatformIDs,omitempty"`
-	ClearPlatforms                 *bool                 `json:"clearPlatforms,omitempty"`
-	AddScanIDs                     []string              `json:"addScanIDs,omitempty"`
-	RemoveScanIDs                  []string              `json:"removeScanIDs,omitempty"`
-	ClearScans                     *bool                 `json:"clearScans,omitempty"`
-	AddCommentIDs                  []string              `json:"addCommentIDs,omitempty"`
-	RemoveCommentIDs               []string              `json:"removeCommentIDs,omitempty"`
-	ClearComments                  *bool                 `json:"clearComments,omitempty"`
-	AddWorkflowObjectRefIDs        []string              `json:"addWorkflowObjectRefIDs,omitempty"`
-	RemoveWorkflowObjectRefIDs     []string              `json:"removeWorkflowObjectRefIDs,omitempty"`
-	ClearWorkflowObjectRefs        *bool                 `json:"clearWorkflowObjectRefs,omitempty"`
-	AddComment                     *CreateNoteInput      `json:"addComment,omitempty"`
-	DeleteComment                  *string               `json:"deleteComment,omitempty"`
+	Status      *enums.EvidenceStatus `json:"status,omitempty"`
+	ClearStatus *bool                 `json:"clearStatus,omitempty"`
+	// the cadence for reviewing the evidence
+	ReviewFrequency                *enums.Frequency `json:"reviewFrequency,omitempty"`
+	ClearReviewFrequency           *bool            `json:"clearReviewFrequency,omitempty"`
+	EnvironmentID                  *string          `json:"environmentID,omitempty"`
+	ClearEnvironment               *bool            `json:"clearEnvironment,omitempty"`
+	ScopeID                        *string          `json:"scopeID,omitempty"`
+	ClearScope                     *bool            `json:"clearScope,omitempty"`
+	AddControlIDs                  []string         `json:"addControlIDs,omitempty"`
+	RemoveControlIDs               []string         `json:"removeControlIDs,omitempty"`
+	ClearControls                  *bool            `json:"clearControls,omitempty"`
+	AddSubcontrolIDs               []string         `json:"addSubcontrolIDs,omitempty"`
+	RemoveSubcontrolIDs            []string         `json:"removeSubcontrolIDs,omitempty"`
+	ClearSubcontrols               *bool            `json:"clearSubcontrols,omitempty"`
+	AddControlObjectiveIDs         []string         `json:"addControlObjectiveIDs,omitempty"`
+	RemoveControlObjectiveIDs      []string         `json:"removeControlObjectiveIDs,omitempty"`
+	ClearControlObjectives         *bool            `json:"clearControlObjectives,omitempty"`
+	AddControlImplementationIDs    []string         `json:"addControlImplementationIDs,omitempty"`
+	RemoveControlImplementationIDs []string         `json:"removeControlImplementationIDs,omitempty"`
+	ClearControlImplementations    *bool            `json:"clearControlImplementations,omitempty"`
+	AddFileIDs                     []string         `json:"addFileIDs,omitempty"`
+	RemoveFileIDs                  []string         `json:"removeFileIDs,omitempty"`
+	ClearFiles                     *bool            `json:"clearFiles,omitempty"`
+	AddProgramIDs                  []string         `json:"addProgramIDs,omitempty"`
+	RemoveProgramIDs               []string         `json:"removeProgramIDs,omitempty"`
+	ClearPrograms                  *bool            `json:"clearPrograms,omitempty"`
+	AddTaskIDs                     []string         `json:"addTaskIDs,omitempty"`
+	RemoveTaskIDs                  []string         `json:"removeTaskIDs,omitempty"`
+	ClearTasks                     *bool            `json:"clearTasks,omitempty"`
+	AddPlatformIDs                 []string         `json:"addPlatformIDs,omitempty"`
+	RemovePlatformIDs              []string         `json:"removePlatformIDs,omitempty"`
+	ClearPlatforms                 *bool            `json:"clearPlatforms,omitempty"`
+	AddScanIDs                     []string         `json:"addScanIDs,omitempty"`
+	RemoveScanIDs                  []string         `json:"removeScanIDs,omitempty"`
+	ClearScans                     *bool            `json:"clearScans,omitempty"`
+	AddCommentIDs                  []string         `json:"addCommentIDs,omitempty"`
+	RemoveCommentIDs               []string         `json:"removeCommentIDs,omitempty"`
+	ClearComments                  *bool            `json:"clearComments,omitempty"`
+	AddWorkflowObjectRefIDs        []string         `json:"addWorkflowObjectRefIDs,omitempty"`
+	RemoveWorkflowObjectRefIDs     []string         `json:"removeWorkflowObjectRefIDs,omitempty"`
+	ClearWorkflowObjectRefs        *bool            `json:"clearWorkflowObjectRefs,omitempty"`
+	AddComment                     *CreateNoteInput `json:"addComment,omitempty"`
+	DeleteComment                  *string          `json:"deleteComment,omitempty"`
 }
 
 // UpdateExportInput is used for update Export object.
@@ -40484,6 +40829,12 @@ type UpdateFileInput struct {
 	// the scope of the file
 	ScopeName      *string `json:"scopeName,omitempty"`
 	ClearScopeName *bool   `json:"clearScopeName,omitempty"`
+	// the category of the file
+	CategoryName      *string `json:"categoryName,omitempty"`
+	ClearCategoryName *bool   `json:"clearCategoryName,omitempty"`
+	// the user-facing display name of the file
+	Name      *string `json:"name,omitempty"`
+	ClearName *bool   `json:"clearName,omitempty"`
 	// the name of the file provided in the payload key without the extension
 	ProvidedFileName *string `json:"providedFileName,omitempty"`
 	// the extension of the file provided
@@ -40534,6 +40885,8 @@ type UpdateFileInput struct {
 	ClearEnvironment                *bool      `json:"clearEnvironment,omitempty"`
 	ScopeID                         *string    `json:"scopeID,omitempty"`
 	ClearScope                      *bool      `json:"clearScope,omitempty"`
+	CategoryID                      *string    `json:"categoryID,omitempty"`
+	ClearCategory                   *bool      `json:"clearCategory,omitempty"`
 	AddOrganizationIDs              []string   `json:"addOrganizationIDs,omitempty"`
 	RemoveOrganizationIDs           []string   `json:"removeOrganizationIDs,omitempty"`
 	ClearOrganization               *bool      `json:"clearOrganization,omitempty"`
@@ -41140,77 +41493,80 @@ type UpdateIdentityHolderInput struct {
 	ExternalReferenceID      *string `json:"externalReferenceID,omitempty"`
 	ClearExternalReferenceID *bool   `json:"clearExternalReferenceID,omitempty"`
 	// additional metadata about the identity holder
-	Metadata                    map[string]any `json:"metadata,omitempty"`
-	ClearMetadata               *bool          `json:"clearMetadata,omitempty"`
-	AddBlockedGroupIDs          []string       `json:"addBlockedGroupIDs,omitempty"`
-	RemoveBlockedGroupIDs       []string       `json:"removeBlockedGroupIDs,omitempty"`
-	ClearBlockedGroups          *bool          `json:"clearBlockedGroups,omitempty"`
-	AddEditorIDs                []string       `json:"addEditorIDs,omitempty"`
-	RemoveEditorIDs             []string       `json:"removeEditorIDs,omitempty"`
-	ClearEditors                *bool          `json:"clearEditors,omitempty"`
-	AddViewerIDs                []string       `json:"addViewerIDs,omitempty"`
-	RemoveViewerIDs             []string       `json:"removeViewerIDs,omitempty"`
-	ClearViewers                *bool          `json:"clearViewers,omitempty"`
-	InternalOwnerUserID         *string        `json:"internalOwnerUserID,omitempty"`
-	ClearInternalOwnerUser      *bool          `json:"clearInternalOwnerUser,omitempty"`
-	InternalOwnerGroupID        *string        `json:"internalOwnerGroupID,omitempty"`
-	ClearInternalOwnerGroup     *bool          `json:"clearInternalOwnerGroup,omitempty"`
-	EnvironmentID               *string        `json:"environmentID,omitempty"`
-	ClearEnvironment            *bool          `json:"clearEnvironment,omitempty"`
-	ScopeID                     *string        `json:"scopeID,omitempty"`
-	ClearScope                  *bool          `json:"clearScope,omitempty"`
-	EmployerID                  *string        `json:"employerID,omitempty"`
-	ClearEmployer               *bool          `json:"clearEmployer,omitempty"`
-	AddAssessmentResponseIDs    []string       `json:"addAssessmentResponseIDs,omitempty"`
-	RemoveAssessmentResponseIDs []string       `json:"removeAssessmentResponseIDs,omitempty"`
-	ClearAssessmentResponses    *bool          `json:"clearAssessmentResponses,omitempty"`
-	AddAssessmentIDs            []string       `json:"addAssessmentIDs,omitempty"`
-	RemoveAssessmentIDs         []string       `json:"removeAssessmentIDs,omitempty"`
-	ClearAssessments            *bool          `json:"clearAssessments,omitempty"`
-	AddTemplateIDs              []string       `json:"addTemplateIDs,omitempty"`
-	RemoveTemplateIDs           []string       `json:"removeTemplateIDs,omitempty"`
-	ClearTemplates              *bool          `json:"clearTemplates,omitempty"`
-	AddAssetIDs                 []string       `json:"addAssetIDs,omitempty"`
-	RemoveAssetIDs              []string       `json:"removeAssetIDs,omitempty"`
-	ClearAssets                 *bool          `json:"clearAssets,omitempty"`
-	AddEntityIDs                []string       `json:"addEntityIDs,omitempty"`
-	RemoveEntityIDs             []string       `json:"removeEntityIDs,omitempty"`
-	ClearEntities               *bool          `json:"clearEntities,omitempty"`
-	AddDirectoryAccountIDs      []string       `json:"addDirectoryAccountIDs,omitempty"`
-	RemoveDirectoryAccountIDs   []string       `json:"removeDirectoryAccountIDs,omitempty"`
-	ClearDirectoryAccounts      *bool          `json:"clearDirectoryAccounts,omitempty"`
-	AddControlIDs               []string       `json:"addControlIDs,omitempty"`
-	RemoveControlIDs            []string       `json:"removeControlIDs,omitempty"`
-	ClearControls               *bool          `json:"clearControls,omitempty"`
-	AddSubcontrolIDs            []string       `json:"addSubcontrolIDs,omitempty"`
-	RemoveSubcontrolIDs         []string       `json:"removeSubcontrolIDs,omitempty"`
-	ClearSubcontrols            *bool          `json:"clearSubcontrols,omitempty"`
-	AddPlatformIDs              []string       `json:"addPlatformIDs,omitempty"`
-	RemovePlatformIDs           []string       `json:"removePlatformIDs,omitempty"`
-	ClearPlatforms              *bool          `json:"clearPlatforms,omitempty"`
-	AddCampaignIDs              []string       `json:"addCampaignIDs,omitempty"`
-	RemoveCampaignIDs           []string       `json:"removeCampaignIDs,omitempty"`
-	ClearCampaigns              *bool          `json:"clearCampaigns,omitempty"`
-	AddTaskIDs                  []string       `json:"addTaskIDs,omitempty"`
-	RemoveTaskIDs               []string       `json:"removeTaskIDs,omitempty"`
-	ClearTasks                  *bool          `json:"clearTasks,omitempty"`
-	AddFileIDs                  []string       `json:"addFileIDs,omitempty"`
-	RemoveFileIDs               []string       `json:"removeFileIDs,omitempty"`
-	ClearFiles                  *bool          `json:"clearFiles,omitempty"`
-	AddFindingIDs               []string       `json:"addFindingIDs,omitempty"`
-	RemoveFindingIDs            []string       `json:"removeFindingIDs,omitempty"`
-	ClearFindings               *bool          `json:"clearFindings,omitempty"`
-	AddWorkflowObjectRefIDs     []string       `json:"addWorkflowObjectRefIDs,omitempty"`
-	RemoveWorkflowObjectRefIDs  []string       `json:"removeWorkflowObjectRefIDs,omitempty"`
-	ClearWorkflowObjectRefs     *bool          `json:"clearWorkflowObjectRefs,omitempty"`
-	AddAccessPlatformIDs        []string       `json:"addAccessPlatformIDs,omitempty"`
-	RemoveAccessPlatformIDs     []string       `json:"removeAccessPlatformIDs,omitempty"`
-	ClearAccessPlatforms        *bool          `json:"clearAccessPlatforms,omitempty"`
-	UserID                      *string        `json:"userID,omitempty"`
-	ClearUser                   *bool          `json:"clearUser,omitempty"`
-	AddInternalPolicyIDs        []string       `json:"addInternalPolicyIDs,omitempty"`
-	RemoveInternalPolicyIDs     []string       `json:"removeInternalPolicyIDs,omitempty"`
-	ClearInternalPolicies       *bool          `json:"clearInternalPolicies,omitempty"`
+	Metadata      map[string]any `json:"metadata,omitempty"`
+	ClearMetadata *bool          `json:"clearMetadata,omitempty"`
+	// URL of the avatar of the identity holder
+	AvatarRemoteURL             *string  `json:"avatarRemoteURL,omitempty"`
+	ClearAvatarRemoteURL        *bool    `json:"clearAvatarRemoteURL,omitempty"`
+	AddBlockedGroupIDs          []string `json:"addBlockedGroupIDs,omitempty"`
+	RemoveBlockedGroupIDs       []string `json:"removeBlockedGroupIDs,omitempty"`
+	ClearBlockedGroups          *bool    `json:"clearBlockedGroups,omitempty"`
+	AddEditorIDs                []string `json:"addEditorIDs,omitempty"`
+	RemoveEditorIDs             []string `json:"removeEditorIDs,omitempty"`
+	ClearEditors                *bool    `json:"clearEditors,omitempty"`
+	AddViewerIDs                []string `json:"addViewerIDs,omitempty"`
+	RemoveViewerIDs             []string `json:"removeViewerIDs,omitempty"`
+	ClearViewers                *bool    `json:"clearViewers,omitempty"`
+	InternalOwnerUserID         *string  `json:"internalOwnerUserID,omitempty"`
+	ClearInternalOwnerUser      *bool    `json:"clearInternalOwnerUser,omitempty"`
+	InternalOwnerGroupID        *string  `json:"internalOwnerGroupID,omitempty"`
+	ClearInternalOwnerGroup     *bool    `json:"clearInternalOwnerGroup,omitempty"`
+	EnvironmentID               *string  `json:"environmentID,omitempty"`
+	ClearEnvironment            *bool    `json:"clearEnvironment,omitempty"`
+	ScopeID                     *string  `json:"scopeID,omitempty"`
+	ClearScope                  *bool    `json:"clearScope,omitempty"`
+	EmployerID                  *string  `json:"employerID,omitempty"`
+	ClearEmployer               *bool    `json:"clearEmployer,omitempty"`
+	AddAssessmentResponseIDs    []string `json:"addAssessmentResponseIDs,omitempty"`
+	RemoveAssessmentResponseIDs []string `json:"removeAssessmentResponseIDs,omitempty"`
+	ClearAssessmentResponses    *bool    `json:"clearAssessmentResponses,omitempty"`
+	AddAssessmentIDs            []string `json:"addAssessmentIDs,omitempty"`
+	RemoveAssessmentIDs         []string `json:"removeAssessmentIDs,omitempty"`
+	ClearAssessments            *bool    `json:"clearAssessments,omitempty"`
+	AddTemplateIDs              []string `json:"addTemplateIDs,omitempty"`
+	RemoveTemplateIDs           []string `json:"removeTemplateIDs,omitempty"`
+	ClearTemplates              *bool    `json:"clearTemplates,omitempty"`
+	AddAssetIDs                 []string `json:"addAssetIDs,omitempty"`
+	RemoveAssetIDs              []string `json:"removeAssetIDs,omitempty"`
+	ClearAssets                 *bool    `json:"clearAssets,omitempty"`
+	AddEntityIDs                []string `json:"addEntityIDs,omitempty"`
+	RemoveEntityIDs             []string `json:"removeEntityIDs,omitempty"`
+	ClearEntities               *bool    `json:"clearEntities,omitempty"`
+	AddDirectoryAccountIDs      []string `json:"addDirectoryAccountIDs,omitempty"`
+	RemoveDirectoryAccountIDs   []string `json:"removeDirectoryAccountIDs,omitempty"`
+	ClearDirectoryAccounts      *bool    `json:"clearDirectoryAccounts,omitempty"`
+	AddControlIDs               []string `json:"addControlIDs,omitempty"`
+	RemoveControlIDs            []string `json:"removeControlIDs,omitempty"`
+	ClearControls               *bool    `json:"clearControls,omitempty"`
+	AddSubcontrolIDs            []string `json:"addSubcontrolIDs,omitempty"`
+	RemoveSubcontrolIDs         []string `json:"removeSubcontrolIDs,omitempty"`
+	ClearSubcontrols            *bool    `json:"clearSubcontrols,omitempty"`
+	AddPlatformIDs              []string `json:"addPlatformIDs,omitempty"`
+	RemovePlatformIDs           []string `json:"removePlatformIDs,omitempty"`
+	ClearPlatforms              *bool    `json:"clearPlatforms,omitempty"`
+	AddCampaignIDs              []string `json:"addCampaignIDs,omitempty"`
+	RemoveCampaignIDs           []string `json:"removeCampaignIDs,omitempty"`
+	ClearCampaigns              *bool    `json:"clearCampaigns,omitempty"`
+	AddTaskIDs                  []string `json:"addTaskIDs,omitempty"`
+	RemoveTaskIDs               []string `json:"removeTaskIDs,omitempty"`
+	ClearTasks                  *bool    `json:"clearTasks,omitempty"`
+	AddFileIDs                  []string `json:"addFileIDs,omitempty"`
+	RemoveFileIDs               []string `json:"removeFileIDs,omitempty"`
+	ClearFiles                  *bool    `json:"clearFiles,omitempty"`
+	AddFindingIDs               []string `json:"addFindingIDs,omitempty"`
+	RemoveFindingIDs            []string `json:"removeFindingIDs,omitempty"`
+	ClearFindings               *bool    `json:"clearFindings,omitempty"`
+	AddWorkflowObjectRefIDs     []string `json:"addWorkflowObjectRefIDs,omitempty"`
+	RemoveWorkflowObjectRefIDs  []string `json:"removeWorkflowObjectRefIDs,omitempty"`
+	ClearWorkflowObjectRefs     *bool    `json:"clearWorkflowObjectRefs,omitempty"`
+	AddAccessPlatformIDs        []string `json:"addAccessPlatformIDs,omitempty"`
+	RemoveAccessPlatformIDs     []string `json:"removeAccessPlatformIDs,omitempty"`
+	ClearAccessPlatforms        *bool    `json:"clearAccessPlatforms,omitempty"`
+	UserID                      *string  `json:"userID,omitempty"`
+	ClearUser                   *bool    `json:"clearUser,omitempty"`
+	AddInternalPolicyIDs        []string `json:"addInternalPolicyIDs,omitempty"`
+	RemoveInternalPolicyIDs     []string `json:"removeInternalPolicyIDs,omitempty"`
+	ClearInternalPolicies       *bool    `json:"clearInternalPolicies,omitempty"`
 }
 
 // UpdateInternalPolicyInput is used for update InternalPolicy object.
@@ -44846,6 +45202,10 @@ type UserSettingBulkCreatePayload struct {
 type UserSettingBulkDeletePayload struct {
 	// Deleted userSetting IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkUserSetting mutation
@@ -45497,6 +45857,10 @@ type VendorRiskScoreBulkCreatePayload struct {
 type VendorRiskScoreBulkDeletePayload struct {
 	// Deleted vendorRiskScore IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkVendorRiskScore mutation
@@ -45837,6 +46201,10 @@ type VendorScoringConfigBulkCreatePayload struct {
 type VendorScoringConfigBulkDeletePayload struct {
 	// Deleted vendorScoringConfig IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkVendorScoringConfig mutation
@@ -46143,6 +46511,10 @@ type VulnerabilityBulkCreatePayload struct {
 type VulnerabilityBulkDeletePayload struct {
 	// Deleted vulnerability IDs
 	DeletedIDs []string `json:"deletedIDs"`
+	// IDs that were not deleted
+	NotDeletedIDs []string `json:"notDeletedIDs"`
+	// Error message when the bulk delete did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // Return response for updateBulkVulnerability mutation
@@ -51164,12 +51536,13 @@ func (e EventOrderField) MarshalJSON() ([]byte, error) {
 type EvidenceOrderField string
 
 const (
-	EvidenceOrderFieldCreatedAt    EvidenceOrderField = "created_at"
-	EvidenceOrderFieldUpdatedAt    EvidenceOrderField = "updated_at"
-	EvidenceOrderFieldName         EvidenceOrderField = "name"
-	EvidenceOrderFieldCreationDate EvidenceOrderField = "creation_date"
-	EvidenceOrderFieldRenewalDate  EvidenceOrderField = "renewal_date"
-	EvidenceOrderFieldStatus       EvidenceOrderField = "STATUS"
+	EvidenceOrderFieldCreatedAt       EvidenceOrderField = "created_at"
+	EvidenceOrderFieldUpdatedAt       EvidenceOrderField = "updated_at"
+	EvidenceOrderFieldName            EvidenceOrderField = "name"
+	EvidenceOrderFieldCreationDate    EvidenceOrderField = "creation_date"
+	EvidenceOrderFieldRenewalDate     EvidenceOrderField = "renewal_date"
+	EvidenceOrderFieldStatus          EvidenceOrderField = "STATUS"
+	EvidenceOrderFieldReviewFrequency EvidenceOrderField = "REVIEW_FREQUENCY"
 )
 
 var AllEvidenceOrderField = []EvidenceOrderField{
@@ -51179,11 +51552,12 @@ var AllEvidenceOrderField = []EvidenceOrderField{
 	EvidenceOrderFieldCreationDate,
 	EvidenceOrderFieldRenewalDate,
 	EvidenceOrderFieldStatus,
+	EvidenceOrderFieldReviewFrequency,
 }
 
 func (e EvidenceOrderField) IsValid() bool {
 	switch e {
-	case EvidenceOrderFieldCreatedAt, EvidenceOrderFieldUpdatedAt, EvidenceOrderFieldName, EvidenceOrderFieldCreationDate, EvidenceOrderFieldRenewalDate, EvidenceOrderFieldStatus:
+	case EvidenceOrderFieldCreatedAt, EvidenceOrderFieldUpdatedAt, EvidenceOrderFieldName, EvidenceOrderFieldCreationDate, EvidenceOrderFieldRenewalDate, EvidenceOrderFieldStatus, EvidenceOrderFieldReviewFrequency:
 		return true
 	}
 	return false

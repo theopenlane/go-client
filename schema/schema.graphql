@@ -94,6 +94,14 @@ type APITokenBulkDeletePayload {
 	Deleted apiToken IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkAPIToken mutation
@@ -1045,6 +1053,14 @@ type ActionPlanBulkDeletePayload {
 	Deleted actionPlan IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkActionPlan mutation
@@ -1103,6 +1119,7 @@ enum ActionPlanDocumentStatus @goModel(model: "github.com/theopenlane/core/commo
 	NEEDS_APPROVAL
 	APPROVED
 	ARCHIVED
+	PENDING
 }
 """
 An edge in a connection.
@@ -2049,6 +2066,14 @@ type AssessmentBulkDeletePayload {
 	Deleted assessment IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 A connection to a list of items.
@@ -3566,6 +3591,14 @@ type AssetBulkDeletePayload {
 	Deleted asset IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkAsset mutation
@@ -4652,13 +4685,13 @@ type Campaign implements Node {
 	"""
 	recurrenceInterval: Int
 	"""
-	cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
-	"""
-	recurrenceCron: String
-	"""
 	timezone used for the recurrence schedule
 	"""
 	recurrenceTimezone: String
+	"""
+	cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
+	"""
+	recurrenceCron: String
 	"""
 	when the campaign was last executed
 	"""
@@ -4684,13 +4717,13 @@ type Campaign implements Node {
 	"""
 	lastResentAt: DateTime
 	"""
-	the template associated with the campaign
-	"""
-	templateID: ID
-	"""
 	the entity associated with the campaign
 	"""
 	entityID: ID
+	"""
+	the template associated with the campaign
+	"""
+	templateID: ID
 	"""
 	the assessment associated with the campaign
 	"""
@@ -4700,10 +4733,6 @@ type Campaign implements Node {
 	"""
 	metadata: Map
 	"""
-	the email branding or theme reference the campaign may use to override the email templates theme
-	"""
-	emailBrandingID: String
-	"""
 	the email template associated with the campaign
 	"""
 	emailTemplateID: ID
@@ -4711,6 +4740,10 @@ type Campaign implements Node {
 	the email integration used for campaign dispatch
 	"""
 	integrationID: ID
+	"""
+	the email branding associated with the campaign
+	"""
+	emailBrandingID: String
 	owner: Organization
 	blockedGroups(
 		"""
@@ -6150,24 +6183,6 @@ input CampaignWhereInput {
 	lastResentAtIsNil: Boolean
 	lastResentAtNotNil: Boolean
 	"""
-	template_id field predicates
-	"""
-	templateID: ID
-	templateIDNEQ: ID
-	templateIDIn: [ID!]
-	templateIDNotIn: [ID!]
-	templateIDGT: ID
-	templateIDGTE: ID
-	templateIDLT: ID
-	templateIDLTE: ID
-	templateIDContains: ID
-	templateIDHasPrefix: ID
-	templateIDHasSuffix: ID
-	templateIDIsNil: Boolean
-	templateIDNotNil: Boolean
-	templateIDEqualFold: ID
-	templateIDContainsFold: ID
-	"""
 	entity_id field predicates
 	"""
 	entityID: ID
@@ -6186,6 +6201,24 @@ input CampaignWhereInput {
 	entityIDEqualFold: ID
 	entityIDContainsFold: ID
 	"""
+	template_id field predicates
+	"""
+	templateID: ID
+	templateIDNEQ: ID
+	templateIDIn: [ID!]
+	templateIDNotIn: [ID!]
+	templateIDGT: ID
+	templateIDGTE: ID
+	templateIDLT: ID
+	templateIDLTE: ID
+	templateIDContains: ID
+	templateIDHasPrefix: ID
+	templateIDHasSuffix: ID
+	templateIDIsNil: Boolean
+	templateIDNotNil: Boolean
+	templateIDEqualFold: ID
+	templateIDContainsFold: ID
+	"""
 	assessment_id field predicates
 	"""
 	assessmentID: ID
@@ -6203,24 +6236,6 @@ input CampaignWhereInput {
 	assessmentIDNotNil: Boolean
 	assessmentIDEqualFold: ID
 	assessmentIDContainsFold: ID
-	"""
-	email_branding_id field predicates
-	"""
-	emailBrandingID: String
-	emailBrandingIDNEQ: String
-	emailBrandingIDIn: [String!]
-	emailBrandingIDNotIn: [String!]
-	emailBrandingIDGT: String
-	emailBrandingIDGTE: String
-	emailBrandingIDLT: String
-	emailBrandingIDLTE: String
-	emailBrandingIDContains: String
-	emailBrandingIDHasPrefix: String
-	emailBrandingIDHasSuffix: String
-	emailBrandingIDIsNil: Boolean
-	emailBrandingIDNotNil: Boolean
-	emailBrandingIDEqualFold: String
-	emailBrandingIDContainsFold: String
 	"""
 	email_template_id field predicates
 	"""
@@ -6257,6 +6272,24 @@ input CampaignWhereInput {
 	integrationIDNotNil: Boolean
 	integrationIDEqualFold: ID
 	integrationIDContainsFold: ID
+	"""
+	email_branding_id field predicates
+	"""
+	emailBrandingID: String
+	emailBrandingIDNEQ: String
+	emailBrandingIDIn: [String!]
+	emailBrandingIDNotIn: [String!]
+	emailBrandingIDGT: String
+	emailBrandingIDGTE: String
+	emailBrandingIDLT: String
+	emailBrandingIDLTE: String
+	emailBrandingIDContains: String
+	emailBrandingIDHasPrefix: String
+	emailBrandingIDHasSuffix: String
+	emailBrandingIDIsNil: Boolean
+	emailBrandingIDNotNil: Boolean
+	emailBrandingIDEqualFold: String
+	emailBrandingIDContainsFold: String
 	"""
 	owner edge predicates
 	"""
@@ -7207,6 +7240,14 @@ type ContactBulkDeletePayload {
 	Deleted contact IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkContact mutation
@@ -8724,6 +8765,14 @@ type ControlBulkDeletePayload {
 	Deleted control IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkControl mutation
@@ -9209,6 +9258,14 @@ type ControlImplementationBulkDeletePayload {
 	Deleted controlImplementation IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkControlImplementation mutation
@@ -9267,6 +9324,7 @@ enum ControlImplementationDocumentStatus @goModel(model: "github.com/theopenlane
 	NEEDS_APPROVAL
 	APPROVED
 	ARCHIVED
+	PENDING
 }
 """
 An edge in a connection.
@@ -10015,6 +10073,14 @@ type ControlObjectiveBulkDeletePayload {
 	Deleted controlObjective IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkControlObjective mutation
@@ -11853,13 +11919,13 @@ input CreateCampaignInput {
 	"""
 	recurrenceInterval: Int
 	"""
-	cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
-	"""
-	recurrenceCron: String
-	"""
 	timezone used for the recurrence schedule
 	"""
 	recurrenceTimezone: String
+	"""
+	cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
+	"""
+	recurrenceCron: String
 	"""
 	when the campaign was last executed
 	"""
@@ -11889,7 +11955,7 @@ input CreateCampaignInput {
 	"""
 	metadata: Map
 	"""
-	the email branding or theme reference the campaign may use to override the email templates theme
+	the email branding associated with the campaign
 	"""
 	emailBrandingID: String
 	ownerID: ID
@@ -12528,6 +12594,14 @@ input CreateDirectoryAccountInput {
 	lower-cased primary email address, if present
 	"""
 	canonicalEmail: String
+	"""
+	alternate email address for the identity holder in an array
+	"""
+	emailAliases: [String!]
+	"""
+	phone number for the identity holder
+	"""
+	phoneNumber: String
 	"""
 	provider supplied display name
 	"""
@@ -13327,6 +13401,10 @@ input CreateEvidenceInput {
 	the status of the evidence, ready, approved, needs renewal, missing artifact, rejected
 	"""
 	status: EvidenceEvidenceStatus
+	"""
+	the cadence for reviewing the evidence
+	"""
+	reviewFrequency: EvidenceFrequency
 	ownerID: ID
 	environmentID: ID
 	scopeID: ID
@@ -13401,6 +13479,14 @@ input CreateFileInput {
 	"""
 	scopeName: String
 	"""
+	the category of the file
+	"""
+	categoryName: String
+	"""
+	the user-facing display name of the file
+	"""
+	name: String
+	"""
 	the name of the file provided in the payload key without the extension
 	"""
 	providedFileName: String!
@@ -13464,6 +13550,7 @@ input CreateFileInput {
 	lastAccessedAt: Time
 	environmentID: ID
 	scopeID: ID
+	categoryID: ID
 	organizationIDs: [ID!]
 	groupIDs: [ID!]
 	contactIDs: [ID!]
@@ -14008,6 +14095,10 @@ input CreateIdentityHolderInput {
 	additional metadata about the identity holder
 	"""
 	metadata: Map
+	"""
+	URL of the avatar of the identity holder
+	"""
+	avatarRemoteURL: String
 	ownerID: ID
 	blockedGroupIDs: [ID!]
 	editorIDs: [ID!]
@@ -17508,6 +17599,14 @@ type CustomDomainBulkDeletePayload {
 	Deleted customDomain IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkCustomDomain mutation
@@ -18705,6 +18804,14 @@ type DNSVerificationBulkDeletePayload {
 	Deleted dnsVerification IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkDNSVerification mutation
@@ -19167,6 +19274,14 @@ type DirectoryAccount implements Node {
 	lower-cased primary email address, if present
 	"""
 	canonicalEmail: String
+	"""
+	alternate email address for the identity holder in an array
+	"""
+	emailAliases: [String!]
+	"""
+	phone number for the identity holder
+	"""
+	phoneNumber: String
 	"""
 	provider supplied display name
 	"""
@@ -19883,6 +19998,24 @@ input DirectoryAccountWhereInput {
 	canonicalEmailEqualFold: String
 	canonicalEmailContainsFold: String
 	"""
+	phone_number field predicates
+	"""
+	phoneNumber: String
+	phoneNumberNEQ: String
+	phoneNumberIn: [String!]
+	phoneNumberNotIn: [String!]
+	phoneNumberGT: String
+	phoneNumberGTE: String
+	phoneNumberLT: String
+	phoneNumberLTE: String
+	phoneNumberContains: String
+	phoneNumberHasPrefix: String
+	phoneNumberHasSuffix: String
+	phoneNumberIsNil: Boolean
+	phoneNumberNotNil: Boolean
+	phoneNumberEqualFold: String
+	phoneNumberContainsFold: String
+	"""
 	display_name field predicates
 	"""
 	displayName: String
@@ -20259,6 +20392,10 @@ input DirectoryAccountWhereInput {
 	Filter for tagsHas to contain a specific value
 	"""
 	tagsHas: String
+	"""
+	Filter for emailAliasesHas to contain a specific value
+	"""
+	emailAliasesHas: String
 }
 type DirectoryGroup implements Node {
 	id: ID!
@@ -22752,6 +22889,14 @@ type DocumentDataBulkDeletePayload {
 	Deleted documentData IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkDocumentData mutation
@@ -23355,6 +23500,14 @@ type EmailTemplateBulkDeletePayload {
 	Deleted emailTemplate IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkEmailTemplate mutation
@@ -24923,6 +25076,14 @@ type EntityBulkDeletePayload {
 	Deleted entity IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkEntity mutation
@@ -25139,6 +25300,14 @@ type EntityTypeBulkDeletePayload {
 	Deleted entityType IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkEntityType mutation
@@ -26848,6 +27017,14 @@ type EventBulkDeletePayload {
 	Deleted event IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkEvent mutation
@@ -27217,6 +27394,10 @@ type Evidence implements Node {
 	the status of the evidence, ready, approved, needs renewal, missing artifact, rejected
 	"""
 	status: EvidenceEvidenceStatus
+	"""
+	the cadence for reviewing the evidence
+	"""
+	reviewFrequency: EvidenceFrequency
 	owner: Organization
 	environment: CustomTypeEnum
 	scope: CustomTypeEnum
@@ -27595,6 +27776,14 @@ type EvidenceBulkDeletePayload {
 	Deleted evidence IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkEvidence mutation
@@ -27672,6 +27861,16 @@ enum EvidenceEvidenceStatus @goModel(model: "github.com/theopenlane/core/common/
 	REJECTED
 }
 """
+EvidenceFrequency is enum for the field review_frequency
+"""
+enum EvidenceFrequency @goModel(model: "github.com/theopenlane/core/common/enums.Frequency") {
+	YEARLY
+	QUARTERLY
+	BIANNUALLY
+	MONTHLY
+	NONE
+}
+"""
 Ordering options for Evidence connections
 """
 input EvidenceOrder {
@@ -27694,6 +27893,7 @@ enum EvidenceOrderField {
 	creation_date
 	renewal_date
 	STATUS
+	REVIEW_FREQUENCY
 }
 """
 The EvidenceRequests scalar type that represents documents or artifacts that can be collected to demonstrate compliance with a control
@@ -28051,6 +28251,15 @@ input EvidenceWhereInput {
 	statusIsNil: Boolean
 	statusNotNil: Boolean
 	"""
+	review_frequency field predicates
+	"""
+	reviewFrequency: EvidenceFrequency
+	reviewFrequencyNEQ: EvidenceFrequency
+	reviewFrequencyIn: [EvidenceFrequency!]
+	reviewFrequencyNotIn: [EvidenceFrequency!]
+	reviewFrequencyIsNil: Boolean
+	reviewFrequencyNotNil: Boolean
+	"""
 	owner edge predicates
 	"""
 	hasOwner: Boolean
@@ -28256,6 +28465,14 @@ type ExportBulkDeletePayload {
 	Deleted export IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 A connection to a list of items.
@@ -28639,6 +28856,18 @@ type File implements Node {
 	"""
 	scopeID: ID
 	"""
+	the category of the file
+	"""
+	categoryName: String
+	"""
+	the category of the file
+	"""
+	categoryID: ID
+	"""
+	the user-facing display name of the file
+	"""
+	name: String
+	"""
 	the name of the file provided in the payload key without the extension
 	"""
 	providedFileName: String!
@@ -28670,7 +28899,7 @@ type File implements Node {
 	"""
 	the category type of the file, if any (e.g. evidence, invoice, etc.)
 	"""
-	categoryType: String
+	categoryType: String @deprecated(reason: "use category_status_name instead")
 	"""
 	the full URI of the file
 	"""
@@ -28702,6 +28931,7 @@ type File implements Node {
 	lastAccessedAt: Time
 	environment: CustomTypeEnum
 	scope: CustomTypeEnum
+	category: CustomTypeEnum
 	organization: [Organization!]
 	groups(
 		"""
@@ -28911,6 +29141,16 @@ type FileEdge {
 	A cursor for use in pagination.
 	"""
 	cursor: Cursor!
+}
+input FileMetadataInput {
+	"""
+	the display name for the file, defaults to the original filename
+	"""
+	name: String
+	"""
+	additional extracted or client-provided metadata for the file
+	"""
+	metadata: Map
 }
 """
 Ordering options for File connections
@@ -29131,6 +29371,60 @@ input FileWhereInput {
 	scopeIDNotNil: Boolean
 	scopeIDEqualFold: ID
 	scopeIDContainsFold: ID
+	"""
+	category_name field predicates
+	"""
+	categoryName: String
+	categoryNameNEQ: String
+	categoryNameIn: [String!]
+	categoryNameNotIn: [String!]
+	categoryNameGT: String
+	categoryNameGTE: String
+	categoryNameLT: String
+	categoryNameLTE: String
+	categoryNameContains: String
+	categoryNameHasPrefix: String
+	categoryNameHasSuffix: String
+	categoryNameIsNil: Boolean
+	categoryNameNotNil: Boolean
+	categoryNameEqualFold: String
+	categoryNameContainsFold: String
+	"""
+	category_id field predicates
+	"""
+	categoryID: ID
+	categoryIDNEQ: ID
+	categoryIDIn: [ID!]
+	categoryIDNotIn: [ID!]
+	categoryIDGT: ID
+	categoryIDGTE: ID
+	categoryIDLT: ID
+	categoryIDLTE: ID
+	categoryIDContains: ID
+	categoryIDHasPrefix: ID
+	categoryIDHasSuffix: ID
+	categoryIDIsNil: Boolean
+	categoryIDNotNil: Boolean
+	categoryIDEqualFold: ID
+	categoryIDContainsFold: ID
+	"""
+	name field predicates
+	"""
+	name: String
+	nameNEQ: String
+	nameIn: [String!]
+	nameNotIn: [String!]
+	nameGT: String
+	nameGTE: String
+	nameLT: String
+	nameLTE: String
+	nameContains: String
+	nameHasPrefix: String
+	nameHasSuffix: String
+	nameIsNil: Boolean
+	nameNotNil: Boolean
+	nameEqualFold: String
+	nameContainsFold: String
 	"""
 	provided_file_name field predicates
 	"""
@@ -29408,6 +29702,11 @@ input FileWhereInput {
 	"""
 	hasScope: Boolean
 	hasScopeWith: [CustomTypeEnumWhereInput!]
+	"""
+	category edge predicates
+	"""
+	hasCategory: Boolean
+	hasCategoryWith: [CustomTypeEnumWhereInput!]
 	"""
 	organization edge predicates
 	"""
@@ -30440,6 +30739,14 @@ type FindingBulkDeletePayload {
 	Deleted finding IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkFinding mutation
@@ -33254,6 +33561,14 @@ type GroupBulkDeletePayload {
 	Deleted group IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkGroup mutation
@@ -33384,6 +33699,14 @@ type GroupMembershipBulkDeletePayload {
 	Deleted groupMembership IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkGroupMembership mutation
@@ -33781,6 +34104,14 @@ type GroupSettingBulkDeletePayload {
 	Deleted groupSetting IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkGroupSetting mutation
@@ -34720,6 +35051,14 @@ type HushBulkDeletePayload {
 	Deleted hush IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkHush mutation
@@ -35119,7 +35458,7 @@ type IdentityHolder implements Node {
 	"""
 	alternate email address for the identity holder
 	"""
-	alternateEmail: String
+	alternateEmail: String @deprecated(reason: "use email_aliases instead")
 	"""
 	alternate email address for the identity holder in an array
 	"""
@@ -35188,6 +35527,10 @@ type IdentityHolder implements Node {
 	additional metadata about the identity holder
 	"""
 	metadata: Map
+	"""
+	URL of the avatar of the identity holder
+	"""
+	avatarRemoteURL: String
 	owner: Organization
 	blockedGroups(
 		"""
@@ -35818,6 +36161,14 @@ type IdentityHolderBulkDeletePayload {
 	Deleted identityHolder IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkIdentityHolder mutation
@@ -36461,6 +36812,24 @@ input IdentityHolderWhereInput {
 	externalReferenceIDNotNil: Boolean
 	externalReferenceIDEqualFold: String
 	externalReferenceIDContainsFold: String
+	"""
+	avatar_remote_url field predicates
+	"""
+	avatarRemoteURL: String
+	avatarRemoteURLNEQ: String
+	avatarRemoteURLIn: [String!]
+	avatarRemoteURLNotIn: [String!]
+	avatarRemoteURLGT: String
+	avatarRemoteURLGTE: String
+	avatarRemoteURLLT: String
+	avatarRemoteURLLTE: String
+	avatarRemoteURLContains: String
+	avatarRemoteURLHasPrefix: String
+	avatarRemoteURLHasSuffix: String
+	avatarRemoteURLIsNil: Boolean
+	avatarRemoteURLNotNil: Boolean
+	avatarRemoteURLEqualFold: String
+	avatarRemoteURLContainsFold: String
 	"""
 	owner edge predicates
 	"""
@@ -38614,6 +38983,14 @@ type InternalPolicyBulkDeletePayload {
 	Deleted internalPolicy IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkInternalPolicy mutation
@@ -38672,6 +39049,7 @@ enum InternalPolicyDocumentStatus @goModel(model: "github.com/theopenlane/core/c
 	NEEDS_APPROVAL
 	APPROVED
 	ARCHIVED
+	PENDING
 }
 """
 An edge in a connection.
@@ -39455,6 +39833,14 @@ type InviteBulkDeletePayload {
 	Deleted invite IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkInvite mutation
@@ -41249,6 +41635,14 @@ type JobTemplateBulkDeletePayload {
 	Deleted jobTemplate IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkJobTemplate mutation
@@ -41653,6 +42047,14 @@ type MappableDomainBulkDeletePayload {
 	Deleted mappableDomain IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkMappableDomain mutation
@@ -42117,6 +42519,14 @@ type MappedControlBulkDeletePayload {
 	Deleted mappedControl IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkMappedControl mutation
@@ -43856,7 +44266,7 @@ type Mutation {
 		File to upload for the documentData
 		"""
 		documentDataFile: Upload
-	): DocumentDataUpdatePayload!
+	documentDataFileMetadata: FileMetadataInput): DocumentDataUpdatePayload!
 	"""
 	Delete an existing documentData
 	"""
@@ -43993,12 +44403,12 @@ type Mutation {
 		entity type name allows the name of the entity type to be passed in over an id
 		"""
 		entityTypeName: String
-	entityFiles: [Upload!],
+	entityFiles: [Upload!], entityFilesMetadata: [FileMetadataInput!],
 		"""
 		file to upload as the logo of the entity
 		"""
 		logoFile: Upload
-	): EntityCreatePayload!
+	logoFileMetadata: FileMetadataInput): EntityCreatePayload!
 	"""
 	Create multiple new entities
 	"""
@@ -44040,12 +44450,12 @@ type Mutation {
 		New values for the entity
 		"""
 		input: UpdateEntityInput!
-	entityFiles: [Upload!],
+	entityFiles: [Upload!], entityFilesMetadata: [FileMetadataInput!],
 		"""
 		file to upload as the logo of the entity
 		"""
 		logoFile: Upload
-	): EntityUpdatePayload!
+	logoFileMetadata: FileMetadataInput): EntityUpdatePayload!
 	"""
 	Delete an existing entity
 	"""
@@ -44259,7 +44669,7 @@ type Mutation {
 		values of the evidence
 		"""
 		input: CreateEvidenceInput!
-	evidenceFiles: [Upload!]): EvidenceCreatePayload!
+	evidenceFiles: [Upload!], evidenceFilesMetadata: [FileMetadataInput!]): EvidenceCreatePayload!
 	"""
 	Create multiple new evidence
 	"""
@@ -44305,7 +44715,7 @@ type Mutation {
 		New values for the evidence
 		"""
 		input: UpdateEvidenceInput!
-	evidenceFiles: [Upload!]): EvidenceUpdatePayload!
+	evidenceFiles: [Upload!], evidenceFilesMetadata: [FileMetadataInput!]): EvidenceUpdatePayload!
 	"""
 	Delete an existing evidence
 	"""
@@ -44360,7 +44770,7 @@ type Mutation {
 		Files to attach to the export
 		"""
 		exportFiles: [Upload!]
-	): ExportUpdatePayload!
+	exportFilesMetadata: [FileMetadataInput!]): ExportUpdatePayload!
 	"""
 	Delete an existing export
 	"""
@@ -44528,7 +44938,7 @@ type Mutation {
 		values of the group
 		"""
 		input: CreateGroupInput!
-	avatarFile: Upload): GroupCreatePayload!
+	avatarFile: Upload, avatarFileMetadata: FileMetadataInput): GroupCreatePayload!
 	"""
 	Create multiple new groups
 	"""
@@ -44560,7 +44970,7 @@ type Mutation {
 		New values for the group
 		"""
 		input: UpdateGroupInput!
-	avatarFile: Upload): GroupUpdatePayload!
+	avatarFile: Upload, avatarFileMetadata: FileMetadataInput): GroupUpdatePayload!
 	"""
 	Delete an existing group
 	"""
@@ -44896,7 +45306,7 @@ type Mutation {
 		values of the identityHolder
 		"""
 		input: CreateIdentityHolderInput!
-	identityHolderFiles: [Upload!]): IdentityHolderCreatePayload!
+	identityHolderFiles: [Upload!], identityHolderFilesMetadata: [FileMetadataInput!]): IdentityHolderCreatePayload!
 	"""
 	Create multiple new identityHolders
 	"""
@@ -44928,7 +45338,7 @@ type Mutation {
 		New values for the identityHolder
 		"""
 		input: UpdateIdentityHolderInput!
-	identityHolderFiles: [Upload!]): IdentityHolderUpdatePayload!
+	identityHolderFiles: [Upload!], identityHolderFilesMetadata: [FileMetadataInput!]): IdentityHolderUpdatePayload!
 	"""
 	Delete an existing identityHolder
 	"""
@@ -44996,7 +45406,7 @@ type Mutation {
 		file containing values of the internalPolicy
 		"""
 		internalPolicyFile: Upload!
-
+	internalPolicyFileMetadata: FileMetadataInput,
 		"""
 		ID of the owner organization
 		"""
@@ -45052,7 +45462,7 @@ type Mutation {
 		file containing values of the internalPolicy
 		"""
 		internalPolicyFile: Upload
-	): InternalPolicyUpdatePayload!
+	internalPolicyFileMetadata: FileMetadataInput): InternalPolicyUpdatePayload!
 	"""
 	Delete an existing internalPolicy
 	"""
@@ -45175,7 +45585,7 @@ type Mutation {
 		files to upload as jobResult attachments
 		"""
 		jobResultFiles: [Upload!]
-	): JobResultCreatePayload!
+	jobResultFilesMetadata: [FileMetadataInput!]): JobResultCreatePayload!
 	"""
 	Update an existing jobResult
 	"""
@@ -45194,7 +45604,7 @@ type Mutation {
 		files to upload as jobResult attachments
 		"""
 		jobResultFiles: [Upload!]
-	): JobResultUpdatePayload!
+	jobResultFilesMetadata: [FileMetadataInput!]): JobResultUpdatePayload!
 	"""
 	Delete an existing jobResult
 	"""
@@ -45618,7 +46028,7 @@ type Mutation {
 		Files to attach to the comment
 		"""
 		noteFiles: [Upload!]
-	): TaskUpdatePayload!
+	noteFilesMetadata: [FileMetadataInput!]): TaskUpdatePayload!
 	"""
 	Update an existing control comment
 	"""
@@ -45637,7 +46047,7 @@ type Mutation {
 		Files to attach to the comment
 		"""
 		noteFiles: [Upload!]
-	): ControlUpdatePayload!
+	noteFilesMetadata: [FileMetadataInput!]): ControlUpdatePayload!
 	"""
 	Update an existing subcontrol comment
 	"""
@@ -45656,7 +46066,7 @@ type Mutation {
 		Files to attach to the comment
 		"""
 		noteFiles: [Upload!]
-	): SubcontrolUpdatePayload!
+	noteFilesMetadata: [FileMetadataInput!]): SubcontrolUpdatePayload!
 	"""
 	Update an existing procedure comment
 	"""
@@ -45675,7 +46085,7 @@ type Mutation {
 		Files to attach to the comment
 		"""
 		noteFiles: [Upload!]
-	): ProcedureUpdatePayload!
+	noteFilesMetadata: [FileMetadataInput!]): ProcedureUpdatePayload!
 	"""
 	Update an existing risk comment
 	"""
@@ -45694,7 +46104,7 @@ type Mutation {
 		Files to attach to the comment
 		"""
 		noteFiles: [Upload!]
-	): RiskUpdatePayload!
+	noteFilesMetadata: [FileMetadataInput!]): RiskUpdatePayload!
 	"""
 	Update an existing internal policy comment
 	"""
@@ -45713,7 +46123,7 @@ type Mutation {
 		Files to attach to the comment
 		"""
 		noteFiles: [Upload!]
-	): InternalPolicyUpdatePayload!
+	noteFilesMetadata: [FileMetadataInput!]): InternalPolicyUpdatePayload!
 	"""
 	Update an existing trust center FAQ comment
 	"""
@@ -45732,7 +46142,7 @@ type Mutation {
 		Files to attach to the comment
 		"""
 		noteFiles: [Upload!]
-	): TrustCenterFAQUpdatePayload!
+	noteFilesMetadata: [FileMetadataInput!]): TrustCenterFAQUpdatePayload!
 	"""
 	Update an existing trust center post
 	"""
@@ -45751,7 +46161,7 @@ type Mutation {
 		Files to attach to the post
 		"""
 		noteFiles: [Upload!]
-	): TrustCenterUpdatePayload!
+	noteFilesMetadata: [FileMetadataInput!]): TrustCenterUpdatePayload!
 	"""
 	Update an existing evidence comment
 	"""
@@ -45770,7 +46180,7 @@ type Mutation {
 		Files to attach to the comment
 		"""
 		noteFiles: [Upload!]
-	): EvidenceUpdatePayload!
+	noteFilesMetadata: [FileMetadataInput!]): EvidenceUpdatePayload!
 	"""
 	Delete an existing note
 	"""
@@ -45993,7 +46403,7 @@ type Mutation {
 		values of the organization
 		"""
 		input: CreateOrganizationInput!
-	avatarFile: Upload): OrganizationCreatePayload!
+	avatarFile: Upload, avatarFileMetadata: FileMetadataInput): OrganizationCreatePayload!
 	"""
 	Update an existing organization
 	"""
@@ -46007,7 +46417,7 @@ type Mutation {
 		New values for the organization
 		"""
 		input: UpdateOrganizationInput!
-	avatarFile: Upload): OrganizationUpdatePayload!
+	avatarFile: Upload, avatarFileMetadata: FileMetadataInput): OrganizationUpdatePayload!
 	"""
 	Delete an existing organization
 	"""
@@ -46112,6 +46522,11 @@ type Mutation {
 		avatar file to Upload
 		"""
 		avatarFile: Upload
+
+		"""
+		metadata for the avatar file
+		"""
+		avatarFileMetadata: FileMetadataInput
 
 		"""
 		organization members to be added to the new org
@@ -46249,7 +46664,7 @@ type Mutation {
 		values of the platform
 		"""
 		input: CreatePlatformInput!
-	architectureDiagrams: [Upload!], dataFlowDiagrams: [Upload!], trustBoundaryDiagrams: [Upload!]): PlatformCreatePayload!
+	architectureDiagrams: [Upload!], architectureDiagramsMetadata: [FileMetadataInput!], dataFlowDiagrams: [Upload!], dataFlowDiagramsMetadata: [FileMetadataInput!], trustBoundaryDiagrams: [Upload!], trustBoundaryDiagramsMetadata: [FileMetadataInput!]): PlatformCreatePayload!
 	"""
 	Create multiple new platforms
 	"""
@@ -46281,7 +46696,7 @@ type Mutation {
 		New values for the platform
 		"""
 		input: UpdatePlatformInput!
-	architectureDiagrams: [Upload!], dataFlowDiagrams: [Upload!], trustBoundaryDiagrams: [Upload!]): PlatformUpdatePayload!
+	architectureDiagrams: [Upload!], architectureDiagramsMetadata: [FileMetadataInput!], dataFlowDiagrams: [Upload!], dataFlowDiagramsMetadata: [FileMetadataInput!], trustBoundaryDiagrams: [Upload!], trustBoundaryDiagramsMetadata: [FileMetadataInput!]): PlatformUpdatePayload!
 	"""
 	Delete an existing platform
 	"""
@@ -46308,7 +46723,7 @@ type Mutation {
 		file containing values of the procedure
 		"""
 		procedureFile: Upload!
-
+	procedureFileMetadata: FileMetadataInput,
 		"""
 		ID of the owner organization
 		"""
@@ -46364,7 +46779,7 @@ type Mutation {
 		file containing values of the procedure
 		"""
 		procedureFile: Upload
-	): ProcedureUpdatePayload!
+	procedureFileMetadata: FileMetadataInput): ProcedureUpdatePayload!
 	"""
 	Delete an existing procedure
 	"""
@@ -46678,7 +47093,7 @@ type Mutation {
 		Files to attach to the review
 		"""
 		reviewFiles: [Upload!]
-	): ReviewCreatePayload!
+	reviewFilesMetadata: [FileMetadataInput!]): ReviewCreatePayload!
 	"""
 	Create multiple new reviews
 	"""
@@ -46724,7 +47139,7 @@ type Mutation {
 		Files to attach to the review
 		"""
 		reviewFiles: [Upload!]
-	): ReviewUpdatePayload!
+	reviewFilesMetadata: [FileMetadataInput!]): ReviewUpdatePayload!
 	"""
 	Delete an existing review
 	"""
@@ -47130,7 +47545,7 @@ type Mutation {
 		file to upload as the logo to represent the standard
 		"""
 		logoFile: Upload
-	): StandardCreatePayload!
+	logoFileMetadata: FileMetadataInput): StandardCreatePayload!
 	"""
 	Update an existing standard
 	"""
@@ -47149,7 +47564,7 @@ type Mutation {
 		file to upload as the logo to represent the standard
 		"""
 		logoFile: Upload
-	): StandardUpdatePayload!
+	logoFileMetadata: FileMetadataInput): StandardUpdatePayload!
 	"""
 	Delete an existing standard
 	"""
@@ -47254,7 +47669,7 @@ type Mutation {
 		file to upload as the logo of the subprocessor
 		"""
 		logoFile: Upload
-	): SubprocessorCreatePayload!
+	logoFileMetadata: FileMetadataInput): SubprocessorCreatePayload!
 	"""
 	Create multiple new subprocessors
 	"""
@@ -47291,7 +47706,7 @@ type Mutation {
 		file to upload as the logo of the subprocessor
 		"""
 		logoFile: Upload
-	): SubprocessorUpdatePayload!
+	logoFileMetadata: FileMetadataInput): SubprocessorUpdatePayload!
 	"""
 	Update multiple existing subprocessors
 	"""
@@ -47610,7 +48025,7 @@ type Mutation {
 		values of the template
 		"""
 		input: CreateTemplateInput!
-	templateFiles: [Upload!]): TemplateCreatePayload!
+	templateFiles: [Upload!], templateFilesMetadata: [FileMetadataInput!]): TemplateCreatePayload!
 	"""
 	Create multiple new templates
 	"""
@@ -47642,7 +48057,7 @@ type Mutation {
 		New values for the template
 		"""
 		input: UpdateTemplateInput!
-	templateFiles: [Upload!]): TemplateUpdatePayload!
+	templateFiles: [Upload!], templateFilesMetadata: [FileMetadataInput!]): TemplateUpdatePayload!
 	"""
 	Delete an existing template
 	"""
@@ -47824,7 +48239,7 @@ type Mutation {
 		values of the trustCenterDoc
 		"""
 		input: CreateTrustCenterDocInput!
-	trustCenterDocFile: Upload!): TrustCenterDocCreatePayload!
+	trustCenterDocFile: Upload!, trustCenterDocFileMetadata: FileMetadataInput): TrustCenterDocCreatePayload!
 	"""
 	Create multiple new trustCenterDocs
 	"""
@@ -47856,7 +48271,7 @@ type Mutation {
 		New values for the trustCenterDoc
 		"""
 		input: UpdateTrustCenterDocInput!
-	trustCenterDocFile: Upload, watermarkedTrustCenterDocFile: Upload): TrustCenterDocUpdatePayload!
+	trustCenterDocFile: Upload, trustCenterDocFileMetadata: FileMetadataInput, watermarkedTrustCenterDocFile: Upload, watermarkedTrustCenterDocFileMetadata: FileMetadataInput): TrustCenterDocUpdatePayload!
 	"""
 	Update multiple existing trust center docs
 	"""
@@ -47920,7 +48335,7 @@ type Mutation {
 		logo file for the trustCenterEntity
 		"""
 		logoFile: Upload
-	): TrustCenterEntityCreatePayload!
+	logoFileMetadata: FileMetadataInput): TrustCenterEntityCreatePayload!
 	"""
 	Create multiple new trustCenterEntitys
 	"""
@@ -47957,7 +48372,7 @@ type Mutation {
 		logo file for the trustCenterEntity
 		"""
 		logoFile: Upload
-	): TrustCenterEntityUpdatePayload!
+	logoFileMetadata: FileMetadataInput): TrustCenterEntityUpdatePayload!
 	"""
 	Delete an existing trustCenterEntity
 	"""
@@ -48062,7 +48477,7 @@ type Mutation {
 		NDA file
 		"""
 		templateFiles: [Upload!]
-	): TrustCenterNDACreatePayload!
+	templateFilesMetadata: [FileMetadataInput!]): TrustCenterNDACreatePayload!
 	updateTrustCenterNDA(
 		"""
 		ID of the trust center
@@ -48073,7 +48488,7 @@ type Mutation {
 		NDA file
 		"""
 		templateFiles: [Upload!]
-	): TrustCenterNDAUpdatePayload!
+	templateFilesMetadata: [FileMetadataInput!]): TrustCenterNDAUpdatePayload!
 	"""
 	Submit a response to a Trust Center NDA
 	"""
@@ -48177,7 +48592,7 @@ type Mutation {
 		values of the preview trust center setting
 		"""
 		input: CreateTrustCenterPreviewSettingInput!
-	logoFile: Upload, faviconFile: Upload, heroImageFile: Upload): TrustCenterPreviewSettingCreatePayload!
+	logoFile: Upload, logoFileMetadata: FileMetadataInput, faviconFile: Upload, faviconFileMetadata: FileMetadataInput, heroImageFile: Upload, heroImageFileMetadata: FileMetadataInput): TrustCenterPreviewSettingCreatePayload!
 	"""
 	Create a new trustCenterSetting
 	"""
@@ -48186,7 +48601,7 @@ type Mutation {
 		values of the trustCenterSetting
 		"""
 		input: CreateTrustCenterSettingInput!
-	logoFile: Upload, faviconFile: Upload, heroImageFile: Upload): TrustCenterSettingCreatePayload!
+	logoFile: Upload, logoFileMetadata: FileMetadataInput, faviconFile: Upload, faviconFileMetadata: FileMetadataInput, heroImageFile: Upload, heroImageFileMetadata: FileMetadataInput): TrustCenterSettingCreatePayload!
 	"""
 	Update an existing trustCenterSetting by targeting the ID
 	"""
@@ -48200,7 +48615,7 @@ type Mutation {
 		New values for the trustCenterSetting
 		"""
 		input: UpdateTrustCenterSettingInput!
-	logoFile: Upload, faviconFile: Upload, heroImageFile: Upload): TrustCenterSettingUpdatePayload!
+	logoFile: Upload, logoFileMetadata: FileMetadataInput, faviconFile: Upload, faviconFileMetadata: FileMetadataInput, heroImageFile: Upload, heroImageFileMetadata: FileMetadataInput): TrustCenterSettingUpdatePayload!
 	"""
 	Update an existing trustCenterSetting preview settings
 	"""
@@ -48209,7 +48624,7 @@ type Mutation {
 		New values for the trustCenterSetting
 		"""
 		input: UpdateTrustCenterSettingInput!
-	logoFile: Upload, faviconFile: Upload, heroImageFile: Upload): TrustCenterSettingUpdatePayload!
+	logoFile: Upload, logoFileMetadata: FileMetadataInput, faviconFile: Upload, faviconFileMetadata: FileMetadataInput, heroImageFile: Upload, heroImageFileMetadata: FileMetadataInput): TrustCenterSettingUpdatePayload!
 	"""
 	Publish changes from preview to live environment
 	"""
@@ -48313,7 +48728,7 @@ type Mutation {
 		values of the trustCenterWatermarkConfig
 		"""
 		input: CreateTrustCenterWatermarkConfigInput!
-	watermarkFile: Upload): TrustCenterWatermarkConfigCreatePayload!
+	watermarkFile: Upload, watermarkFileMetadata: FileMetadataInput): TrustCenterWatermarkConfigCreatePayload!
 	"""
 	Update an existing trustCenterWatermarkConfig
 	"""
@@ -48327,7 +48742,7 @@ type Mutation {
 		New values for the trustCenterWatermarkConfig
 		"""
 		input: UpdateTrustCenterWatermarkConfigInput!
-	watermarkFile: Upload): TrustCenterWatermarkConfigUpdatePayload!
+	watermarkFile: Upload, watermarkFileMetadata: FileMetadataInput): TrustCenterWatermarkConfigUpdatePayload!
 	"""
 	Delete an existing trustCenterWatermarkConfig
 	"""
@@ -48345,7 +48760,7 @@ type Mutation {
 		values of the user
 		"""
 		input: CreateUserInput!
-	avatarFile: Upload): UserCreatePayload!
+	avatarFile: Upload, avatarFileMetadata: FileMetadataInput): UserCreatePayload!
 	"""
 	Update an existing user
 	"""
@@ -48359,7 +48774,7 @@ type Mutation {
 		New values for the user
 		"""
 		input: UpdateUserInput!
-	avatarFile: Upload): UserUpdatePayload!
+	avatarFile: Upload, avatarFileMetadata: FileMetadataInput): UserUpdatePayload!
 	"""
 	Delete an existing user
 	"""
@@ -49163,6 +49578,14 @@ type NarrativeBulkDeletePayload {
 	Deleted narrative IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkNarrative mutation
@@ -50216,6 +50639,14 @@ type NotificationPreferenceBulkDeletePayload {
 	Deleted notificationPreference IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkNotificationPreference mutation
@@ -50852,6 +51283,14 @@ type NotificationTemplateBulkDeletePayload {
 	Deleted notificationTemplate IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkNotificationTemplate mutation
@@ -51590,6 +52029,14 @@ type OrgMembershipBulkDeletePayload {
 	Deleted orgMembership IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkOrgMembership mutation
@@ -55475,6 +55922,14 @@ type OrganizationSettingBulkDeletePayload {
 	Deleted organizationSetting IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkOrganizationSetting mutation
@@ -60040,6 +60495,14 @@ type ProcedureBulkDeletePayload {
 	Deleted export IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkProcedure mutation
@@ -60098,6 +60561,7 @@ enum ProcedureDocumentStatus @goModel(model: "github.com/theopenlane/core/common
 	NEEDS_APPROVAL
 	APPROVED
 	ARCHIVED
+	PENDING
 }
 """
 An edge in a connection.
@@ -61348,6 +61812,14 @@ type ProgramBulkDeletePayload {
 	Deleted program IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkProgram mutation
@@ -61439,6 +61911,14 @@ type ProgramMembershipBulkDeletePayload {
 	Deleted programMembership IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkProgramMembership mutation
@@ -68094,6 +68574,14 @@ type RemediationBulkDeletePayload {
 	Deleted remediation IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkRemediation mutation
@@ -69607,6 +70095,14 @@ type ReviewBulkDeletePayload {
 	Deleted trustCenterNDARequest IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkReview mutation
@@ -71048,6 +71544,14 @@ type RiskBulkDeletePayload {
 	Deleted risk IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkRisk mutation
@@ -72042,6 +72546,14 @@ type SLADefinitionBulkDeletePayload {
 	Deleted slaDefinition IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkSLADefinition mutation
@@ -72874,6 +73386,14 @@ type ScanBulkDeletePayload {
 	Deleted scan IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkScan mutation
@@ -73642,6 +74162,14 @@ type ScheduledJobBulkDeletePayload {
 	Deleted scheduledJob IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkScheduledJob mutation
@@ -75841,6 +76369,14 @@ type SubcontrolBulkDeletePayload {
 	Deleted subcontrol IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkSubcontrol mutation
@@ -76802,6 +77338,14 @@ type SubprocessorBulkDeletePayload {
 	Deleted subprocessor IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkSubprocessor mutation
@@ -77570,6 +78114,14 @@ type SystemDetailBulkDeletePayload {
 	Deleted systemDetail IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkSystemDetail mutation
@@ -79160,6 +79712,14 @@ type TaskBulkDeletePayload {
 	Deleted task IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkTask mutation
@@ -80038,6 +80598,14 @@ type TemplateBulkDeletePayload {
 	Deleted template IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkTemplate mutation
@@ -81007,6 +81575,14 @@ type TrustCenterComplianceBulkDeletePayload {
 	Deleted trustCenterCompliance IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkTrustCenterCompliance mutation
@@ -81416,6 +81992,14 @@ type TrustCenterDocBulkDeletePayload {
 	Deleted trustCenterDoc IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkTrustCenterDoc mutation
@@ -82287,6 +82871,14 @@ type TrustCenterFAQBulkDeletePayload {
 	Deleted trustCenterFAQ IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkTrustCenterFAQ mutation
@@ -82774,6 +83366,14 @@ type TrustCenterNDARequestBulkDeletePayload {
 	Deleted trustCenterNDARequest IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 A connection to a list of items.
@@ -84097,6 +84697,14 @@ type TrustCenterSubprocessorBulkDeletePayload {
 	Deleted trustCenterSubprocessor IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkTrustCenterSubprocessor mutation
@@ -85794,15 +86402,15 @@ input UpdateCampaignInput {
 	recurrenceInterval: Int
 	clearRecurrenceInterval: Boolean
 	"""
-	cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
-	"""
-	recurrenceCron: String
-	clearRecurrenceCron: Boolean
-	"""
 	timezone used for the recurrence schedule
 	"""
 	recurrenceTimezone: String
 	clearRecurrenceTimezone: Boolean
+	"""
+	cron schedule to run the campaign in cron 6-field syntax, e.g. 0 0 0 * * *
+	"""
+	recurrenceCron: String
+	clearRecurrenceCron: Boolean
 	"""
 	when the campaign was last executed
 	"""
@@ -85839,7 +86447,7 @@ input UpdateCampaignInput {
 	metadata: Map
 	clearMetadata: Boolean
 	"""
-	the email branding or theme reference the campaign may use to override the email templates theme
+	the email branding associated with the campaign
 	"""
 	emailBrandingID: String
 	clearEmailBrandingID: Boolean
@@ -86725,6 +87333,17 @@ input UpdateDirectoryAccountInput {
 	"""
 	canonicalEmail: String
 	clearCanonicalEmail: Boolean
+	"""
+	alternate email address for the identity holder in an array
+	"""
+	emailAliases: [String!]
+	appendEmailAliases: [String!]
+	clearEmailAliases: Boolean
+	"""
+	phone number for the identity holder
+	"""
+	phoneNumber: String
+	clearPhoneNumber: Boolean
 	"""
 	provider supplied display name
 	"""
@@ -87784,6 +88403,11 @@ input UpdateEvidenceInput {
 	"""
 	status: EvidenceEvidenceStatus
 	clearStatus: Boolean
+	"""
+	the cadence for reviewing the evidence
+	"""
+	reviewFrequency: EvidenceFrequency
+	clearReviewFrequency: Boolean
 	environmentID: ID
 	clearEnvironment: Boolean
 	scopeID: ID
@@ -87884,6 +88508,16 @@ input UpdateFileInput {
 	scopeName: String
 	clearScopeName: Boolean
 	"""
+	the category of the file
+	"""
+	categoryName: String
+	clearCategoryName: Boolean
+	"""
+	the user-facing display name of the file
+	"""
+	name: String
+	clearName: Boolean
+	"""
 	the name of the file provided in the payload key without the extension
 	"""
 	providedFileName: String
@@ -87963,6 +88597,8 @@ input UpdateFileInput {
 	clearEnvironment: Boolean
 	scopeID: ID
 	clearScope: Boolean
+	categoryID: ID
+	clearCategory: Boolean
 	addOrganizationIDs: [ID!]
 	removeOrganizationIDs: [ID!]
 	clearOrganization: Boolean
@@ -88770,6 +89406,11 @@ input UpdateIdentityHolderInput {
 	"""
 	metadata: Map
 	clearMetadata: Boolean
+	"""
+	URL of the avatar of the identity holder
+	"""
+	avatarRemoteURL: String
+	clearAvatarRemoteURL: Boolean
 	addBlockedGroupIDs: [ID!]
 	removeBlockedGroupIDs: [ID!]
 	clearBlockedGroups: Boolean
@@ -93520,6 +94161,10 @@ The `Upload` scalar type represents a file upload.
 This scalar is typically used to handle file uploads in GraphQL mutations.
 """
 scalar Upload
+"""
+UploadFileName allows passing file name overrides for uploaded files without requiring a resolver.
+"""
+scalar UploadFileName
 type User implements Node {
 	id: ID!
 	createdAt: Time
@@ -94357,6 +95002,14 @@ type UserSettingBulkDeletePayload {
 	Deleted userSetting IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkUserSetting mutation
@@ -95218,6 +95871,14 @@ type VendorRiskScoreBulkDeletePayload {
 	Deleted vendorRiskScore IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkVendorRiskScore mutation
@@ -95736,6 +96397,14 @@ type VendorScoringConfigBulkDeletePayload {
 	Deleted vendorScoringConfig IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkVendorScoringConfig mutation
@@ -96769,6 +97438,14 @@ type VulnerabilityBulkDeletePayload {
 	Deleted vulnerability IDs
 	"""
 	deletedIDs: [ID!]!
+	"""
+	IDs that were not deleted
+	"""
+	notDeletedIDs: [ID!]!
+	"""
+	Error message when the bulk delete did not apply to every requested ID
+	"""
+	error: String
 }
 """
 Return response for updateBulkVulnerability mutation
@@ -101585,3 +102262,4 @@ enum WorkflowProposalWorkflowProposalState @goModel(model: "github.com/theopenla
 	REJECTED
 	SUPERSEDED
 }
+
