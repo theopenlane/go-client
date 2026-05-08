@@ -1,0 +1,226 @@
+mutation CreateBulkCSVTrustCenterFAQ ($input: Upload!) {
+	createBulkCSVTrustCenterFAQ(input: $input) {
+		trustCenterFaqs {
+			blockedGroups
+			createdAt
+			createdBy
+			displayOrder
+			editors
+			id
+			note
+			noteID
+			referenceLink
+			trustCenter
+			trustCenterFaqKind
+			trustCenterFaqKindID
+			trustCenterFaqKindName
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+mutation CreateBulkTrustCenterFAQ ($input: [CreateTrustCenterFAQInput!]) {
+	createBulkTrustCenterFAQ(input: $input) {
+		trustCenterFaqs {
+			blockedGroups
+			createdAt
+			createdBy
+			displayOrder
+			editors
+			id
+			note
+			noteID
+			referenceLink
+			trustCenter
+			trustCenterFaqKind
+			trustCenterFaqKindID
+			trustCenterFaqKindName
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+mutation CreateTrustCenterFAQ ($input: CreateTrustCenterFAQInput!) {
+	createTrustCenterFAQ(input: $input) {
+		trustCenterFaq {
+			blockedGroups
+			createdAt
+			createdBy
+			displayOrder
+			editors
+			id
+			note
+			noteID
+			referenceLink
+			trustCenter
+			trustCenterFaqKind
+			trustCenterFaqKindID
+			trustCenterFaqKindName
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+	}
+}
+mutation DeleteTrustCenterFAQ ($deleteTrustCenterFAQId: ID!) {
+	deleteTrustCenterFAQ(id: $deleteTrustCenterFAQId) {
+		deletedID
+	}
+}
+mutation UpdateBulkTrustCenterFAQ ($ids: [ID!]!, $input: UpdateTrustCenterFAQInput!) {
+	updateBulkTrustCenterFAQ(ids: $ids, input: $input) {
+		trustCenterFaqs {
+			blockedGroups
+			createdAt
+			createdBy
+			displayOrder
+			editors
+			id
+			note
+			noteID
+			referenceLink
+			trustCenter
+			trustCenterFaqKind
+			trustCenterFaqKindID
+			trustCenterFaqKindName
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+		updatedIDs
+	}
+}
+mutation UpdateBulkCSVTrustCenterFAQ ($input: Upload!) {
+	updateBulkCSVTrustCenterFAQ(input: $input) {
+		trustCenterFaqs {
+			blockedGroups
+			createdAt
+			createdBy
+			displayOrder
+			editors
+			id
+			note
+			noteID
+			referenceLink
+			trustCenter
+			trustCenterFaqKind
+			trustCenterFaqKindID
+			trustCenterFaqKindName
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+		updatedIDs
+	}
+}
+mutation DeleteBulkTrustCenterFAQ ($ids: [ID!]!) {
+	deleteBulkTrustCenterFAQ(ids: $ids) {
+		deletedIDs
+	}
+}
+query GetAllTrustCenterFAQS ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterFAQOrder!]) {
+	trustCenterFaqs(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				blockedGroups
+				createdAt
+				createdBy
+				displayOrder
+				editors
+				id
+				note
+				noteID
+				referenceLink
+				trustCenter
+				trustCenterFaqKind
+				trustCenterFaqKindID
+				trustCenterFaqKindName
+				trustCenterID
+				updatedAt
+				updatedBy
+			}
+		}
+	}
+}
+query GetTrustCenterFAQByID ($trustCenterFaqId: ID!) {
+	trustCenterFaq(id: $trustCenterFaqId) {
+		blockedGroups
+		createdAt
+		createdBy
+		displayOrder
+		editors
+		id
+		note
+		noteID
+		referenceLink
+		trustCenter
+		trustCenterFaqKind
+		trustCenterFaqKindID
+		trustCenterFaqKindName
+		trustCenterID
+		updatedAt
+		updatedBy
+	}
+}
+query GetTrustCenterFAQS ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TrustCenterFAQOrder!], $where: TrustCenterFAQWhereInput) {
+	trustCenterFaqs(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy, where: $where) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				blockedGroups
+				createdAt
+				createdBy
+				displayOrder
+				editors
+				id
+				note
+				noteID
+				referenceLink
+				trustCenter
+				trustCenterFaqKind
+				trustCenterFaqKindID
+				trustCenterFaqKindName
+				trustCenterID
+				updatedAt
+				updatedBy
+			}
+		}
+	}
+}
+mutation UpdateTrustCenterFAQ ($updateTrustCenterFAQId: ID!, $input: UpdateTrustCenterFAQInput!) {
+	updateTrustCenterFAQ(id: $updateTrustCenterFAQId, input: $input) {
+		trustCenterFaq {
+			blockedGroups
+			createdAt
+			createdBy
+			displayOrder
+			editors
+			id
+			note
+			noteID
+			referenceLink
+			trustCenter
+			trustCenterFaqKind
+			trustCenterFaqKindID
+			trustCenterFaqKindName
+			trustCenterID
+			updatedAt
+			updatedBy
+		}
+	}
+}
