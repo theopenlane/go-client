@@ -4087,7 +4087,7 @@ type CreateAssessmentResponse_CreateAssessmentResponse_AssessmentResponse struct
 	CreatedBy      *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DocumentDataID *string                        "json:\"documentDataID,omitempty\" graphql:\"documentDataID\""
 	DueDate        *time.Time                     "json:\"dueDate,omitempty\" graphql:\"dueDate\""
-	Email          string                         "json:\"email\" graphql:\"email\""
+	Email          *string                        "json:\"email,omitempty\" graphql:\"email\""
 	ID             string                         "json:\"id\" graphql:\"id\""
 	OwnerID        *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	SendAttempts   int64                          "json:\"sendAttempts\" graphql:\"sendAttempts\""
@@ -4139,7 +4139,7 @@ func (t *CreateAssessmentResponse_CreateAssessmentResponse_AssessmentResponse) G
 	}
 	return t.DueDate
 }
-func (t *CreateAssessmentResponse_CreateAssessmentResponse_AssessmentResponse) GetEmail() string {
+func (t *CreateAssessmentResponse_CreateAssessmentResponse_AssessmentResponse) GetEmail() *string {
 	if t == nil {
 		t = &CreateAssessmentResponse_CreateAssessmentResponse_AssessmentResponse{}
 	}
@@ -4250,7 +4250,7 @@ type GetAllAssessmentResponses_AssessmentResponses_Edges_Node struct {
 	CreatedBy      *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DocumentDataID *string                        "json:\"documentDataID,omitempty\" graphql:\"documentDataID\""
 	DueDate        *time.Time                     "json:\"dueDate,omitempty\" graphql:\"dueDate\""
-	Email          string                         "json:\"email\" graphql:\"email\""
+	Email          *string                        "json:\"email,omitempty\" graphql:\"email\""
 	ID             string                         "json:\"id\" graphql:\"id\""
 	OwnerID        *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	SendAttempts   int64                          "json:\"sendAttempts\" graphql:\"sendAttempts\""
@@ -4302,7 +4302,7 @@ func (t *GetAllAssessmentResponses_AssessmentResponses_Edges_Node) GetDueDate() 
 	}
 	return t.DueDate
 }
-func (t *GetAllAssessmentResponses_AssessmentResponses_Edges_Node) GetEmail() string {
+func (t *GetAllAssessmentResponses_AssessmentResponses_Edges_Node) GetEmail() *string {
 	if t == nil {
 		t = &GetAllAssessmentResponses_AssessmentResponses_Edges_Node{}
 	}
@@ -4395,7 +4395,7 @@ type GetAssessmentResponseByID_AssessmentResponse struct {
 	CreatedBy      *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DocumentDataID *string                        "json:\"documentDataID,omitempty\" graphql:\"documentDataID\""
 	DueDate        *time.Time                     "json:\"dueDate,omitempty\" graphql:\"dueDate\""
-	Email          string                         "json:\"email\" graphql:\"email\""
+	Email          *string                        "json:\"email,omitempty\" graphql:\"email\""
 	ID             string                         "json:\"id\" graphql:\"id\""
 	OwnerID        *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	SendAttempts   int64                          "json:\"sendAttempts\" graphql:\"sendAttempts\""
@@ -4447,7 +4447,7 @@ func (t *GetAssessmentResponseByID_AssessmentResponse) GetDueDate() *time.Time {
 	}
 	return t.DueDate
 }
-func (t *GetAssessmentResponseByID_AssessmentResponse) GetEmail() string {
+func (t *GetAssessmentResponseByID_AssessmentResponse) GetEmail() *string {
 	if t == nil {
 		t = &GetAssessmentResponseByID_AssessmentResponse{}
 	}
@@ -4536,7 +4536,7 @@ type GetAssessmentResponses_AssessmentResponses_Edges_Node struct {
 	CreatedBy      *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DocumentDataID *string                        "json:\"documentDataID,omitempty\" graphql:\"documentDataID\""
 	DueDate        *time.Time                     "json:\"dueDate,omitempty\" graphql:\"dueDate\""
-	Email          string                         "json:\"email\" graphql:\"email\""
+	Email          *string                        "json:\"email,omitempty\" graphql:\"email\""
 	ID             string                         "json:\"id\" graphql:\"id\""
 	OwnerID        *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	SendAttempts   int64                          "json:\"sendAttempts\" graphql:\"sendAttempts\""
@@ -4588,7 +4588,7 @@ func (t *GetAssessmentResponses_AssessmentResponses_Edges_Node) GetDueDate() *ti
 	}
 	return t.DueDate
 }
-func (t *GetAssessmentResponses_AssessmentResponses_Edges_Node) GetEmail() string {
+func (t *GetAssessmentResponses_AssessmentResponses_Edges_Node) GetEmail() *string {
 	if t == nil {
 		t = &GetAssessmentResponses_AssessmentResponses_Edges_Node{}
 	}
@@ -78249,11 +78249,11 @@ func (t *GlobalSearch_Search_AssessmentResponses_PageInfo) GetStartCursor() *str
 }
 
 type GlobalSearch_Search_AssessmentResponses_Edges_Node struct {
-	Email string "json:\"email\" graphql:\"email\""
-	ID    string "json:\"id\" graphql:\"id\""
+	Email *string "json:\"email,omitempty\" graphql:\"email\""
+	ID    string  "json:\"id\" graphql:\"id\""
 }
 
-func (t *GlobalSearch_Search_AssessmentResponses_Edges_Node) GetEmail() string {
+func (t *GlobalSearch_Search_AssessmentResponses_Edges_Node) GetEmail() *string {
 	if t == nil {
 		t = &GlobalSearch_Search_AssessmentResponses_Edges_Node{}
 	}
