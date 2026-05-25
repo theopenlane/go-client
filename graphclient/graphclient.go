@@ -60541,7 +60541,6 @@ type CreateOrganization_CreateOrganization_Organization struct {
 	AvatarUpdatedAt   *time.Time "json:\"avatarUpdatedAt,omitempty\" graphql:\"avatarUpdatedAt\""
 	CreatedAt         *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy         *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DedicatedDb       bool       "json:\"dedicatedDb\" graphql:\"dedicatedDb\""
 	Description       *string    "json:\"description,omitempty\" graphql:\"description\""
 	DisplayName       string     "json:\"displayName\" graphql:\"displayName\""
 	ID                string     "json:\"id\" graphql:\"id\""
@@ -60581,12 +60580,6 @@ func (t *CreateOrganization_CreateOrganization_Organization) GetCreatedBy() *str
 		t = &CreateOrganization_CreateOrganization_Organization{}
 	}
 	return t.CreatedBy
-}
-func (t *CreateOrganization_CreateOrganization_Organization) GetDedicatedDb() bool {
-	if t == nil {
-		t = &CreateOrganization_CreateOrganization_Organization{}
-	}
-	return t.DedicatedDb
 }
 func (t *CreateOrganization_CreateOrganization_Organization) GetDescription() *string {
 	if t == nil {
@@ -60715,7 +60708,6 @@ type GetAllOrganizations_Organizations_Edges_Node struct {
 	AvatarUpdatedAt   *time.Time                                            "json:\"avatarUpdatedAt,omitempty\" graphql:\"avatarUpdatedAt\""
 	CreatedAt         *time.Time                                            "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy         *string                                               "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DedicatedDb       bool                                                  "json:\"dedicatedDb\" graphql:\"dedicatedDb\""
 	Description       *string                                               "json:\"description,omitempty\" graphql:\"description\""
 	DisplayName       string                                                "json:\"displayName\" graphql:\"displayName\""
 	ID                string                                                "json:\"id\" graphql:\"id\""
@@ -60756,12 +60748,6 @@ func (t *GetAllOrganizations_Organizations_Edges_Node) GetCreatedBy() *string {
 		t = &GetAllOrganizations_Organizations_Edges_Node{}
 	}
 	return t.CreatedBy
-}
-func (t *GetAllOrganizations_Organizations_Edges_Node) GetDedicatedDb() bool {
-	if t == nil {
-		t = &GetAllOrganizations_Organizations_Edges_Node{}
-	}
-	return t.DedicatedDb
 }
 func (t *GetAllOrganizations_Organizations_Edges_Node) GetDescription() *string {
 	if t == nil {
@@ -60860,7 +60846,6 @@ type GetOrganizationByID_Organization struct {
 	AvatarUpdatedAt   *time.Time "json:\"avatarUpdatedAt,omitempty\" graphql:\"avatarUpdatedAt\""
 	CreatedAt         *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy         *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DedicatedDb       bool       "json:\"dedicatedDb\" graphql:\"dedicatedDb\""
 	Description       *string    "json:\"description,omitempty\" graphql:\"description\""
 	DisplayName       string     "json:\"displayName\" graphql:\"displayName\""
 	ID                string     "json:\"id\" graphql:\"id\""
@@ -60900,12 +60885,6 @@ func (t *GetOrganizationByID_Organization) GetCreatedBy() *string {
 		t = &GetOrganizationByID_Organization{}
 	}
 	return t.CreatedBy
-}
-func (t *GetOrganizationByID_Organization) GetDedicatedDb() bool {
-	if t == nil {
-		t = &GetOrganizationByID_Organization{}
-	}
-	return t.DedicatedDb
 }
 func (t *GetOrganizationByID_Organization) GetDescription() *string {
 	if t == nil {
@@ -60994,7 +60973,6 @@ type GetOrganizations_Organizations_Edges_Node struct {
 	AvatarUpdatedAt   *time.Time "json:\"avatarUpdatedAt,omitempty\" graphql:\"avatarUpdatedAt\""
 	CreatedAt         *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy         *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DedicatedDb       bool       "json:\"dedicatedDb\" graphql:\"dedicatedDb\""
 	Description       *string    "json:\"description,omitempty\" graphql:\"description\""
 	DisplayName       string     "json:\"displayName\" graphql:\"displayName\""
 	ID                string     "json:\"id\" graphql:\"id\""
@@ -61034,12 +61012,6 @@ func (t *GetOrganizations_Organizations_Edges_Node) GetCreatedBy() *string {
 		t = &GetOrganizations_Organizations_Edges_Node{}
 	}
 	return t.CreatedBy
-}
-func (t *GetOrganizations_Organizations_Edges_Node) GetDedicatedDb() bool {
-	if t == nil {
-		t = &GetOrganizations_Organizations_Edges_Node{}
-	}
-	return t.DedicatedDb
 }
 func (t *GetOrganizations_Organizations_Edges_Node) GetDescription() *string {
 	if t == nil {
@@ -61132,7 +61104,6 @@ type UpdateOrganization_UpdateOrganization_Organization struct {
 	AvatarUpdatedAt   *time.Time "json:\"avatarUpdatedAt,omitempty\" graphql:\"avatarUpdatedAt\""
 	CreatedAt         *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy         *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DedicatedDb       bool       "json:\"dedicatedDb\" graphql:\"dedicatedDb\""
 	Description       *string    "json:\"description,omitempty\" graphql:\"description\""
 	DisplayName       string     "json:\"displayName\" graphql:\"displayName\""
 	ID                string     "json:\"id\" graphql:\"id\""
@@ -61172,12 +61143,6 @@ func (t *UpdateOrganization_UpdateOrganization_Organization) GetCreatedBy() *str
 		t = &UpdateOrganization_UpdateOrganization_Organization{}
 	}
 	return t.CreatedBy
-}
-func (t *UpdateOrganization_UpdateOrganization_Organization) GetDedicatedDb() bool {
-	if t == nil {
-		t = &UpdateOrganization_UpdateOrganization_Organization{}
-	}
-	return t.DedicatedDb
 }
 func (t *UpdateOrganization_UpdateOrganization_Organization) GetDescription() *string {
 	if t == nil {
@@ -133484,7 +133449,6 @@ const CreateOrganizationDocument = `mutation CreateOrganization ($input: CreateO
 			avatarUpdatedAt
 			createdAt
 			createdBy
-			dedicatedDb
 			description
 			displayName
 			id
@@ -133556,7 +133520,6 @@ const GetAllOrganizationsDocument = `query GetAllOrganizations ($first: Int, $la
 				avatarUpdatedAt
 				createdAt
 				createdBy
-				dedicatedDb
 				description
 				displayName
 				id
@@ -133603,7 +133566,6 @@ const GetOrganizationByIDDocument = `query GetOrganizationByID ($organizationId:
 		avatarUpdatedAt
 		createdAt
 		createdBy
-		dedicatedDb
 		description
 		displayName
 		id
@@ -133649,7 +133611,6 @@ const GetOrganizationsDocument = `query GetOrganizations ($first: Int, $last: In
 				avatarUpdatedAt
 				createdAt
 				createdBy
-				dedicatedDb
 				description
 				displayName
 				id
@@ -133694,7 +133655,6 @@ const UpdateOrganizationDocument = `mutation UpdateOrganization ($updateOrganiza
 			avatarUpdatedAt
 			createdAt
 			createdBy
-			dedicatedDb
 			description
 			displayName
 			id
