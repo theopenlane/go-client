@@ -6,7 +6,6 @@ mutation CreateOrganization($input: CreateOrganizationInput!, $avatarFile: Uploa
       avatarUpdatedAt
       createdAt
       createdBy
-      dedicatedDb
       description
       displayName
       id
@@ -47,7 +46,6 @@ query GetAllOrganizations($first: Int, $last: Int, $after: Cursor, $before: Curs
         avatarUpdatedAt
         createdAt
         createdBy
-        dedicatedDb
         description
         displayName
         id
@@ -72,7 +70,6 @@ query GetOrganizationByID($organizationId: ID!) {
     avatarUpdatedAt
     createdAt
     createdBy
-    dedicatedDb
     description
     displayName
     id
@@ -107,7 +104,6 @@ query GetOrganizations($first: Int, $last: Int, $after: Cursor, $before: Cursor,
         avatarUpdatedAt
         createdAt
         createdBy
-        dedicatedDb
         description
         displayName
         id
@@ -133,7 +129,6 @@ mutation UpdateOrganization($updateOrganizationId: ID!, $input: UpdateOrganizati
       avatarUpdatedAt
       createdAt
       createdBy
-      dedicatedDb
       description
       displayName
       id
