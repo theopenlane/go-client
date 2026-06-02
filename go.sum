@@ -144,8 +144,8 @@ github.com/theopenlane/entx v0.28.1 h1:Vouh8SLVHPFoidzWn0e4WaxZ3OO858W93MKKtg9Dv
 github.com/theopenlane/entx v0.28.1/go.mod h1:yMkUL9e++jwZgRi20IxC6b9dO/MBtErZ6dnarsuqGsM=
 github.com/theopenlane/httpsling v0.3.0 h1:Bad0dGdqCqAB8UVDyVo+YCevzRvGHhmkK22F7T3pXtY=
 github.com/theopenlane/httpsling v0.3.0/go.mod h1:iJc3XRLYTFIpfCnPpLZVMBP0xsWIPAb7ozARtQoclAE=
-github.com/theopenlane/iam v0.31.1 h1:ut9P6lnjANi6RrLgYq/w0C4HqUJE2AKQQ62rBZg2q54=
-github.com/theopenlane/iam v0.31.1/go.mod h1:oIr/9vKR2pM36PZ+CVOGUjdDHBo1LDGXPpJNq3CYILM=
+github.com/theopenlane/iam v0.32.0 h1:eIqVylXYhouoTNDl7bGKMVencaO1vAw7Ac+P1frT14o=
+github.com/theopenlane/iam v0.32.0/go.mod h1:Hh/oU0c2To5uCfO8Yy26kcsGaEHzoPKgve5mdocXLSk=
 github.com/theopenlane/utils v0.7.1 h1:x+9kVMgOALYqAH6GaLaDb9tj16nzasoGM8X0v0XNTn8=
 github.com/theopenlane/utils v0.7.1/go.mod h1:uxiLqjtcqgH57yOpYl3tTfKuenGYyAROxHFMpXx6mDY=
 github.com/tinylib/msgp v1.6.4 h1:mOwYbyYDLPj35mkA2BjjYejgJk9BuHxDdvRnb6v2ZcQ=

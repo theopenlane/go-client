@@ -11,7 +11,7 @@ require (
 	github.com/theopenlane/core/common v1.0.24
 	github.com/theopenlane/entx v0.28.1
 	github.com/theopenlane/httpsling v0.3.0
-	github.com/theopenlane/iam v0.31.1
+	github.com/theopenlane/iam v0.32.0
 	github.com/theopenlane/utils v0.7.1
 	github.com/vektah/gqlparser/v2 v2.5.33
 	golang.org/x/oauth2 v0.36.0
