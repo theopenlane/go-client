@@ -136,12 +136,12 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/theopenlane/core v1.21.22 h1:OpCxR6QSJndAdcgSGFRivVmQIjGlmDc3ASmNtXgBJ74=
 github.com/theopenlane/core v1.21.22/go.mod h1:nbb9es/91Sr1foL4OBoB7oMphnsvG6Ppl8fChF9XlmI=
-github.com/theopenlane/core/common v1.0.23 h1:ZGpFADXgsbBLt0FVYZdJL+FEYJz1NCEnrCfcdRAJ84c=
-github.com/theopenlane/core/common v1.0.23/go.mod h1:de/V2poZlK0gmqUxNjyVHwirz2wcXtCrQHks71H7xrY=
+github.com/theopenlane/core/common v1.0.24 h1:MIRjz6vnOwCHFSbC1oWjsuPCUCr8Xr9Z29+uLkMf694=
+github.com/theopenlane/core/common v1.0.24/go.mod h1:c3Jykrf6ENOf7bR7Wod4GpvCnspv9EAX49dgiWLY7DU=
 github.com/theopenlane/echox v0.3.0 h1:uwOKEw+r1utGQoOR6dZQqAVuY5j8TcasqnTwO5+rMsA=
 github.com/theopenlane/echox v0.3.0/go.mod h1:yTrXnj7s3VNIg0FCvB7Dut2Elr+LqJKU/nruxx1E1cM=
-github.com/theopenlane/entx v0.28.0 h1:SL/BSGSJT6daOxVCSig57q0H2XQ63qDD1vyjQLPKtUo=
-github.com/theopenlane/entx v0.28.0/go.mod h1:ZSvcYVsdErZIf8EPS6NZTFeWjJ/XCASoR1mIRMVzUl0=
+github.com/theopenlane/entx v0.28.1 h1:Vouh8SLVHPFoidzWn0e4WaxZ3OO858W93MKKtg9Dv5Y=
+github.com/theopenlane/entx v0.28.1/go.mod h1:yMkUL9e++jwZgRi20IxC6b9dO/MBtErZ6dnarsuqGsM=
 github.com/theopenlane/httpsling v0.3.0 h1:Bad0dGdqCqAB8UVDyVo+YCevzRvGHhmkK22F7T3pXtY=
 github.com/theopenlane/httpsling v0.3.0/go.mod h1:iJc3XRLYTFIpfCnPpLZVMBP0xsWIPAb7ozARtQoclAE=
 github.com/theopenlane/iam v0.31.1 h1:ut9P6lnjANi6RrLgYq/w0C4HqUJE2AKQQ62rBZg2q54=
@@ -194,8 +194,8 @@ golang.org/x/exp v0.0.0-20260508232706-74f9aab9d74a h1:+3jdDGGB8NGb1Zktc737jlt3/
 golang.org/x/exp v0.0.0-20260508232706-74f9aab9d74a/go.mod h1:d2fgXJLVs4dYDHUk5lwMIfzRzSrWCfGZb0ZqeLa/Vcw=
 golang.org/x/mod v0.36.0 h1:JJjpVx6myfUsUdAzZuOSTTmRE0PfZeNWzzvKrP7amb4=
 golang.org/x/mod v0.36.0/go.mod h1:moc6ELqsWcOw5Ef3xVprK5ul/MvtVvkIXLziUOICjUQ=
-golang.org/x/net v0.54.0 h1:2zJIZAxAHV/OHCDTCOHAYehQzLfSXuf/5SoL/Dv6w/w=
-golang.org/x/net v0.54.0/go.mod h1:Sj4oj8jK6XmHpBZU/zWHw3BV3abl4Kvi+Ut7cQcY+cQ=
+golang.org/x/net v0.55.0 h1:bcvxaJn3e1U6InsFWt1JUq1aSjnRxLzT2rtD2KfkDF8=
+golang.org/x/net v0.55.0/go.mod h1:L5U2KuzuOe1lY7Z+aWVIKK6qEeJXnXV9yzGA+WCHJww=
 golang.org/x/oauth2 v0.36.0 h1:peZ/1z27fi9hUOFCAZaHyrpWG5lwe0RJEEEeH0ThlIs=
 golang.org/x/oauth2 v0.36.0/go.mod h1:YDBUJMTkDnJS+A4BP4eZBjCqtokkg1hODuPjwiGPO7Q=
 golang.org/x/sync v0.20.0 h1:e0PTpb7pjO8GAtTs2dQ6jYa5BWYlMuX047Dco/pItO4=

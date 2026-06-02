@@ -8,8 +8,8 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.1
 	github.com/samber/lo v1.53.0
-	github.com/theopenlane/core/common v1.0.23
-	github.com/theopenlane/entx v0.28.0
+	github.com/theopenlane/core/common v1.0.24
+	github.com/theopenlane/entx v0.28.1
 	github.com/theopenlane/httpsling v0.3.0
 	github.com/theopenlane/iam v0.31.1
 	github.com/theopenlane/utils v0.7.1
@@ -70,7 +70,7 @@ require (
 	golang.org/x/crypto v0.52.0 // indirect
 	golang.org/x/exp v0.0.0-20260508232706-74f9aab9d74a // indirect
 	golang.org/x/mod v0.36.0 // indirect
-	golang.org/x/net v0.54.0 // indirect
+	golang.org/x/net v0.55.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
 	golang.org/x/sys v0.45.0 // indirect
 	golang.org/x/text v0.37.0 // indirect
