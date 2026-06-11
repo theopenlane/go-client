@@ -3,7 +3,7 @@ module github.com/theopenlane/go-client
 go 1.26.3
 
 require (
-	github.com/99designs/gqlgen v0.17.90
+	github.com/99designs/gqlgen v0.17.91
 	github.com/gqlgo/gqlgenc v0.37.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.1
@@ -13,7 +13,7 @@ require (
 	github.com/theopenlane/httpsling v0.3.0
 	github.com/theopenlane/iam v0.32.0
 	github.com/theopenlane/utils v0.7.1
-	github.com/vektah/gqlparser/v2 v2.5.33
+	github.com/vektah/gqlparser/v2 v2.5.34
 	golang.org/x/oauth2 v0.36.0
 )
 
@@ -27,6 +27,7 @@ require (
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/bmatcuk/doublestar v1.3.4 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
+	github.com/coder/websocket v1.8.14 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.2 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
