@@ -1146,14 +1146,15 @@ type AssessmentResponse struct {
 	// the document containing the user's response data
 	DocumentDataID *string `json:"documentDataID,omitempty"`
 	// is this a draft response? can the user resume from where they left?
-	IsDraft          bool                       `json:"isDraft"`
-	Owner            *Organization              `json:"owner,omitempty"`
-	Assessment       *Assessment                `json:"assessment"`
-	Campaign         *Campaign                  `json:"campaign,omitempty"`
-	IdentityHolder   *IdentityHolder            `json:"identityHolder,omitempty"`
-	Entity           *Entity                    `json:"entity,omitempty"`
-	Document         *DocumentData              `json:"document,omitempty"`
-	VendorRiskScores *VendorRiskScoreConnection `json:"vendorRiskScores"`
+	IsDraft                     bool                       `json:"isDraft"`
+	Owner                       *Organization              `json:"owner,omitempty"`
+	Assessment                  *Assessment                `json:"assessment"`
+	Campaign                    *Campaign                  `json:"campaign,omitempty"`
+	IdentityHolder              *IdentityHolder            `json:"identityHolder,omitempty"`
+	Entity                      *Entity                    `json:"entity,omitempty"`
+	Document                    *DocumentData              `json:"document,omitempty"`
+	VendorRiskScores            *VendorRiskScoreConnection `json:"vendorRiskScores"`
+	QuestionnaireTransformError *string                    `json:"questionnaireTransformError,omitempty"`
 }
 
 func (AssessmentResponse) IsNode() {}
@@ -13617,6 +13618,18 @@ type EmailTemplateCatalogEntry struct {
 	// The UI uses this to render a dynamic form; the submitted values become
 	// the EmailTemplate defaults field.
 	ConfigSchema map[string]any `json:"configSchema"`
+	// RJSF-style UI schema describing how the configurable fields should be
+	// rendered as a form: authoring order, color widgets for hex fields,
+	// repeatable lists for body paragraphs, and hidden per-send fields.
+	UISchema map[string]any `json:"uiSchema"`
+	// System-provided template variables available for interpolation in this
+	// template's string fields (e.g. {{ .firstName }}), with descriptions for
+	// the UI variable picker.
+	Variables []*TemplateVariable `json:"variables"`
+	// Example/default field values used to render the preview, keyed by the same
+	// field names as configSchema. The UI pre-fills the editor form with these so
+	// the author starts from — and can see — what the default preview renders.
+	ExampleValues map[string]any `json:"exampleValues,omitempty"`
 	// Rendered HTML preview of the template with default/example values.
 	HTMLPreview string `json:"htmlPreview"`
 }
