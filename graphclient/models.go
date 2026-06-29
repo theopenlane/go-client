@@ -4693,6 +4693,9 @@ type ControlEdge struct {
 type ControlEvidence struct {
 	// total number of evidence items linked to the control
 	TotalCount int64 `json:"totalCount"`
+	// from the total number, the amount inherited from linked controls instead of directly
+	// linked to this control
+	InheritedCount int64 `json:"inheritedCount"`
 	// the most severe evidence status among all linked evidence items
 	WorstStatus *enums.EvidenceStatus `json:"worstStatus,omitempty"`
 	// number of evidence items with auditor-approved status
@@ -5037,6 +5040,10 @@ type ControlImplementationWhereInput struct {
 type ControlInfo struct {
 	// unique identifier of the control
 	ID string `json:"id"`
+	// id(s) of the mapped_control this related control from if the mapping is org owned
+	MappedControlReferenceIDs []string `json:"mappedControlReferenceIDs,omitempty"`
+	// id(s) of the subcontrol the mapping was inherited from, this is null if the control was directly mapped, if it was inherited from a subcontrol it will have the subcontrol IDs that are providing the mapping
+	InheritedFromSubcontrolIDs []string `json:"inheritedFromSubcontrolIDs,omitempty"`
 	// the unique reference code for the control
 	RefCode string `json:"refCode"`
 	// description of what the control is supposed to accomplish
@@ -5055,6 +5062,8 @@ type ControlInfo struct {
 	Subcategory *string `json:"subcategory,omitempty"`
 	// whether this entry is a subcontrol rather than a top-level control
 	IsSubcontrol bool `json:"isSubcontrol"`
+	// the id of the parent control if this is a subcontrol, empty if isSubcontrol is false
+	ParentControlID *string `json:"parentControlID,omitempty"`
 }
 
 type ControlObjective struct {
@@ -5488,6 +5497,8 @@ type ControlPolicies struct {
 type ControlReport struct {
 	// unique identifier of the control
 	ID string `json:"id"`
+	// the id of the parent control, only populated when the object is a subcontrol
+	ParentControlID *string `json:"parentControlID,omitempty"`
 	// the unique reference code for the control
 	RefCode string `json:"refCode"`
 	// description of what the control is supposed to accomplish
@@ -7331,7 +7342,6 @@ type CreateEntityInput struct {
 	OwnerID                             *string          `json:"ownerID,omitempty"`
 	BlockedGroupIDs                     []string         `json:"blockedGroupIDs,omitempty"`
 	EditorIDs                           []string         `json:"editorIDs,omitempty"`
-	ViewerIDs                           []string         `json:"viewerIDs,omitempty"`
 	InternalOwnerUserID                 *string          `json:"internalOwnerUserID,omitempty"`
 	InternalOwnerGroupID                *string          `json:"internalOwnerGroupID,omitempty"`
 	ReviewedByUserID                    *string          `json:"reviewedByUserID,omitempty"`
@@ -7653,7 +7663,6 @@ type CreateFindingInput struct {
 	OwnerID              *string        `json:"ownerID,omitempty"`
 	BlockedGroupIDs      []string       `json:"blockedGroupIDs,omitempty"`
 	EditorIDs            []string       `json:"editorIDs,omitempty"`
-	ViewerIDs            []string       `json:"viewerIDs,omitempty"`
 	EnvironmentID        *string        `json:"environmentID,omitempty"`
 	ScopeID              *string        `json:"scopeID,omitempty"`
 	FindingStatusID      *string        `json:"findingStatusID,omitempty"`
@@ -7731,12 +7740,6 @@ type CreateGroupInput struct {
 	ControlImplementationEditorIDs       []string                 `json:"controlImplementationEditorIDs,omitempty"`
 	ControlImplementationBlockedGroupIDs []string                 `json:"controlImplementationBlockedGroupIDs,omitempty"`
 	ControlImplementationViewerIDs       []string                 `json:"controlImplementationViewerIDs,omitempty"`
-	ScanEditorIDs                        []string                 `json:"scanEditorIDs,omitempty"`
-	ScanBlockedGroupIDs                  []string                 `json:"scanBlockedGroupIDs,omitempty"`
-	ScanViewerIDs                        []string                 `json:"scanViewerIDs,omitempty"`
-	EntityEditorIDs                      []string                 `json:"entityEditorIDs,omitempty"`
-	EntityBlockedGroupIDs                []string                 `json:"entityBlockedGroupIDs,omitempty"`
-	EntityViewerIDs                      []string                 `json:"entityViewerIDs,omitempty"`
 	ActionPlanEditorIDs                  []string                 `json:"actionPlanEditorIDs,omitempty"`
 	ActionPlanBlockedGroupIDs            []string                 `json:"actionPlanBlockedGroupIDs,omitempty"`
 	ActionPlanViewerIDs                  []string                 `json:"actionPlanViewerIDs,omitempty"`
@@ -7754,6 +7757,16 @@ type CreateGroupInput struct {
 	ControlBlockedGroupIDs               []string                 `json:"controlBlockedGroupIDs,omitempty"`
 	MappedControlEditorIDs               []string                 `json:"mappedControlEditorIDs,omitempty"`
 	MappedControlBlockedGroupIDs         []string                 `json:"mappedControlBlockedGroupIDs,omitempty"`
+	ScanEditorIDs                        []string                 `json:"scanEditorIDs,omitempty"`
+	ScanBlockedGroupIDs                  []string                 `json:"scanBlockedGroupIDs,omitempty"`
+	EntityEditorIDs                      []string                 `json:"entityEditorIDs,omitempty"`
+	EntityBlockedGroupIDs                []string                 `json:"entityBlockedGroupIDs,omitempty"`
+	FindingEditorIDs                     []string                 `json:"findingEditorIDs,omitempty"`
+	FindingBlockedGroupIDs               []string                 `json:"findingBlockedGroupIDs,omitempty"`
+	ReviewEditorIDs                      []string                 `json:"reviewEditorIDs,omitempty"`
+	ReviewBlockedGroupIDs                []string                 `json:"reviewBlockedGroupIDs,omitempty"`
+	RemediationEditorIDs                 []string                 `json:"remediationEditorIDs,omitempty"`
+	RemediationBlockedGroupIDs           []string                 `json:"remediationBlockedGroupIDs,omitempty"`
 	SettingID                            *string                  `json:"settingID,omitempty"`
 	EventIDs                             []string                 `json:"eventIDs,omitempty"`
 	IntegrationIDs                       []string                 `json:"integrationIDs,omitempty"`
@@ -8921,7 +8934,6 @@ type CreateRemediationInput struct {
 	OwnerID          *string        `json:"ownerID,omitempty"`
 	BlockedGroupIDs  []string       `json:"blockedGroupIDs,omitempty"`
 	EditorIDs        []string       `json:"editorIDs,omitempty"`
-	ViewerIDs        []string       `json:"viewerIDs,omitempty"`
 	EnvironmentID    *string        `json:"environmentID,omitempty"`
 	ScopeID          *string        `json:"scopeID,omitempty"`
 	IntegrationIDs   []string       `json:"integrationIDs,omitempty"`
@@ -8993,7 +9005,6 @@ type CreateReviewInput struct {
 	OwnerID           *string        `json:"ownerID,omitempty"`
 	BlockedGroupIDs   []string       `json:"blockedGroupIDs,omitempty"`
 	EditorIDs         []string       `json:"editorIDs,omitempty"`
-	ViewerIDs         []string       `json:"viewerIDs,omitempty"`
 	EnvironmentID     *string        `json:"environmentID,omitempty"`
 	ScopeID           *string        `json:"scopeID,omitempty"`
 	IntegrationIDs    []string       `json:"integrationIDs,omitempty"`
@@ -9109,7 +9120,6 @@ type CreateSLADefinitionInput struct {
 	OwnerID         *string  `json:"ownerID,omitempty"`
 	BlockedGroupIDs []string `json:"blockedGroupIDs,omitempty"`
 	EditorIDs       []string `json:"editorIDs,omitempty"`
-	ViewerIDs       []string `json:"viewerIDs,omitempty"`
 }
 
 // CreateScanInput is used for create Scan object.
@@ -9146,7 +9156,6 @@ type CreateScanInput struct {
 	OwnerID               *string           `json:"ownerID,omitempty"`
 	BlockedGroupIDs       []string          `json:"blockedGroupIDs,omitempty"`
 	EditorIDs             []string          `json:"editorIDs,omitempty"`
-	ViewerIDs             []string          `json:"viewerIDs,omitempty"`
 	ReviewedByUserID      *string           `json:"reviewedByUserID,omitempty"`
 	ReviewedByGroupID     *string           `json:"reviewedByGroupID,omitempty"`
 	AssignedToUserID      *string           `json:"assignedToUserID,omitempty"`
@@ -14372,7 +14381,6 @@ type Entity struct {
 	Owner                             *Organization                 `json:"owner,omitempty"`
 	BlockedGroups                     *GroupConnection              `json:"blockedGroups"`
 	Editors                           *GroupConnection              `json:"editors"`
-	Viewers                           *GroupConnection              `json:"viewers"`
 	InternalOwnerUser                 *User                         `json:"internalOwnerUser,omitempty"`
 	InternalOwnerGroup                *Group                        `json:"internalOwnerGroup,omitempty"`
 	ReviewedByUser                    *User                         `json:"reviewedByUser,omitempty"`
@@ -15469,9 +15477,6 @@ type EntityWhereInput struct {
 	// editors edge predicates
 	HasEditors     *bool              `json:"hasEditors,omitempty"`
 	HasEditorsWith []*GroupWhereInput `json:"hasEditorsWith,omitempty"`
-	// viewers edge predicates
-	HasViewers     *bool              `json:"hasViewers,omitempty"`
-	HasViewersWith []*GroupWhereInput `json:"hasViewersWith,omitempty"`
 	// internal_owner_user edge predicates
 	HasInternalOwnerUser     *bool             `json:"hasInternalOwnerUser,omitempty"`
 	HasInternalOwnerUserWith []*UserWhereInput `json:"hasInternalOwnerUserWith,omitempty"`
@@ -17341,7 +17346,6 @@ type Finding struct {
 	Owner              *Organization                `json:"owner,omitempty"`
 	BlockedGroups      *GroupConnection             `json:"blockedGroups"`
 	Editors            *GroupConnection             `json:"editors"`
-	Viewers            *GroupConnection             `json:"viewers"`
 	Environment        *CustomTypeEnum              `json:"environment,omitempty"`
 	Scope              *CustomTypeEnum              `json:"scope,omitempty"`
 	FindingStatus      *CustomTypeEnum              `json:"findingStatus,omitempty"`
@@ -18285,9 +18289,6 @@ type FindingWhereInput struct {
 	// editors edge predicates
 	HasEditors     *bool              `json:"hasEditors,omitempty"`
 	HasEditorsWith []*GroupWhereInput `json:"hasEditorsWith,omitempty"`
-	// viewers edge predicates
-	HasViewers     *bool              `json:"hasViewers,omitempty"`
-	HasViewersWith []*GroupWhereInput `json:"hasViewersWith,omitempty"`
 	// environment edge predicates
 	HasEnvironment     *bool                       `json:"hasEnvironment,omitempty"`
 	HasEnvironmentWith []*CustomTypeEnumWhereInput `json:"hasEnvironmentWith,omitempty"`
@@ -18425,12 +18426,6 @@ type Group struct {
 	ControlImplementationEditors       *ControlImplementationConnection `json:"controlImplementationEditors"`
 	ControlImplementationBlockedGroups *ControlImplementationConnection `json:"controlImplementationBlockedGroups"`
 	ControlImplementationViewers       *ControlImplementationConnection `json:"controlImplementationViewers"`
-	ScanEditors                        *ScanConnection                  `json:"scanEditors"`
-	ScanBlockedGroups                  *ScanConnection                  `json:"scanBlockedGroups"`
-	ScanViewers                        *ScanConnection                  `json:"scanViewers"`
-	EntityEditors                      *EntityConnection                `json:"entityEditors"`
-	EntityBlockedGroups                *EntityConnection                `json:"entityBlockedGroups"`
-	EntityViewers                      *EntityConnection                `json:"entityViewers"`
 	ActionPlanEditors                  *ActionPlanConnection            `json:"actionPlanEditors"`
 	ActionPlanBlockedGroups            *ActionPlanConnection            `json:"actionPlanBlockedGroups"`
 	ActionPlanViewers                  *ActionPlanConnection            `json:"actionPlanViewers"`
@@ -18448,6 +18443,16 @@ type Group struct {
 	ControlBlockedGroups               *ControlConnection               `json:"controlBlockedGroups"`
 	MappedControlEditors               *MappedControlConnection         `json:"mappedControlEditors"`
 	MappedControlBlockedGroups         *MappedControlConnection         `json:"mappedControlBlockedGroups"`
+	ScanEditors                        *ScanConnection                  `json:"scanEditors"`
+	ScanBlockedGroups                  *ScanConnection                  `json:"scanBlockedGroups"`
+	EntityEditors                      *EntityConnection                `json:"entityEditors"`
+	EntityBlockedGroups                *EntityConnection                `json:"entityBlockedGroups"`
+	FindingEditors                     *FindingConnection               `json:"findingEditors"`
+	FindingBlockedGroups               *FindingConnection               `json:"findingBlockedGroups"`
+	ReviewEditors                      *ReviewConnection                `json:"reviewEditors"`
+	ReviewBlockedGroups                *ReviewConnection                `json:"reviewBlockedGroups"`
+	RemediationEditors                 *RemediationConnection           `json:"remediationEditors"`
+	RemediationBlockedGroups           *RemediationConnection           `json:"remediationBlockedGroups"`
 	Setting                            *GroupSetting                    `json:"setting,omitempty"`
 	Users                              *UserConnection                  `json:"users"`
 	Events                             *EventConnection                 `json:"events"`
@@ -19286,24 +19291,6 @@ type GroupWhereInput struct {
 	// control_implementation_viewers edge predicates
 	HasControlImplementationViewers     *bool                              `json:"hasControlImplementationViewers,omitempty"`
 	HasControlImplementationViewersWith []*ControlImplementationWhereInput `json:"hasControlImplementationViewersWith,omitempty"`
-	// scan_editors edge predicates
-	HasScanEditors     *bool             `json:"hasScanEditors,omitempty"`
-	HasScanEditorsWith []*ScanWhereInput `json:"hasScanEditorsWith,omitempty"`
-	// scan_blocked_groups edge predicates
-	HasScanBlockedGroups     *bool             `json:"hasScanBlockedGroups,omitempty"`
-	HasScanBlockedGroupsWith []*ScanWhereInput `json:"hasScanBlockedGroupsWith,omitempty"`
-	// scan_viewers edge predicates
-	HasScanViewers     *bool             `json:"hasScanViewers,omitempty"`
-	HasScanViewersWith []*ScanWhereInput `json:"hasScanViewersWith,omitempty"`
-	// entity_editors edge predicates
-	HasEntityEditors     *bool               `json:"hasEntityEditors,omitempty"`
-	HasEntityEditorsWith []*EntityWhereInput `json:"hasEntityEditorsWith,omitempty"`
-	// entity_blocked_groups edge predicates
-	HasEntityBlockedGroups     *bool               `json:"hasEntityBlockedGroups,omitempty"`
-	HasEntityBlockedGroupsWith []*EntityWhereInput `json:"hasEntityBlockedGroupsWith,omitempty"`
-	// entity_viewers edge predicates
-	HasEntityViewers     *bool               `json:"hasEntityViewers,omitempty"`
-	HasEntityViewersWith []*EntityWhereInput `json:"hasEntityViewersWith,omitempty"`
 	// action_plan_editors edge predicates
 	HasActionPlanEditors     *bool                   `json:"hasActionPlanEditors,omitempty"`
 	HasActionPlanEditorsWith []*ActionPlanWhereInput `json:"hasActionPlanEditorsWith,omitempty"`
@@ -19355,6 +19342,36 @@ type GroupWhereInput struct {
 	// mapped_control_blocked_groups edge predicates
 	HasMappedControlBlockedGroups     *bool                      `json:"hasMappedControlBlockedGroups,omitempty"`
 	HasMappedControlBlockedGroupsWith []*MappedControlWhereInput `json:"hasMappedControlBlockedGroupsWith,omitempty"`
+	// scan_editors edge predicates
+	HasScanEditors     *bool             `json:"hasScanEditors,omitempty"`
+	HasScanEditorsWith []*ScanWhereInput `json:"hasScanEditorsWith,omitempty"`
+	// scan_blocked_groups edge predicates
+	HasScanBlockedGroups     *bool             `json:"hasScanBlockedGroups,omitempty"`
+	HasScanBlockedGroupsWith []*ScanWhereInput `json:"hasScanBlockedGroupsWith,omitempty"`
+	// entity_editors edge predicates
+	HasEntityEditors     *bool               `json:"hasEntityEditors,omitempty"`
+	HasEntityEditorsWith []*EntityWhereInput `json:"hasEntityEditorsWith,omitempty"`
+	// entity_blocked_groups edge predicates
+	HasEntityBlockedGroups     *bool               `json:"hasEntityBlockedGroups,omitempty"`
+	HasEntityBlockedGroupsWith []*EntityWhereInput `json:"hasEntityBlockedGroupsWith,omitempty"`
+	// finding_editors edge predicates
+	HasFindingEditors     *bool                `json:"hasFindingEditors,omitempty"`
+	HasFindingEditorsWith []*FindingWhereInput `json:"hasFindingEditorsWith,omitempty"`
+	// finding_blocked_groups edge predicates
+	HasFindingBlockedGroups     *bool                `json:"hasFindingBlockedGroups,omitempty"`
+	HasFindingBlockedGroupsWith []*FindingWhereInput `json:"hasFindingBlockedGroupsWith,omitempty"`
+	// review_editors edge predicates
+	HasReviewEditors     *bool               `json:"hasReviewEditors,omitempty"`
+	HasReviewEditorsWith []*ReviewWhereInput `json:"hasReviewEditorsWith,omitempty"`
+	// review_blocked_groups edge predicates
+	HasReviewBlockedGroups     *bool               `json:"hasReviewBlockedGroups,omitempty"`
+	HasReviewBlockedGroupsWith []*ReviewWhereInput `json:"hasReviewBlockedGroupsWith,omitempty"`
+	// remediation_editors edge predicates
+	HasRemediationEditors     *bool                    `json:"hasRemediationEditors,omitempty"`
+	HasRemediationEditorsWith []*RemediationWhereInput `json:"hasRemediationEditorsWith,omitempty"`
+	// remediation_blocked_groups edge predicates
+	HasRemediationBlockedGroups     *bool                    `json:"hasRemediationBlockedGroups,omitempty"`
+	HasRemediationBlockedGroupsWith []*RemediationWhereInput `json:"hasRemediationBlockedGroupsWith,omitempty"`
 	// setting edge predicates
 	HasSetting     *bool                     `json:"hasSetting,omitempty"`
 	HasSettingWith []*GroupSettingWhereInput `json:"hasSettingWith,omitempty"`
@@ -28528,6 +28545,8 @@ type PolicySummary struct {
 	Name string `json:"name"`
 	// status of the policy, e.g. draft, published, archived, etc.
 	Status enums.DocumentStatus `json:"status"`
+	// empty when linked directly to the control; otherwise the related/mapped control IDs that contributed it
+	InheritedFromIDs []string `json:"inheritedFromIDs,omitempty"`
 }
 
 func (PolicySummary) IsNode() {}
@@ -29969,7 +29988,6 @@ type Remediation struct {
 	Owner           *Organization            `json:"owner,omitempty"`
 	BlockedGroups   *GroupConnection         `json:"blockedGroups"`
 	Editors         *GroupConnection         `json:"editors"`
-	Viewers         *GroupConnection         `json:"viewers"`
 	Environment     *CustomTypeEnum          `json:"environment,omitempty"`
 	Scope           *CustomTypeEnum          `json:"scope,omitempty"`
 	Integrations    *IntegrationConnection   `json:"integrations"`
@@ -30550,9 +30568,6 @@ type RemediationWhereInput struct {
 	// editors edge predicates
 	HasEditors     *bool              `json:"hasEditors,omitempty"`
 	HasEditorsWith []*GroupWhereInput `json:"hasEditorsWith,omitempty"`
-	// viewers edge predicates
-	HasViewers     *bool              `json:"hasViewers,omitempty"`
-	HasViewersWith []*GroupWhereInput `json:"hasViewersWith,omitempty"`
 	// environment edge predicates
 	HasEnvironment     *bool                       `json:"hasEnvironment,omitempty"`
 	HasEnvironmentWith []*CustomTypeEnumWhereInput `json:"hasEnvironmentWith,omitempty"`
@@ -30699,7 +30714,6 @@ type Review struct {
 	Owner           *Organization            `json:"owner,omitempty"`
 	BlockedGroups   *GroupConnection         `json:"blockedGroups"`
 	Editors         *GroupConnection         `json:"editors"`
-	Viewers         *GroupConnection         `json:"viewers"`
 	Environment     *CustomTypeEnum          `json:"environment,omitempty"`
 	Scope           *CustomTypeEnum          `json:"scope,omitempty"`
 	Integrations    *IntegrationConnection   `json:"integrations"`
@@ -31223,9 +31237,6 @@ type ReviewWhereInput struct {
 	// editors edge predicates
 	HasEditors     *bool              `json:"hasEditors,omitempty"`
 	HasEditorsWith []*GroupWhereInput `json:"hasEditorsWith,omitempty"`
-	// viewers edge predicates
-	HasViewers     *bool              `json:"hasViewers,omitempty"`
-	HasViewersWith []*GroupWhereInput `json:"hasViewersWith,omitempty"`
 	// environment edge predicates
 	HasEnvironment     *bool                       `json:"hasEnvironment,omitempty"`
 	HasEnvironmentWith []*CustomTypeEnumWhereInput `json:"hasEnvironmentWith,omitempty"`
@@ -32046,7 +32057,6 @@ type SLADefinition struct {
 	Owner         *Organization       `json:"owner,omitempty"`
 	BlockedGroups *GroupConnection    `json:"blockedGroups"`
 	Editors       *GroupConnection    `json:"editors"`
-	Viewers       *GroupConnection    `json:"viewers"`
 }
 
 func (SLADefinition) IsNode() {}
@@ -32243,9 +32253,6 @@ type SLADefinitionWhereInput struct {
 	// editors edge predicates
 	HasEditors     *bool              `json:"hasEditors,omitempty"`
 	HasEditorsWith []*GroupWhereInput `json:"hasEditorsWith,omitempty"`
-	// viewers edge predicates
-	HasViewers     *bool              `json:"hasViewers,omitempty"`
-	HasViewersWith []*GroupWhereInput `json:"hasViewersWith,omitempty"`
 	// Filter for tagsHas to contain a specific value
 	TagsHas *string `json:"tagsHas,omitempty"`
 }
@@ -32307,7 +32314,6 @@ type Scan struct {
 	Owner               *Organization            `json:"owner,omitempty"`
 	BlockedGroups       *GroupConnection         `json:"blockedGroups"`
 	Editors             *GroupConnection         `json:"editors"`
-	Viewers             *GroupConnection         `json:"viewers"`
 	ReviewedByUser      *User                    `json:"reviewedByUser,omitempty"`
 	ReviewedByGroup     *Group                   `json:"reviewedByGroup,omitempty"`
 	AssignedToUser      *User                    `json:"assignedToUser,omitempty"`
@@ -32766,9 +32772,6 @@ type ScanWhereInput struct {
 	// editors edge predicates
 	HasEditors     *bool              `json:"hasEditors,omitempty"`
 	HasEditorsWith []*GroupWhereInput `json:"hasEditorsWith,omitempty"`
-	// viewers edge predicates
-	HasViewers     *bool              `json:"hasViewers,omitempty"`
-	HasViewersWith []*GroupWhereInput `json:"hasViewersWith,omitempty"`
 	// reviewed_by_user edge predicates
 	HasReviewedByUser     *bool             `json:"hasReviewedByUser,omitempty"`
 	HasReviewedByUserWith []*UserWhereInput `json:"hasReviewedByUserWith,omitempty"`
@@ -41555,9 +41558,6 @@ type UpdateEntityInput struct {
 	AddEditorIDs                           []string         `json:"addEditorIDs,omitempty"`
 	RemoveEditorIDs                        []string         `json:"removeEditorIDs,omitempty"`
 	ClearEditors                           *bool            `json:"clearEditors,omitempty"`
-	AddViewerIDs                           []string         `json:"addViewerIDs,omitempty"`
-	RemoveViewerIDs                        []string         `json:"removeViewerIDs,omitempty"`
-	ClearViewers                           *bool            `json:"clearViewers,omitempty"`
 	InternalOwnerUserID                    *string          `json:"internalOwnerUserID,omitempty"`
 	ClearInternalOwnerUser                 *bool            `json:"clearInternalOwnerUser,omitempty"`
 	InternalOwnerGroupID                   *string          `json:"internalOwnerGroupID,omitempty"`
@@ -42116,9 +42116,6 @@ type UpdateFindingInput struct {
 	AddEditorIDs               []string       `json:"addEditorIDs,omitempty"`
 	RemoveEditorIDs            []string       `json:"removeEditorIDs,omitempty"`
 	ClearEditors               *bool          `json:"clearEditors,omitempty"`
-	AddViewerIDs               []string       `json:"addViewerIDs,omitempty"`
-	RemoveViewerIDs            []string       `json:"removeViewerIDs,omitempty"`
-	ClearViewers               *bool          `json:"clearViewers,omitempty"`
 	EnvironmentID              *string        `json:"environmentID,omitempty"`
 	ClearEnvironment           *bool          `json:"clearEnvironment,omitempty"`
 	ScopeID                    *string        `json:"scopeID,omitempty"`
@@ -42270,24 +42267,6 @@ type UpdateGroupInput struct {
 	AddControlImplementationViewerIDs          []string                      `json:"addControlImplementationViewerIDs,omitempty"`
 	RemoveControlImplementationViewerIDs       []string                      `json:"removeControlImplementationViewerIDs,omitempty"`
 	ClearControlImplementationViewers          *bool                         `json:"clearControlImplementationViewers,omitempty"`
-	AddScanEditorIDs                           []string                      `json:"addScanEditorIDs,omitempty"`
-	RemoveScanEditorIDs                        []string                      `json:"removeScanEditorIDs,omitempty"`
-	ClearScanEditors                           *bool                         `json:"clearScanEditors,omitempty"`
-	AddScanBlockedGroupIDs                     []string                      `json:"addScanBlockedGroupIDs,omitempty"`
-	RemoveScanBlockedGroupIDs                  []string                      `json:"removeScanBlockedGroupIDs,omitempty"`
-	ClearScanBlockedGroups                     *bool                         `json:"clearScanBlockedGroups,omitempty"`
-	AddScanViewerIDs                           []string                      `json:"addScanViewerIDs,omitempty"`
-	RemoveScanViewerIDs                        []string                      `json:"removeScanViewerIDs,omitempty"`
-	ClearScanViewers                           *bool                         `json:"clearScanViewers,omitempty"`
-	AddEntityEditorIDs                         []string                      `json:"addEntityEditorIDs,omitempty"`
-	RemoveEntityEditorIDs                      []string                      `json:"removeEntityEditorIDs,omitempty"`
-	ClearEntityEditors                         *bool                         `json:"clearEntityEditors,omitempty"`
-	AddEntityBlockedGroupIDs                   []string                      `json:"addEntityBlockedGroupIDs,omitempty"`
-	RemoveEntityBlockedGroupIDs                []string                      `json:"removeEntityBlockedGroupIDs,omitempty"`
-	ClearEntityBlockedGroups                   *bool                         `json:"clearEntityBlockedGroups,omitempty"`
-	AddEntityViewerIDs                         []string                      `json:"addEntityViewerIDs,omitempty"`
-	RemoveEntityViewerIDs                      []string                      `json:"removeEntityViewerIDs,omitempty"`
-	ClearEntityViewers                         *bool                         `json:"clearEntityViewers,omitempty"`
 	AddActionPlanEditorIDs                     []string                      `json:"addActionPlanEditorIDs,omitempty"`
 	RemoveActionPlanEditorIDs                  []string                      `json:"removeActionPlanEditorIDs,omitempty"`
 	ClearActionPlanEditors                     *bool                         `json:"clearActionPlanEditors,omitempty"`
@@ -42339,6 +42318,36 @@ type UpdateGroupInput struct {
 	AddMappedControlBlockedGroupIDs            []string                      `json:"addMappedControlBlockedGroupIDs,omitempty"`
 	RemoveMappedControlBlockedGroupIDs         []string                      `json:"removeMappedControlBlockedGroupIDs,omitempty"`
 	ClearMappedControlBlockedGroups            *bool                         `json:"clearMappedControlBlockedGroups,omitempty"`
+	AddScanEditorIDs                           []string                      `json:"addScanEditorIDs,omitempty"`
+	RemoveScanEditorIDs                        []string                      `json:"removeScanEditorIDs,omitempty"`
+	ClearScanEditors                           *bool                         `json:"clearScanEditors,omitempty"`
+	AddScanBlockedGroupIDs                     []string                      `json:"addScanBlockedGroupIDs,omitempty"`
+	RemoveScanBlockedGroupIDs                  []string                      `json:"removeScanBlockedGroupIDs,omitempty"`
+	ClearScanBlockedGroups                     *bool                         `json:"clearScanBlockedGroups,omitempty"`
+	AddEntityEditorIDs                         []string                      `json:"addEntityEditorIDs,omitempty"`
+	RemoveEntityEditorIDs                      []string                      `json:"removeEntityEditorIDs,omitempty"`
+	ClearEntityEditors                         *bool                         `json:"clearEntityEditors,omitempty"`
+	AddEntityBlockedGroupIDs                   []string                      `json:"addEntityBlockedGroupIDs,omitempty"`
+	RemoveEntityBlockedGroupIDs                []string                      `json:"removeEntityBlockedGroupIDs,omitempty"`
+	ClearEntityBlockedGroups                   *bool                         `json:"clearEntityBlockedGroups,omitempty"`
+	AddFindingEditorIDs                        []string                      `json:"addFindingEditorIDs,omitempty"`
+	RemoveFindingEditorIDs                     []string                      `json:"removeFindingEditorIDs,omitempty"`
+	ClearFindingEditors                        *bool                         `json:"clearFindingEditors,omitempty"`
+	AddFindingBlockedGroupIDs                  []string                      `json:"addFindingBlockedGroupIDs,omitempty"`
+	RemoveFindingBlockedGroupIDs               []string                      `json:"removeFindingBlockedGroupIDs,omitempty"`
+	ClearFindingBlockedGroups                  *bool                         `json:"clearFindingBlockedGroups,omitempty"`
+	AddReviewEditorIDs                         []string                      `json:"addReviewEditorIDs,omitempty"`
+	RemoveReviewEditorIDs                      []string                      `json:"removeReviewEditorIDs,omitempty"`
+	ClearReviewEditors                         *bool                         `json:"clearReviewEditors,omitempty"`
+	AddReviewBlockedGroupIDs                   []string                      `json:"addReviewBlockedGroupIDs,omitempty"`
+	RemoveReviewBlockedGroupIDs                []string                      `json:"removeReviewBlockedGroupIDs,omitempty"`
+	ClearReviewBlockedGroups                   *bool                         `json:"clearReviewBlockedGroups,omitempty"`
+	AddRemediationEditorIDs                    []string                      `json:"addRemediationEditorIDs,omitempty"`
+	RemoveRemediationEditorIDs                 []string                      `json:"removeRemediationEditorIDs,omitempty"`
+	ClearRemediationEditors                    *bool                         `json:"clearRemediationEditors,omitempty"`
+	AddRemediationBlockedGroupIDs              []string                      `json:"addRemediationBlockedGroupIDs,omitempty"`
+	RemoveRemediationBlockedGroupIDs           []string                      `json:"removeRemediationBlockedGroupIDs,omitempty"`
+	ClearRemediationBlockedGroups              *bool                         `json:"clearRemediationBlockedGroups,omitempty"`
 	SettingID                                  *string                       `json:"settingID,omitempty"`
 	ClearSetting                               *bool                         `json:"clearSetting,omitempty"`
 	AddEventIDs                                []string                      `json:"addEventIDs,omitempty"`
@@ -44359,9 +44368,6 @@ type UpdateRemediationInput struct {
 	AddEditorIDs           []string       `json:"addEditorIDs,omitempty"`
 	RemoveEditorIDs        []string       `json:"removeEditorIDs,omitempty"`
 	ClearEditors           *bool          `json:"clearEditors,omitempty"`
-	AddViewerIDs           []string       `json:"addViewerIDs,omitempty"`
-	RemoveViewerIDs        []string       `json:"removeViewerIDs,omitempty"`
-	ClearViewers           *bool          `json:"clearViewers,omitempty"`
 	EnvironmentID          *string        `json:"environmentID,omitempty"`
 	ClearEnvironment       *bool          `json:"clearEnvironment,omitempty"`
 	ScopeID                *string        `json:"scopeID,omitempty"`
@@ -44491,9 +44497,6 @@ type UpdateReviewInput struct {
 	AddEditorIDs            []string       `json:"addEditorIDs,omitempty"`
 	RemoveEditorIDs         []string       `json:"removeEditorIDs,omitempty"`
 	ClearEditors            *bool          `json:"clearEditors,omitempty"`
-	AddViewerIDs            []string       `json:"addViewerIDs,omitempty"`
-	RemoveViewerIDs         []string       `json:"removeViewerIDs,omitempty"`
-	ClearViewers            *bool          `json:"clearViewers,omitempty"`
 	EnvironmentID           *string        `json:"environmentID,omitempty"`
 	ClearEnvironment        *bool          `json:"clearEnvironment,omitempty"`
 	ScopeID                 *string        `json:"scopeID,omitempty"`
@@ -44726,9 +44729,6 @@ type UpdateSLADefinitionInput struct {
 	AddEditorIDs          []string `json:"addEditorIDs,omitempty"`
 	RemoveEditorIDs       []string `json:"removeEditorIDs,omitempty"`
 	ClearEditors          *bool    `json:"clearEditors,omitempty"`
-	AddViewerIDs          []string `json:"addViewerIDs,omitempty"`
-	RemoveViewerIDs       []string `json:"removeViewerIDs,omitempty"`
-	ClearViewers          *bool    `json:"clearViewers,omitempty"`
 }
 
 // UpdateScanInput is used for update Scan object.
@@ -44781,9 +44781,6 @@ type UpdateScanInput struct {
 	AddEditorIDs             []string          `json:"addEditorIDs,omitempty"`
 	RemoveEditorIDs          []string          `json:"removeEditorIDs,omitempty"`
 	ClearEditors             *bool             `json:"clearEditors,omitempty"`
-	AddViewerIDs             []string          `json:"addViewerIDs,omitempty"`
-	RemoveViewerIDs          []string          `json:"removeViewerIDs,omitempty"`
-	ClearViewers             *bool             `json:"clearViewers,omitempty"`
 	ReviewedByUserID         *string           `json:"reviewedByUserID,omitempty"`
 	ClearReviewedByUser      *bool             `json:"clearReviewedByUser,omitempty"`
 	ReviewedByGroupID        *string           `json:"reviewedByGroupID,omitempty"`
