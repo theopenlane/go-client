@@ -18,7 +18,7 @@ steps:
       location: "NYC"
     cancel_on_build_failing: true
     plugins:
-      - docker#v5.13.0:
+      - docker#v5.14.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           always_pull: true
           propagate-environment: true
@@ -86,7 +86,7 @@ steps:
     cancel_on_build_failing: true
     key: "lint"
     plugins:
-      - docker#v5.13.0:
+      - docker#v5.14.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           command: ["task", "go:lint:ci"]
           always_pull: true
@@ -105,7 +105,7 @@ steps:
       - "**.go"
       - "go.mod"
     plugins:
-      - docker#v5.13.0:
+      - docker#v5.14.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           always-pull: true
           command: ["task", "go:test"]
