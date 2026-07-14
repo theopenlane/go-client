@@ -85902,8 +85902,6 @@ type CreateBulkCSVSystemDetail_CreateBulkCSVSystemDetail_SystemDetails struct {
 	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
 	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
 	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
 	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
 	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
@@ -85966,18 +85964,6 @@ func (t *CreateBulkCSVSystemDetail_CreateBulkCSVSystemDetail_SystemDetails) GetO
 		t = &CreateBulkCSVSystemDetail_CreateBulkCSVSystemDetail_SystemDetails{}
 	}
 	return t.OwnerID
-}
-func (t *CreateBulkCSVSystemDetail_CreateBulkCSVSystemDetail_SystemDetails) GetPlatformID() *string {
-	if t == nil {
-		t = &CreateBulkCSVSystemDetail_CreateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.PlatformID
-}
-func (t *CreateBulkCSVSystemDetail_CreateBulkCSVSystemDetail_SystemDetails) GetProgramID() *string {
-	if t == nil {
-		t = &CreateBulkCSVSystemDetail_CreateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.ProgramID
 }
 func (t *CreateBulkCSVSystemDetail_CreateBulkCSVSystemDetail_SystemDetails) GetRevisionHistory() []any {
 	if t == nil {
@@ -86043,8 +86029,6 @@ type CreateBulkSystemDetail_CreateBulkSystemDetail_SystemDetails struct {
 	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
 	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
 	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
 	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
 	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
@@ -86107,18 +86091,6 @@ func (t *CreateBulkSystemDetail_CreateBulkSystemDetail_SystemDetails) GetOwnerID
 		t = &CreateBulkSystemDetail_CreateBulkSystemDetail_SystemDetails{}
 	}
 	return t.OwnerID
-}
-func (t *CreateBulkSystemDetail_CreateBulkSystemDetail_SystemDetails) GetPlatformID() *string {
-	if t == nil {
-		t = &CreateBulkSystemDetail_CreateBulkSystemDetail_SystemDetails{}
-	}
-	return t.PlatformID
-}
-func (t *CreateBulkSystemDetail_CreateBulkSystemDetail_SystemDetails) GetProgramID() *string {
-	if t == nil {
-		t = &CreateBulkSystemDetail_CreateBulkSystemDetail_SystemDetails{}
-	}
-	return t.ProgramID
 }
 func (t *CreateBulkSystemDetail_CreateBulkSystemDetail_SystemDetails) GetRevisionHistory() []any {
 	if t == nil {
@@ -86184,8 +86156,6 @@ type CreateSystemDetail_CreateSystemDetail_SystemDetail struct {
 	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
 	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
 	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
 	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
 	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
@@ -86248,18 +86218,6 @@ func (t *CreateSystemDetail_CreateSystemDetail_SystemDetail) GetOwnerID() *strin
 		t = &CreateSystemDetail_CreateSystemDetail_SystemDetail{}
 	}
 	return t.OwnerID
-}
-func (t *CreateSystemDetail_CreateSystemDetail_SystemDetail) GetPlatformID() *string {
-	if t == nil {
-		t = &CreateSystemDetail_CreateSystemDetail_SystemDetail{}
-	}
-	return t.PlatformID
-}
-func (t *CreateSystemDetail_CreateSystemDetail_SystemDetail) GetProgramID() *string {
-	if t == nil {
-		t = &CreateSystemDetail_CreateSystemDetail_SystemDetail{}
-	}
-	return t.ProgramID
 }
 func (t *CreateSystemDetail_CreateSystemDetail_SystemDetail) GetRevisionHistory() []any {
 	if t == nil {
@@ -86379,8 +86337,6 @@ type GetAllSystemDetails_SystemDetails_Edges_Node struct {
 	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
 	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
 	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
 	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
 	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
@@ -86443,18 +86399,6 @@ func (t *GetAllSystemDetails_SystemDetails_Edges_Node) GetOwnerID() *string {
 		t = &GetAllSystemDetails_SystemDetails_Edges_Node{}
 	}
 	return t.OwnerID
-}
-func (t *GetAllSystemDetails_SystemDetails_Edges_Node) GetPlatformID() *string {
-	if t == nil {
-		t = &GetAllSystemDetails_SystemDetails_Edges_Node{}
-	}
-	return t.PlatformID
-}
-func (t *GetAllSystemDetails_SystemDetails_Edges_Node) GetProgramID() *string {
-	if t == nil {
-		t = &GetAllSystemDetails_SystemDetails_Edges_Node{}
-	}
-	return t.ProgramID
 }
 func (t *GetAllSystemDetails_SystemDetails_Edges_Node) GetRevisionHistory() []any {
 	if t == nil {
@@ -86545,8 +86489,6 @@ type GetSystemDetailByID_SystemDetail struct {
 	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
 	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
 	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
 	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
 	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
@@ -86609,18 +86551,6 @@ func (t *GetSystemDetailByID_SystemDetail) GetOwnerID() *string {
 		t = &GetSystemDetailByID_SystemDetail{}
 	}
 	return t.OwnerID
-}
-func (t *GetSystemDetailByID_SystemDetail) GetPlatformID() *string {
-	if t == nil {
-		t = &GetSystemDetailByID_SystemDetail{}
-	}
-	return t.PlatformID
-}
-func (t *GetSystemDetailByID_SystemDetail) GetProgramID() *string {
-	if t == nil {
-		t = &GetSystemDetailByID_SystemDetail{}
-	}
-	return t.ProgramID
 }
 func (t *GetSystemDetailByID_SystemDetail) GetRevisionHistory() []any {
 	if t == nil {
@@ -86707,8 +86637,6 @@ type GetSystemDetails_SystemDetails_Edges_Node struct {
 	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
 	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
 	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
 	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
 	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
@@ -86771,18 +86699,6 @@ func (t *GetSystemDetails_SystemDetails_Edges_Node) GetOwnerID() *string {
 		t = &GetSystemDetails_SystemDetails_Edges_Node{}
 	}
 	return t.OwnerID
-}
-func (t *GetSystemDetails_SystemDetails_Edges_Node) GetPlatformID() *string {
-	if t == nil {
-		t = &GetSystemDetails_SystemDetails_Edges_Node{}
-	}
-	return t.PlatformID
-}
-func (t *GetSystemDetails_SystemDetails_Edges_Node) GetProgramID() *string {
-	if t == nil {
-		t = &GetSystemDetails_SystemDetails_Edges_Node{}
-	}
-	return t.ProgramID
 }
 func (t *GetSystemDetails_SystemDetails_Edges_Node) GetRevisionHistory() []any {
 	if t == nil {
@@ -86873,8 +86789,6 @@ type UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails struct {
 	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
 	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
 	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
 	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
 	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
@@ -86937,18 +86851,6 @@ func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetO
 		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
 	}
 	return t.OwnerID
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetPlatformID() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.PlatformID
-}
-func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetProgramID() *string {
-	if t == nil {
-		t = &UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails{}
-	}
-	return t.ProgramID
 }
 func (t *UpdateBulkCSVSystemDetail_UpdateBulkCSVSystemDetail_SystemDetails) GetRevisionHistory() []any {
 	if t == nil {
@@ -87021,8 +86923,6 @@ type UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails struct {
 	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
 	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
 	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
 	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
 	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
@@ -87085,18 +86985,6 @@ func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetOwnerID
 		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
 	}
 	return t.OwnerID
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetPlatformID() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.PlatformID
-}
-func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetProgramID() *string {
-	if t == nil {
-		t = &UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails{}
-	}
-	return t.ProgramID
 }
 func (t *UpdateBulkSystemDetail_UpdateBulkSystemDetail_SystemDetails) GetRevisionHistory() []any {
 	if t == nil {
@@ -87169,8 +87057,6 @@ type UpdateSystemDetail_UpdateSystemDetail_SystemDetail struct {
 	LastReviewed          *models.DateTime              "json:\"lastReviewed,omitempty\" graphql:\"lastReviewed\""
 	OscalMetadataJSON     map[string]any                "json:\"oscalMetadataJSON,omitempty\" graphql:\"oscalMetadataJSON\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID            *string                       "json:\"platformID,omitempty\" graphql:\"platformID\""
-	ProgramID             *string                       "json:\"programID,omitempty\" graphql:\"programID\""
 	RevisionHistory       []any                         "json:\"revisionHistory,omitempty\" graphql:\"revisionHistory\""
 	SensitivityLevel      *enums.SystemSensitivityLevel "json:\"sensitivityLevel,omitempty\" graphql:\"sensitivityLevel\""
 	SystemName            string                        "json:\"systemName\" graphql:\"systemName\""
@@ -87233,18 +87119,6 @@ func (t *UpdateSystemDetail_UpdateSystemDetail_SystemDetail) GetOwnerID() *strin
 		t = &UpdateSystemDetail_UpdateSystemDetail_SystemDetail{}
 	}
 	return t.OwnerID
-}
-func (t *UpdateSystemDetail_UpdateSystemDetail_SystemDetail) GetPlatformID() *string {
-	if t == nil {
-		t = &UpdateSystemDetail_UpdateSystemDetail_SystemDetail{}
-	}
-	return t.PlatformID
-}
-func (t *UpdateSystemDetail_UpdateSystemDetail_SystemDetail) GetProgramID() *string {
-	if t == nil {
-		t = &UpdateSystemDetail_UpdateSystemDetail_SystemDetail{}
-	}
-	return t.ProgramID
 }
 func (t *UpdateSystemDetail_UpdateSystemDetail_SystemDetail) GetRevisionHistory() []any {
 	if t == nil {
@@ -140675,8 +140549,6 @@ const CreateBulkCSVSystemDetailDocument = `mutation CreateBulkCSVSystemDetail ($
 			lastReviewed
 			oscalMetadataJSON
 			ownerID
-			platformID
-			programID
 			revisionHistory
 			sensitivityLevel
 			systemName
@@ -140718,8 +140590,6 @@ const CreateBulkSystemDetailDocument = `mutation CreateBulkSystemDetail ($input:
 			lastReviewed
 			oscalMetadataJSON
 			ownerID
-			platformID
-			programID
 			revisionHistory
 			sensitivityLevel
 			systemName
@@ -140761,8 +140631,6 @@ const CreateSystemDetailDocument = `mutation CreateSystemDetail ($input: CreateS
 			lastReviewed
 			oscalMetadataJSON
 			ownerID
-			platformID
-			programID
 			revisionHistory
 			sensitivityLevel
 			systemName
@@ -140860,8 +140728,6 @@ const GetAllSystemDetailsDocument = `query GetAllSystemDetails ($first: Int, $la
 				lastReviewed
 				oscalMetadataJSON
 				ownerID
-				platformID
-				programID
 				revisionHistory
 				sensitivityLevel
 				systemName
@@ -140907,8 +140773,6 @@ const GetSystemDetailByIDDocument = `query GetSystemDetailByID ($systemDetailId:
 		lastReviewed
 		oscalMetadataJSON
 		ownerID
-		platformID
-		programID
 		revisionHistory
 		sensitivityLevel
 		systemName
@@ -140957,8 +140821,6 @@ const GetSystemDetailsDocument = `query GetSystemDetails ($first: Int, $last: In
 				lastReviewed
 				oscalMetadataJSON
 				ownerID
-				platformID
-				programID
 				revisionHistory
 				sensitivityLevel
 				systemName
@@ -141006,8 +140868,6 @@ const UpdateBulkCSVSystemDetailDocument = `mutation UpdateBulkCSVSystemDetail ($
 			lastReviewed
 			oscalMetadataJSON
 			ownerID
-			platformID
-			programID
 			revisionHistory
 			sensitivityLevel
 			systemName
@@ -141050,8 +140910,6 @@ const UpdateBulkSystemDetailDocument = `mutation UpdateBulkSystemDetail ($ids: [
 			lastReviewed
 			oscalMetadataJSON
 			ownerID
-			platformID
-			programID
 			revisionHistory
 			sensitivityLevel
 			systemName
@@ -141095,8 +140953,6 @@ const UpdateSystemDetailDocument = `mutation UpdateSystemDetail ($updateSystemDe
 			lastReviewed
 			oscalMetadataJSON
 			ownerID
-			platformID
-			programID
 			revisionHistory
 			sensitivityLevel
 			systemName
