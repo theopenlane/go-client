@@ -58,7 +58,7 @@ steps:
         branchName="${BUILDKITE_BRANCH}"
       fi
 
-      git checkout -B "$$branchName"
+      git checkout -b "$$branchName"
       git add -u
 
       # commit changes
