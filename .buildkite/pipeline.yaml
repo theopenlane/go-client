@@ -54,11 +54,11 @@ steps:
       # if on default branch create a new branch for a PR, else use the current branch
       if [ "${BUILDKITE_BRANCH}" == "$DEFAULT_BRANCH" ]; then
         branchName="chore/go-generate-$(date +%s)"
-        git checkout -b "$$branchName"
       else
         branchName="${BUILDKITE_BRANCH}"
-        git checkout "$$branchName"
       fi
+
+      git checkout -B "$$branchName"
       git add -u
 
       # commit changes
