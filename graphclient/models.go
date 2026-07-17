@@ -2981,7 +2981,7 @@ type CampaignTarget struct {
 	// internal marker field for workflow eligibility, not exposed in API
 	WorkflowEligibleMarker *bool `json:"workflowEligibleMarker,omitempty"`
 	// the campaign this target belongs to
-	CampaignID string `json:"campaignID"`
+	CampaignID *string `json:"campaignID,omitempty"`
 	// the contact associated with the campaign target
 	ContactID *string `json:"contactID,omitempty"`
 	// the user associated with the campaign target
@@ -3003,7 +3003,7 @@ type CampaignTarget struct {
 	// additional metadata about the campaign target
 	Metadata           map[string]any               `json:"metadata,omitempty"`
 	Owner              *Organization                `json:"owner,omitempty"`
-	Campaign           *Campaign                    `json:"campaign"`
+	Campaign           *Campaign                    `json:"campaign,omitempty"`
 	Contact            *Contact                     `json:"contact,omitempty"`
 	User               *User                        `json:"user,omitempty"`
 	Group              *Group                       `json:"group,omitempty"`
@@ -3191,6 +3191,8 @@ type CampaignTargetWhereInput struct {
 	CampaignIDContains     *string  `json:"campaignIDContains,omitempty"`
 	CampaignIDHasPrefix    *string  `json:"campaignIDHasPrefix,omitempty"`
 	CampaignIDHasSuffix    *string  `json:"campaignIDHasSuffix,omitempty"`
+	CampaignIDIsNil        *bool    `json:"campaignIDIsNil,omitempty"`
+	CampaignIDNotNil       *bool    `json:"campaignIDNotNil,omitempty"`
 	CampaignIDEqualFold    *string  `json:"campaignIDEqualFold,omitempty"`
 	CampaignIDContainsFold *string  `json:"campaignIDContainsFold,omitempty"`
 	// contact_id field predicates
@@ -6868,7 +6870,7 @@ type CreateCampaignTargetInput struct {
 	// additional metadata about the campaign target
 	Metadata             map[string]any `json:"metadata,omitempty"`
 	OwnerID              *string        `json:"ownerID,omitempty"`
-	CampaignID           string         `json:"campaignID"`
+	CampaignID           *string        `json:"campaignID,omitempty"`
 	ContactID            *string        `json:"contactID,omitempty"`
 	UserID               *string        `json:"userID,omitempty"`
 	GroupID              *string        `json:"groupID,omitempty"`
@@ -7546,6 +7548,8 @@ type CreateEntityInput struct {
 	Description *string `json:"description,omitempty"`
 	// domains associated with the entity
 	Domains []string `json:"domains,omitempty"`
+	// common matching names that should match with the entity
+	Aliases []string `json:"aliases,omitempty"`
 	// status of the entity
 	Status *enums.EntityStatus `json:"status,omitempty"`
 	// whether the entity is approved for use
@@ -14811,6 +14815,8 @@ type Entity struct {
 	Description *string `json:"description,omitempty"`
 	// domains associated with the entity
 	Domains []string `json:"domains,omitempty"`
+	// common matching names that should match with the entity
+	Aliases []string `json:"aliases,omitempty"`
 	// The type of the entity
 	EntityTypeID *string `json:"entityTypeID,omitempty"`
 	// status of the entity
@@ -16109,6 +16115,8 @@ type EntityWhereInput struct {
 	TagsHas *string `json:"tagsHas,omitempty"`
 	// Filter for domainsHas to contain a specific value
 	DomainsHas *string `json:"domainsHas,omitempty"`
+	// Filter for aliasesHas to contain a specific value
+	AliasesHas *string `json:"aliasesHas,omitempty"`
 	// Filter for linkedAssetIdsHas to contain a specific value
 	LinkedAssetIdsHas *string `json:"linkedAssetIdsHas,omitempty"`
 	// Filter for providedServicesHas to contain a specific value
@@ -42280,7 +42288,6 @@ type UpdateCampaignTargetInput struct {
 	// additional metadata about the campaign target
 	Metadata                   map[string]any `json:"metadata,omitempty"`
 	ClearMetadata              *bool          `json:"clearMetadata,omitempty"`
-	CampaignID                 *string        `json:"campaignID,omitempty"`
 	ContactID                  *string        `json:"contactID,omitempty"`
 	ClearContact               *bool          `json:"clearContact,omitempty"`
 	UserID                     *string        `json:"userID,omitempty"`
@@ -43330,6 +43337,10 @@ type UpdateEntityInput struct {
 	Domains       []string `json:"domains,omitempty"`
 	AppendDomains []string `json:"appendDomains,omitempty"`
 	ClearDomains  *bool    `json:"clearDomains,omitempty"`
+	// common matching names that should match with the entity
+	Aliases       []string `json:"aliases,omitempty"`
+	AppendAliases []string `json:"appendAliases,omitempty"`
+	ClearAliases  *bool    `json:"clearAliases,omitempty"`
 	// status of the entity
 	Status      *enums.EntityStatus `json:"status,omitempty"`
 	ClearStatus *bool               `json:"clearStatus,omitempty"`
