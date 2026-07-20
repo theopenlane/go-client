@@ -9240,7 +9240,7 @@ func (t *CreateCampaignWithTargets_CreateCampaignWithTargets_Campaign) GetWorkfl
 }
 
 type CreateCampaignWithTargets_CreateCampaignWithTargets_CampaignTargets struct {
-	CampaignID             string                         "json:\"campaignID\" graphql:\"campaignID\""
+	CampaignID             *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt            *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
 	ContactID              *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
 	CreatedAt              *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -9259,7 +9259,7 @@ type CreateCampaignWithTargets_CreateCampaignWithTargets_CampaignTargets struct 
 	WorkflowEligibleMarker *bool                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
-func (t *CreateCampaignWithTargets_CreateCampaignWithTargets_CampaignTargets) GetCampaignID() string {
+func (t *CreateCampaignWithTargets_CreateCampaignWithTargets_CampaignTargets) GetCampaignID() *string {
 	if t == nil {
 		t = &CreateCampaignWithTargets_CreateCampaignWithTargets_CampaignTargets{}
 	}
@@ -9630,7 +9630,7 @@ func (t *CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_Campaign) Get
 }
 
 type CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_CampaignTargets struct {
-	CampaignID             string                         "json:\"campaignID\" graphql:\"campaignID\""
+	CampaignID             *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt            *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
 	ContactID              *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
 	CreatedAt              *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -9649,7 +9649,7 @@ type CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_CampaignTargets s
 	WorkflowEligibleMarker *bool                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
-func (t *CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_CampaignTargets) GetCampaignID() string {
+func (t *CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_CampaignTargets) GetCampaignID() *string {
 	if t == nil {
 		t = &CreateCampaignWithTargetsCSV_CreateCampaignWithTargetsCSV_CampaignTargets{}
 	}
@@ -10593,7 +10593,7 @@ func (t *SendCampaignTestEmail_SendCampaignTestEmail) GetSkippedCount() int64 {
 }
 
 type CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets struct {
-	CampaignID             string                         "json:\"campaignID\" graphql:\"campaignID\""
+	CampaignID             *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt            *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
 	ContactID              *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
 	CreatedAt              *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -10612,7 +10612,7 @@ type CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets str
 	WorkflowEligibleMarker *bool                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCampaignID() string {
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCampaignID() *string {
 	if t == nil {
 		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
 	}
@@ -10727,7 +10727,7 @@ func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget) GetCampaignTar
 }
 
 type CreateBulkCampaignTarget_CreateBulkCampaignTarget_CampaignTargets struct {
-	CampaignID             string                         "json:\"campaignID\" graphql:\"campaignID\""
+	CampaignID             *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt            *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
 	ContactID              *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
 	CreatedAt              *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -10746,7 +10746,7 @@ type CreateBulkCampaignTarget_CreateBulkCampaignTarget_CampaignTargets struct {
 	WorkflowEligibleMarker *bool                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
-func (t *CreateBulkCampaignTarget_CreateBulkCampaignTarget_CampaignTargets) GetCampaignID() string {
+func (t *CreateBulkCampaignTarget_CreateBulkCampaignTarget_CampaignTargets) GetCampaignID() *string {
 	if t == nil {
 		t = &CreateBulkCampaignTarget_CreateBulkCampaignTarget_CampaignTargets{}
 	}
@@ -10861,7 +10861,7 @@ func (t *CreateBulkCampaignTarget_CreateBulkCampaignTarget) GetCampaignTargets()
 }
 
 type CreateCampaignTarget_CreateCampaignTarget_CampaignTarget struct {
-	CampaignID             string                         "json:\"campaignID\" graphql:\"campaignID\""
+	CampaignID             *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt            *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
 	ContactID              *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
 	CreatedAt              *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -10880,7 +10880,7 @@ type CreateCampaignTarget_CreateCampaignTarget_CampaignTarget struct {
 	WorkflowEligibleMarker *bool                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
-func (t *CreateCampaignTarget_CreateCampaignTarget_CampaignTarget) GetCampaignID() string {
+func (t *CreateCampaignTarget_CreateCampaignTarget_CampaignTarget) GetCampaignID() *string {
 	if t == nil {
 		t = &CreateCampaignTarget_CreateCampaignTarget_CampaignTarget{}
 	}
@@ -11038,7 +11038,7 @@ func (t *GetAllCampaignTargets_CampaignTargets_PageInfo) GetStartCursor() *strin
 }
 
 type GetAllCampaignTargets_CampaignTargets_Edges_Node struct {
-	CampaignID             string                         "json:\"campaignID\" graphql:\"campaignID\""
+	CampaignID             *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt            *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
 	ContactID              *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
 	CreatedAt              *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -11057,7 +11057,7 @@ type GetAllCampaignTargets_CampaignTargets_Edges_Node struct {
 	WorkflowEligibleMarker *bool                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
-func (t *GetAllCampaignTargets_CampaignTargets_Edges_Node) GetCampaignID() string {
+func (t *GetAllCampaignTargets_CampaignTargets_Edges_Node) GetCampaignID() *string {
 	if t == nil {
 		t = &GetAllCampaignTargets_CampaignTargets_Edges_Node{}
 	}
@@ -11197,7 +11197,7 @@ func (t *GetAllCampaignTargets_CampaignTargets) GetTotalCount() int64 {
 }
 
 type GetCampaignTargetByID_CampaignTarget struct {
-	CampaignID             string                         "json:\"campaignID\" graphql:\"campaignID\""
+	CampaignID             *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt            *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
 	ContactID              *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
 	CreatedAt              *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -11216,7 +11216,7 @@ type GetCampaignTargetByID_CampaignTarget struct {
 	WorkflowEligibleMarker *bool                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
-func (t *GetCampaignTargetByID_CampaignTarget) GetCampaignID() string {
+func (t *GetCampaignTargetByID_CampaignTarget) GetCampaignID() *string {
 	if t == nil {
 		t = &GetCampaignTargetByID_CampaignTarget{}
 	}
@@ -11352,7 +11352,7 @@ func (t *GetCampaignTargets_CampaignTargets_PageInfo) GetStartCursor() *string {
 }
 
 type GetCampaignTargets_CampaignTargets_Edges_Node struct {
-	CampaignID             string                         "json:\"campaignID\" graphql:\"campaignID\""
+	CampaignID             *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt            *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
 	ContactID              *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
 	CreatedAt              *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -11371,7 +11371,7 @@ type GetCampaignTargets_CampaignTargets_Edges_Node struct {
 	WorkflowEligibleMarker *bool                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
-func (t *GetCampaignTargets_CampaignTargets_Edges_Node) GetCampaignID() string {
+func (t *GetCampaignTargets_CampaignTargets_Edges_Node) GetCampaignID() *string {
 	if t == nil {
 		t = &GetCampaignTargets_CampaignTargets_Edges_Node{}
 	}
@@ -11511,7 +11511,7 @@ func (t *GetCampaignTargets_CampaignTargets) GetTotalCount() int64 {
 }
 
 type UpdateCampaignTarget_UpdateCampaignTarget_CampaignTarget struct {
-	CampaignID             string                         "json:\"campaignID\" graphql:\"campaignID\""
+	CampaignID             *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt            *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
 	ContactID              *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
 	CreatedAt              *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -11530,7 +11530,7 @@ type UpdateCampaignTarget_UpdateCampaignTarget_CampaignTarget struct {
 	WorkflowEligibleMarker *bool                          "json:\"workflowEligibleMarker,omitempty\" graphql:\"workflowEligibleMarker\""
 }
 
-func (t *UpdateCampaignTarget_UpdateCampaignTarget_CampaignTarget) GetCampaignID() string {
+func (t *UpdateCampaignTarget_UpdateCampaignTarget_CampaignTarget) GetCampaignID() *string {
 	if t == nil {
 		t = &UpdateCampaignTarget_UpdateCampaignTarget_CampaignTarget{}
 	}
