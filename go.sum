@@ -138,8 +138,8 @@ github.com/theopenlane/core/common v1.0.24 h1:MIRjz6vnOwCHFSbC1oWjsuPCUCr8Xr9Z29
 github.com/theopenlane/core/common v1.0.24/go.mod h1:c3Jykrf6ENOf7bR7Wod4GpvCnspv9EAX49dgiWLY7DU=
 github.com/theopenlane/echox v0.3.0 h1:uwOKEw+r1utGQoOR6dZQqAVuY5j8TcasqnTwO5+rMsA=
 github.com/theopenlane/echox v0.3.0/go.mod h1:yTrXnj7s3VNIg0FCvB7Dut2Elr+LqJKU/nruxx1E1cM=
-github.com/theopenlane/entx v0.29.0 h1:KvpP78yuxk5p7NCjIZBFvgN5zIvSd/7tX4HQZbaxbZc=
-github.com/theopenlane/entx v0.29.0/go.mod h1:Lyp+YR7PCaye6B/QVTwHcGQ0cXgXLx2CeDgxsG8Do2Q=
+github.com/theopenlane/entx v0.30.1 h1:9MOBt0kPPimYu5g9c0pZP0SVIczI36oX0RwzskgukcY=
+github.com/theopenlane/entx v0.30.1/go.mod h1:Lyp+YR7PCaye6B/QVTwHcGQ0cXgXLx2CeDgxsG8Do2Q=
 github.com/theopenlane/httpsling v0.3.0 h1:Bad0dGdqCqAB8UVDyVo+YCevzRvGHhmkK22F7T3pXtY=
 github.com/theopenlane/httpsling v0.3.0/go.mod h1:iJc3XRLYTFIpfCnPpLZVMBP0xsWIPAb7ozARtQoclAE=
 github.com/theopenlane/iam v0.33.0 h1:dAQiefJ2e0vygN2dFCcy60Qj0PRBvehd055vcQIqU2s=
