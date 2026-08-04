@@ -16,6 +16,7 @@ mutation CreateBulkControl($input: [CreateControlInput!]) {
       description
       displayID
       exampleEvidence
+      externalUUID
       evidenceRequests
       id
       implementationGuidance
@@ -57,6 +58,7 @@ mutation CreateBulkCSVControl($input: Upload!) {
       description
       displayID
       exampleEvidence
+      externalUUID
       evidenceRequests
       id
       implementationGuidance
@@ -98,6 +100,7 @@ mutation CreateControl($input: CreateControlInput!) {
       description
       displayID
       exampleEvidence
+      externalUUID
       evidenceRequests
       id
       implementationGuidance
@@ -159,6 +162,7 @@ query GetAllControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
         description
         displayID
         exampleEvidence
+        externalUUID
         evidenceRequests
         id
         implementationGuidance
@@ -200,6 +204,7 @@ query GetControlByID($controlId: ID!) {
     description
     displayID
     exampleEvidence
+    externalUUID
     evidenceRequests
     id
     implementationGuidance
@@ -255,6 +260,7 @@ query GetControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $whe
         description
         displayID
         exampleEvidence
+        externalUUID
         evidenceRequests
         id
         implementationGuidance
@@ -297,6 +303,7 @@ mutation UpdateControl($updateControlId: ID!, $input: UpdateControlInput!) {
       description
       displayID
       exampleEvidence
+      externalUUID
       evidenceRequests
       id
       implementationGuidance
