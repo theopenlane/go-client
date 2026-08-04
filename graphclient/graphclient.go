@@ -82678,6 +82678,7 @@ type CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols struct {
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
 	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
+	ExternalUUID           *string                          "json:\"externalUUID,omitempty\" graphql:\"externalUUID\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
 	MappedCategories       []string                         "json:\"mappedCategories,omitempty\" graphql:\"mappedCategories\""
@@ -82791,6 +82792,12 @@ func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetExample
 		t = &CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols{}
 	}
 	return t.ExampleEvidence
+}
+func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetExternalUUID() *string {
+	if t == nil {
+		t = &CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols{}
+	}
+	return t.ExternalUUID
 }
 func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetID() string {
 	if t == nil {
@@ -82917,6 +82924,7 @@ type CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols struct {
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
 	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
+	ExternalUUID           *string                          "json:\"externalUUID,omitempty\" graphql:\"externalUUID\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
 	MappedCategories       []string                         "json:\"mappedCategories,omitempty\" graphql:\"mappedCategories\""
@@ -83030,6 +83038,12 @@ func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetExampleEviden
 		t = &CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols{}
 	}
 	return t.ExampleEvidence
+}
+func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetExternalUUID() *string {
+	if t == nil {
+		t = &CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols{}
+	}
+	return t.ExternalUUID
 }
 func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetID() string {
 	if t == nil {
@@ -83156,6 +83170,7 @@ type CreateSubcontrol_CreateSubcontrol_Subcontrol struct {
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
 	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
+	ExternalUUID           *string                          "json:\"externalUUID,omitempty\" graphql:\"externalUUID\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
 	MappedCategories       []string                         "json:\"mappedCategories,omitempty\" graphql:\"mappedCategories\""
@@ -83269,6 +83284,12 @@ func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetExampleEvidence() []*m
 		t = &CreateSubcontrol_CreateSubcontrol_Subcontrol{}
 	}
 	return t.ExampleEvidence
+}
+func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetExternalUUID() *string {
+	if t == nil {
+		t = &CreateSubcontrol_CreateSubcontrol_Subcontrol{}
+	}
+	return t.ExternalUUID
 }
 func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetID() string {
 	if t == nil {
@@ -83438,6 +83459,7 @@ type GetAllSubcontrols_Subcontrols_Edges_Node struct {
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
 	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
+	ExternalUUID           *string                          "json:\"externalUUID,omitempty\" graphql:\"externalUUID\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
 	MappedCategories       []string                         "json:\"mappedCategories,omitempty\" graphql:\"mappedCategories\""
@@ -83551,6 +83573,12 @@ func (t *GetAllSubcontrols_Subcontrols_Edges_Node) GetExampleEvidence() []*model
 		t = &GetAllSubcontrols_Subcontrols_Edges_Node{}
 	}
 	return t.ExampleEvidence
+}
+func (t *GetAllSubcontrols_Subcontrols_Edges_Node) GetExternalUUID() *string {
+	if t == nil {
+		t = &GetAllSubcontrols_Subcontrols_Edges_Node{}
+	}
+	return t.ExternalUUID
 }
 func (t *GetAllSubcontrols_Subcontrols_Edges_Node) GetID() string {
 	if t == nil {
@@ -83702,6 +83730,7 @@ type GetSubcontrolByID_Subcontrol struct {
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
 	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
+	ExternalUUID           *string                          "json:\"externalUUID,omitempty\" graphql:\"externalUUID\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
 	MappedCategories       []string                         "json:\"mappedCategories,omitempty\" graphql:\"mappedCategories\""
@@ -83815,6 +83844,12 @@ func (t *GetSubcontrolByID_Subcontrol) GetExampleEvidence() []*models.ExampleEvi
 		t = &GetSubcontrolByID_Subcontrol{}
 	}
 	return t.ExampleEvidence
+}
+func (t *GetSubcontrolByID_Subcontrol) GetExternalUUID() *string {
+	if t == nil {
+		t = &GetSubcontrolByID_Subcontrol{}
+	}
+	return t.ExternalUUID
 }
 func (t *GetSubcontrolByID_Subcontrol) GetID() string {
 	if t == nil {
@@ -83962,6 +83997,7 @@ type GetSubcontrols_Subcontrols_Edges_Node struct {
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
 	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
+	ExternalUUID           *string                          "json:\"externalUUID,omitempty\" graphql:\"externalUUID\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
 	MappedCategories       []string                         "json:\"mappedCategories,omitempty\" graphql:\"mappedCategories\""
@@ -84075,6 +84111,12 @@ func (t *GetSubcontrols_Subcontrols_Edges_Node) GetExampleEvidence() []*models.E
 		t = &GetSubcontrols_Subcontrols_Edges_Node{}
 	}
 	return t.ExampleEvidence
+}
+func (t *GetSubcontrols_Subcontrols_Edges_Node) GetExternalUUID() *string {
+	if t == nil {
+		t = &GetSubcontrols_Subcontrols_Edges_Node{}
+	}
+	return t.ExternalUUID
 }
 func (t *GetSubcontrols_Subcontrols_Edges_Node) GetID() string {
 	if t == nil {
@@ -84226,6 +84268,7 @@ type UpdateSubcontrol_UpdateSubcontrol_Subcontrol struct {
 	DisplayID              string                           "json:\"displayID\" graphql:\"displayID\""
 	EvidenceRequests       []*models.EvidenceRequests       "json:\"evidenceRequests,omitempty\" graphql:\"evidenceRequests\""
 	ExampleEvidence        []*models.ExampleEvidence        "json:\"exampleEvidence,omitempty\" graphql:\"exampleEvidence\""
+	ExternalUUID           *string                          "json:\"externalUUID,omitempty\" graphql:\"externalUUID\""
 	ID                     string                           "json:\"id\" graphql:\"id\""
 	ImplementationGuidance []*models.ImplementationGuidance "json:\"implementationGuidance,omitempty\" graphql:\"implementationGuidance\""
 	MappedCategories       []string                         "json:\"mappedCategories,omitempty\" graphql:\"mappedCategories\""
@@ -84339,6 +84382,12 @@ func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetExampleEvidence() []*m
 		t = &UpdateSubcontrol_UpdateSubcontrol_Subcontrol{}
 	}
 	return t.ExampleEvidence
+}
+func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetExternalUUID() *string {
+	if t == nil {
+		t = &UpdateSubcontrol_UpdateSubcontrol_Subcontrol{}
+	}
+	return t.ExternalUUID
 }
 func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetID() string {
 	if t == nil {
@@ -139512,6 +139561,7 @@ const CreateBulkCSVSubcontrolDocument = `mutation CreateBulkCSVSubcontrol ($inpu
 			description
 			displayID
 			exampleEvidence
+			externalUUID
 			evidenceRequests
 			id
 			implementationGuidance
@@ -139569,6 +139619,7 @@ const CreateBulkSubcontrolDocument = `mutation CreateBulkSubcontrol ($input: [Cr
 			description
 			displayID
 			exampleEvidence
+			externalUUID
 			evidenceRequests
 			id
 			implementationGuidance
@@ -139626,6 +139677,7 @@ const CreateSubcontrolDocument = `mutation CreateSubcontrol ($input: CreateSubco
 			description
 			displayID
 			exampleEvidence
+			externalUUID
 			evidenceRequests
 			id
 			implementationGuidance
@@ -139715,6 +139767,7 @@ const GetAllSubcontrolsDocument = `query GetAllSubcontrols ($first: Int, $last: 
 				description
 				displayID
 				exampleEvidence
+				externalUUID
 				evidenceRequests
 				id
 				implementationGuidance
@@ -139776,6 +139829,7 @@ const GetSubcontrolByIDDocument = `query GetSubcontrolByID ($subcontrolId: ID!) 
 		description
 		displayID
 		exampleEvidence
+		externalUUID
 		evidenceRequests
 		id
 		implementationGuidance
@@ -139840,6 +139894,7 @@ const GetSubcontrolsDocument = `query GetSubcontrols ($first: Int, $last: Int, $
 				description
 				displayID
 				exampleEvidence
+				externalUUID
 				evidenceRequests
 				id
 				implementationGuidance
@@ -139903,6 +139958,7 @@ const UpdateSubcontrolDocument = `mutation UpdateSubcontrol ($updateSubcontrolId
 			description
 			displayID
 			exampleEvidence
+			externalUUID
 			evidenceRequests
 			id
 			implementationGuidance

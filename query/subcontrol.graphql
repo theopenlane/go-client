@@ -16,6 +16,7 @@ mutation CreateBulkCSVSubcontrol($input: Upload!) {
       description
       displayID
       exampleEvidence
+      externalUUID
       evidenceRequests
       id
       implementationGuidance
@@ -55,6 +56,7 @@ mutation CreateBulkSubcontrol($input: [CreateSubcontrolInput!]) {
       description
       displayID
       exampleEvidence
+      externalUUID
       evidenceRequests
       id
       implementationGuidance
@@ -94,6 +96,7 @@ mutation CreateSubcontrol($input: CreateSubcontrolInput!) {
       description
       displayID
       exampleEvidence
+      externalUUID
       evidenceRequests
       id
       implementationGuidance
@@ -153,6 +156,7 @@ query GetAllSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor
         description
         displayID
         exampleEvidence
+        externalUUID
         evidenceRequests
         id
         implementationGuidance
@@ -192,6 +196,7 @@ query GetSubcontrolByID($subcontrolId: ID!) {
     description
     displayID
     exampleEvidence
+    externalUUID
     evidenceRequests
     id
     implementationGuidance
@@ -245,6 +250,7 @@ query GetSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
         description
         displayID
         exampleEvidence
+        externalUUID
         evidenceRequests
         id
         implementationGuidance
@@ -285,6 +291,7 @@ mutation UpdateSubcontrol($updateSubcontrolId: ID!, $input: UpdateSubcontrolInpu
       description
       displayID
       exampleEvidence
+      externalUUID
       evidenceRequests
       id
       implementationGuidance
