@@ -72,6 +72,10 @@ type APITokenBulkUpdatePayload struct {
 	APITokens []*APIToken `json:"apiTokens,omitempty"`
 	// IDs of the updated apiTokens
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -464,6 +468,10 @@ type ActionPlanBulkUpdatePayload struct {
 	ActionPlans []*ActionPlan `json:"actionPlans,omitempty"`
 	// IDs of the updated actionPlans
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -1215,8 +1223,7 @@ type AssessmentResponse struct {
 	// Returns active workflow instances for this assessmentResponse (RUNNING or PAUSED)
 	ActiveWorkflowInstances []*WorkflowInstance `json:"activeWorkflowInstances"`
 	// Returns the workflow event timeline for this assessmentResponse across all workflow instances
-	WorkflowTimeline            *WorkflowEventConnection `json:"workflowTimeline"`
-	QuestionnaireTransformError *string                  `json:"questionnaireTransformError,omitempty"`
+	WorkflowTimeline *WorkflowEventConnection `json:"workflowTimeline"`
 }
 
 func (AssessmentResponse) IsNode() {}
@@ -2001,6 +2008,10 @@ type AssetBulkUpdatePayload struct {
 	Assets []*Asset `json:"assets,omitempty"`
 	// IDs of the updated assets
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -3961,7 +3972,7 @@ type CheckResultBulkDeletePayload struct {
 	// Error returned when the bulk delete is only partially applied
 	Error *string `json:"error,omitempty"`
 	// IDs of checkResults that were not deleted
-	NotDeletedIDs []string `json:"notDeletedIDs,omitempty"`
+	NotDeletedIDs []string `json:"notDeletedIDs"`
 }
 
 // Return response for updateBulkCheckResult mutation
@@ -3970,6 +3981,10 @@ type CheckResultBulkUpdatePayload struct {
 	CheckResults []*CheckResult `json:"checkResults,omitempty"`
 	// IDs of the updated checkResults
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -4334,6 +4349,10 @@ type ContactBulkUpdatePayload struct {
 	Contacts []*Contact `json:"contacts,omitempty"`
 	// IDs of the updated contacts
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -4827,6 +4846,10 @@ type ControlBulkUpdatePayload struct {
 	Controls []*Control `json:"controls,omitempty"`
 	// IDs of the updated controls
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 type ControlCategory struct {
@@ -5024,6 +5047,10 @@ type ControlImplementationBulkUpdatePayload struct {
 	ControlImplementations []*ControlImplementation `json:"controlImplementations,omitempty"`
 	// IDs of the updated controlImplementations
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -5392,6 +5419,10 @@ type ControlObjectiveBulkUpdatePayload struct {
 	ControlObjectives []*ControlObjective `json:"controlObjectives,omitempty"`
 	// IDs of the updated controlObjectives
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -9961,6 +9992,8 @@ type CreateTrustCenterDocInput struct {
 type CreateTrustCenterDomainInput struct {
 	// the name of the custom domain
 	CnameRecord string `json:"cnameRecord"`
+	// the type of the custom domain
+	DomainType *enums.CustomDomainType `json:"domainType,omitempty"`
 	// trust center ID
 	TrustCenterID string `json:"trustCenterID"`
 }
@@ -10555,6 +10588,10 @@ type CustomDomainBulkUpdatePayload struct {
 	CustomDomains []*CustomDomain `json:"customDomains,omitempty"`
 	// IDs of the updated customDomains
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -11241,6 +11278,10 @@ type DNSVerificationBulkUpdatePayload struct {
 	DNSVerifications []*DNSVerification `json:"dnsVerifications,omitempty"`
 	// IDs of the updated dnsVerifications
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -14014,6 +14055,10 @@ type DocumentDataBulkUpdatePayload struct {
 	DocumentData []*DocumentData `json:"documentData,omitempty"`
 	// IDs of the updated documentDatas
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -14348,6 +14393,10 @@ type EmailTemplateBulkUpdatePayload struct {
 	EmailTemplates []*EmailTemplate `json:"emailTemplates,omitempty"`
 	// IDs of the updated emailTemplates
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // EmailTemplateCatalog contains the available customer-selectable email template types
@@ -15024,6 +15073,10 @@ type EntityBulkUpdatePayload struct {
 	Entities []*Entity `json:"entities,omitempty"`
 	// IDs of the updated entitys
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -15112,6 +15165,10 @@ type EntityTypeBulkUpdatePayload struct {
 	EntityTypes []*EntityType `json:"entityTypes,omitempty"`
 	// IDs of the updated entityTypes
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -16269,6 +16326,10 @@ type EventBulkUpdatePayload struct {
 	Events []*Event `json:"events,omitempty"`
 	// IDs of the updated events
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -16566,6 +16627,10 @@ type EvidenceBulkUpdatePayload struct {
 	Evidences []*Evidence `json:"evidences,omitempty"`
 	// IDs of the updated evidence
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -18114,6 +18179,10 @@ type FindingBulkUpdatePayload struct {
 	Findings []*Finding `json:"findings,omitempty"`
 	// IDs of the updated findings
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -19374,6 +19443,10 @@ type GroupBulkUpdatePayload struct {
 	Groups []*Group `json:"groups,omitempty"`
 	// IDs of the updated groups
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -19453,6 +19526,10 @@ type GroupMembershipBulkUpdatePayload struct {
 	GroupMemberships []*GroupMembership `json:"groupMemberships,omitempty"`
 	// IDs of the updated groupMemberships
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -19745,6 +19822,10 @@ type GroupSettingBulkUpdatePayload struct {
 	GroupSettings []*GroupSetting `json:"groupSettings,omitempty"`
 	// IDs of the updated groupSettings
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -20402,6 +20483,10 @@ type HushBulkUpdatePayload struct {
 	Hushes []*Hush `json:"hushes,omitempty"`
 	// IDs of the updated hushs
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -20802,6 +20887,10 @@ type IdentityHolderBulkUpdatePayload struct {
 	IdentityHolders []*IdentityHolder `json:"identityHolders,omitempty"`
 	// IDs of the updated identityHolders
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -22184,6 +22273,10 @@ type InternalPolicyBulkUpdatePayload struct {
 	InternalPolicies []*InternalPolicy `json:"internalPolicies,omitempty"`
 	// IDs of the updated internalPolicys
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -22828,6 +22921,10 @@ type InviteBulkUpdatePayload struct {
 	Invites []*Invite `json:"invites,omitempty"`
 	// IDs of the updated invites
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -24171,6 +24268,10 @@ type JobTemplateBulkUpdatePayload struct {
 	JobTemplates []*JobTemplate `json:"jobTemplates,omitempty"`
 	// IDs of the updated jobTemplates
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -24467,6 +24568,10 @@ type MappableDomainBulkUpdatePayload struct {
 	MappableDomains []*MappableDomain `json:"mappableDomains,omitempty"`
 	// IDs of the updated mappableDomains
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -24694,6 +24799,10 @@ type MappedControlBulkUpdatePayload struct {
 	MappedControls []*MappedControl `json:"mappedControls,omitempty"`
 	// IDs of the updated mappedControls
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -25007,6 +25116,10 @@ type NarrativeBulkUpdatePayload struct {
 	Narratives []*Narrative `json:"narratives,omitempty"`
 	// IDs of the updated narratives
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -25766,6 +25879,10 @@ type NotificationPreferenceBulkUpdatePayload struct {
 	NotificationPreferences []*NotificationPreference `json:"notificationPreferences,omitempty"`
 	// IDs of the updated notificationPreferences
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -26208,6 +26325,10 @@ type NotificationTemplateBulkUpdatePayload struct {
 	NotificationTemplates []*NotificationTemplate `json:"notificationTemplates,omitempty"`
 	// IDs of the updated notificationTemplates
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -26777,6 +26898,10 @@ type OrgMembershipBulkUpdatePayload struct {
 	OrgMemberships []*OrgMembership `json:"orgMemberships,omitempty"`
 	// IDs of the updated orgMemberships
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -27596,6 +27721,10 @@ type OrganizationSettingBulkUpdatePayload struct {
 	OrganizationSettings []*OrganizationSetting `json:"organizationSettings,omitempty"`
 	// IDs of the updated organizationSettings
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -30274,6 +30403,10 @@ type ProcedureBulkUpdatePayload struct {
 	Procedures []*Procedure `json:"procedures,omitempty"`
 	// IDs of the updated procedures
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -30932,6 +31065,10 @@ type ProgramBulkUpdatePayload struct {
 	Programs []*Program `json:"programs,omitempty"`
 	// IDs of the updated programs
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -31003,6 +31140,10 @@ type ProgramMembershipBulkUpdatePayload struct {
 	ProgramMemberships []*ProgramMembership `json:"programMemberships,omitempty"`
 	// IDs of the updated programMemberships
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -31757,6 +31898,10 @@ type RemediationBulkUpdatePayload struct {
 	Remediations []*Remediation `json:"remediations,omitempty"`
 	// IDs of the updated remediations
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -32511,6 +32656,10 @@ type ReviewBulkUpdatePayload struct {
 	Reviews []*Review `json:"reviews,omitempty"`
 	// IDs of the updated reviews
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -33208,6 +33357,10 @@ type RiskBulkUpdatePayload struct {
 	Risks []*Risk `json:"risks,omitempty"`
 	// IDs of the updated risks
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -33898,6 +34051,10 @@ type SLADefinitionBulkUpdatePayload struct {
 	SLADefinitions []*SLADefinition `json:"slaDefinitions,omitempty"`
 	// IDs of the updated slaDefinitions
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -34200,6 +34357,10 @@ type ScanBulkUpdatePayload struct {
 	Scans []*Scan `json:"scans,omitempty"`
 	// IDs of the updated scans
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -34787,6 +34948,10 @@ type ScheduledJobBulkUpdatePayload struct {
 	ScheduledJobs []*ScheduledJob `json:"scheduledJobs,omitempty"`
 	// IDs of the updated scheduledJobs
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -35919,6 +36084,10 @@ type SubcontrolBulkUpdatePayload struct {
 	Subcontrols []*Subcontrol `json:"subcontrols,omitempty"`
 	// IDs of the updated subcontrols
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -36619,6 +36788,10 @@ type SubprocessorBulkUpdatePayload struct {
 	Subprocessors []*Subprocessor `json:"subprocessors,omitempty"`
 	// IDs of the updated subprocessors
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -37263,6 +37436,10 @@ type SystemDetailBulkUpdatePayload struct {
 	SystemDetails []*SystemDetail `json:"systemDetails,omitempty"`
 	// IDs of the updated systemDetails
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -38101,6 +38278,10 @@ type TaskBulkUpdatePayload struct {
 	Tasks []*Task `json:"tasks,omitempty"`
 	// IDs of the updated tasks
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -38713,6 +38894,10 @@ type TemplateBulkUpdatePayload struct {
 	Templates []*Template `json:"templates,omitempty"`
 	// IDs of the updated templates
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -39184,6 +39369,10 @@ type TrustCenterComplianceBulkUpdatePayload struct {
 	TrustCenterCompliances []*TrustCenterCompliance `json:"trustCenterCompliances,omitempty"`
 	// IDs of the updated trustCenterCompliances
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -39450,6 +39639,10 @@ type TrustCenterDocBulkUpdatePayload struct {
 	TrustCenterDocs []*TrustCenterDoc `json:"trustCenterDocs,omitempty"`
 	// IDs of the updated trust center docs
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -40044,6 +40237,10 @@ type TrustCenterFAQBulkUpdatePayload struct {
 	TrustCenterFAQs []*TrustCenterFaq `json:"trustCenterFAQs,omitempty"`
 	// IDs of the updated trustCenterFAQs
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -41361,6 +41558,10 @@ type TrustCenterSubprocessorBulkUpdatePayload struct {
 	TrustCenterSubprocessors []*TrustCenterSubprocessor `json:"trustCenterSubprocessors,omitempty"`
 	// IDs of the updated trustCenterSubprocessors
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -48953,6 +49154,10 @@ type UserSettingBulkUpdatePayload struct {
 	UserSettings []*UserSetting `json:"userSettings,omitempty"`
 	// IDs of the updated userSettings
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -49629,6 +49834,10 @@ type VendorRiskScoreBulkUpdatePayload struct {
 	VendorRiskScores []*VendorRiskScore `json:"vendorRiskScores,omitempty"`
 	// IDs of the updated vendorRiskScores
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -49991,6 +50200,10 @@ type VendorScoringConfigBulkUpdatePayload struct {
 	VendorScoringConfigs []*VendorScoringConfig `json:"vendorScoringConfigs,omitempty"`
 	// IDs of the updated vendorScoringConfigs
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
@@ -50346,6 +50559,10 @@ type VulnerabilityBulkUpdatePayload struct {
 	Vulnerabilities []*Vulnerability `json:"vulnerabilities,omitempty"`
 	// IDs of the updated vulnerabilities
 	UpdatedIDs []string `json:"updatedIDs,omitempty"`
+	// IDs that were not updated
+	NotUpdatedIDs []string `json:"notUpdatedIDs"`
+	// Error message when the bulk update did not apply to every requested ID
+	Error *string `json:"error,omitempty"`
 }
 
 // A connection to a list of items.
