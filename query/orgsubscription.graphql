@@ -1,6 +1,4 @@
-
-
-query GetAllOrgSubscriptions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: OrgSubscriptionOrder){
+query GetAllOrgSubscriptions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: OrgSubscriptionOrder) {
   orgSubscriptions(
     first: $first
     last: $last
@@ -34,6 +32,7 @@ query GetAllOrgSubscriptions($first: Int, $last: Int, $after: Cursor, $before: C
     }
   }
 }
+
 query GetOrgSubscriptionByID($orgSubscriptionId: ID!) {
   orgSubscription(id: $orgSubscriptionId) {
     active
@@ -53,7 +52,7 @@ query GetOrgSubscriptionByID($orgSubscriptionId: ID!) {
 }
 
 query GetOrgSubscriptions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: OrgSubscriptionWhereInput, $orderBy: OrgSubscriptionOrder) {
-orgSubscriptions(
+  orgSubscriptions(
     first: $first
     last: $last
     after: $after

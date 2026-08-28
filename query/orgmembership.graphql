@@ -79,6 +79,26 @@ query GetAllOrgMemberships($first: Int, $last: Int, $after: Cursor, $before: Cur
   }
 }
 
+query GetOrgMembersByOrgID($where: OrgMembershipWhereInput) {
+  orgMemberships(where: $where) {
+    edges {
+      node {
+        id
+        organizationID
+        userID
+        role
+        user {
+          firstName
+          lastName
+          id
+          displayName
+          email
+        }
+      }
+    }
+  }
+}
+
 query GetOrgMembershipByID($orgMembershipId: ID!) {
   orgMembership(id: $orgMembershipId) {
     createdAt
@@ -136,24 +156,4 @@ mutation UpdateOrgMembership($updateOrgMembershipId: ID!, $input: UpdateOrgMembe
       userID
     }
   }
-}
-
-query GetOrgMembersByOrgID ($where: OrgMembershipWhereInput) {
-	orgMemberships(where: $where) {
-		edges {
-			node {
-				id
-				organizationID
-				userID
-				role
-				user {
-					firstName
-					lastName
-					id
-					displayName
-					email
-				}
-			}
-		}
-	}
 }
