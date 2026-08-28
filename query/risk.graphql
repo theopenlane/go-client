@@ -100,7 +100,7 @@ query GetAllRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
     edges {
       node {
         businessCosts
-          createdAt
+        createdAt
         createdBy
         delegateID
         details
@@ -166,7 +166,7 @@ query GetRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where:
     edges {
       node {
         businessCosts
-          createdAt
+        createdAt
         createdBy
         delegateID
         details

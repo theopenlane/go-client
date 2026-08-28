@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVRemediation($input: Upload!) {
   createBulkCSVRemediation(input: $input) {
     remediations {
@@ -101,7 +100,7 @@ mutation DeleteRemediation($deleteRemediationId: ID!) {
   }
 }
 
-query GetAllRemediations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [RemediationOrder!]){
+query GetAllRemediations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [RemediationOrder!]) {
   remediations(
     first: $first
     last: $last
@@ -147,6 +146,7 @@ query GetAllRemediations($first: Int, $last: Int, $after: Cursor, $before: Curso
     }
   }
 }
+
 query GetRemediationByID($remediationId: ID!) {
   remediation(id: $remediationId) {
     completedAt
@@ -178,7 +178,7 @@ query GetRemediationByID($remediationId: ID!) {
 }
 
 query GetRemediations($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: RemediationWhereInput, $orderBy: [RemediationOrder!]) {
-remediations(
+  remediations(
     first: $first
     last: $last
     after: $after
@@ -224,6 +224,7 @@ remediations(
     }
   }
 }
+
 mutation UpdateRemediation($updateRemediationId: ID!, $input: UpdateRemediationInput!) {
   updateRemediation(id: $updateRemediationId, input: $input) {
     remediation {
