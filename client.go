@@ -33,7 +33,7 @@ type Client struct {
 
 // A Reauthenticator generates new access and refresh pair given a valid refresh token
 type Reauthenticator interface {
-	Refresh(context.Context, *api.RefreshRequest) (*api.RefreshReply, error)
+	Refresh(context.Context, *api.RefreshRequest) (*api.RefreshResponse, error)
 }
 
 // New creates a new API v1 client that implements the Client interface
