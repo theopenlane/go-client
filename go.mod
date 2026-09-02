@@ -3,17 +3,17 @@ module github.com/theopenlane/go-client
 go 1.26.6
 
 require (
-	github.com/99designs/gqlgen v0.17.94
-	github.com/gqlgo/gqlgenc v0.38.1
+	github.com/99designs/gqlgen v0.17.95
+	github.com/gqlgo/gqlgenc v0.38.2
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.1
 	github.com/samber/lo v1.53.0
 	github.com/theopenlane/core/common v1.1.0
-	github.com/theopenlane/entx v0.33.0
+	github.com/theopenlane/entx v0.33.3
 	github.com/theopenlane/httpsling v0.3.0
 	github.com/theopenlane/iam v0.37.0
 	github.com/theopenlane/utils v0.7.1
-	github.com/vektah/gqlparser/v2 v2.5.36
+	github.com/vektah/gqlparser/v2 v2.5.37
 	golang.org/x/oauth2 v0.36.0
 )
 
