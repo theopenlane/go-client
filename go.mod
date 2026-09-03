@@ -11,7 +11,7 @@ require (
 	github.com/theopenlane/core/common v1.1.0
 	github.com/theopenlane/entx v0.33.3
 	github.com/theopenlane/httpsling v0.3.0
-	github.com/theopenlane/iam v0.37.0
+	github.com/theopenlane/iam v0.38.2
 	github.com/theopenlane/utils v0.7.1
 	github.com/vektah/gqlparser/v2 v2.5.37
 	golang.org/x/oauth2 v0.36.0
@@ -30,6 +30,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/coder/websocket v1.8.15 // indirect
 	github.com/envoyproxy/protoc-gen-validate v1.3.3 // indirect
+	github.com/fatih/color v1.19.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.3 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -47,6 +48,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.30.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.24.0 // indirect
 	github.com/labstack/echo/v5 v5.3.1 // indirect
+	github.com/labstack/gommon v0.5.0 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
 	github.com/mattn/go-isatty v0.0.24 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
@@ -61,6 +63,7 @@ require (
 	github.com/stoewer/go-strcase v1.3.1 // indirect
 	github.com/theopenlane/core/v2 v2.3.0 // indirect
 	github.com/theopenlane/echox v0.3.0 // indirect
+	github.com/theopenlane/logx v0.1.0 // indirect
 	github.com/tinylib/msgp v1.6.4 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
