@@ -1,10 +1,10 @@
 module github.com/theopenlane/go-client
 
-go 1.26.6
+go 1.27
 
 require (
 	github.com/99designs/gqlgen v0.17.95
-	github.com/gqlgo/gqlgenc v0.38.2
+	github.com/gqlgo/gqlgenc v0.39.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.1
 	github.com/samber/lo v1.53.0
@@ -75,7 +75,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.45.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	golang.org/x/crypto v0.55.0 // indirect
-	golang.org/x/exp v0.0.0-20260820142414-ca536658362e // indirect
+	golang.org/x/exp v0.0.0-20260824195058-e88cd73687aa // indirect
 	golang.org/x/mod v0.40.0 // indirect
 	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/sync v0.22.0 // indirect
