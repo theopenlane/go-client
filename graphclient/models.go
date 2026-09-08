@@ -4,7 +4,7 @@ package graphclient
 
 import (
 	"bytes"
-	"encoding/json"
+	"encoding/json/jsontext"
 	"fmt"
 	"io"
 	"strconv"
@@ -18929,8 +18929,8 @@ type Integration struct {
 	Campaigns             *CampaignConnection             `json:"campaigns"`
 	Entities              *EntityConnection               `json:"entities"`
 	WebhookURLs           map[string]any                  `json:"webhookURLs,omitempty"`
-	Credentials           json.RawMessage                 `json:"credentials,omitempty"`
-	Config                json.RawMessage                 `json:"config,omitempty"`
+	Credentials           jsontext.Value                  `json:"credentials,omitempty"`
+	Config                jsontext.Value                  `json:"config,omitempty"`
 }
 
 func (Integration) IsNode() {}
