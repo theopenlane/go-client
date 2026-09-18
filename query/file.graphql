@@ -21,7 +21,7 @@ query GetAllFiles($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
     }
     edges {
       node {
-        categoryType
+        categoryName
         createdAt
         createdBy
         detectedContentType
@@ -46,7 +46,7 @@ query GetAllFiles($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
 }
 query GetFileByID($fileId: ID!) {
   file(id: $fileId) {
-    categoryType
+    categoryName
     createdAt
     createdBy
     detectedContentType
@@ -86,7 +86,7 @@ files(
     }
     edges {
       node {
-        categoryType
+        categoryName
         createdAt
         createdBy
         detectedContentType

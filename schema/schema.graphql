@@ -102869,4 +102869,3 @@ enum WorkflowProposalWorkflowProposalState @goModel(model: "github.com/theopenla
 WorkflowProposedChanges captures staged field updates as opaque JSON for workflow proposals.
 """
 scalar WorkflowProposedChanges
-
