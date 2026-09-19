@@ -7,7 +7,6 @@ mutation CreateBulkCSVDirectoryAccount($input: Upload!) {
       createdAt
       createdBy
       department
-      directorySyncRunID
       displayID
       displayName
       externalID
@@ -16,14 +15,12 @@ mutation CreateBulkCSVDirectoryAccount($input: Upload!) {
       id
       integrationID
       jobTitle
-      lastLoginAt
       lastSeenIP
       mfaState
       observedAt
       organizationUnit
       ownerID
       profile
-      profileHash
       rawProfileFileID
       secondaryKey
       sourceVersion
@@ -43,7 +40,6 @@ mutation CreateBulkDirectoryAccount($input: [CreateDirectoryAccountInput!]) {
       createdAt
       createdBy
       department
-      directorySyncRunID
       displayID
       displayName
       externalID
@@ -52,14 +48,12 @@ mutation CreateBulkDirectoryAccount($input: [CreateDirectoryAccountInput!]) {
       id
       integrationID
       jobTitle
-      lastLoginAt
       lastSeenIP
       mfaState
       observedAt
       organizationUnit
       ownerID
       profile
-      profileHash
       rawProfileFileID
       secondaryKey
       sourceVersion
@@ -79,7 +73,6 @@ mutation CreateDirectoryAccount($input: CreateDirectoryAccountInput!) {
       createdAt
       createdBy
       department
-      directorySyncRunID
       displayID
       displayName
       externalID
@@ -88,14 +81,12 @@ mutation CreateDirectoryAccount($input: CreateDirectoryAccountInput!) {
       id
       integrationID
       jobTitle
-      lastLoginAt
       lastSeenIP
       mfaState
       observedAt
       organizationUnit
       ownerID
       profile
-      profileHash
       rawProfileFileID
       secondaryKey
       sourceVersion
@@ -135,7 +126,6 @@ query GetAllDirectoryAccounts($first: Int, $last: Int, $after: Cursor, $before: 
         createdAt
         createdBy
         department
-        directorySyncRunID
         displayID
         displayName
         externalID
@@ -144,14 +134,12 @@ query GetAllDirectoryAccounts($first: Int, $last: Int, $after: Cursor, $before: 
         id
         integrationID
         jobTitle
-        lastLoginAt
         lastSeenIP
         mfaState
         observedAt
         organizationUnit
         ownerID
         profile
-        profileHash
         rawProfileFileID
         secondaryKey
         sourceVersion
@@ -170,7 +158,6 @@ query GetDirectoryAccountByID($directoryAccountId: ID!) {
     createdAt
     createdBy
     department
-    directorySyncRunID
     displayID
     displayName
     externalID
@@ -179,14 +166,12 @@ query GetDirectoryAccountByID($directoryAccountId: ID!) {
     id
     integrationID
     jobTitle
-    lastLoginAt
     lastSeenIP
     mfaState
     observedAt
     organizationUnit
     ownerID
     profile
-    profileHash
     rawProfileFileID
     secondaryKey
     sourceVersion
@@ -220,7 +205,6 @@ directoryAccounts(
         createdAt
         createdBy
         department
-        directorySyncRunID
         displayID
         displayName
         externalID
@@ -229,14 +213,12 @@ directoryAccounts(
         id
         integrationID
         jobTitle
-        lastLoginAt
         lastSeenIP
         mfaState
         observedAt
         organizationUnit
         ownerID
         profile
-        profileHash
         rawProfileFileID
         secondaryKey
         sourceVersion
@@ -256,7 +238,6 @@ mutation UpdateDirectoryAccount($updateDirectoryAccountId: ID!, $input: UpdateDi
       createdAt
       createdBy
       department
-      directorySyncRunID
       displayID
       displayName
       externalID
@@ -265,14 +246,12 @@ mutation UpdateDirectoryAccount($updateDirectoryAccountId: ID!, $input: UpdateDi
       id
       integrationID
       jobTitle
-      lastLoginAt
       lastSeenIP
       mfaState
       observedAt
       organizationUnit
       ownerID
       profile
-      profileHash
       rawProfileFileID
       secondaryKey
       sourceVersion

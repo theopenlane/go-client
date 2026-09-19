@@ -161,14 +161,6 @@ type GraphClient interface {
 	GetDirectoryMembershipByID(ctx context.Context, directoryMembershipID string, interceptors ...clientv2.RequestInterceptor) (*GetDirectoryMembershipByID, error)
 	GetDirectoryMemberships(ctx context.Context, first *int64, last *int64, after *string, before *string, where *DirectoryMembershipWhereInput, orderBy []*DirectoryMembershipOrder, interceptors ...clientv2.RequestInterceptor) (*GetDirectoryMemberships, error)
 	UpdateDirectoryMembership(ctx context.Context, updateDirectoryMembershipID string, input UpdateDirectoryMembershipInput, interceptors ...clientv2.RequestInterceptor) (*UpdateDirectoryMembership, error)
-	CreateBulkCSVDirectorySyncRun(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVDirectorySyncRun, error)
-	CreateBulkDirectorySyncRun(ctx context.Context, input []*CreateDirectorySyncRunInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkDirectorySyncRun, error)
-	CreateDirectorySyncRun(ctx context.Context, input CreateDirectorySyncRunInput, interceptors ...clientv2.RequestInterceptor) (*CreateDirectorySyncRun, error)
-	DeleteDirectorySyncRun(ctx context.Context, deleteDirectorySyncRunID string, interceptors ...clientv2.RequestInterceptor) (*DeleteDirectorySyncRun, error)
-	GetAllDirectorySyncRuns(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*DirectorySyncRunOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllDirectorySyncRuns, error)
-	GetDirectorySyncRunByID(ctx context.Context, directorySyncRunID string, interceptors ...clientv2.RequestInterceptor) (*GetDirectorySyncRunByID, error)
-	GetDirectorySyncRuns(ctx context.Context, first *int64, last *int64, after *string, before *string, where *DirectorySyncRunWhereInput, orderBy []*DirectorySyncRunOrder, interceptors ...clientv2.RequestInterceptor) (*GetDirectorySyncRuns, error)
-	UpdateDirectorySyncRun(ctx context.Context, updateDirectorySyncRunID string, input UpdateDirectorySyncRunInput, interceptors ...clientv2.RequestInterceptor) (*UpdateDirectorySyncRun, error)
 	CreateBulkCSVDiscussion(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVDiscussion, error)
 	CreateBulkDiscussion(ctx context.Context, input []*CreateDiscussionInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkDiscussion, error)
 	CreateDiscussion(ctx context.Context, input CreateDiscussionInput, interceptors ...clientv2.RequestInterceptor) (*CreateDiscussion, error)
@@ -21178,35 +21170,32 @@ func (t *UpdateCustomTypeEnum_UpdateCustomTypeEnum) GetCustomTypeEnum() *UpdateC
 }
 
 type CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts struct {
-	AccountType        *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
-	CanonicalEmail     *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
-	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
-	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
-	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
-	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
-	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
-	MfaState           enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
-	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
-	OrganizationUnit   *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Profile            map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash        string                         "json:\"profileHash\" graphql:\"profileHash\""
-	RawProfileFileID   *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
-	SecondaryKey       *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
-	SourceVersion      *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
-	Status             enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccountType      *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
+	CanonicalEmail   *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	CreatedAt        *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department       *string                        "json:\"department,omitempty\" graphql:\"department\""
+	DisplayID        string                         "json:\"displayID\" graphql:\"displayID\""
+	DisplayName      *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
+	ExternalID       string                         "json:\"externalID\" graphql:\"externalID\""
+	FamilyName       *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
+	GivenName        *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
+	ID               string                         "json:\"id\" graphql:\"id\""
+	IntegrationID    *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	JobTitle         *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
+	LastSeenIP       *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
+	MfaState         enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
+	ObservedAt       time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
+	OrganizationUnit *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
+	OwnerID          *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Profile          map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
+	RawProfileFileID *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
+	SecondaryKey     *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
+	SourceVersion    *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
+	Status           enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
+	Tags             []string                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetAccountType() *enums.DirectoryAccountType {
@@ -21238,12 +21227,6 @@ func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAc
 		t = &CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts{}
 	}
 	return t.Department
-}
-func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetDirectorySyncRunID() *string {
-	if t == nil {
-		t = &CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetDisplayID() string {
 	if t == nil {
@@ -21293,12 +21276,6 @@ func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAc
 	}
 	return t.JobTitle
 }
-func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetLastLoginAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts{}
-	}
-	return t.LastLoginAt
-}
 func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetLastSeenIP() *string {
 	if t == nil {
 		t = &CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts{}
@@ -21334,12 +21311,6 @@ func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAc
 		t = &CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts{}
 	}
 	return t.Profile
-}
-func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetProfileHash() string {
-	if t == nil {
-		t = &CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts{}
-	}
-	return t.ProfileHash
 }
 func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount_DirectoryAccounts) GetRawProfileFileID() *string {
 	if t == nil {
@@ -21396,35 +21367,32 @@ func (t *CreateBulkCSVDirectoryAccount_CreateBulkCSVDirectoryAccount) GetDirecto
 }
 
 type CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts struct {
-	AccountType        *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
-	CanonicalEmail     *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
-	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
-	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
-	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
-	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
-	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
-	MfaState           enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
-	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
-	OrganizationUnit   *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Profile            map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash        string                         "json:\"profileHash\" graphql:\"profileHash\""
-	RawProfileFileID   *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
-	SecondaryKey       *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
-	SourceVersion      *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
-	Status             enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccountType      *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
+	CanonicalEmail   *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	CreatedAt        *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department       *string                        "json:\"department,omitempty\" graphql:\"department\""
+	DisplayID        string                         "json:\"displayID\" graphql:\"displayID\""
+	DisplayName      *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
+	ExternalID       string                         "json:\"externalID\" graphql:\"externalID\""
+	FamilyName       *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
+	GivenName        *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
+	ID               string                         "json:\"id\" graphql:\"id\""
+	IntegrationID    *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	JobTitle         *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
+	LastSeenIP       *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
+	MfaState         enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
+	ObservedAt       time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
+	OrganizationUnit *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
+	OwnerID          *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Profile          map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
+	RawProfileFileID *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
+	SecondaryKey     *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
+	SourceVersion    *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
+	Status           enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
+	Tags             []string                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetAccountType() *enums.DirectoryAccountType {
@@ -21456,12 +21424,6 @@ func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts
 		t = &CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts{}
 	}
 	return t.Department
-}
-func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetDirectorySyncRunID() *string {
-	if t == nil {
-		t = &CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetDisplayID() string {
 	if t == nil {
@@ -21511,12 +21473,6 @@ func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts
 	}
 	return t.JobTitle
 }
-func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetLastLoginAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts{}
-	}
-	return t.LastLoginAt
-}
 func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetLastSeenIP() *string {
 	if t == nil {
 		t = &CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts{}
@@ -21552,12 +21508,6 @@ func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts
 		t = &CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts{}
 	}
 	return t.Profile
-}
-func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetProfileHash() string {
-	if t == nil {
-		t = &CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts{}
-	}
-	return t.ProfileHash
 }
 func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount_DirectoryAccounts) GetRawProfileFileID() *string {
 	if t == nil {
@@ -21614,35 +21564,32 @@ func (t *CreateBulkDirectoryAccount_CreateBulkDirectoryAccount) GetDirectoryAcco
 }
 
 type CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount struct {
-	AccountType        *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
-	CanonicalEmail     *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
-	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
-	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
-	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
-	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
-	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
-	MfaState           enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
-	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
-	OrganizationUnit   *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Profile            map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash        string                         "json:\"profileHash\" graphql:\"profileHash\""
-	RawProfileFileID   *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
-	SecondaryKey       *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
-	SourceVersion      *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
-	Status             enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccountType      *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
+	CanonicalEmail   *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	CreatedAt        *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department       *string                        "json:\"department,omitempty\" graphql:\"department\""
+	DisplayID        string                         "json:\"displayID\" graphql:\"displayID\""
+	DisplayName      *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
+	ExternalID       string                         "json:\"externalID\" graphql:\"externalID\""
+	FamilyName       *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
+	GivenName        *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
+	ID               string                         "json:\"id\" graphql:\"id\""
+	IntegrationID    *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	JobTitle         *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
+	LastSeenIP       *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
+	MfaState         enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
+	ObservedAt       time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
+	OrganizationUnit *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
+	OwnerID          *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Profile          map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
+	RawProfileFileID *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
+	SecondaryKey     *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
+	SourceVersion    *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
+	Status           enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
+	Tags             []string                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetAccountType() *enums.DirectoryAccountType {
@@ -21674,12 +21621,6 @@ func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetDepa
 		t = &CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount{}
 	}
 	return t.Department
-}
-func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetDirectorySyncRunID() *string {
-	if t == nil {
-		t = &CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetDisplayID() string {
 	if t == nil {
@@ -21729,12 +21670,6 @@ func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetJobT
 	}
 	return t.JobTitle
 }
-func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetLastLoginAt() *time.Time {
-	if t == nil {
-		t = &CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount{}
-	}
-	return t.LastLoginAt
-}
 func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetLastSeenIP() *string {
 	if t == nil {
 		t = &CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount{}
@@ -21770,12 +21705,6 @@ func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetProf
 		t = &CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount{}
 	}
 	return t.Profile
-}
-func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetProfileHash() string {
-	if t == nil {
-		t = &CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount{}
-	}
-	return t.ProfileHash
 }
 func (t *CreateDirectoryAccount_CreateDirectoryAccount_DirectoryAccount) GetRawProfileFileID() *string {
 	if t == nil {
@@ -21875,35 +21804,32 @@ func (t *GetAllDirectoryAccounts_DirectoryAccounts_PageInfo) GetStartCursor() *s
 }
 
 type GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node struct {
-	AccountType        *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
-	CanonicalEmail     *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
-	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
-	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
-	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
-	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
-	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
-	MfaState           enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
-	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
-	OrganizationUnit   *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Profile            map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash        string                         "json:\"profileHash\" graphql:\"profileHash\""
-	RawProfileFileID   *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
-	SecondaryKey       *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
-	SourceVersion      *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
-	Status             enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccountType      *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
+	CanonicalEmail   *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	CreatedAt        *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department       *string                        "json:\"department,omitempty\" graphql:\"department\""
+	DisplayID        string                         "json:\"displayID\" graphql:\"displayID\""
+	DisplayName      *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
+	ExternalID       string                         "json:\"externalID\" graphql:\"externalID\""
+	FamilyName       *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
+	GivenName        *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
+	ID               string                         "json:\"id\" graphql:\"id\""
+	IntegrationID    *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	JobTitle         *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
+	LastSeenIP       *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
+	MfaState         enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
+	ObservedAt       time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
+	OrganizationUnit *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
+	OwnerID          *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Profile          map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
+	RawProfileFileID *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
+	SecondaryKey     *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
+	SourceVersion    *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
+	Status           enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
+	Tags             []string                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetAccountType() *enums.DirectoryAccountType {
@@ -21935,12 +21861,6 @@ func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDepartment() *
 		t = &GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node{}
 	}
 	return t.Department
-}
-func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDirectorySyncRunID() *string {
-	if t == nil {
-		t = &GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDisplayID() string {
 	if t == nil {
@@ -21990,12 +21910,6 @@ func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetJobTitle() *st
 	}
 	return t.JobTitle
 }
-func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetLastLoginAt() *time.Time {
-	if t == nil {
-		t = &GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node{}
-	}
-	return t.LastLoginAt
-}
 func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetLastSeenIP() *string {
 	if t == nil {
 		t = &GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node{}
@@ -22031,12 +21945,6 @@ func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetProfile() map[
 		t = &GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node{}
 	}
 	return t.Profile
-}
-func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetProfileHash() string {
-	if t == nil {
-		t = &GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node{}
-	}
-	return t.ProfileHash
 }
 func (t *GetAllDirectoryAccounts_DirectoryAccounts_Edges_Node) GetRawProfileFileID() *string {
 	if t == nil {
@@ -22118,35 +22026,32 @@ func (t *GetAllDirectoryAccounts_DirectoryAccounts) GetTotalCount() int64 {
 }
 
 type GetDirectoryAccountByID_DirectoryAccount struct {
-	AccountType        *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
-	CanonicalEmail     *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
-	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
-	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
-	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
-	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
-	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
-	MfaState           enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
-	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
-	OrganizationUnit   *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Profile            map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash        string                         "json:\"profileHash\" graphql:\"profileHash\""
-	RawProfileFileID   *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
-	SecondaryKey       *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
-	SourceVersion      *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
-	Status             enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccountType      *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
+	CanonicalEmail   *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	CreatedAt        *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department       *string                        "json:\"department,omitempty\" graphql:\"department\""
+	DisplayID        string                         "json:\"displayID\" graphql:\"displayID\""
+	DisplayName      *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
+	ExternalID       string                         "json:\"externalID\" graphql:\"externalID\""
+	FamilyName       *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
+	GivenName        *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
+	ID               string                         "json:\"id\" graphql:\"id\""
+	IntegrationID    *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	JobTitle         *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
+	LastSeenIP       *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
+	MfaState         enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
+	ObservedAt       time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
+	OrganizationUnit *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
+	OwnerID          *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Profile          map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
+	RawProfileFileID *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
+	SecondaryKey     *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
+	SourceVersion    *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
+	Status           enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
+	Tags             []string                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetDirectoryAccountByID_DirectoryAccount) GetAccountType() *enums.DirectoryAccountType {
@@ -22178,12 +22083,6 @@ func (t *GetDirectoryAccountByID_DirectoryAccount) GetDepartment() *string {
 		t = &GetDirectoryAccountByID_DirectoryAccount{}
 	}
 	return t.Department
-}
-func (t *GetDirectoryAccountByID_DirectoryAccount) GetDirectorySyncRunID() *string {
-	if t == nil {
-		t = &GetDirectoryAccountByID_DirectoryAccount{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *GetDirectoryAccountByID_DirectoryAccount) GetDisplayID() string {
 	if t == nil {
@@ -22233,12 +22132,6 @@ func (t *GetDirectoryAccountByID_DirectoryAccount) GetJobTitle() *string {
 	}
 	return t.JobTitle
 }
-func (t *GetDirectoryAccountByID_DirectoryAccount) GetLastLoginAt() *time.Time {
-	if t == nil {
-		t = &GetDirectoryAccountByID_DirectoryAccount{}
-	}
-	return t.LastLoginAt
-}
 func (t *GetDirectoryAccountByID_DirectoryAccount) GetLastSeenIP() *string {
 	if t == nil {
 		t = &GetDirectoryAccountByID_DirectoryAccount{}
@@ -22274,12 +22167,6 @@ func (t *GetDirectoryAccountByID_DirectoryAccount) GetProfile() map[string]any {
 		t = &GetDirectoryAccountByID_DirectoryAccount{}
 	}
 	return t.Profile
-}
-func (t *GetDirectoryAccountByID_DirectoryAccount) GetProfileHash() string {
-	if t == nil {
-		t = &GetDirectoryAccountByID_DirectoryAccount{}
-	}
-	return t.ProfileHash
 }
 func (t *GetDirectoryAccountByID_DirectoryAccount) GetRawProfileFileID() *string {
 	if t == nil {
@@ -22357,35 +22244,32 @@ func (t *GetDirectoryAccounts_DirectoryAccounts_PageInfo) GetStartCursor() *stri
 }
 
 type GetDirectoryAccounts_DirectoryAccounts_Edges_Node struct {
-	AccountType        *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
-	CanonicalEmail     *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
-	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
-	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
-	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
-	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
-	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
-	MfaState           enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
-	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
-	OrganizationUnit   *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Profile            map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash        string                         "json:\"profileHash\" graphql:\"profileHash\""
-	RawProfileFileID   *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
-	SecondaryKey       *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
-	SourceVersion      *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
-	Status             enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccountType      *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
+	CanonicalEmail   *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	CreatedAt        *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department       *string                        "json:\"department,omitempty\" graphql:\"department\""
+	DisplayID        string                         "json:\"displayID\" graphql:\"displayID\""
+	DisplayName      *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
+	ExternalID       string                         "json:\"externalID\" graphql:\"externalID\""
+	FamilyName       *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
+	GivenName        *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
+	ID               string                         "json:\"id\" graphql:\"id\""
+	IntegrationID    *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	JobTitle         *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
+	LastSeenIP       *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
+	MfaState         enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
+	ObservedAt       time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
+	OrganizationUnit *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
+	OwnerID          *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Profile          map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
+	RawProfileFileID *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
+	SecondaryKey     *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
+	SourceVersion    *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
+	Status           enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
+	Tags             []string                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetAccountType() *enums.DirectoryAccountType {
@@ -22417,12 +22301,6 @@ func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDepartment() *str
 		t = &GetDirectoryAccounts_DirectoryAccounts_Edges_Node{}
 	}
 	return t.Department
-}
-func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDirectorySyncRunID() *string {
-	if t == nil {
-		t = &GetDirectoryAccounts_DirectoryAccounts_Edges_Node{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetDisplayID() string {
 	if t == nil {
@@ -22472,12 +22350,6 @@ func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetJobTitle() *strin
 	}
 	return t.JobTitle
 }
-func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetLastLoginAt() *time.Time {
-	if t == nil {
-		t = &GetDirectoryAccounts_DirectoryAccounts_Edges_Node{}
-	}
-	return t.LastLoginAt
-}
 func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetLastSeenIP() *string {
 	if t == nil {
 		t = &GetDirectoryAccounts_DirectoryAccounts_Edges_Node{}
@@ -22513,12 +22385,6 @@ func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetProfile() map[str
 		t = &GetDirectoryAccounts_DirectoryAccounts_Edges_Node{}
 	}
 	return t.Profile
-}
-func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetProfileHash() string {
-	if t == nil {
-		t = &GetDirectoryAccounts_DirectoryAccounts_Edges_Node{}
-	}
-	return t.ProfileHash
 }
 func (t *GetDirectoryAccounts_DirectoryAccounts_Edges_Node) GetRawProfileFileID() *string {
 	if t == nil {
@@ -22600,35 +22466,32 @@ func (t *GetDirectoryAccounts_DirectoryAccounts) GetTotalCount() int64 {
 }
 
 type UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount struct {
-	AccountType        *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
-	CanonicalEmail     *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
-	CreatedAt          *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department         *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectorySyncRunID *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
-	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	DisplayName        *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
-	ExternalID         string                         "json:\"externalID\" graphql:\"externalID\""
-	FamilyName         *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
-	GivenName          *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
-	ID                 string                         "json:\"id\" graphql:\"id\""
-	IntegrationID      *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	JobTitle           *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
-	LastLoginAt        *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
-	LastSeenIP         *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
-	MfaState           enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
-	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
-	OrganizationUnit   *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
-	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Profile            map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash        string                         "json:\"profileHash\" graphql:\"profileHash\""
-	RawProfileFileID   *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
-	SecondaryKey       *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
-	SourceVersion      *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
-	Status             enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
-	Tags               []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt          *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy          *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccountType      *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
+	CanonicalEmail   *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	CreatedAt        *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy        *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department       *string                        "json:\"department,omitempty\" graphql:\"department\""
+	DisplayID        string                         "json:\"displayID\" graphql:\"displayID\""
+	DisplayName      *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
+	ExternalID       string                         "json:\"externalID\" graphql:\"externalID\""
+	FamilyName       *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
+	GivenName        *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
+	ID               string                         "json:\"id\" graphql:\"id\""
+	IntegrationID    *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	JobTitle         *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
+	LastSeenIP       *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
+	MfaState         enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
+	ObservedAt       time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
+	OrganizationUnit *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
+	OwnerID          *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Profile          map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
+	RawProfileFileID *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
+	SecondaryKey     *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
+	SourceVersion    *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
+	Status           enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
+	Tags             []string                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt        *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy        *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetAccountType() *enums.DirectoryAccountType {
@@ -22660,12 +22523,6 @@ func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetDepa
 		t = &UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount{}
 	}
 	return t.Department
-}
-func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetDirectorySyncRunID() *string {
-	if t == nil {
-		t = &UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetDisplayID() string {
 	if t == nil {
@@ -22715,12 +22572,6 @@ func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetJobT
 	}
 	return t.JobTitle
 }
-func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetLastLoginAt() *time.Time {
-	if t == nil {
-		t = &UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount{}
-	}
-	return t.LastLoginAt
-}
 func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetLastSeenIP() *string {
 	if t == nil {
 		t = &UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount{}
@@ -22756,12 +22607,6 @@ func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetProf
 		t = &UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount{}
 	}
 	return t.Profile
-}
-func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetProfileHash() string {
-	if t == nil {
-		t = &UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount{}
-	}
-	return t.ProfileHash
 }
 func (t *UpdateDirectoryAccount_UpdateDirectoryAccount_DirectoryAccount) GetRawProfileFileID() *string {
 	if t == nil {
@@ -22822,7 +22667,6 @@ type CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups str
 	CreatedAt              *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy              *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description            *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DirectorySyncRunID     string                             "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID              string                             "json:\"displayID\" graphql:\"displayID\""
 	DisplayName            *string                            "json:\"displayName,omitempty\" graphql:\"displayName\""
 	Email                  *string                            "json:\"email,omitempty\" graphql:\"email\""
@@ -22834,7 +22678,6 @@ type CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups str
 	ObservedAt             time.Time                          "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID                *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Profile                map[string]any                     "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash            string                             "json:\"profileHash\" graphql:\"profileHash\""
 	RawProfileFileID       *string                            "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
 	SourceVersion          *string                            "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
 	Status                 enums.DirectoryGroupStatus         "json:\"status\" graphql:\"status\""
@@ -22866,12 +22709,6 @@ func (t *CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups
 		t = &CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups{}
 	}
 	return t.Description
-}
-func (t *CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups) GetDisplayID() string {
 	if t == nil {
@@ -22939,12 +22776,6 @@ func (t *CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups
 	}
 	return t.Profile
 }
-func (t *CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups) GetProfileHash() string {
-	if t == nil {
-		t = &CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups{}
-	}
-	return t.ProfileHash
-}
 func (t *CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups) GetRawProfileFileID() *string {
 	if t == nil {
 		t = &CreateBulkCSVDirectoryGroup_CreateBulkCSVDirectoryGroup_DirectoryGroups{}
@@ -22998,7 +22829,6 @@ type CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups struct {
 	CreatedAt              *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy              *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description            *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DirectorySyncRunID     string                             "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID              string                             "json:\"displayID\" graphql:\"displayID\""
 	DisplayName            *string                            "json:\"displayName,omitempty\" graphql:\"displayName\""
 	Email                  *string                            "json:\"email,omitempty\" graphql:\"email\""
@@ -23010,7 +22840,6 @@ type CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups struct {
 	ObservedAt             time.Time                          "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID                *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Profile                map[string]any                     "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash            string                             "json:\"profileHash\" graphql:\"profileHash\""
 	RawProfileFileID       *string                            "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
 	SourceVersion          *string                            "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
 	Status                 enums.DirectoryGroupStatus         "json:\"status\" graphql:\"status\""
@@ -23042,12 +22871,6 @@ func (t *CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups) GetD
 		t = &CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups{}
 	}
 	return t.Description
-}
-func (t *CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups) GetDisplayID() string {
 	if t == nil {
@@ -23115,12 +22938,6 @@ func (t *CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups) GetP
 	}
 	return t.Profile
 }
-func (t *CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups) GetProfileHash() string {
-	if t == nil {
-		t = &CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups{}
-	}
-	return t.ProfileHash
-}
 func (t *CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups) GetRawProfileFileID() *string {
 	if t == nil {
 		t = &CreateBulkDirectoryGroup_CreateBulkDirectoryGroup_DirectoryGroups{}
@@ -23174,7 +22991,6 @@ type CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup struct {
 	CreatedAt              *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy              *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description            *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DirectorySyncRunID     string                             "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID              string                             "json:\"displayID\" graphql:\"displayID\""
 	DisplayName            *string                            "json:\"displayName,omitempty\" graphql:\"displayName\""
 	Email                  *string                            "json:\"email,omitempty\" graphql:\"email\""
@@ -23186,7 +23002,6 @@ type CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup struct {
 	ObservedAt             time.Time                          "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID                *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Profile                map[string]any                     "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash            string                             "json:\"profileHash\" graphql:\"profileHash\""
 	RawProfileFileID       *string                            "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
 	SourceVersion          *string                            "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
 	Status                 enums.DirectoryGroupStatus         "json:\"status\" graphql:\"status\""
@@ -23218,12 +23033,6 @@ func (t *CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup) GetDescriptio
 		t = &CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup{}
 	}
 	return t.Description
-}
-func (t *CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup) GetDisplayID() string {
 	if t == nil {
@@ -23290,12 +23099,6 @@ func (t *CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup) GetProfile() 
 		t = &CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup{}
 	}
 	return t.Profile
-}
-func (t *CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup) GetProfileHash() string {
-	if t == nil {
-		t = &CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup{}
-	}
-	return t.ProfileHash
 }
 func (t *CreateDirectoryGroup_CreateDirectoryGroup_DirectoryGroup) GetRawProfileFileID() *string {
 	if t == nil {
@@ -23393,7 +23196,6 @@ type GetAllDirectoryGroups_DirectoryGroups_Edges_Node struct {
 	CreatedAt              *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy              *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description            *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DirectorySyncRunID     string                             "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID              string                             "json:\"displayID\" graphql:\"displayID\""
 	DisplayName            *string                            "json:\"displayName,omitempty\" graphql:\"displayName\""
 	Email                  *string                            "json:\"email,omitempty\" graphql:\"email\""
@@ -23405,7 +23207,6 @@ type GetAllDirectoryGroups_DirectoryGroups_Edges_Node struct {
 	ObservedAt             time.Time                          "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID                *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Profile                map[string]any                     "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash            string                             "json:\"profileHash\" graphql:\"profileHash\""
 	RawProfileFileID       *string                            "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
 	SourceVersion          *string                            "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
 	Status                 enums.DirectoryGroupStatus         "json:\"status\" graphql:\"status\""
@@ -23437,12 +23238,6 @@ func (t *GetAllDirectoryGroups_DirectoryGroups_Edges_Node) GetDescription() *str
 		t = &GetAllDirectoryGroups_DirectoryGroups_Edges_Node{}
 	}
 	return t.Description
-}
-func (t *GetAllDirectoryGroups_DirectoryGroups_Edges_Node) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &GetAllDirectoryGroups_DirectoryGroups_Edges_Node{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *GetAllDirectoryGroups_DirectoryGroups_Edges_Node) GetDisplayID() string {
 	if t == nil {
@@ -23509,12 +23304,6 @@ func (t *GetAllDirectoryGroups_DirectoryGroups_Edges_Node) GetProfile() map[stri
 		t = &GetAllDirectoryGroups_DirectoryGroups_Edges_Node{}
 	}
 	return t.Profile
-}
-func (t *GetAllDirectoryGroups_DirectoryGroups_Edges_Node) GetProfileHash() string {
-	if t == nil {
-		t = &GetAllDirectoryGroups_DirectoryGroups_Edges_Node{}
-	}
-	return t.ProfileHash
 }
 func (t *GetAllDirectoryGroups_DirectoryGroups_Edges_Node) GetRawProfileFileID() *string {
 	if t == nil {
@@ -23594,7 +23383,6 @@ type GetDirectoryGroupByID_DirectoryGroup struct {
 	CreatedAt              *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy              *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description            *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DirectorySyncRunID     string                             "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID              string                             "json:\"displayID\" graphql:\"displayID\""
 	DisplayName            *string                            "json:\"displayName,omitempty\" graphql:\"displayName\""
 	Email                  *string                            "json:\"email,omitempty\" graphql:\"email\""
@@ -23606,7 +23394,6 @@ type GetDirectoryGroupByID_DirectoryGroup struct {
 	ObservedAt             time.Time                          "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID                *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Profile                map[string]any                     "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash            string                             "json:\"profileHash\" graphql:\"profileHash\""
 	RawProfileFileID       *string                            "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
 	SourceVersion          *string                            "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
 	Status                 enums.DirectoryGroupStatus         "json:\"status\" graphql:\"status\""
@@ -23638,12 +23425,6 @@ func (t *GetDirectoryGroupByID_DirectoryGroup) GetDescription() *string {
 		t = &GetDirectoryGroupByID_DirectoryGroup{}
 	}
 	return t.Description
-}
-func (t *GetDirectoryGroupByID_DirectoryGroup) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &GetDirectoryGroupByID_DirectoryGroup{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *GetDirectoryGroupByID_DirectoryGroup) GetDisplayID() string {
 	if t == nil {
@@ -23710,12 +23491,6 @@ func (t *GetDirectoryGroupByID_DirectoryGroup) GetProfile() map[string]any {
 		t = &GetDirectoryGroupByID_DirectoryGroup{}
 	}
 	return t.Profile
-}
-func (t *GetDirectoryGroupByID_DirectoryGroup) GetProfileHash() string {
-	if t == nil {
-		t = &GetDirectoryGroupByID_DirectoryGroup{}
-	}
-	return t.ProfileHash
 }
 func (t *GetDirectoryGroupByID_DirectoryGroup) GetRawProfileFileID() *string {
 	if t == nil {
@@ -23791,7 +23566,6 @@ type GetDirectoryGroups_DirectoryGroups_Edges_Node struct {
 	CreatedAt              *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy              *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description            *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DirectorySyncRunID     string                             "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID              string                             "json:\"displayID\" graphql:\"displayID\""
 	DisplayName            *string                            "json:\"displayName,omitempty\" graphql:\"displayName\""
 	Email                  *string                            "json:\"email,omitempty\" graphql:\"email\""
@@ -23803,7 +23577,6 @@ type GetDirectoryGroups_DirectoryGroups_Edges_Node struct {
 	ObservedAt             time.Time                          "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID                *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Profile                map[string]any                     "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash            string                             "json:\"profileHash\" graphql:\"profileHash\""
 	RawProfileFileID       *string                            "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
 	SourceVersion          *string                            "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
 	Status                 enums.DirectoryGroupStatus         "json:\"status\" graphql:\"status\""
@@ -23835,12 +23608,6 @@ func (t *GetDirectoryGroups_DirectoryGroups_Edges_Node) GetDescription() *string
 		t = &GetDirectoryGroups_DirectoryGroups_Edges_Node{}
 	}
 	return t.Description
-}
-func (t *GetDirectoryGroups_DirectoryGroups_Edges_Node) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &GetDirectoryGroups_DirectoryGroups_Edges_Node{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *GetDirectoryGroups_DirectoryGroups_Edges_Node) GetDisplayID() string {
 	if t == nil {
@@ -23907,12 +23674,6 @@ func (t *GetDirectoryGroups_DirectoryGroups_Edges_Node) GetProfile() map[string]
 		t = &GetDirectoryGroups_DirectoryGroups_Edges_Node{}
 	}
 	return t.Profile
-}
-func (t *GetDirectoryGroups_DirectoryGroups_Edges_Node) GetProfileHash() string {
-	if t == nil {
-		t = &GetDirectoryGroups_DirectoryGroups_Edges_Node{}
-	}
-	return t.ProfileHash
 }
 func (t *GetDirectoryGroups_DirectoryGroups_Edges_Node) GetRawProfileFileID() *string {
 	if t == nil {
@@ -23992,7 +23753,6 @@ type UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup struct {
 	CreatedAt              *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy              *string                            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Description            *string                            "json:\"description,omitempty\" graphql:\"description\""
-	DirectorySyncRunID     string                             "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID              string                             "json:\"displayID\" graphql:\"displayID\""
 	DisplayName            *string                            "json:\"displayName,omitempty\" graphql:\"displayName\""
 	Email                  *string                            "json:\"email,omitempty\" graphql:\"email\""
@@ -24004,7 +23764,6 @@ type UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup struct {
 	ObservedAt             time.Time                          "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID                *string                            "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	Profile                map[string]any                     "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash            string                             "json:\"profileHash\" graphql:\"profileHash\""
 	RawProfileFileID       *string                            "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
 	SourceVersion          *string                            "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
 	Status                 enums.DirectoryGroupStatus         "json:\"status\" graphql:\"status\""
@@ -24036,12 +23795,6 @@ func (t *UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup) GetDescriptio
 		t = &UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup{}
 	}
 	return t.Description
-}
-func (t *UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup) GetDisplayID() string {
 	if t == nil {
@@ -24109,12 +23862,6 @@ func (t *UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup) GetProfile() 
 	}
 	return t.Profile
 }
-func (t *UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup) GetProfileHash() string {
-	if t == nil {
-		t = &UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup{}
-	}
-	return t.ProfileHash
-}
 func (t *UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup) GetRawProfileFileID() *string {
 	if t == nil {
 		t = &UpdateDirectoryGroup_UpdateDirectoryGroup_DirectoryGroup{}
@@ -24168,13 +23915,9 @@ type CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_Directory
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DirectoryAccountID string                         "json:\"directoryAccountID\" graphql:\"directoryAccountID\""
 	DirectoryGroupID   string                         "json:\"directoryGroupID\" graphql:\"directoryGroupID\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	FirstSeenAt        *time.Time                     "json:\"firstSeenAt,omitempty\" graphql:\"firstSeenAt\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
 	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
-	LastConfirmedRunID *string                        "json:\"lastConfirmedRunID,omitempty\" graphql:\"lastConfirmedRunID\""
-	LastSeenAt         *time.Time                     "json:\"lastSeenAt,omitempty\" graphql:\"lastSeenAt\""
 	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
 	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -24208,23 +23951,11 @@ func (t *CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_Direc
 	}
 	return t.DirectoryGroupID
 }
-func (t *CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships{}
-	}
-	return t.DirectorySyncRunID
-}
 func (t *CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships) GetDisplayID() string {
 	if t == nil {
 		t = &CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships{}
 	}
 	return t.DisplayID
-}
-func (t *CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships) GetFirstSeenAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships{}
-	}
-	return t.FirstSeenAt
 }
 func (t *CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships) GetID() string {
 	if t == nil {
@@ -24237,18 +23968,6 @@ func (t *CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_Direc
 		t = &CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships{}
 	}
 	return t.IntegrationID
-}
-func (t *CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships) GetLastConfirmedRunID() *string {
-	if t == nil {
-		t = &CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships{}
-	}
-	return t.LastConfirmedRunID
-}
-func (t *CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships) GetLastSeenAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships{}
-	}
-	return t.LastSeenAt
 }
 func (t *CreateBulkCSVDirectoryMembership_CreateBulkCSVDirectoryMembership_DirectoryMemberships) GetMetadata() map[string]any {
 	if t == nil {
@@ -24309,13 +24028,9 @@ type CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMember
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DirectoryAccountID string                         "json:\"directoryAccountID\" graphql:\"directoryAccountID\""
 	DirectoryGroupID   string                         "json:\"directoryGroupID\" graphql:\"directoryGroupID\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	FirstSeenAt        *time.Time                     "json:\"firstSeenAt,omitempty\" graphql:\"firstSeenAt\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
 	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
-	LastConfirmedRunID *string                        "json:\"lastConfirmedRunID,omitempty\" graphql:\"lastConfirmedRunID\""
-	LastSeenAt         *time.Time                     "json:\"lastSeenAt,omitempty\" graphql:\"lastSeenAt\""
 	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
 	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -24349,23 +24064,11 @@ func (t *CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMe
 	}
 	return t.DirectoryGroupID
 }
-func (t *CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships{}
-	}
-	return t.DirectorySyncRunID
-}
 func (t *CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships) GetDisplayID() string {
 	if t == nil {
 		t = &CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships{}
 	}
 	return t.DisplayID
-}
-func (t *CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships) GetFirstSeenAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships{}
-	}
-	return t.FirstSeenAt
 }
 func (t *CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships) GetID() string {
 	if t == nil {
@@ -24378,18 +24081,6 @@ func (t *CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMe
 		t = &CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships{}
 	}
 	return t.IntegrationID
-}
-func (t *CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships) GetLastConfirmedRunID() *string {
-	if t == nil {
-		t = &CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships{}
-	}
-	return t.LastConfirmedRunID
-}
-func (t *CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships) GetLastSeenAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships{}
-	}
-	return t.LastSeenAt
 }
 func (t *CreateBulkDirectoryMembership_CreateBulkDirectoryMembership_DirectoryMemberships) GetMetadata() map[string]any {
 	if t == nil {
@@ -24450,13 +24141,9 @@ type CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership str
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DirectoryAccountID string                         "json:\"directoryAccountID\" graphql:\"directoryAccountID\""
 	DirectoryGroupID   string                         "json:\"directoryGroupID\" graphql:\"directoryGroupID\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	FirstSeenAt        *time.Time                     "json:\"firstSeenAt,omitempty\" graphql:\"firstSeenAt\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
 	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
-	LastConfirmedRunID *string                        "json:\"lastConfirmedRunID,omitempty\" graphql:\"lastConfirmedRunID\""
-	LastSeenAt         *time.Time                     "json:\"lastSeenAt,omitempty\" graphql:\"lastSeenAt\""
 	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
 	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -24490,23 +24177,11 @@ func (t *CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership
 	}
 	return t.DirectoryGroupID
 }
-func (t *CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership{}
-	}
-	return t.DirectorySyncRunID
-}
 func (t *CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership) GetDisplayID() string {
 	if t == nil {
 		t = &CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership{}
 	}
 	return t.DisplayID
-}
-func (t *CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership) GetFirstSeenAt() *time.Time {
-	if t == nil {
-		t = &CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership{}
-	}
-	return t.FirstSeenAt
 }
 func (t *CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership) GetID() string {
 	if t == nil {
@@ -24519,18 +24194,6 @@ func (t *CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership
 		t = &CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership{}
 	}
 	return t.IntegrationID
-}
-func (t *CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership) GetLastConfirmedRunID() *string {
-	if t == nil {
-		t = &CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership{}
-	}
-	return t.LastConfirmedRunID
-}
-func (t *CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership) GetLastSeenAt() *time.Time {
-	if t == nil {
-		t = &CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership{}
-	}
-	return t.LastSeenAt
 }
 func (t *CreateDirectoryMembership_CreateDirectoryMembership_DirectoryMembership) GetMetadata() map[string]any {
 	if t == nil {
@@ -24634,13 +24297,9 @@ type GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node struct {
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DirectoryAccountID string                         "json:\"directoryAccountID\" graphql:\"directoryAccountID\""
 	DirectoryGroupID   string                         "json:\"directoryGroupID\" graphql:\"directoryGroupID\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	FirstSeenAt        *time.Time                     "json:\"firstSeenAt,omitempty\" graphql:\"firstSeenAt\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
 	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
-	LastConfirmedRunID *string                        "json:\"lastConfirmedRunID,omitempty\" graphql:\"lastConfirmedRunID\""
-	LastSeenAt         *time.Time                     "json:\"lastSeenAt,omitempty\" graphql:\"lastSeenAt\""
 	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
 	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -24674,23 +24333,11 @@ func (t *GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node) GetDirector
 	}
 	return t.DirectoryGroupID
 }
-func (t *GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node{}
-	}
-	return t.DirectorySyncRunID
-}
 func (t *GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node) GetDisplayID() string {
 	if t == nil {
 		t = &GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node{}
 	}
 	return t.DisplayID
-}
-func (t *GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node) GetFirstSeenAt() *time.Time {
-	if t == nil {
-		t = &GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node{}
-	}
-	return t.FirstSeenAt
 }
 func (t *GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node) GetID() string {
 	if t == nil {
@@ -24703,18 +24350,6 @@ func (t *GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node) GetIntegrat
 		t = &GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node{}
 	}
 	return t.IntegrationID
-}
-func (t *GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node) GetLastConfirmedRunID() *string {
-	if t == nil {
-		t = &GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node{}
-	}
-	return t.LastConfirmedRunID
-}
-func (t *GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node) GetLastSeenAt() *time.Time {
-	if t == nil {
-		t = &GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node{}
-	}
-	return t.LastSeenAt
 }
 func (t *GetAllDirectoryMemberships_DirectoryMemberships_Edges_Node) GetMetadata() map[string]any {
 	if t == nil {
@@ -24800,13 +24435,9 @@ type GetDirectoryMembershipByID_DirectoryMembership struct {
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DirectoryAccountID string                         "json:\"directoryAccountID\" graphql:\"directoryAccountID\""
 	DirectoryGroupID   string                         "json:\"directoryGroupID\" graphql:\"directoryGroupID\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	FirstSeenAt        *time.Time                     "json:\"firstSeenAt,omitempty\" graphql:\"firstSeenAt\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
 	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
-	LastConfirmedRunID *string                        "json:\"lastConfirmedRunID,omitempty\" graphql:\"lastConfirmedRunID\""
-	LastSeenAt         *time.Time                     "json:\"lastSeenAt,omitempty\" graphql:\"lastSeenAt\""
 	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
 	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -24840,23 +24471,11 @@ func (t *GetDirectoryMembershipByID_DirectoryMembership) GetDirectoryGroupID() s
 	}
 	return t.DirectoryGroupID
 }
-func (t *GetDirectoryMembershipByID_DirectoryMembership) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &GetDirectoryMembershipByID_DirectoryMembership{}
-	}
-	return t.DirectorySyncRunID
-}
 func (t *GetDirectoryMembershipByID_DirectoryMembership) GetDisplayID() string {
 	if t == nil {
 		t = &GetDirectoryMembershipByID_DirectoryMembership{}
 	}
 	return t.DisplayID
-}
-func (t *GetDirectoryMembershipByID_DirectoryMembership) GetFirstSeenAt() *time.Time {
-	if t == nil {
-		t = &GetDirectoryMembershipByID_DirectoryMembership{}
-	}
-	return t.FirstSeenAt
 }
 func (t *GetDirectoryMembershipByID_DirectoryMembership) GetID() string {
 	if t == nil {
@@ -24869,18 +24488,6 @@ func (t *GetDirectoryMembershipByID_DirectoryMembership) GetIntegrationID() stri
 		t = &GetDirectoryMembershipByID_DirectoryMembership{}
 	}
 	return t.IntegrationID
-}
-func (t *GetDirectoryMembershipByID_DirectoryMembership) GetLastConfirmedRunID() *string {
-	if t == nil {
-		t = &GetDirectoryMembershipByID_DirectoryMembership{}
-	}
-	return t.LastConfirmedRunID
-}
-func (t *GetDirectoryMembershipByID_DirectoryMembership) GetLastSeenAt() *time.Time {
-	if t == nil {
-		t = &GetDirectoryMembershipByID_DirectoryMembership{}
-	}
-	return t.LastSeenAt
 }
 func (t *GetDirectoryMembershipByID_DirectoryMembership) GetMetadata() map[string]any {
 	if t == nil {
@@ -24962,13 +24569,9 @@ type GetDirectoryMemberships_DirectoryMemberships_Edges_Node struct {
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DirectoryAccountID string                         "json:\"directoryAccountID\" graphql:\"directoryAccountID\""
 	DirectoryGroupID   string                         "json:\"directoryGroupID\" graphql:\"directoryGroupID\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	FirstSeenAt        *time.Time                     "json:\"firstSeenAt,omitempty\" graphql:\"firstSeenAt\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
 	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
-	LastConfirmedRunID *string                        "json:\"lastConfirmedRunID,omitempty\" graphql:\"lastConfirmedRunID\""
-	LastSeenAt         *time.Time                     "json:\"lastSeenAt,omitempty\" graphql:\"lastSeenAt\""
 	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
 	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -25002,23 +24605,11 @@ func (t *GetDirectoryMemberships_DirectoryMemberships_Edges_Node) GetDirectoryGr
 	}
 	return t.DirectoryGroupID
 }
-func (t *GetDirectoryMemberships_DirectoryMemberships_Edges_Node) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &GetDirectoryMemberships_DirectoryMemberships_Edges_Node{}
-	}
-	return t.DirectorySyncRunID
-}
 func (t *GetDirectoryMemberships_DirectoryMemberships_Edges_Node) GetDisplayID() string {
 	if t == nil {
 		t = &GetDirectoryMemberships_DirectoryMemberships_Edges_Node{}
 	}
 	return t.DisplayID
-}
-func (t *GetDirectoryMemberships_DirectoryMemberships_Edges_Node) GetFirstSeenAt() *time.Time {
-	if t == nil {
-		t = &GetDirectoryMemberships_DirectoryMemberships_Edges_Node{}
-	}
-	return t.FirstSeenAt
 }
 func (t *GetDirectoryMemberships_DirectoryMemberships_Edges_Node) GetID() string {
 	if t == nil {
@@ -25031,18 +24622,6 @@ func (t *GetDirectoryMemberships_DirectoryMemberships_Edges_Node) GetIntegration
 		t = &GetDirectoryMemberships_DirectoryMemberships_Edges_Node{}
 	}
 	return t.IntegrationID
-}
-func (t *GetDirectoryMemberships_DirectoryMemberships_Edges_Node) GetLastConfirmedRunID() *string {
-	if t == nil {
-		t = &GetDirectoryMemberships_DirectoryMemberships_Edges_Node{}
-	}
-	return t.LastConfirmedRunID
-}
-func (t *GetDirectoryMemberships_DirectoryMemberships_Edges_Node) GetLastSeenAt() *time.Time {
-	if t == nil {
-		t = &GetDirectoryMemberships_DirectoryMemberships_Edges_Node{}
-	}
-	return t.LastSeenAt
 }
 func (t *GetDirectoryMemberships_DirectoryMemberships_Edges_Node) GetMetadata() map[string]any {
 	if t == nil {
@@ -25128,13 +24707,9 @@ type UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership str
 	CreatedBy          *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DirectoryAccountID string                         "json:\"directoryAccountID\" graphql:\"directoryAccountID\""
 	DirectoryGroupID   string                         "json:\"directoryGroupID\" graphql:\"directoryGroupID\""
-	DirectorySyncRunID string                         "json:\"directorySyncRunID\" graphql:\"directorySyncRunID\""
 	DisplayID          string                         "json:\"displayID\" graphql:\"displayID\""
-	FirstSeenAt        *time.Time                     "json:\"firstSeenAt,omitempty\" graphql:\"firstSeenAt\""
 	ID                 string                         "json:\"id\" graphql:\"id\""
 	IntegrationID      string                         "json:\"integrationID\" graphql:\"integrationID\""
-	LastConfirmedRunID *string                        "json:\"lastConfirmedRunID,omitempty\" graphql:\"lastConfirmedRunID\""
-	LastSeenAt         *time.Time                     "json:\"lastSeenAt,omitempty\" graphql:\"lastSeenAt\""
 	Metadata           map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
 	ObservedAt         time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
 	OwnerID            *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
@@ -25168,23 +24743,11 @@ func (t *UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership
 	}
 	return t.DirectoryGroupID
 }
-func (t *UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership) GetDirectorySyncRunID() string {
-	if t == nil {
-		t = &UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership{}
-	}
-	return t.DirectorySyncRunID
-}
 func (t *UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership) GetDisplayID() string {
 	if t == nil {
 		t = &UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership{}
 	}
 	return t.DisplayID
-}
-func (t *UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership) GetFirstSeenAt() *time.Time {
-	if t == nil {
-		t = &UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership{}
-	}
-	return t.FirstSeenAt
 }
 func (t *UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership) GetID() string {
 	if t == nil {
@@ -25197,18 +24760,6 @@ func (t *UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership
 		t = &UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership{}
 	}
 	return t.IntegrationID
-}
-func (t *UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership) GetLastConfirmedRunID() *string {
-	if t == nil {
-		t = &UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership{}
-	}
-	return t.LastConfirmedRunID
-}
-func (t *UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership) GetLastSeenAt() *time.Time {
-	if t == nil {
-		t = &UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership{}
-	}
-	return t.LastSeenAt
 }
 func (t *UpdateDirectoryMembership_UpdateDirectoryMembership_DirectoryMembership) GetMetadata() map[string]any {
 	if t == nil {
@@ -25262,1058 +24813,6 @@ func (t *UpdateDirectoryMembership_UpdateDirectoryMembership) GetDirectoryMember
 		t = &UpdateDirectoryMembership_UpdateDirectoryMembership{}
 	}
 	return &t.DirectoryMembership
-}
-
-type CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns struct {
-	CompletedAt       *time.Time                   "json:\"completedAt,omitempty\" graphql:\"completedAt\""
-	CreatedAt         *time.Time                   "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                      "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DeltaCount        int64                        "json:\"deltaCount\" graphql:\"deltaCount\""
-	DisplayID         string                       "json:\"displayID\" graphql:\"displayID\""
-	Error             *string                      "json:\"error,omitempty\" graphql:\"error\""
-	FullCount         int64                        "json:\"fullCount\" graphql:\"fullCount\""
-	ID                string                       "json:\"id\" graphql:\"id\""
-	IntegrationID     string                       "json:\"integrationID\" graphql:\"integrationID\""
-	OwnerID           *string                      "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RawManifestFileID *string                      "json:\"rawManifestFileID,omitempty\" graphql:\"rawManifestFileID\""
-	SourceCursor      *string                      "json:\"sourceCursor,omitempty\" graphql:\"sourceCursor\""
-	StartedAt         time.Time                    "json:\"startedAt\" graphql:\"startedAt\""
-	Stats             map[string]any               "json:\"stats,omitempty\" graphql:\"stats\""
-	Status            enums.DirectorySyncRunStatus "json:\"status\" graphql:\"status\""
-	UpdatedAt         *time.Time                   "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                      "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetCompletedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.CompletedAt
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetDeltaCount() int64 {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.DeltaCount
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetDisplayID() string {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.DisplayID
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetError() *string {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.Error
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetFullCount() int64 {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.FullCount
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetID() string {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.ID
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetIntegrationID() string {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.IntegrationID
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetRawManifestFileID() *string {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.RawManifestFileID
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetSourceCursor() *string {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.SourceCursor
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetStartedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return &t.StartedAt
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetStats() map[string]any {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.Stats
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetStatus() *enums.DirectorySyncRunStatus {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return &t.Status
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.UpdatedBy
-}
-
-type CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun struct {
-	DirectorySyncRuns []*CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns "json:\"directorySyncRuns,omitempty\" graphql:\"directorySyncRuns\""
-}
-
-func (t *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun) GetDirectorySyncRuns() []*CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun_DirectorySyncRuns {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun{}
-	}
-	return t.DirectorySyncRuns
-}
-
-type CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns struct {
-	CompletedAt       *time.Time                   "json:\"completedAt,omitempty\" graphql:\"completedAt\""
-	CreatedAt         *time.Time                   "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                      "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DeltaCount        int64                        "json:\"deltaCount\" graphql:\"deltaCount\""
-	DisplayID         string                       "json:\"displayID\" graphql:\"displayID\""
-	Error             *string                      "json:\"error,omitempty\" graphql:\"error\""
-	FullCount         int64                        "json:\"fullCount\" graphql:\"fullCount\""
-	ID                string                       "json:\"id\" graphql:\"id\""
-	IntegrationID     string                       "json:\"integrationID\" graphql:\"integrationID\""
-	OwnerID           *string                      "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RawManifestFileID *string                      "json:\"rawManifestFileID,omitempty\" graphql:\"rawManifestFileID\""
-	SourceCursor      *string                      "json:\"sourceCursor,omitempty\" graphql:\"sourceCursor\""
-	StartedAt         time.Time                    "json:\"startedAt\" graphql:\"startedAt\""
-	Stats             map[string]any               "json:\"stats,omitempty\" graphql:\"stats\""
-	Status            enums.DirectorySyncRunStatus "json:\"status\" graphql:\"status\""
-	UpdatedAt         *time.Time                   "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                      "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetCompletedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.CompletedAt
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetDeltaCount() int64 {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.DeltaCount
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetDisplayID() string {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.DisplayID
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetError() *string {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.Error
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetFullCount() int64 {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.FullCount
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetID() string {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.ID
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetIntegrationID() string {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.IntegrationID
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetRawManifestFileID() *string {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.RawManifestFileID
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetSourceCursor() *string {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.SourceCursor
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetStartedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return &t.StartedAt
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetStats() map[string]any {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.Stats
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetStatus() *enums.DirectorySyncRunStatus {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return &t.Status
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns{}
-	}
-	return t.UpdatedBy
-}
-
-type CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun struct {
-	DirectorySyncRuns []*CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns "json:\"directorySyncRuns,omitempty\" graphql:\"directorySyncRuns\""
-}
-
-func (t *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun) GetDirectorySyncRuns() []*CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun_DirectorySyncRuns {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun{}
-	}
-	return t.DirectorySyncRuns
-}
-
-type CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun struct {
-	CompletedAt       *time.Time                   "json:\"completedAt,omitempty\" graphql:\"completedAt\""
-	CreatedAt         *time.Time                   "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                      "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DeltaCount        int64                        "json:\"deltaCount\" graphql:\"deltaCount\""
-	DisplayID         string                       "json:\"displayID\" graphql:\"displayID\""
-	Error             *string                      "json:\"error,omitempty\" graphql:\"error\""
-	FullCount         int64                        "json:\"fullCount\" graphql:\"fullCount\""
-	ID                string                       "json:\"id\" graphql:\"id\""
-	IntegrationID     string                       "json:\"integrationID\" graphql:\"integrationID\""
-	OwnerID           *string                      "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RawManifestFileID *string                      "json:\"rawManifestFileID,omitempty\" graphql:\"rawManifestFileID\""
-	SourceCursor      *string                      "json:\"sourceCursor,omitempty\" graphql:\"sourceCursor\""
-	StartedAt         time.Time                    "json:\"startedAt\" graphql:\"startedAt\""
-	Stats             map[string]any               "json:\"stats,omitempty\" graphql:\"stats\""
-	Status            enums.DirectorySyncRunStatus "json:\"status\" graphql:\"status\""
-	UpdatedAt         *time.Time                   "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                      "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetCompletedAt() *time.Time {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.CompletedAt
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetDeltaCount() int64 {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.DeltaCount
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetDisplayID() string {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.DisplayID
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetError() *string {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.Error
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetFullCount() int64 {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.FullCount
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetID() string {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.ID
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetIntegrationID() string {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.IntegrationID
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.OwnerID
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetRawManifestFileID() *string {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.RawManifestFileID
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetSourceCursor() *string {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.SourceCursor
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetStartedAt() *time.Time {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return &t.StartedAt
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetStats() map[string]any {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.Stats
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetStatus() *enums.DirectorySyncRunStatus {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return &t.Status
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.UpdatedBy
-}
-
-type CreateDirectorySyncRun_CreateDirectorySyncRun struct {
-	DirectorySyncRun CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun "json:\"directorySyncRun\" graphql:\"directorySyncRun\""
-}
-
-func (t *CreateDirectorySyncRun_CreateDirectorySyncRun) GetDirectorySyncRun() *CreateDirectorySyncRun_CreateDirectorySyncRun_DirectorySyncRun {
-	if t == nil {
-		t = &CreateDirectorySyncRun_CreateDirectorySyncRun{}
-	}
-	return &t.DirectorySyncRun
-}
-
-type DeleteDirectorySyncRun_DeleteDirectorySyncRun struct {
-	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
-}
-
-func (t *DeleteDirectorySyncRun_DeleteDirectorySyncRun) GetDeletedID() string {
-	if t == nil {
-		t = &DeleteDirectorySyncRun_DeleteDirectorySyncRun{}
-	}
-	return t.DeletedID
-}
-
-type GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo struct {
-	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
-	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
-	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
-	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
-}
-
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo) GetEndCursor() *string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo{}
-	}
-	return t.EndCursor
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo) GetHasNextPage() bool {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo{}
-	}
-	return t.HasNextPage
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo) GetHasPreviousPage() bool {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo{}
-	}
-	return t.HasPreviousPage
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo) GetStartCursor() *string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo{}
-	}
-	return t.StartCursor
-}
-
-type GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node struct {
-	CompletedAt       *time.Time                   "json:\"completedAt,omitempty\" graphql:\"completedAt\""
-	CreatedAt         *time.Time                   "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                      "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DeltaCount        int64                        "json:\"deltaCount\" graphql:\"deltaCount\""
-	DisplayID         string                       "json:\"displayID\" graphql:\"displayID\""
-	Error             *string                      "json:\"error,omitempty\" graphql:\"error\""
-	FullCount         int64                        "json:\"fullCount\" graphql:\"fullCount\""
-	ID                string                       "json:\"id\" graphql:\"id\""
-	IntegrationID     string                       "json:\"integrationID\" graphql:\"integrationID\""
-	OwnerID           *string                      "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RawManifestFileID *string                      "json:\"rawManifestFileID,omitempty\" graphql:\"rawManifestFileID\""
-	SourceCursor      *string                      "json:\"sourceCursor,omitempty\" graphql:\"sourceCursor\""
-	StartedAt         time.Time                    "json:\"startedAt\" graphql:\"startedAt\""
-	Stats             map[string]any               "json:\"stats,omitempty\" graphql:\"stats\""
-	Status            enums.DirectorySyncRunStatus "json:\"status\" graphql:\"status\""
-	UpdatedAt         *time.Time                   "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                      "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetCompletedAt() *time.Time {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.CompletedAt
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.CreatedAt
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetCreatedBy() *string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.CreatedBy
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetDeltaCount() int64 {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.DeltaCount
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetDisplayID() string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.DisplayID
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetError() *string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.Error
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetFullCount() int64 {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.FullCount
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetID() string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.ID
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetIntegrationID() string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.IntegrationID
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetOwnerID() *string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.OwnerID
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetRawManifestFileID() *string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.RawManifestFileID
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetSourceCursor() *string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.SourceCursor
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetStartedAt() *time.Time {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return &t.StartedAt
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetStats() map[string]any {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.Stats
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetStatus() *enums.DirectorySyncRunStatus {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return &t.Status
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.UpdatedAt
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetUpdatedBy() *string {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.UpdatedBy
-}
-
-type GetAllDirectorySyncRuns_DirectorySyncRuns_Edges struct {
-	Node *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
-}
-
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges) GetNode() *GetAllDirectorySyncRuns_DirectorySyncRuns_Edges_Node {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns_Edges{}
-	}
-	return t.Node
-}
-
-type GetAllDirectorySyncRuns_DirectorySyncRuns struct {
-	Edges      []*GetAllDirectorySyncRuns_DirectorySyncRuns_Edges "json:\"edges,omitempty\" graphql:\"edges\""
-	PageInfo   GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
-	TotalCount int64                                              "json:\"totalCount\" graphql:\"totalCount\""
-}
-
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns) GetEdges() []*GetAllDirectorySyncRuns_DirectorySyncRuns_Edges {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns{}
-	}
-	return t.Edges
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns) GetPageInfo() *GetAllDirectorySyncRuns_DirectorySyncRuns_PageInfo {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns{}
-	}
-	return &t.PageInfo
-}
-func (t *GetAllDirectorySyncRuns_DirectorySyncRuns) GetTotalCount() int64 {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns_DirectorySyncRuns{}
-	}
-	return t.TotalCount
-}
-
-type GetDirectorySyncRunByID_DirectorySyncRun struct {
-	CompletedAt       *time.Time                   "json:\"completedAt,omitempty\" graphql:\"completedAt\""
-	CreatedAt         *time.Time                   "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                      "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DeltaCount        int64                        "json:\"deltaCount\" graphql:\"deltaCount\""
-	DisplayID         string                       "json:\"displayID\" graphql:\"displayID\""
-	Error             *string                      "json:\"error,omitempty\" graphql:\"error\""
-	FullCount         int64                        "json:\"fullCount\" graphql:\"fullCount\""
-	ID                string                       "json:\"id\" graphql:\"id\""
-	IntegrationID     string                       "json:\"integrationID\" graphql:\"integrationID\""
-	OwnerID           *string                      "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RawManifestFileID *string                      "json:\"rawManifestFileID,omitempty\" graphql:\"rawManifestFileID\""
-	SourceCursor      *string                      "json:\"sourceCursor,omitempty\" graphql:\"sourceCursor\""
-	StartedAt         time.Time                    "json:\"startedAt\" graphql:\"startedAt\""
-	Stats             map[string]any               "json:\"stats,omitempty\" graphql:\"stats\""
-	Status            enums.DirectorySyncRunStatus "json:\"status\" graphql:\"status\""
-	UpdatedAt         *time.Time                   "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                      "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetCompletedAt() *time.Time {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.CompletedAt
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.CreatedAt
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetCreatedBy() *string {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.CreatedBy
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetDeltaCount() int64 {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.DeltaCount
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetDisplayID() string {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.DisplayID
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetError() *string {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.Error
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetFullCount() int64 {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.FullCount
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetID() string {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.ID
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetIntegrationID() string {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.IntegrationID
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetOwnerID() *string {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.OwnerID
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetRawManifestFileID() *string {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.RawManifestFileID
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetSourceCursor() *string {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.SourceCursor
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetStartedAt() *time.Time {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return &t.StartedAt
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetStats() map[string]any {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.Stats
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetStatus() *enums.DirectorySyncRunStatus {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return &t.Status
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.UpdatedAt
-}
-func (t *GetDirectorySyncRunByID_DirectorySyncRun) GetUpdatedBy() *string {
-	if t == nil {
-		t = &GetDirectorySyncRunByID_DirectorySyncRun{}
-	}
-	return t.UpdatedBy
-}
-
-type GetDirectorySyncRuns_DirectorySyncRuns_PageInfo struct {
-	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
-	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
-	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
-	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
-}
-
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_PageInfo) GetEndCursor() *string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_PageInfo{}
-	}
-	return t.EndCursor
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_PageInfo) GetHasNextPage() bool {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_PageInfo{}
-	}
-	return t.HasNextPage
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_PageInfo) GetHasPreviousPage() bool {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_PageInfo{}
-	}
-	return t.HasPreviousPage
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_PageInfo) GetStartCursor() *string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_PageInfo{}
-	}
-	return t.StartCursor
-}
-
-type GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node struct {
-	CompletedAt       *time.Time                   "json:\"completedAt,omitempty\" graphql:\"completedAt\""
-	CreatedAt         *time.Time                   "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                      "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DeltaCount        int64                        "json:\"deltaCount\" graphql:\"deltaCount\""
-	DisplayID         string                       "json:\"displayID\" graphql:\"displayID\""
-	Error             *string                      "json:\"error,omitempty\" graphql:\"error\""
-	FullCount         int64                        "json:\"fullCount\" graphql:\"fullCount\""
-	ID                string                       "json:\"id\" graphql:\"id\""
-	IntegrationID     string                       "json:\"integrationID\" graphql:\"integrationID\""
-	OwnerID           *string                      "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RawManifestFileID *string                      "json:\"rawManifestFileID,omitempty\" graphql:\"rawManifestFileID\""
-	SourceCursor      *string                      "json:\"sourceCursor,omitempty\" graphql:\"sourceCursor\""
-	StartedAt         time.Time                    "json:\"startedAt\" graphql:\"startedAt\""
-	Stats             map[string]any               "json:\"stats,omitempty\" graphql:\"stats\""
-	Status            enums.DirectorySyncRunStatus "json:\"status\" graphql:\"status\""
-	UpdatedAt         *time.Time                   "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                      "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetCompletedAt() *time.Time {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.CompletedAt
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.CreatedAt
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetCreatedBy() *string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.CreatedBy
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetDeltaCount() int64 {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.DeltaCount
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetDisplayID() string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.DisplayID
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetError() *string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.Error
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetFullCount() int64 {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.FullCount
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetID() string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.ID
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetIntegrationID() string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.IntegrationID
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetOwnerID() *string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.OwnerID
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetRawManifestFileID() *string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.RawManifestFileID
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetSourceCursor() *string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.SourceCursor
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetStartedAt() *time.Time {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return &t.StartedAt
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetStats() map[string]any {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.Stats
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetStatus() *enums.DirectorySyncRunStatus {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return &t.Status
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.UpdatedAt
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node) GetUpdatedBy() *string {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node{}
-	}
-	return t.UpdatedBy
-}
-
-type GetDirectorySyncRuns_DirectorySyncRuns_Edges struct {
-	Node *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node "json:\"node,omitempty\" graphql:\"node\""
-}
-
-func (t *GetDirectorySyncRuns_DirectorySyncRuns_Edges) GetNode() *GetDirectorySyncRuns_DirectorySyncRuns_Edges_Node {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns_Edges{}
-	}
-	return t.Node
-}
-
-type GetDirectorySyncRuns_DirectorySyncRuns struct {
-	Edges      []*GetDirectorySyncRuns_DirectorySyncRuns_Edges "json:\"edges,omitempty\" graphql:\"edges\""
-	PageInfo   GetDirectorySyncRuns_DirectorySyncRuns_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
-	TotalCount int64                                           "json:\"totalCount\" graphql:\"totalCount\""
-}
-
-func (t *GetDirectorySyncRuns_DirectorySyncRuns) GetEdges() []*GetDirectorySyncRuns_DirectorySyncRuns_Edges {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns{}
-	}
-	return t.Edges
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns) GetPageInfo() *GetDirectorySyncRuns_DirectorySyncRuns_PageInfo {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns{}
-	}
-	return &t.PageInfo
-}
-func (t *GetDirectorySyncRuns_DirectorySyncRuns) GetTotalCount() int64 {
-	if t == nil {
-		t = &GetDirectorySyncRuns_DirectorySyncRuns{}
-	}
-	return t.TotalCount
-}
-
-type UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun struct {
-	CompletedAt       *time.Time                   "json:\"completedAt,omitempty\" graphql:\"completedAt\""
-	CreatedAt         *time.Time                   "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy         *string                      "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	DeltaCount        int64                        "json:\"deltaCount\" graphql:\"deltaCount\""
-	DisplayID         string                       "json:\"displayID\" graphql:\"displayID\""
-	Error             *string                      "json:\"error,omitempty\" graphql:\"error\""
-	FullCount         int64                        "json:\"fullCount\" graphql:\"fullCount\""
-	ID                string                       "json:\"id\" graphql:\"id\""
-	IntegrationID     string                       "json:\"integrationID\" graphql:\"integrationID\""
-	OwnerID           *string                      "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	RawManifestFileID *string                      "json:\"rawManifestFileID,omitempty\" graphql:\"rawManifestFileID\""
-	SourceCursor      *string                      "json:\"sourceCursor,omitempty\" graphql:\"sourceCursor\""
-	StartedAt         time.Time                    "json:\"startedAt\" graphql:\"startedAt\""
-	Stats             map[string]any               "json:\"stats,omitempty\" graphql:\"stats\""
-	Status            enums.DirectorySyncRunStatus "json:\"status\" graphql:\"status\""
-	UpdatedAt         *time.Time                   "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy         *string                      "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-}
-
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetCompletedAt() *time.Time {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.CompletedAt
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetDeltaCount() int64 {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.DeltaCount
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetDisplayID() string {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.DisplayID
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetError() *string {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.Error
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetFullCount() int64 {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.FullCount
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetID() string {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.ID
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetIntegrationID() string {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.IntegrationID
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetRawManifestFileID() *string {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.RawManifestFileID
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetSourceCursor() *string {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.SourceCursor
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetStartedAt() *time.Time {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return &t.StartedAt
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetStats() map[string]any {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.Stats
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetStatus() *enums.DirectorySyncRunStatus {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return &t.Status
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun{}
-	}
-	return t.UpdatedBy
-}
-
-type UpdateDirectorySyncRun_UpdateDirectorySyncRun struct {
-	DirectorySyncRun UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun "json:\"directorySyncRun\" graphql:\"directorySyncRun\""
-}
-
-func (t *UpdateDirectorySyncRun_UpdateDirectorySyncRun) GetDirectorySyncRun() *UpdateDirectorySyncRun_UpdateDirectorySyncRun_DirectorySyncRun {
-	if t == nil {
-		t = &UpdateDirectorySyncRun_UpdateDirectorySyncRun{}
-	}
-	return &t.DirectorySyncRun
 }
 
 type CreateBulkCSVDiscussion_CreateBulkCSVDiscussion_Discussions struct {
@@ -35971,7 +34470,7 @@ func (t *GetAllFiles_Files_PageInfo) GetStartCursor() *string {
 }
 
 type GetAllFiles_Files_Edges_Node struct {
-	CategoryType          *string    "json:\"categoryType,omitempty\" graphql:\"categoryType\""
+	CategoryName          *string    "json:\"categoryName,omitempty\" graphql:\"categoryName\""
 	CreatedAt             *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DetectedContentType   string     "json:\"detectedContentType\" graphql:\"detectedContentType\""
@@ -35992,11 +34491,11 @@ type GetAllFiles_Files_Edges_Node struct {
 	URI                   *string    "json:\"uri,omitempty\" graphql:\"uri\""
 }
 
-func (t *GetAllFiles_Files_Edges_Node) GetCategoryType() *string {
+func (t *GetAllFiles_Files_Edges_Node) GetCategoryName() *string {
 	if t == nil {
 		t = &GetAllFiles_Files_Edges_Node{}
 	}
-	return t.CategoryType
+	return t.CategoryName
 }
 func (t *GetAllFiles_Files_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -36144,7 +34643,7 @@ func (t *GetAllFiles_Files) GetTotalCount() int64 {
 }
 
 type GetFileByID_File struct {
-	CategoryType          *string    "json:\"categoryType,omitempty\" graphql:\"categoryType\""
+	CategoryName          *string    "json:\"categoryName,omitempty\" graphql:\"categoryName\""
 	CreatedAt             *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DetectedContentType   string     "json:\"detectedContentType\" graphql:\"detectedContentType\""
@@ -36165,11 +34664,11 @@ type GetFileByID_File struct {
 	URI                   *string    "json:\"uri,omitempty\" graphql:\"uri\""
 }
 
-func (t *GetFileByID_File) GetCategoryType() *string {
+func (t *GetFileByID_File) GetCategoryName() *string {
 	if t == nil {
 		t = &GetFileByID_File{}
 	}
-	return t.CategoryType
+	return t.CategoryName
 }
 func (t *GetFileByID_File) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -36313,7 +34812,7 @@ func (t *GetFiles_Files_PageInfo) GetStartCursor() *string {
 }
 
 type GetFiles_Files_Edges_Node struct {
-	CategoryType          *string    "json:\"categoryType,omitempty\" graphql:\"categoryType\""
+	CategoryName          *string    "json:\"categoryName,omitempty\" graphql:\"categoryName\""
 	CreatedAt             *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	DetectedContentType   string     "json:\"detectedContentType\" graphql:\"detectedContentType\""
@@ -36334,11 +34833,11 @@ type GetFiles_Files_Edges_Node struct {
 	URI                   *string    "json:\"uri,omitempty\" graphql:\"uri\""
 }
 
-func (t *GetFiles_Files_Edges_Node) GetCategoryType() *string {
+func (t *GetFiles_Files_Edges_Node) GetCategoryName() *string {
 	if t == nil {
 		t = &GetFiles_Files_Edges_Node{}
 	}
-	return t.CategoryType
+	return t.CategoryName
 }
 func (t *GetFiles_Files_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
@@ -45256,52 +43755,46 @@ func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Pag
 }
 
 type GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node struct {
-	AccountType         *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
-	AddedAt             *time.Time                     "json:\"addedAt,omitempty\" graphql:\"addedAt\""
-	AvatarLocalFileID   *string                        "json:\"avatarLocalFileID,omitempty\" graphql:\"avatarLocalFileID\""
-	AvatarRemoteURL     *string                        "json:\"avatarRemoteURL,omitempty\" graphql:\"avatarRemoteURL\""
-	AvatarUpdatedAt     *time.Time                     "json:\"avatarUpdatedAt,omitempty\" graphql:\"avatarUpdatedAt\""
-	CanonicalEmail      *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
-	CreatedAt           *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy           *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Department          *string                        "json:\"department,omitempty\" graphql:\"department\""
-	DirectoryInstanceID *string                        "json:\"directoryInstanceID,omitempty\" graphql:\"directoryInstanceID\""
-	DirectoryName       *string                        "json:\"directoryName,omitempty\" graphql:\"directoryName\""
-	DirectorySyncRunID  *string                        "json:\"directorySyncRunID,omitempty\" graphql:\"directorySyncRunID\""
-	DisplayID           string                         "json:\"displayID\" graphql:\"displayID\""
-	DisplayName         *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
-	EnvironmentID       *string                        "json:\"environmentID,omitempty\" graphql:\"environmentID\""
-	EnvironmentName     *string                        "json:\"environmentName,omitempty\" graphql:\"environmentName\""
-	ExternalID          string                         "json:\"externalID\" graphql:\"externalID\""
-	FamilyName          *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
-	FirstSeenAt         *time.Time                     "json:\"firstSeenAt,omitempty\" graphql:\"firstSeenAt\""
-	GivenName           *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
-	ID                  string                         "json:\"id\" graphql:\"id\""
-	IdentityHolderID    *string                        "json:\"identityHolderID,omitempty\" graphql:\"identityHolderID\""
-	IntegrationID       *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
-	JobTitle            *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
-	LastLoginAt         *time.Time                     "json:\"lastLoginAt,omitempty\" graphql:\"lastLoginAt\""
-	LastSeenAt          *time.Time                     "json:\"lastSeenAt,omitempty\" graphql:\"lastSeenAt\""
-	LastSeenIP          *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
-	Metadata            map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
-	MfaState            enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
-	ObservedAt          time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
-	OrganizationUnit    *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
-	OwnerID             *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	PlatformID          *string                        "json:\"platformID,omitempty\" graphql:\"platformID\""
-	PrimarySource       bool                           "json:\"primarySource\" graphql:\"primarySource\""
-	Profile             map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
-	ProfileHash         string                         "json:\"profileHash\" graphql:\"profileHash\""
-	RawProfileFileID    *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
-	RemovedAt           *time.Time                     "json:\"removedAt,omitempty\" graphql:\"removedAt\""
-	ScopeID             *string                        "json:\"scopeID,omitempty\" graphql:\"scopeID\""
-	ScopeName           *string                        "json:\"scopeName,omitempty\" graphql:\"scopeName\""
-	SecondaryKey        *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
-	SourceVersion       *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
-	Status              enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
-	Tags                []string                       "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt           *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy           *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	AccountType       *enums.DirectoryAccountType    "json:\"accountType,omitempty\" graphql:\"accountType\""
+	AddedAt           *time.Time                     "json:\"addedAt,omitempty\" graphql:\"addedAt\""
+	AvatarLocalFileID *string                        "json:\"avatarLocalFileID,omitempty\" graphql:\"avatarLocalFileID\""
+	AvatarRemoteURL   *string                        "json:\"avatarRemoteURL,omitempty\" graphql:\"avatarRemoteURL\""
+	AvatarUpdatedAt   *time.Time                     "json:\"avatarUpdatedAt,omitempty\" graphql:\"avatarUpdatedAt\""
+	CanonicalEmail    *string                        "json:\"canonicalEmail,omitempty\" graphql:\"canonicalEmail\""
+	CreatedAt         *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy         *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Department        *string                        "json:\"department,omitempty\" graphql:\"department\""
+	DirectoryName     *string                        "json:\"directoryName,omitempty\" graphql:\"directoryName\""
+	DisplayID         string                         "json:\"displayID\" graphql:\"displayID\""
+	DisplayName       *string                        "json:\"displayName,omitempty\" graphql:\"displayName\""
+	EnvironmentID     *string                        "json:\"environmentID,omitempty\" graphql:\"environmentID\""
+	EnvironmentName   *string                        "json:\"environmentName,omitempty\" graphql:\"environmentName\""
+	ExternalID        string                         "json:\"externalID\" graphql:\"externalID\""
+	FamilyName        *string                        "json:\"familyName,omitempty\" graphql:\"familyName\""
+	GivenName         *string                        "json:\"givenName,omitempty\" graphql:\"givenName\""
+	ID                string                         "json:\"id\" graphql:\"id\""
+	IdentityHolderID  *string                        "json:\"identityHolderID,omitempty\" graphql:\"identityHolderID\""
+	IntegrationID     *string                        "json:\"integrationID,omitempty\" graphql:\"integrationID\""
+	JobTitle          *string                        "json:\"jobTitle,omitempty\" graphql:\"jobTitle\""
+	LastSeenIP        *string                        "json:\"lastSeenIP,omitempty\" graphql:\"lastSeenIP\""
+	Metadata          map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
+	MfaState          enums.DirectoryAccountMFAState "json:\"mfaState\" graphql:\"mfaState\""
+	ObservedAt        time.Time                      "json:\"observedAt\" graphql:\"observedAt\""
+	OrganizationUnit  *string                        "json:\"organizationUnit,omitempty\" graphql:\"organizationUnit\""
+	OwnerID           *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	PlatformID        *string                        "json:\"platformID,omitempty\" graphql:\"platformID\""
+	PrimarySource     bool                           "json:\"primarySource\" graphql:\"primarySource\""
+	Profile           map[string]any                 "json:\"profile,omitempty\" graphql:\"profile\""
+	RawProfileFileID  *string                        "json:\"rawProfileFileID,omitempty\" graphql:\"rawProfileFileID\""
+	RemovedAt         *time.Time                     "json:\"removedAt,omitempty\" graphql:\"removedAt\""
+	ScopeID           *string                        "json:\"scopeID,omitempty\" graphql:\"scopeID\""
+	ScopeName         *string                        "json:\"scopeName,omitempty\" graphql:\"scopeName\""
+	SecondaryKey      *string                        "json:\"secondaryKey,omitempty\" graphql:\"secondaryKey\""
+	SourceVersion     *string                        "json:\"sourceVersion,omitempty\" graphql:\"sourceVersion\""
+	Status            enums.DirectoryAccountStatus   "json:\"status\" graphql:\"status\""
+	Tags              []string                       "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt         *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy         *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
 }
 
 func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetAccountType() *enums.DirectoryAccountType {
@@ -45358,23 +43851,11 @@ func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edg
 	}
 	return t.Department
 }
-func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDirectoryInstanceID() *string {
-	if t == nil {
-		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
-	}
-	return t.DirectoryInstanceID
-}
 func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDirectoryName() *string {
 	if t == nil {
 		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
 	}
 	return t.DirectoryName
-}
-func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDirectorySyncRunID() *string {
-	if t == nil {
-		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
-	}
-	return t.DirectorySyncRunID
 }
 func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetDisplayID() string {
 	if t == nil {
@@ -45412,12 +43893,6 @@ func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edg
 	}
 	return t.FamilyName
 }
-func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetFirstSeenAt() *time.Time {
-	if t == nil {
-		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
-	}
-	return t.FirstSeenAt
-}
 func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetGivenName() *string {
 	if t == nil {
 		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
@@ -45447,18 +43922,6 @@ func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edg
 		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
 	}
 	return t.JobTitle
-}
-func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetLastLoginAt() *time.Time {
-	if t == nil {
-		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
-	}
-	return t.LastLoginAt
-}
-func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetLastSeenAt() *time.Time {
-	if t == nil {
-		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
-	}
-	return t.LastSeenAt
 }
 func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetLastSeenIP() *string {
 	if t == nil {
@@ -45513,12 +43976,6 @@ func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edg
 		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
 	}
 	return t.Profile
-}
-func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetProfileHash() string {
-	if t == nil {
-		t = &GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node{}
-	}
-	return t.ProfileHash
 }
 func (t *GetIdentityHolderDirectoryAccounts_IdentityHolder_DirectoryAccounts_Edges_Node) GetRawProfileFileID() *string {
 	if t == nil {
@@ -104516,94 +102973,6 @@ func (t *UpdateDirectoryMembership) GetUpdateDirectoryMembership() *UpdateDirect
 	return &t.UpdateDirectoryMembership
 }
 
-type CreateBulkCSVDirectorySyncRun struct {
-	CreateBulkCSVDirectorySyncRun CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun "json:\"createBulkCSVDirectorySyncRun\" graphql:\"createBulkCSVDirectorySyncRun\""
-}
-
-func (t *CreateBulkCSVDirectorySyncRun) GetCreateBulkCSVDirectorySyncRun() *CreateBulkCSVDirectorySyncRun_CreateBulkCSVDirectorySyncRun {
-	if t == nil {
-		t = &CreateBulkCSVDirectorySyncRun{}
-	}
-	return &t.CreateBulkCSVDirectorySyncRun
-}
-
-type CreateBulkDirectorySyncRun struct {
-	CreateBulkDirectorySyncRun CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun "json:\"createBulkDirectorySyncRun\" graphql:\"createBulkDirectorySyncRun\""
-}
-
-func (t *CreateBulkDirectorySyncRun) GetCreateBulkDirectorySyncRun() *CreateBulkDirectorySyncRun_CreateBulkDirectorySyncRun {
-	if t == nil {
-		t = &CreateBulkDirectorySyncRun{}
-	}
-	return &t.CreateBulkDirectorySyncRun
-}
-
-type CreateDirectorySyncRun struct {
-	CreateDirectorySyncRun CreateDirectorySyncRun_CreateDirectorySyncRun "json:\"createDirectorySyncRun\" graphql:\"createDirectorySyncRun\""
-}
-
-func (t *CreateDirectorySyncRun) GetCreateDirectorySyncRun() *CreateDirectorySyncRun_CreateDirectorySyncRun {
-	if t == nil {
-		t = &CreateDirectorySyncRun{}
-	}
-	return &t.CreateDirectorySyncRun
-}
-
-type DeleteDirectorySyncRun struct {
-	DeleteDirectorySyncRun DeleteDirectorySyncRun_DeleteDirectorySyncRun "json:\"deleteDirectorySyncRun\" graphql:\"deleteDirectorySyncRun\""
-}
-
-func (t *DeleteDirectorySyncRun) GetDeleteDirectorySyncRun() *DeleteDirectorySyncRun_DeleteDirectorySyncRun {
-	if t == nil {
-		t = &DeleteDirectorySyncRun{}
-	}
-	return &t.DeleteDirectorySyncRun
-}
-
-type GetAllDirectorySyncRuns struct {
-	DirectorySyncRuns GetAllDirectorySyncRuns_DirectorySyncRuns "json:\"directorySyncRuns\" graphql:\"directorySyncRuns\""
-}
-
-func (t *GetAllDirectorySyncRuns) GetDirectorySyncRuns() *GetAllDirectorySyncRuns_DirectorySyncRuns {
-	if t == nil {
-		t = &GetAllDirectorySyncRuns{}
-	}
-	return &t.DirectorySyncRuns
-}
-
-type GetDirectorySyncRunByID struct {
-	DirectorySyncRun GetDirectorySyncRunByID_DirectorySyncRun "json:\"directorySyncRun\" graphql:\"directorySyncRun\""
-}
-
-func (t *GetDirectorySyncRunByID) GetDirectorySyncRun() *GetDirectorySyncRunByID_DirectorySyncRun {
-	if t == nil {
-		t = &GetDirectorySyncRunByID{}
-	}
-	return &t.DirectorySyncRun
-}
-
-type GetDirectorySyncRuns struct {
-	DirectorySyncRuns GetDirectorySyncRuns_DirectorySyncRuns "json:\"directorySyncRuns\" graphql:\"directorySyncRuns\""
-}
-
-func (t *GetDirectorySyncRuns) GetDirectorySyncRuns() *GetDirectorySyncRuns_DirectorySyncRuns {
-	if t == nil {
-		t = &GetDirectorySyncRuns{}
-	}
-	return &t.DirectorySyncRuns
-}
-
-type UpdateDirectorySyncRun struct {
-	UpdateDirectorySyncRun UpdateDirectorySyncRun_UpdateDirectorySyncRun "json:\"updateDirectorySyncRun\" graphql:\"updateDirectorySyncRun\""
-}
-
-func (t *UpdateDirectorySyncRun) GetUpdateDirectorySyncRun() *UpdateDirectorySyncRun_UpdateDirectorySyncRun {
-	if t == nil {
-		t = &UpdateDirectorySyncRun{}
-	}
-	return &t.UpdateDirectorySyncRun
-}
-
 type CreateBulkCSVDiscussion struct {
 	CreateBulkCSVDiscussion CreateBulkCSVDiscussion_CreateBulkCSVDiscussion "json:\"createBulkCSVDiscussion\" graphql:\"createBulkCSVDiscussion\""
 }
@@ -115870,7 +114239,6 @@ const CreateBulkCSVDirectoryAccountDocument = `mutation CreateBulkCSVDirectoryAc
 			createdAt
 			createdBy
 			department
-			directorySyncRunID
 			displayID
 			displayName
 			externalID
@@ -115879,14 +114247,12 @@ const CreateBulkCSVDirectoryAccountDocument = `mutation CreateBulkCSVDirectoryAc
 			id
 			integrationID
 			jobTitle
-			lastLoginAt
 			lastSeenIP
 			mfaState
 			observedAt
 			organizationUnit
 			ownerID
 			profile
-			profileHash
 			rawProfileFileID
 			secondaryKey
 			sourceVersion
@@ -115924,7 +114290,6 @@ const CreateBulkDirectoryAccountDocument = `mutation CreateBulkDirectoryAccount 
 			createdAt
 			createdBy
 			department
-			directorySyncRunID
 			displayID
 			displayName
 			externalID
@@ -115933,14 +114298,12 @@ const CreateBulkDirectoryAccountDocument = `mutation CreateBulkDirectoryAccount 
 			id
 			integrationID
 			jobTitle
-			lastLoginAt
 			lastSeenIP
 			mfaState
 			observedAt
 			organizationUnit
 			ownerID
 			profile
-			profileHash
 			rawProfileFileID
 			secondaryKey
 			sourceVersion
@@ -115978,7 +114341,6 @@ const CreateDirectoryAccountDocument = `mutation CreateDirectoryAccount ($input:
 			createdAt
 			createdBy
 			department
-			directorySyncRunID
 			displayID
 			displayName
 			externalID
@@ -115987,14 +114349,12 @@ const CreateDirectoryAccountDocument = `mutation CreateDirectoryAccount ($input:
 			id
 			integrationID
 			jobTitle
-			lastLoginAt
 			lastSeenIP
 			mfaState
 			observedAt
 			organizationUnit
 			ownerID
 			profile
-			profileHash
 			rawProfileFileID
 			secondaryKey
 			sourceVersion
@@ -116064,7 +114424,6 @@ const GetAllDirectoryAccountsDocument = `query GetAllDirectoryAccounts ($first: 
 				createdAt
 				createdBy
 				department
-				directorySyncRunID
 				displayID
 				displayName
 				externalID
@@ -116073,14 +114432,12 @@ const GetAllDirectoryAccountsDocument = `query GetAllDirectoryAccounts ($first: 
 				id
 				integrationID
 				jobTitle
-				lastLoginAt
 				lastSeenIP
 				mfaState
 				observedAt
 				organizationUnit
 				ownerID
 				profile
-				profileHash
 				rawProfileFileID
 				secondaryKey
 				sourceVersion
@@ -116122,7 +114479,6 @@ const GetDirectoryAccountByIDDocument = `query GetDirectoryAccountByID ($directo
 		createdAt
 		createdBy
 		department
-		directorySyncRunID
 		displayID
 		displayName
 		externalID
@@ -116131,14 +114487,12 @@ const GetDirectoryAccountByIDDocument = `query GetDirectoryAccountByID ($directo
 		id
 		integrationID
 		jobTitle
-		lastLoginAt
 		lastSeenIP
 		mfaState
 		observedAt
 		organizationUnit
 		ownerID
 		profile
-		profileHash
 		rawProfileFileID
 		secondaryKey
 		sourceVersion
@@ -116183,7 +114537,6 @@ const GetDirectoryAccountsDocument = `query GetDirectoryAccounts ($first: Int, $
 				createdAt
 				createdBy
 				department
-				directorySyncRunID
 				displayID
 				displayName
 				externalID
@@ -116192,14 +114545,12 @@ const GetDirectoryAccountsDocument = `query GetDirectoryAccounts ($first: Int, $
 				id
 				integrationID
 				jobTitle
-				lastLoginAt
 				lastSeenIP
 				mfaState
 				observedAt
 				organizationUnit
 				ownerID
 				profile
-				profileHash
 				rawProfileFileID
 				secondaryKey
 				sourceVersion
@@ -116243,7 +114594,6 @@ const UpdateDirectoryAccountDocument = `mutation UpdateDirectoryAccount ($update
 			createdAt
 			createdBy
 			department
-			directorySyncRunID
 			displayID
 			displayName
 			externalID
@@ -116252,14 +114602,12 @@ const UpdateDirectoryAccountDocument = `mutation UpdateDirectoryAccount ($update
 			id
 			integrationID
 			jobTitle
-			lastLoginAt
 			lastSeenIP
 			mfaState
 			observedAt
 			organizationUnit
 			ownerID
 			profile
-			profileHash
 			rawProfileFileID
 			secondaryKey
 			sourceVersion
@@ -116297,7 +114645,6 @@ const CreateBulkCSVDirectoryGroupDocument = `mutation CreateBulkCSVDirectoryGrou
 			createdAt
 			createdBy
 			description
-			directorySyncRunID
 			displayID
 			displayName
 			email
@@ -116309,7 +114656,6 @@ const CreateBulkCSVDirectoryGroupDocument = `mutation CreateBulkCSVDirectoryGrou
 			observedAt
 			ownerID
 			profile
-			profileHash
 			rawProfileFileID
 			sourceVersion
 			status
@@ -116345,7 +114691,6 @@ const CreateBulkDirectoryGroupDocument = `mutation CreateBulkDirectoryGroup ($in
 			createdAt
 			createdBy
 			description
-			directorySyncRunID
 			displayID
 			displayName
 			email
@@ -116357,7 +114702,6 @@ const CreateBulkDirectoryGroupDocument = `mutation CreateBulkDirectoryGroup ($in
 			observedAt
 			ownerID
 			profile
-			profileHash
 			rawProfileFileID
 			sourceVersion
 			status
@@ -116393,7 +114737,6 @@ const CreateDirectoryGroupDocument = `mutation CreateDirectoryGroup ($input: Cre
 			createdAt
 			createdBy
 			description
-			directorySyncRunID
 			displayID
 			displayName
 			email
@@ -116405,7 +114748,6 @@ const CreateDirectoryGroupDocument = `mutation CreateDirectoryGroup ($input: Cre
 			observedAt
 			ownerID
 			profile
-			profileHash
 			rawProfileFileID
 			sourceVersion
 			status
@@ -116473,7 +114815,6 @@ const GetAllDirectoryGroupsDocument = `query GetAllDirectoryGroups ($first: Int,
 				createdAt
 				createdBy
 				description
-				directorySyncRunID
 				displayID
 				displayName
 				email
@@ -116485,7 +114826,6 @@ const GetAllDirectoryGroupsDocument = `query GetAllDirectoryGroups ($first: Int,
 				observedAt
 				ownerID
 				profile
-				profileHash
 				rawProfileFileID
 				sourceVersion
 				status
@@ -116525,7 +114865,6 @@ const GetDirectoryGroupByIDDocument = `query GetDirectoryGroupByID ($directoryGr
 		createdAt
 		createdBy
 		description
-		directorySyncRunID
 		displayID
 		displayName
 		email
@@ -116537,7 +114876,6 @@ const GetDirectoryGroupByIDDocument = `query GetDirectoryGroupByID ($directoryGr
 		observedAt
 		ownerID
 		profile
-		profileHash
 		rawProfileFileID
 		sourceVersion
 		status
@@ -116580,7 +114918,6 @@ const GetDirectoryGroupsDocument = `query GetDirectoryGroups ($first: Int, $last
 				createdAt
 				createdBy
 				description
-				directorySyncRunID
 				displayID
 				displayName
 				email
@@ -116592,7 +114929,6 @@ const GetDirectoryGroupsDocument = `query GetDirectoryGroups ($first: Int, $last
 				observedAt
 				ownerID
 				profile
-				profileHash
 				rawProfileFileID
 				sourceVersion
 				status
@@ -116634,7 +114970,6 @@ const UpdateDirectoryGroupDocument = `mutation UpdateDirectoryGroup ($updateDire
 			createdAt
 			createdBy
 			description
-			directorySyncRunID
 			displayID
 			displayName
 			email
@@ -116646,7 +114981,6 @@ const UpdateDirectoryGroupDocument = `mutation UpdateDirectoryGroup ($updateDire
 			observedAt
 			ownerID
 			profile
-			profileHash
 			rawProfileFileID
 			sourceVersion
 			status
@@ -116683,13 +115017,9 @@ const CreateBulkCSVDirectoryMembershipDocument = `mutation CreateBulkCSVDirector
 			createdBy
 			directoryAccountID
 			directoryGroupID
-			directorySyncRunID
 			displayID
-			firstSeenAt
 			id
 			integrationID
-			lastConfirmedRunID
-			lastSeenAt
 			metadata
 			observedAt
 			ownerID
@@ -116726,13 +115056,9 @@ const CreateBulkDirectoryMembershipDocument = `mutation CreateBulkDirectoryMembe
 			createdBy
 			directoryAccountID
 			directoryGroupID
-			directorySyncRunID
 			displayID
-			firstSeenAt
 			id
 			integrationID
-			lastConfirmedRunID
-			lastSeenAt
 			metadata
 			observedAt
 			ownerID
@@ -116769,13 +115095,9 @@ const CreateDirectoryMembershipDocument = `mutation CreateDirectoryMembership ($
 			createdBy
 			directoryAccountID
 			directoryGroupID
-			directorySyncRunID
 			displayID
-			firstSeenAt
 			id
 			integrationID
-			lastConfirmedRunID
-			lastSeenAt
 			metadata
 			observedAt
 			ownerID
@@ -116844,13 +115166,9 @@ const GetAllDirectoryMembershipsDocument = `query GetAllDirectoryMemberships ($f
 				createdBy
 				directoryAccountID
 				directoryGroupID
-				directorySyncRunID
 				displayID
-				firstSeenAt
 				id
 				integrationID
-				lastConfirmedRunID
-				lastSeenAt
 				metadata
 				observedAt
 				ownerID
@@ -116891,13 +115209,9 @@ const GetDirectoryMembershipByIDDocument = `query GetDirectoryMembershipByID ($d
 		createdBy
 		directoryAccountID
 		directoryGroupID
-		directorySyncRunID
 		displayID
-		firstSeenAt
 		id
 		integrationID
-		lastConfirmedRunID
-		lastSeenAt
 		metadata
 		observedAt
 		ownerID
@@ -116941,13 +115255,9 @@ const GetDirectoryMembershipsDocument = `query GetDirectoryMemberships ($first: 
 				createdBy
 				directoryAccountID
 				directoryGroupID
-				directorySyncRunID
 				displayID
-				firstSeenAt
 				id
 				integrationID
-				lastConfirmedRunID
-				lastSeenAt
 				metadata
 				observedAt
 				ownerID
@@ -116990,13 +115300,9 @@ const UpdateDirectoryMembershipDocument = `mutation UpdateDirectoryMembership ($
 			createdBy
 			directoryAccountID
 			directoryGroupID
-			directorySyncRunID
 			displayID
-			firstSeenAt
 			id
 			integrationID
-			lastConfirmedRunID
-			lastSeenAt
 			metadata
 			observedAt
 			ownerID
@@ -117017,350 +115323,6 @@ func (c *Client) UpdateDirectoryMembership(ctx context.Context, updateDirectoryM
 
 	var res UpdateDirectoryMembership
 	if err := c.Client.Post(ctx, "UpdateDirectoryMembership", UpdateDirectoryMembershipDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateBulkCSVDirectorySyncRunDocument = `mutation CreateBulkCSVDirectorySyncRun ($input: Upload!) {
-	createBulkCSVDirectorySyncRun(input: $input) {
-		directorySyncRuns {
-			completedAt
-			createdAt
-			createdBy
-			deltaCount
-			displayID
-			error
-			fullCount
-			id
-			integrationID
-			ownerID
-			rawManifestFileID
-			sourceCursor
-			startedAt
-			stats
-			status
-			updatedAt
-			updatedBy
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkCSVDirectorySyncRun(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVDirectorySyncRun, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkCSVDirectorySyncRun
-	if err := c.Client.Post(ctx, "CreateBulkCSVDirectorySyncRun", CreateBulkCSVDirectorySyncRunDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateBulkDirectorySyncRunDocument = `mutation CreateBulkDirectorySyncRun ($input: [CreateDirectorySyncRunInput!]) {
-	createBulkDirectorySyncRun(input: $input) {
-		directorySyncRuns {
-			completedAt
-			createdAt
-			createdBy
-			deltaCount
-			displayID
-			error
-			fullCount
-			id
-			integrationID
-			ownerID
-			rawManifestFileID
-			sourceCursor
-			startedAt
-			stats
-			status
-			updatedAt
-			updatedBy
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkDirectorySyncRun(ctx context.Context, input []*CreateDirectorySyncRunInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkDirectorySyncRun, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkDirectorySyncRun
-	if err := c.Client.Post(ctx, "CreateBulkDirectorySyncRun", CreateBulkDirectorySyncRunDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const CreateDirectorySyncRunDocument = `mutation CreateDirectorySyncRun ($input: CreateDirectorySyncRunInput!) {
-	createDirectorySyncRun(input: $input) {
-		directorySyncRun {
-			completedAt
-			createdAt
-			createdBy
-			deltaCount
-			displayID
-			error
-			fullCount
-			id
-			integrationID
-			ownerID
-			rawManifestFileID
-			sourceCursor
-			startedAt
-			stats
-			status
-			updatedAt
-			updatedBy
-		}
-	}
-}
-`
-
-func (c *Client) CreateDirectorySyncRun(ctx context.Context, input CreateDirectorySyncRunInput, interceptors ...clientv2.RequestInterceptor) (*CreateDirectorySyncRun, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateDirectorySyncRun
-	if err := c.Client.Post(ctx, "CreateDirectorySyncRun", CreateDirectorySyncRunDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const DeleteDirectorySyncRunDocument = `mutation DeleteDirectorySyncRun ($deleteDirectorySyncRunId: ID!) {
-	deleteDirectorySyncRun(id: $deleteDirectorySyncRunId) {
-		deletedID
-	}
-}
-`
-
-func (c *Client) DeleteDirectorySyncRun(ctx context.Context, deleteDirectorySyncRunID string, interceptors ...clientv2.RequestInterceptor) (*DeleteDirectorySyncRun, error) {
-	vars := map[string]any{
-		"deleteDirectorySyncRunId": deleteDirectorySyncRunID,
-	}
-
-	var res DeleteDirectorySyncRun
-	if err := c.Client.Post(ctx, "DeleteDirectorySyncRun", DeleteDirectorySyncRunDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const GetAllDirectorySyncRunsDocument = `query GetAllDirectorySyncRuns ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectorySyncRunOrder!]) {
-	directorySyncRuns(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
-		totalCount
-		pageInfo {
-			startCursor
-			endCursor
-			hasPreviousPage
-			hasNextPage
-		}
-		edges {
-			node {
-				completedAt
-				createdAt
-				createdBy
-				deltaCount
-				displayID
-				error
-				fullCount
-				id
-				integrationID
-				ownerID
-				rawManifestFileID
-				sourceCursor
-				startedAt
-				stats
-				status
-				updatedAt
-				updatedBy
-			}
-		}
-	}
-}
-`
-
-func (c *Client) GetAllDirectorySyncRuns(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*DirectorySyncRunOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllDirectorySyncRuns, error) {
-	vars := map[string]any{
-		"first":   first,
-		"last":    last,
-		"after":   after,
-		"before":  before,
-		"orderBy": orderBy,
-	}
-
-	var res GetAllDirectorySyncRuns
-	if err := c.Client.Post(ctx, "GetAllDirectorySyncRuns", GetAllDirectorySyncRunsDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const GetDirectorySyncRunByIDDocument = `query GetDirectorySyncRunByID ($directorySyncRunId: ID!) {
-	directorySyncRun(id: $directorySyncRunId) {
-		completedAt
-		createdAt
-		createdBy
-		deltaCount
-		displayID
-		error
-		fullCount
-		id
-		integrationID
-		ownerID
-		rawManifestFileID
-		sourceCursor
-		startedAt
-		stats
-		status
-		updatedAt
-		updatedBy
-	}
-}
-`
-
-func (c *Client) GetDirectorySyncRunByID(ctx context.Context, directorySyncRunID string, interceptors ...clientv2.RequestInterceptor) (*GetDirectorySyncRunByID, error) {
-	vars := map[string]any{
-		"directorySyncRunId": directorySyncRunID,
-	}
-
-	var res GetDirectorySyncRunByID
-	if err := c.Client.Post(ctx, "GetDirectorySyncRunByID", GetDirectorySyncRunByIDDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const GetDirectorySyncRunsDocument = `query GetDirectorySyncRuns ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DirectorySyncRunWhereInput, $orderBy: [DirectorySyncRunOrder!]) {
-	directorySyncRuns(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
-		totalCount
-		pageInfo {
-			startCursor
-			endCursor
-			hasPreviousPage
-			hasNextPage
-		}
-		edges {
-			node {
-				completedAt
-				createdAt
-				createdBy
-				deltaCount
-				displayID
-				error
-				fullCount
-				id
-				integrationID
-				ownerID
-				rawManifestFileID
-				sourceCursor
-				startedAt
-				stats
-				status
-				updatedAt
-				updatedBy
-			}
-		}
-	}
-}
-`
-
-func (c *Client) GetDirectorySyncRuns(ctx context.Context, first *int64, last *int64, after *string, before *string, where *DirectorySyncRunWhereInput, orderBy []*DirectorySyncRunOrder, interceptors ...clientv2.RequestInterceptor) (*GetDirectorySyncRuns, error) {
-	vars := map[string]any{
-		"first":   first,
-		"last":    last,
-		"after":   after,
-		"before":  before,
-		"where":   where,
-		"orderBy": orderBy,
-	}
-
-	var res GetDirectorySyncRuns
-	if err := c.Client.Post(ctx, "GetDirectorySyncRuns", GetDirectorySyncRunsDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateDirectorySyncRunDocument = `mutation UpdateDirectorySyncRun ($updateDirectorySyncRunId: ID!, $input: UpdateDirectorySyncRunInput!) {
-	updateDirectorySyncRun(id: $updateDirectorySyncRunId, input: $input) {
-		directorySyncRun {
-			completedAt
-			createdAt
-			createdBy
-			deltaCount
-			displayID
-			error
-			fullCount
-			id
-			integrationID
-			ownerID
-			rawManifestFileID
-			sourceCursor
-			startedAt
-			stats
-			status
-			updatedAt
-			updatedBy
-		}
-	}
-}
-`
-
-func (c *Client) UpdateDirectorySyncRun(ctx context.Context, updateDirectorySyncRunID string, input UpdateDirectorySyncRunInput, interceptors ...clientv2.RequestInterceptor) (*UpdateDirectorySyncRun, error) {
-	vars := map[string]any{
-		"updateDirectorySyncRunId": updateDirectorySyncRunID,
-		"input":                    input,
-	}
-
-	var res UpdateDirectorySyncRun
-	if err := c.Client.Post(ctx, "UpdateDirectorySyncRun", UpdateDirectorySyncRunDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -120481,7 +118443,7 @@ const GetAllFilesDocument = `query GetAllFiles ($first: Int, $last: Int, $after:
 		}
 		edges {
 			node {
-				categoryType
+				categoryName
 				createdAt
 				createdBy
 				detectedContentType
@@ -120529,7 +118491,7 @@ func (c *Client) GetAllFiles(ctx context.Context, first *int64, last *int64, aft
 
 const GetFileByIDDocument = `query GetFileByID ($fileId: ID!) {
 	file(id: $fileId) {
-		categoryType
+		categoryName
 		createdAt
 		createdBy
 		detectedContentType
@@ -120580,7 +118542,7 @@ const GetFilesDocument = `query GetFiles ($first: Int, $last: Int, $after: Curso
 		}
 		edges {
 			node {
-				categoryType
+				categoryName
 				createdAt
 				createdBy
 				detectedContentType
@@ -123222,23 +121184,18 @@ const GetIdentityHolderDirectoryAccountsDocument = `query GetIdentityHolderDirec
 					createdAt
 					createdBy
 					department
-					directoryInstanceID
 					directoryName
-					directorySyncRunID
 					displayID
 					displayName
 					environmentID
 					environmentName
 					externalID
 					familyName
-					firstSeenAt
 					givenName
 					id
 					identityHolderID
 					integrationID
 					jobTitle
-					lastLoginAt
-					lastSeenAt
 					lastSeenIP
 					metadata
 					mfaState
@@ -123248,7 +121205,6 @@ const GetIdentityHolderDirectoryAccountsDocument = `query GetIdentityHolderDirec
 					platformID
 					primarySource
 					profile
-					profileHash
 					rawProfileFileID
 					removedAt
 					scopeID
@@ -140351,14 +138307,6 @@ var DocumentOperationNames = map[string]string{
 	GetDirectoryMembershipByIDDocument:           "GetDirectoryMembershipByID",
 	GetDirectoryMembershipsDocument:              "GetDirectoryMemberships",
 	UpdateDirectoryMembershipDocument:            "UpdateDirectoryMembership",
-	CreateBulkCSVDirectorySyncRunDocument:        "CreateBulkCSVDirectorySyncRun",
-	CreateBulkDirectorySyncRunDocument:           "CreateBulkDirectorySyncRun",
-	CreateDirectorySyncRunDocument:               "CreateDirectorySyncRun",
-	DeleteDirectorySyncRunDocument:               "DeleteDirectorySyncRun",
-	GetAllDirectorySyncRunsDocument:              "GetAllDirectorySyncRuns",
-	GetDirectorySyncRunByIDDocument:              "GetDirectorySyncRunByID",
-	GetDirectorySyncRunsDocument:                 "GetDirectorySyncRuns",
-	UpdateDirectorySyncRunDocument:               "UpdateDirectorySyncRun",
 	CreateBulkCSVDiscussionDocument:              "CreateBulkCSVDiscussion",
 	CreateBulkDiscussionDocument:                 "CreateBulkDiscussion",
 	CreateDiscussionDocument:                     "CreateDiscussion",

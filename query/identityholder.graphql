@@ -311,23 +311,18 @@ query GetIdentityHolderDirectoryAccounts($identityHolderId: ID!, $first: Int, $l
           createdAt
           createdBy
           department
-          directoryInstanceID
           directoryName
-          directorySyncRunID
           displayID
           displayName
           environmentID
           environmentName
           externalID
           familyName
-          firstSeenAt
           givenName
           id
           identityHolderID
           integrationID
           jobTitle
-          lastLoginAt
-          lastSeenAt
           lastSeenIP
           metadata
           mfaState
@@ -337,7 +332,6 @@ query GetIdentityHolderDirectoryAccounts($identityHolderId: ID!, $first: Int, $l
           platformID
           primarySource
           profile
-          profileHash
           rawProfileFileID
           removedAt
           scopeID

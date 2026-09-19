@@ -6,13 +6,9 @@ mutation CreateBulkCSVDirectoryMembership($input: Upload!) {
       createdBy
       directoryAccountID
       directoryGroupID
-      directorySyncRunID
       displayID
-      firstSeenAt
       id
       integrationID
-      lastConfirmedRunID
-      lastSeenAt
       metadata
       observedAt
       ownerID
@@ -31,13 +27,9 @@ mutation CreateBulkDirectoryMembership($input: [CreateDirectoryMembershipInput!]
       createdBy
       directoryAccountID
       directoryGroupID
-      directorySyncRunID
       displayID
-      firstSeenAt
       id
       integrationID
-      lastConfirmedRunID
-      lastSeenAt
       metadata
       observedAt
       ownerID
@@ -56,13 +48,9 @@ mutation CreateDirectoryMembership($input: CreateDirectoryMembershipInput!) {
       createdBy
       directoryAccountID
       directoryGroupID
-      directorySyncRunID
       displayID
-      firstSeenAt
       id
       integrationID
-      lastConfirmedRunID
-      lastSeenAt
       metadata
       observedAt
       ownerID
@@ -101,13 +89,9 @@ query GetAllDirectoryMemberships($first: Int, $last: Int, $after: Cursor, $befor
         createdBy
         directoryAccountID
         directoryGroupID
-        directorySyncRunID
         displayID
-        firstSeenAt
         id
         integrationID
-        lastConfirmedRunID
-        lastSeenAt
         metadata
         observedAt
         ownerID
@@ -125,13 +109,9 @@ query GetDirectoryMembershipByID($directoryMembershipId: ID!) {
     createdBy
     directoryAccountID
     directoryGroupID
-    directorySyncRunID
     displayID
-    firstSeenAt
     id
     integrationID
-    lastConfirmedRunID
-    lastSeenAt
     metadata
     observedAt
     ownerID
@@ -164,13 +144,9 @@ directoryMemberships(
         createdBy
         directoryAccountID
         directoryGroupID
-        directorySyncRunID
         displayID
-        firstSeenAt
         id
         integrationID
-        lastConfirmedRunID
-        lastSeenAt
         metadata
         observedAt
         ownerID
@@ -189,13 +165,9 @@ mutation UpdateDirectoryMembership($updateDirectoryMembershipId: ID!, $input: Up
       createdBy
       directoryAccountID
       directoryGroupID
-      directorySyncRunID
       displayID
-      firstSeenAt
       id
       integrationID
-      lastConfirmedRunID
-      lastSeenAt
       metadata
       observedAt
       ownerID
