@@ -13,7 +13,7 @@ require (
 	github.com/theopenlane/httpsling v0.3.0
 	github.com/theopenlane/iam v0.40.0
 	github.com/theopenlane/utils v0.7.3
-	github.com/vektah/gqlparser/v2 v2.5.58
+	github.com/vektah/gqlparser/v2 v2.5.62
 	golang.org/x/oauth2 v0.37.0
 )
 
