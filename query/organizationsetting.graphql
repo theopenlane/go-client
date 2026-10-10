@@ -103,7 +103,7 @@ mutation DeleteOrganizationSetting($deleteOrganizationSettingId: ID!) {
   }
 }
 
-query GetAllOrganizationSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [OrganizationSettingOrder!]){
+query GetAllOrganizationSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [OrganizationSettingOrder!]) {
   organizationSettings(
     first: $first
     last: $last
@@ -183,7 +183,7 @@ query GetOrganizationSettingByID($organizationSettingId: ID!) {
 }
 
 query GetOrganizationSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: OrganizationSettingWhereInput, $orderBy: [OrganizationSettingOrder!]) {
-organizationSettings(
+  organizationSettings(
     first: $first
     last: $last
     after: $after
