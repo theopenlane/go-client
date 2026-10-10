@@ -15,7 +15,6 @@ steps:
     agents:
       queue: $LARGE_RUNNER_QUEUE
       size: $RUNNER_LARGE
-      location: "NYC"
     cancel_on_build_failing: true
     plugins:
       - docker#v5.14.0:
