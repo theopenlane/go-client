@@ -67,7 +67,7 @@ mutation DeleteSubprocessor($deleteSubprocessorId: ID!) {
   }
 }
 
-query GetAllSubprocessors($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubprocessorOrder!]){
+query GetAllSubprocessors($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubprocessorOrder!]) {
   subprocessors(
     first: $first
     last: $last
@@ -119,7 +119,7 @@ query GetSubprocessorByID($subprocessorId: ID!) {
 }
 
 query GetSubprocessors($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: SubprocessorWhereInput, $orderBy: [SubprocessorOrder!]) {
-subprocessors(
+  subprocessors(
     first: $first
     last: $last
     after: $after
