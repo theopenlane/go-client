@@ -4,7 +4,7 @@ go 1.27.2
 
 require (
 	github.com/99designs/gqlgen v0.17.97
-	github.com/gqlgo/gqlgenc v0.40.1
+	github.com/gqlgo/gqlgenc v0.44.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.1
 	github.com/samber/lo v1.53.0
