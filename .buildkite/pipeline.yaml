@@ -1,8 +1,29 @@
 env:
-  GOCACHE: $HOME/.cache/go-build
-  GOMODCACHE: $HOME/.cache/go/pkg/mod
-  GOLANGCI_LINT_CACHE: $HOME/.cache/golangci-lint
   DEFAULT_BRANCH: "main"
+
+  # build settings
+  BK_HOME: /var/lib/buildkite-agent
+  GOCACHE: $BK_HOME/.cache/go-build
+  GOMODCACHE: $BK_HOME/.cache/go/pkg/mod
+  GOLANGCI_LINT_CACHE: $BK_HOME/.cache/golangci-lint
+  HOME: /tmp
+  GIT_CONFIG_GLOBAL: $HOME/.gitconfig
+  APOLLO_CONFIG_HOME: $HOME
+
+  # runner vars
+  LARGE_RUNNER_QUEUE: ${LARGE_RUNNER_QUEUE:-self-hosted-garage-vms}
+  SMALL_RUNNER_QUEUE: ${SMALL_RUNNER_QUEUE:-self-hosted-garage-vms}
+  RUNNER_WORKLOAD_LIGHTWEIGHT: "lightweight"
+  RUNNER_WORKLOAD_STANDARD: "standard"
+
+# cache for hosted runners
+cache:
+  name: go-cache
+  size: 100g
+  paths:
+    - $GOCACHE
+    - $GOMODCACHE
+    - $GOLANGCI_LINT_CACHE
 
 secrets:
   - GITHUB_TOKEN
@@ -14,13 +35,17 @@ steps:
     key: "generate"
     agents:
       queue: $LARGE_RUNNER_QUEUE
-      size: $RUNNER_LARGE
+      workload: $RUNNER_WORKLOAD_STANDARD
     cancel_on_build_failing: true
     plugins:
       - docker#v5.14.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           always_pull: true
           propagate-environment: true
+          propagate-uid-gid: true
+          volumes:
+            - $GOCACHE:$GOCACHE
+            - $GOMODCACHE:$GOMODCACHE
           environment:
             - "APOLLO_KEY"
             - "GITHUB_TOKEN"
@@ -81,7 +106,7 @@ steps:
       - "generate"
     agents:
       queue: $LARGE_RUNNER_QUEUE
-      size: $RUNNER_LARGE
+      workload: $RUNNER_WORKLOAD_STANDARD
     cancel_on_build_failing: true
     key: "lint"
     plugins:
@@ -90,6 +115,7 @@ steps:
           command: ["task", "go:lint:ci"]
           always_pull: true
           propagate-environment: true
+          propagate-uid-gid: true
           volumes:
             - $GOCACHE:$GOCACHE
             - $GOMODCACHE:$GOMODCACHE
@@ -98,6 +124,9 @@ steps:
             - "GOTOOLCHAIN=auto"
   - label: ":golang: go test"
     key: "go_test"
+    agents:
+      queue: $SMALL_RUNNER_QUEUE
+      workload: $RUNNER_WORKLOAD_LIGHTWEIGHT
     depends_on:
       - "generate"
     if_changed:
@@ -108,3 +137,7 @@ steps:
           image: "ghcr.io/theopenlane/build-image:latest"
           always-pull: true
           command: ["task", "go:test"]
+          propagate-uid-gid: true
+          volumes:
+            - $GOCACHE:$GOCACHE
+            - $GOMODCACHE:$GOMODCACHE
