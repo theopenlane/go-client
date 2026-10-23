@@ -1,19 +1,19 @@
 module github.com/theopenlane/go-client
 
-go 1.27.2
+go 1.27.3
 
 require (
-	github.com/99designs/gqlgen v0.17.97
-	github.com/gqlgo/gqlgenc v0.40.1
+	github.com/99designs/gqlgen v0.17.98
+	github.com/gqlgo/gqlgenc v0.44.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.1
 	github.com/samber/lo v1.53.0
-	github.com/theopenlane/core/common v1.2.0
-	github.com/theopenlane/entx v0.36.2
+	github.com/theopenlane/core/common v1.2.1
+	github.com/theopenlane/entx v0.36.3
 	github.com/theopenlane/httpsling v0.3.0
-	github.com/theopenlane/iam v0.40.0
+	github.com/theopenlane/iam v0.40.1
 	github.com/theopenlane/utils v0.7.4
-	github.com/vektah/gqlparser/v2 v2.5.63
+	github.com/vektah/gqlparser/v2 v2.5.64
 	golang.org/x/oauth2 v0.37.0
 )
 
@@ -48,7 +48,7 @@ require (
 	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.32.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.25.0 // indirect
-	github.com/labstack/echo/v5 v5.3.1 // indirect
+	github.com/labstack/echo/v5 v5.4.2 // indirect
 	github.com/labstack/gommon v0.5.0 // indirect
 	github.com/mattn/go-colorable v0.1.16 // indirect
 	github.com/mattn/go-isatty v0.0.24 // indirect
@@ -58,13 +58,13 @@ require (
 	github.com/openfga/go-sdk v0.8.3 // indirect
 	github.com/openfga/language/pkg/go v0.3.2 // indirect
 	github.com/philhofer/fwd v1.2.1 // indirect
-	github.com/redis/go-redis/v9 v9.22.0 // indirect
+	github.com/redis/go-redis/v9 v9.23.0 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/sosodev/duration v1.4.0 // indirect
 	github.com/stoewer/go-strcase v1.3.1 // indirect
-	github.com/theopenlane/core/v2 v2.4.7 // indirect
+	github.com/theopenlane/core/v2 v2.9.4 // indirect
 	github.com/theopenlane/echox v0.3.0 // indirect
-	github.com/theopenlane/logx v0.1.0 // indirect
+	github.com/theopenlane/logx v0.1.1 // indirect
 	github.com/tinylib/msgp v1.6.5 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
@@ -78,7 +78,7 @@ require (
 	go.opentelemetry.io/otel/log v1.47.0 // indirect
 	go.opentelemetry.io/otel/metric v1.47.0 // indirect
 	go.opentelemetry.io/otel/trace v1.47.0 // indirect
-	go.uber.org/atomic v1.11.0 // indirect
+	go.uber.org/atomic v1.12.0 // indirect
 	golang.org/x/crypto v0.58.0 // indirect
 	golang.org/x/exp v0.0.0-20261014143641-f0251eb4aa3e // indirect
 	golang.org/x/mod v0.42.0 // indirect
