@@ -135,8 +135,9 @@ steps:
     plugins:
       - docker#v5.14.0:
           image: "ghcr.io/theopenlane/build-image:latest"
-          always-pull: true
+          always_pull: true
           command: ["task", "go:test"]
+          propagate-environment: true
           propagate-uid-gid: true
           volumes:
             - $GOCACHE:$GOCACHE
