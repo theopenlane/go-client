@@ -35,6 +35,8 @@ type RestClient interface {
 	OAuthRegister(context.Context, *api.OauthTokenRequest) (*api.LoginResponse, error)
 	// ValidateTOTP validates a user's TOTP or recovery code
 	ValidateTOTP(context.Context, *api.TFARequest) (*api.TFAResponse, error)
+	// ValidateLoginTOTP completes a pending login by validating a TOTP or recovery code and returns the issued session
+	ValidateLoginTOTP(context.Context, *api.TFARequest) (*api.LoginResponse, error)
 	// AccountAccess checks if a subject has a specific relation to an object
 	AccountAccess(context.Context, *api.AccountAccessRequest) (*api.AccountAccessResponse, error)
 	// AccountRoles lists the relations a subject has in relation to an object
@@ -304,6 +306,24 @@ func (s *APIv1) OAuthRegister(ctx context.Context, in *api.OauthTokenRequest) (o
 func (s *APIv1) ValidateTOTP(ctx context.Context, in *api.TFARequest) (out *api.TFAResponse, err error) {
 	resp, err := s.Requester.ReceiveWithContext(ctx, &out,
 		httpsling.Post(v1Path("2fa/validate")),
+		httpsling.Body(in))
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+
+	if !httpsling.IsSuccess(resp) {
+		return nil, newRequestError(resp.StatusCode, out.Error)
+	}
+
+	return out, nil
+}
+
+// ValidateLoginTOTP completes a pending login by validating a TOTP or recovery code and returns the issued session.
+func (s *APIv1) ValidateLoginTOTP(ctx context.Context, in *api.TFARequest) (out *api.LoginResponse, err error) {
+	resp, err := s.Requester.ReceiveWithContext(ctx, &out,
+		httpsling.Post(v1Path("login/2fa/validate")),
 		httpsling.Body(in))
 	if err != nil {
 		return nil, err
