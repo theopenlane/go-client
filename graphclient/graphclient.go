@@ -56454,7 +56454,6 @@ type CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_Organizat
 	BillingEmail                     *string            "json:\"billingEmail,omitempty\" graphql:\"billingEmail\""
 	BillingNotificationsEnabled      bool               "json:\"billingNotificationsEnabled\" graphql:\"billingNotificationsEnabled\""
 	BillingPhone                     *string            "json:\"billingPhone,omitempty\" graphql:\"billingPhone\""
-	ComplianceWebhookToken           *string            "json:\"complianceWebhookToken,omitempty\" graphql:\"complianceWebhookToken\""
 	CreatedAt                        *time.Time         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                        *string            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Domains                          []string           "json:\"domains,omitempty\" graphql:\"domains\""
@@ -56463,7 +56462,6 @@ type CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_Organizat
 	IdentityProvider                 *enums.SSOProvider "json:\"identityProvider,omitempty\" graphql:\"identityProvider\""
 	IdentityProviderAuthTested       bool               "json:\"identityProviderAuthTested\" graphql:\"identityProviderAuthTested\""
 	IdentityProviderClientID         *string            "json:\"identityProviderClientID,omitempty\" graphql:\"identityProviderClientID\""
-	IdentityProviderClientSecret     *string            "json:\"identityProviderClientSecret,omitempty\" graphql:\"identityProviderClientSecret\""
 	IdentityProviderEntityID         *string            "json:\"identityProviderEntityID,omitempty\" graphql:\"identityProviderEntityID\""
 	IdentityProviderLoginEnforced    bool               "json:\"identityProviderLoginEnforced\" graphql:\"identityProviderLoginEnforced\""
 	IdentityProviderMetadataEndpoint *string            "json:\"identityProviderMetadataEndpoint,omitempty\" graphql:\"identityProviderMetadataEndpoint\""
@@ -56517,12 +56515,6 @@ func (t *CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_Organ
 	}
 	return t.BillingPhone
 }
-func (t *CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_OrganizationSettings) GetComplianceWebhookToken() *string {
-	if t == nil {
-		t = &CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_OrganizationSettings{}
-	}
-	return t.ComplianceWebhookToken
-}
 func (t *CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_OrganizationSettings) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_OrganizationSettings{}
@@ -56570,12 +56562,6 @@ func (t *CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_Organ
 		t = &CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_OrganizationSettings{}
 	}
 	return t.IdentityProviderClientID
-}
-func (t *CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_OrganizationSettings) GetIdentityProviderClientSecret() *string {
-	if t == nil {
-		t = &CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_OrganizationSettings{}
-	}
-	return t.IdentityProviderClientSecret
 }
 func (t *CreateBulkCSVOrganizationSetting_CreateBulkCSVOrganizationSetting_OrganizationSettings) GetIdentityProviderEntityID() *string {
 	if t == nil {
@@ -56651,7 +56637,6 @@ type CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSet
 	BillingEmail                     *string            "json:\"billingEmail,omitempty\" graphql:\"billingEmail\""
 	BillingNotificationsEnabled      bool               "json:\"billingNotificationsEnabled\" graphql:\"billingNotificationsEnabled\""
 	BillingPhone                     *string            "json:\"billingPhone,omitempty\" graphql:\"billingPhone\""
-	ComplianceWebhookToken           *string            "json:\"complianceWebhookToken,omitempty\" graphql:\"complianceWebhookToken\""
 	CreatedAt                        *time.Time         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                        *string            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Domains                          []string           "json:\"domains,omitempty\" graphql:\"domains\""
@@ -56660,7 +56645,6 @@ type CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSet
 	IdentityProvider                 *enums.SSOProvider "json:\"identityProvider,omitempty\" graphql:\"identityProvider\""
 	IdentityProviderAuthTested       bool               "json:\"identityProviderAuthTested\" graphql:\"identityProviderAuthTested\""
 	IdentityProviderClientID         *string            "json:\"identityProviderClientID,omitempty\" graphql:\"identityProviderClientID\""
-	IdentityProviderClientSecret     *string            "json:\"identityProviderClientSecret,omitempty\" graphql:\"identityProviderClientSecret\""
 	IdentityProviderEntityID         *string            "json:\"identityProviderEntityID,omitempty\" graphql:\"identityProviderEntityID\""
 	IdentityProviderLoginEnforced    bool               "json:\"identityProviderLoginEnforced\" graphql:\"identityProviderLoginEnforced\""
 	IdentityProviderMetadataEndpoint *string            "json:\"identityProviderMetadataEndpoint,omitempty\" graphql:\"identityProviderMetadataEndpoint\""
@@ -56714,12 +56698,6 @@ func (t *CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_Organizatio
 	}
 	return t.BillingPhone
 }
-func (t *CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSettings) GetComplianceWebhookToken() *string {
-	if t == nil {
-		t = &CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSettings{}
-	}
-	return t.ComplianceWebhookToken
-}
 func (t *CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSettings) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSettings{}
@@ -56767,12 +56745,6 @@ func (t *CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_Organizatio
 		t = &CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSettings{}
 	}
 	return t.IdentityProviderClientID
-}
-func (t *CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSettings) GetIdentityProviderClientSecret() *string {
-	if t == nil {
-		t = &CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSettings{}
-	}
-	return t.IdentityProviderClientSecret
 }
 func (t *CreateBulkOrganizationSetting_CreateBulkOrganizationSetting_OrganizationSettings) GetIdentityProviderEntityID() *string {
 	if t == nil {
@@ -56848,7 +56820,6 @@ type CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting str
 	BillingEmail                     *string            "json:\"billingEmail,omitempty\" graphql:\"billingEmail\""
 	BillingNotificationsEnabled      bool               "json:\"billingNotificationsEnabled\" graphql:\"billingNotificationsEnabled\""
 	BillingPhone                     *string            "json:\"billingPhone,omitempty\" graphql:\"billingPhone\""
-	ComplianceWebhookToken           *string            "json:\"complianceWebhookToken,omitempty\" graphql:\"complianceWebhookToken\""
 	CreatedAt                        *time.Time         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                        *string            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Domains                          []string           "json:\"domains,omitempty\" graphql:\"domains\""
@@ -56857,7 +56828,6 @@ type CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting str
 	IdentityProvider                 *enums.SSOProvider "json:\"identityProvider,omitempty\" graphql:\"identityProvider\""
 	IdentityProviderAuthTested       bool               "json:\"identityProviderAuthTested\" graphql:\"identityProviderAuthTested\""
 	IdentityProviderClientID         *string            "json:\"identityProviderClientID,omitempty\" graphql:\"identityProviderClientID\""
-	IdentityProviderClientSecret     *string            "json:\"identityProviderClientSecret,omitempty\" graphql:\"identityProviderClientSecret\""
 	IdentityProviderEntityID         *string            "json:\"identityProviderEntityID,omitempty\" graphql:\"identityProviderEntityID\""
 	IdentityProviderLoginEnforced    bool               "json:\"identityProviderLoginEnforced\" graphql:\"identityProviderLoginEnforced\""
 	IdentityProviderMetadataEndpoint *string            "json:\"identityProviderMetadataEndpoint,omitempty\" graphql:\"identityProviderMetadataEndpoint\""
@@ -56911,12 +56881,6 @@ func (t *CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting
 	}
 	return t.BillingPhone
 }
-func (t *CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting) GetComplianceWebhookToken() *string {
-	if t == nil {
-		t = &CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting{}
-	}
-	return t.ComplianceWebhookToken
-}
 func (t *CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting{}
@@ -56964,12 +56928,6 @@ func (t *CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting
 		t = &CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting{}
 	}
 	return t.IdentityProviderClientID
-}
-func (t *CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting) GetIdentityProviderClientSecret() *string {
-	if t == nil {
-		t = &CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting{}
-	}
-	return t.IdentityProviderClientSecret
 }
 func (t *CreateOrganizationSetting_CreateOrganizationSetting_OrganizationSetting) GetIdentityProviderEntityID() *string {
 	if t == nil {
@@ -57088,7 +57046,6 @@ type GetAllOrganizationSettings_OrganizationSettings_Edges_Node struct {
 	BillingEmail                     *string            "json:\"billingEmail,omitempty\" graphql:\"billingEmail\""
 	BillingNotificationsEnabled      bool               "json:\"billingNotificationsEnabled\" graphql:\"billingNotificationsEnabled\""
 	BillingPhone                     *string            "json:\"billingPhone,omitempty\" graphql:\"billingPhone\""
-	ComplianceWebhookToken           *string            "json:\"complianceWebhookToken,omitempty\" graphql:\"complianceWebhookToken\""
 	CreatedAt                        *time.Time         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                        *string            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Domains                          []string           "json:\"domains,omitempty\" graphql:\"domains\""
@@ -57097,7 +57054,6 @@ type GetAllOrganizationSettings_OrganizationSettings_Edges_Node struct {
 	IdentityProvider                 *enums.SSOProvider "json:\"identityProvider,omitempty\" graphql:\"identityProvider\""
 	IdentityProviderAuthTested       bool               "json:\"identityProviderAuthTested\" graphql:\"identityProviderAuthTested\""
 	IdentityProviderClientID         *string            "json:\"identityProviderClientID,omitempty\" graphql:\"identityProviderClientID\""
-	IdentityProviderClientSecret     *string            "json:\"identityProviderClientSecret,omitempty\" graphql:\"identityProviderClientSecret\""
 	IdentityProviderEntityID         *string            "json:\"identityProviderEntityID,omitempty\" graphql:\"identityProviderEntityID\""
 	IdentityProviderLoginEnforced    bool               "json:\"identityProviderLoginEnforced\" graphql:\"identityProviderLoginEnforced\""
 	IdentityProviderMetadataEndpoint *string            "json:\"identityProviderMetadataEndpoint,omitempty\" graphql:\"identityProviderMetadataEndpoint\""
@@ -57151,12 +57107,6 @@ func (t *GetAllOrganizationSettings_OrganizationSettings_Edges_Node) GetBillingP
 	}
 	return t.BillingPhone
 }
-func (t *GetAllOrganizationSettings_OrganizationSettings_Edges_Node) GetComplianceWebhookToken() *string {
-	if t == nil {
-		t = &GetAllOrganizationSettings_OrganizationSettings_Edges_Node{}
-	}
-	return t.ComplianceWebhookToken
-}
 func (t *GetAllOrganizationSettings_OrganizationSettings_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &GetAllOrganizationSettings_OrganizationSettings_Edges_Node{}
@@ -57204,12 +57154,6 @@ func (t *GetAllOrganizationSettings_OrganizationSettings_Edges_Node) GetIdentity
 		t = &GetAllOrganizationSettings_OrganizationSettings_Edges_Node{}
 	}
 	return t.IdentityProviderClientID
-}
-func (t *GetAllOrganizationSettings_OrganizationSettings_Edges_Node) GetIdentityProviderClientSecret() *string {
-	if t == nil {
-		t = &GetAllOrganizationSettings_OrganizationSettings_Edges_Node{}
-	}
-	return t.IdentityProviderClientSecret
 }
 func (t *GetAllOrganizationSettings_OrganizationSettings_Edges_Node) GetIdentityProviderEntityID() *string {
 	if t == nil {
@@ -57310,7 +57254,6 @@ type GetOrganizationSettingByID_OrganizationSetting struct {
 	BillingEmail                     *string            "json:\"billingEmail,omitempty\" graphql:\"billingEmail\""
 	BillingNotificationsEnabled      bool               "json:\"billingNotificationsEnabled\" graphql:\"billingNotificationsEnabled\""
 	BillingPhone                     *string            "json:\"billingPhone,omitempty\" graphql:\"billingPhone\""
-	ComplianceWebhookToken           *string            "json:\"complianceWebhookToken,omitempty\" graphql:\"complianceWebhookToken\""
 	CreatedAt                        *time.Time         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                        *string            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Domains                          []string           "json:\"domains,omitempty\" graphql:\"domains\""
@@ -57319,7 +57262,6 @@ type GetOrganizationSettingByID_OrganizationSetting struct {
 	IdentityProvider                 *enums.SSOProvider "json:\"identityProvider,omitempty\" graphql:\"identityProvider\""
 	IdentityProviderAuthTested       bool               "json:\"identityProviderAuthTested\" graphql:\"identityProviderAuthTested\""
 	IdentityProviderClientID         *string            "json:\"identityProviderClientID,omitempty\" graphql:\"identityProviderClientID\""
-	IdentityProviderClientSecret     *string            "json:\"identityProviderClientSecret,omitempty\" graphql:\"identityProviderClientSecret\""
 	IdentityProviderEntityID         *string            "json:\"identityProviderEntityID,omitempty\" graphql:\"identityProviderEntityID\""
 	IdentityProviderLoginEnforced    bool               "json:\"identityProviderLoginEnforced\" graphql:\"identityProviderLoginEnforced\""
 	IdentityProviderMetadataEndpoint *string            "json:\"identityProviderMetadataEndpoint,omitempty\" graphql:\"identityProviderMetadataEndpoint\""
@@ -57373,12 +57315,6 @@ func (t *GetOrganizationSettingByID_OrganizationSetting) GetBillingPhone() *stri
 	}
 	return t.BillingPhone
 }
-func (t *GetOrganizationSettingByID_OrganizationSetting) GetComplianceWebhookToken() *string {
-	if t == nil {
-		t = &GetOrganizationSettingByID_OrganizationSetting{}
-	}
-	return t.ComplianceWebhookToken
-}
 func (t *GetOrganizationSettingByID_OrganizationSetting) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &GetOrganizationSettingByID_OrganizationSetting{}
@@ -57426,12 +57362,6 @@ func (t *GetOrganizationSettingByID_OrganizationSetting) GetIdentityProviderClie
 		t = &GetOrganizationSettingByID_OrganizationSetting{}
 	}
 	return t.IdentityProviderClientID
-}
-func (t *GetOrganizationSettingByID_OrganizationSetting) GetIdentityProviderClientSecret() *string {
-	if t == nil {
-		t = &GetOrganizationSettingByID_OrganizationSetting{}
-	}
-	return t.IdentityProviderClientSecret
 }
 func (t *GetOrganizationSettingByID_OrganizationSetting) GetIdentityProviderEntityID() *string {
 	if t == nil {
@@ -57553,7 +57483,6 @@ type GetOrganizationSettings_OrganizationSettings_Edges_Node struct {
 	BillingEmail                     *string                                                               "json:\"billingEmail,omitempty\" graphql:\"billingEmail\""
 	BillingNotificationsEnabled      bool                                                                  "json:\"billingNotificationsEnabled\" graphql:\"billingNotificationsEnabled\""
 	BillingPhone                     *string                                                               "json:\"billingPhone,omitempty\" graphql:\"billingPhone\""
-	ComplianceWebhookToken           *string                                                               "json:\"complianceWebhookToken,omitempty\" graphql:\"complianceWebhookToken\""
 	CreatedAt                        *time.Time                                                            "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                        *string                                                               "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Domains                          []string                                                              "json:\"domains,omitempty\" graphql:\"domains\""
@@ -57562,7 +57491,6 @@ type GetOrganizationSettings_OrganizationSettings_Edges_Node struct {
 	IdentityProvider                 *enums.SSOProvider                                                    "json:\"identityProvider,omitempty\" graphql:\"identityProvider\""
 	IdentityProviderAuthTested       bool                                                                  "json:\"identityProviderAuthTested\" graphql:\"identityProviderAuthTested\""
 	IdentityProviderClientID         *string                                                               "json:\"identityProviderClientID,omitempty\" graphql:\"identityProviderClientID\""
-	IdentityProviderClientSecret     *string                                                               "json:\"identityProviderClientSecret,omitempty\" graphql:\"identityProviderClientSecret\""
 	IdentityProviderEntityID         *string                                                               "json:\"identityProviderEntityID,omitempty\" graphql:\"identityProviderEntityID\""
 	IdentityProviderLoginEnforced    bool                                                                  "json:\"identityProviderLoginEnforced\" graphql:\"identityProviderLoginEnforced\""
 	IdentityProviderMetadataEndpoint *string                                                               "json:\"identityProviderMetadataEndpoint,omitempty\" graphql:\"identityProviderMetadataEndpoint\""
@@ -57619,12 +57547,6 @@ func (t *GetOrganizationSettings_OrganizationSettings_Edges_Node) GetBillingPhon
 	}
 	return t.BillingPhone
 }
-func (t *GetOrganizationSettings_OrganizationSettings_Edges_Node) GetComplianceWebhookToken() *string {
-	if t == nil {
-		t = &GetOrganizationSettings_OrganizationSettings_Edges_Node{}
-	}
-	return t.ComplianceWebhookToken
-}
 func (t *GetOrganizationSettings_OrganizationSettings_Edges_Node) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &GetOrganizationSettings_OrganizationSettings_Edges_Node{}
@@ -57672,12 +57594,6 @@ func (t *GetOrganizationSettings_OrganizationSettings_Edges_Node) GetIdentityPro
 		t = &GetOrganizationSettings_OrganizationSettings_Edges_Node{}
 	}
 	return t.IdentityProviderClientID
-}
-func (t *GetOrganizationSettings_OrganizationSettings_Edges_Node) GetIdentityProviderClientSecret() *string {
-	if t == nil {
-		t = &GetOrganizationSettings_OrganizationSettings_Edges_Node{}
-	}
-	return t.IdentityProviderClientSecret
 }
 func (t *GetOrganizationSettings_OrganizationSettings_Edges_Node) GetIdentityProviderEntityID() *string {
 	if t == nil {
@@ -57796,7 +57712,6 @@ type UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting str
 	BillingEmail                     *string            "json:\"billingEmail,omitempty\" graphql:\"billingEmail\""
 	BillingNotificationsEnabled      bool               "json:\"billingNotificationsEnabled\" graphql:\"billingNotificationsEnabled\""
 	BillingPhone                     *string            "json:\"billingPhone,omitempty\" graphql:\"billingPhone\""
-	ComplianceWebhookToken           *string            "json:\"complianceWebhookToken,omitempty\" graphql:\"complianceWebhookToken\""
 	CreatedAt                        *time.Time         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                        *string            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Domains                          []string           "json:\"domains,omitempty\" graphql:\"domains\""
@@ -57805,7 +57720,6 @@ type UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting str
 	IdentityProvider                 *enums.SSOProvider "json:\"identityProvider,omitempty\" graphql:\"identityProvider\""
 	IdentityProviderAuthTested       bool               "json:\"identityProviderAuthTested\" graphql:\"identityProviderAuthTested\""
 	IdentityProviderClientID         *string            "json:\"identityProviderClientID,omitempty\" graphql:\"identityProviderClientID\""
-	IdentityProviderClientSecret     *string            "json:\"identityProviderClientSecret,omitempty\" graphql:\"identityProviderClientSecret\""
 	IdentityProviderEntityID         *string            "json:\"identityProviderEntityID,omitempty\" graphql:\"identityProviderEntityID\""
 	IdentityProviderLoginEnforced    bool               "json:\"identityProviderLoginEnforced\" graphql:\"identityProviderLoginEnforced\""
 	IdentityProviderMetadataEndpoint *string            "json:\"identityProviderMetadataEndpoint,omitempty\" graphql:\"identityProviderMetadataEndpoint\""
@@ -57859,12 +57773,6 @@ func (t *UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting
 	}
 	return t.BillingPhone
 }
-func (t *UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting) GetComplianceWebhookToken() *string {
-	if t == nil {
-		t = &UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting{}
-	}
-	return t.ComplianceWebhookToken
-}
 func (t *UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting) GetCreatedAt() *time.Time {
 	if t == nil {
 		t = &UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting{}
@@ -57912,12 +57820,6 @@ func (t *UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting
 		t = &UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting{}
 	}
 	return t.IdentityProviderClientID
-}
-func (t *UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting) GetIdentityProviderClientSecret() *string {
-	if t == nil {
-		t = &UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting{}
-	}
-	return t.IdentityProviderClientSecret
 }
 func (t *UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting) GetIdentityProviderEntityID() *string {
 	if t == nil {
@@ -125082,7 +124984,6 @@ const CreateBulkCSVOrganizationSettingDocument = `mutation CreateBulkCSVOrganiza
 			billingEmail
 			billingNotificationsEnabled
 			billingPhone
-			complianceWebhookToken
 			createdAt
 			createdBy
 			domains
@@ -125090,7 +124991,6 @@ const CreateBulkCSVOrganizationSettingDocument = `mutation CreateBulkCSVOrganiza
 			id
 			identityProvider
 			identityProviderClientID
-			identityProviderClientSecret
 			identityProviderEntityID
 			identityProviderLoginEnforced
 			identityProviderMetadataEndpoint
@@ -125133,7 +125033,6 @@ const CreateBulkOrganizationSettingDocument = `mutation CreateBulkOrganizationSe
 			billingEmail
 			billingNotificationsEnabled
 			billingPhone
-			complianceWebhookToken
 			createdAt
 			createdBy
 			domains
@@ -125141,7 +125040,6 @@ const CreateBulkOrganizationSettingDocument = `mutation CreateBulkOrganizationSe
 			id
 			identityProvider
 			identityProviderClientID
-			identityProviderClientSecret
 			identityProviderEntityID
 			identityProviderLoginEnforced
 			identityProviderMetadataEndpoint
@@ -125184,7 +125082,6 @@ const CreateOrganizationSettingDocument = `mutation CreateOrganizationSetting ($
 			billingEmail
 			billingNotificationsEnabled
 			billingPhone
-			complianceWebhookToken
 			createdAt
 			createdBy
 			domains
@@ -125192,7 +125089,6 @@ const CreateOrganizationSettingDocument = `mutation CreateOrganizationSetting ($
 			id
 			identityProvider
 			identityProviderClientID
-			identityProviderClientSecret
 			identityProviderEntityID
 			identityProviderLoginEnforced
 			identityProviderMetadataEndpoint
@@ -125267,7 +125163,6 @@ const GetAllOrganizationSettingsDocument = `query GetAllOrganizationSettings ($f
 				billingEmail
 				billingNotificationsEnabled
 				billingPhone
-				complianceWebhookToken
 				createdAt
 				createdBy
 				domains
@@ -125275,7 +125170,6 @@ const GetAllOrganizationSettingsDocument = `query GetAllOrganizationSettings ($f
 				id
 				identityProvider
 				identityProviderClientID
-				identityProviderClientSecret
 				identityProviderEntityID
 				identityProviderLoginEnforced
 				identityProviderMetadataEndpoint
@@ -125322,7 +125216,6 @@ const GetOrganizationSettingByIDDocument = `query GetOrganizationSettingByID ($o
 		billingEmail
 		billingNotificationsEnabled
 		billingPhone
-		complianceWebhookToken
 		createdAt
 		createdBy
 		domains
@@ -125331,7 +125224,6 @@ const GetOrganizationSettingByIDDocument = `query GetOrganizationSettingByID ($o
 		identityProvider
 		identityProviderAuthTested
 		identityProviderClientID
-		identityProviderClientSecret
 		identityProviderEntityID
 		identityProviderLoginEnforced
 		identityProviderMetadataEndpoint
@@ -125380,7 +125272,6 @@ const GetOrganizationSettingsDocument = `query GetOrganizationSettings ($first: 
 				billingEmail
 				billingNotificationsEnabled
 				billingPhone
-				complianceWebhookToken
 				createdAt
 				createdBy
 				domains
@@ -125389,7 +125280,6 @@ const GetOrganizationSettingsDocument = `query GetOrganizationSettings ($first: 
 				identityProvider
 				identityProviderAuthTested
 				identityProviderClientID
-				identityProviderClientSecret
 				identityProviderEntityID
 				identityProviderLoginEnforced
 				identityProviderMetadataEndpoint
@@ -125444,7 +125334,6 @@ const UpdateOrganizationSettingDocument = `mutation UpdateOrganizationSetting ($
 			billingEmail
 			billingNotificationsEnabled
 			billingPhone
-			complianceWebhookToken
 			createdAt
 			createdBy
 			domains
@@ -125452,7 +125341,6 @@ const UpdateOrganizationSettingDocument = `mutation UpdateOrganizationSetting ($
 			id
 			identityProvider
 			identityProviderClientID
-			identityProviderClientSecret
 			identityProviderEntityID
 			identityProviderLoginEnforced
 			identityProviderMetadataEndpoint

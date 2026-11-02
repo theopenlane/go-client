@@ -8,7 +8,6 @@ mutation CreateBulkCSVOrganizationSetting($input: Upload!) {
       billingEmail
       billingNotificationsEnabled
       billingPhone
-      complianceWebhookToken
       createdAt
       createdBy
       domains
@@ -16,7 +15,6 @@ mutation CreateBulkCSVOrganizationSetting($input: Upload!) {
       id
       identityProvider
       identityProviderClientID
-      identityProviderClientSecret
       identityProviderEntityID
       identityProviderLoginEnforced
       identityProviderMetadataEndpoint
@@ -41,7 +39,6 @@ mutation CreateBulkOrganizationSetting($input: [CreateOrganizationSettingInput!]
       billingEmail
       billingNotificationsEnabled
       billingPhone
-      complianceWebhookToken
       createdAt
       createdBy
       domains
@@ -49,7 +46,6 @@ mutation CreateBulkOrganizationSetting($input: [CreateOrganizationSettingInput!]
       id
       identityProvider
       identityProviderClientID
-      identityProviderClientSecret
       identityProviderEntityID
       identityProviderLoginEnforced
       identityProviderMetadataEndpoint
@@ -74,7 +70,6 @@ mutation CreateOrganizationSetting($input: CreateOrganizationSettingInput!) {
       billingEmail
       billingNotificationsEnabled
       billingPhone
-      complianceWebhookToken
       createdAt
       createdBy
       domains
@@ -82,7 +77,6 @@ mutation CreateOrganizationSetting($input: CreateOrganizationSettingInput!) {
       id
       identityProvider
       identityProviderClientID
-      identityProviderClientSecret
       identityProviderEntityID
       identityProviderLoginEnforced
       identityProviderMetadataEndpoint
@@ -127,7 +121,6 @@ query GetAllOrganizationSettings($first: Int, $last: Int, $after: Cursor, $befor
         billingEmail
         billingNotificationsEnabled
         billingPhone
-        complianceWebhookToken
         createdAt
         createdBy
         domains
@@ -135,7 +128,6 @@ query GetAllOrganizationSettings($first: Int, $last: Int, $after: Cursor, $befor
         id
         identityProvider
         identityProviderClientID
-        identityProviderClientSecret
         identityProviderEntityID
         identityProviderLoginEnforced
         identityProviderMetadataEndpoint
@@ -160,7 +152,6 @@ query GetOrganizationSettingByID($organizationSettingId: ID!) {
     billingEmail
     billingNotificationsEnabled
     billingPhone
-    complianceWebhookToken
     createdAt
     createdBy
     domains
@@ -169,7 +160,6 @@ query GetOrganizationSettingByID($organizationSettingId: ID!) {
     identityProvider
     identityProviderAuthTested
     identityProviderClientID
-    identityProviderClientSecret
     identityProviderEntityID
     identityProviderLoginEnforced
     identityProviderMetadataEndpoint
@@ -207,7 +197,6 @@ query GetOrganizationSettings($first: Int, $last: Int, $after: Cursor, $before: 
         billingEmail
         billingNotificationsEnabled
         billingPhone
-        complianceWebhookToken
         createdAt
         createdBy
         domains
@@ -216,7 +205,6 @@ query GetOrganizationSettings($first: Int, $last: Int, $after: Cursor, $before: 
         identityProvider
         identityProviderAuthTested
         identityProviderClientID
-        identityProviderClientSecret
         identityProviderEntityID
         identityProviderLoginEnforced
         identityProviderMetadataEndpoint
@@ -248,7 +236,6 @@ mutation UpdateOrganizationSetting($updateOrganizationSettingId: ID!, $input: Up
       billingEmail
       billingNotificationsEnabled
       billingPhone
-      complianceWebhookToken
       createdAt
       createdBy
       domains
@@ -256,7 +243,6 @@ mutation UpdateOrganizationSetting($updateOrganizationSettingId: ID!, $input: Up
       id
       identityProvider
       identityProviderClientID
-      identityProviderClientSecret
       identityProviderEntityID
       identityProviderLoginEnforced
       identityProviderMetadataEndpoint
