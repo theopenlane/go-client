@@ -40,7 +40,7 @@ steps:
     plugins:
       - docker#v5.14.0:
           image: "ghcr.io/theopenlane/build-image:latest"
-          always_pull: true
+          always-pull: true
           propagate-environment: true
           propagate-uid-gid: true
           volumes:
@@ -113,7 +113,7 @@ steps:
       - docker#v5.14.0:
           image: "ghcr.io/theopenlane/build-image:latest"
           command: ["task", "go:lint:ci"]
-          always_pull: true
+          always-pull: true
           propagate-environment: true
           propagate-uid-gid: true
           volumes:
@@ -135,7 +135,7 @@ steps:
     plugins:
       - docker#v5.14.0:
           image: "ghcr.io/theopenlane/build-image:latest"
-          always_pull: true
+          always-pull: true
           command: ["task", "go:test"]
           propagate-environment: true
           propagate-uid-gid: true
