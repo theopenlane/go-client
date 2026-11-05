@@ -19,6 +19,12 @@
             "matchUpdateTypes": [
                 "patch"
             ]
+        },
+        {
+            "matchPackageNames": [
+                "github.com/theopenlane/core/common"
+            ],
+            "minimumReleaseAge": "0 days"
         }
     ]
 }
