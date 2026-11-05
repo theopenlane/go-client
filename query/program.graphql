@@ -1,230 +1,275 @@
-mutation CreateBulkCSVProgram($input: Upload!) {
-  createBulkCSVProgram(input: $input) {
-    programs {
-      auditFirm
-      auditor
-      auditorEmail
-      auditorReadComments
-      auditorReady
-      auditorWriteComments
-      createdAt
-      createdBy
-      description
-      displayID
-      endDate
-      frameworkName
-      id
-      name
-      ownerID
-      programKindName
-      startDate
-      status
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkCSVProgram ($input: Upload!) {
+	createBulkCSVProgram(input: $input) {
+		programs {
+			auditFirm
+			auditor
+			auditorEmail
+			auditorReadComments
+			auditorReady
+			auditorWriteComments
+			createdAt
+			createdBy
+			description
+			displayID
+			endDate
+			fieldworkStartDate
+			externalID
+			externalUUID
+			fieldworkEndDate
+			frameworkName
+			id
+			integrationRunID
+			managedBy
+			name
+			observationPeriodEndDate
+			observationPeriodStartDate
+			ownerID
+			programKindID
+			programKindName
+			programOwnerID
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			startDate
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateBulkProgram($input: [CreateProgramInput!]) {
-  createBulkProgram(input: $input) {
-    programs {
-      auditFirm
-      auditor
-      auditorEmail
-      auditorReadComments
-      auditorReady
-      auditorWriteComments
-      createdAt
-      createdBy
-      description
-      displayID
-      endDate
-      frameworkName
-      id
-      name
-      ownerID
-      programKindName
-      startDate
-      status
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkProgram ($input: [CreateProgramInput!]) {
+	createBulkProgram(input: $input) {
+		programs {
+			auditFirm
+			auditor
+			auditorEmail
+			auditorReadComments
+			auditorReady
+			auditorWriteComments
+			createdAt
+			createdBy
+			description
+			displayID
+			endDate
+			fieldworkStartDate
+			externalID
+			externalUUID
+			fieldworkEndDate
+			frameworkName
+			id
+			managedBy
+			integrationRunID
+			name
+			observationPeriodStartDate
+			observationPeriodEndDate
+			ownerID
+			programKindID
+			programKindName
+			programOwnerID
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			startDate
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateProgram($input: CreateProgramInput!) {
-  createProgram(input: $input) {
-    program {
-      auditFirm
-      auditor
-      auditorEmail
-      auditorReadComments
-      auditorReady
-      auditorWriteComments
-      createdAt
-      createdBy
-      description
-      displayID
-      endDate
-      frameworkName
-      id
-      name
-      ownerID
-      programKindName
-      startDate
-      status
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateProgram ($input: CreateProgramInput!) {
+	createProgram(input: $input) {
+		program {
+			auditFirm
+			auditor
+			auditorEmail
+			auditorReadComments
+			auditorReady
+			auditorWriteComments
+			createdAt
+			createdBy
+			description
+			displayID
+			endDate
+			externalID
+			externalUUID
+			fieldworkStartDate
+			fieldworkEndDate
+			frameworkName
+			id
+			integrationRunID
+			managedBy
+			name
+			observationPeriodStartDate
+			observationPeriodEndDate
+			ownerID
+			programKindID
+			programKindName
+			programOwnerID
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			startDate
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation DeleteProgram($deleteProgramId: ID!) {
-  deleteProgram(id: $deleteProgramId) {
-    deletedID
-  }
+mutation DeleteProgram ($deleteProgramId: ID!) {
+	deleteProgram(id: $deleteProgramId) {
+		deletedID
+	}
 }
-
-query GetAllPrograms($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ProgramOrder!]) {
-  programs(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        auditFirm
-        auditor
-        auditorEmail
-        auditorReadComments
-        auditorReady
-        auditorWriteComments
-        createdAt
-        createdBy
-        description
-        displayID
-        endDate
-        frameworkName
-        id
-        name
-        ownerID
-        programKindName
-        startDate
-        status
-        tags
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetAllPrograms ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ProgramOrder!]) {
+	programs(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				auditFirm
+				auditor
+				auditorEmail
+				auditorReadComments
+				auditorReady
+				auditorWriteComments
+				createdAt
+				createdBy
+				description
+				displayID
+				endDate
+				frameworkName
+				id
+				name
+				ownerID
+				programKindName
+				startDate
+				status
+				tags
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-query GetProgramByID($programId: ID!) {
-  program(id: $programId) {
-    auditFirm
-    auditor
-    auditorEmail
-    auditorReadComments
-    auditorReady
-    auditorWriteComments
-    createdAt
-    createdBy
-    description
-    displayID
-    endDate
-    frameworkName
-    id
-    name
-    ownerID
-    programKindName
-    startDate
-    status
-    tags
-    updatedAt
-    updatedBy
-  }
+query GetProgramByID ($programId: ID!) {
+	program(id: $programId) {
+		auditFirm
+		auditor
+		auditorEmail
+		auditorReadComments
+		auditorReady
+		auditorWriteComments
+		createdAt
+		createdBy
+		description
+		displayID
+		endDate
+		fieldworkStartDate
+		fieldworkEndDate
+		externalUUID
+		externalID
+		frameworkName
+		id
+		integrationRunID
+		managedBy
+		name
+		observationPeriodEndDate
+		observationPeriodStartDate
+		ownerID
+		programKindID
+		programKindName
+		programOwnerID
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
+		startDate
+		status
+		tags
+		updatedAt
+		updatedBy
+	}
 }
-
-query GetPrograms($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ProgramWhereInput, $orderBy: [ProgramOrder!]) {
-  programs(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        auditFirm
-        auditor
-        auditorEmail
-        auditorReadComments
-        auditorReady
-        auditorWriteComments
-        createdAt
-        createdBy
-        description
-        displayID
-        endDate
-        frameworkName
-        id
-        name
-        ownerID
-        programKindName
-        startDate
-        status
-        tags
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetPrograms ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ProgramWhereInput, $orderBy: [ProgramOrder!]) {
+	programs(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				auditFirm
+				auditor
+				auditorEmail
+				auditorReadComments
+				auditorReady
+				auditorWriteComments
+				createdAt
+				createdBy
+				description
+				displayID
+				endDate
+				frameworkName
+				id
+				name
+				ownerID
+				programKindName
+				startDate
+				status
+				tags
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-mutation UpdateProgram($updateProgramId: ID!, $input: UpdateProgramInput!) {
-  updateProgram(id: $updateProgramId, input: $input) {
-    program {
-      auditFirm
-      auditor
-      auditorEmail
-      auditorReadComments
-      auditorReady
-      auditorWriteComments
-      createdAt
-      createdBy
-      description
-      displayID
-      endDate
-      frameworkName
-      id
-      name
-      ownerID
-      programKindName
-      startDate
-      status
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation UpdateProgram ($updateProgramId: ID!, $input: UpdateProgramInput!) {
+	updateProgram(id: $updateProgramId, input: $input) {
+		program {
+			auditFirm
+			auditor
+			auditorEmail
+			auditorReadComments
+			auditorReady
+			auditorWriteComments
+			createdAt
+			createdBy
+			description
+			displayID
+			endDate
+			fieldworkStartDate
+			fieldworkEndDate
+			externalUUID
+			externalID
+			frameworkName
+			id
+			integrationRunID
+			managedBy
+			name
+			observationPeriodEndDate
+			observationPeriodStartDate
+			ownerID
+			programKindID
+			programKindName
+			programOwnerID
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			startDate
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }

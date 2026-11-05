@@ -4,8 +4,11 @@ mutation CreateBulkCSVHush($input: Upload!) {
       createdAt
       createdBy
       description
+      expiresAt
       id
       kind
+      lastUsedAt
+      metadata
       name
       ownerID
       secretName
@@ -21,8 +24,11 @@ mutation CreateBulkHush($input: [CreateHushInput!]) {
       createdAt
       createdBy
       description
+      expiresAt
       id
       kind
+      lastUsedAt
+      metadata
       name
       ownerID
       secretName
@@ -38,8 +44,11 @@ mutation CreateHush($input: CreateHushInput!) {
       createdAt
       createdBy
       description
+      expiresAt
       id
       kind
+      metadata
+      lastUsedAt
       name
       ownerID
       secretName
@@ -92,8 +101,11 @@ query GetHushByID($hushId: ID!) {
     createdAt
     createdBy
     description
+    expiresAt
     id
     kind
+    metadata
+    lastUsedAt
     name
     ownerID
     secretName
@@ -141,8 +153,11 @@ mutation UpdateHush($updateHushId: ID!, $input: UpdateHushInput!) {
       createdAt
       createdBy
       description
+      expiresAt
       id
       kind
+      metadata
+      lastUsedAt
       name
       ownerID
       secretName

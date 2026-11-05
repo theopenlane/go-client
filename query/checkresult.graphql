@@ -1,22 +1,3 @@
-mutation CreateBulkCSVCheckResult ($input: Upload!) {
-	createBulkCSVCheckResult(input: $input) {
-		checkResults {
-			createdAt
-			createdBy
-			details
-			externalURI
-			id
-			integrationID
-			lastObservedAt
-			parentExternalID
-			source
-			status
-			tags
-			updatedAt
-			updatedBy
-		}
-	}
-}
 mutation CreateBulkCheckResult ($input: [CreateCheckResultInput!]) {
 	createBulkCheckResult(input: $input) {
 		checkResults {
@@ -26,9 +7,38 @@ mutation CreateBulkCheckResult ($input: [CreateCheckResultInput!]) {
 			externalURI
 			id
 			integrationID
+			integrationRunID
 			lastObservedAt
+			managedBy
 			parentExternalID
 			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
+}
+mutation CreateBulkCSVCheckResult ($input: Upload!) {
+	createBulkCSVCheckResult(input: $input) {
+		checkResults {
+			createdAt
+			createdBy
+			details
+			externalURI
+			id
+			integrationID
+			integrationRunID
+			lastObservedAt
+			managedBy
+			parentExternalID
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			status
 			tags
 			updatedAt
@@ -45,9 +55,14 @@ mutation CreateCheckResult ($input: CreateCheckResultInput!) {
 			externalURI
 			id
 			integrationID
+			integrationRunID
 			lastObservedAt
+			managedBy
 			parentExternalID
 			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			status
 			tags
 			updatedAt
@@ -82,9 +97,14 @@ query GetAllCheckResults ($first: Int, $last: Int, $after: Cursor, $before: Curs
 				externalURI
 				id
 				integrationID
+				integrationRunID
 				lastObservedAt
+				managedBy
 				parentExternalID
 				source
+				sourceDefinitionID
+				sourceInstanceID
+				sourceKey
 				status
 				tags
 				updatedAt
@@ -101,9 +121,14 @@ query GetCheckResultByID ($checkResultId: ID!) {
 		externalURI
 		id
 		integrationID
+		integrationRunID
 		lastObservedAt
+		managedBy
 		parentExternalID
 		source
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
 		status
 		tags
 		updatedAt
@@ -127,35 +152,20 @@ query GetCheckResults ($first: Int, $last: Int, $after: Cursor, $before: Cursor,
 				externalURI
 				id
 				integrationID
+				integrationRunID
 				lastObservedAt
+				managedBy
 				parentExternalID
 				source
+				sourceDefinitionID
+				sourceInstanceID
+				sourceKey
 				status
 				tags
 				updatedAt
 				updatedBy
 			}
 		}
-	}
-}
-mutation UpdateBulkCSVCheckResult ($input: Upload!) {
-	updateBulkCSVCheckResult(input: $input) {
-		checkResults {
-			createdAt
-			createdBy
-			details
-			externalURI
-			id
-			integrationID
-			lastObservedAt
-			parentExternalID
-			source
-			status
-			tags
-			updatedAt
-			updatedBy
-		}
-		updatedIDs
 	}
 }
 mutation UpdateBulkCheckResult ($ids: [ID!]!, $input: UpdateCheckResultInput!) {
@@ -167,9 +177,39 @@ mutation UpdateBulkCheckResult ($ids: [ID!]!, $input: UpdateCheckResultInput!) {
 			externalURI
 			id
 			integrationID
+			integrationRunID
 			lastObservedAt
+			managedBy
 			parentExternalID
 			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+		updatedIDs
+	}
+}
+mutation UpdateBulkCSVCheckResult ($input: Upload!) {
+	updateBulkCSVCheckResult(input: $input) {
+		checkResults {
+			createdAt
+			createdBy
+			details
+			externalURI
+			id
+			integrationID
+			integrationRunID
+			lastObservedAt
+			managedBy
+			parentExternalID
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			status
 			tags
 			updatedAt
@@ -187,9 +227,14 @@ mutation UpdateCheckResult ($updateCheckResultId: ID!, $input: UpdateCheckResult
 			externalURI
 			id
 			integrationID
+			integrationRunID
 			lastObservedAt
+			managedBy
 			parentExternalID
 			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			status
 			tags
 			updatedAt

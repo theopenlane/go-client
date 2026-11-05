@@ -5,12 +5,19 @@ mutation CreateBulkCSVCustomTypeEnum($input: Upload!) {
       createdAt
       createdBy
       description
+      externalID
       field
+      icon
       id
+      integrationRunID
       internalNotes
+      managedBy
       name
       objectType
       ownerID
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       systemInternalID
       systemOwned
       updatedAt
@@ -26,12 +33,19 @@ mutation CreateBulkCustomTypeEnum($input: [CreateCustomTypeEnumInput!]) {
       createdAt
       createdBy
       description
+      externalID
       field
+      icon
       id
+      integrationRunID
       internalNotes
+      managedBy
       name
       objectType
       ownerID
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       systemInternalID
       systemOwned
       updatedAt
@@ -47,12 +61,19 @@ mutation CreateCustomTypeEnum($input: CreateCustomTypeEnumInput!) {
       createdAt
       createdBy
       description
+      externalID
       field
+      icon
       id
+      integrationRunID
       internalNotes
+      managedBy
       name
       objectType
       ownerID
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       systemInternalID
       systemOwned
       updatedAt
@@ -109,12 +130,19 @@ query GetCustomTypeEnumByID($customTypeEnumId: ID!) {
     createdAt
     createdBy
     description
+    externalID
     field
+    icon
     id
+    integrationRunID
     internalNotes
+    managedBy
     name
     objectType
     ownerID
+    sourceDefinitionID
+    sourceInstanceID
+    sourceKey
     systemInternalID
     systemOwned
     updatedAt
@@ -166,12 +194,19 @@ mutation UpdateCustomTypeEnum($updateCustomTypeEnumId: ID!, $input: UpdateCustom
       createdAt
       createdBy
       description
+      externalID
       field
+      icon
       id
+      integrationRunID
       internalNotes
+      managedBy
       name
       objectType
       ownerID
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       systemInternalID
       systemOwned
       updatedAt

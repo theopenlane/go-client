@@ -1,160 +1,170 @@
-mutation CreateBulkCSVNarrative($input: Upload!) {
-  createBulkCSVNarrative(input: $input) {
-    narratives {
-      createdAt
-      createdBy
-      description
-      details
-      displayID
-      id
-      name
-      ownerID
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkCSVNarrative ($input: Upload!) {
+	createBulkCSVNarrative(input: $input) {
+		narratives {
+			createdAt
+			createdBy
+			description
+			details
+			displayID
+			externalID
+			id
+			integrationRunID
+			managedBy
+			name
+			ownerID
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateBulkNarrative($input: [CreateNarrativeInput!]) {
-  createBulkNarrative(input: $input) {
-    narratives {
-      createdAt
-      createdBy
-      description
-      details
-      displayID
-      id
-      name
-      ownerID
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkNarrative ($input: [CreateNarrativeInput!]) {
+	createBulkNarrative(input: $input) {
+		narratives {
+			createdAt
+			createdBy
+			description
+			details
+			displayID
+			externalID
+			id
+			integrationRunID
+			managedBy
+			name
+			ownerID
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateNarrative($input: CreateNarrativeInput!) {
-  createNarrative(input: $input) {
-    narrative {
-      createdAt
-      createdBy
-      description
-      details
-      displayID
-      id
-      name
-      ownerID
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateNarrative ($input: CreateNarrativeInput!) {
+	createNarrative(input: $input) {
+		narrative {
+			createdAt
+			createdBy
+			description
+			details
+			displayID
+			externalID
+			id
+			managedBy
+			integrationRunID
+			name
+			ownerID
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation DeleteNarrative($deleteNarrativeId: ID!) {
-  deleteNarrative(id: $deleteNarrativeId) {
-    deletedID
-  }
+mutation DeleteNarrative ($deleteNarrativeId: ID!) {
+	deleteNarrative(id: $deleteNarrativeId) {
+		deletedID
+	}
 }
-
-query GetAllNarratives($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [NarrativeOrder!]) {
-  narratives(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        createdAt
-        createdBy
-        description
-        details
-        displayID
-        id
-        name
-        ownerID
-        tags
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetAllNarratives ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [NarrativeOrder!]) {
+	narratives(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				description
+				details
+				displayID
+				id
+				name
+				ownerID
+				tags
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-query GetNarrativeByID($narrativeId: ID!) {
-  narrative(id: $narrativeId) {
-    createdAt
-    createdBy
-    description
-    details
-    displayID
-    id
-    name
-    ownerID
-    tags
-    updatedAt
-    updatedBy
-  }
+query GetNarrativeByID ($narrativeId: ID!) {
+	narrative(id: $narrativeId) {
+		createdAt
+		createdBy
+		description
+		details
+		displayID
+		externalID
+		id
+		integrationRunID
+		managedBy
+		name
+		ownerID
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
+		tags
+		updatedAt
+		updatedBy
+	}
 }
-
-query GetNarratives($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: NarrativeWhereInput, $orderBy: [NarrativeOrder!]) {
-  narratives(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        createdAt
-        createdBy
-        description
-        details
-        displayID
-        id
-        name
-        ownerID
-        tags
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetNarratives ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: NarrativeWhereInput, $orderBy: [NarrativeOrder!]) {
+	narratives(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				description
+				details
+				displayID
+				id
+				name
+				ownerID
+				tags
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-mutation UpdateNarrative($updateNarrativeId: ID!, $input: UpdateNarrativeInput!) {
-  updateNarrative(id: $updateNarrativeId, input: $input) {
-    narrative {
-      createdAt
-      createdBy
-      description
-      details
-      displayID
-      id
-      name
-      ownerID
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation UpdateNarrative ($updateNarrativeId: ID!, $input: UpdateNarrativeInput!) {
+	updateNarrative(id: $updateNarrativeId, input: $input) {
+		narrative {
+			createdAt
+			createdBy
+			description
+			details
+			displayID
+			externalID
+			id
+			managedBy
+			integrationRunID
+			name
+			ownerID
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }

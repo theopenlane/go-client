@@ -9,7 +9,9 @@ mutation CreateBulkCSVCustomDomain($input: Upload!) {
       id
       mappableDomainID
       ownerID
+      purpose
       tags
+      trustCenterID
       updatedAt
       updatedBy
     }
@@ -27,7 +29,9 @@ mutation CreateBulkCustomDomain($input: [CreateCustomDomainInput!]) {
       id
       mappableDomainID
       ownerID
+      purpose
       tags
+      trustCenterID
       updatedAt
       updatedBy
     }
@@ -51,7 +55,9 @@ mutation CreateCustomDomain($input: CreateCustomDomainInput!) {
       id
       mappableDomainID
       ownerID
+      purpose
       tags
+      trustCenterID
       updatedAt
       updatedBy
     }
@@ -99,6 +105,7 @@ query GetAllCustomDomains($first: Int, $last: Int, $after: Cursor, $before: Curs
         }
         domainType
         id
+        mappableDomainID
         mappableDomain {
           id
           name
@@ -140,7 +147,9 @@ query GetCustomDomainByID($customDomainId: ID!) {
     id
     mappableDomainID
     ownerID
+    purpose
     tags
+    trustCenterID
     updatedAt
     updatedBy
   }
@@ -214,7 +223,9 @@ mutation UpdateCustomDomain($updateCustomDomainId: ID!, $input: UpdateCustomDoma
       id
       mappableDomainID
       ownerID
+      purpose
       tags
+      trustCenterID
       updatedAt
       updatedBy
     }

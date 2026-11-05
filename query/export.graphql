@@ -4,11 +4,13 @@ mutation CreateExport($input: CreateExportInput!) {
       createdAt
       createdBy
       errorMessage
+      exportMetadata
       exportType
       fields
       filters
       format
       id
+      mode
       ownerID
       requestorID
       status
@@ -70,11 +72,13 @@ query GetExportByID($exportId: ID!) {
     createdAt
     createdBy
     errorMessage
+    exportMetadata
     exportType
     fields
     filters
     format
     id
+    mode
     ownerID
     requestorID
     status

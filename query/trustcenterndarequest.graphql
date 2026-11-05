@@ -2,14 +2,20 @@ mutation CreateBulkCSVTrustCenterNDARequest($input: Upload!) {
   createBulkCSVTrustCenterNDARequest(input: $input) {
     trustCenterNDARequests {
       accessLevel
+      approvedAt
+      autoApproved
+      approvedByUserID
       companyName
       createdAt
       createdBy
+      documentDataID
       email
+      fileID
       firstName
       id
       lastName
       reason
+      signedAt
       status
       tags
       trustCenterID
@@ -23,14 +29,20 @@ mutation CreateBulkTrustCenterNDARequest($input: [CreateTrustCenterNDARequestInp
   createBulkTrustCenterNDARequest(input: $input) {
     trustCenterNDARequests {
       accessLevel
+      autoApproved
+      approvedAt
+      approvedByUserID
       companyName
       createdAt
       createdBy
+      documentDataID
       email
+      fileID
       firstName
       id
       lastName
       reason
+      signedAt
       status
       tags
       trustCenterID
@@ -44,14 +56,20 @@ mutation CreateTrustCenterNDARequest($input: CreateTrustCenterNDARequestInput!) 
   createTrustCenterNDARequest(input: $input) {
     trustCenterNDARequest {
       accessLevel
+      approvedByUserID
+      autoApproved
+      approvedAt
       companyName
       createdAt
       createdBy
+      documentDataID
       email
+      fileID
       firstName
       id
       lastName
       reason
+      signedAt
       status
       tags
       trustCenterID
@@ -89,6 +107,7 @@ query GetAllTrustCenterNDARequests($first: Int, $last: Int, $after: Cursor, $bef
         createdAt
         createdBy
         email
+        fileID
         firstName
         id
         lastName
@@ -99,6 +118,8 @@ query GetAllTrustCenterNDARequests($first: Int, $last: Int, $after: Cursor, $bef
         updatedAt
         updatedBy
         approvedAt
+        approvedByUserID
+        autoApproved
         signedAt
         documentDataID
       }
@@ -113,6 +134,7 @@ query GetTrustCenterNDARequestByID($trustCenterNDARequestId: ID!) {
     createdAt
     createdBy
     email
+    fileID
     firstName
     id
     lastName
@@ -123,6 +145,8 @@ query GetTrustCenterNDARequestByID($trustCenterNDARequestId: ID!) {
     updatedAt
     updatedBy
     approvedAt
+    autoApproved
+    approvedByUserID
     signedAt
     documentDataID
   }
@@ -151,6 +175,7 @@ query GetTrustCenterNDARequests($first: Int, $last: Int, $after: Cursor, $before
         createdAt
         createdBy
         email
+        fileID
         firstName
         id
         lastName
@@ -161,6 +186,8 @@ query GetTrustCenterNDARequests($first: Int, $last: Int, $after: Cursor, $before
         updatedAt
         updatedBy
         approvedAt
+        autoApproved
+        approvedByUserID
         signedAt
         documentDataID
       }
@@ -176,6 +203,7 @@ mutation UpdateTrustCenterNDARequest($updateTrustCenterNDARequestId: ID!, $input
       createdAt
       createdBy
       email
+      fileID
       firstName
       id
       lastName
@@ -186,6 +214,8 @@ mutation UpdateTrustCenterNDARequest($updateTrustCenterNDARequestId: ID!, $input
       updatedAt
       updatedBy
       approvedAt
+      autoApproved
+      approvedByUserID
       signedAt
       documentDataID
     }

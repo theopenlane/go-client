@@ -1,457 +1,439 @@
-mutation CreateBulkCSVMappedControl($input: Upload!) {
-  createBulkCSVMappedControl(input: $input) {
-    mappedControls {
-      confidence
-      createdAt
-      createdBy
-      id
-      mappingType
-      relation
-      source
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkCSVMappedControl ($input: Upload!) {
+	createBulkCSVMappedControl(input: $input) {
+		mappedControls {
+			confidence
+			createdAt
+			createdBy
+			externalID
+			id
+			integrationRunID
+			managedBy
+			mappingType
+			relation
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateBulkMappedControl($input: [CreateMappedControlInput!]) {
-  createBulkMappedControl(input: $input) {
-    mappedControls {
-      confidence
-      createdAt
-      createdBy
-      id
-      mappingType
-      relation
-      source
-      tags
-      updatedAt
-      updatedBy
-      fromControls {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-      toControls {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-      fromSubcontrols {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-      toSubcontrols {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-    }
-  }
+mutation CreateBulkMappedControl ($input: [CreateMappedControlInput!]) {
+	createBulkMappedControl(input: $input) {
+		mappedControls {
+			confidence
+			createdAt
+			createdBy
+			externalID
+			id
+			managedBy
+			integrationRunID
+			mappingType
+			relation
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			updatedAt
+			updatedBy
+			fromControls {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+			toControls {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+			fromSubcontrols {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+			toSubcontrols {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+		}
+	}
 }
-
-mutation CreateMappedControl($input: CreateMappedControlInput!) {
-  createMappedControl(input: $input) {
-    mappedControl {
-      confidence
-      createdAt
-      createdBy
-      id
-      mappingType
-      relation
-      source
-      tags
-      updatedAt
-      updatedBy
-      fromControls {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-      toControls {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-      fromSubcontrols {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-      toSubcontrols {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-    }
-  }
+mutation CreateMappedControl ($input: CreateMappedControlInput!) {
+	createMappedControl(input: $input) {
+		mappedControl {
+			confidence
+			createdAt
+			createdBy
+			externalID
+			id
+			managedBy
+			integrationRunID
+			mappingType
+			relation
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			updatedAt
+			updatedBy
+			fromControls {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+			toControls {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+			fromSubcontrols {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+			toSubcontrols {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+		}
+	}
 }
-
-mutation DeleteMappedControl($deleteMappedControlId: ID!) {
-  deleteMappedControl(id: $deleteMappedControlId) {
-    deletedID
-  }
+mutation DeleteMappedControl ($deleteMappedControlId: ID!) {
+	deleteMappedControl(id: $deleteMappedControlId) {
+		deletedID
+	}
 }
-
-query GetAllMappedControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [MappedControlOrder!]) {
-  mappedControls(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        confidence
-        createdAt
-        createdBy
-        id
-        mappingType
-        relation
-        source
-        tags
-        updatedAt
-        updatedBy
-        fromControls {
-          edges {
-            node {
-              id
-              refCode
-            }
-          }
-        }
-        toControls {
-          edges {
-            node {
-              id
-              refCode
-            }
-          }
-        }
-        fromSubcontrols {
-          edges {
-            node {
-              id
-              refCode
-            }
-          }
-        }
-        toSubcontrols {
-          edges {
-            node {
-              id
-              refCode
-            }
-          }
-        }
-      }
-    }
-  }
+query GetAllMappedControls ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [MappedControlOrder!]) {
+	mappedControls(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				confidence
+				createdAt
+				createdBy
+				id
+				mappingType
+				relation
+				source
+				tags
+				updatedAt
+				updatedBy
+				fromControls {
+					edges {
+						node {
+							id
+							refCode
+						}
+					}
+				}
+				toControls {
+					edges {
+						node {
+							id
+							refCode
+						}
+					}
+				}
+				fromSubcontrols {
+					edges {
+						node {
+							id
+							refCode
+						}
+					}
+				}
+				toSubcontrols {
+					edges {
+						node {
+							id
+							refCode
+						}
+					}
+				}
+			}
+		}
+	}
 }
-
-query GetMappedAllFromControlsForID($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
-  mappedControl(id: $mappedControlId) {
-    fromControls(
-      first: $first
-      last: $last
-      after: $after
-      before: $before
-      orderBy: $orderBy
-    ) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-        hasPreviousPage
-      }
-      edges {
-        node {
-          id
-          refCode
-          referenceFramework
-          referenceFrameworkRevision
-          standardID
-        }
-      }
-    }
-  }
+query GetMappedAllFromControlsForID ($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
+	mappedControl(id: $mappedControlId) {
+		fromControls(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+			pageInfo {
+				startCursor
+				endCursor
+				hasNextPage
+				hasPreviousPage
+			}
+			edges {
+				node {
+					id
+					refCode
+					referenceFramework
+					referenceFrameworkRevision
+					standardID
+				}
+			}
+		}
+	}
 }
-
-query GetMappedAllFromSubcontrolsForID($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
-  mappedControl(id: $mappedControlId) {
-    fromSubcontrols(
-      first: $first
-      last: $last
-      after: $after
-      before: $before
-      orderBy: $orderBy
-    ) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-        hasPreviousPage
-      }
-      edges {
-        node {
-          id
-          refCode
-          referenceFramework
-          referenceFrameworkRevision
-          controlID
-        }
-      }
-    }
-  }
+query GetMappedAllFromSubcontrolsForID ($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
+	mappedControl(id: $mappedControlId) {
+		fromSubcontrols(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+			pageInfo {
+				startCursor
+				endCursor
+				hasNextPage
+				hasPreviousPage
+			}
+			edges {
+				node {
+					id
+					refCode
+					referenceFramework
+					referenceFrameworkRevision
+					controlID
+				}
+			}
+		}
+	}
 }
-
-query GetMappedAllToControlsForID($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
-  mappedControl(id: $mappedControlId) {
-    toControls(
-      first: $first
-      last: $last
-      after: $after
-      before: $before
-      orderBy: $orderBy
-    ) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-        hasPreviousPage
-      }
-      edges {
-        node {
-          id
-          refCode
-          referenceFramework
-          referenceFrameworkRevision
-          standardID
-        }
-      }
-    }
-  }
+query GetMappedAllToControlsForID ($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ControlOrder!]) {
+	mappedControl(id: $mappedControlId) {
+		toControls(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+			pageInfo {
+				startCursor
+				endCursor
+				hasNextPage
+				hasPreviousPage
+			}
+			edges {
+				node {
+					id
+					refCode
+					referenceFramework
+					referenceFrameworkRevision
+					standardID
+				}
+			}
+		}
+	}
 }
-
-query GetMappedAllToSubcontrolsForID($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
-  mappedControl(id: $mappedControlId) {
-    toSubcontrols(
-      first: $first
-      last: $last
-      after: $after
-      before: $before
-      orderBy: $orderBy
-    ) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-        hasPreviousPage
-      }
-      edges {
-        node {
-          id
-          refCode
-          referenceFramework
-          referenceFrameworkRevision
-          controlID
-        }
-      }
-    }
-  }
+query GetMappedAllToSubcontrolsForID ($mappedControlId: ID!, $first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
+	mappedControl(id: $mappedControlId) {
+		toSubcontrols(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+			pageInfo {
+				startCursor
+				endCursor
+				hasNextPage
+				hasPreviousPage
+			}
+			edges {
+				node {
+					id
+					refCode
+					referenceFramework
+					referenceFrameworkRevision
+					controlID
+				}
+			}
+		}
+	}
 }
-
-query GetMappedControlByID($mappedControlId: ID!) {
-  mappedControl(id: $mappedControlId) {
-    confidence
-    createdAt
-    createdBy
-    id
-    mappingType
-    relation
-    source
-    tags
-    updatedAt
-    updatedBy
-    fromControls {
-      edges {
-        node {
-          id
-          refCode
-        }
-      }
-    }
-    toControls {
-      edges {
-        node {
-          id
-          refCode
-        }
-      }
-    }
-    fromSubcontrols {
-      edges {
-        node {
-          id
-          refCode
-        }
-      }
-    }
-    toSubcontrols {
-      edges {
-        node {
-          id
-          refCode
-        }
-      }
-    }
-  }
+query GetMappedControlByID ($mappedControlId: ID!) {
+	mappedControl(id: $mappedControlId) {
+		confidence
+		createdAt
+		createdBy
+		externalID
+		id
+		managedBy
+		integrationRunID
+		mappingType
+		relation
+		source
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
+		tags
+		updatedAt
+		updatedBy
+		fromControls {
+			edges {
+				node {
+					id
+					refCode
+				}
+			}
+		}
+		toControls {
+			edges {
+				node {
+					id
+					refCode
+				}
+			}
+		}
+		fromSubcontrols {
+			edges {
+				node {
+					id
+					refCode
+				}
+			}
+		}
+		toSubcontrols {
+			edges {
+				node {
+					id
+					refCode
+				}
+			}
+		}
+	}
 }
-
-query GetMappedControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: MappedControlWhereInput, $orderBy: [MappedControlOrder!]) {
-  mappedControls(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        confidence
-        createdAt
-        createdBy
-        id
-        mappingType
-        relation
-        source
-        tags
-        updatedAt
-        updatedBy
-        fromControls {
-          edges {
-            node {
-              id
-              refCode
-            }
-          }
-        }
-        toControls {
-          edges {
-            node {
-              id
-              refCode
-            }
-          }
-        }
-        fromSubcontrols {
-          edges {
-            node {
-              id
-              refCode
-            }
-          }
-        }
-        toSubcontrols {
-          edges {
-            node {
-              id
-              refCode
-            }
-          }
-        }
-      }
-    }
-  }
+query GetMappedControls ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: MappedControlWhereInput, $orderBy: [MappedControlOrder!]) {
+	mappedControls(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				confidence
+				createdAt
+				createdBy
+				id
+				mappingType
+				relation
+				source
+				tags
+				updatedAt
+				updatedBy
+				fromControls {
+					edges {
+						node {
+							id
+							refCode
+						}
+					}
+				}
+				toControls {
+					edges {
+						node {
+							id
+							refCode
+						}
+					}
+				}
+				fromSubcontrols {
+					edges {
+						node {
+							id
+							refCode
+						}
+					}
+				}
+				toSubcontrols {
+					edges {
+						node {
+							id
+							refCode
+						}
+					}
+				}
+			}
+		}
+	}
 }
-
-mutation UpdateMappedControl($updateMappedControlId: ID!, $input: UpdateMappedControlInput!) {
-  updateMappedControl(id: $updateMappedControlId, input: $input) {
-    mappedControl {
-      confidence
-      createdAt
-      createdBy
-      id
-      mappingType
-      relation
-      source
-      tags
-      updatedAt
-      updatedBy
-      fromControls {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-      toControls {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-      fromSubcontrols {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-      toSubcontrols {
-        edges {
-          node {
-            id
-            refCode
-          }
-        }
-      }
-    }
-  }
+mutation UpdateMappedControl ($updateMappedControlId: ID!, $input: UpdateMappedControlInput!) {
+	updateMappedControl(id: $updateMappedControlId, input: $input) {
+		mappedControl {
+			confidence
+			createdAt
+			createdBy
+			externalID
+			id
+			managedBy
+			integrationRunID
+			mappingType
+			relation
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			updatedAt
+			updatedBy
+			fromControls {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+			toControls {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+			fromSubcontrols {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+			toSubcontrols {
+				edges {
+					node {
+						id
+						refCode
+					}
+				}
+			}
+		}
+	}
 }

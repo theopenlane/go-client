@@ -103,18 +103,31 @@ query GetAllEvidences($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
 
 query GetEvidenceByID($evidenceId: ID!) {
   evidence(id: $evidenceId) {
+    auditorReferenceID
     collectionProcedure
     createdAt
     createdBy
     creationDate
     description
     displayID
+    externalUUID
+    externalID
+    environmentName
+    environmentID
     id
+    integrationRunID
     isAutomated
+    managedBy
     name
     ownerID
     renewalDate
+    reviewFrequency
+    scopeID
+    scopeName
     source
+    sourceDefinitionID
+    sourceInstanceID
+    sourceKey
     status
     tags
     updatedAt

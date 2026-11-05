@@ -8,6 +8,7 @@
     "labels": [
         "dependencies"
     ],
+    "minimumReleaseAge": "7 days",
     "packageRules": [
         {
             "groupName": "all patch dependencies",
@@ -18,6 +19,12 @@
             "matchUpdateTypes": [
                 "patch"
             ]
+        },
+        {
+            "matchPackageNames": [
+                "github.com/theopenlane/core/common"
+            ],
+            "minimumReleaseAge": "0 days"
         }
     ]
 }

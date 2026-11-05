@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/samber/lo"
 	openlane "github.com/theopenlane/go-client"
 	"github.com/theopenlane/go-client/graphclient"
 )
@@ -51,8 +50,8 @@ func getAllControls(client *openlane.Client, ctx context.Context) ([]*graphclien
 	// Set page size
 	pageSize := int64(10)
 	where := &graphclient.ControlWhereInput{
-		ReferenceFramework: lo.ToPtr("SOC 2"),
-		SystemOwned:        lo.ToPtr(true),
+		ReferenceFramework: new("SOC 2"),
+		SystemOwned:        new(true),
 	}
 
 	orderBy := &graphclient.ControlOrder{

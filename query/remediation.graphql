@@ -4,7 +4,10 @@ mutation CreateBulkCSVRemediation($input: Upload!) {
       completedAt
       createdAt
       createdBy
+      displayID
       dueAt
+      environmentID
+      environmentName
       error
       explanation
       externalID
@@ -12,14 +15,22 @@ mutation CreateBulkCSVRemediation($input: Upload!) {
       externalURI
       id
       instructions
+      integrationRunID
       intent
+      managedBy
       metadata
       ownerReference
       prGeneratedAt
       pullRequestURI
       repositoryURI
+      scopeID
+      scopeName
       source
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       state
+      status
       summary
       tags
       ticketReference
@@ -36,7 +47,10 @@ mutation CreateBulkRemediation($input: [CreateRemediationInput!]) {
       completedAt
       createdAt
       createdBy
+      displayID
       dueAt
+      environmentID
+      environmentName
       error
       explanation
       externalID
@@ -44,14 +58,22 @@ mutation CreateBulkRemediation($input: [CreateRemediationInput!]) {
       externalURI
       id
       instructions
+      integrationRunID
       intent
+      managedBy
       metadata
       ownerReference
       prGeneratedAt
       pullRequestURI
       repositoryURI
+      scopeName
+      scopeID
       source
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       state
+      status
       summary
       tags
       ticketReference
@@ -68,7 +90,10 @@ mutation CreateRemediation($input: CreateRemediationInput!) {
       completedAt
       createdAt
       createdBy
+      displayID
       dueAt
+      environmentID
+      environmentName
       error
       explanation
       externalID
@@ -76,14 +101,22 @@ mutation CreateRemediation($input: CreateRemediationInput!) {
       externalURI
       id
       instructions
+      integrationRunID
       intent
+      managedBy
       metadata
       ownerReference
       prGeneratedAt
       pullRequestURI
       repositoryURI
+      scopeName
+      scopeID
       source
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       state
+      status
       summary
       tags
       ticketReference
@@ -152,7 +185,10 @@ query GetRemediationByID($remediationId: ID!) {
     completedAt
     createdAt
     createdBy
+    displayID
     dueAt
+    environmentID
+    environmentName
     error
     explanation
     externalID
@@ -160,14 +196,22 @@ query GetRemediationByID($remediationId: ID!) {
     externalURI
     id
     instructions
+    integrationRunID
     intent
+    managedBy
     metadata
     ownerReference
     prGeneratedAt
     pullRequestURI
     repositoryURI
+    scopeID
+    scopeName
     source
+    sourceDefinitionID
+    sourceInstanceID
+    sourceKey
     state
+    status
     summary
     tags
     ticketReference
@@ -231,7 +275,10 @@ mutation UpdateRemediation($updateRemediationId: ID!, $input: UpdateRemediationI
       completedAt
       createdAt
       createdBy
+      displayID
       dueAt
+      environmentName
+      environmentID
       error
       explanation
       externalID
@@ -239,14 +286,22 @@ mutation UpdateRemediation($updateRemediationId: ID!, $input: UpdateRemediationI
       externalURI
       id
       instructions
+      integrationRunID
       intent
+      managedBy
       metadata
       ownerReference
       prGeneratedAt
       pullRequestURI
       repositoryURI
+      scopeName
+      scopeID
       source
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       state
+      status
       summary
       tags
       ticketReference

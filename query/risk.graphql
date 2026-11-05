@@ -2,20 +2,55 @@ mutation CreateBulkCSVRisk($input: Upload!) {
   createBulkCSVRisk(input: $input) {
     risks {
       businessCosts
+      businessCostsJSON
       createdAt
       createdBy
+      delegateGroupID
       delegateID
+      delegateUserID
+      delegateName
+      delegateIdentityHolderID
       details
+      detailsJSON
       displayID
+      externalID
+      dueDate
+      environmentName
+      externalUUID
+      environmentID
       id
       impact
+      integrationID
+      lastReviewedAt
+      integrationRunID
       likelihood
+      mitigatedAt
+      managedBy
       mitigation
+      mitigationJSON
       name
+      observedAt
+      nextReviewDueAt
       ownerID
+      riskKindID
+      riskDecision
+      riskCategoryName
+      riskCategoryID
+      reviewRequired
+      reviewFrequency
+      residualScore
       riskKindName
+      scopeName
+      scopeID
       score
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
+      stakeholderGroupID
       stakeholderID
+      stakeholderUserID
+      stakeholderName
+      stakeholderIdentityHolderID
       status
       tags
       updatedAt
@@ -28,20 +63,55 @@ mutation CreateBulkRisk($input: [CreateRiskInput!]) {
   createBulkRisk(input: $input) {
     risks {
       businessCosts
+      businessCostsJSON
       createdAt
       createdBy
+      delegateGroupID
       delegateID
+      delegateName
+      delegateUserID
+      delegateIdentityHolderID
       details
+      detailsJSON
       displayID
+      dueDate
+      environmentID
+      environmentName
+      externalID
+      externalUUID
       id
       impact
+      integrationID
+      integrationRunID
+      lastReviewedAt
       likelihood
+      managedBy
+      mitigatedAt
       mitigation
+      mitigationJSON
       name
+      nextReviewDueAt
+      observedAt
       ownerID
+      reviewFrequency
+      riskKindID
+      riskDecision
+      riskCategoryName
+      riskCategoryID
+      reviewRequired
+      residualScore
       riskKindName
+      scopeName
+      scopeID
       score
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
+      stakeholderGroupID
       stakeholderID
+      stakeholderIdentityHolderID
+      stakeholderName
+      stakeholderUserID
       status
       tags
       updatedAt
@@ -54,20 +124,55 @@ mutation CreateRisk($input: CreateRiskInput!) {
   createRisk(input: $input) {
     risk {
       businessCosts
+      businessCostsJSON
       createdAt
       createdBy
+      delegateGroupID
       delegateID
+      delegateIdentityHolderID
+      delegateName
+      delegateUserID
       details
+      detailsJSON
       displayID
+      externalUUID
+      externalID
+      environmentName
+      environmentID
+      dueDate
       id
       impact
+      lastReviewedAt
+      integrationRunID
+      integrationID
       likelihood
+      managedBy
+      mitigatedAt
       mitigation
+      mitigationJSON
       name
+      nextReviewDueAt
+      observedAt
       ownerID
+      reviewFrequency
+      riskKindID
+      riskDecision
+      residualScore
+      riskCategoryName
+      riskCategoryID
+      reviewRequired
       riskKindName
+      scopeName
+      scopeID
       score
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
+      stakeholderGroupID
       stakeholderID
+      stakeholderName
+      stakeholderIdentityHolderID
+      stakeholderUserID
       status
       tags
       updatedAt
@@ -100,20 +205,55 @@ query GetAllRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
     edges {
       node {
         businessCosts
+        businessCostsJSON
         createdAt
         createdBy
+        delegateGroupID
         delegateID
+        delegateIdentityHolderID
+        delegateUserID
+        delegateName
         details
+        detailsJSON
         displayID
+        externalUUID
+        externalID
+        environmentName
+        environmentID
+        dueDate
         id
         impact
+        integrationRunID
+        integrationID
+        lastReviewedAt
         likelihood
+        mitigatedAt
+        managedBy
         mitigation
+        mitigationJSON
         name
+        nextReviewDueAt
+        observedAt
         ownerID
+        reviewRequired
+        riskKindID
+        riskDecision
+        riskCategoryName
+        riskCategoryID
+        reviewFrequency
+        residualScore
         riskKindName
+        scopeName
+        scopeID
         score
+        sourceDefinitionID
+        sourceInstanceID
+        sourceKey
+        stakeholderGroupID
         stakeholderID
+        stakeholderUserID
+        stakeholderIdentityHolderID
+        stakeholderName
         status
         tags
         updatedAt
@@ -126,20 +266,55 @@ query GetAllRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
 query GetRiskByID($riskId: ID!) {
   risk(id: $riskId) {
     businessCosts
+    businessCostsJSON
     createdAt
     createdBy
+    delegateGroupID
     delegateID
+    delegateUserID
+    delegateName
+    delegateIdentityHolderID
     details
+    detailsJSON
     displayID
+    externalUUID
+    externalID
+    environmentName
+    environmentID
+    dueDate
     id
     impact
+    integrationRunID
+    lastReviewedAt
+    integrationID
     likelihood
+    managedBy
+    mitigatedAt
     mitigation
+    mitigationJSON
     name
+    observedAt
+    nextReviewDueAt
     ownerID
+    riskDecision
+    riskKindID
+    riskCategoryName
+    riskCategoryID
+    reviewRequired
+    reviewFrequency
+    residualScore
     riskKindName
+    scopeID
+    scopeName
     score
+    sourceDefinitionID
+    sourceInstanceID
+    sourceKey
+    stakeholderGroupID
     stakeholderID
+    stakeholderName
+    stakeholderUserID
+    stakeholderIdentityHolderID
     status
     tags
     updatedAt
@@ -166,20 +341,55 @@ query GetRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where:
     edges {
       node {
         businessCosts
+        businessCostsJSON
         createdAt
         createdBy
+        delegateGroupID
         delegateID
+        delegateUserID
+        delegateName
+        delegateIdentityHolderID
         details
+        detailsJSON
         displayID
+        environmentID
+        dueDate
+        externalUUID
+        environmentName
+        externalID
         id
         impact
+        lastReviewedAt
+        integrationID
+        integrationRunID
         likelihood
+        managedBy
+        mitigatedAt
         mitigation
+        mitigationJSON
         name
+        observedAt
+        nextReviewDueAt
         ownerID
+        riskKindID
+        riskDecision
+        riskCategoryName
+        riskCategoryID
+        reviewRequired
+        reviewFrequency
+        residualScore
         riskKindName
+        scopeName
+        scopeID
         score
+        sourceDefinitionID
+        sourceInstanceID
+        sourceKey
+        stakeholderGroupID
         stakeholderID
+        stakeholderName
+        stakeholderIdentityHolderID
+        stakeholderUserID
         status
         tags
         updatedAt
@@ -193,20 +403,55 @@ mutation UpdateRisk($updateRiskId: ID!, $input: UpdateRiskInput!) {
   updateRisk(id: $updateRiskId, input: $input) {
     risk {
       businessCosts
+      businessCostsJSON
       createdAt
       createdBy
+      delegateGroupID
       delegateID
+      delegateIdentityHolderID
+      delegateName
+      delegateUserID
       details
+      detailsJSON
       displayID
+      externalUUID
+      externalID
+      environmentName
+      environmentID
+      dueDate
       id
       impact
+      lastReviewedAt
+      integrationRunID
+      integrationID
       likelihood
+      mitigatedAt
+      managedBy
       mitigation
+      mitigationJSON
       name
+      observedAt
+      nextReviewDueAt
       ownerID
+      riskCategoryID
+      residualScore
+      riskKindID
+      riskDecision
+      riskCategoryName
+      reviewRequired
+      reviewFrequency
       riskKindName
+      scopeName
+      scopeID
       score
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
+      stakeholderGroupID
       stakeholderID
+      stakeholderUserID
+      stakeholderName
+      stakeholderIdentityHolderID
       status
       tags
       updatedAt

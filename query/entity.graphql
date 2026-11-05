@@ -12,6 +12,8 @@ mutation CreateBulkCSVEntity($input: Upload!) {
       createdBy
       description
       displayName
+      status
+      domains
       entityRelationshipStateID
       entityRelationshipStateName
       entitySecurityQuestionnaireStatusID
@@ -68,6 +70,8 @@ mutation CreateBulkEntity($input: [CreateEntityInput!]) {
       createdBy
       description
       displayName
+      domains
+      status
       entityRelationshipStateID
       entityRelationshipStateName
       entitySecurityQuestionnaireStatusID
@@ -124,6 +128,8 @@ mutation CreateEntity($input: CreateEntityInput!, $entityTypeName: String) {
       createdBy
       description
       displayName
+      status
+      domains
       entityRelationshipStateID
       entityRelationshipStateName
       entitySecurityQuestionnaireStatusID
@@ -135,6 +141,8 @@ mutation CreateEntity($input: CreateEntityInput!, $entityTypeName: String) {
       environmentName
       hasSoc2
       id
+      logoFileID
+      logoRemoteURL
       internalOwner
       internalOwnerGroupID
       internalOwnerUserID
@@ -200,6 +208,8 @@ query GetAllEntities($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
         createdBy
         description
         displayName
+        status
+        domains
         entityRelationshipStateID
         entityRelationshipStateName
         entitySecurityQuestionnaireStatusID
@@ -272,6 +282,8 @@ query GetEntities($first: Int, $last: Int, $after: Cursor, $before: Cursor, $whe
         createdBy
         description
         displayName
+        status
+        domains
         entityRelationshipStateID
         entityRelationshipStateName
         entitySecurityQuestionnaireStatusID
@@ -317,10 +329,13 @@ query GetEntities($first: Int, $last: Int, $after: Cursor, $before: Cursor, $whe
 
 query GetEntityByID($entityId: ID!) {
   entity(id: $entityId) {
+    aliases
     annualSpend
     approvedForUse
     autoRenews
     billingModel
+    catalogKey
+    catalogID
     contractEndDate
     contractRenewalAt
     contractStartDate
@@ -328,6 +343,7 @@ query GetEntityByID($entityId: ID!) {
     createdBy
     description
     displayName
+    domains
     entityRelationshipStateID
     entityRelationshipStateName
     entitySecurityQuestionnaireStatusID
@@ -337,27 +353,46 @@ query GetEntityByID($entityId: ID!) {
     entityTypeID
     environmentID
     environmentName
+    externallyVisible
+    externalID
     hasSoc2
     id
+    integrationRunID
     internalOwner
     internalOwnerGroupID
+    internalOwnerIdentityHolderID
     internalOwnerUserID
     lastReviewedAt
+    logoFileID
+    managedBy
+    logoRemoteURL
+    links
+    linkedAssetIds
     mfaEnforced
     mfaSupported
     name
     nextReviewAt
+    rawIngestPayload
+    observedAt
+    providedServices
     renewalRisk
+    reviewFrequency
     reviewedBy
     reviewedByGroupID
+    reviewedByIdentityHolderID
     reviewedByUserID
     riskRating
     riskScore
+    riskScoreCoverage
     scopeID
     scopeName
     soc2PeriodEnd
+    sourceDefinitionID
+    sourceInstanceID
+    sourceKey
     spendCurrency
     ssoEnforced
+    status
     statusPageURL
     systemOwned
     tags
@@ -383,6 +418,7 @@ mutation UpdateEntity($updateEntityId: ID!, $input: UpdateEntityInput!) {
       createdBy
       description
       displayName
+      domains
       entityRelationshipStateID
       entityRelationshipStateName
       entitySecurityQuestionnaireStatusID
@@ -392,27 +428,36 @@ mutation UpdateEntity($updateEntityId: ID!, $input: UpdateEntityInput!) {
       entityTypeID
       environmentID
       environmentName
+      externalID
       hasSoc2
       id
       internalOwner
       internalOwnerGroupID
       internalOwnerUserID
       lastReviewedAt
+      linkedAssetIds
+      links
+      logoFileID
       mfaEnforced
       mfaSupported
       name
       nextReviewAt
+      observedAt
+      providedServices
       renewalRisk
+      reviewFrequency
       reviewedBy
       reviewedByGroupID
       reviewedByUserID
       riskRating
       riskScore
+      riskScoreCoverage
       scopeID
       scopeName
       soc2PeriodEnd
       spendCurrency
       ssoEnforced
+      status
       statusPageURL
       systemOwned
       tags

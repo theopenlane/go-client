@@ -43,16 +43,21 @@ query GetWorkflowAssignmentByID($workflowAssignmentId: ID!) {
   workflowAssignment(id: $workflowAssignmentId) {
     actorGroupID
     actorUserID
+    approvalMetadata
     assignmentKey
     createdAt
     createdBy
     decidedAt
     displayID
+    dueAt
     id
+    invalidationMetadata
     label
     metadata
     notes
+    outcomeMetadata
     ownerID
+    rejectionMetadata
     required
     role
     status

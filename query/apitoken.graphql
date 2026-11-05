@@ -1,202 +1,132 @@
-mutation CreateAPIToken($input: CreateAPITokenInput!) {
-  createAPIToken(input: $input) {
-    apiToken {
-      createdAt
-      createdBy
-      description
-      expiresAt
-      id
-      isActive
-      lastUsedAt
-      name
-      ownerID
-      revokedAt
-      revokedBy
-      revokedReason
-      ssoAuthorizations
-      scopes
-      tags
-      token
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateAPIToken ($input: CreateAPITokenInput!) {
+	createAPIToken(input: $input) {
+		apiToken {
+			createdAt
+			createdBy
+			description
+			expiresAt
+			id
+			isActive
+			lastUsedAt
+			name
+			ownerID
+			revokedAt
+			revokedBy
+			revokedReason
+			scopes
+			ssoAuthorizations
+			tags
+			token
+			updatedAt
+			updatedBy
+			updatedByImpersonator
+		}
+	}
 }
-
-mutation CreateBulkAPIToken($input: [CreateAPITokenInput!]) {
-  createBulkAPIToken(input: $input) {
-    apiTokens {
-      createdAt
-      createdBy
-      description
-      expiresAt
-      id
-      isActive
-      lastUsedAt
-      name
-      ownerID
-      revokedAt
-      revokedBy
-      revokedReason
-      ssoAuthorizations
-      scopes
-      tags
-      token
-      updatedAt
-      updatedBy
-    }
-  }
+mutation DeleteAPIToken ($deleteAPITokenId: ID!) {
+	deleteAPIToken(id: $deleteAPITokenId) {
+		deletedID
+	}
 }
-
-mutation CreateBulkCSVAPIToken($input: Upload!) {
-  createBulkCSVAPIToken(input: $input) {
-    apiTokens {
-      createdAt
-      createdBy
-      description
-      expiresAt
-      id
-      isActive
-      lastUsedAt
-      name
-      ownerID
-      revokedAt
-      revokedBy
-      revokedReason
-      ssoAuthorizations
-      scopes
-      tags
-      token
-      updatedAt
-      updatedBy
-    }
-  }
+query GetAPITokenByID ($apiTokenId: ID!) {
+	apiToken(id: $apiTokenId) {
+		createdAt
+		createdBy
+		description
+		expiresAt
+		id
+		isActive
+		lastUsedAt
+		name
+		ownerID
+		revokedAt
+		revokedBy
+		revokedReason
+		scopes
+		ssoAuthorizations
+		tags
+		token
+		updatedAt
+		updatedBy
+		updatedByImpersonator
+		owner {
+			id
+			displayName
+		}
+	}
 }
-
-mutation DeleteAPIToken($deleteAPITokenId: ID!) {
-  deleteAPIToken(id: $deleteAPITokenId) {
-    deletedID
-  }
+query GetAPITokens ($where: APITokenWhereInput) {
+	apiTokens(where: $where) {
+		edges {
+			node {
+				createdAt
+				createdBy
+				description
+				expiresAt
+				id
+				isActive
+				lastUsedAt
+				name
+				ownerID
+				revokedAt
+				revokedBy
+				revokedReason
+				scopes
+				tags
+				token
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-query GetAllAPITokens($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [APITokenOrder!]) {
-  apiTokens(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        createdAt
-        createdBy
-        description
-        expiresAt
-        id
-        isActive
-        lastUsedAt
-        name
-        ownerID
-        revokedAt
-        revokedBy
-        revokedReason
-        ssoAuthorizations
-        scopes
-        tags
-        token
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetAllAPITokens {
+	apiTokens {
+		edges {
+			node {
+				createdAt
+				createdBy
+				description
+				expiresAt
+				id
+				isActive
+				lastUsedAt
+				name
+				ownerID
+				revokedAt
+				revokedBy
+				revokedReason
+				scopes
+				tags
+				token
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-query GetAPITokenByID($apiTokenId: ID!) {
-  apiToken(id: $apiTokenId) {
-    createdAt
-    createdBy
-    description
-    expiresAt
-    id
-    isActive
-    lastUsedAt
-    name
-    ownerID
-    revokedAt
-    revokedBy
-    revokedReason
-    ssoAuthorizations
-    scopes
-    tags
-    token
-    updatedAt
-    updatedBy
-  }
-}
-
-query GetAPITokens($first: Int, $last: Int, $where: APITokenWhereInput) {
-  apiTokens(first: $first, last: $last, where: $where) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        createdAt
-        createdBy
-        description
-        expiresAt
-        id
-        isActive
-        lastUsedAt
-        name
-        ownerID
-        revokedAt
-        revokedBy
-        revokedReason
-        ssoAuthorizations
-        scopes
-        tags
-        token
-        updatedAt
-        updatedBy
-      }
-    }
-  }
-}
-
-mutation UpdateAPIToken($updateAPITokenId: ID!, $input: UpdateAPITokenInput!) {
-  updateAPIToken(id: $updateAPITokenId, input: $input) {
-    apiToken {
-      createdAt
-      createdBy
-      description
-      expiresAt
-      id
-      isActive
-      lastUsedAt
-      name
-      ownerID
-      revokedAt
-      revokedBy
-      revokedReason
-      ssoAuthorizations
-      scopes
-      tags
-      token
-      updatedAt
-      updatedBy
-    }
-  }
+mutation UpdateAPIToken ($updateAPITokenId: ID!, $input: UpdateAPITokenInput!) {
+	updateAPIToken(id: $updateAPITokenId, input: $input) {
+		apiToken {
+			createdAt
+			createdBy
+			description
+			expiresAt
+			id
+			isActive
+			lastUsedAt
+			name
+			ownerID
+			revokedAt
+			revokedBy
+			revokedReason
+			scopes
+			ssoAuthorizations
+			tags
+			token
+			updatedAt
+			updatedBy
+			updatedByImpersonator
+		}
+	}
 }

@@ -8,6 +8,7 @@ mutation CreateBulkCSVProgramMembership($input: Upload!) {
       role
       updatedAt
       updatedBy
+      userID
       user {
         displayName
         email
@@ -29,6 +30,7 @@ mutation CreateBulkProgramMembership($input: [CreateProgramMembershipInput!]) {
       role
       updatedAt
       updatedBy
+      userID
       user {
         displayName
         email
@@ -50,6 +52,7 @@ mutation CreateProgramMembership($input: CreateProgramMembershipInput!) {
       role
       updatedAt
       updatedBy
+      userID
       user {
         displayName
         email
@@ -91,6 +94,7 @@ query GetAllProgramMemberships($first: Int, $last: Int, $after: Cursor, $before:
         role
         updatedAt
         updatedBy
+        userID
         user {
           displayName
           email
@@ -112,6 +116,7 @@ query GetProgramMembershipByID($programMembershipId: ID!) {
     role
     updatedAt
     updatedBy
+    userID
     user {
       displayName
       email
@@ -147,6 +152,7 @@ query GetProgramMemberships($first: Int, $last: Int, $after: Cursor, $before: Cu
         role
         updatedAt
         updatedBy
+        userID
         user {
           displayName
           email
@@ -169,6 +175,7 @@ mutation UpdateProgramMembership($updateProgramMembershipId: ID!, $input: Update
       role
       updatedAt
       updatedBy
+      userID
       user {
         displayName
         email

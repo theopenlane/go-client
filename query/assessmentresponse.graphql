@@ -3,13 +3,26 @@ mutation CreateAssessmentResponse($input: CreateAssessmentResponseInput!) {
     assessmentResponse {
       assessmentID
       assignedAt
+      campaignID
       completedAt
       createdAt
       createdBy
+      displayName
       documentDataID
       dueDate
       email
+      entityID
+      emailOpenedAt
+      emailOpenCount
+      emailMetadata
+      emailDeliveredAt
+      emailClickedAt
+      emailClickCount
       id
+      isTest
+      lastEmailEventAt
+      identityHolderID
+      isDraft
       ownerID
       sendAttempts
       startedAt
@@ -67,13 +80,26 @@ query GetAssessmentResponseByID($assessmentResponseId: ID!) {
   assessmentResponse(id: $assessmentResponseId) {
     assessmentID
     assignedAt
+    campaignID
     completedAt
     createdAt
     createdBy
+    displayName
     documentDataID
     dueDate
     email
+    emailOpenedAt
+    emailMetadata
+    entityID
+    emailOpenCount
+    emailDeliveredAt
+    emailClickedAt
+    emailClickCount
     id
+    lastEmailEventAt
+    identityHolderID
+    isTest
+    isDraft
     ownerID
     sendAttempts
     startedAt

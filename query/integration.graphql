@@ -46,20 +46,29 @@ query GetAllIntegrations($first: Int, $last: Int, $after: Cursor, $before: Curso
 
 query GetIntegrationByID($integrationId: ID!) {
   integration(id: $integrationId) {
+    campaignEmail
     createdAt
     createdBy
     definitionID
     definitionSlug
     definitionVersion
     description
+    environmentID
+    environmentName
+    expiresAt
     family
+    health
     id
     integrationType
     kind
     metadata
     name
     ownerID
+    primaryDirectory
+    platformID
     providerMetadataSnapshot
+    scopeName
+    scopeID
     status
     tags
     updatedAt
