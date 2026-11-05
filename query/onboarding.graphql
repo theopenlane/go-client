@@ -4,6 +4,7 @@ mutation CreateOnboarding($input: CreateOnboardingInput!) {
       companyDetails
       companyName
       compliance
+      demoRequested
       domains
       id
       organizationID

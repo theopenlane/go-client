@@ -14,10 +14,10 @@ mutation CreateBulkCSVCampaignTarget ($input: Upload!) {
 			ownerID
 			sentAt
 			status
+			subscriberID
 			updatedAt
 			updatedBy
 			userID
-			workflowEligibleMarker
 		}
 	}
 }
@@ -37,10 +37,10 @@ mutation CreateBulkCampaignTarget ($input: [CreateCampaignTargetInput!]) {
 			ownerID
 			sentAt
 			status
+			subscriberID
 			updatedAt
 			updatedBy
 			userID
-			workflowEligibleMarker
 		}
 	}
 }
@@ -60,10 +60,10 @@ mutation CreateCampaignTarget ($input: CreateCampaignTargetInput!) {
 			ownerID
 			sentAt
 			status
+			subscriberID
 			updatedAt
 			updatedBy
 			userID
-			workflowEligibleMarker
 		}
 	}
 }
@@ -96,10 +96,10 @@ query GetAllCampaignTargets ($first: Int, $last: Int, $after: Cursor, $before: C
 				ownerID
 				sentAt
 				status
+				subscriberID
 				updatedAt
 				updatedBy
 				userID
-				workflowEligibleMarker
 			}
 		}
 	}
@@ -119,10 +119,10 @@ query GetCampaignTargetByID ($campaignTargetId: ID!) {
 		ownerID
 		sentAt
 		status
+		subscriberID
 		updatedAt
 		updatedBy
 		userID
-		workflowEligibleMarker
 	}
 }
 query GetCampaignTargets ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [CampaignTargetOrder!], $where: CampaignTargetWhereInput) {
@@ -149,10 +149,10 @@ query GetCampaignTargets ($first: Int, $last: Int, $after: Cursor, $before: Curs
 				ownerID
 				sentAt
 				status
+				subscriberID
 				updatedAt
 				updatedBy
 				userID
-				workflowEligibleMarker
 			}
 		}
 	}
@@ -173,10 +173,10 @@ mutation UpdateCampaignTarget ($updateCampaignTargetId: ID!, $input: UpdateCampa
 			ownerID
 			sentAt
 			status
+			subscriberID
 			updatedAt
 			updatedBy
 			userID
-			workflowEligibleMarker
 		}
 	}
 }

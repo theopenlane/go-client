@@ -5,6 +5,7 @@ mutation CreateBulkCSVPlatform($input: Upload!) {
       accessModelName
       businessOwner
       businessOwnerGroupID
+      businessOwnerIdentityHolderID
       businessOwnerUserID
       businessPurpose
       containsPii
@@ -21,11 +22,16 @@ mutation CreateBulkCSVPlatform($input: Upload!) {
       environmentID
       environmentName
       estimatedMonthlyCost
+      externalID
       externalReferenceID
+      externalUUID
       id
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
+      managedBy
       metadata
       name
       ownerID
@@ -42,6 +48,7 @@ mutation CreateBulkCSVPlatform($input: Upload!) {
       scopeStatement
       securityOwner
       securityOwnerGroupID
+      securityOwnerIdentityHolderID
       securityOwnerUserID
       securityTierID
       securityTierName
@@ -51,11 +58,11 @@ mutation CreateBulkCSVPlatform($input: Upload!) {
       tags
       technicalOwner
       technicalOwnerGroupID
+      technicalOwnerIdentityHolderID
       technicalOwnerUserID
       trustBoundaryDescription
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
   }
 }
@@ -67,6 +74,7 @@ mutation CreateBulkPlatform($input: [CreatePlatformInput!]) {
       accessModelName
       businessOwner
       businessOwnerGroupID
+      businessOwnerIdentityHolderID
       businessOwnerUserID
       businessPurpose
       containsPii
@@ -83,11 +91,16 @@ mutation CreateBulkPlatform($input: [CreatePlatformInput!]) {
       environmentID
       environmentName
       estimatedMonthlyCost
+      externalID
       externalReferenceID
+      externalUUID
       id
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
+      managedBy
       metadata
       name
       ownerID
@@ -104,6 +117,7 @@ mutation CreateBulkPlatform($input: [CreatePlatformInput!]) {
       scopeStatement
       securityOwner
       securityOwnerGroupID
+      securityOwnerIdentityHolderID
       securityOwnerUserID
       securityTierID
       securityTierName
@@ -113,11 +127,11 @@ mutation CreateBulkPlatform($input: [CreatePlatformInput!]) {
       tags
       technicalOwner
       technicalOwnerGroupID
+      technicalOwnerIdentityHolderID
       technicalOwnerUserID
       trustBoundaryDescription
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
   }
 }
@@ -146,6 +160,7 @@ mutation CreatePlatform($input: CreatePlatformInput!) {
       environmentName
       estimatedMonthlyCost
       externalReferenceID
+      externalUUID
       id
       internalOwner
       internalOwnerGroupID
@@ -179,7 +194,6 @@ mutation CreatePlatform($input: CreatePlatformInput!) {
       trustBoundaryDescription
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
   }
 }
@@ -211,6 +225,7 @@ query GetAllPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
         accessModelName
         businessOwner
         businessOwnerGroupID
+        businessOwnerIdentityHolderID
         businessOwnerUserID
         businessPurpose
         containsPii
@@ -227,11 +242,16 @@ query GetAllPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
         environmentID
         environmentName
         estimatedMonthlyCost
+        externalID
         externalReferenceID
+        externalUUID
         id
+        integrationRunID
         internalOwner
         internalOwnerGroupID
+        internalOwnerIdentityHolderID
         internalOwnerUserID
+        managedBy
         metadata
         name
         ownerID
@@ -248,6 +268,7 @@ query GetAllPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
         scopeStatement
         securityOwner
         securityOwnerGroupID
+        securityOwnerIdentityHolderID
         securityOwnerUserID
         securityTierID
         securityTierName
@@ -257,11 +278,11 @@ query GetAllPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
         tags
         technicalOwner
         technicalOwnerGroupID
+        technicalOwnerIdentityHolderID
         technicalOwnerUserID
         trustBoundaryDescription
         updatedAt
         updatedBy
-        workflowEligibleMarker
         identityHolders {
           edges {
             node {
@@ -283,6 +304,7 @@ query GetPlatformByID($platformId: ID!) {
     accessModelName
     businessOwner
     businessOwnerGroupID
+    businessOwnerIdentityHolderID
     businessOwnerUserID
     businessPurpose
     containsPii
@@ -299,11 +321,16 @@ query GetPlatformByID($platformId: ID!) {
     environmentID
     environmentName
     estimatedMonthlyCost
+    externalID
     externalReferenceID
+    externalUUID
     id
+    integrationRunID
     internalOwner
     internalOwnerGroupID
+    internalOwnerIdentityHolderID
     internalOwnerUserID
+    managedBy
     metadata
     name
     ownerID
@@ -320,6 +347,7 @@ query GetPlatformByID($platformId: ID!) {
     scopeStatement
     securityOwner
     securityOwnerGroupID
+    securityOwnerIdentityHolderID
     securityOwnerUserID
     securityTierID
     securityTierName
@@ -329,11 +357,11 @@ query GetPlatformByID($platformId: ID!) {
     tags
     technicalOwner
     technicalOwnerGroupID
+    technicalOwnerIdentityHolderID
     technicalOwnerUserID
     trustBoundaryDescription
     updatedAt
     updatedBy
-    workflowEligibleMarker
   }
 }
 
@@ -359,6 +387,7 @@ query GetPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
         accessModelName
         businessOwner
         businessOwnerGroupID
+        businessOwnerIdentityHolderID
         businessOwnerUserID
         businessPurpose
         containsPii
@@ -375,11 +404,16 @@ query GetPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
         environmentID
         environmentName
         estimatedMonthlyCost
+        externalID
         externalReferenceID
+        externalUUID
         id
+        integrationRunID
         internalOwner
         internalOwnerGroupID
+        internalOwnerIdentityHolderID
         internalOwnerUserID
+        managedBy
         metadata
         name
         ownerID
@@ -396,6 +430,7 @@ query GetPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
         scopeStatement
         securityOwner
         securityOwnerGroupID
+        securityOwnerIdentityHolderID
         securityOwnerUserID
         securityTierID
         securityTierName
@@ -405,11 +440,11 @@ query GetPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
         tags
         technicalOwner
         technicalOwnerGroupID
+        technicalOwnerIdentityHolderID
         technicalOwnerUserID
         trustBoundaryDescription
         updatedAt
         updatedBy
-        workflowEligibleMarker
       }
     }
   }
@@ -439,6 +474,7 @@ mutation UpdatePlatform($updatePlatformId: ID!, $input: UpdatePlatformInput!) {
       environmentName
       estimatedMonthlyCost
       externalReferenceID
+      externalUUID
       id
       internalOwner
       internalOwnerGroupID
@@ -472,7 +508,6 @@ mutation UpdatePlatform($updatePlatformId: ID!, $input: UpdatePlatformInput!) {
       trustBoundaryDescription
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
   }
 }

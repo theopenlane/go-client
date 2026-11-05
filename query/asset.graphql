@@ -1,9 +1,15 @@
 mutation CreateAsset($input: CreateAssetInput!) {
   createAsset(input: $input) {
     asset {
+      accessModelID
       id
       name
+      observedAt
       internalOwner
+      managedBy
+      internalOwnerUserID
+      internalOwnerIdentityHolderID
+      internalOwnerGroupID
       internalOwnerGroup {
         id
         displayName
@@ -13,28 +19,41 @@ mutation CreateAsset($input: CreateAssetInput!) {
         displayName
       }
       accessModelName
+      assetDataClassificationID
       assetDataClassificationName
+      assetSubtypeID
       assetSubtypeName
       assetType
+      categories
       containsPii
       costCenter
       cpe
       createdAt
       createdBy
+      criticalityID
       updatedAt
       updatedBy
       criticalityName
       description
+      encryptionStatusID
+      displayName
       encryptionStatusName
+      environmentID
       environmentName
       estimatedMonthlyCost
+      externalID
       identifier
+      integrationRunID
+      integrationID
       physicalLocation
       purchaseDate
       region
+      scopeID
       scopeName
+      securityTierID
       securityTierName
       sourceIdentifier
+      sourcePlatformID
       sourceType
       tags
       website
@@ -45,9 +64,15 @@ mutation CreateAsset($input: CreateAssetInput!) {
 mutation CreateBulkAsset($input: [CreateAssetInput!]) {
   createBulkAsset(input: $input) {
     assets {
+      accessModelID
       id
       name
+      observedAt
       internalOwner
+      internalOwnerGroupID
+      managedBy
+      internalOwnerUserID
+      internalOwnerIdentityHolderID
       internalOwnerGroup {
         id
         displayName
@@ -57,28 +82,41 @@ mutation CreateBulkAsset($input: [CreateAssetInput!]) {
         displayName
       }
       accessModelName
+      assetDataClassificationID
       assetDataClassificationName
+      assetSubtypeID
       assetSubtypeName
       assetType
+      categories
       containsPii
       costCenter
       cpe
       createdAt
       createdBy
+      criticalityID
       updatedAt
       updatedBy
       criticalityName
       description
+      displayName
+      encryptionStatusID
       encryptionStatusName
+      environmentID
       environmentName
       estimatedMonthlyCost
+      externalID
       identifier
+      integrationID
+      integrationRunID
       physicalLocation
       purchaseDate
       region
+      scopeID
       scopeName
+      securityTierID
       securityTierName
       sourceIdentifier
+      sourcePlatformID
       sourceType
       tags
       website
@@ -89,9 +127,15 @@ mutation CreateBulkAsset($input: [CreateAssetInput!]) {
 mutation CreateBulkCSVAsset($input: Upload!) {
   createBulkCSVAsset(input: $input) {
     assets {
+      accessModelID
       id
       name
+      observedAt
       internalOwner
+      internalOwnerIdentityHolderID
+      internalOwnerGroupID
+      internalOwnerUserID
+      managedBy
       internalOwnerGroup {
         id
         displayName
@@ -101,28 +145,41 @@ mutation CreateBulkCSVAsset($input: Upload!) {
         displayName
       }
       accessModelName
+      assetDataClassificationID
       assetDataClassificationName
+      assetSubtypeID
       assetSubtypeName
       assetType
+      categories
       containsPii
       costCenter
       cpe
       createdAt
       createdBy
+      criticalityID
       updatedAt
       updatedBy
       criticalityName
       description
+      displayName
+      encryptionStatusID
       encryptionStatusName
+      environmentID
       environmentName
       estimatedMonthlyCost
+      externalID
       identifier
+      integrationRunID
+      integrationID
       physicalLocation
       purchaseDate
       region
+      scopeID
       scopeName
+      securityTierID
       securityTierName
       sourceIdentifier
+      sourcePlatformID
       sourceType
       tags
       website
@@ -153,9 +210,15 @@ query GetAllAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
     }
     edges {
       node {
+        accessModelID
         id
         name
+        observedAt
         internalOwner
+        managedBy
+        internalOwnerUserID
+        internalOwnerIdentityHolderID
+        internalOwnerGroupID
         internalOwnerGroup {
           id
           displayName
@@ -165,28 +228,41 @@ query GetAllAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
           displayName
         }
         accessModelName
+        assetDataClassificationID
         assetDataClassificationName
+        assetSubtypeID
         assetSubtypeName
         assetType
+        categories
         containsPii
         costCenter
         cpe
         createdAt
         createdBy
+        criticalityID
         updatedAt
         updatedBy
         criticalityName
         description
+        encryptionStatusID
+        displayName
         encryptionStatusName
+        environmentID
         environmentName
         estimatedMonthlyCost
+        externalID
         identifier
+        integrationID
+        integrationRunID
         physicalLocation
         purchaseDate
         region
+        scopeID
         scopeName
+        securityTierID
         securityTierName
         sourceIdentifier
+        sourcePlatformID
         sourceType
         tags
         website
@@ -197,9 +273,15 @@ query GetAllAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
 
 query GetAssetByID($assetId: ID!) {
   asset(id: $assetId) {
+    accessModelID
     id
     name
+    observedAt
     internalOwner
+    internalOwnerGroupID
+    internalOwnerIdentityHolderID
+    internalOwnerUserID
+    managedBy
     internalOwnerGroup {
       id
       displayName
@@ -209,28 +291,41 @@ query GetAssetByID($assetId: ID!) {
       displayName
     }
     accessModelName
+    assetDataClassificationID
     assetDataClassificationName
+    assetSubtypeID
     assetSubtypeName
     assetType
+    categories
     containsPii
     costCenter
     cpe
     createdAt
     createdBy
+    criticalityID
     updatedAt
     updatedBy
     criticalityName
     description
+    displayName
+    encryptionStatusID
     encryptionStatusName
+    environmentID
     environmentName
     estimatedMonthlyCost
+    externalID
     identifier
+    integrationID
+    integrationRunID
     physicalLocation
     purchaseDate
     region
+    scopeID
     scopeName
+    securityTierID
     securityTierName
     sourceIdentifier
+    sourcePlatformID
     sourceType
     tags
     website
@@ -255,9 +350,15 @@ query GetAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where
     }
     edges {
       node {
+        accessModelID
         id
         name
+        observedAt
         internalOwner
+        managedBy
+        internalOwnerGroupID
+        internalOwnerIdentityHolderID
+        internalOwnerUserID
         internalOwnerGroup {
           id
           displayName
@@ -267,28 +368,41 @@ query GetAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where
           displayName
         }
         accessModelName
+        assetDataClassificationID
         assetDataClassificationName
+        assetSubtypeID
         assetSubtypeName
         assetType
+        categories
         containsPii
         costCenter
         cpe
         createdAt
         createdBy
+        criticalityID
         updatedAt
         updatedBy
         criticalityName
         description
+        displayName
+        encryptionStatusID
         encryptionStatusName
+        environmentID
         environmentName
         estimatedMonthlyCost
+        externalID
         identifier
+        integrationID
+        integrationRunID
         physicalLocation
         purchaseDate
         region
+        scopeID
         scopeName
+        securityTierID
         securityTierName
         sourceIdentifier
+        sourcePlatformID
         sourceType
         tags
         website
@@ -300,9 +414,15 @@ query GetAssets($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where
 mutation UpdateAsset($updateAssetId: ID!, $input: UpdateAssetInput!) {
   updateAsset(id: $updateAssetId, input: $input) {
     asset {
+      accessModelID
       id
       name
+      observedAt
       internalOwner
+      managedBy
+      internalOwnerGroupID
+      internalOwnerIdentityHolderID
+      internalOwnerUserID
       internalOwnerGroup {
         id
         displayName
@@ -312,28 +432,41 @@ mutation UpdateAsset($updateAssetId: ID!, $input: UpdateAssetInput!) {
         displayName
       }
       accessModelName
+      assetDataClassificationID
       assetDataClassificationName
+      assetSubtypeID
       assetSubtypeName
       assetType
+      categories
       containsPii
       costCenter
       cpe
       createdAt
       createdBy
+      criticalityID
       updatedAt
       updatedBy
       criticalityName
       description
+      encryptionStatusID
+      displayName
       encryptionStatusName
+      environmentID
       environmentName
       estimatedMonthlyCost
+      externalID
       identifier
+      integrationID
+      integrationRunID
       physicalLocation
       purchaseDate
       region
+      scopeID
       scopeName
+      securityTierID
       securityTierName
       sourceIdentifier
+      sourcePlatformID
       sourceType
       tags
       website

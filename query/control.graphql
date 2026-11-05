@@ -7,6 +7,7 @@ mutation CreateBulkControl($input: [CreateControlInput!]) {
       auditorReferenceID
       category
       categoryID
+      controlKindID
       controlOwnerID
       controlQuestions
       controlKindName
@@ -14,19 +15,34 @@ mutation CreateBulkControl($input: [CreateControlInput!]) {
       createdBy
       delegateID
       description
+      descriptionJSON
       displayID
+      environmentName
+      environmentID
       exampleEvidence
+      externalID
       externalUUID
       evidenceRequests
       id
+      implementationDescription
       implementationGuidance
+      managedBy
+      isTrustCenterControl
+      integrationRunID
+      implementationStatus
       mappedCategories
       ownerID
+      publicRepresentation
       refCode
       referenceFramework
+      referenceFrameworkRevision
       referenceID
       references
+      scopeName
+      scopeID
+      responsiblePartyID
       source
+      sourceName
       standardID
       status
       subcategory
@@ -34,6 +50,7 @@ mutation CreateBulkControl($input: [CreateControlInput!]) {
       testingProcedures
       evidenceRequests
       title
+      trustCenterVisibility
       updatedAt
       updatedBy
     }
@@ -49,6 +66,7 @@ mutation CreateBulkCSVControl($input: Upload!) {
       auditorReferenceID
       category
       categoryID
+      controlKindID
       controlOwnerID
       controlQuestions
       controlKindName
@@ -56,19 +74,34 @@ mutation CreateBulkCSVControl($input: Upload!) {
       createdBy
       delegateID
       description
+      descriptionJSON
       displayID
+      environmentID
+      environmentName
       exampleEvidence
+      externalID
       externalUUID
       evidenceRequests
       id
+      implementationDescription
       implementationGuidance
+      implementationStatus
+      integrationRunID
+      isTrustCenterControl
+      managedBy
       mappedCategories
       ownerID
+      publicRepresentation
       refCode
       referenceFramework
+      referenceFrameworkRevision
       referenceID
       references
+      responsiblePartyID
+      scopeID
+      scopeName
       source
+      sourceName
       standardID
       status
       subcategory
@@ -76,6 +109,7 @@ mutation CreateBulkCSVControl($input: Upload!) {
       testingProcedures
       evidenceRequests
       title
+      trustCenterVisibility
       updatedAt
       updatedBy
     }
@@ -91,6 +125,7 @@ mutation CreateControl($input: CreateControlInput!) {
       auditorReferenceID
       category
       categoryID
+      controlKindID
       controlOwnerID
       controlQuestions
       controlKindName
@@ -98,19 +133,34 @@ mutation CreateControl($input: CreateControlInput!) {
       createdBy
       delegateID
       description
+      descriptionJSON
       displayID
+      environmentName
+      environmentID
       exampleEvidence
+      externalID
       externalUUID
       evidenceRequests
       id
+      implementationDescription
       implementationGuidance
+      isTrustCenterControl
+      managedBy
+      integrationRunID
+      implementationStatus
       mappedCategories
       ownerID
+      publicRepresentation
       refCode
       referenceFramework
+      referenceFrameworkRevision
       referenceID
       references
+      responsiblePartyID
+      scopeID
+      scopeName
       source
+      sourceName
       standardID
       status
       subcategory
@@ -118,6 +168,7 @@ mutation CreateControl($input: CreateControlInput!) {
       testingProcedures
       evidenceRequests
       title
+      trustCenterVisibility
       updatedAt
       updatedBy
     }
@@ -160,6 +211,7 @@ query GetAllControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
         createdBy
         delegateID
         description
+        descriptionJSON
         displayID
         exampleEvidence
         externalUUID
@@ -195,6 +247,7 @@ query GetControlByID($controlId: ID!) {
     auditorReferenceID
     category
     categoryID
+    controlKindID
     controlOwnerID
     controlQuestions
     controlKindName
@@ -202,19 +255,34 @@ query GetControlByID($controlId: ID!) {
     createdBy
     delegateID
     description
+    descriptionJSON
     displayID
+    environmentName
+    environmentID
     exampleEvidence
+    externalID
     externalUUID
     evidenceRequests
     id
+    implementationDescription
     implementationGuidance
+    managedBy
+    isTrustCenterControl
+    integrationRunID
+    implementationStatus
     mappedCategories
     ownerID
+    publicRepresentation
     refCode
     referenceFramework
+    referenceFrameworkRevision
     referenceID
     references
+    scopeName
+    scopeID
+    responsiblePartyID
     source
+    sourceName
     standardID
     status
     subcategory
@@ -222,6 +290,7 @@ query GetControlByID($controlId: ID!) {
     testingProcedures
     evidenceRequests
     title
+    trustCenterVisibility
     updatedAt
     updatedBy
   }
@@ -251,6 +320,7 @@ query GetControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $whe
         auditorReferenceID
         category
         categoryID
+        controlKindID
         controlOwnerID
         controlQuestions
         controlKindName
@@ -258,19 +328,34 @@ query GetControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $whe
         createdBy
         delegateID
         description
+        descriptionJSON
         displayID
+        environmentID
+        environmentName
         exampleEvidence
+        externalID
         externalUUID
         evidenceRequests
         id
+        implementationDescription
         implementationGuidance
+        managedBy
+        implementationStatus
+        integrationRunID
+        isTrustCenterControl
         mappedCategories
         ownerID
+        publicRepresentation
         refCode
         referenceFramework
+        referenceFrameworkRevision
         referenceID
         references
+        responsiblePartyID
+        scopeID
+        scopeName
         source
+        sourceName
         standardID
         status
         subcategory
@@ -278,6 +363,7 @@ query GetControls($first: Int, $last: Int, $after: Cursor, $before: Cursor, $whe
         testingProcedures
         evidenceRequests
         title
+        trustCenterVisibility
         updatedAt
         updatedBy
       }
@@ -294,6 +380,7 @@ mutation UpdateControl($updateControlId: ID!, $input: UpdateControlInput!) {
       auditorReferenceID
       category
       categoryID
+      controlKindID
       controlOwnerID
       controlQuestions
       controlKindName
@@ -301,19 +388,34 @@ mutation UpdateControl($updateControlId: ID!, $input: UpdateControlInput!) {
       createdBy
       delegateID
       description
+      descriptionJSON
       displayID
+      environmentName
+      environmentID
       exampleEvidence
+      externalID
       externalUUID
       evidenceRequests
       id
+      implementationDescription
       implementationGuidance
+      managedBy
+      isTrustCenterControl
+      integrationRunID
+      implementationStatus
       mappedCategories
       ownerID
+      publicRepresentation
       refCode
       referenceFramework
+      referenceFrameworkRevision
       referenceID
       references
+      scopeName
+      scopeID
+      responsiblePartyID
       source
+      sourceName
       standardID
       status
       subcategory
@@ -321,6 +423,7 @@ mutation UpdateControl($updateControlId: ID!, $input: UpdateControlInput!) {
       testingProcedures
       evidenceRequests
       title
+      trustCenterVisibility
       updatedAt
       updatedBy
     }

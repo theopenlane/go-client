@@ -9,18 +9,23 @@ mutation CreateBulkCampaign($input: [CreateCampaignInput!]) {
       description
       displayID
       dueDate
+      emailBrandingID
       emailTemplateID
       entityID
+      externalID
       id
       integrationID
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
       isActive
       isRecurring
       lastResentAt
       lastRunAt
       launchedAt
+      managedBy
       metadata
       name
       nextRunAt
@@ -36,9 +41,9 @@ mutation CreateBulkCampaign($input: [CreateCampaignInput!]) {
       status
       tags
       templateID
+      trustCenterID
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
   }
 }
@@ -54,18 +59,23 @@ mutation CreateBulkCSVCampaign($input: Upload!) {
       description
       displayID
       dueDate
+      emailBrandingID
       emailTemplateID
       entityID
+      externalID
       id
       integrationID
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
       isActive
       isRecurring
       lastResentAt
       lastRunAt
       launchedAt
+      managedBy
       metadata
       name
       nextRunAt
@@ -81,9 +91,9 @@ mutation CreateBulkCSVCampaign($input: Upload!) {
       status
       tags
       templateID
+      trustCenterID
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
   }
 }
@@ -99,18 +109,23 @@ mutation CreateCampaign($input: CreateCampaignInput!) {
       description
       displayID
       dueDate
+      emailBrandingID
       emailTemplateID
       entityID
+      externalID
       id
       integrationID
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
       isActive
       isRecurring
       lastResentAt
       lastRunAt
       launchedAt
+      managedBy
       metadata
       name
       nextRunAt
@@ -126,9 +141,9 @@ mutation CreateCampaign($input: CreateCampaignInput!) {
       status
       tags
       templateID
+      trustCenterID
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
   }
 }
@@ -164,18 +179,23 @@ query GetAllCampaigns($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
         description
         displayID
         dueDate
+        emailBrandingID
         emailTemplateID
         entityID
+        externalID
         id
         integrationID
+        integrationRunID
         internalOwner
         internalOwnerGroupID
+        internalOwnerIdentityHolderID
         internalOwnerUserID
         isActive
         isRecurring
         lastResentAt
         lastRunAt
         launchedAt
+        managedBy
         metadata
         name
         nextRunAt
@@ -191,9 +211,9 @@ query GetAllCampaigns($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
         status
         tags
         templateID
+        trustCenterID
         updatedAt
         updatedBy
-        workflowEligibleMarker
         campaignTargets {
           edges {
             node {
@@ -222,18 +242,23 @@ query GetCampaignByID($campaignId: ID!) {
     description
     displayID
     dueDate
+    emailBrandingID
     emailTemplateID
     entityID
+    externalID
     id
     integrationID
+    integrationRunID
     internalOwner
     internalOwnerGroupID
+    internalOwnerIdentityHolderID
     internalOwnerUserID
     isActive
     isRecurring
     lastResentAt
     lastRunAt
     launchedAt
+    managedBy
     metadata
     name
     nextRunAt
@@ -249,9 +274,9 @@ query GetCampaignByID($campaignId: ID!) {
     status
     tags
     templateID
+    trustCenterID
     updatedAt
     updatedBy
-    workflowEligibleMarker
     campaignTargets {
       edges {
         node {
@@ -294,18 +319,23 @@ query GetCampaigns($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
         description
         displayID
         dueDate
+        emailBrandingID
         emailTemplateID
         entityID
+        externalID
         id
         integrationID
+        integrationRunID
         internalOwner
         internalOwnerGroupID
+        internalOwnerIdentityHolderID
         internalOwnerUserID
         isActive
         isRecurring
         lastResentAt
         lastRunAt
         launchedAt
+        managedBy
         metadata
         name
         nextRunAt
@@ -321,9 +351,9 @@ query GetCampaigns($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
         status
         tags
         templateID
+        trustCenterID
         updatedAt
         updatedBy
-        workflowEligibleMarker
         campaignTargets {
           edges {
             node {
@@ -353,18 +383,23 @@ mutation UpdateCampaign($updateCampaignId: ID!, $input: UpdateCampaignInput!) {
       description
       displayID
       dueDate
+      emailBrandingID
       emailTemplateID
       entityID
+      externalID
       id
       integrationID
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
       isActive
       isRecurring
       lastResentAt
       lastRunAt
       launchedAt
+      managedBy
       metadata
       name
       nextRunAt
@@ -380,9 +415,9 @@ mutation UpdateCampaign($updateCampaignId: ID!, $input: UpdateCampaignInput!) {
       status
       tags
       templateID
+      trustCenterID
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
   }
 }

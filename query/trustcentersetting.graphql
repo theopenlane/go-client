@@ -3,6 +3,9 @@ mutation CreateTrustCenterSetting($input: CreateTrustCenterSettingInput!) {
     trustCenterSetting {
       accentColor
       backgroundColor
+      companyName
+      companyDomain
+      companyDescription
       createdAt
       createdBy
       environment
@@ -10,11 +13,18 @@ mutation CreateTrustCenterSetting($input: CreateTrustCenterSettingInput!) {
       faviconRemoteURL
       font
       foregroundColor
+      heroImageLocalFileID
       id
       logoLocalFileID
       logoRemoteURL
+      ndaApprovalRequired
       overview
       primaryColor
+      removeBranding
+      secondaryBackgroundColor
+      secondaryForegroundColor
+      securityContact
+      statusPageURL
       themeMode
       title
       trustCenterID
@@ -53,6 +63,7 @@ query GetAllTrustCenterSettings($first: Int, $last: Int, $after: Cursor, $before
         createdBy
         environment
         faviconLocalFileID
+        heroImageLocalFileID
         faviconRemoteURL
         font
         foregroundColor
@@ -74,19 +85,36 @@ query GetAllTrustCenterSettings($first: Int, $last: Int, $after: Cursor, $before
 query GetTrustCenterSettingByID($trustCenterSettingId: ID!) {
   trustCenterSetting(id: $trustCenterSettingId) {
     accentColor
+    allowSubscribers
+    autoApprovalRules
     backgroundColor
+    companyDescription
+    companyDomain
+    companyName
     createdAt
     createdBy
+    enableAutoApproval
     environment
     faviconLocalFileID
     faviconRemoteURL
     font
     foregroundColor
+    heroImageLocalFileID
     id
     logoLocalFileID
     logoRemoteURL
+    ndaApproverGroupID
+    noindexDefaultDomain
+    notifySubscribersOnSubprocessorChange
+    ndaApprovalRequired
     overview
     primaryColor
+    subprocessorsNotifiedAt
+    removeBranding
+    secondaryBackgroundColor
+    secondaryForegroundColor
+    securityContact
+    statusPageURL
     themeMode
     title
     trustCenterID
@@ -119,6 +147,7 @@ query GetTrustCenterSettings($first: Int, $last: Int, $after: Cursor, $before: C
         createdBy
         environment
         faviconLocalFileID
+        heroImageLocalFileID
         faviconRemoteURL
         font
         foregroundColor
@@ -150,6 +179,7 @@ mutation UpdateTrustCenterSetting($updateTrustCenterSettingId: ID!, $input: Upda
       createdAt
       createdBy
       environment
+      securityContact
       faviconLocalFileID
       faviconRemoteURL
       font

@@ -12,11 +12,21 @@ mutation CreateBulkCSVProgram($input: Upload!) {
       description
       displayID
       endDate
+      fieldworkStartDate
+      externalID
+      externalUUID
+      fieldworkEndDate
       frameworkName
       id
+      integrationRunID
+      managedBy
       name
+      observationPeriodEndDate
+      observationPeriodStartDate
       ownerID
+      programKindID
       programKindName
+      programOwnerID
       startDate
       status
       tags
@@ -40,11 +50,21 @@ mutation CreateBulkProgram($input: [CreateProgramInput!]) {
       description
       displayID
       endDate
+      fieldworkStartDate
+      externalID
+      externalUUID
+      fieldworkEndDate
       frameworkName
       id
+      managedBy
+      integrationRunID
       name
+      observationPeriodStartDate
+      observationPeriodEndDate
       ownerID
+      programKindID
       programKindName
+      programOwnerID
       startDate
       status
       tags
@@ -68,11 +88,21 @@ mutation CreateProgram($input: CreateProgramInput!) {
       description
       displayID
       endDate
+      externalID
+      externalUUID
+      fieldworkStartDate
+      fieldworkEndDate
       frameworkName
       id
+      integrationRunID
+      managedBy
       name
+      observationPeriodStartDate
+      observationPeriodEndDate
       ownerID
+      programKindID
       programKindName
+      programOwnerID
       startDate
       status
       tags
@@ -144,11 +174,21 @@ query GetProgramByID($programId: ID!) {
     description
     displayID
     endDate
+    fieldworkStartDate
+    fieldworkEndDate
+    externalUUID
+    externalID
     frameworkName
     id
+    integrationRunID
+    managedBy
     name
+    observationPeriodEndDate
+    observationPeriodStartDate
     ownerID
+    programKindID
     programKindName
+    programOwnerID
     startDate
     status
     tags
@@ -215,11 +255,21 @@ mutation UpdateProgram($updateProgramId: ID!, $input: UpdateProgramInput!) {
       description
       displayID
       endDate
+      fieldworkStartDate
+      fieldworkEndDate
+      externalUUID
+      externalID
       frameworkName
       id
+      integrationRunID
+      managedBy
       name
+      observationPeriodEndDate
+      observationPeriodStartDate
       ownerID
+      programKindID
       programKindName
+      programOwnerID
       startDate
       status
       tags

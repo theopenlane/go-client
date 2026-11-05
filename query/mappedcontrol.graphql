@@ -4,7 +4,10 @@ mutation CreateBulkCSVMappedControl($input: Upload!) {
       confidence
       createdAt
       createdBy
+      externalID
       id
+      integrationRunID
+      managedBy
       mappingType
       relation
       source
@@ -21,7 +24,10 @@ mutation CreateBulkMappedControl($input: [CreateMappedControlInput!]) {
       confidence
       createdAt
       createdBy
+      externalID
       id
+      managedBy
+      integrationRunID
       mappingType
       relation
       source
@@ -70,7 +76,10 @@ mutation CreateMappedControl($input: CreateMappedControlInput!) {
       confidence
       createdAt
       createdBy
+      externalID
       id
+      managedBy
+      integrationRunID
       mappingType
       relation
       source
@@ -300,7 +309,10 @@ query GetMappedControlByID($mappedControlId: ID!) {
     confidence
     createdAt
     createdBy
+    externalID
     id
+    managedBy
+    integrationRunID
     mappingType
     relation
     source
@@ -413,7 +425,10 @@ mutation UpdateMappedControl($updateMappedControlId: ID!, $input: UpdateMappedCo
       confidence
       createdAt
       createdBy
+      externalID
       id
+      managedBy
+      integrationRunID
       mappingType
       relation
       source

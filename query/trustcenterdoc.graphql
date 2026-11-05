@@ -95,9 +95,12 @@ query GetTrustCenterDocByID($trustCenterDocId: ID!) {
     tags
     trustCenterID
     title
+    trustCenterDocKindID
     trustCenterDocKindName
     fileID
     visibility
+    watermarkingEnabled
+    watermarkStatus
     standardID
     standard {
       id

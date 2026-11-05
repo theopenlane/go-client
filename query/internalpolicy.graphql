@@ -8,24 +8,39 @@ mutation CreateBulkCSVInternalPolicy($input: Upload!) {
       createdBy
       delegateID
       details
+      detailsJSON
       dismissedControlSuggestions
       dismissedImprovementSuggestions
       dismissedTagSuggestions
       displayID
+      fileID
+      externalUUID
+      externalID
+      externalFileID
+      externalContents
+      environmentName
+      environmentID
       id
       improvementSuggestions
+      internalPolicyKindID
+      integrationRunID
       name
       ownerID
       internalPolicyKindName
+      managedBy
+      managementMode
       reviewDue
       reviewFrequency
       revision
+      scopeID
+      scopeName
       status
       summary
       tagSuggestions
       tags
       updatedAt
       updatedBy
+      url
     }
   }
 }
@@ -40,24 +55,39 @@ mutation CreateBulkInternalPolicy($input: [CreateInternalPolicyInput!]) {
       createdBy
       delegateID
       details
+      detailsJSON
       dismissedControlSuggestions
       dismissedImprovementSuggestions
       dismissedTagSuggestions
       displayID
+      environmentID
+      environmentName
+      externalContents
+      externalFileID
+      fileID
+      externalUUID
+      externalID
       id
       improvementSuggestions
+      internalPolicyKindID
+      integrationRunID
       name
       ownerID
       internalPolicyKindName
+      managementMode
+      managedBy
       reviewDue
       reviewFrequency
       revision
+      scopeName
+      scopeID
       status
       summary
       tagSuggestions
       tags
       updatedAt
       updatedBy
+      url
     }
   }
 }
@@ -72,24 +102,39 @@ mutation CreateInternalPolicy($input: CreateInternalPolicyInput!) {
       createdBy
       delegateID
       details
+      detailsJSON
       dismissedControlSuggestions
       dismissedImprovementSuggestions
       dismissedTagSuggestions
       displayID
+      externalUUID
+      fileID
+      externalFileID
+      externalContents
+      environmentName
+      environmentID
+      externalID
       id
       improvementSuggestions
+      integrationRunID
+      internalPolicyKindID
       name
       ownerID
       internalPolicyKindName
+      managedBy
+      managementMode
       reviewDue
       reviewFrequency
       revision
+      scopeID
+      scopeName
       status
       summary
       tagSuggestions
       tags
       updatedAt
       updatedBy
+      url
     }
   }
 }
@@ -159,24 +204,39 @@ query GetAllInternalPolicies($first: Int, $last: Int, $after: Cursor, $before: C
         createdBy
         delegateID
         details
+        detailsJSON
         dismissedControlSuggestions
         dismissedImprovementSuggestions
         dismissedTagSuggestions
         displayID
+        environmentID
+        environmentName
+        externalContents
+        externalFileID
+        externalID
+        externalUUID
+        fileID
         id
         improvementSuggestions
+        integrationRunID
+        internalPolicyKindID
         name
         ownerID
         internalPolicyKindName
+        managedBy
+        managementMode
         reviewDue
         reviewFrequency
         revision
+        scopeID
+        scopeName
         status
         summary
         tagSuggestions
         tags
         updatedAt
         updatedBy
+        url
       }
     }
   }
@@ -207,24 +267,39 @@ internalPolicies(
         createdBy
         delegateID
         details
+        detailsJSON
         dismissedControlSuggestions
         dismissedImprovementSuggestions
         dismissedTagSuggestions
         displayID
+        environmentName
+        externalContents
+        externalFileID
+        externalID
+        externalUUID
+        fileID
+        environmentID
         id
         improvementSuggestions
+        integrationRunID
+        internalPolicyKindID
         name
         ownerID
         internalPolicyKindName
+        managedBy
+        managementMode
         reviewDue
         reviewFrequency
         revision
+        scopeName
+        scopeID
         status
         summary
         tagSuggestions
         tags
         updatedAt
         updatedBy
+        url
       }
     }
   }
@@ -239,24 +314,39 @@ query GetInternalPolicyByID($internalPolicyId: ID!) {
     createdBy
     delegateID
     details
+    detailsJSON
     dismissedControlSuggestions
     dismissedImprovementSuggestions
     dismissedTagSuggestions
     displayID
+    environmentID
+    fileID
+    environmentName
+    externalContents
+    externalFileID
+    externalID
+    externalUUID
     id
     improvementSuggestions
+    internalPolicyKindID
+    integrationRunID
     name
     ownerID
     internalPolicyKindName
+    managementMode
+    managedBy
     reviewDue
     reviewFrequency
     revision
+    scopeID
+    scopeName
     status
     summary
     tagSuggestions
     tags
     updatedAt
     updatedBy
+    url
   }
 }
 
@@ -270,23 +360,39 @@ mutation UpdateInternalPolicy($updateInternalPolicyId: ID!, $input: UpdateIntern
       createdBy
       delegateID
       details
+      detailsJSON
       dismissedControlSuggestions
       dismissedImprovementSuggestions
       dismissedTagSuggestions
       displayID
+      externalContents
+      externalID
+      externalUUID
+      fileID
+      externalFileID
+      environmentID
+      environmentName
       id
       improvementSuggestions
+      integrationRunID
+      managementMode
+      internalPolicyKindID
+      managedBy
+      internalPolicyKindName
       name
       ownerID
       reviewDue
       reviewFrequency
       revision
+      scopeName
+      scopeID
       status
       summary
       tagSuggestions
       tags
       updatedAt
       updatedBy
+      url
     }
   }
 }

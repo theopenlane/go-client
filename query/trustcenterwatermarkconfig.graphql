@@ -73,6 +73,7 @@ query GetTrustCenterWatermarkConfigByID($trustCenterWatermarkConfigId: ID!) {
     createdAt
     createdBy
     id
+    isEnabled
     updatedAt
     updatedBy
     trustCenterID

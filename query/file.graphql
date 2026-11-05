@@ -28,6 +28,7 @@ query GetAllFiles($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
         detectedMimeType
         id
         md5Hash
+        name
         persistedFileSize
         providedFileExtension
         providedFileName
@@ -40,24 +41,38 @@ query GetAllFiles($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
         updatedAt
         updatedBy
         uri
+        storageRegion
+        storageProvider
+        metadata
+        lastAccessedAt
       }
     }
   }
 }
 query GetFileByID($fileId: ID!) {
   file(id: $fileId) {
+    categoryID
     categoryName
     createdAt
     createdBy
     detectedContentType
     detectedMimeType
+    environmentName
+    environmentID
     id
+    lastAccessedAt
     md5Hash
+    name
+    metadata
     persistedFileSize
     providedFileExtension
     providedFileName
     providedFileSize
+    scopeName
+    scopeID
     storagePath
+    storageRegion
+    storageProvider
     storageScheme
     storageVolume
     storeKey
@@ -93,6 +108,7 @@ files(
         detectedMimeType
         id
         md5Hash
+        name
         persistedFileSize
         providedFileExtension
         providedFileName
@@ -105,6 +121,10 @@ files(
         updatedAt
         updatedBy
         uri
+        storageRegion
+        storageProvider
+        metadata
+        lastAccessedAt
       }
     }
   }

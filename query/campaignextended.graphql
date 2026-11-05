@@ -35,7 +35,6 @@ mutation CreateCampaignWithTargets($input: CreateCampaignWithTargetsInput!) {
       templateID
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
     campaignTargets {
       campaignID
@@ -54,7 +53,6 @@ mutation CreateCampaignWithTargets($input: CreateCampaignWithTargetsInput!) {
       updatedAt
       updatedBy
       userID
-      workflowEligibleMarker
     }
   }
 }
@@ -96,7 +94,6 @@ mutation CreateCampaignWithTargetsCSV($campaign: CreateCampaignInput!, $targets:
       templateID
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
     campaignTargets {
       campaignID
@@ -115,7 +112,6 @@ mutation CreateCampaignWithTargetsCSV($campaign: CreateCampaignInput!, $targets:
       updatedAt
       updatedBy
       userID
-      workflowEligibleMarker
     }
   }
 }
@@ -157,7 +153,6 @@ mutation LaunchCampaign($input: LaunchCampaignInput!) {
       templateID
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
     queuedCount
     skippedCount
@@ -201,7 +196,6 @@ mutation ResendCampaignIncompleteTargets($input: ResendCampaignIncompleteInput!)
       templateID
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
     queuedCount
     skippedCount
@@ -245,7 +239,6 @@ mutation SendCampaignTestEmail($input: SendCampaignTestEmailInput!) {
       templateID
       updatedAt
       updatedBy
-      workflowEligibleMarker
     }
     queuedCount
     skippedCount

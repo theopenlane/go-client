@@ -96,6 +96,7 @@ query GetStandardByID($standardId: ID!) {
     id
     isPublic
     link
+    logoFileID
     name
     ownerID
     revision

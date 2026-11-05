@@ -1,22 +1,33 @@
 mutation CreateBulkCSVDirectoryGroup($input: Upload!) {
   createBulkCSVDirectoryGroup(input: $input) {
     directoryGroups {
+      addedAt
       classification
       createdAt
       createdBy
       description
+      directoryName
       displayID
       displayName
       email
+      environmentID
+      environmentName
       externalID
       externalSharingAllowed
       id
       integrationID
+      managedBy
+      integrationRunID
       memberCount
+      metadata
       observedAt
       ownerID
+      platformID
       profile
       rawProfileFileID
+      removedAt
+      scopeName
+      scopeID
       sourceVersion
       status
       tags
@@ -29,22 +40,33 @@ mutation CreateBulkCSVDirectoryGroup($input: Upload!) {
 mutation CreateBulkDirectoryGroup($input: [CreateDirectoryGroupInput!]) {
   createBulkDirectoryGroup(input: $input) {
     directoryGroups {
+      addedAt
       classification
       createdAt
       createdBy
       description
+      directoryName
       displayID
       displayName
       email
+      environmentName
+      environmentID
       externalID
       externalSharingAllowed
       id
       integrationID
+      integrationRunID
+      managedBy
       memberCount
+      metadata
       observedAt
       ownerID
+      platformID
       profile
       rawProfileFileID
+      scopeName
+      scopeID
+      removedAt
       sourceVersion
       status
       tags
@@ -57,22 +79,33 @@ mutation CreateBulkDirectoryGroup($input: [CreateDirectoryGroupInput!]) {
 mutation CreateDirectoryGroup($input: CreateDirectoryGroupInput!) {
   createDirectoryGroup(input: $input) {
     directoryGroup {
+      addedAt
       classification
       createdAt
       createdBy
       description
+      directoryName
       displayID
       displayName
       email
+      environmentID
+      environmentName
       externalID
       externalSharingAllowed
       id
       integrationID
+      integrationRunID
+      managedBy
       memberCount
+      metadata
       observedAt
       ownerID
+      platformID
       profile
       rawProfileFileID
+      removedAt
+      scopeID
+      scopeName
       sourceVersion
       status
       tags
@@ -88,7 +121,7 @@ mutation DeleteDirectoryGroup($deleteDirectoryGroupId: ID!) {
   }
 }
 
-query GetAllDirectoryGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectoryGroupOrder!]){
+query GetAllDirectoryGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectoryGroupOrder!]) {
   directoryGroups(
     first: $first
     last: $last
@@ -133,22 +166,33 @@ query GetAllDirectoryGroups($first: Int, $last: Int, $after: Cursor, $before: Cu
 
 query GetDirectoryGroupByID($directoryGroupId: ID!) {
   directoryGroup(id: $directoryGroupId) {
+    addedAt
     classification
     createdAt
     createdBy
     description
+    directoryName
     displayID
     displayName
     email
+    environmentName
+    environmentID
     externalID
     externalSharingAllowed
     id
     integrationID
+    managedBy
+    integrationRunID
     memberCount
+    metadata
     observedAt
     ownerID
+    platformID
     profile
     rawProfileFileID
+    scopeName
+    removedAt
+    scopeID
     sourceVersion
     status
     tags
@@ -158,7 +202,7 @@ query GetDirectoryGroupByID($directoryGroupId: ID!) {
 }
 
 query GetDirectoryGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DirectoryGroupWhereInput, $orderBy: [DirectoryGroupOrder!]) {
-directoryGroups(
+  directoryGroups(
     first: $first
     last: $last
     after: $after
@@ -204,22 +248,33 @@ directoryGroups(
 mutation UpdateDirectoryGroup($updateDirectoryGroupId: ID!, $input: UpdateDirectoryGroupInput!) {
   updateDirectoryGroup(id: $updateDirectoryGroupId, input: $input) {
     directoryGroup {
+      addedAt
       classification
       createdAt
       createdBy
       description
+      directoryName
       displayID
       displayName
       email
+      environmentName
+      environmentID
       externalID
       externalSharingAllowed
       id
       integrationID
+      managedBy
+      integrationRunID
       memberCount
+      metadata
       observedAt
       ownerID
+      platformID
       profile
       rawProfileFileID
+      scopeName
+      scopeID
+      removedAt
       sourceVersion
       status
       tags

@@ -6,7 +6,10 @@ mutation CreateBulkCSVNarrative($input: Upload!) {
       description
       details
       displayID
+      externalID
       id
+      integrationRunID
+      managedBy
       name
       ownerID
       tags
@@ -24,7 +27,10 @@ mutation CreateBulkNarrative($input: [CreateNarrativeInput!]) {
       description
       details
       displayID
+      externalID
       id
+      integrationRunID
+      managedBy
       name
       ownerID
       tags
@@ -42,7 +48,10 @@ mutation CreateNarrative($input: CreateNarrativeInput!) {
       description
       details
       displayID
+      externalID
       id
+      managedBy
+      integrationRunID
       name
       ownerID
       tags
@@ -98,7 +107,10 @@ query GetNarrativeByID($narrativeId: ID!) {
     description
     details
     displayID
+    externalID
     id
+    integrationRunID
+    managedBy
     name
     ownerID
     tags
@@ -149,7 +161,10 @@ mutation UpdateNarrative($updateNarrativeId: ID!, $input: UpdateNarrativeInput!)
       description
       details
       displayID
+      externalID
       id
+      managedBy
+      integrationRunID
       name
       ownerID
       tags

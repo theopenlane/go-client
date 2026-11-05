@@ -4,8 +4,12 @@ mutation CreateBulkControlImplementation($input: [CreateControlImplementationInp
       createdAt
       createdBy
       details
+      externalID
+      detailsJSON
       id
       implementationDate
+      integrationRunID
+      managedBy
       ownerID
       status
       tags
@@ -30,8 +34,12 @@ mutation CreateBulkCSVControlImplementation($input: Upload!) {
       createdAt
       createdBy
       details
+      externalID
+      detailsJSON
       id
       implementationDate
+      integrationRunID
+      managedBy
       ownerID
       status
       tags
@@ -56,8 +64,12 @@ mutation CreateControlImplementation($input: CreateControlImplementationInput!) 
       createdAt
       createdBy
       details
+      externalID
+      detailsJSON
       id
       implementationDate
+      managedBy
+      integrationRunID
       ownerID
       status
       tags
@@ -142,8 +154,12 @@ query GetControlImplementationByID($controlImplementationId: ID!) {
     createdAt
     createdBy
     details
+    detailsJSON
+    externalID
     id
     implementationDate
+    managedBy
+    integrationRunID
     ownerID
     status
     tags
@@ -223,8 +239,12 @@ mutation UpdateControlImplementation($updateControlImplementationId: ID!, $input
       createdAt
       createdBy
       details
+      externalID
+      detailsJSON
       id
       implementationDate
+      managedBy
+      integrationRunID
       ownerID
       status
       tags

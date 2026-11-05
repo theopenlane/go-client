@@ -4,11 +4,17 @@ mutation CreateAssessment($input: CreateAssessmentInput!) {
       assessmentType
       createdAt
       createdBy
+      externalID
       id
+      jsonconfig
+      managedBy
+      integrationRunID
       name
       ownerID
+      responseDueDuration
       tags
       templateID
+      uischema
       updatedAt
       updatedBy
     }
@@ -74,11 +80,17 @@ query GetAssessmentByID($assessmentId: ID!) {
     assessmentType
     createdAt
     createdBy
+    externalID
     id
+    integrationRunID
+    jsonconfig
+    managedBy
     name
     ownerID
+    responseDueDuration
     tags
     templateID
+    uischema
     updatedAt
     updatedBy
     campaigns {
@@ -143,11 +155,17 @@ mutation UpdateAssessment($updateAssessmentId: ID!, $input: UpdateAssessmentInpu
       assessmentType
       createdAt
       createdBy
+      externalID
       id
+      integrationRunID
+      jsonconfig
+      managedBy
       name
       ownerID
+      responseDueDuration
       tags
       templateID
+      uischema
       updatedAt
       updatedBy
     }

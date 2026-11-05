@@ -2,6 +2,7 @@ mutation CreateBulkCSVIdentityHolder($input: Upload!) {
   createBulkCSVIdentityHolder(input: $input) {
     identityHolders {
       alternateEmail
+      avatarRemoteURL
       createdAt
       createdBy
       department
@@ -12,17 +13,21 @@ mutation CreateBulkCSVIdentityHolder($input: Upload!) {
       endDate
       environmentID
       environmentName
+      externalID
       externalReferenceID
       externalUserID
       fullName
       id
       identityHolderType
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
       isActive
       isOpenlaneUser
       location
+      managedBy
       metadata
       ownerID
       phoneNumber
@@ -36,7 +41,6 @@ mutation CreateBulkCSVIdentityHolder($input: Upload!) {
       updatedAt
       updatedBy
       userID
-      workflowEligibleMarker
     }
   }
 }
@@ -45,6 +49,7 @@ mutation CreateBulkIdentityHolder($input: [CreateIdentityHolderInput!]) {
   createBulkIdentityHolder(input: $input) {
     identityHolders {
       alternateEmail
+      avatarRemoteURL
       createdAt
       createdBy
       department
@@ -55,17 +60,21 @@ mutation CreateBulkIdentityHolder($input: [CreateIdentityHolderInput!]) {
       endDate
       environmentID
       environmentName
+      externalID
       externalReferenceID
       externalUserID
       fullName
       id
       identityHolderType
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
       isActive
       isOpenlaneUser
       location
+      managedBy
       metadata
       ownerID
       phoneNumber
@@ -79,7 +88,6 @@ mutation CreateBulkIdentityHolder($input: [CreateIdentityHolderInput!]) {
       updatedAt
       updatedBy
       userID
-      workflowEligibleMarker
     }
   }
 }
@@ -88,6 +96,7 @@ mutation CreateIdentityHolder($input: CreateIdentityHolderInput!) {
   createIdentityHolder(input: $input) {
     identityHolder {
       alternateEmail
+      avatarRemoteURL
       createdAt
       createdBy
       department
@@ -98,17 +107,21 @@ mutation CreateIdentityHolder($input: CreateIdentityHolderInput!) {
       endDate
       environmentID
       environmentName
+      externalID
       externalReferenceID
       externalUserID
       fullName
       id
       identityHolderType
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
       isActive
       isOpenlaneUser
       location
+      managedBy
       metadata
       ownerID
       phoneNumber
@@ -122,7 +135,6 @@ mutation CreateIdentityHolder($input: CreateIdentityHolderInput!) {
       updatedAt
       updatedBy
       userID
-      workflowEligibleMarker
     }
   }
 }
@@ -151,6 +163,7 @@ query GetAllIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Cu
     edges {
       node {
         alternateEmail
+        avatarRemoteURL
         createdAt
         createdBy
         department
@@ -161,17 +174,21 @@ query GetAllIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Cu
         endDate
         environmentID
         environmentName
+        externalID
         externalReferenceID
         externalUserID
         fullName
         id
         identityHolderType
+        integrationRunID
         internalOwner
         internalOwnerGroupID
+        internalOwnerIdentityHolderID
         internalOwnerUserID
         isActive
         isOpenlaneUser
         location
+        managedBy
         metadata
         ownerID
         phoneNumber
@@ -185,7 +202,6 @@ query GetAllIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Cu
         updatedAt
         updatedBy
         userID
-        workflowEligibleMarker
         campaigns {
           edges {
             node {
@@ -218,6 +234,7 @@ query GetAllIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Cu
 query GetIdentityHolderByID($identityHolderId: ID!) {
   identityHolder(id: $identityHolderId) {
     alternateEmail
+    avatarRemoteURL
     createdAt
     createdBy
     department
@@ -228,17 +245,21 @@ query GetIdentityHolderByID($identityHolderId: ID!) {
     endDate
     environmentID
     environmentName
+    externalID
     externalReferenceID
     externalUserID
     fullName
     id
     identityHolderType
+    integrationRunID
     internalOwner
     internalOwnerGroupID
+    internalOwnerIdentityHolderID
     internalOwnerUserID
     isActive
     isOpenlaneUser
     location
+    managedBy
     metadata
     ownerID
     phoneNumber
@@ -252,7 +273,6 @@ query GetIdentityHolderByID($identityHolderId: ID!) {
     updatedAt
     updatedBy
     userID
-    workflowEligibleMarker
     campaigns {
       edges {
         node {
@@ -367,6 +387,7 @@ query GetIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Curso
     edges {
       node {
         alternateEmail
+        avatarRemoteURL
         createdAt
         createdBy
         department
@@ -377,17 +398,21 @@ query GetIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Curso
         endDate
         environmentID
         environmentName
+        externalID
         externalReferenceID
         externalUserID
         fullName
         id
         identityHolderType
+        integrationRunID
         internalOwner
         internalOwnerGroupID
+        internalOwnerIdentityHolderID
         internalOwnerUserID
         isActive
         isOpenlaneUser
         location
+        managedBy
         metadata
         ownerID
         phoneNumber
@@ -401,7 +426,6 @@ query GetIdentityHolders($first: Int, $last: Int, $after: Cursor, $before: Curso
         updatedAt
         updatedBy
         userID
-        workflowEligibleMarker
         campaigns {
           edges {
             node {
@@ -421,6 +445,7 @@ mutation UpdateIdentityHolder($updateIdentityHolderId: ID!, $input: UpdateIdenti
   updateIdentityHolder(id: $updateIdentityHolderId, input: $input) {
     identityHolder {
       alternateEmail
+      avatarRemoteURL
       createdAt
       createdBy
       department
@@ -431,17 +456,21 @@ mutation UpdateIdentityHolder($updateIdentityHolderId: ID!, $input: UpdateIdenti
       endDate
       environmentID
       environmentName
+      externalID
       externalReferenceID
       externalUserID
       fullName
       id
       identityHolderType
+      integrationRunID
       internalOwner
       internalOwnerGroupID
+      internalOwnerIdentityHolderID
       internalOwnerUserID
       isActive
       isOpenlaneUser
       location
+      managedBy
       metadata
       ownerID
       phoneNumber
@@ -455,7 +484,6 @@ mutation UpdateIdentityHolder($updateIdentityHolderId: ID!, $input: UpdateIdenti
       updatedAt
       updatedBy
       userID
-      workflowEligibleMarker
     }
   }
 }

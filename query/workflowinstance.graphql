@@ -72,6 +72,7 @@ query GetWorkflowInstanceByID($workflowInstanceId: ID!) {
     context
     createdAt
     createdBy
+    currentActionIndex
     definitionSnapshot
     displayID
     id
@@ -79,19 +80,27 @@ query GetWorkflowInstanceByID($workflowInstanceId: ID!) {
     ownerID
     state
     tags
+    taskID
     updatedAt
     updatedBy
+    vulnerabilityID
     workflowDefinitionID
     workflowProposalID
     controlID
     internalPolicyID
     evidenceID
+    findingID
     subcontrolID
     actionPlanID
+    assessmentResponseID
+    assessmentID
     procedureID
+    riskID
+    remediationID
     campaignID
     campaignTargetID
     identityHolderID
+    integrationID
     platformID
     workflowAssignments {
       edges {

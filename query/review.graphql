@@ -8,18 +8,25 @@ mutation CreateBulkCSVReview($input: Upload!) {
       createdAt
       createdBy
       details
+      environmentName
+      environmentID
       externalID
       externalOwnerID
       externalURI
       id
+      integrationRunID
+      managedBy
       metadata
       rawPayload
       reportedAt
       reporter
       reviewedAt
       reviewerID
+      scopeID
+      scopeName
       source
       state
+      status
       summary
       tags
       title
@@ -39,18 +46,25 @@ mutation CreateBulkReview($input: [CreateReviewInput!]) {
       createdAt
       createdBy
       details
+      environmentID
+      environmentName
       externalID
       externalOwnerID
       externalURI
       id
+      managedBy
+      integrationRunID
       metadata
       rawPayload
       reportedAt
       reporter
       reviewedAt
       reviewerID
+      scopeID
+      scopeName
       source
       state
+      status
       summary
       tags
       title
@@ -70,18 +84,25 @@ mutation CreateReview($input: CreateReviewInput!) {
       createdAt
       createdBy
       details
+      environmentID
+      environmentName
       externalID
       externalOwnerID
       externalURI
       id
+      integrationRunID
+      managedBy
       metadata
       rawPayload
       reportedAt
       reporter
       reviewedAt
       reviewerID
+      scopeID
+      scopeName
       source
       state
+      status
       summary
       tags
       title
@@ -152,18 +173,25 @@ query GetReviewByID($reviewId: ID!) {
     createdAt
     createdBy
     details
+    environmentName
+    environmentID
     externalID
     externalOwnerID
     externalURI
     id
+    managedBy
+    integrationRunID
     metadata
     rawPayload
     reportedAt
     reporter
     reviewedAt
     reviewerID
+    scopeName
+    scopeID
     source
     state
+    status
     summary
     tags
     title

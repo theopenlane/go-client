@@ -6,8 +6,12 @@ mutation CreateBulkControlObjective($input: [CreateControlObjectiveInput!]) {
       createdAt
       createdBy
       desiredOutcome
+      desiredOutcomeJSON
       displayID
+      externalID
       id
+      managedBy
+      integrationRunID
       name
       ownerID
       revision
@@ -43,8 +47,12 @@ mutation CreateBulkCSVControlObjective($input: Upload!) {
       createdAt
       createdBy
       desiredOutcome
+      desiredOutcomeJSON
       displayID
+      externalID
       id
+      managedBy
+      integrationRunID
       name
       ownerID
       revision
@@ -80,8 +88,12 @@ mutation CreateControlObjective($input: CreateControlObjectiveInput!) {
       createdAt
       createdBy
       desiredOutcome
+      desiredOutcomeJSON
       displayID
+      externalID
       id
+      managedBy
+      integrationRunID
       name
       ownerID
       revision
@@ -174,8 +186,12 @@ query GetControlObjectiveByID($controlObjectiveId: ID!) {
     createdAt
     createdBy
     desiredOutcome
+    desiredOutcomeJSON
     displayID
+    externalID
     id
+    integrationRunID
+    managedBy
     name
     ownerID
     revision
@@ -263,8 +279,12 @@ mutation UpdateControlObjective($updateControlObjectiveId: ID!, $input: UpdateCo
       createdAt
       createdBy
       desiredOutcome
+      desiredOutcomeJSON
       displayID
+      externalID
       id
+      managedBy
+      integrationRunID
       name
       ownerID
       revision

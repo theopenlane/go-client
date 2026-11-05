@@ -8,24 +8,38 @@ mutation CreateBulkCSVProcedure($input: Upload!) {
       createdBy
       delegateID
       details
+      detailsJSON
       dismissedControlSuggestions
       dismissedImprovementSuggestions
       dismissedTagSuggestions
       displayID
+      environmentID
+      environmentName
+      externalContents
+      externalFileID
+      externalID
+      fileID
       id
       improvementSuggestions
+      managedBy
+      managementMode
+      integrationRunID
       name
       ownerID
+      procedureKindID
       procedureKindName
       reviewDue
       reviewFrequency
       revision
+      scopeID
+      scopeName
       status
       summary
       tagSuggestions
       tags
       updatedAt
       updatedBy
+      url
     }
   }
 }
@@ -40,24 +54,38 @@ mutation CreateBulkProcedure($input: [CreateProcedureInput!]) {
       createdBy
       delegateID
       details
+      detailsJSON
       dismissedControlSuggestions
       dismissedImprovementSuggestions
       dismissedTagSuggestions
       displayID
+      externalID
+      fileID
+      environmentID
+      environmentName
+      externalContents
+      externalFileID
       id
       improvementSuggestions
+      integrationRunID
+      managementMode
+      managedBy
       name
       ownerID
+      procedureKindID
       procedureKindName
       reviewDue
       reviewFrequency
       revision
+      scopeName
+      scopeID
       status
       summary
       tagSuggestions
       tags
       updatedAt
       updatedBy
+      url
     }
   }
 }
@@ -72,24 +100,38 @@ mutation CreateProcedure($input: CreateProcedureInput!) {
       createdBy
       delegateID
       details
+      detailsJSON
       dismissedControlSuggestions
       dismissedImprovementSuggestions
       dismissedTagSuggestions
       displayID
+      fileID
+      externalID
+      externalFileID
+      externalContents
+      environmentName
+      environmentID
       id
       improvementSuggestions
+      managementMode
+      managedBy
+      integrationRunID
       name
       ownerID
+      procedureKindID
       procedureKindName
       reviewDue
       reviewFrequency
       revision
+      scopeName
+      scopeID
       status
       summary
       tagSuggestions
       tags
       updatedAt
       updatedBy
+      url
     }
   }
 }
@@ -188,24 +230,38 @@ query GetProcedureByID($procedureId: ID!) {
     createdBy
     delegateID
     details
+    detailsJSON
     dismissedControlSuggestions
     dismissedImprovementSuggestions
     dismissedTagSuggestions
     displayID
+    fileID
+    externalID
+    externalFileID
+    externalContents
+    environmentName
+    environmentID
     id
     improvementSuggestions
+    integrationRunID
+    managedBy
+    managementMode
     name
     ownerID
+    procedureKindID
     procedureKindName
     reviewDue
     reviewFrequency
     revision
+    scopeID
+    scopeName
     status
     summary
     tagSuggestions
     tags
     updatedAt
     updatedBy
+    url
   }
 }
 
@@ -267,23 +323,38 @@ mutation UpdateProcedure($updateProcedureId: ID!, $input: UpdateProcedureInput!)
       createdBy
       delegateID
       details
+      detailsJSON
       dismissedControlSuggestions
       dismissedImprovementSuggestions
       dismissedTagSuggestions
       displayID
+      environmentName
+      environmentID
+      externalContents
+      externalFileID
+      externalID
+      fileID
       id
       improvementSuggestions
+      managementMode
+      integrationRunID
+      managedBy
       name
       ownerID
+      procedureKindName
+      procedureKindID
       reviewDue
       reviewFrequency
       revision
+      scopeName
+      scopeID
       status
       summary
       tagSuggestions
       tags
       updatedAt
       updatedBy
+      url
     }
   }
 }

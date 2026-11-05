@@ -6,10 +6,12 @@ mutation CreateBulkCSVInvite($input: Upload!) {
       expires
       id
       ownerID
+      ownershipTransfer
       recipient
       requestorID
       role
       sendAttempts
+      ssoExempt
       status
       updatedAt
       updatedBy
@@ -25,10 +27,12 @@ mutation CreateBulkInvite($input: [CreateInviteInput!]) {
       expires
       id
       ownerID
+      ownershipTransfer
       recipient
       requestorID
       role
       sendAttempts
+      ssoExempt
       status
       updatedAt
       updatedBy
@@ -44,10 +48,12 @@ mutation CreateInvite($input: CreateInviteInput!) {
       expires
       id
       ownerID
+      ownershipTransfer
       recipient
       requestorID
       role
       sendAttempts
+      ssoExempt
       status
       updatedAt
       updatedBy
@@ -102,10 +108,12 @@ query GetInviteByID($inviteId: ID!) {
     expires
     id
     ownerID
+    ownershipTransfer
     recipient
     requestorID
     role
     sendAttempts
+    ssoExempt
     status
     updatedAt
     updatedBy

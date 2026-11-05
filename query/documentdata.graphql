@@ -37,8 +37,12 @@ mutation CreateDocumentData($input: CreateDocumentDataInput!) {
       createdAt
       createdBy
       data
+      environmentName
+      environmentID
       id
       ownerID
+      scopeName
+      scopeID
       tags
       templateID
       updatedAt
@@ -58,8 +62,12 @@ query GetDocumentDataByID($documentDataId: ID!) {
     createdAt
     createdBy
     data
+    environmentID
+    environmentName
     id
     ownerID
+    scopeID
+    scopeName
     tags
     templateID
     updatedAt

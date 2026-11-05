@@ -3,25 +3,43 @@ mutation CreateBulkCSVDirectoryAccount($input: Upload!) {
   createBulkCSVDirectoryAccount(input: $input) {
     directoryAccounts {
       accountType
+      avatarUpdatedAt
+      avatarRemoteURL
+      avatarLocalFileID
+      addedAt
       canonicalEmail
       createdAt
       createdBy
       department
+      directoryName
       displayID
       displayName
+      emailAliases
+      environmentName
+      environmentID
       externalID
       familyName
       givenName
       id
+      identityHolderID
       integrationID
+      integrationRunID
       jobTitle
       lastSeenIP
+      metadata
+      managedBy
       mfaState
       observedAt
       organizationUnit
       ownerID
+      platformID
+      phoneNumber
+      primarySource
       profile
       rawProfileFileID
+      scopeName
+      scopeID
+      removedAt
       secondaryKey
       sourceVersion
       status
@@ -36,25 +54,43 @@ mutation CreateBulkDirectoryAccount($input: [CreateDirectoryAccountInput!]) {
   createBulkDirectoryAccount(input: $input) {
     directoryAccounts {
       accountType
+      addedAt
+      avatarUpdatedAt
+      avatarRemoteURL
+      avatarLocalFileID
       canonicalEmail
       createdAt
       createdBy
       department
+      directoryName
       displayID
       displayName
+      emailAliases
+      environmentID
+      environmentName
       externalID
       familyName
       givenName
       id
+      identityHolderID
       integrationID
+      integrationRunID
       jobTitle
       lastSeenIP
+      managedBy
+      metadata
       mfaState
       observedAt
       organizationUnit
       ownerID
+      phoneNumber
+      platformID
+      primarySource
       profile
       rawProfileFileID
+      removedAt
+      scopeID
+      scopeName
       secondaryKey
       sourceVersion
       status
@@ -69,25 +105,43 @@ mutation CreateDirectoryAccount($input: CreateDirectoryAccountInput!) {
   createDirectoryAccount(input: $input) {
     directoryAccount {
       accountType
+      addedAt
+      avatarLocalFileID
+      avatarRemoteURL
+      avatarUpdatedAt
       canonicalEmail
       createdAt
       createdBy
       department
+      directoryName
       displayID
       displayName
+      emailAliases
+      environmentID
+      environmentName
       externalID
       familyName
       givenName
       id
+      identityHolderID
       integrationID
+      integrationRunID
       jobTitle
       lastSeenIP
+      managedBy
+      metadata
       mfaState
       observedAt
       organizationUnit
       ownerID
+      phoneNumber
+      platformID
+      primarySource
       profile
       rawProfileFileID
+      scopeName
+      scopeID
+      removedAt
       secondaryKey
       sourceVersion
       status
@@ -154,25 +208,43 @@ query GetAllDirectoryAccounts($first: Int, $last: Int, $after: Cursor, $before: 
 query GetDirectoryAccountByID($directoryAccountId: ID!) {
   directoryAccount(id: $directoryAccountId) {
     accountType
+    avatarLocalFileID
+    addedAt
+    avatarRemoteURL
+    avatarUpdatedAt
     canonicalEmail
     createdAt
     createdBy
     department
+    directoryName
     displayID
     displayName
+    environmentID
+    environmentName
+    emailAliases
     externalID
     familyName
     givenName
     id
+    identityHolderID
     integrationID
+    integrationRunID
     jobTitle
     lastSeenIP
+    metadata
+    managedBy
     mfaState
     observedAt
     organizationUnit
     ownerID
+    phoneNumber
+    platformID
+    primarySource
     profile
     rawProfileFileID
+    scopeID
+    scopeName
+    removedAt
     secondaryKey
     sourceVersion
     status
@@ -234,25 +306,43 @@ mutation UpdateDirectoryAccount($updateDirectoryAccountId: ID!, $input: UpdateDi
   updateDirectoryAccount(id: $updateDirectoryAccountId, input: $input) {
     directoryAccount {
       accountType
+      addedAt
+      avatarUpdatedAt
+      avatarLocalFileID
+      avatarRemoteURL
       canonicalEmail
       createdAt
       createdBy
       department
+      directoryName
       displayID
       displayName
+      environmentName
+      environmentID
+      emailAliases
       externalID
       familyName
       givenName
       id
+      identityHolderID
       integrationID
+      integrationRunID
       jobTitle
       lastSeenIP
+      metadata
+      managedBy
       mfaState
       observedAt
       organizationUnit
       ownerID
+      platformID
+      primarySource
+      phoneNumber
       profile
       rawProfileFileID
+      removedAt
+      scopeID
+      scopeName
       secondaryKey
       sourceVersion
       status

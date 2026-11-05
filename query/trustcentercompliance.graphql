@@ -5,7 +5,9 @@ mutation CreateBulkCSVTrustCenterCompliance($input: Upload!) {
       createdAt
       createdBy
       id
+      standardID
       tags
+      trustCenterID
       updatedAt
       updatedBy
       standard {
@@ -29,7 +31,9 @@ mutation CreateBulkTrustCenterCompliance($input: [CreateTrustCenterComplianceInp
       createdAt
       createdBy
       id
+      standardID
       tags
+      trustCenterID
       updatedAt
       updatedBy
       standard {
@@ -53,7 +57,9 @@ mutation CreateTrustCenterCompliance($input: CreateTrustCenterComplianceInput!) 
       createdAt
       createdBy
       id
+      standardID
       tags
+      trustCenterID
       updatedAt
       updatedBy
       standard {
@@ -120,7 +126,9 @@ query GetTrustCenterComplianceByID($trustCenterComplianceId: ID!) {
     createdAt
     createdBy
     id
+    standardID
     tags
+    trustCenterID
     updatedAt
     updatedBy
     standard {
@@ -182,7 +190,9 @@ mutation UpdateTrustCenterCompliance($updateTrustCenterComplianceId: ID!, $input
       createdAt
       createdBy
       id
+      standardID
       tags
+      trustCenterID
       updatedAt
       updatedBy
       standard {

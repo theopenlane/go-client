@@ -2,21 +2,35 @@ mutation CreateBulkCSVFinding($input: Upload!) {
   createBulkCSVFinding(input: $input) {
     findings {
       assessmentID
+      assignedToUserID
+      assignedToGroupID
+      assignedToIdentityHolderID
+      assignedTo
       blocksProduction
       categories
       category
       createdAt
       createdBy
       description
+      displayID
       displayName
+      environmentID
+      environmentName
       eventTime
       exploitability
       externalID
       externalOwnerID
       externalURI
       findingClass
+      findingStatusID
       id
       impact
+      integrationRunID
+      internalOwner
+      internalOwnerGroupID
+      internalOwnerIdentityHolderID
+      internalOwnerUserID
+      managedBy
       metadata
       numericSeverity
       open
@@ -30,7 +44,14 @@ mutation CreateBulkCSVFinding($input: Upload!) {
       remediationSLA
       reportedAt
       resourceName
+      reviewedBy
+      reviewedByGroupID
+      reviewedByIdentityHolderID
+      reviewedByUserID
+      scopeID
+      scopeName
       score
+      securityLevel
       severity
       source
       sourceUpdatedAt
@@ -52,21 +73,35 @@ mutation CreateBulkFinding($input: [CreateFindingInput!]) {
   createBulkFinding(input: $input) {
     findings {
       assessmentID
+      assignedTo
+      assignedToGroupID
+      assignedToIdentityHolderID
+      assignedToUserID
       blocksProduction
       categories
       category
       createdAt
       createdBy
       description
+      displayID
       displayName
+      environmentID
+      environmentName
       eventTime
       exploitability
       externalID
       externalOwnerID
       externalURI
       findingClass
+      findingStatusID
       id
       impact
+      integrationRunID
+      internalOwner
+      internalOwnerGroupID
+      internalOwnerIdentityHolderID
+      internalOwnerUserID
+      managedBy
       metadata
       numericSeverity
       open
@@ -80,7 +115,14 @@ mutation CreateBulkFinding($input: [CreateFindingInput!]) {
       remediationSLA
       reportedAt
       resourceName
+      reviewedBy
+      reviewedByGroupID
+      reviewedByIdentityHolderID
+      reviewedByUserID
+      scopeID
+      scopeName
       score
+      securityLevel
       severity
       source
       sourceUpdatedAt
@@ -102,21 +144,35 @@ mutation CreateFinding($input: CreateFindingInput!) {
   createFinding(input: $input) {
     finding {
       assessmentID
+      assignedTo
+      assignedToUserID
+      assignedToIdentityHolderID
+      assignedToGroupID
       blocksProduction
       categories
       category
       createdAt
       createdBy
       description
+      displayID
       displayName
+      environmentName
+      environmentID
       eventTime
       exploitability
       externalID
       externalOwnerID
       externalURI
       findingClass
+      findingStatusID
       id
       impact
+      internalOwnerGroupID
+      managedBy
+      internalOwnerUserID
+      internalOwnerIdentityHolderID
+      internalOwner
+      integrationRunID
       metadata
       numericSeverity
       open
@@ -130,7 +186,14 @@ mutation CreateFinding($input: CreateFindingInput!) {
       remediationSLA
       reportedAt
       resourceName
+      scopeName
+      scopeID
+      reviewedByUserID
+      reviewedByIdentityHolderID
+      reviewedByGroupID
+      reviewedBy
       score
+      securityLevel
       severity
       source
       sourceUpdatedAt
@@ -242,21 +305,35 @@ query GetAllFindings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
 query GetFindingByID($findingId: ID!) {
   finding(id: $findingId) {
     assessmentID
+    assignedTo
+    assignedToGroupID
+    assignedToIdentityHolderID
+    assignedToUserID
     blocksProduction
     categories
     category
     createdAt
     createdBy
     description
+    displayID
     displayName
+    environmentID
+    environmentName
     eventTime
     exploitability
     externalID
     externalOwnerID
     externalURI
     findingClass
+    findingStatusID
     id
     impact
+    integrationRunID
+    internalOwner
+    internalOwnerGroupID
+    internalOwnerIdentityHolderID
+    internalOwnerUserID
+    managedBy
     metadata
     numericSeverity
     open
@@ -270,7 +347,14 @@ query GetFindingByID($findingId: ID!) {
     remediationSLA
     reportedAt
     resourceName
+    scopeName
+    scopeID
+    reviewedBy
+    reviewedByGroupID
+    reviewedByIdentityHolderID
+    reviewedByUserID
     score
+    securityLevel
     severity
     source
     sourceUpdatedAt
@@ -397,21 +481,35 @@ mutation UpdateFinding($updateFindingId: ID!, $input: UpdateFindingInput!) {
   updateFinding(id: $updateFindingId, input: $input) {
     finding {
       assessmentID
+      assignedToUserID
+      assignedToIdentityHolderID
+      assignedToGroupID
+      assignedTo
       blocksProduction
       categories
       category
       createdAt
       createdBy
       description
+      displayID
       displayName
+      environmentName
+      environmentID
       eventTime
       exploitability
       externalID
       externalOwnerID
       externalURI
       findingClass
+      findingStatusID
       id
       impact
+      integrationRunID
+      managedBy
+      internalOwnerUserID
+      internalOwnerIdentityHolderID
+      internalOwnerGroupID
+      internalOwner
       metadata
       numericSeverity
       open
@@ -425,7 +523,14 @@ mutation UpdateFinding($updateFindingId: ID!, $input: UpdateFindingInput!) {
       remediationSLA
       reportedAt
       resourceName
+      scopeName
+      scopeID
+      reviewedByUserID
+      reviewedByIdentityHolderID
+      reviewedByGroupID
+      reviewedBy
       score
+      securityLevel
       severity
       source
       sourceUpdatedAt

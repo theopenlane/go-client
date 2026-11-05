@@ -1,12 +1,35 @@
 mutation CreateBulkCSVScan($input: Upload!) {
   createBulkCSVScan(input: $input) {
     scans {
+      assignedToUserID
+      assignedToIdentityHolderID
+      assignedToGroupID
+      assignedTo
       createdAt
       createdBy
+      generatedByPlatformID
+      externalID
+      environmentName
+      environmentID
+      discoveredVulnerabilityIds
       id
+      managedBy
+      integrationRunID
       metadata
+      nextScanRunAt
       ownerID
+      reviewedBy
+      performedByGroupID
+      scanSchedule
+      scanDate
+      reviewedByUserID
+      reviewedByIdentityHolderID
+      reviewedByGroupID
+      performedBy
+      performedByUserID
       scanType
+      scopeName
+      scopeID
       status
       tags
       target
@@ -19,12 +42,35 @@ mutation CreateBulkCSVScan($input: Upload!) {
 mutation CreateBulkScan($input: [CreateScanInput!]) {
   createBulkScan(input: $input) {
     scans {
+      assignedTo
+      assignedToGroupID
+      assignedToIdentityHolderID
+      assignedToUserID
       createdAt
       createdBy
+      environmentID
+      discoveredVulnerabilityIds
+      environmentName
+      externalID
+      generatedByPlatformID
       id
+      integrationRunID
+      managedBy
       metadata
+      nextScanRunAt
       ownerID
+      performedBy
+      performedByGroupID
+      performedByUserID
+      reviewedBy
+      reviewedByGroupID
+      reviewedByIdentityHolderID
+      reviewedByUserID
+      scanDate
+      scanSchedule
       scanType
+      scopeName
+      scopeID
       status
       tags
       target
@@ -37,12 +83,35 @@ mutation CreateBulkScan($input: [CreateScanInput!]) {
 mutation CreateScan($input: CreateScanInput!) {
   createScan(input: $input) {
     scan {
+      assignedToUserID
+      assignedToIdentityHolderID
+      assignedToGroupID
+      assignedTo
       createdAt
       createdBy
+      generatedByPlatformID
+      externalID
+      environmentName
+      environmentID
+      discoveredVulnerabilityIds
       id
+      managedBy
+      integrationRunID
       metadata
+      nextScanRunAt
       ownerID
+      performedBy
+      performedByGroupID
+      performedByUserID
+      reviewedBy
+      reviewedByGroupID
+      reviewedByIdentityHolderID
+      reviewedByUserID
+      scanDate
+      scanSchedule
       scanType
+      scopeID
+      scopeName
       status
       tags
       target
@@ -93,12 +162,35 @@ query GetAllScans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
 
 query GetScanByID($scanId: ID!) {
   scan(id: $scanId) {
+    assignedToUserID
+    assignedTo
+    assignedToGroupID
+    assignedToIdentityHolderID
     createdAt
     createdBy
+    discoveredVulnerabilityIds
+    environmentID
+    environmentName
+    externalID
+    generatedByPlatformID
     id
+    integrationRunID
+    managedBy
     metadata
+    nextScanRunAt
     ownerID
+    performedByUserID
+    performedBy
+    performedByGroupID
+    reviewedBy
+    reviewedByGroupID
+    reviewedByIdentityHolderID
+    reviewedByUserID
+    scanDate
+    scanSchedule
     scanType
+    scopeID
+    scopeName
     status
     tags
     target
@@ -144,12 +236,35 @@ query GetScans($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where:
 mutation UpdateScan($updateScanId: ID!, $input: UpdateScanInput!) {
   updateScan(id: $updateScanId, input: $input) {
     scan {
+      assignedTo
+      assignedToUserID
+      assignedToIdentityHolderID
+      assignedToGroupID
       createdAt
       createdBy
+      externalID
+      environmentName
+      generatedByPlatformID
+      environmentID
+      discoveredVulnerabilityIds
       id
+      managedBy
+      integrationRunID
       metadata
+      nextScanRunAt
       ownerID
+      reviewedByIdentityHolderID
+      reviewedByUserID
+      scanDate
+      scanSchedule
+      performedByUserID
+      performedByGroupID
+      performedBy
+      reviewedByGroupID
+      reviewedBy
       scanType
+      scopeName
+      scopeID
       status
       tags
       target

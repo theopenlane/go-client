@@ -6,7 +6,13 @@ mutation CreateTrustCenter($input: CreateTrustCenterInput!) {
       customDomainID
       id
       ownerID
+      previewStatus
+      previewDomainID
+      pirschIdentificationCode
+      pirschDomainID
+      pirschAccessLink
       slug
+      subprocessorURL
       tags
       updatedAt
       updatedBy
@@ -131,13 +137,17 @@ query GetTrustCenterByID($trustCenterId: ID!) {
     customDomainID
     id
     ownerID
+    pirschAccessLink
     owner {
       id
       displayName
     }
     pirschDomainID
     pirschIdentificationCode
+    previewDomainID
+    previewStatus
     slug
+    subprocessorURL
     tags
     updatedAt
     updatedBy
@@ -232,6 +242,7 @@ query GetTrustCenters($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
         createdAt
         createdBy
         customDomainID
+        previewDomainID
         id
         ownerID
         slug
@@ -299,7 +310,13 @@ mutation UpdateTrustCenter($updateTrustCenterId: ID!, $input: UpdateTrustCenterI
       customDomainID
       id
       ownerID
+      pirschIdentificationCode
+      pirschDomainID
+      pirschAccessLink
+      previewStatus
+      previewDomainID
       slug
+      subprocessorURL
       tags
       updatedAt
       updatedBy

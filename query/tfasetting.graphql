@@ -1,7 +1,12 @@
 mutation CreateTFASetting($input: CreateTFASettingInput!) {
   createTFASetting(input: $input) {
     tfaSetting {
+      createdAt
+      createdBy
+      id
       totpAllowed
+      updatedAt
+      updatedBy
       verified
     }
     qrCode

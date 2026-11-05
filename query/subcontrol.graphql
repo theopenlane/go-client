@@ -14,23 +14,35 @@ mutation CreateBulkCSVSubcontrol($input: Upload!) {
       createdBy
       delegateID
       description
+      descriptionJSON
       displayID
       exampleEvidence
+      externalID
       externalUUID
       evidenceRequests
       id
+      implementationDescription
       implementationGuidance
+      implementationStatus
+      integrationRunID
+      managedBy
       mappedCategories
       ownerID
+      publicRepresentation
       refCode
       referenceFramework
+      referenceFrameworkRevision
       referenceID
       references
+      responsiblePartyID
       source
+      sourceName
       status
       subcategory
+      subcontrolKindID
       subcontrolKindName
       tags
+      testingProcedures
       title
       updatedAt
       updatedBy
@@ -54,23 +66,35 @@ mutation CreateBulkSubcontrol($input: [CreateSubcontrolInput!]) {
       createdBy
       delegateID
       description
+      descriptionJSON
       displayID
       exampleEvidence
+      externalID
       externalUUID
       evidenceRequests
       id
+      implementationDescription
       implementationGuidance
+      integrationRunID
+      implementationStatus
+      managedBy
       mappedCategories
       ownerID
+      publicRepresentation
       refCode
       referenceFramework
+      referenceFrameworkRevision
       referenceID
       references
+      responsiblePartyID
       source
+      sourceName
       status
       subcategory
+      subcontrolKindID
       subcontrolKindName
       tags
+      testingProcedures
       title
       updatedAt
       updatedBy
@@ -94,23 +118,35 @@ mutation CreateSubcontrol($input: CreateSubcontrolInput!) {
       createdBy
       delegateID
       description
+      descriptionJSON
       displayID
       exampleEvidence
+      externalID
       externalUUID
       evidenceRequests
       id
+      implementationDescription
       implementationGuidance
+      implementationStatus
+      integrationRunID
+      managedBy
       mappedCategories
       ownerID
+      publicRepresentation
       refCode
       referenceFramework
+      referenceFrameworkRevision
       referenceID
       references
+      responsiblePartyID
       source
+      sourceName
       status
       subcategory
+      subcontrolKindID
       subcontrolKindName
       tags
+      testingProcedures
       title
       updatedAt
       updatedBy
@@ -194,23 +230,35 @@ query GetSubcontrolByID($subcontrolId: ID!) {
     createdBy
     delegateID
     description
+    descriptionJSON
     displayID
     exampleEvidence
+    externalID
     externalUUID
     evidenceRequests
     id
+    implementationDescription
     implementationGuidance
+    managedBy
+    integrationRunID
+    implementationStatus
     mappedCategories
     ownerID
+    publicRepresentation
     refCode
     referenceFramework
+    referenceFrameworkRevision
     referenceID
     references
+    responsiblePartyID
     source
+    sourceName
     status
     subcategory
+    subcontrolKindID
     subcontrolKindName
     tags
+    testingProcedures
     title
     updatedAt
     updatedBy
@@ -289,23 +337,35 @@ mutation UpdateSubcontrol($updateSubcontrolId: ID!, $input: UpdateSubcontrolInpu
       createdBy
       delegateID
       description
+      descriptionJSON
       displayID
       exampleEvidence
+      externalID
       externalUUID
       evidenceRequests
       id
+      implementationDescription
       implementationGuidance
+      managedBy
+      implementationStatus
+      integrationRunID
       mappedCategories
       ownerID
+      publicRepresentation
       refCode
       referenceFramework
+      referenceFrameworkRevision
       referenceID
       references
+      responsiblePartyID
       source
+      sourceName
       status
       subcategory
+      subcontrolKindID
       subcontrolKindName
       tags
+      testingProcedures
       title
       updatedAt
       updatedBy

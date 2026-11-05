@@ -8,10 +8,10 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.1
 	github.com/samber/lo v1.53.0
-	github.com/theopenlane/core/common v1.2.2
-	github.com/theopenlane/entx v0.36.3
+	github.com/theopenlane/core/common v1.2.3
+	github.com/theopenlane/entx v0.38.1
 	github.com/theopenlane/httpsling v0.3.0
-	github.com/theopenlane/iam v0.40.1
+	github.com/theopenlane/iam v0.40.2
 	github.com/theopenlane/utils v0.7.4
 	github.com/vektah/gqlparser/v2 v2.5.64
 	golang.org/x/oauth2 v0.37.0
@@ -62,7 +62,7 @@ require (
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/sosodev/duration v1.4.0 // indirect
 	github.com/stoewer/go-strcase v1.3.1 // indirect
-	github.com/theopenlane/core/v2 v2.9.4 // indirect
+	github.com/theopenlane/core/v2 v2.13.1 // indirect
 	github.com/theopenlane/echox v0.3.0 // indirect
 	github.com/theopenlane/logx v0.1.1 // indirect
 	github.com/tinylib/msgp v1.6.5 // indirect

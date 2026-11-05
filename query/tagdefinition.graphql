@@ -6,8 +6,11 @@ mutation CreateBulkCSVTagDefinition($input: Upload!) {
       createdAt
       createdBy
       description
+      externalID
       id
+      integrationRunID
       internalNotes
+      managedBy
       name
       ownerID
       slug
@@ -27,8 +30,11 @@ mutation CreateBulkTagDefinition($input: [CreateTagDefinitionInput!]) {
       createdAt
       createdBy
       description
+      externalID
       id
+      integrationRunID
       internalNotes
+      managedBy
       name
       ownerID
       slug
@@ -48,8 +54,11 @@ mutation CreateTagDefinition($input: CreateTagDefinitionInput!) {
       createdAt
       createdBy
       description
+      externalID
       id
+      integrationRunID
       internalNotes
+      managedBy
       name
       ownerID
       slug
@@ -67,7 +76,7 @@ mutation DeleteTagDefinition($deleteTagDefinitionId: ID!) {
   }
 }
 
-query GetAllTagDefinitions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TagDefinitionOrder!]){
+query GetAllTagDefinitions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TagDefinitionOrder!]) {
   tagDefinitions(
     first: $first
     last: $last
@@ -110,8 +119,11 @@ query GetTagDefinitionByID($tagDefinitionId: ID!) {
     createdAt
     createdBy
     description
+    externalID
     id
+    integrationRunID
     internalNotes
+    managedBy
     name
     ownerID
     slug
@@ -123,7 +135,7 @@ query GetTagDefinitionByID($tagDefinitionId: ID!) {
 }
 
 query GetTagDefinitions($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TagDefinitionWhereInput, $orderBy: [TagDefinitionOrder!]) {
-tagDefinitions(
+  tagDefinitions(
     first: $first
     last: $last
     after: $after
@@ -167,8 +179,11 @@ mutation UpdateTagDefinition($updateTagDefinitionId: ID!, $input: UpdateTagDefin
       createdAt
       createdBy
       description
+      externalID
       id
+      integrationRunID
       internalNotes
+      managedBy
       name
       ownerID
       slug

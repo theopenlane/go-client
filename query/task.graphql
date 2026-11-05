@@ -7,12 +7,31 @@ mutation CreateBulkCSVTask($input: Upload!) {
       createdAt
       createdBy
       details
+      detailsJSON
       displayID
       due
+      externalUUID
+      externalReferenceURL
+      externalID
+      environmentName
+      environmentID
       id
+      metadata
+      managedBy
+      isTemplate
+      isSuggested
+      integrationRunID
+      idempotencyKey
       ownerID
+      scopeName
+      source
+      scopeID
+      priority
+      parentTaskID
       status
+      systemGenerated
       tags
+      taskKindID
       taskKindName
       title
       updatedAt
@@ -38,12 +57,31 @@ mutation CreateBulkTask($input: [CreateTaskInput!]) {
       createdAt
       createdBy
       details
+      detailsJSON
       displayID
       due
+      externalID
+      environmentName
+      environmentID
+      externalUUID
+      externalReferenceURL
       id
+      metadata
+      managedBy
+      isTemplate
+      isSuggested
+      integrationRunID
+      idempotencyKey
       ownerID
+      parentTaskID
+      priority
+      scopeID
+      scopeName
+      source
       status
+      systemGenerated
       tags
+      taskKindID
       taskKindName
       title
       updatedAt
@@ -69,12 +107,31 @@ mutation CreateTask($input: CreateTaskInput!) {
       createdAt
       createdBy
       details
+      detailsJSON
       displayID
       due
+      externalReferenceURL
+      externalUUID
+      externalID
+      environmentName
+      environmentID
       id
+      integrationRunID
+      metadata
+      isTemplate
+      managedBy
+      isSuggested
+      idempotencyKey
       ownerID
+      priority
+      parentTaskID
+      scopeID
+      scopeName
+      source
       status
+      systemGenerated
       tags
+      taskKindID
       taskKindName
       title
       updatedAt
@@ -120,12 +177,31 @@ query GetAllTasks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
         createdAt
         createdBy
         details
+        detailsJSON
         displayID
         due
+        environmentID
+        externalUUID
+        externalReferenceURL
+        externalID
+        environmentName
         id
+        managedBy
+        isTemplate
+        metadata
+        integrationRunID
+        idempotencyKey
+        isSuggested
         ownerID
+        parentTaskID
+        scopeID
+        scopeName
+        source
+        priority
         status
+        systemGenerated
         tags
+        taskKindID
         taskKindName
         title
         updatedAt
@@ -151,12 +227,31 @@ query GetTaskByID($taskId: ID!) {
     createdAt
     createdBy
     details
+    detailsJSON
     displayID
     due
+    externalUUID
+    externalReferenceURL
+    environmentID
+    environmentName
+    externalID
     id
+    isTemplate
+    managedBy
+    metadata
+    idempotencyKey
+    integrationRunID
+    isSuggested
     ownerID
+    scopeName
+    scopeID
+    parentTaskID
+    priority
+    source
     status
+    systemGenerated
     tags
+    taskKindID
     taskKindName
     title
     updatedAt
@@ -196,12 +291,31 @@ query GetTasks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where:
         createdAt
         createdBy
         details
+        detailsJSON
         displayID
         due
+        environmentID
+        externalUUID
+        externalReferenceURL
+        externalID
+        environmentName
         id
+        isSuggested
+        metadata
+        managedBy
+        isTemplate
+        integrationRunID
+        idempotencyKey
         ownerID
+        scopeName
+        source
+        priority
+        parentTaskID
+        scopeID
         status
+        systemGenerated
         tags
+        taskKindID
         taskKindName
         title
         updatedAt
@@ -228,12 +342,31 @@ mutation UpdateTask($updateTaskId: ID!, $input: UpdateTaskInput!) {
       createdAt
       createdBy
       details
+      detailsJSON
       displayID
       due
+      environmentID
+      environmentName
+      externalID
+      externalReferenceURL
+      externalUUID
       id
+      integrationRunID
+      metadata
+      managedBy
+      isTemplate
+      idempotencyKey
+      isSuggested
       ownerID
+      scopeID
+      source
+      scopeName
+      priority
+      parentTaskID
       status
+      systemGenerated
       tags
+      taskKindID
       taskKindName
       title
       updatedAt

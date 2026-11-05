@@ -10,7 +10,9 @@ mutation CreateNotification($input: CreateNotificationInput!) {
       notificationType
       objectType
       ownerID
+      readAt
       tags
+      templateID
       title
       topic
       updatedAt

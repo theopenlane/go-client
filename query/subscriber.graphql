@@ -2,10 +2,21 @@ mutation CreateBulkCSVSubscriber($input: Upload!) {
   createBulkCSVSubscriber(input: $input) {
     subscribers {
       active
+      contactID
+      createdAt
+      createdBy
       email
       id
+      trustCenterID
+      tags
+      phoneNumber
+      sendAttempts
       verifiedEmail
+      verifiedPhone
       unsubscribed
+      userID
+      updatedBy
+      updatedAt
     }
   }
 }
@@ -14,10 +25,21 @@ mutation CreateBulkSubscriber($input: [CreateSubscriberInput!]) {
   createBulkSubscriber(input: $input) {
     subscribers {
       active
+      createdBy
+      contactID
+      createdAt
       email
       id
+      sendAttempts
+      phoneNumber
+      tags
+      trustCenterID
       verifiedEmail
+      verifiedPhone
       unsubscribed
+      userID
+      updatedAt
+      updatedBy
     }
   }
 }
@@ -26,13 +48,20 @@ mutation CreateSubscriber($input: CreateSubscriberInput!) {
   createSubscriber(input: $input) {
     subscriber {
       active
+      contactID
       createdAt
       createdBy
       email
       id
+      tags
+      trustCenterID
+      sendAttempts
+      phoneNumber
       updatedAt
       updatedBy
+      userID
       verifiedEmail
+      verifiedPhone
       unsubscribed
     }
   }
@@ -65,12 +94,22 @@ query GetAllSubscribers($first: Int, $last: Int, $after: Cursor, $before: Cursor
     edges {
       node {
         active
+        contactID
+        createdAt
+        createdBy
         email
         id
         ownerID
+        phoneNumber
         verifiedEmail
+        verifiedPhone
         unsubscribed
+        updatedAt
+        userID
+        updatedBy
         sendAttempts
+        trustCenterID
+        tags
       }
     }
   }
@@ -107,12 +146,22 @@ query GetSubscribers($first: Int, $last: Int, $after: Cursor, $before: Cursor, $
     edges {
       node {
         active
+        contactID
+        createdBy
+        createdAt
         email
         id
         ownerID
+        phoneNumber
         verifiedEmail
+        verifiedPhone
         unsubscribed
+        updatedAt
+        updatedBy
+        userID
         sendAttempts
+        tags
+        trustCenterID
       }
     }
   }

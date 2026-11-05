@@ -8,6 +8,7 @@ mutation CreateBulkCSVTrustCenterSubprocessor($input: Upload!) {
       id
       subprocessorID
       trustCenterID
+      trustCenterSubprocessorKindID
       updatedAt
       updatedBy
     }
@@ -24,6 +25,7 @@ mutation CreateBulkTrustCenterSubprocessor($input: [CreateTrustCenterSubprocesso
       id
       subprocessorID
       trustCenterID
+      trustCenterSubprocessorKindID
       updatedAt
       updatedBy
     }
@@ -40,6 +42,7 @@ mutation CreateTrustCenterSubprocessor($input: CreateTrustCenterSubprocessorInpu
       id
       subprocessorID
       trustCenterID
+      trustCenterSubprocessorKindID
       updatedAt
       updatedBy
     }
@@ -103,7 +106,9 @@ query GetTrustCenterSubprocessorByID($trustCenterSubprocessorId: ID!) {
     createdAt
     createdBy
     id
+    subprocessorID
     trustCenterID
+    trustCenterSubprocessorKindID
     updatedAt
     updatedBy
     subprocessor {
@@ -164,7 +169,9 @@ mutation UpdateBulkTrustCenterSubprocessor($ids: [ID!]!, $input: UpdateTrustCent
       createdAt
       createdBy
       id
+      subprocessorID
       trustCenterID
+      trustCenterSubprocessorKindID
       updatedAt
       updatedBy
       subprocessor {
@@ -190,7 +197,9 @@ mutation UpdateTrustCenterSubprocessor($updateTrustCenterSubprocessorId: ID!, $i
       createdAt
       createdBy
       id
+      subprocessorID
       trustCenterID
+      trustCenterSubprocessorKindID
       updatedAt
       updatedBy
       subprocessor {

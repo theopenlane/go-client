@@ -1,17 +1,28 @@
 mutation CreateBulkCSVGroup($input: Upload!) {
   createBulkCSVGroup(input: $input) {
     groups {
+      avatarLocalFileID
       createdAt
       createdBy
       description
       displayID
       displayName
+      externalID
       gravatarLogoURL
       id
+      integrationRunID
       isManaged
       logoURL
+      managedBy
       name
+      oscalContactUuids
+      oscalRole
+      oscalPartyUUID
       ownerID
+      scimExternalID
+      scimGroupMailing
+      scimActive
+      scimDisplayName
       tags
       updatedAt
       updatedBy
@@ -22,17 +33,28 @@ mutation CreateBulkCSVGroup($input: Upload!) {
 mutation CreateBulkGroup($input: [CreateGroupInput!]) {
   createBulkGroup(input: $input) {
     groups {
+      avatarLocalFileID
       createdAt
       createdBy
       description
       displayID
       displayName
+      externalID
       gravatarLogoURL
       id
+      integrationRunID
       isManaged
       logoURL
+      managedBy
       name
+      oscalRole
+      oscalPartyUUID
+      oscalContactUuids
       ownerID
+      scimExternalID
+      scimActive
+      scimDisplayName
+      scimGroupMailing
       tags
       updatedAt
       updatedBy
@@ -43,17 +65,28 @@ mutation CreateBulkGroup($input: [CreateGroupInput!]) {
 mutation CreateGroup($input: CreateGroupInput!) {
   createGroup(input: $input) {
     group {
+      avatarLocalFileID
       createdAt
       createdBy
       description
       displayID
       displayName
+      externalID
       gravatarLogoURL
       id
+      integrationRunID
       isManaged
       logoURL
+      managedBy
       name
+      oscalContactUuids
+      oscalRole
+      oscalPartyUUID
       ownerID
+      scimGroupMailing
+      scimExternalID
+      scimDisplayName
+      scimActive
       tags
       updatedAt
       updatedBy
@@ -125,17 +158,28 @@ query GetAllGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
 
 query GetGroupByID($groupId: ID!) {
   group(id: $groupId) {
+    avatarLocalFileID
     createdAt
     createdBy
     description
     displayID
     displayName
+    externalID
     gravatarLogoURL
     id
+    integrationRunID
     isManaged
     logoURL
+    managedBy
     name
+    oscalRole
+    oscalPartyUUID
+    oscalContactUuids
     ownerID
+    scimExternalID
+    scimGroupMailing
+    scimDisplayName
+    scimActive
     tags
     updatedAt
     updatedBy
@@ -202,17 +246,28 @@ groups(
 mutation UpdateGroup($updateGroupId: ID!, $input: UpdateGroupInput!) {
   updateGroup(id: $updateGroupId, input: $input) {
     group {
+      avatarLocalFileID
       createdAt
       createdBy
       description
       displayID
       displayName
+      externalID
       gravatarLogoURL
       id
+      integrationRunID
       isManaged
       logoURL
+      managedBy
       name
+      oscalRole
+      oscalContactUuids
+      oscalPartyUUID
       ownerID
+      scimGroupMailing
+      scimExternalID
+      scimDisplayName
+      scimActive
       tags
       updatedAt
       updatedBy

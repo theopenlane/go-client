@@ -59,6 +59,9 @@ query GetUserSettingByID($userSettingId: ID!) {
   userSetting(id: $userSettingId) {
     createdAt
     createdBy
+    delegateEndAt
+    delegateStartAt
+    delegateUserID
     emailConfirmed
     id
     isTfaEnabled
@@ -116,6 +119,9 @@ mutation UpdateUserSetting($updateUserSettingId: ID!, $input: UpdateUserSettingI
     userSetting {
       createdAt
       createdBy
+      delegateUserID
+      delegateStartAt
+      delegateEndAt
       emailConfirmed
       id
       isTfaEnabled

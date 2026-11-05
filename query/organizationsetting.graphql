@@ -147,6 +147,7 @@ query GetOrganizationSettingByID($organizationSettingId: ID!) {
   organizationSetting(id: $organizationSettingId) {
     allowedEmailDomains
     allowMatchingDomainsAutojoin
+    allowSupportAccess
     billingAddress
     billingContact
     billingEmail
@@ -161,10 +162,19 @@ query GetOrganizationSettingByID($organizationSettingId: ID!) {
     identityProviderAuthTested
     identityProviderClientID
     identityProviderEntityID
+    identityProviderJitProvisioning
     identityProviderLoginEnforced
     identityProviderMetadataEndpoint
+    multifactorAuthEnforced
+    jitAllowedEmailDomains
     oidcDiscoveryEndpoint
     organizationID
+    ssoExemptDomains
+    paymentMethodAdded
+    pendingDeletionAt
+    samlCert
+    samlSigninURL
+    samlIssuer
     tags
     taxIdentifier
     updatedAt
@@ -231,6 +241,7 @@ mutation UpdateOrganizationSetting($updateOrganizationSettingId: ID!, $input: Up
     organizationSetting {
       allowedEmailDomains
       allowMatchingDomainsAutojoin
+      allowSupportAccess
       billingAddress
       billingContact
       billingEmail
@@ -244,11 +255,20 @@ mutation UpdateOrganizationSetting($updateOrganizationSettingId: ID!, $input: Up
       identityProvider
       identityProviderClientID
       identityProviderEntityID
+      identityProviderJitProvisioning
       identityProviderLoginEnforced
       identityProviderMetadataEndpoint
+      multifactorAuthEnforced
+      jitAllowedEmailDomains
       identityProviderAuthTested
       oidcDiscoveryEndpoint
       organizationID
+      pendingDeletionAt
+      samlCert
+      paymentMethodAdded
+      samlIssuer
+      samlSigninURL
+      ssoExemptDomains
       tags
       taxIdentifier
       updatedAt

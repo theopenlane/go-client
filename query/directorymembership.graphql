@@ -2,17 +2,27 @@
 mutation CreateBulkCSVDirectoryMembership($input: Upload!) {
   createBulkCSVDirectoryMembership(input: $input) {
     directoryMemberships {
+      addedAt
       createdAt
       createdBy
       directoryAccountID
       directoryGroupID
+      directoryName
       displayID
+      environmentName
+      environmentID
       id
       integrationID
+      managedBy
+      integrationRunID
       metadata
       observedAt
       ownerID
+      platformID
+      removedAt
       role
+      scopeName
+      scopeID
       source
       updatedAt
       updatedBy
@@ -23,17 +33,27 @@ mutation CreateBulkCSVDirectoryMembership($input: Upload!) {
 mutation CreateBulkDirectoryMembership($input: [CreateDirectoryMembershipInput!]) {
   createBulkDirectoryMembership(input: $input) {
     directoryMemberships {
+      addedAt
       createdAt
       createdBy
       directoryAccountID
       directoryGroupID
+      directoryName
       displayID
+      environmentID
+      environmentName
       id
       integrationID
+      integrationRunID
+      managedBy
       metadata
       observedAt
       ownerID
+      removedAt
+      platformID
       role
+      scopeID
+      scopeName
       source
       updatedAt
       updatedBy
@@ -44,17 +64,27 @@ mutation CreateBulkDirectoryMembership($input: [CreateDirectoryMembershipInput!]
 mutation CreateDirectoryMembership($input: CreateDirectoryMembershipInput!) {
   createDirectoryMembership(input: $input) {
     directoryMembership {
+      addedAt
       createdAt
       createdBy
       directoryAccountID
       directoryGroupID
+      directoryName
       displayID
+      environmentName
+      environmentID
       id
       integrationID
+      managedBy
+      integrationRunID
       metadata
       observedAt
       ownerID
+      removedAt
+      platformID
       role
+      scopeName
+      scopeID
       source
       updatedAt
       updatedBy
@@ -105,17 +135,27 @@ query GetAllDirectoryMemberships($first: Int, $last: Int, $after: Cursor, $befor
 }
 query GetDirectoryMembershipByID($directoryMembershipId: ID!) {
   directoryMembership(id: $directoryMembershipId) {
+    addedAt
     createdAt
     createdBy
     directoryAccountID
     directoryGroupID
+    directoryName
     displayID
+    environmentID
+    environmentName
     id
     integrationID
+    integrationRunID
+    managedBy
     metadata
     observedAt
     ownerID
+    removedAt
+    platformID
     role
+    scopeID
+    scopeName
     source
     updatedAt
     updatedBy
@@ -161,17 +201,27 @@ directoryMemberships(
 mutation UpdateDirectoryMembership($updateDirectoryMembershipId: ID!, $input: UpdateDirectoryMembershipInput!) {
   updateDirectoryMembership(id: $updateDirectoryMembershipId, input: $input) {
     directoryMembership {
+      addedAt
       createdAt
       createdBy
       directoryAccountID
       directoryGroupID
+      directoryName
       displayID
+      environmentName
+      environmentID
       id
       integrationID
+      integrationRunID
+      managedBy
       metadata
       observedAt
       ownerID
+      removedAt
+      platformID
       role
+      scopeID
+      scopeName
       source
       updatedAt
       updatedBy
