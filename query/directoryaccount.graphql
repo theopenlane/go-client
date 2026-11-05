@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVDirectoryAccount($input: Upload!) {
   createBulkCSVDirectoryAccount(input: $input) {
     directoryAccounts {
@@ -41,6 +40,9 @@ mutation CreateBulkCSVDirectoryAccount($input: Upload!) {
       scopeID
       removedAt
       secondaryKey
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       sourceVersion
       status
       tags
@@ -92,6 +94,9 @@ mutation CreateBulkDirectoryAccount($input: [CreateDirectoryAccountInput!]) {
       scopeID
       scopeName
       secondaryKey
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       sourceVersion
       status
       tags
@@ -143,6 +148,9 @@ mutation CreateDirectoryAccount($input: CreateDirectoryAccountInput!) {
       scopeID
       removedAt
       secondaryKey
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       sourceVersion
       status
       tags
@@ -158,7 +166,7 @@ mutation DeleteDirectoryAccount($deleteDirectoryAccountId: ID!) {
   }
 }
 
-query GetAllDirectoryAccounts($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectoryAccountOrder!]){
+query GetAllDirectoryAccounts($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectoryAccountOrder!]) {
   directoryAccounts(
     first: $first
     last: $last
@@ -205,6 +213,7 @@ query GetAllDirectoryAccounts($first: Int, $last: Int, $after: Cursor, $before: 
     }
   }
 }
+
 query GetDirectoryAccountByID($directoryAccountId: ID!) {
   directoryAccount(id: $directoryAccountId) {
     accountType
@@ -246,6 +255,9 @@ query GetDirectoryAccountByID($directoryAccountId: ID!) {
     scopeName
     removedAt
     secondaryKey
+    sourceDefinitionID
+    sourceInstanceID
+    sourceKey
     sourceVersion
     status
     tags
@@ -255,7 +267,7 @@ query GetDirectoryAccountByID($directoryAccountId: ID!) {
 }
 
 query GetDirectoryAccounts($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DirectoryAccountWhereInput, $orderBy: [DirectoryAccountOrder!]) {
-directoryAccounts(
+  directoryAccounts(
     first: $first
     last: $last
     after: $after
@@ -302,6 +314,7 @@ directoryAccounts(
     }
   }
 }
+
 mutation UpdateDirectoryAccount($updateDirectoryAccountId: ID!, $input: UpdateDirectoryAccountInput!) {
   updateDirectoryAccount(id: $updateDirectoryAccountId, input: $input) {
     directoryAccount {
@@ -344,6 +357,9 @@ mutation UpdateDirectoryAccount($updateDirectoryAccountId: ID!, $input: UpdateDi
       scopeID
       scopeName
       secondaryKey
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       sourceVersion
       status
       tags

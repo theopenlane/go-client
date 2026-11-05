@@ -387,6 +387,9 @@ query GetEntityByID($entityId: ID!) {
     scopeID
     scopeName
     soc2PeriodEnd
+    sourceDefinitionID
+    sourceInstanceID
+    sourceKey
     spendCurrency
     ssoEnforced
     status

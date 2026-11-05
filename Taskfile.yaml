@@ -28,6 +28,11 @@ tasks:
     cmds:
       - rover graph fetch Openlane-0dedz@current > schema/schema.graphql
 
+  sync:fields:
+    desc: add new flat fields from the latest core release to existing queries
+    cmds:
+      - go run generate/syncfields.go {{.CLI_ARGS}}
+
   go:fmt:
     desc: format all go code
     cmds:

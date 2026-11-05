@@ -1,173 +1,163 @@
-mutation CreateAssessment($input: CreateAssessmentInput!) {
-  createAssessment(input: $input) {
-    assessment {
-      assessmentType
-      createdAt
-      createdBy
-      externalID
-      id
-      jsonconfig
-      managedBy
-      integrationRunID
-      name
-      ownerID
-      responseDueDuration
-      tags
-      templateID
-      uischema
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateAssessment ($input: CreateAssessmentInput!) {
+	createAssessment(input: $input) {
+		assessment {
+			assessmentType
+			createdAt
+			createdBy
+			externalID
+			id
+			jsonconfig
+			managedBy
+			integrationRunID
+			name
+			ownerID
+			responseDueDuration
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			templateID
+			uischema
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation DeleteAssessment($deleteAssessmentId: ID!) {
-  deleteAssessment(id: $deleteAssessmentId) {
-    deletedID
-  }
+mutation DeleteAssessment ($deleteAssessmentId: ID!) {
+	deleteAssessment(id: $deleteAssessmentId) {
+		deletedID
+	}
 }
-
-mutation DeleteBulkAssessment($ids: [ID!]!) {
-  deleteBulkAssessment(ids: $ids) {
-    deletedIDs
-  }
+mutation DeleteBulkAssessment ($ids: [ID!]!) {
+	deleteBulkAssessment(ids: $ids) {
+		deletedIDs
+	}
 }
-
-query GetAllAssessments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [AssessmentOrder!]) {
-  assessments(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        assessmentType
-        createdAt
-        createdBy
-        id
-        name
-        ownerID
-        tags
-        templateID
-        updatedAt
-        updatedBy
-        campaigns {
-          edges {
-            node {
-              id
-              name
-              status
-              displayID
-            }
-          }
-        }
-      }
-    }
-  }
+query GetAllAssessments ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [AssessmentOrder!]) {
+	assessments(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				assessmentType
+				createdAt
+				createdBy
+				id
+				name
+				ownerID
+				tags
+				templateID
+				updatedAt
+				updatedBy
+				campaigns {
+					edges {
+						node {
+							id
+							name
+							status
+							displayID
+						}
+					}
+				}
+			}
+		}
+	}
 }
-
-query GetAssessmentByID($assessmentId: ID!) {
-  assessment(id: $assessmentId) {
-    assessmentType
-    createdAt
-    createdBy
-    externalID
-    id
-    integrationRunID
-    jsonconfig
-    managedBy
-    name
-    ownerID
-    responseDueDuration
-    tags
-    templateID
-    uischema
-    updatedAt
-    updatedBy
-    campaigns {
-      edges {
-        node {
-          id
-          name
-          status
-          displayID
-        }
-      }
-    }
-  }
+query GetAssessmentByID ($assessmentId: ID!) {
+	assessment(id: $assessmentId) {
+		assessmentType
+		createdAt
+		createdBy
+		externalID
+		id
+		integrationRunID
+		jsonconfig
+		managedBy
+		name
+		ownerID
+		responseDueDuration
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
+		tags
+		templateID
+		uischema
+		updatedAt
+		updatedBy
+		campaigns {
+			edges {
+				node {
+					id
+					name
+					status
+					displayID
+				}
+			}
+		}
+	}
 }
-
-query GetAssessments($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: AssessmentWhereInput, $orderBy: [AssessmentOrder!]) {
-  assessments(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        assessmentType
-        createdAt
-        createdBy
-        id
-        name
-        ownerID
-        tags
-        templateID
-        updatedAt
-        updatedBy
-        campaigns {
-          edges {
-            node {
-              id
-              name
-              status
-              displayID
-            }
-          }
-        }
-      }
-    }
-  }
+query GetAssessments ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: AssessmentWhereInput, $orderBy: [AssessmentOrder!]) {
+	assessments(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				assessmentType
+				createdAt
+				createdBy
+				id
+				name
+				ownerID
+				tags
+				templateID
+				updatedAt
+				updatedBy
+				campaigns {
+					edges {
+						node {
+							id
+							name
+							status
+							displayID
+						}
+					}
+				}
+			}
+		}
+	}
 }
-
-mutation UpdateAssessment($updateAssessmentId: ID!, $input: UpdateAssessmentInput!) {
-  updateAssessment(id: $updateAssessmentId, input: $input) {
-    assessment {
-      assessmentType
-      createdAt
-      createdBy
-      externalID
-      id
-      integrationRunID
-      jsonconfig
-      managedBy
-      name
-      ownerID
-      responseDueDuration
-      tags
-      templateID
-      uischema
-      updatedAt
-      updatedBy
-    }
-  }
+mutation UpdateAssessment ($updateAssessmentId: ID!, $input: UpdateAssessmentInput!) {
+	updateAssessment(id: $updateAssessmentId, input: $input) {
+		assessment {
+			assessmentType
+			createdAt
+			createdBy
+			externalID
+			id
+			integrationRunID
+			jsonconfig
+			managedBy
+			name
+			ownerID
+			responseDueDuration
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			templateID
+			uischema
+			updatedAt
+			updatedBy
+		}
+	}
 }

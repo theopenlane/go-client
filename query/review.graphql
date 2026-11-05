@@ -1,279 +1,271 @@
-mutation CreateBulkCSVReview($input: Upload!) {
-  createBulkCSVReview(input: $input) {
-    reviews {
-      approved
-      approvedAt
-      category
-      classification
-      createdAt
-      createdBy
-      details
-      environmentName
-      environmentID
-      externalID
-      externalOwnerID
-      externalURI
-      id
-      integrationRunID
-      managedBy
-      metadata
-      rawPayload
-      reportedAt
-      reporter
-      reviewedAt
-      reviewerID
-      scopeID
-      scopeName
-      source
-      state
-      status
-      summary
-      tags
-      title
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkCSVReview ($input: Upload!) {
+	createBulkCSVReview(input: $input) {
+		reviews {
+			approved
+			approvedAt
+			category
+			classification
+			createdAt
+			createdBy
+			details
+			environmentName
+			environmentID
+			externalID
+			externalOwnerID
+			externalURI
+			id
+			integrationRunID
+			managedBy
+			metadata
+			rawPayload
+			reportedAt
+			reporter
+			reviewedAt
+			reviewerID
+			scopeID
+			scopeName
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			state
+			status
+			summary
+			tags
+			title
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateBulkReview($input: [CreateReviewInput!]) {
-  createBulkReview(input: $input) {
-    reviews {
-      approved
-      approvedAt
-      category
-      classification
-      createdAt
-      createdBy
-      details
-      environmentID
-      environmentName
-      externalID
-      externalOwnerID
-      externalURI
-      id
-      managedBy
-      integrationRunID
-      metadata
-      rawPayload
-      reportedAt
-      reporter
-      reviewedAt
-      reviewerID
-      scopeID
-      scopeName
-      source
-      state
-      status
-      summary
-      tags
-      title
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkReview ($input: [CreateReviewInput!]) {
+	createBulkReview(input: $input) {
+		reviews {
+			approved
+			approvedAt
+			category
+			classification
+			createdAt
+			createdBy
+			details
+			environmentID
+			environmentName
+			externalID
+			externalOwnerID
+			externalURI
+			id
+			managedBy
+			integrationRunID
+			metadata
+			rawPayload
+			reportedAt
+			reporter
+			reviewedAt
+			reviewerID
+			scopeID
+			scopeName
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			state
+			status
+			summary
+			tags
+			title
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateReview($input: CreateReviewInput!) {
-  createReview(input: $input) {
-    review {
-      approved
-      approvedAt
-      category
-      classification
-      createdAt
-      createdBy
-      details
-      environmentID
-      environmentName
-      externalID
-      externalOwnerID
-      externalURI
-      id
-      integrationRunID
-      managedBy
-      metadata
-      rawPayload
-      reportedAt
-      reporter
-      reviewedAt
-      reviewerID
-      scopeID
-      scopeName
-      source
-      state
-      status
-      summary
-      tags
-      title
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateReview ($input: CreateReviewInput!) {
+	createReview(input: $input) {
+		review {
+			approved
+			approvedAt
+			category
+			classification
+			createdAt
+			createdBy
+			details
+			environmentID
+			environmentName
+			externalID
+			externalOwnerID
+			externalURI
+			id
+			integrationRunID
+			managedBy
+			metadata
+			rawPayload
+			reportedAt
+			reporter
+			reviewedAt
+			reviewerID
+			scopeID
+			scopeName
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			state
+			status
+			summary
+			tags
+			title
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation DeleteReview($deleteReviewId: ID!) {
-  deleteReview(id: $deleteReviewId) {
-    deletedID
-  }
+mutation DeleteReview ($deleteReviewId: ID!) {
+	deleteReview(id: $deleteReviewId) {
+		deletedID
+	}
 }
-
-query GetAllReviews($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ReviewOrder!]) {
-  reviews(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        approved
-        approvedAt
-        category
-        classification
-        createdAt
-        createdBy
-        details
-        externalID
-        externalOwnerID
-        externalURI
-        id
-        metadata
-        rawPayload
-        reportedAt
-        reporter
-        reviewedAt
-        reviewerID
-        source
-        state
-        summary
-        tags
-        title
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetAllReviews ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ReviewOrder!]) {
+	reviews(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				approved
+				approvedAt
+				category
+				classification
+				createdAt
+				createdBy
+				details
+				externalID
+				externalOwnerID
+				externalURI
+				id
+				metadata
+				rawPayload
+				reportedAt
+				reporter
+				reviewedAt
+				reviewerID
+				source
+				state
+				summary
+				tags
+				title
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-query GetReviewByID($reviewId: ID!) {
-  review(id: $reviewId) {
-    approved
-    approvedAt
-    category
-    classification
-    createdAt
-    createdBy
-    details
-    environmentName
-    environmentID
-    externalID
-    externalOwnerID
-    externalURI
-    id
-    managedBy
-    integrationRunID
-    metadata
-    rawPayload
-    reportedAt
-    reporter
-    reviewedAt
-    reviewerID
-    scopeName
-    scopeID
-    source
-    state
-    status
-    summary
-    tags
-    title
-    updatedAt
-    updatedBy
-  }
+query GetReviewByID ($reviewId: ID!) {
+	review(id: $reviewId) {
+		approved
+		approvedAt
+		category
+		classification
+		createdAt
+		createdBy
+		details
+		environmentName
+		environmentID
+		externalID
+		externalOwnerID
+		externalURI
+		id
+		managedBy
+		integrationRunID
+		metadata
+		rawPayload
+		reportedAt
+		reporter
+		reviewedAt
+		reviewerID
+		scopeName
+		scopeID
+		source
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
+		state
+		status
+		summary
+		tags
+		title
+		updatedAt
+		updatedBy
+	}
 }
-
-query GetReviews($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ReviewWhereInput, $orderBy: [ReviewOrder!]) {
-  reviews(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        approved
-        approvedAt
-        category
-        classification
-        createdAt
-        createdBy
-        details
-        externalID
-        externalOwnerID
-        externalURI
-        id
-        metadata
-        rawPayload
-        reportedAt
-        reporter
-        reviewedAt
-        reviewerID
-        source
-        state
-        summary
-        tags
-        title
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetReviews ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: ReviewWhereInput, $orderBy: [ReviewOrder!]) {
+	reviews(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				approved
+				approvedAt
+				category
+				classification
+				createdAt
+				createdBy
+				details
+				externalID
+				externalOwnerID
+				externalURI
+				id
+				metadata
+				rawPayload
+				reportedAt
+				reporter
+				reviewedAt
+				reviewerID
+				source
+				state
+				summary
+				tags
+				title
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-mutation UpdateReview($updateReviewId: ID!, $input: UpdateReviewInput!) {
-  updateReview(id: $updateReviewId, input: $input) {
-    review {
-      approved
-      approvedAt
-      category
-      classification
-      createdAt
-      createdBy
-      details
-      externalID
-      externalOwnerID
-      externalURI
-      id
-      metadata
-      rawPayload
-      reportedAt
-      reporter
-      reviewedAt
-      reviewerID
-      source
-      state
-      summary
-      tags
-      title
-      updatedAt
-      updatedBy
-    }
-  }
+mutation UpdateReview ($updateReviewId: ID!, $input: UpdateReviewInput!) {
+	updateReview(id: $updateReviewId, input: $input) {
+		review {
+			approved
+			approvedAt
+			category
+			classification
+			createdAt
+			createdBy
+			details
+			externalID
+			externalOwnerID
+			externalURI
+			id
+			metadata
+			rawPayload
+			reportedAt
+			reporter
+			reviewedAt
+			reviewerID
+			source
+			state
+			summary
+			tags
+			title
+			updatedAt
+			updatedBy
+		}
+	}
 }

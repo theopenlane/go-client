@@ -43,6 +43,9 @@ mutation CreateBulkCSVRisk($input: Upload!) {
       scopeName
       scopeID
       score
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       stakeholderGroupID
       stakeholderID
       stakeholderUserID
@@ -101,6 +104,9 @@ mutation CreateBulkRisk($input: [CreateRiskInput!]) {
       scopeName
       scopeID
       score
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       stakeholderGroupID
       stakeholderID
       stakeholderIdentityHolderID
@@ -159,6 +165,9 @@ mutation CreateRisk($input: CreateRiskInput!) {
       scopeName
       scopeID
       score
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       stakeholderGroupID
       stakeholderID
       stakeholderName
@@ -237,6 +246,9 @@ query GetAllRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $ord
         scopeName
         scopeID
         score
+        sourceDefinitionID
+        sourceInstanceID
+        sourceKey
         stakeholderGroupID
         stakeholderID
         stakeholderUserID
@@ -295,6 +307,9 @@ query GetRiskByID($riskId: ID!) {
     scopeID
     scopeName
     score
+    sourceDefinitionID
+    sourceInstanceID
+    sourceKey
     stakeholderGroupID
     stakeholderID
     stakeholderName
@@ -367,6 +382,9 @@ query GetRisks($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where:
         scopeName
         scopeID
         score
+        sourceDefinitionID
+        sourceInstanceID
+        sourceKey
         stakeholderGroupID
         stakeholderID
         stakeholderName
@@ -426,6 +444,9 @@ mutation UpdateRisk($updateRiskId: ID!, $input: UpdateRiskInput!) {
       scopeName
       scopeID
       score
+      sourceDefinitionID
+      sourceInstanceID
+      sourceKey
       stakeholderGroupID
       stakeholderID
       stakeholderUserID

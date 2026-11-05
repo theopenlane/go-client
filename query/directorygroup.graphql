@@ -1,285 +1,280 @@
-mutation CreateBulkCSVDirectoryGroup($input: Upload!) {
-  createBulkCSVDirectoryGroup(input: $input) {
-    directoryGroups {
-      addedAt
-      classification
-      createdAt
-      createdBy
-      description
-      directoryName
-      displayID
-      displayName
-      email
-      environmentID
-      environmentName
-      externalID
-      externalSharingAllowed
-      id
-      integrationID
-      managedBy
-      integrationRunID
-      memberCount
-      metadata
-      observedAt
-      ownerID
-      platformID
-      profile
-      rawProfileFileID
-      removedAt
-      scopeName
-      scopeID
-      sourceVersion
-      status
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkCSVDirectoryGroup ($input: Upload!) {
+	createBulkCSVDirectoryGroup(input: $input) {
+		directoryGroups {
+			addedAt
+			classification
+			createdAt
+			createdBy
+			description
+			directoryName
+			displayID
+			displayName
+			email
+			environmentID
+			environmentName
+			externalID
+			externalSharingAllowed
+			id
+			integrationID
+			managedBy
+			integrationRunID
+			memberCount
+			metadata
+			observedAt
+			ownerID
+			platformID
+			profile
+			rawProfileFileID
+			removedAt
+			scopeName
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			scopeID
+			sourceVersion
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateBulkDirectoryGroup($input: [CreateDirectoryGroupInput!]) {
-  createBulkDirectoryGroup(input: $input) {
-    directoryGroups {
-      addedAt
-      classification
-      createdAt
-      createdBy
-      description
-      directoryName
-      displayID
-      displayName
-      email
-      environmentName
-      environmentID
-      externalID
-      externalSharingAllowed
-      id
-      integrationID
-      integrationRunID
-      managedBy
-      memberCount
-      metadata
-      observedAt
-      ownerID
-      platformID
-      profile
-      rawProfileFileID
-      scopeName
-      scopeID
-      removedAt
-      sourceVersion
-      status
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkDirectoryGroup ($input: [CreateDirectoryGroupInput!]) {
+	createBulkDirectoryGroup(input: $input) {
+		directoryGroups {
+			addedAt
+			classification
+			createdAt
+			createdBy
+			description
+			directoryName
+			displayID
+			displayName
+			email
+			environmentName
+			environmentID
+			externalID
+			externalSharingAllowed
+			id
+			integrationID
+			integrationRunID
+			managedBy
+			memberCount
+			metadata
+			observedAt
+			ownerID
+			platformID
+			profile
+			rawProfileFileID
+			scopeName
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			scopeID
+			removedAt
+			sourceVersion
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateDirectoryGroup($input: CreateDirectoryGroupInput!) {
-  createDirectoryGroup(input: $input) {
-    directoryGroup {
-      addedAt
-      classification
-      createdAt
-      createdBy
-      description
-      directoryName
-      displayID
-      displayName
-      email
-      environmentID
-      environmentName
-      externalID
-      externalSharingAllowed
-      id
-      integrationID
-      integrationRunID
-      managedBy
-      memberCount
-      metadata
-      observedAt
-      ownerID
-      platformID
-      profile
-      rawProfileFileID
-      removedAt
-      scopeID
-      scopeName
-      sourceVersion
-      status
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateDirectoryGroup ($input: CreateDirectoryGroupInput!) {
+	createDirectoryGroup(input: $input) {
+		directoryGroup {
+			addedAt
+			classification
+			createdAt
+			createdBy
+			description
+			directoryName
+			displayID
+			displayName
+			email
+			environmentID
+			environmentName
+			externalID
+			externalSharingAllowed
+			id
+			integrationID
+			integrationRunID
+			managedBy
+			memberCount
+			metadata
+			observedAt
+			ownerID
+			platformID
+			profile
+			rawProfileFileID
+			removedAt
+			scopeID
+			scopeName
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			sourceVersion
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation DeleteDirectoryGroup($deleteDirectoryGroupId: ID!) {
-  deleteDirectoryGroup(id: $deleteDirectoryGroupId) {
-    deletedID
-  }
+mutation DeleteDirectoryGroup ($deleteDirectoryGroupId: ID!) {
+	deleteDirectoryGroup(id: $deleteDirectoryGroupId) {
+		deletedID
+	}
 }
-
-query GetAllDirectoryGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectoryGroupOrder!]) {
-  directoryGroups(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        classification
-        createdAt
-        createdBy
-        description
-        displayID
-        displayName
-        email
-        externalID
-        externalSharingAllowed
-        id
-        integrationID
-        memberCount
-        observedAt
-        ownerID
-        profile
-        rawProfileFileID
-        sourceVersion
-        status
-        tags
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetAllDirectoryGroups ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [DirectoryGroupOrder!]) {
+	directoryGroups(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				classification
+				createdAt
+				createdBy
+				description
+				displayID
+				displayName
+				email
+				externalID
+				externalSharingAllowed
+				id
+				integrationID
+				memberCount
+				observedAt
+				ownerID
+				profile
+				rawProfileFileID
+				sourceVersion
+				status
+				tags
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-query GetDirectoryGroupByID($directoryGroupId: ID!) {
-  directoryGroup(id: $directoryGroupId) {
-    addedAt
-    classification
-    createdAt
-    createdBy
-    description
-    directoryName
-    displayID
-    displayName
-    email
-    environmentName
-    environmentID
-    externalID
-    externalSharingAllowed
-    id
-    integrationID
-    managedBy
-    integrationRunID
-    memberCount
-    metadata
-    observedAt
-    ownerID
-    platformID
-    profile
-    rawProfileFileID
-    scopeName
-    removedAt
-    scopeID
-    sourceVersion
-    status
-    tags
-    updatedAt
-    updatedBy
-  }
+query GetDirectoryGroupByID ($directoryGroupId: ID!) {
+	directoryGroup(id: $directoryGroupId) {
+		addedAt
+		classification
+		createdAt
+		createdBy
+		description
+		directoryName
+		displayID
+		displayName
+		email
+		environmentName
+		environmentID
+		externalID
+		externalSharingAllowed
+		id
+		integrationID
+		managedBy
+		integrationRunID
+		memberCount
+		metadata
+		observedAt
+		ownerID
+		platformID
+		profile
+		rawProfileFileID
+		scopeName
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
+		removedAt
+		scopeID
+		sourceVersion
+		status
+		tags
+		updatedAt
+		updatedBy
+	}
 }
-
-query GetDirectoryGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DirectoryGroupWhereInput, $orderBy: [DirectoryGroupOrder!]) {
-  directoryGroups(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        classification
-        createdAt
-        createdBy
-        description
-        displayID
-        displayName
-        email
-        externalID
-        externalSharingAllowed
-        id
-        integrationID
-        memberCount
-        observedAt
-        ownerID
-        profile
-        rawProfileFileID
-        sourceVersion
-        status
-        tags
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetDirectoryGroups ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: DirectoryGroupWhereInput, $orderBy: [DirectoryGroupOrder!]) {
+	directoryGroups(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				classification
+				createdAt
+				createdBy
+				description
+				displayID
+				displayName
+				email
+				externalID
+				externalSharingAllowed
+				id
+				integrationID
+				memberCount
+				observedAt
+				ownerID
+				profile
+				rawProfileFileID
+				sourceVersion
+				status
+				tags
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-mutation UpdateDirectoryGroup($updateDirectoryGroupId: ID!, $input: UpdateDirectoryGroupInput!) {
-  updateDirectoryGroup(id: $updateDirectoryGroupId, input: $input) {
-    directoryGroup {
-      addedAt
-      classification
-      createdAt
-      createdBy
-      description
-      directoryName
-      displayID
-      displayName
-      email
-      environmentName
-      environmentID
-      externalID
-      externalSharingAllowed
-      id
-      integrationID
-      managedBy
-      integrationRunID
-      memberCount
-      metadata
-      observedAt
-      ownerID
-      platformID
-      profile
-      rawProfileFileID
-      scopeName
-      scopeID
-      removedAt
-      sourceVersion
-      status
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation UpdateDirectoryGroup ($updateDirectoryGroupId: ID!, $input: UpdateDirectoryGroupInput!) {
+	updateDirectoryGroup(id: $updateDirectoryGroupId, input: $input) {
+		directoryGroup {
+			addedAt
+			classification
+			createdAt
+			createdBy
+			description
+			directoryName
+			displayID
+			displayName
+			email
+			environmentName
+			environmentID
+			externalID
+			externalSharingAllowed
+			id
+			integrationID
+			managedBy
+			integrationRunID
+			memberCount
+			metadata
+			observedAt
+			ownerID
+			platformID
+			profile
+			rawProfileFileID
+			scopeName
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			scopeID
+			removedAt
+			sourceVersion
+			status
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }

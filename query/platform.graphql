@@ -52,7 +52,10 @@ mutation CreateBulkCSVPlatform($input: Upload!) {
       securityOwnerUserID
       securityTierID
       securityTierName
+      sourceDefinitionID
       sourceIdentifier
+      sourceInstanceID
+      sourceKey
       sourceType
       status
       tags
@@ -121,7 +124,10 @@ mutation CreateBulkPlatform($input: [CreatePlatformInput!]) {
       securityOwnerUserID
       securityTierID
       securityTierName
+      sourceDefinitionID
       sourceIdentifier
+      sourceInstanceID
+      sourceKey
       sourceType
       status
       tags
@@ -272,7 +278,10 @@ query GetAllPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, 
         securityOwnerUserID
         securityTierID
         securityTierName
+        sourceDefinitionID
         sourceIdentifier
+        sourceInstanceID
+        sourceKey
         sourceType
         status
         tags
@@ -351,7 +360,10 @@ query GetPlatformByID($platformId: ID!) {
     securityOwnerUserID
     securityTierID
     securityTierName
+    sourceDefinitionID
     sourceIdentifier
+    sourceInstanceID
+    sourceKey
     sourceType
     status
     tags
@@ -434,7 +446,10 @@ query GetPlatforms($first: Int, $last: Int, $after: Cursor, $before: Cursor, $or
         securityOwnerUserID
         securityTierID
         securityTierName
+        sourceDefinitionID
         sourceIdentifier
+        sourceInstanceID
+        sourceKey
         sourceType
         status
         tags

@@ -1,0 +1,8 @@
+# field name patterns syncfields never adds, one per line
+workflow*
+updatedByImpersonator
+internalNotes
+systemInternalID
+systemOwned
+sourceDefinitionVersion
+ownerID

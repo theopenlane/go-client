@@ -1,236 +1,218 @@
-mutation CreateBulkCSVTemplate($input: Upload!) {
-  createBulkCSVTemplate(input: $input) {
-    templates {
-      createdAt
-      createdBy
-      description
-      environmentName
-      externalID
-      environmentID
-      id
-      integrationRunID
-      jsonconfig
-      name
-      ownerID
-      scopeID
-      scopeName
-      tags
-      templateType
-      transformConfiguration
-      trustCenterID
-      uischema
-      updatedAt
-      updatedBy
-      kind
-      managedBy
-    }
-  }
+mutation CreateBulkCSVTemplate ($input: Upload!) {
+	createBulkCSVTemplate(input: $input) {
+		templates {
+			createdAt
+			createdBy
+			description
+			environmentName
+			externalID
+			environmentID
+			id
+			integrationRunID
+			jsonconfig
+			name
+			ownerID
+			scopeID
+			scopeName
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			templateType
+			transformConfiguration
+			trustCenterID
+			uischema
+			updatedAt
+			updatedBy
+			kind
+			managedBy
+		}
+	}
 }
-
-mutation CreateBulkTemplate($input: [CreateTemplateInput!]) {
-  createBulkTemplate(input: $input) {
-    templates {
-      createdAt
-      createdBy
-      description
-      environmentID
-      environmentName
-      externalID
-      id
-      integrationRunID
-      jsonconfig
-      name
-      ownerID
-      scopeID
-      scopeName
-      tags
-      templateType
-      transformConfiguration
-      trustCenterID
-      uischema
-      updatedAt
-      updatedBy
-      kind
-      managedBy
-    }
-  }
+mutation CreateBulkTemplate ($input: [CreateTemplateInput!]) {
+	createBulkTemplate(input: $input) {
+		templates {
+			createdAt
+			createdBy
+			description
+			environmentID
+			environmentName
+			externalID
+			id
+			integrationRunID
+			jsonconfig
+			name
+			ownerID
+			scopeID
+			scopeName
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			templateType
+			transformConfiguration
+			trustCenterID
+			uischema
+			updatedAt
+			updatedBy
+			kind
+			managedBy
+		}
+	}
 }
-
-mutation CreateTemplate($input: CreateTemplateInput!, $templateFiles: [Upload!]) {
-  createTemplate(input: $input, templateFiles: $templateFiles) {
-    template {
-      createdAt
-      createdBy
-      description
-      id
-      jsonconfig
-      name
-      ownerID
-      tags
-      templateType
-      uischema
-      updatedAt
-      updatedBy
-      kind
-      files {
-        edges {
-          node {
-            id
-            presignedURL
-          }
-        }
-      }
-    }
-  }
+mutation CreateTemplate ($input: CreateTemplateInput!, $templateFiles: [Upload!]) {
+	createTemplate(input: $input, templateFiles: $templateFiles) {
+		template {
+			createdAt
+			createdBy
+			description
+			id
+			jsonconfig
+			name
+			ownerID
+			tags
+			templateType
+			uischema
+			updatedAt
+			updatedBy
+			kind
+			files {
+				edges {
+					node {
+						id
+						presignedURL
+					}
+				}
+			}
+		}
+	}
 }
-
-mutation DeleteTemplate($deleteTemplateId: ID!) {
-  deleteTemplate(id: $deleteTemplateId) {
-    deletedID
-  }
+mutation DeleteTemplate ($deleteTemplateId: ID!) {
+	deleteTemplate(id: $deleteTemplateId) {
+		deletedID
+	}
 }
-
-query GetAllTemplates($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TemplateOrder!]) {
-  templates(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        createdAt
-        createdBy
-        description
-        id
-        jsonconfig
-        name
-        ownerID
-        tags
-        templateType
-        uischema
-        updatedAt
-        updatedBy
-        kind
-        files {
-          edges {
-            node {
-              id
-              presignedURL
-            }
-          }
-        }
-      }
-    }
-  }
+query GetAllTemplates ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [TemplateOrder!]) {
+	templates(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				description
+				id
+				jsonconfig
+				name
+				ownerID
+				tags
+				templateType
+				uischema
+				updatedAt
+				updatedBy
+				kind
+				files {
+					edges {
+						node {
+							id
+							presignedURL
+						}
+					}
+				}
+			}
+		}
+	}
 }
-
-query GetTemplateByID($templateId: ID!) {
-  template(id: $templateId) {
-    createdAt
-    createdBy
-    description
-    id
-    jsonconfig
-    name
-    ownerID
-    tags
-    templateType
-    uischema
-    updatedAt
-    updatedBy
-    kind
-    files {
-      edges {
-        node {
-          id
-          presignedURL
-        }
-      }
-    }
-  }
+query GetTemplateByID ($templateId: ID!) {
+	template(id: $templateId) {
+		createdAt
+		createdBy
+		description
+		id
+		jsonconfig
+		name
+		ownerID
+		tags
+		templateType
+		uischema
+		updatedAt
+		updatedBy
+		kind
+		files {
+			edges {
+				node {
+					id
+					presignedURL
+				}
+			}
+		}
+	}
 }
-
-query GetTemplates($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TemplateWhereInput, $orderBy: [TemplateOrder!]) {
-  templates(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        createdAt
-        createdBy
-        description
-        id
-        jsonconfig
-        name
-        ownerID
-        tags
-        templateType
-        uischema
-        updatedAt
-        updatedBy
-        kind
-        files {
-          edges {
-            node {
-              id
-              presignedURL
-            }
-          }
-        }
-      }
-    }
-  }
+query GetTemplates ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: TemplateWhereInput, $orderBy: [TemplateOrder!]) {
+	templates(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				description
+				id
+				jsonconfig
+				name
+				ownerID
+				tags
+				templateType
+				uischema
+				updatedAt
+				updatedBy
+				kind
+				files {
+					edges {
+						node {
+							id
+							presignedURL
+						}
+					}
+				}
+			}
+		}
+	}
 }
-
-mutation UpdateTemplate($updateTemplateId: ID!, $input: UpdateTemplateInput!, $templateFiles: [Upload!]) {
-  updateTemplate(
-    id: $updateTemplateId
-    input: $input
-    templateFiles: $templateFiles
-  ) {
-    template {
-      createdAt
-      createdBy
-      description
-      id
-      jsonconfig
-      name
-      ownerID
-      tags
-      templateType
-      uischema
-      updatedAt
-      updatedBy
-      kind
-      files {
-        edges {
-          node {
-            id
-            presignedURL
-          }
-        }
-      }
-    }
-  }
+mutation UpdateTemplate ($updateTemplateId: ID!, $input: UpdateTemplateInput!, $templateFiles: [Upload!]) {
+	updateTemplate(id: $updateTemplateId, input: $input, templateFiles: $templateFiles) {
+		template {
+			createdAt
+			createdBy
+			description
+			id
+			jsonconfig
+			name
+			ownerID
+			tags
+			templateType
+			uischema
+			updatedAt
+			updatedBy
+			kind
+			files {
+				edges {
+					node {
+						id
+						presignedURL
+					}
+				}
+			}
+		}
+	}
 }

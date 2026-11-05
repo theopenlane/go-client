@@ -1,286 +1,281 @@
-mutation CreateBulkCSVGroup($input: Upload!) {
-  createBulkCSVGroup(input: $input) {
-    groups {
-      avatarLocalFileID
-      createdAt
-      createdBy
-      description
-      displayID
-      displayName
-      externalID
-      gravatarLogoURL
-      id
-      integrationRunID
-      isManaged
-      logoURL
-      managedBy
-      name
-      oscalContactUuids
-      oscalRole
-      oscalPartyUUID
-      ownerID
-      scimExternalID
-      scimGroupMailing
-      scimActive
-      scimDisplayName
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkCSVGroup ($input: Upload!) {
+	createBulkCSVGroup(input: $input) {
+		groups {
+			avatarLocalFileID
+			createdAt
+			createdBy
+			description
+			displayID
+			displayName
+			externalID
+			gravatarLogoURL
+			id
+			integrationRunID
+			isManaged
+			logoURL
+			managedBy
+			name
+			oscalContactUuids
+			oscalRole
+			oscalPartyUUID
+			ownerID
+			scimExternalID
+			scimGroupMailing
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			scimActive
+			scimDisplayName
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateBulkGroup($input: [CreateGroupInput!]) {
-  createBulkGroup(input: $input) {
-    groups {
-      avatarLocalFileID
-      createdAt
-      createdBy
-      description
-      displayID
-      displayName
-      externalID
-      gravatarLogoURL
-      id
-      integrationRunID
-      isManaged
-      logoURL
-      managedBy
-      name
-      oscalRole
-      oscalPartyUUID
-      oscalContactUuids
-      ownerID
-      scimExternalID
-      scimActive
-      scimDisplayName
-      scimGroupMailing
-      tags
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkGroup ($input: [CreateGroupInput!]) {
+	createBulkGroup(input: $input) {
+		groups {
+			avatarLocalFileID
+			createdAt
+			createdBy
+			description
+			displayID
+			displayName
+			externalID
+			gravatarLogoURL
+			id
+			integrationRunID
+			isManaged
+			logoURL
+			managedBy
+			name
+			oscalRole
+			oscalPartyUUID
+			oscalContactUuids
+			ownerID
+			scimExternalID
+			scimActive
+			scimDisplayName
+			scimGroupMailing
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			tags
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateGroup($input: CreateGroupInput!) {
-  createGroup(input: $input) {
-    group {
-      avatarLocalFileID
-      createdAt
-      createdBy
-      description
-      displayID
-      displayName
-      externalID
-      gravatarLogoURL
-      id
-      integrationRunID
-      isManaged
-      logoURL
-      managedBy
-      name
-      oscalContactUuids
-      oscalRole
-      oscalPartyUUID
-      ownerID
-      scimGroupMailing
-      scimExternalID
-      scimDisplayName
-      scimActive
-      tags
-      updatedAt
-      updatedBy
-      setting {
-        id
-        joinPolicy
-        syncToGithub
-        syncToSlack
-        visibility
-      }
-      members {
-        totalCount
-      }
-    }
-  }
+mutation CreateGroup ($input: CreateGroupInput!) {
+	createGroup(input: $input) {
+		group {
+			avatarLocalFileID
+			createdAt
+			createdBy
+			description
+			displayID
+			displayName
+			externalID
+			gravatarLogoURL
+			id
+			integrationRunID
+			isManaged
+			logoURL
+			managedBy
+			name
+			oscalContactUuids
+			oscalRole
+			oscalPartyUUID
+			ownerID
+			scimGroupMailing
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			scimExternalID
+			scimDisplayName
+			scimActive
+			tags
+			updatedAt
+			updatedBy
+			setting {
+				id
+				joinPolicy
+				syncToGithub
+				syncToSlack
+				visibility
+			}
+			members {
+				totalCount
+			}
+		}
+	}
 }
-
-mutation DeleteGroup($deleteGroupId: ID!) {
-  deleteGroup(id: $deleteGroupId) {
-    deletedID
-  }
+mutation DeleteGroup ($deleteGroupId: ID!) {
+	deleteGroup(id: $deleteGroupId) {
+		deletedID
+	}
 }
-
-query GetAllGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [GroupOrder!]){
-  groups(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        createdAt
-        createdBy
-        description
-        displayID
-        displayName
-        gravatarLogoURL
-        id
-        isManaged
-        logoURL
-        name
-        ownerID
-        tags
-        updatedAt
-        updatedBy
-        setting {
-          id
-          joinPolicy
-          syncToGithub
-          syncToSlack
-          visibility
-        }
-        members {
-          totalCount
-        }
-      }
-    }
-  }
+query GetAllGroups ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [GroupOrder!]) {
+	groups(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				description
+				displayID
+				displayName
+				gravatarLogoURL
+				id
+				isManaged
+				logoURL
+				name
+				ownerID
+				tags
+				updatedAt
+				updatedBy
+				setting {
+					id
+					joinPolicy
+					syncToGithub
+					syncToSlack
+					visibility
+				}
+				members {
+					totalCount
+				}
+			}
+		}
+	}
 }
-
-query GetGroupByID($groupId: ID!) {
-  group(id: $groupId) {
-    avatarLocalFileID
-    createdAt
-    createdBy
-    description
-    displayID
-    displayName
-    externalID
-    gravatarLogoURL
-    id
-    integrationRunID
-    isManaged
-    logoURL
-    managedBy
-    name
-    oscalRole
-    oscalPartyUUID
-    oscalContactUuids
-    ownerID
-    scimExternalID
-    scimGroupMailing
-    scimDisplayName
-    scimActive
-    tags
-    updatedAt
-    updatedBy
-    setting {
-      id
-      joinPolicy
-      syncToGithub
-      syncToSlack
-      visibility
-    }
-    members {
-      totalCount
-    }
-  }
+query GetGroupByID ($groupId: ID!) {
+	group(id: $groupId) {
+		avatarLocalFileID
+		createdAt
+		createdBy
+		description
+		displayID
+		displayName
+		externalID
+		gravatarLogoURL
+		id
+		integrationRunID
+		isManaged
+		logoURL
+		managedBy
+		name
+		oscalRole
+		oscalPartyUUID
+		oscalContactUuids
+		ownerID
+		scimExternalID
+		scimGroupMailing
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
+		scimDisplayName
+		scimActive
+		tags
+		updatedAt
+		updatedBy
+		setting {
+			id
+			joinPolicy
+			syncToGithub
+			syncToSlack
+			visibility
+		}
+		members {
+			totalCount
+		}
+	}
 }
-
-query GetGroups($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: GroupWhereInput, $orderBy: [GroupOrder!]) {
-groups(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        createdAt
-        createdBy
-        description
-        displayID
-        displayName
-        gravatarLogoURL
-        id
-        isManaged
-        logoURL
-        name
-        ownerID
-        tags
-        updatedAt
-        updatedBy
-        setting {
-          id
-          joinPolicy
-          syncToGithub
-          syncToSlack
-          visibility
-        }
-        members {
-          totalCount
-        }
-      }
-    }
-  }
+query GetGroups ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: GroupWhereInput, $orderBy: [GroupOrder!]) {
+	groups(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				createdAt
+				createdBy
+				description
+				displayID
+				displayName
+				gravatarLogoURL
+				id
+				isManaged
+				logoURL
+				name
+				ownerID
+				tags
+				updatedAt
+				updatedBy
+				setting {
+					id
+					joinPolicy
+					syncToGithub
+					syncToSlack
+					visibility
+				}
+				members {
+					totalCount
+				}
+			}
+		}
+	}
 }
-
-mutation UpdateGroup($updateGroupId: ID!, $input: UpdateGroupInput!) {
-  updateGroup(id: $updateGroupId, input: $input) {
-    group {
-      avatarLocalFileID
-      createdAt
-      createdBy
-      description
-      displayID
-      displayName
-      externalID
-      gravatarLogoURL
-      id
-      integrationRunID
-      isManaged
-      logoURL
-      managedBy
-      name
-      oscalRole
-      oscalContactUuids
-      oscalPartyUUID
-      ownerID
-      scimGroupMailing
-      scimExternalID
-      scimDisplayName
-      scimActive
-      tags
-      updatedAt
-      updatedBy
-      setting {
-        id
-        joinPolicy
-        syncToGithub
-        syncToSlack
-        visibility
-      }
-      members {
-        totalCount
-      }
-    }
-  }
+mutation UpdateGroup ($updateGroupId: ID!, $input: UpdateGroupInput!) {
+	updateGroup(id: $updateGroupId, input: $input) {
+		group {
+			avatarLocalFileID
+			createdAt
+			createdBy
+			description
+			displayID
+			displayName
+			externalID
+			gravatarLogoURL
+			id
+			integrationRunID
+			isManaged
+			logoURL
+			managedBy
+			name
+			oscalRole
+			oscalContactUuids
+			oscalPartyUUID
+			ownerID
+			scimGroupMailing
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			scimExternalID
+			scimDisplayName
+			scimActive
+			tags
+			updatedAt
+			updatedBy
+			setting {
+				id
+				joinPolicy
+				syncToGithub
+				syncToSlack
+				visibility
+			}
+			members {
+				totalCount
+			}
+		}
+	}
 }
