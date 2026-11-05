@@ -29,7 +29,9 @@ tasks:
       - rover graph fetch Openlane-0dedz@current > schema/schema.graphql
 
   sync:fields:
-    desc: add new flat fields from the latest core release to existing queries
+    desc: add new flat fields from the latest core release to existing queries and remove fields no longer in the schema
+    deps:
+      - fetch-schema
     cmds:
       - go run generate/syncfields.go {{.CLI_ARGS}}
 

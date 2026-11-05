@@ -40,6 +40,7 @@ type syncer struct {
 	schema   *ast.Schema
 	excluded []string
 	added    int
+	removed  int
 }
 
 func main() {
@@ -90,22 +91,24 @@ func run(version string, dryRun bool) error {
 
 	for _, file := range slices.Sorted(maps.Keys(localDocs)) {
 		doc := localDocs[file]
-		before := s.added
+		before := s.added + s.removed
 
 		for _, op := range doc.Operations {
+			s.pruneOperation(op)
+
 			if core, ok := coreOps[op.Name]; ok {
 				op.SelectionSet = s.merge(core.SelectionSet, op.SelectionSet, true)
 			}
 		}
 
-		if s.added > before && !dryRun {
+		if s.added+s.removed > before && !dryRun {
 			if err := writeDocument(file, doc); err != nil {
 				return err
 			}
 		}
 	}
 
-	fmt.Printf("core %s: %d fields to add\n", resolved, s.added)
+	fmt.Printf("core %s: %d fields to add, %d to remove\n", resolved, s.added, s.removed)
 
 	return nil
 }
@@ -196,6 +199,76 @@ func operationsByName(docs map[string]*ast.QueryDocument) map[string]*ast.Operat
 	}
 
 	return ops
+}
+
+// pruneOperation removes fields the schema no longer has, top level fields are reported and left in place
+func (s *syncer) pruneOperation(op *ast.OperationDefinition) {
+	for _, selection := range op.SelectionSet {
+		field, ok := selection.(*ast.Field)
+		if !ok {
+			continue
+		}
+
+		if field.Definition == nil {
+			fmt.Printf("%s: top level field %s is not in the schema, remove it by hand\n", op.Name, field.Name)
+
+			continue
+		}
+
+		kept, gone := prune(op.Name+": "+field.Name, field.SelectionSet)
+		if len(gone) > 0 && len(kept) == 0 {
+			fmt.Printf("%s: no fields of %s are left in the schema, remove it by hand\n", op.Name, field.Name)
+
+			continue
+		}
+
+		field.SelectionSet = kept
+		s.removed += len(gone)
+
+		for _, name := range gone {
+			fmt.Println("remove", name)
+		}
+	}
+}
+
+// prune returns the selections that exist in the schema and the names of those that do not
+// a field left with nothing selected is dropped as well, since an empty selection is invalid
+func prune(parent string, selections ast.SelectionSet) (ast.SelectionSet, []string) {
+	kept := ast.SelectionSet{}
+	gone := []string{}
+
+	for _, selection := range selections {
+		field, ok := selection.(*ast.Field)
+		if !ok {
+			kept = append(kept, selection)
+
+			continue
+		}
+
+		name := parent + "." + field.Name
+
+		if field.Definition == nil {
+			gone = append(gone, name)
+
+			continue
+		}
+
+		if len(field.SelectionSet) == 0 {
+			kept = append(kept, field)
+
+			continue
+		}
+
+		children, removed := prune(name, field.SelectionSet)
+		gone = append(gone, removed...)
+
+		if len(children) > 0 {
+			field.SelectionSet = children
+			kept = append(kept, field)
+		}
+	}
+
+	return kept, gone
 }
 
 // merge adds core's missing flat fields, descending through wrappers to the entity and never into edges
