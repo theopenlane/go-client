@@ -19,14 +19,14 @@ type GraphClient interface {
 	DeleteActionPlan(ctx context.Context, deleteActionPlanID string, interceptors ...clientv2.RequestInterceptor) (*DeleteActionPlan, error)
 	GetActionPlanByID(ctx context.Context, actionPlanID string, interceptors ...clientv2.RequestInterceptor) (*GetActionPlanByID, error)
 	GetActionPlans(ctx context.Context, where *ActionPlanWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetActionPlans, error)
-	GetAllActionPlans(ctx context.Context, interceptors ...clientv2.RequestInterceptor) (*GetAllActionPlans, error)
+	GetAllActionPlans(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*ActionPlanOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllActionPlans, error)
 	UpdateActionPlan(ctx context.Context, updateActionPlanID string, input UpdateActionPlanInput, interceptors ...clientv2.RequestInterceptor) (*UpdateActionPlan, error)
 	UpdateBulkActionPlan(ctx context.Context, ids []string, input UpdateActionPlanInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkActionPlan, error)
 	CreateAPIToken(ctx context.Context, input CreateAPITokenInput, interceptors ...clientv2.RequestInterceptor) (*CreateAPIToken, error)
 	DeleteAPIToken(ctx context.Context, deleteAPITokenID string, interceptors ...clientv2.RequestInterceptor) (*DeleteAPIToken, error)
 	GetAPITokenByID(ctx context.Context, apiTokenID string, interceptors ...clientv2.RequestInterceptor) (*GetAPITokenByID, error)
 	GetAPITokens(ctx context.Context, where *APITokenWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetAPITokens, error)
-	GetAllAPITokens(ctx context.Context, interceptors ...clientv2.RequestInterceptor) (*GetAllAPITokens, error)
+	GetAllAPITokens(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*APITokenOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllAPITokens, error)
 	UpdateAPIToken(ctx context.Context, updateAPITokenID string, input UpdateAPITokenInput, interceptors ...clientv2.RequestInterceptor) (*UpdateAPIToken, error)
 	CreateAssessment(ctx context.Context, input CreateAssessmentInput, interceptors ...clientv2.RequestInterceptor) (*CreateAssessment, error)
 	DeleteAssessment(ctx context.Context, deleteAssessmentID string, interceptors ...clientv2.RequestInterceptor) (*DeleteAssessment, error)
@@ -2505,6 +2505,38 @@ func (t *GetActionPlans_ActionPlans) GetEdges() []*GetActionPlans_ActionPlans_Ed
 	return t.Edges
 }
 
+type GetAllActionPlans_ActionPlans_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetAllActionPlans_ActionPlans_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetAllActionPlans_ActionPlans_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetAllActionPlans_ActionPlans_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetAllActionPlans_ActionPlans_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetAllActionPlans_ActionPlans_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetAllActionPlans_ActionPlans_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetAllActionPlans_ActionPlans_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetAllActionPlans_ActionPlans_PageInfo{}
+	}
+	return t.StartCursor
+}
+
 type GetAllActionPlans_ActionPlans_Edges_Node struct {
 	ApprovalRequired *bool                 "json:\"approvalRequired,omitempty\" graphql:\"approvalRequired\""
 	CreatedAt        *time.Time            "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -2633,7 +2665,9 @@ func (t *GetAllActionPlans_ActionPlans_Edges) GetNode() *GetAllActionPlans_Actio
 }
 
 type GetAllActionPlans_ActionPlans struct {
-	Edges []*GetAllActionPlans_ActionPlans_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	Edges      []*GetAllActionPlans_ActionPlans_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo   GetAllActionPlans_ActionPlans_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+	TotalCount int64                                  "json:\"totalCount\" graphql:\"totalCount\""
 }
 
 func (t *GetAllActionPlans_ActionPlans) GetEdges() []*GetAllActionPlans_ActionPlans_Edges {
@@ -2641,6 +2675,18 @@ func (t *GetAllActionPlans_ActionPlans) GetEdges() []*GetAllActionPlans_ActionPl
 		t = &GetAllActionPlans_ActionPlans{}
 	}
 	return t.Edges
+}
+func (t *GetAllActionPlans_ActionPlans) GetPageInfo() *GetAllActionPlans_ActionPlans_PageInfo {
+	if t == nil {
+		t = &GetAllActionPlans_ActionPlans{}
+	}
+	return &t.PageInfo
+}
+func (t *GetAllActionPlans_ActionPlans) GetTotalCount() int64 {
+	if t == nil {
+		t = &GetAllActionPlans_ActionPlans{}
+	}
+	return t.TotalCount
 }
 
 type UpdateActionPlan_UpdateActionPlan_ActionPlan struct {
@@ -3958,6 +4004,38 @@ func (t *GetAPITokens_APITokens) GetEdges() []*GetAPITokens_APITokens_Edges {
 	return t.Edges
 }
 
+type GetAllAPITokens_APITokens_PageInfo struct {
+	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
+	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
+	HasPreviousPage bool    "json:\"hasPreviousPage\" graphql:\"hasPreviousPage\""
+	StartCursor     *string "json:\"startCursor,omitempty\" graphql:\"startCursor\""
+}
+
+func (t *GetAllAPITokens_APITokens_PageInfo) GetEndCursor() *string {
+	if t == nil {
+		t = &GetAllAPITokens_APITokens_PageInfo{}
+	}
+	return t.EndCursor
+}
+func (t *GetAllAPITokens_APITokens_PageInfo) GetHasNextPage() bool {
+	if t == nil {
+		t = &GetAllAPITokens_APITokens_PageInfo{}
+	}
+	return t.HasNextPage
+}
+func (t *GetAllAPITokens_APITokens_PageInfo) GetHasPreviousPage() bool {
+	if t == nil {
+		t = &GetAllAPITokens_APITokens_PageInfo{}
+	}
+	return t.HasPreviousPage
+}
+func (t *GetAllAPITokens_APITokens_PageInfo) GetStartCursor() *string {
+	if t == nil {
+		t = &GetAllAPITokens_APITokens_PageInfo{}
+	}
+	return t.StartCursor
+}
+
 type GetAllAPITokens_APITokens_Edges_Node struct {
 	CreatedAt     *time.Time "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy     *string    "json:\"createdBy,omitempty\" graphql:\"createdBy\""
@@ -4093,7 +4171,9 @@ func (t *GetAllAPITokens_APITokens_Edges) GetNode() *GetAllAPITokens_APITokens_E
 }
 
 type GetAllAPITokens_APITokens struct {
-	Edges []*GetAllAPITokens_APITokens_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	Edges      []*GetAllAPITokens_APITokens_Edges "json:\"edges,omitempty\" graphql:\"edges\""
+	PageInfo   GetAllAPITokens_APITokens_PageInfo "json:\"pageInfo\" graphql:\"pageInfo\""
+	TotalCount int64                              "json:\"totalCount\" graphql:\"totalCount\""
 }
 
 func (t *GetAllAPITokens_APITokens) GetEdges() []*GetAllAPITokens_APITokens_Edges {
@@ -4101,6 +4181,18 @@ func (t *GetAllAPITokens_APITokens) GetEdges() []*GetAllAPITokens_APITokens_Edge
 		t = &GetAllAPITokens_APITokens{}
 	}
 	return t.Edges
+}
+func (t *GetAllAPITokens_APITokens) GetPageInfo() *GetAllAPITokens_APITokens_PageInfo {
+	if t == nil {
+		t = &GetAllAPITokens_APITokens{}
+	}
+	return &t.PageInfo
+}
+func (t *GetAllAPITokens_APITokens) GetTotalCount() int64 {
+	if t == nil {
+		t = &GetAllAPITokens_APITokens{}
+	}
+	return t.TotalCount
 }
 
 type UpdateAPIToken_UpdateAPIToken_APIToken struct {
@@ -137487,8 +137579,15 @@ func (c *Client) GetActionPlans(ctx context.Context, where *ActionPlanWhereInput
 	return &res, nil
 }
 
-const GetAllActionPlansDocument = `query GetAllActionPlans {
-	actionPlans {
+const GetAllActionPlansDocument = `query GetAllActionPlans ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [ActionPlanOrder!]) {
+	actionPlans(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
 		edges {
 			node {
 				approvalRequired
@@ -137513,8 +137612,14 @@ const GetAllActionPlansDocument = `query GetAllActionPlans {
 }
 `
 
-func (c *Client) GetAllActionPlans(ctx context.Context, interceptors ...clientv2.RequestInterceptor) (*GetAllActionPlans, error) {
-	vars := map[string]any{}
+func (c *Client) GetAllActionPlans(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*ActionPlanOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllActionPlans, error) {
+	vars := map[string]any{
+		"first":   first,
+		"last":    last,
+		"after":   after,
+		"before":  before,
+		"orderBy": orderBy,
+	}
 
 	var res GetAllActionPlans
 	if err := c.Client.Post(ctx, "GetAllActionPlans", GetAllActionPlansDocument, &res, vars, interceptors...); err != nil {
@@ -137855,8 +137960,15 @@ func (c *Client) GetAPITokens(ctx context.Context, where *APITokenWhereInput, in
 	return &res, nil
 }
 
-const GetAllAPITokensDocument = `query GetAllAPITokens {
-	apiTokens {
+const GetAllAPITokensDocument = `query GetAllAPITokens ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [APITokenOrder!]) {
+	apiTokens(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
 		edges {
 			node {
 				createdAt
@@ -137882,8 +137994,14 @@ const GetAllAPITokensDocument = `query GetAllAPITokens {
 }
 `
 
-func (c *Client) GetAllAPITokens(ctx context.Context, interceptors ...clientv2.RequestInterceptor) (*GetAllAPITokens, error) {
-	vars := map[string]any{}
+func (c *Client) GetAllAPITokens(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*APITokenOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllAPITokens, error) {
+	vars := map[string]any{
+		"first":   first,
+		"last":    last,
+		"after":   after,
+		"before":  before,
+		"orderBy": orderBy,
+	}
 
 	var res GetAllAPITokens
 	if err := c.Client.Post(ctx, "GetAllAPITokens", GetAllAPITokensDocument, &res, vars, interceptors...); err != nil {
