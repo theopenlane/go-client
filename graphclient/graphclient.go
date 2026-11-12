@@ -66125,10 +66125,12 @@ type CreateOnboarding_CreateOnboarding_Onboarding struct {
 	CompanyDetails map[string]any "json:\"companyDetails,omitempty\" graphql:\"companyDetails\""
 	CompanyName    string         "json:\"companyName\" graphql:\"companyName\""
 	Compliance     map[string]any "json:\"compliance,omitempty\" graphql:\"compliance\""
+	DemoDataset    *string        "json:\"demoDataset,omitempty\" graphql:\"demoDataset\""
 	DemoRequested  *bool          "json:\"demoRequested,omitempty\" graphql:\"demoRequested\""
 	Domains        []string       "json:\"domains,omitempty\" graphql:\"domains\""
 	ID             string         "json:\"id\" graphql:\"id\""
 	OrganizationID *string        "json:\"organizationID,omitempty\" graphql:\"organizationID\""
+	SeedDemoData   *bool          "json:\"seedDemoData,omitempty\" graphql:\"seedDemoData\""
 	UserDetails    map[string]any "json:\"userDetails,omitempty\" graphql:\"userDetails\""
 }
 
@@ -66149,6 +66151,12 @@ func (t *CreateOnboarding_CreateOnboarding_Onboarding) GetCompliance() map[strin
 		t = &CreateOnboarding_CreateOnboarding_Onboarding{}
 	}
 	return t.Compliance
+}
+func (t *CreateOnboarding_CreateOnboarding_Onboarding) GetDemoDataset() *string {
+	if t == nil {
+		t = &CreateOnboarding_CreateOnboarding_Onboarding{}
+	}
+	return t.DemoDataset
 }
 func (t *CreateOnboarding_CreateOnboarding_Onboarding) GetDemoRequested() *bool {
 	if t == nil {
@@ -66173,6 +66181,12 @@ func (t *CreateOnboarding_CreateOnboarding_Onboarding) GetOrganizationID() *stri
 		t = &CreateOnboarding_CreateOnboarding_Onboarding{}
 	}
 	return t.OrganizationID
+}
+func (t *CreateOnboarding_CreateOnboarding_Onboarding) GetSeedDemoData() *bool {
+	if t == nil {
+		t = &CreateOnboarding_CreateOnboarding_Onboarding{}
+	}
+	return t.SeedDemoData
 }
 func (t *CreateOnboarding_CreateOnboarding_Onboarding) GetUserDetails() map[string]any {
 	if t == nil {
@@ -113573,6 +113587,7 @@ type GetTrustCenterSettingByID_TrustCenterSetting struct {
 	CompanyName                           *string                       "json:\"companyName,omitempty\" graphql:\"companyName\""
 	CreatedAt                             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	DisableDefaultDomain                  *bool                         "json:\"disableDefaultDomain,omitempty\" graphql:\"disableDefaultDomain\""
 	EnableAutoApproval                    *bool                         "json:\"enableAutoApproval,omitempty\" graphql:\"enableAutoApproval\""
 	Environment                           *enums.TrustCenterEnvironment "json:\"environment,omitempty\" graphql:\"environment\""
 	FaviconLocalFileID                    *string                       "json:\"faviconLocalFileID,omitempty\" graphql:\"faviconLocalFileID\""
@@ -113655,6 +113670,12 @@ func (t *GetTrustCenterSettingByID_TrustCenterSetting) GetCreatedBy() *string {
 		t = &GetTrustCenterSettingByID_TrustCenterSetting{}
 	}
 	return t.CreatedBy
+}
+func (t *GetTrustCenterSettingByID_TrustCenterSetting) GetDisableDefaultDomain() *bool {
+	if t == nil {
+		t = &GetTrustCenterSettingByID_TrustCenterSetting{}
+	}
+	return t.DisableDefaultDomain
 }
 func (t *GetTrustCenterSettingByID_TrustCenterSetting) GetEnableAutoApproval() *bool {
 	if t == nil {
@@ -117864,9 +117885,12 @@ type CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores 
 	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	EntityID              string                        "json:\"entityID\" graphql:\"entityID\""
+	ExternalID            *string                       "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID                    string                        "json:\"id\" graphql:\"id\""
 	Impact                enums.VendorRiskImpact        "json:\"impact\" graphql:\"impact\""
+	IntegrationRunID      *string                       "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
 	Likelihood            enums.VendorRiskLikelihood    "json:\"likelihood\" graphql:\"likelihood\""
+	ManagedBy             *string                       "json:\"managedBy,omitempty\" graphql:\"managedBy\""
 	Notes                 *string                       "json:\"notes,omitempty\" graphql:\"notes\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	QuestionCategory      enums.VendorScoringCategory   "json:\"questionCategory\" graphql:\"questionCategory\""
@@ -117874,6 +117898,9 @@ type CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores 
 	QuestionKey           string                        "json:\"questionKey\" graphql:\"questionKey\""
 	QuestionName          string                        "json:\"questionName\" graphql:\"questionName\""
 	Score                 float64                       "json:\"score\" graphql:\"score\""
+	SourceDefinitionID    *string                       "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID      *string                       "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey             *string                       "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
 	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
 	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -117917,6 +117944,12 @@ func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskSco
 	}
 	return t.EntityID
 }
+func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetExternalID() *string {
+	if t == nil {
+		t = &CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.ExternalID
+}
 func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetID() string {
 	if t == nil {
 		t = &CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores{}
@@ -117929,11 +117962,23 @@ func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskSco
 	}
 	return &t.Impact
 }
+func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.IntegrationRunID
+}
 func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetLikelihood() *enums.VendorRiskLikelihood {
 	if t == nil {
 		t = &CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores{}
 	}
 	return &t.Likelihood
+}
+func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetManagedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.ManagedBy
 }
 func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetNotes() *string {
 	if t == nil {
@@ -117976,6 +118021,24 @@ func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskSco
 		t = &CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores{}
 	}
 	return t.Score
+}
+func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceInstanceID
+}
+func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetSourceKey() *string {
+	if t == nil {
+		t = &CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceKey
 }
 func (t *CreateBulkCSVVendorRiskScore_CreateBulkCSVVendorRiskScore_VendorRiskScores) GetTags() []string {
 	if t == nil {
@@ -118026,9 +118089,12 @@ type CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores struct
 	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	EntityID              string                        "json:\"entityID\" graphql:\"entityID\""
+	ExternalID            *string                       "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID                    string                        "json:\"id\" graphql:\"id\""
 	Impact                enums.VendorRiskImpact        "json:\"impact\" graphql:\"impact\""
+	IntegrationRunID      *string                       "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
 	Likelihood            enums.VendorRiskLikelihood    "json:\"likelihood\" graphql:\"likelihood\""
+	ManagedBy             *string                       "json:\"managedBy,omitempty\" graphql:\"managedBy\""
 	Notes                 *string                       "json:\"notes,omitempty\" graphql:\"notes\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	QuestionCategory      enums.VendorScoringCategory   "json:\"questionCategory\" graphql:\"questionCategory\""
@@ -118036,6 +118102,9 @@ type CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores struct
 	QuestionKey           string                        "json:\"questionKey\" graphql:\"questionKey\""
 	QuestionName          string                        "json:\"questionName\" graphql:\"questionName\""
 	Score                 float64                       "json:\"score\" graphql:\"score\""
+	SourceDefinitionID    *string                       "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID      *string                       "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey             *string                       "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
 	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
 	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -118079,6 +118148,12 @@ func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) G
 	}
 	return t.EntityID
 }
+func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetExternalID() *string {
+	if t == nil {
+		t = &CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.ExternalID
+}
 func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetID() string {
 	if t == nil {
 		t = &CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores{}
@@ -118091,11 +118166,23 @@ func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) G
 	}
 	return &t.Impact
 }
+func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.IntegrationRunID
+}
 func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetLikelihood() *enums.VendorRiskLikelihood {
 	if t == nil {
 		t = &CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores{}
 	}
 	return &t.Likelihood
+}
+func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetManagedBy() *string {
+	if t == nil {
+		t = &CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.ManagedBy
 }
 func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetNotes() *string {
 	if t == nil {
@@ -118138,6 +118225,24 @@ func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) G
 		t = &CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores{}
 	}
 	return t.Score
+}
+func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceInstanceID
+}
+func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetSourceKey() *string {
+	if t == nil {
+		t = &CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceKey
 }
 func (t *CreateBulkVendorRiskScore_CreateBulkVendorRiskScore_VendorRiskScores) GetTags() []string {
 	if t == nil {
@@ -118188,9 +118293,12 @@ type CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore struct {
 	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	EntityID              string                        "json:\"entityID\" graphql:\"entityID\""
+	ExternalID            *string                       "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID                    string                        "json:\"id\" graphql:\"id\""
 	Impact                enums.VendorRiskImpact        "json:\"impact\" graphql:\"impact\""
+	IntegrationRunID      *string                       "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
 	Likelihood            enums.VendorRiskLikelihood    "json:\"likelihood\" graphql:\"likelihood\""
+	ManagedBy             *string                       "json:\"managedBy,omitempty\" graphql:\"managedBy\""
 	Notes                 *string                       "json:\"notes,omitempty\" graphql:\"notes\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	QuestionCategory      enums.VendorScoringCategory   "json:\"questionCategory\" graphql:\"questionCategory\""
@@ -118198,6 +118306,9 @@ type CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore struct {
 	QuestionKey           string                        "json:\"questionKey\" graphql:\"questionKey\""
 	QuestionName          string                        "json:\"questionName\" graphql:\"questionName\""
 	Score                 float64                       "json:\"score\" graphql:\"score\""
+	SourceDefinitionID    *string                       "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID      *string                       "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey             *string                       "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
 	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
 	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -118241,6 +118352,12 @@ func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetEntityI
 	}
 	return t.EntityID
 }
+func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetExternalID() *string {
+	if t == nil {
+		t = &CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.ExternalID
+}
 func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetID() string {
 	if t == nil {
 		t = &CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore{}
@@ -118253,11 +118370,23 @@ func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetImpact(
 	}
 	return &t.Impact
 }
+func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.IntegrationRunID
+}
 func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetLikelihood() *enums.VendorRiskLikelihood {
 	if t == nil {
 		t = &CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore{}
 	}
 	return &t.Likelihood
+}
+func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetManagedBy() *string {
+	if t == nil {
+		t = &CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.ManagedBy
 }
 func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetNotes() *string {
 	if t == nil {
@@ -118300,6 +118429,24 @@ func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetScore()
 		t = &CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore{}
 	}
 	return t.Score
+}
+func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.SourceInstanceID
+}
+func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetSourceKey() *string {
+	if t == nil {
+		t = &CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.SourceKey
 }
 func (t *CreateVendorRiskScore_CreateVendorRiskScore_VendorRiskScore) GetTags() []string {
 	if t == nil {
@@ -118418,9 +118565,12 @@ type GetAllVendorRiskScores_VendorRiskScores_Edges_Node struct {
 	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	EntityID              string                        "json:\"entityID\" graphql:\"entityID\""
+	ExternalID            *string                       "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID                    string                        "json:\"id\" graphql:\"id\""
 	Impact                enums.VendorRiskImpact        "json:\"impact\" graphql:\"impact\""
+	IntegrationRunID      *string                       "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
 	Likelihood            enums.VendorRiskLikelihood    "json:\"likelihood\" graphql:\"likelihood\""
+	ManagedBy             *string                       "json:\"managedBy,omitempty\" graphql:\"managedBy\""
 	Notes                 *string                       "json:\"notes,omitempty\" graphql:\"notes\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	QuestionCategory      enums.VendorScoringCategory   "json:\"questionCategory\" graphql:\"questionCategory\""
@@ -118428,6 +118578,9 @@ type GetAllVendorRiskScores_VendorRiskScores_Edges_Node struct {
 	QuestionKey           string                        "json:\"questionKey\" graphql:\"questionKey\""
 	QuestionName          string                        "json:\"questionName\" graphql:\"questionName\""
 	Score                 float64                       "json:\"score\" graphql:\"score\""
+	SourceDefinitionID    *string                       "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID      *string                       "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey             *string                       "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
 	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
 	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -118471,6 +118624,12 @@ func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetEntityID() strin
 	}
 	return t.EntityID
 }
+func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetExternalID() *string {
+	if t == nil {
+		t = &GetAllVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.ExternalID
+}
 func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetID() string {
 	if t == nil {
 		t = &GetAllVendorRiskScores_VendorRiskScores_Edges_Node{}
@@ -118483,11 +118642,23 @@ func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetImpact() *enums.
 	}
 	return &t.Impact
 }
+func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &GetAllVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.IntegrationRunID
+}
 func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetLikelihood() *enums.VendorRiskLikelihood {
 	if t == nil {
 		t = &GetAllVendorRiskScores_VendorRiskScores_Edges_Node{}
 	}
 	return &t.Likelihood
+}
+func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetManagedBy() *string {
+	if t == nil {
+		t = &GetAllVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.ManagedBy
 }
 func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetNotes() *string {
 	if t == nil {
@@ -118530,6 +118701,24 @@ func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetScore() float64 
 		t = &GetAllVendorRiskScores_VendorRiskScores_Edges_Node{}
 	}
 	return t.Score
+}
+func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &GetAllVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &GetAllVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.SourceInstanceID
+}
+func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetSourceKey() *string {
+	if t == nil {
+		t = &GetAllVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.SourceKey
 }
 func (t *GetAllVendorRiskScores_VendorRiskScores_Edges_Node) GetTags() []string {
 	if t == nil {
@@ -118605,9 +118794,12 @@ type GetVendorRiskScoreByID_VendorRiskScore struct {
 	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	EntityID              string                        "json:\"entityID\" graphql:\"entityID\""
+	ExternalID            *string                       "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID                    string                        "json:\"id\" graphql:\"id\""
 	Impact                enums.VendorRiskImpact        "json:\"impact\" graphql:\"impact\""
+	IntegrationRunID      *string                       "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
 	Likelihood            enums.VendorRiskLikelihood    "json:\"likelihood\" graphql:\"likelihood\""
+	ManagedBy             *string                       "json:\"managedBy,omitempty\" graphql:\"managedBy\""
 	Notes                 *string                       "json:\"notes,omitempty\" graphql:\"notes\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	QuestionCategory      enums.VendorScoringCategory   "json:\"questionCategory\" graphql:\"questionCategory\""
@@ -118615,6 +118807,9 @@ type GetVendorRiskScoreByID_VendorRiskScore struct {
 	QuestionKey           string                        "json:\"questionKey\" graphql:\"questionKey\""
 	QuestionName          string                        "json:\"questionName\" graphql:\"questionName\""
 	Score                 float64                       "json:\"score\" graphql:\"score\""
+	SourceDefinitionID    *string                       "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID      *string                       "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey             *string                       "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
 	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
 	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -118658,6 +118853,12 @@ func (t *GetVendorRiskScoreByID_VendorRiskScore) GetEntityID() string {
 	}
 	return t.EntityID
 }
+func (t *GetVendorRiskScoreByID_VendorRiskScore) GetExternalID() *string {
+	if t == nil {
+		t = &GetVendorRiskScoreByID_VendorRiskScore{}
+	}
+	return t.ExternalID
+}
 func (t *GetVendorRiskScoreByID_VendorRiskScore) GetID() string {
 	if t == nil {
 		t = &GetVendorRiskScoreByID_VendorRiskScore{}
@@ -118670,11 +118871,23 @@ func (t *GetVendorRiskScoreByID_VendorRiskScore) GetImpact() *enums.VendorRiskIm
 	}
 	return &t.Impact
 }
+func (t *GetVendorRiskScoreByID_VendorRiskScore) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &GetVendorRiskScoreByID_VendorRiskScore{}
+	}
+	return t.IntegrationRunID
+}
 func (t *GetVendorRiskScoreByID_VendorRiskScore) GetLikelihood() *enums.VendorRiskLikelihood {
 	if t == nil {
 		t = &GetVendorRiskScoreByID_VendorRiskScore{}
 	}
 	return &t.Likelihood
+}
+func (t *GetVendorRiskScoreByID_VendorRiskScore) GetManagedBy() *string {
+	if t == nil {
+		t = &GetVendorRiskScoreByID_VendorRiskScore{}
+	}
+	return t.ManagedBy
 }
 func (t *GetVendorRiskScoreByID_VendorRiskScore) GetNotes() *string {
 	if t == nil {
@@ -118717,6 +118930,24 @@ func (t *GetVendorRiskScoreByID_VendorRiskScore) GetScore() float64 {
 		t = &GetVendorRiskScoreByID_VendorRiskScore{}
 	}
 	return t.Score
+}
+func (t *GetVendorRiskScoreByID_VendorRiskScore) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &GetVendorRiskScoreByID_VendorRiskScore{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *GetVendorRiskScoreByID_VendorRiskScore) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &GetVendorRiskScoreByID_VendorRiskScore{}
+	}
+	return t.SourceInstanceID
+}
+func (t *GetVendorRiskScoreByID_VendorRiskScore) GetSourceKey() *string {
+	if t == nil {
+		t = &GetVendorRiskScoreByID_VendorRiskScore{}
+	}
+	return t.SourceKey
 }
 func (t *GetVendorRiskScoreByID_VendorRiskScore) GetTags() []string {
 	if t == nil {
@@ -118788,9 +119019,12 @@ type GetVendorRiskScores_VendorRiskScores_Edges_Node struct {
 	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	EntityID              string                        "json:\"entityID\" graphql:\"entityID\""
+	ExternalID            *string                       "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID                    string                        "json:\"id\" graphql:\"id\""
 	Impact                enums.VendorRiskImpact        "json:\"impact\" graphql:\"impact\""
+	IntegrationRunID      *string                       "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
 	Likelihood            enums.VendorRiskLikelihood    "json:\"likelihood\" graphql:\"likelihood\""
+	ManagedBy             *string                       "json:\"managedBy,omitempty\" graphql:\"managedBy\""
 	Notes                 *string                       "json:\"notes,omitempty\" graphql:\"notes\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	QuestionCategory      enums.VendorScoringCategory   "json:\"questionCategory\" graphql:\"questionCategory\""
@@ -118798,6 +119032,9 @@ type GetVendorRiskScores_VendorRiskScores_Edges_Node struct {
 	QuestionKey           string                        "json:\"questionKey\" graphql:\"questionKey\""
 	QuestionName          string                        "json:\"questionName\" graphql:\"questionName\""
 	Score                 float64                       "json:\"score\" graphql:\"score\""
+	SourceDefinitionID    *string                       "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID      *string                       "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey             *string                       "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
 	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
 	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -118841,6 +119078,12 @@ func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetEntityID() string {
 	}
 	return t.EntityID
 }
+func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetExternalID() *string {
+	if t == nil {
+		t = &GetVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.ExternalID
+}
 func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetID() string {
 	if t == nil {
 		t = &GetVendorRiskScores_VendorRiskScores_Edges_Node{}
@@ -118853,11 +119096,23 @@ func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetImpact() *enums.Ven
 	}
 	return &t.Impact
 }
+func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &GetVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.IntegrationRunID
+}
 func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetLikelihood() *enums.VendorRiskLikelihood {
 	if t == nil {
 		t = &GetVendorRiskScores_VendorRiskScores_Edges_Node{}
 	}
 	return &t.Likelihood
+}
+func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetManagedBy() *string {
+	if t == nil {
+		t = &GetVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.ManagedBy
 }
 func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetNotes() *string {
 	if t == nil {
@@ -118900,6 +119155,24 @@ func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetScore() float64 {
 		t = &GetVendorRiskScores_VendorRiskScores_Edges_Node{}
 	}
 	return t.Score
+}
+func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &GetVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &GetVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.SourceInstanceID
+}
+func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetSourceKey() *string {
+	if t == nil {
+		t = &GetVendorRiskScores_VendorRiskScores_Edges_Node{}
+	}
+	return t.SourceKey
 }
 func (t *GetVendorRiskScores_VendorRiskScores_Edges_Node) GetTags() []string {
 	if t == nil {
@@ -118975,9 +119248,12 @@ type UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores 
 	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	EntityID              string                        "json:\"entityID\" graphql:\"entityID\""
+	ExternalID            *string                       "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID                    string                        "json:\"id\" graphql:\"id\""
 	Impact                enums.VendorRiskImpact        "json:\"impact\" graphql:\"impact\""
+	IntegrationRunID      *string                       "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
 	Likelihood            enums.VendorRiskLikelihood    "json:\"likelihood\" graphql:\"likelihood\""
+	ManagedBy             *string                       "json:\"managedBy,omitempty\" graphql:\"managedBy\""
 	Notes                 *string                       "json:\"notes,omitempty\" graphql:\"notes\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	QuestionCategory      enums.VendorScoringCategory   "json:\"questionCategory\" graphql:\"questionCategory\""
@@ -118985,6 +119261,9 @@ type UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores 
 	QuestionKey           string                        "json:\"questionKey\" graphql:\"questionKey\""
 	QuestionName          string                        "json:\"questionName\" graphql:\"questionName\""
 	Score                 float64                       "json:\"score\" graphql:\"score\""
+	SourceDefinitionID    *string                       "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID      *string                       "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey             *string                       "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
 	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
 	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -119028,6 +119307,12 @@ func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskSco
 	}
 	return t.EntityID
 }
+func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetExternalID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.ExternalID
+}
 func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetID() string {
 	if t == nil {
 		t = &UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores{}
@@ -119040,11 +119325,23 @@ func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskSco
 	}
 	return &t.Impact
 }
+func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.IntegrationRunID
+}
 func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetLikelihood() *enums.VendorRiskLikelihood {
 	if t == nil {
 		t = &UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores{}
 	}
 	return &t.Likelihood
+}
+func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetManagedBy() *string {
+	if t == nil {
+		t = &UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.ManagedBy
 }
 func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetNotes() *string {
 	if t == nil {
@@ -119087,6 +119384,24 @@ func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskSco
 		t = &UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores{}
 	}
 	return t.Score
+}
+func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceInstanceID
+}
+func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetSourceKey() *string {
+	if t == nil {
+		t = &UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceKey
 }
 func (t *UpdateBulkCSVVendorRiskScore_UpdateBulkCSVVendorRiskScore_VendorRiskScores) GetTags() []string {
 	if t == nil {
@@ -119158,9 +119473,12 @@ type UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores struct
 	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	EntityID              string                        "json:\"entityID\" graphql:\"entityID\""
+	ExternalID            *string                       "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID                    string                        "json:\"id\" graphql:\"id\""
 	Impact                enums.VendorRiskImpact        "json:\"impact\" graphql:\"impact\""
+	IntegrationRunID      *string                       "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
 	Likelihood            enums.VendorRiskLikelihood    "json:\"likelihood\" graphql:\"likelihood\""
+	ManagedBy             *string                       "json:\"managedBy,omitempty\" graphql:\"managedBy\""
 	Notes                 *string                       "json:\"notes,omitempty\" graphql:\"notes\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	QuestionCategory      enums.VendorScoringCategory   "json:\"questionCategory\" graphql:\"questionCategory\""
@@ -119168,6 +119486,9 @@ type UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores struct
 	QuestionKey           string                        "json:\"questionKey\" graphql:\"questionKey\""
 	QuestionName          string                        "json:\"questionName\" graphql:\"questionName\""
 	Score                 float64                       "json:\"score\" graphql:\"score\""
+	SourceDefinitionID    *string                       "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID      *string                       "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey             *string                       "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
 	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
 	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -119211,6 +119532,12 @@ func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) G
 	}
 	return t.EntityID
 }
+func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetExternalID() *string {
+	if t == nil {
+		t = &UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.ExternalID
+}
 func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetID() string {
 	if t == nil {
 		t = &UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores{}
@@ -119223,11 +119550,23 @@ func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) G
 	}
 	return &t.Impact
 }
+func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.IntegrationRunID
+}
 func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetLikelihood() *enums.VendorRiskLikelihood {
 	if t == nil {
 		t = &UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores{}
 	}
 	return &t.Likelihood
+}
+func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetManagedBy() *string {
+	if t == nil {
+		t = &UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.ManagedBy
 }
 func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetNotes() *string {
 	if t == nil {
@@ -119270,6 +119609,24 @@ func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) G
 		t = &UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores{}
 	}
 	return t.Score
+}
+func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceInstanceID
+}
+func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetSourceKey() *string {
+	if t == nil {
+		t = &UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores{}
+	}
+	return t.SourceKey
 }
 func (t *UpdateBulkVendorRiskScore_UpdateBulkVendorRiskScore_VendorRiskScores) GetTags() []string {
 	if t == nil {
@@ -119341,9 +119698,12 @@ type UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore struct {
 	CreatedAt             *time.Time                    "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy             *string                       "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	EntityID              string                        "json:\"entityID\" graphql:\"entityID\""
+	ExternalID            *string                       "json:\"externalID,omitempty\" graphql:\"externalID\""
 	ID                    string                        "json:\"id\" graphql:\"id\""
 	Impact                enums.VendorRiskImpact        "json:\"impact\" graphql:\"impact\""
+	IntegrationRunID      *string                       "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
 	Likelihood            enums.VendorRiskLikelihood    "json:\"likelihood\" graphql:\"likelihood\""
+	ManagedBy             *string                       "json:\"managedBy,omitempty\" graphql:\"managedBy\""
 	Notes                 *string                       "json:\"notes,omitempty\" graphql:\"notes\""
 	OwnerID               *string                       "json:\"ownerID,omitempty\" graphql:\"ownerID\""
 	QuestionCategory      enums.VendorScoringCategory   "json:\"questionCategory\" graphql:\"questionCategory\""
@@ -119351,6 +119711,9 @@ type UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore struct {
 	QuestionKey           string                        "json:\"questionKey\" graphql:\"questionKey\""
 	QuestionName          string                        "json:\"questionName\" graphql:\"questionName\""
 	Score                 float64                       "json:\"score\" graphql:\"score\""
+	SourceDefinitionID    *string                       "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID      *string                       "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey             *string                       "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
 	Tags                  []string                      "json:\"tags,omitempty\" graphql:\"tags\""
 	UpdatedAt             *time.Time                    "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
 	UpdatedBy             *string                       "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
@@ -119394,6 +119757,12 @@ func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetEntityI
 	}
 	return t.EntityID
 }
+func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetExternalID() *string {
+	if t == nil {
+		t = &UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.ExternalID
+}
 func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetID() string {
 	if t == nil {
 		t = &UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore{}
@@ -119406,11 +119775,23 @@ func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetImpact(
 	}
 	return &t.Impact
 }
+func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.IntegrationRunID
+}
 func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetLikelihood() *enums.VendorRiskLikelihood {
 	if t == nil {
 		t = &UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore{}
 	}
 	return &t.Likelihood
+}
+func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetManagedBy() *string {
+	if t == nil {
+		t = &UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.ManagedBy
 }
 func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetNotes() *string {
 	if t == nil {
@@ -119453,6 +119834,24 @@ func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetScore()
 		t = &UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore{}
 	}
 	return t.Score
+}
+func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.SourceInstanceID
+}
+func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetSourceKey() *string {
+	if t == nil {
+		t = &UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore{}
+	}
+	return t.SourceKey
 }
 func (t *UpdateVendorRiskScore_UpdateVendorRiskScore_VendorRiskScore) GetTags() []string {
 	if t == nil {
@@ -154563,10 +154962,12 @@ const CreateOnboardingDocument = `mutation CreateOnboarding ($input: CreateOnboa
 			companyDetails
 			companyName
 			compliance
+			demoDataset
 			demoRequested
 			domains
 			id
 			organizationID
+			seedDemoData
 			userDetails
 		}
 	}
@@ -167558,6 +167959,7 @@ const GetTrustCenterSettingByIDDocument = `query GetTrustCenterSettingByID ($tru
 		companyName
 		createdAt
 		createdBy
+		disableDefaultDomain
 		enableAutoApproval
 		environment
 		faviconLocalFileID
@@ -168940,9 +169342,12 @@ const CreateBulkCSVVendorRiskScoreDocument = `mutation CreateBulkCSVVendorRiskSc
 			createdAt
 			createdBy
 			entityID
+			externalID
 			id
 			impact
+			integrationRunID
 			likelihood
+			managedBy
 			notes
 			ownerID
 			questionCategory
@@ -168950,6 +169355,9 @@ const CreateBulkCSVVendorRiskScoreDocument = `mutation CreateBulkCSVVendorRiskSc
 			questionKey
 			questionName
 			score
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			tags
 			updatedAt
 			updatedBy
@@ -168986,9 +169394,12 @@ const CreateBulkVendorRiskScoreDocument = `mutation CreateBulkVendorRiskScore ($
 			createdAt
 			createdBy
 			entityID
+			externalID
 			id
 			impact
+			integrationRunID
 			likelihood
+			managedBy
 			notes
 			ownerID
 			questionCategory
@@ -168996,6 +169407,9 @@ const CreateBulkVendorRiskScoreDocument = `mutation CreateBulkVendorRiskScore ($
 			questionKey
 			questionName
 			score
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			tags
 			updatedAt
 			updatedBy
@@ -169032,9 +169446,12 @@ const CreateVendorRiskScoreDocument = `mutation CreateVendorRiskScore ($input: C
 			createdAt
 			createdBy
 			entityID
+			externalID
 			id
 			impact
+			integrationRunID
 			likelihood
+			managedBy
 			notes
 			ownerID
 			questionCategory
@@ -169042,6 +169459,9 @@ const CreateVendorRiskScoreDocument = `mutation CreateVendorRiskScore ($input: C
 			questionKey
 			questionName
 			score
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			tags
 			updatedAt
 			updatedBy
@@ -169136,9 +169556,12 @@ const GetAllVendorRiskScoresDocument = `query GetAllVendorRiskScores ($first: In
 				createdAt
 				createdBy
 				entityID
+				externalID
 				id
 				impact
+				integrationRunID
 				likelihood
+				managedBy
 				notes
 				ownerID
 				questionCategory
@@ -169146,6 +169569,9 @@ const GetAllVendorRiskScoresDocument = `query GetAllVendorRiskScores ($first: In
 				questionKey
 				questionName
 				score
+				sourceDefinitionID
+				sourceInstanceID
+				sourceKey
 				tags
 				updatedAt
 				updatedBy
@@ -169186,9 +169612,12 @@ const GetVendorRiskScoreByIDDocument = `query GetVendorRiskScoreByID ($vendorRis
 		createdAt
 		createdBy
 		entityID
+		externalID
 		id
 		impact
+		integrationRunID
 		likelihood
+		managedBy
 		notes
 		ownerID
 		questionCategory
@@ -169196,6 +169625,9 @@ const GetVendorRiskScoreByIDDocument = `query GetVendorRiskScoreByID ($vendorRis
 		questionKey
 		questionName
 		score
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
 		tags
 		updatedAt
 		updatedBy
@@ -169239,9 +169671,12 @@ const GetVendorRiskScoresDocument = `query GetVendorRiskScores ($first: Int, $la
 				createdAt
 				createdBy
 				entityID
+				externalID
 				id
 				impact
+				integrationRunID
 				likelihood
+				managedBy
 				notes
 				ownerID
 				questionCategory
@@ -169249,6 +169684,9 @@ const GetVendorRiskScoresDocument = `query GetVendorRiskScores ($first: Int, $la
 				questionKey
 				questionName
 				score
+				sourceDefinitionID
+				sourceInstanceID
+				sourceKey
 				tags
 				updatedAt
 				updatedBy
@@ -169291,9 +169729,12 @@ const UpdateBulkCSVVendorRiskScoreDocument = `mutation UpdateBulkCSVVendorRiskSc
 			createdAt
 			createdBy
 			entityID
+			externalID
 			id
 			impact
+			integrationRunID
 			likelihood
+			managedBy
 			notes
 			ownerID
 			questionCategory
@@ -169301,6 +169742,9 @@ const UpdateBulkCSVVendorRiskScoreDocument = `mutation UpdateBulkCSVVendorRiskSc
 			questionKey
 			questionName
 			score
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			tags
 			updatedAt
 			updatedBy
@@ -169340,9 +169784,12 @@ const UpdateBulkVendorRiskScoreDocument = `mutation UpdateBulkVendorRiskScore ($
 			createdAt
 			createdBy
 			entityID
+			externalID
 			id
 			impact
+			integrationRunID
 			likelihood
+			managedBy
 			notes
 			ownerID
 			questionCategory
@@ -169350,6 +169797,9 @@ const UpdateBulkVendorRiskScoreDocument = `mutation UpdateBulkVendorRiskScore ($
 			questionKey
 			questionName
 			score
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			tags
 			updatedAt
 			updatedBy
@@ -169390,9 +169840,12 @@ const UpdateVendorRiskScoreDocument = `mutation UpdateVendorRiskScore ($updateVe
 			createdAt
 			createdBy
 			entityID
+			externalID
 			id
 			impact
+			integrationRunID
 			likelihood
+			managedBy
 			notes
 			ownerID
 			questionCategory
@@ -169400,6 +169853,9 @@ const UpdateVendorRiskScoreDocument = `mutation UpdateVendorRiskScore ($updateVe
 			questionKey
 			questionName
 			score
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
 			tags
 			updatedAt
 			updatedBy
