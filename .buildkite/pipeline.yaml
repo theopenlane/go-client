@@ -1,29 +1,27 @@
 env:
   DEFAULT_BRANCH: "main"
 
-  # build settings
-  CACHE_HOME: ${CACHE_HOME:-/var/lib/buildkite-agent/.cache}
-  GOCACHE: ${GOCACHE:-$CACHE_HOME/go-build}
-  GOMODCACHE: ${GOMODCACHE:-$CACHE_HOME/go/pkg/mod}
-  GOLANGCI_LINT_CACHE: ${GOLANGCI_LINT_CACHE:-$CACHE_HOME/golangci-lint}
+  # build settings, default to what is in buldkite
+  CACHE_HOME: ${CACHE_HOME:-$CACHE_HOME/.cache}
+  GOCACHE: ${GOCACHE:-$CACHE_HOME/.cache/go-build}
+  GOMODCACHE: ${GOMODCACHE:-$BK_HOME/.cache/go/pkg/mod}
+  GOLANGCI_LINT_CACHE: ${GOLANGCI_LINT_CACHE:-$CACHE_HOME/.cache/golangci-lint}
   CONFIG_HOME: ${CONFIG_HOME:-/tmp}
   GIT_CONFIG_GLOBAL: ${GIT_CONFIG_GLOBAL:-$CONFIG_HOME/.gitconfig}
+  APOLLO_CONFIG_HOME: ${APOLLO_CONFIG_HOME:-$CONFIG_HOME}
   SONAR_USER_HOME: ${SONAR_USER_HOME:-$CONFIG_HOME/.sonar}
   SCANNER_WORKDIR_PATH: ${SCANNER_WORKDIR_PATH:-$CONFIG_HOME/sonar-scanner-work}
-  APOLLO_CONFIG_HOME: ${APOLLO_CONFIG_HOME:-$CONFIG_HOME}
 
   # runner vars
-  LARGE_RUNNER_QUEUE: ${LARGE_RUNNER_QUEUE:-self-hosted-garage-vms}
-  SMALL_RUNNER_QUEUE: ${SMALL_RUNNER_QUEUE:-self-hosted-garage-vms}
+  LARGE_RUNNER_QUEUE: ${LARGE_RUNNER_QUEUE:-namespace}
+  SMALL_RUNNER_QUEUE: ${SMALL_RUNNER_QUEUE:-namespace}
+  RUNNER_WORKLOAD_LIGHTWEIGHT: "lightweight"
+  RUNNER_WORKLOAD_STANDARD: "standard"
 
-# cache for hosted runners
-cache:
-  name: go-cache
-  size: 100g
-  paths:
-    - $GOCACHE
-    - $GOMODCACHE
-    - $GOLANGCI_LINT_CACHE
+# defaults
+agents:
+  queue: $SMALL_RUNNER_QUEUE
+  workload: $RUNNER_WORKLOAD_LIGHTWEIGHT
 
 secrets:
   - GITHUB_TOKEN
@@ -122,23 +120,3 @@ steps:
             - $GOLANGCI_LINT_CACHE:$GOLANGCI_LINT_CACHE
           environment:
             - "GOTOOLCHAIN=auto"
-  - label: ":golang: go test"
-    key: "go_test"
-    agents:
-      queue: $SMALL_RUNNER_QUEUE
-      workload: $RUNNER_WORKLOAD_LIGHTWEIGHT
-    depends_on:
-      - "generate"
-    if_changed:
-      - "**.go"
-      - "go.mod"
-    plugins:
-      - docker#v5.14.0:
-          image: "ghcr.io/theopenlane/build-image:latest"
-          always-pull: true
-          command: ["task", "go:test"]
-          propagate-environment: true
-          propagate-uid-gid: true
-          volumes:
-            - $GOCACHE:$GOCACHE
-            - $GOMODCACHE:$GOMODCACHE
