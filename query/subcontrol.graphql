@@ -1,389 +1,379 @@
-mutation CreateBulkCSVSubcontrol($input: Upload!) {
-  createBulkCSVSubcontrol(input: $input) {
-    subcontrols {
-      aliases
-      assessmentMethods
-      assessmentObjectives
-      auditorReferenceID
-      category
-      categoryID
-      controlID
-      controlOwnerID
-      controlQuestions
-      createdAt
-      createdBy
-      delegateID
-      description
-      descriptionJSON
-      displayID
-      exampleEvidence
-      externalID
-      externalUUID
-      evidenceRequests
-      id
-      implementationDescription
-      implementationGuidance
-      implementationStatus
-      integrationRunID
-      managedBy
-      mappedCategories
-      ownerID
-      publicRepresentation
-      refCode
-      referenceFramework
-      referenceFrameworkRevision
-      referenceID
-      references
-      responsiblePartyID
-      source
-      sourceDefinitionID
-      sourceInstanceID
-      sourceKey
-      sourceName
-      status
-      subcategory
-      subcontrolKindID
-      subcontrolKindName
-      tags
-      testingProcedures
-      title
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkCSVSubcontrol ($input: Upload!) {
+	createBulkCSVSubcontrol(input: $input) {
+		subcontrols {
+			aliases
+			assessmentMethods
+			assessmentObjectives
+			auditorReferenceID
+			category
+			categoryID
+			controlID
+			controlOriginID
+			controlOriginName
+			controlOwnerID
+			controlQuestions
+			createdAt
+			createdBy
+			delegateID
+			description
+			descriptionJSON
+			displayID
+			exampleEvidence
+			externalID
+			externalUUID
+			evidenceRequests
+			id
+			implementationDescription
+			implementationGuidance
+			implementationStatus
+			integrationRunID
+			managedBy
+			mappedCategories
+			ownerID
+			publicRepresentation
+			refCode
+			referenceFramework
+			referenceFrameworkRevision
+			referenceID
+			references
+			responsiblePartyID
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			sourceName
+			status
+			subcategory
+			subcontrolKindID
+			subcontrolKindName
+			tags
+			testingProcedures
+			title
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateBulkSubcontrol($input: [CreateSubcontrolInput!]) {
-  createBulkSubcontrol(input: $input) {
-    subcontrols {
-      aliases
-      assessmentMethods
-      assessmentObjectives
-      auditorReferenceID
-      category
-      categoryID
-      controlID
-      controlOwnerID
-      controlQuestions
-      createdAt
-      createdBy
-      delegateID
-      description
-      descriptionJSON
-      displayID
-      exampleEvidence
-      externalID
-      externalUUID
-      evidenceRequests
-      id
-      implementationDescription
-      implementationGuidance
-      integrationRunID
-      implementationStatus
-      managedBy
-      mappedCategories
-      ownerID
-      publicRepresentation
-      refCode
-      referenceFramework
-      referenceFrameworkRevision
-      referenceID
-      references
-      responsiblePartyID
-      source
-      sourceDefinitionID
-      sourceInstanceID
-      sourceKey
-      sourceName
-      status
-      subcategory
-      subcontrolKindID
-      subcontrolKindName
-      tags
-      testingProcedures
-      title
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateBulkSubcontrol ($input: [CreateSubcontrolInput!]) {
+	createBulkSubcontrol(input: $input) {
+		subcontrols {
+			aliases
+			assessmentMethods
+			assessmentObjectives
+			auditorReferenceID
+			category
+			categoryID
+			controlID
+			controlOriginID
+			controlOriginName
+			controlOwnerID
+			controlQuestions
+			createdAt
+			createdBy
+			delegateID
+			description
+			descriptionJSON
+			displayID
+			exampleEvidence
+			externalID
+			externalUUID
+			evidenceRequests
+			id
+			implementationDescription
+			implementationGuidance
+			integrationRunID
+			implementationStatus
+			managedBy
+			mappedCategories
+			ownerID
+			publicRepresentation
+			refCode
+			referenceFramework
+			referenceFrameworkRevision
+			referenceID
+			references
+			responsiblePartyID
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			sourceName
+			status
+			subcategory
+			subcontrolKindID
+			subcontrolKindName
+			tags
+			testingProcedures
+			title
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation CreateSubcontrol($input: CreateSubcontrolInput!) {
-  createSubcontrol(input: $input) {
-    subcontrol {
-      aliases
-      assessmentMethods
-      assessmentObjectives
-      auditorReferenceID
-      category
-      categoryID
-      controlID
-      controlOwnerID
-      controlQuestions
-      createdAt
-      createdBy
-      delegateID
-      description
-      descriptionJSON
-      displayID
-      exampleEvidence
-      externalID
-      externalUUID
-      evidenceRequests
-      id
-      implementationDescription
-      implementationGuidance
-      implementationStatus
-      integrationRunID
-      managedBy
-      mappedCategories
-      ownerID
-      publicRepresentation
-      refCode
-      referenceFramework
-      referenceFrameworkRevision
-      referenceID
-      references
-      responsiblePartyID
-      source
-      sourceDefinitionID
-      sourceInstanceID
-      sourceKey
-      sourceName
-      status
-      subcategory
-      subcontrolKindID
-      subcontrolKindName
-      tags
-      testingProcedures
-      title
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateSubcontrol ($input: CreateSubcontrolInput!) {
+	createSubcontrol(input: $input) {
+		subcontrol {
+			aliases
+			assessmentMethods
+			assessmentObjectives
+			auditorReferenceID
+			category
+			categoryID
+			controlID
+			controlOriginID
+			controlOriginName
+			controlOwnerID
+			controlQuestions
+			createdAt
+			createdBy
+			delegateID
+			description
+			descriptionJSON
+			displayID
+			exampleEvidence
+			externalID
+			externalUUID
+			evidenceRequests
+			id
+			implementationDescription
+			implementationGuidance
+			implementationStatus
+			integrationRunID
+			managedBy
+			mappedCategories
+			ownerID
+			publicRepresentation
+			refCode
+			referenceFramework
+			referenceFrameworkRevision
+			referenceID
+			references
+			responsiblePartyID
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			sourceName
+			status
+			subcategory
+			subcontrolKindID
+			subcontrolKindName
+			tags
+			testingProcedures
+			title
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation DeleteSubcontrol($deleteSubcontrolId: ID!) {
-  deleteSubcontrol(id: $deleteSubcontrolId) {
-    deletedID
-  }
+mutation DeleteSubcontrol ($deleteSubcontrolId: ID!) {
+	deleteSubcontrol(id: $deleteSubcontrolId) {
+		deletedID
+	}
 }
-
-query GetAllSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
-  subcontrols(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        aliases
-        assessmentMethods
-        assessmentObjectives
-        auditorReferenceID
-        category
-        categoryID
-        controlID
-        controlOwnerID
-        controlQuestions
-        createdAt
-        createdBy
-        delegateID
-        description
-        displayID
-        exampleEvidence
-        externalUUID
-        evidenceRequests
-        id
-        implementationGuidance
-        mappedCategories
-        ownerID
-        refCode
-        referenceFramework
-        referenceID
-        references
-        source
-        status
-        subcategory
-        subcontrolKindName
-        tags
-        title
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetAllSubcontrols ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [SubcontrolOrder!]) {
+	subcontrols(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				aliases
+				assessmentMethods
+				assessmentObjectives
+				auditorReferenceID
+				category
+				categoryID
+				controlID
+				controlOwnerID
+				controlQuestions
+				createdAt
+				createdBy
+				delegateID
+				description
+				displayID
+				exampleEvidence
+				externalUUID
+				evidenceRequests
+				id
+				implementationGuidance
+				mappedCategories
+				ownerID
+				refCode
+				referenceFramework
+				referenceID
+				references
+				source
+				status
+				subcategory
+				subcontrolKindName
+				tags
+				title
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-query GetSubcontrolByID($subcontrolId: ID!) {
-  subcontrol(id: $subcontrolId) {
-    aliases
-    assessmentMethods
-    assessmentObjectives
-    auditorReferenceID
-    category
-    categoryID
-    controlID
-    controlOwnerID
-    controlQuestions
-    createdAt
-    createdBy
-    delegateID
-    description
-    descriptionJSON
-    displayID
-    exampleEvidence
-    externalID
-    externalUUID
-    evidenceRequests
-    id
-    implementationDescription
-    implementationGuidance
-    managedBy
-    integrationRunID
-    implementationStatus
-    mappedCategories
-    ownerID
-    publicRepresentation
-    refCode
-    referenceFramework
-    referenceFrameworkRevision
-    referenceID
-    references
-    responsiblePartyID
-    source
-    sourceDefinitionID
-    sourceInstanceID
-    sourceKey
-    sourceName
-    status
-    subcategory
-    subcontrolKindID
-    subcontrolKindName
-    tags
-    testingProcedures
-    title
-    updatedAt
-    updatedBy
-  }
+query GetSubcontrolByID ($subcontrolId: ID!) {
+	subcontrol(id: $subcontrolId) {
+		aliases
+		assessmentMethods
+		assessmentObjectives
+		auditorReferenceID
+		category
+		categoryID
+		controlID
+		controlOriginID
+		controlOriginName
+		controlOwnerID
+		controlQuestions
+		createdAt
+		createdBy
+		delegateID
+		description
+		descriptionJSON
+		displayID
+		exampleEvidence
+		externalID
+		externalUUID
+		evidenceRequests
+		id
+		implementationDescription
+		implementationGuidance
+		managedBy
+		integrationRunID
+		implementationStatus
+		mappedCategories
+		ownerID
+		publicRepresentation
+		refCode
+		referenceFramework
+		referenceFrameworkRevision
+		referenceID
+		references
+		responsiblePartyID
+		source
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
+		sourceName
+		status
+		subcategory
+		subcontrolKindID
+		subcontrolKindName
+		tags
+		testingProcedures
+		title
+		updatedAt
+		updatedBy
+	}
 }
-
-query GetSubcontrols($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: SubcontrolWhereInput, $orderBy: [SubcontrolOrder!]) {
-  subcontrols(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        aliases
-        assessmentMethods
-        assessmentObjectives
-        auditorReferenceID
-        category
-        categoryID
-        controlID
-        controlOwnerID
-        controlQuestions
-        createdAt
-        createdBy
-        delegateID
-        description
-        displayID
-        exampleEvidence
-        externalUUID
-        evidenceRequests
-        id
-        implementationGuidance
-        mappedCategories
-        ownerID
-        refCode
-        referenceFramework
-        referenceID
-        references
-        source
-        status
-        subcategory
-        subcontrolKindName
-        tags
-        title
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetSubcontrols ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: SubcontrolWhereInput, $orderBy: [SubcontrolOrder!]) {
+	subcontrols(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				aliases
+				assessmentMethods
+				assessmentObjectives
+				auditorReferenceID
+				category
+				categoryID
+				controlID
+				controlOwnerID
+				controlQuestions
+				createdAt
+				createdBy
+				delegateID
+				description
+				displayID
+				exampleEvidence
+				externalUUID
+				evidenceRequests
+				id
+				implementationGuidance
+				mappedCategories
+				ownerID
+				refCode
+				referenceFramework
+				referenceID
+				references
+				source
+				status
+				subcategory
+				subcontrolKindName
+				tags
+				title
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-mutation UpdateSubcontrol($updateSubcontrolId: ID!, $input: UpdateSubcontrolInput!) {
-  updateSubcontrol(id: $updateSubcontrolId, input: $input) {
-    subcontrol {
-      aliases
-      assessmentMethods
-      assessmentObjectives
-      auditorReferenceID
-      category
-      categoryID
-      controlID
-      controlOwnerID
-      controlQuestions
-      createdAt
-      createdBy
-      delegateID
-      description
-      descriptionJSON
-      displayID
-      exampleEvidence
-      externalID
-      externalUUID
-      evidenceRequests
-      id
-      implementationDescription
-      implementationGuidance
-      managedBy
-      implementationStatus
-      integrationRunID
-      mappedCategories
-      ownerID
-      publicRepresentation
-      refCode
-      referenceFramework
-      referenceFrameworkRevision
-      referenceID
-      references
-      responsiblePartyID
-      source
-      sourceDefinitionID
-      sourceInstanceID
-      sourceKey
-      sourceName
-      status
-      subcategory
-      subcontrolKindID
-      subcontrolKindName
-      tags
-      testingProcedures
-      title
-      updatedAt
-      updatedBy
-    }
-  }
+mutation UpdateSubcontrol ($updateSubcontrolId: ID!, $input: UpdateSubcontrolInput!) {
+	updateSubcontrol(id: $updateSubcontrolId, input: $input) {
+		subcontrol {
+			aliases
+			assessmentMethods
+			assessmentObjectives
+			auditorReferenceID
+			category
+			categoryID
+			controlID
+			controlOriginID
+			controlOriginName
+			controlOwnerID
+			controlQuestions
+			createdAt
+			createdBy
+			delegateID
+			description
+			descriptionJSON
+			displayID
+			exampleEvidence
+			externalID
+			externalUUID
+			evidenceRequests
+			id
+			implementationDescription
+			implementationGuidance
+			managedBy
+			implementationStatus
+			integrationRunID
+			mappedCategories
+			ownerID
+			publicRepresentation
+			refCode
+			referenceFramework
+			referenceFrameworkRevision
+			referenceID
+			references
+			responsiblePartyID
+			source
+			sourceDefinitionID
+			sourceInstanceID
+			sourceKey
+			sourceName
+			status
+			subcategory
+			subcontrolKindID
+			subcontrolKindName
+			tags
+			testingProcedures
+			title
+			updatedAt
+			updatedBy
+		}
+	}
 }

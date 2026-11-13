@@ -17035,6 +17035,8 @@ type CreateBulkControl_CreateBulkControl_Controls struct {
 	CategoryID                 *string                             "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlKindID              *string                             "json:\"controlKindID,omitempty\" graphql:\"controlKindID\""
 	ControlKindName            *string                             "json:\"controlKindName,omitempty\" graphql:\"controlKindName\""
+	ControlOriginID            *string                             "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                             "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                             "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                            "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                          "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -17130,6 +17132,18 @@ func (t *CreateBulkControl_CreateBulkControl_Controls) GetControlKindName() *str
 		t = &CreateBulkControl_CreateBulkControl_Controls{}
 	}
 	return t.ControlKindName
+}
+func (t *CreateBulkControl_CreateBulkControl_Controls) GetControlOriginID() *string {
+	if t == nil {
+		t = &CreateBulkControl_CreateBulkControl_Controls{}
+	}
+	return t.ControlOriginID
+}
+func (t *CreateBulkControl_CreateBulkControl_Controls) GetControlOriginName() *string {
+	if t == nil {
+		t = &CreateBulkControl_CreateBulkControl_Controls{}
+	}
+	return t.ControlOriginName
 }
 func (t *CreateBulkControl_CreateBulkControl_Controls) GetControlOwnerID() *string {
 	if t == nil {
@@ -17428,6 +17442,8 @@ type CreateBulkCSVControl_CreateBulkCSVControl_Controls struct {
 	CategoryID                 *string                             "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlKindID              *string                             "json:\"controlKindID,omitempty\" graphql:\"controlKindID\""
 	ControlKindName            *string                             "json:\"controlKindName,omitempty\" graphql:\"controlKindName\""
+	ControlOriginID            *string                             "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                             "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                             "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                            "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                          "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -17523,6 +17539,18 @@ func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetControlKindName(
 		t = &CreateBulkCSVControl_CreateBulkCSVControl_Controls{}
 	}
 	return t.ControlKindName
+}
+func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetControlOriginID() *string {
+	if t == nil {
+		t = &CreateBulkCSVControl_CreateBulkCSVControl_Controls{}
+	}
+	return t.ControlOriginID
+}
+func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetControlOriginName() *string {
+	if t == nil {
+		t = &CreateBulkCSVControl_CreateBulkCSVControl_Controls{}
+	}
+	return t.ControlOriginName
 }
 func (t *CreateBulkCSVControl_CreateBulkCSVControl_Controls) GetControlOwnerID() *string {
 	if t == nil {
@@ -17821,6 +17849,8 @@ type CreateControl_CreateControl_Control struct {
 	CategoryID                 *string                             "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlKindID              *string                             "json:\"controlKindID,omitempty\" graphql:\"controlKindID\""
 	ControlKindName            *string                             "json:\"controlKindName,omitempty\" graphql:\"controlKindName\""
+	ControlOriginID            *string                             "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                             "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                             "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                            "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                          "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -17916,6 +17946,18 @@ func (t *CreateControl_CreateControl_Control) GetControlKindName() *string {
 		t = &CreateControl_CreateControl_Control{}
 	}
 	return t.ControlKindName
+}
+func (t *CreateControl_CreateControl_Control) GetControlOriginID() *string {
+	if t == nil {
+		t = &CreateControl_CreateControl_Control{}
+	}
+	return t.ControlOriginID
+}
+func (t *CreateControl_CreateControl_Control) GetControlOriginName() *string {
+	if t == nil {
+		t = &CreateControl_CreateControl_Control{}
+	}
+	return t.ControlOriginName
 }
 func (t *CreateControl_CreateControl_Control) GetControlOwnerID() *string {
 	if t == nil {
@@ -18542,6 +18584,8 @@ type GetControlByID_Control struct {
 	CategoryID                 *string                             "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlKindID              *string                             "json:\"controlKindID,omitempty\" graphql:\"controlKindID\""
 	ControlKindName            *string                             "json:\"controlKindName,omitempty\" graphql:\"controlKindName\""
+	ControlOriginID            *string                             "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                             "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                             "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                            "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                          "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -18637,6 +18681,18 @@ func (t *GetControlByID_Control) GetControlKindName() *string {
 		t = &GetControlByID_Control{}
 	}
 	return t.ControlKindName
+}
+func (t *GetControlByID_Control) GetControlOriginID() *string {
+	if t == nil {
+		t = &GetControlByID_Control{}
+	}
+	return t.ControlOriginID
+}
+func (t *GetControlByID_Control) GetControlOriginName() *string {
+	if t == nil {
+		t = &GetControlByID_Control{}
+	}
+	return t.ControlOriginName
 }
 func (t *GetControlByID_Control) GetControlOwnerID() *string {
 	if t == nil {
@@ -18956,6 +19012,8 @@ type GetControls_Controls_Edges_Node struct {
 	CategoryID                 *string                             "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlKindID              *string                             "json:\"controlKindID,omitempty\" graphql:\"controlKindID\""
 	ControlKindName            *string                             "json:\"controlKindName,omitempty\" graphql:\"controlKindName\""
+	ControlOriginID            *string                             "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                             "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                             "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                            "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                          "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -19051,6 +19109,18 @@ func (t *GetControls_Controls_Edges_Node) GetControlKindName() *string {
 		t = &GetControls_Controls_Edges_Node{}
 	}
 	return t.ControlKindName
+}
+func (t *GetControls_Controls_Edges_Node) GetControlOriginID() *string {
+	if t == nil {
+		t = &GetControls_Controls_Edges_Node{}
+	}
+	return t.ControlOriginID
+}
+func (t *GetControls_Controls_Edges_Node) GetControlOriginName() *string {
+	if t == nil {
+		t = &GetControls_Controls_Edges_Node{}
+	}
+	return t.ControlOriginName
 }
 func (t *GetControls_Controls_Edges_Node) GetControlOwnerID() *string {
 	if t == nil {
@@ -19374,6 +19444,8 @@ type UpdateControl_UpdateControl_Control struct {
 	CategoryID                 *string                             "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlKindID              *string                             "json:\"controlKindID,omitempty\" graphql:\"controlKindID\""
 	ControlKindName            *string                             "json:\"controlKindName,omitempty\" graphql:\"controlKindName\""
+	ControlOriginID            *string                             "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                             "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                             "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                            "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                          "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -19469,6 +19541,18 @@ func (t *UpdateControl_UpdateControl_Control) GetControlKindName() *string {
 		t = &UpdateControl_UpdateControl_Control{}
 	}
 	return t.ControlKindName
+}
+func (t *UpdateControl_UpdateControl_Control) GetControlOriginID() *string {
+	if t == nil {
+		t = &UpdateControl_UpdateControl_Control{}
+	}
+	return t.ControlOriginID
+}
+func (t *UpdateControl_UpdateControl_Control) GetControlOriginName() *string {
+	if t == nil {
+		t = &UpdateControl_UpdateControl_Control{}
+	}
+	return t.ControlOriginName
 }
 func (t *UpdateControl_UpdateControl_Control) GetControlOwnerID() *string {
 	if t == nil {
@@ -94214,6 +94298,8 @@ type CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols struct {
 	Category                   *string                            "json:\"category,omitempty\" graphql:\"category\""
 	CategoryID                 *string                            "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlID                  string                             "json:\"controlID\" graphql:\"controlID\""
+	ControlOriginID            *string                            "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                            "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                            "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                           "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -94298,6 +94384,18 @@ func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetControl
 		t = &CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols{}
 	}
 	return t.ControlID
+}
+func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetControlOriginID() *string {
+	if t == nil {
+		t = &CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols{}
+	}
+	return t.ControlOriginID
+}
+func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetControlOriginName() *string {
+	if t == nil {
+		t = &CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols{}
+	}
+	return t.ControlOriginName
 }
 func (t *CreateBulkCSVSubcontrol_CreateBulkCSVSubcontrol_Subcontrols) GetControlOwnerID() *string {
 	if t == nil {
@@ -94565,6 +94663,8 @@ type CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols struct {
 	Category                   *string                            "json:\"category,omitempty\" graphql:\"category\""
 	CategoryID                 *string                            "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlID                  string                             "json:\"controlID\" graphql:\"controlID\""
+	ControlOriginID            *string                            "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                            "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                            "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                           "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -94649,6 +94749,18 @@ func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetControlID() s
 		t = &CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols{}
 	}
 	return t.ControlID
+}
+func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetControlOriginID() *string {
+	if t == nil {
+		t = &CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols{}
+	}
+	return t.ControlOriginID
+}
+func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetControlOriginName() *string {
+	if t == nil {
+		t = &CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols{}
+	}
+	return t.ControlOriginName
 }
 func (t *CreateBulkSubcontrol_CreateBulkSubcontrol_Subcontrols) GetControlOwnerID() *string {
 	if t == nil {
@@ -94916,6 +95028,8 @@ type CreateSubcontrol_CreateSubcontrol_Subcontrol struct {
 	Category                   *string                            "json:\"category,omitempty\" graphql:\"category\""
 	CategoryID                 *string                            "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlID                  string                             "json:\"controlID\" graphql:\"controlID\""
+	ControlOriginID            *string                            "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                            "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                            "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                           "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -95000,6 +95114,18 @@ func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetControlID() string {
 		t = &CreateSubcontrol_CreateSubcontrol_Subcontrol{}
 	}
 	return t.ControlID
+}
+func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetControlOriginID() *string {
+	if t == nil {
+		t = &CreateSubcontrol_CreateSubcontrol_Subcontrol{}
+	}
+	return t.ControlOriginID
+}
+func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetControlOriginName() *string {
+	if t == nil {
+		t = &CreateSubcontrol_CreateSubcontrol_Subcontrol{}
+	}
+	return t.ControlOriginName
 }
 func (t *CreateSubcontrol_CreateSubcontrol_Subcontrol) GetControlOwnerID() *string {
 	if t == nil {
@@ -95581,6 +95707,8 @@ type GetSubcontrolByID_Subcontrol struct {
 	Category                   *string                            "json:\"category,omitempty\" graphql:\"category\""
 	CategoryID                 *string                            "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlID                  string                             "json:\"controlID\" graphql:\"controlID\""
+	ControlOriginID            *string                            "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                            "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                            "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                           "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -95665,6 +95793,18 @@ func (t *GetSubcontrolByID_Subcontrol) GetControlID() string {
 		t = &GetSubcontrolByID_Subcontrol{}
 	}
 	return t.ControlID
+}
+func (t *GetSubcontrolByID_Subcontrol) GetControlOriginID() *string {
+	if t == nil {
+		t = &GetSubcontrolByID_Subcontrol{}
+	}
+	return t.ControlOriginID
+}
+func (t *GetSubcontrolByID_Subcontrol) GetControlOriginName() *string {
+	if t == nil {
+		t = &GetSubcontrolByID_Subcontrol{}
+	}
+	return t.ControlOriginName
 }
 func (t *GetSubcontrolByID_Subcontrol) GetControlOwnerID() *string {
 	if t == nil {
@@ -96224,6 +96364,8 @@ type UpdateSubcontrol_UpdateSubcontrol_Subcontrol struct {
 	Category                   *string                            "json:\"category,omitempty\" graphql:\"category\""
 	CategoryID                 *string                            "json:\"categoryID,omitempty\" graphql:\"categoryID\""
 	ControlID                  string                             "json:\"controlID\" graphql:\"controlID\""
+	ControlOriginID            *string                            "json:\"controlOriginID,omitempty\" graphql:\"controlOriginID\""
+	ControlOriginName          *string                            "json:\"controlOriginName,omitempty\" graphql:\"controlOriginName\""
 	ControlOwnerID             *string                            "json:\"controlOwnerID,omitempty\" graphql:\"controlOwnerID\""
 	ControlQuestions           []string                           "json:\"controlQuestions,omitempty\" graphql:\"controlQuestions\""
 	CreatedAt                  *time.Time                         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
@@ -96308,6 +96450,18 @@ func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetControlID() string {
 		t = &UpdateSubcontrol_UpdateSubcontrol_Subcontrol{}
 	}
 	return t.ControlID
+}
+func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetControlOriginID() *string {
+	if t == nil {
+		t = &UpdateSubcontrol_UpdateSubcontrol_Subcontrol{}
+	}
+	return t.ControlOriginID
+}
+func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetControlOriginName() *string {
+	if t == nil {
+		t = &UpdateSubcontrol_UpdateSubcontrol_Subcontrol{}
+	}
+	return t.ControlOriginName
 }
 func (t *UpdateSubcontrol_UpdateSubcontrol_Subcontrol) GetControlOwnerID() *string {
 	if t == nil {
@@ -141347,6 +141501,8 @@ const CreateBulkControlDocument = `mutation CreateBulkControl ($input: [CreateCo
 			controlOwnerID
 			controlQuestions
 			controlKindName
+			controlOriginID
+			controlOriginName
 			createdAt
 			createdBy
 			delegateID
@@ -141427,6 +141583,8 @@ const CreateBulkCSVControlDocument = `mutation CreateBulkCSVControl ($input: Upl
 			controlOwnerID
 			controlQuestions
 			controlKindName
+			controlOriginID
+			controlOriginName
 			createdAt
 			createdBy
 			delegateID
@@ -141507,6 +141665,8 @@ const CreateControlDocument = `mutation CreateControl ($input: CreateControlInpu
 			controlOwnerID
 			controlQuestions
 			controlKindName
+			controlOriginID
+			controlOriginName
 			createdAt
 			createdBy
 			delegateID
@@ -141684,6 +141844,8 @@ const GetControlByIDDocument = `query GetControlByID ($controlId: ID!) {
 		controlOwnerID
 		controlQuestions
 		controlKindName
+		controlOriginID
+		controlOriginName
 		createdAt
 		createdBy
 		delegateID
@@ -141771,6 +141933,8 @@ const GetControlsDocument = `query GetControls ($first: Int, $last: Int, $after:
 				controlOwnerID
 				controlQuestions
 				controlKindName
+				controlOriginID
+				controlOriginName
 				createdAt
 				createdBy
 				delegateID
@@ -141857,6 +142021,8 @@ const UpdateControlDocument = `mutation UpdateControl ($updateControlId: ID!, $i
 			controlOwnerID
 			controlQuestions
 			controlKindName
+			controlOriginID
+			controlOriginName
 			createdAt
 			createdBy
 			delegateID
@@ -162330,6 +162496,8 @@ const CreateBulkCSVSubcontrolDocument = `mutation CreateBulkCSVSubcontrol ($inpu
 			category
 			categoryID
 			controlID
+			controlOriginID
+			controlOriginName
 			controlOwnerID
 			controlQuestions
 			createdAt
@@ -162403,6 +162571,8 @@ const CreateBulkSubcontrolDocument = `mutation CreateBulkSubcontrol ($input: [Cr
 			category
 			categoryID
 			controlID
+			controlOriginID
+			controlOriginName
 			controlOwnerID
 			controlQuestions
 			createdAt
@@ -162476,6 +162646,8 @@ const CreateSubcontrolDocument = `mutation CreateSubcontrol ($input: CreateSubco
 			category
 			categoryID
 			controlID
+			controlOriginID
+			controlOriginName
 			controlOwnerID
 			controlQuestions
 			createdAt
@@ -162643,6 +162815,8 @@ const GetSubcontrolByIDDocument = `query GetSubcontrolByID ($subcontrolId: ID!) 
 		category
 		categoryID
 		controlID
+		controlOriginID
+		controlOriginName
 		controlOwnerID
 		controlQuestions
 		createdAt
@@ -162787,6 +162961,8 @@ const UpdateSubcontrolDocument = `mutation UpdateSubcontrol ($updateSubcontrolId
 			category
 			categoryID
 			controlID
+			controlOriginID
+			controlOriginName
 			controlOwnerID
 			controlQuestions
 			createdAt
