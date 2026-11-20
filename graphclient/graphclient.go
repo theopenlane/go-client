@@ -68074,6 +68074,7 @@ type GetOrganizationSettingByID_OrganizationSetting struct {
 	CreatedAt                        *time.Time         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                        *string            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Domains                          []string           "json:\"domains,omitempty\" graphql:\"domains\""
+	ExternalSharingEnabled           *bool              "json:\"externalSharingEnabled,omitempty\" graphql:\"externalSharingEnabled\""
 	GeoLocation                      *enums.Region      "json:\"geoLocation,omitempty\" graphql:\"geoLocation\""
 	ID                               string             "json:\"id\" graphql:\"id\""
 	IdentityProvider                 *enums.SSOProvider "json:\"identityProvider,omitempty\" graphql:\"identityProvider\""
@@ -68164,6 +68165,12 @@ func (t *GetOrganizationSettingByID_OrganizationSetting) GetDomains() []string {
 		t = &GetOrganizationSettingByID_OrganizationSetting{}
 	}
 	return t.Domains
+}
+func (t *GetOrganizationSettingByID_OrganizationSetting) GetExternalSharingEnabled() *bool {
+	if t == nil {
+		t = &GetOrganizationSettingByID_OrganizationSetting{}
+	}
+	return t.ExternalSharingEnabled
 }
 func (t *GetOrganizationSettingByID_OrganizationSetting) GetGeoLocation() *enums.Region {
 	if t == nil {
@@ -68602,6 +68609,7 @@ type UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting str
 	CreatedAt                        *time.Time         "json:\"createdAt,omitempty\" graphql:\"createdAt\""
 	CreatedBy                        *string            "json:\"createdBy,omitempty\" graphql:\"createdBy\""
 	Domains                          []string           "json:\"domains,omitempty\" graphql:\"domains\""
+	ExternalSharingEnabled           *bool              "json:\"externalSharingEnabled,omitempty\" graphql:\"externalSharingEnabled\""
 	GeoLocation                      *enums.Region      "json:\"geoLocation,omitempty\" graphql:\"geoLocation\""
 	ID                               string             "json:\"id\" graphql:\"id\""
 	IdentityProvider                 *enums.SSOProvider "json:\"identityProvider,omitempty\" graphql:\"identityProvider\""
@@ -68692,6 +68700,12 @@ func (t *UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting
 		t = &UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting{}
 	}
 	return t.Domains
+}
+func (t *UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting) GetExternalSharingEnabled() *bool {
+	if t == nil {
+		t = &UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting{}
+	}
+	return t.ExternalSharingEnabled
 }
 func (t *UpdateOrganizationSetting_UpdateOrganizationSetting_OrganizationSetting) GetGeoLocation() *enums.Region {
 	if t == nil {
@@ -155844,6 +155858,7 @@ const GetOrganizationSettingByIDDocument = `query GetOrganizationSettingByID ($o
 		createdAt
 		createdBy
 		domains
+		externalSharingEnabled
 		geoLocation
 		id
 		identityProvider
@@ -155972,6 +155987,7 @@ const UpdateOrganizationSettingDocument = `mutation UpdateOrganizationSetting ($
 			createdAt
 			createdBy
 			domains
+			externalSharingEnabled
 			geoLocation
 			id
 			identityProvider

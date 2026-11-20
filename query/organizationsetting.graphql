@@ -1,216 +1,200 @@
-mutation CreateOrganizationSetting($input: CreateOrganizationSettingInput!) {
-  createOrganizationSetting(input: $input) {
-    organizationSetting {
-      allowedEmailDomains
-      allowMatchingDomainsAutojoin
-      billingAddress
-      billingContact
-      billingEmail
-      billingNotificationsEnabled
-      billingPhone
-      createdAt
-      createdBy
-      domains
-      geoLocation
-      id
-      identityProvider
-      identityProviderClientID
-      identityProviderEntityID
-      identityProviderLoginEnforced
-      identityProviderMetadataEndpoint
-      identityProviderAuthTested
-      oidcDiscoveryEndpoint
-      organizationID
-      tags
-      taxIdentifier
-      updatedAt
-      updatedBy
-    }
-  }
+mutation CreateOrganizationSetting ($input: CreateOrganizationSettingInput!) {
+	createOrganizationSetting(input: $input) {
+		organizationSetting {
+			allowedEmailDomains
+			allowMatchingDomainsAutojoin
+			billingAddress
+			billingContact
+			billingEmail
+			billingNotificationsEnabled
+			billingPhone
+			createdAt
+			createdBy
+			domains
+			geoLocation
+			id
+			identityProvider
+			identityProviderClientID
+			identityProviderEntityID
+			identityProviderLoginEnforced
+			identityProviderMetadataEndpoint
+			identityProviderAuthTested
+			oidcDiscoveryEndpoint
+			organizationID
+			tags
+			taxIdentifier
+			updatedAt
+			updatedBy
+		}
+	}
 }
-
-mutation DeleteOrganizationSetting($deleteOrganizationSettingId: ID!) {
-  deleteOrganizationSetting(id: $deleteOrganizationSettingId) {
-    deletedID
-  }
+mutation DeleteOrganizationSetting ($deleteOrganizationSettingId: ID!) {
+	deleteOrganizationSetting(id: $deleteOrganizationSettingId) {
+		deletedID
+	}
 }
-
-query GetAllOrganizationSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [OrganizationSettingOrder!]) {
-  organizationSettings(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        allowedEmailDomains
-        allowMatchingDomainsAutojoin
-        billingAddress
-        billingContact
-        billingEmail
-        billingNotificationsEnabled
-        billingPhone
-        createdAt
-        createdBy
-        domains
-        geoLocation
-        id
-        identityProvider
-        identityProviderClientID
-        identityProviderEntityID
-        identityProviderLoginEnforced
-        identityProviderMetadataEndpoint
-        identityProviderAuthTested
-        oidcDiscoveryEndpoint
-        organizationID
-        tags
-        taxIdentifier
-        updatedAt
-        updatedBy
-      }
-    }
-  }
+query GetAllOrganizationSettings ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [OrganizationSettingOrder!]) {
+	organizationSettings(first: $first, last: $last, after: $after, before: $before, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				allowedEmailDomains
+				allowMatchingDomainsAutojoin
+				billingAddress
+				billingContact
+				billingEmail
+				billingNotificationsEnabled
+				billingPhone
+				createdAt
+				createdBy
+				domains
+				geoLocation
+				id
+				identityProvider
+				identityProviderClientID
+				identityProviderEntityID
+				identityProviderLoginEnforced
+				identityProviderMetadataEndpoint
+				identityProviderAuthTested
+				oidcDiscoveryEndpoint
+				organizationID
+				tags
+				taxIdentifier
+				updatedAt
+				updatedBy
+			}
+		}
+	}
 }
-
-query GetOrganizationSettingByID($organizationSettingId: ID!) {
-  organizationSetting(id: $organizationSettingId) {
-    allowedEmailDomains
-    allowMatchingDomainsAutojoin
-    allowSupportAccess
-    billingAddress
-    billingContact
-    billingEmail
-    billingNotificationsEnabled
-    billingPhone
-    createdAt
-    createdBy
-    domains
-    geoLocation
-    id
-    identityProvider
-    identityProviderAuthTested
-    identityProviderClientID
-    identityProviderEntityID
-    identityProviderJitProvisioning
-    identityProviderLoginEnforced
-    identityProviderMetadataEndpoint
-    multifactorAuthEnforced
-    jitAllowedEmailDomains
-    oidcDiscoveryEndpoint
-    organizationID
-    ssoExemptDomains
-    paymentMethodAdded
-    pendingDeletionAt
-    samlCert
-    samlSigninURL
-    samlIssuer
-    tags
-    taxIdentifier
-    updatedAt
-    updatedBy
-  }
+query GetOrganizationSettingByID ($organizationSettingId: ID!) {
+	organizationSetting(id: $organizationSettingId) {
+		allowedEmailDomains
+		allowMatchingDomainsAutojoin
+		allowSupportAccess
+		billingAddress
+		billingContact
+		billingEmail
+		billingNotificationsEnabled
+		billingPhone
+		createdAt
+		createdBy
+		domains
+		externalSharingEnabled
+		geoLocation
+		id
+		identityProvider
+		identityProviderAuthTested
+		identityProviderClientID
+		identityProviderEntityID
+		identityProviderJitProvisioning
+		identityProviderLoginEnforced
+		identityProviderMetadataEndpoint
+		multifactorAuthEnforced
+		jitAllowedEmailDomains
+		oidcDiscoveryEndpoint
+		organizationID
+		ssoExemptDomains
+		paymentMethodAdded
+		pendingDeletionAt
+		samlCert
+		samlSigninURL
+		samlIssuer
+		tags
+		taxIdentifier
+		updatedAt
+		updatedBy
+	}
 }
-
-query GetOrganizationSettings($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: OrganizationSettingWhereInput, $orderBy: [OrganizationSettingOrder!]) {
-  organizationSettings(
-    first: $first
-    last: $last
-    after: $after
-    before: $before
-    where: $where
-    orderBy: $orderBy
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    edges {
-      node {
-        allowedEmailDomains
-        allowMatchingDomainsAutojoin
-        billingAddress
-        billingContact
-        billingEmail
-        billingNotificationsEnabled
-        billingPhone
-        createdAt
-        createdBy
-        domains
-        geoLocation
-        id
-        identityProvider
-        identityProviderAuthTested
-        identityProviderClientID
-        identityProviderEntityID
-        identityProviderLoginEnforced
-        identityProviderMetadataEndpoint
-        oidcDiscoveryEndpoint
-        organizationID
-        tags
-        taxIdentifier
-        updatedAt
-        updatedBy
-        paymentMethodAdded
-        pendingDeletionAt
-        organization {
-          id
-          createdAt
-          name
-        }
-      }
-    }
-  }
+query GetOrganizationSettings ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: OrganizationSettingWhereInput, $orderBy: [OrganizationSettingOrder!]) {
+	organizationSettings(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
+		totalCount
+		pageInfo {
+			startCursor
+			endCursor
+			hasPreviousPage
+			hasNextPage
+		}
+		edges {
+			node {
+				allowedEmailDomains
+				allowMatchingDomainsAutojoin
+				billingAddress
+				billingContact
+				billingEmail
+				billingNotificationsEnabled
+				billingPhone
+				createdAt
+				createdBy
+				domains
+				geoLocation
+				id
+				identityProvider
+				identityProviderAuthTested
+				identityProviderClientID
+				identityProviderEntityID
+				identityProviderLoginEnforced
+				identityProviderMetadataEndpoint
+				oidcDiscoveryEndpoint
+				organizationID
+				tags
+				taxIdentifier
+				updatedAt
+				updatedBy
+				paymentMethodAdded
+				pendingDeletionAt
+				organization {
+					id
+					createdAt
+					name
+				}
+			}
+		}
+	}
 }
-
-mutation UpdateOrganizationSetting($updateOrganizationSettingId: ID!, $input: UpdateOrganizationSettingInput!) {
-  updateOrganizationSetting(id: $updateOrganizationSettingId, input: $input) {
-    organizationSetting {
-      allowedEmailDomains
-      allowMatchingDomainsAutojoin
-      allowSupportAccess
-      billingAddress
-      billingContact
-      billingEmail
-      billingNotificationsEnabled
-      billingPhone
-      createdAt
-      createdBy
-      domains
-      geoLocation
-      id
-      identityProvider
-      identityProviderClientID
-      identityProviderEntityID
-      identityProviderJitProvisioning
-      identityProviderLoginEnforced
-      identityProviderMetadataEndpoint
-      multifactorAuthEnforced
-      jitAllowedEmailDomains
-      identityProviderAuthTested
-      oidcDiscoveryEndpoint
-      organizationID
-      pendingDeletionAt
-      samlCert
-      paymentMethodAdded
-      samlIssuer
-      samlSigninURL
-      ssoExemptDomains
-      tags
-      taxIdentifier
-      updatedAt
-      updatedBy
-    }
-  }
+mutation UpdateOrganizationSetting ($updateOrganizationSettingId: ID!, $input: UpdateOrganizationSettingInput!) {
+	updateOrganizationSetting(id: $updateOrganizationSettingId, input: $input) {
+		organizationSetting {
+			allowedEmailDomains
+			allowMatchingDomainsAutojoin
+			allowSupportAccess
+			billingAddress
+			billingContact
+			billingEmail
+			billingNotificationsEnabled
+			billingPhone
+			createdAt
+			createdBy
+			domains
+			externalSharingEnabled
+			geoLocation
+			id
+			identityProvider
+			identityProviderClientID
+			identityProviderEntityID
+			identityProviderJitProvisioning
+			identityProviderLoginEnforced
+			identityProviderMetadataEndpoint
+			multifactorAuthEnforced
+			jitAllowedEmailDomains
+			identityProviderAuthTested
+			oidcDiscoveryEndpoint
+			organizationID
+			pendingDeletionAt
+			samlCert
+			paymentMethodAdded
+			samlIssuer
+			samlSigninURL
+			ssoExemptDomains
+			tags
+			taxIdentifier
+			updatedAt
+			updatedBy
+		}
+	}
 }
