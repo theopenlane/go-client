@@ -1,4 +1,3 @@
-
 mutation CreateBulkCSVNotificationPreference($input: Upload!) {
   createBulkCSVNotificationPreference(input: $input) {
     notificationPreferences {
@@ -101,89 +100,19 @@ mutation CreateNotificationPreference($input: CreateNotificationPreferenceInput!
   }
 }
 
-mutation DeleteNotificationPreference($deleteNotificationPreferenceId: ID!) {
-  deleteNotificationPreference(id: $deleteNotificationPreferenceId) {
-    deletedID
-  }
-}
-
-mutation UpdateBulkNotificationPreference($ids: [ID!]!, $input: UpdateNotificationPreferenceInput!) {
-  updateBulkNotificationPreference(ids: $ids, input: $input) {
-    notificationPreferences {
-      cadence
-      channel
-      config
-      createdAt
-      createdBy
-      destination
-      enabled
-      id
-      isDefault
-      lastError
-      lastUsedAt
-      metadata
-      muteUntil
-      ownerID
-      priority
-      provider
-      quietHoursEnd
-      quietHoursStart
-      status
-      templateID
-      timezone
-      topicOverrides
-      topicPatterns
-      updatedAt
-      updatedBy
-      userID
-      verifiedAt
-    }
-    updatedIDs
-  }
-}
-
-mutation UpdateBulkCSVNotificationPreference($input: Upload!) {
-  updateBulkCSVNotificationPreference(input: $input) {
-    notificationPreferences {
-      cadence
-      channel
-      config
-      createdAt
-      createdBy
-      destination
-      enabled
-      id
-      isDefault
-      lastError
-      lastUsedAt
-      metadata
-      muteUntil
-      ownerID
-      priority
-      provider
-      quietHoursEnd
-      quietHoursStart
-      status
-      templateID
-      timezone
-      topicOverrides
-      topicPatterns
-      updatedAt
-      updatedBy
-      userID
-      verifiedAt
-    }
-    updatedIDs
-  }
-}
-
 mutation DeleteBulkNotificationPreference($ids: [ID!]!) {
   deleteBulkNotificationPreference(ids: $ids) {
     deletedIDs
   }
 }
 
-query GetAllNotificationPreferences($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [NotificationPreferenceOrder!]){
+mutation DeleteNotificationPreference($deleteNotificationPreferenceId: ID!) {
+  deleteNotificationPreference(id: $deleteNotificationPreferenceId) {
+    deletedID
+  }
+}
+
+query GetAllNotificationPreferences($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [NotificationPreferenceOrder!]) {
   notificationPreferences(
     first: $first
     last: $last
@@ -231,6 +160,7 @@ query GetAllNotificationPreferences($first: Int, $last: Int, $after: Cursor, $be
     }
   }
 }
+
 query GetNotificationPreferenceByID($notificationPreferenceId: ID!) {
   notificationPreference(id: $notificationPreferenceId) {
     cadence
@@ -265,13 +195,13 @@ query GetNotificationPreferenceByID($notificationPreferenceId: ID!) {
 
 query GetNotificationPreferences($first: Int, $last: Int, $after: Cursor, $before: Cursor, $orderBy: [NotificationPreferenceOrder!], $where: NotificationPreferenceWhereInput) {
   notificationPreferences(
-      first: $first
-      last: $last
-      after: $after
-      before: $before
-      orderBy: $orderBy
-      where: $where
-    ) {
+    first: $first
+    last: $last
+    after: $after
+    before: $before
+    orderBy: $orderBy
+    where: $where
+  ) {
     totalCount
     pageInfo {
       startCursor
@@ -312,6 +242,77 @@ query GetNotificationPreferences($first: Int, $last: Int, $after: Cursor, $befor
     }
   }
 }
+
+mutation UpdateBulkCSVNotificationPreference($input: Upload!) {
+  updateBulkCSVNotificationPreference(input: $input) {
+    notificationPreferences {
+      cadence
+      channel
+      config
+      createdAt
+      createdBy
+      destination
+      enabled
+      id
+      isDefault
+      lastError
+      lastUsedAt
+      metadata
+      muteUntil
+      ownerID
+      priority
+      provider
+      quietHoursEnd
+      quietHoursStart
+      status
+      templateID
+      timezone
+      topicOverrides
+      topicPatterns
+      updatedAt
+      updatedBy
+      userID
+      verifiedAt
+    }
+    updatedIDs
+  }
+}
+
+mutation UpdateBulkNotificationPreference($ids: [ID!]!, $input: UpdateNotificationPreferenceInput!) {
+  updateBulkNotificationPreference(ids: $ids, input: $input) {
+    notificationPreferences {
+      cadence
+      channel
+      config
+      createdAt
+      createdBy
+      destination
+      enabled
+      id
+      isDefault
+      lastError
+      lastUsedAt
+      metadata
+      muteUntil
+      ownerID
+      priority
+      provider
+      quietHoursEnd
+      quietHoursStart
+      status
+      templateID
+      timezone
+      topicOverrides
+      topicPatterns
+      updatedAt
+      updatedBy
+      userID
+      verifiedAt
+    }
+    updatedIDs
+  }
+}
+
 mutation UpdateNotificationPreference($updateNotificationPreferenceId: ID!, $input: UpdateNotificationPreferenceInput!) {
   updateNotificationPreference(id: $updateNotificationPreferenceId, input: $input) {
     notificationPreference {

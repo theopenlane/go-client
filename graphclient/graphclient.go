@@ -61,8 +61,8 @@ type GraphClient interface {
 	LaunchCampaign(ctx context.Context, input LaunchCampaignInput, interceptors ...clientv2.RequestInterceptor) (*LaunchCampaign, error)
 	ResendCampaignIncompleteTargets(ctx context.Context, input ResendCampaignIncompleteInput, interceptors ...clientv2.RequestInterceptor) (*ResendCampaignIncompleteTargets, error)
 	SendCampaignTestEmail(ctx context.Context, input SendCampaignTestEmailInput, interceptors ...clientv2.RequestInterceptor) (*SendCampaignTestEmail, error)
-	CreateBulkCSVCampaignTarget(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVCampaignTarget, error)
 	CreateBulkCampaignTarget(ctx context.Context, input []*CreateCampaignTargetInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCampaignTarget, error)
+	CreateBulkCSVCampaignTarget(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVCampaignTarget, error)
 	CreateCampaignTarget(ctx context.Context, input CreateCampaignTargetInput, interceptors ...clientv2.RequestInterceptor) (*CreateCampaignTarget, error)
 	DeleteCampaignTarget(ctx context.Context, deleteCampaignTargetID string, interceptors ...clientv2.RequestInterceptor) (*DeleteCampaignTarget, error)
 	GetAllCampaignTargets(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*CampaignTargetOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllCampaignTargets, error)
@@ -341,13 +341,13 @@ type GraphClient interface {
 	CreateBulkCSVNotificationPreference(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVNotificationPreference, error)
 	CreateBulkNotificationPreference(ctx context.Context, input []*CreateNotificationPreferenceInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkNotificationPreference, error)
 	CreateNotificationPreference(ctx context.Context, input CreateNotificationPreferenceInput, interceptors ...clientv2.RequestInterceptor) (*CreateNotificationPreference, error)
-	DeleteNotificationPreference(ctx context.Context, deleteNotificationPreferenceID string, interceptors ...clientv2.RequestInterceptor) (*DeleteNotificationPreference, error)
-	UpdateBulkNotificationPreference(ctx context.Context, ids []string, input UpdateNotificationPreferenceInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkNotificationPreference, error)
-	UpdateBulkCSVNotificationPreference(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVNotificationPreference, error)
 	DeleteBulkNotificationPreference(ctx context.Context, ids []string, interceptors ...clientv2.RequestInterceptor) (*DeleteBulkNotificationPreference, error)
+	DeleteNotificationPreference(ctx context.Context, deleteNotificationPreferenceID string, interceptors ...clientv2.RequestInterceptor) (*DeleteNotificationPreference, error)
 	GetAllNotificationPreferences(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*NotificationPreferenceOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllNotificationPreferences, error)
 	GetNotificationPreferenceByID(ctx context.Context, notificationPreferenceID string, interceptors ...clientv2.RequestInterceptor) (*GetNotificationPreferenceByID, error)
 	GetNotificationPreferences(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*NotificationPreferenceOrder, where *NotificationPreferenceWhereInput, interceptors ...clientv2.RequestInterceptor) (*GetNotificationPreferences, error)
+	UpdateBulkCSVNotificationPreference(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVNotificationPreference, error)
+	UpdateBulkNotificationPreference(ctx context.Context, ids []string, input UpdateNotificationPreferenceInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkNotificationPreference, error)
 	UpdateNotificationPreference(ctx context.Context, updateNotificationPreferenceID string, input UpdateNotificationPreferenceInput, interceptors ...clientv2.RequestInterceptor) (*UpdateNotificationPreference, error)
 	CreateBulkCSVNotificationTemplate(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVNotificationTemplate, error)
 	CreateBulkNotificationTemplate(ctx context.Context, input []*CreateNotificationTemplateInput, interceptors ...clientv2.RequestInterceptor) (*CreateBulkNotificationTemplate, error)
@@ -676,8 +676,8 @@ type GraphClient interface {
 	CreateVulnerability(ctx context.Context, input CreateVulnerabilityInput, interceptors ...clientv2.RequestInterceptor) (*CreateVulnerability, error)
 	DeleteVulnerability(ctx context.Context, deleteVulnerabilityID string, interceptors ...clientv2.RequestInterceptor) (*DeleteVulnerability, error)
 	GetAllVulnerabilities(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy []*VulnerabilityOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllVulnerabilities, error)
-	GetVulnerabilityByID(ctx context.Context, vulnerabilityID string, interceptors ...clientv2.RequestInterceptor) (*GetVulnerabilityByID, error)
 	GetVulnerabilities(ctx context.Context, first *int64, last *int64, after *string, before *string, where *VulnerabilityWhereInput, orderBy []*VulnerabilityOrder, interceptors ...clientv2.RequestInterceptor) (*GetVulnerabilities, error)
+	GetVulnerabilityByID(ctx context.Context, vulnerabilityID string, interceptors ...clientv2.RequestInterceptor) (*GetVulnerabilityByID, error)
 	UpdateVulnerability(ctx context.Context, updateVulnerabilityID string, input UpdateVulnerabilityInput, interceptors ...clientv2.RequestInterceptor) (*UpdateVulnerability, error)
 	DeleteWebauthn(ctx context.Context, deleteWebauthnID string, interceptors ...clientv2.RequestInterceptor) (*DeleteWebauthn, error)
 	GetAllWebauthns(ctx context.Context, first *int64, last *int64, after *string, before *string, orderBy *WebauthnOrder, interceptors ...clientv2.RequestInterceptor) (*GetAllWebauthns, error)
@@ -13387,140 +13387,6 @@ func (t *SendCampaignTestEmail_SendCampaignTestEmail) GetSkippedCount() int64 {
 	return t.SkippedCount
 }
 
-type CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets struct {
-	CampaignID   *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
-	CompletedAt  *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
-	ContactID    *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
-	CreatedAt    *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy    *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Email        string                         "json:\"email\" graphql:\"email\""
-	FullName     *string                        "json:\"fullName,omitempty\" graphql:\"fullName\""
-	GroupID      *string                        "json:\"groupID,omitempty\" graphql:\"groupID\""
-	ID           string                         "json:\"id\" graphql:\"id\""
-	Metadata     map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
-	OwnerID      *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	SentAt       *models.DateTime               "json:\"sentAt,omitempty\" graphql:\"sentAt\""
-	Status       enums.AssessmentResponseStatus "json:\"status\" graphql:\"status\""
-	SubscriberID *string                        "json:\"subscriberID,omitempty\" graphql:\"subscriberID\""
-	UpdatedAt    *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy    *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	UserID       *string                        "json:\"userID,omitempty\" graphql:\"userID\""
-}
-
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCampaignID() *string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.CampaignID
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCompletedAt() *models.DateTime {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.CompletedAt
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetContactID() *string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.ContactID
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.CreatedAt
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCreatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.CreatedBy
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetEmail() string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.Email
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetFullName() *string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.FullName
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetGroupID() *string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.GroupID
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetID() string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.ID
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetMetadata() map[string]any {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.Metadata
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetOwnerID() *string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.OwnerID
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetSentAt() *models.DateTime {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.SentAt
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetStatus() *enums.AssessmentResponseStatus {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return &t.Status
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetSubscriberID() *string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.SubscriberID
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.UpdatedAt
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetUpdatedBy() *string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.UpdatedBy
-}
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetUserID() *string {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
-	}
-	return t.UserID
-}
-
-type CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget struct {
-	CampaignTargets []*CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets "json:\"campaignTargets,omitempty\" graphql:\"campaignTargets\""
-}
-
-func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget) GetCampaignTargets() []*CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget{}
-	}
-	return t.CampaignTargets
-}
-
 type CreateBulkCampaignTarget_CreateBulkCampaignTarget_CampaignTargets struct {
 	CampaignID   *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
 	CompletedAt  *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
@@ -13651,6 +13517,140 @@ type CreateBulkCampaignTarget_CreateBulkCampaignTarget struct {
 func (t *CreateBulkCampaignTarget_CreateBulkCampaignTarget) GetCampaignTargets() []*CreateBulkCampaignTarget_CreateBulkCampaignTarget_CampaignTargets {
 	if t == nil {
 		t = &CreateBulkCampaignTarget_CreateBulkCampaignTarget{}
+	}
+	return t.CampaignTargets
+}
+
+type CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets struct {
+	CampaignID   *string                        "json:\"campaignID,omitempty\" graphql:\"campaignID\""
+	CompletedAt  *models.DateTime               "json:\"completedAt,omitempty\" graphql:\"completedAt\""
+	ContactID    *string                        "json:\"contactID,omitempty\" graphql:\"contactID\""
+	CreatedAt    *time.Time                     "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy    *string                        "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Email        string                         "json:\"email\" graphql:\"email\""
+	FullName     *string                        "json:\"fullName,omitempty\" graphql:\"fullName\""
+	GroupID      *string                        "json:\"groupID,omitempty\" graphql:\"groupID\""
+	ID           string                         "json:\"id\" graphql:\"id\""
+	Metadata     map[string]any                 "json:\"metadata,omitempty\" graphql:\"metadata\""
+	OwnerID      *string                        "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	SentAt       *models.DateTime               "json:\"sentAt,omitempty\" graphql:\"sentAt\""
+	Status       enums.AssessmentResponseStatus "json:\"status\" graphql:\"status\""
+	SubscriberID *string                        "json:\"subscriberID,omitempty\" graphql:\"subscriberID\""
+	UpdatedAt    *time.Time                     "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy    *string                        "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	UserID       *string                        "json:\"userID,omitempty\" graphql:\"userID\""
+}
+
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCampaignID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.CampaignID
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCompletedAt() *models.DateTime {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.CompletedAt
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetContactID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.ContactID
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.CreatedAt
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetCreatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.CreatedBy
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetEmail() string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.Email
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetFullName() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.FullName
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetGroupID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.GroupID
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetID() string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.ID
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetMetadata() map[string]any {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.Metadata
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetOwnerID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.OwnerID
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetSentAt() *models.DateTime {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.SentAt
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetStatus() *enums.AssessmentResponseStatus {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return &t.Status
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetSubscriberID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.SubscriberID
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.UpdatedAt
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetUpdatedBy() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.UpdatedBy
+}
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets) GetUserID() *string {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets{}
+	}
+	return t.UserID
+}
+
+type CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget struct {
+	CampaignTargets []*CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets "json:\"campaignTargets,omitempty\" graphql:\"campaignTargets\""
+}
+
+func (t *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget) GetCampaignTargets() []*CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget_CampaignTargets {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget{}
 	}
 	return t.CampaignTargets
 }
@@ -62650,439 +62650,6 @@ func (t *CreateNotificationPreference_CreateNotificationPreference) GetNotificat
 	return &t.NotificationPreference
 }
 
-type DeleteNotificationPreference_DeleteNotificationPreference struct {
-	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
-}
-
-func (t *DeleteNotificationPreference_DeleteNotificationPreference) GetDeletedID() string {
-	if t == nil {
-		t = &DeleteNotificationPreference_DeleteNotificationPreference{}
-	}
-	return t.DeletedID
-}
-
-type UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences struct {
-	Cadence         enums.NotificationCadence       "json:\"cadence\" graphql:\"cadence\""
-	Channel         enums.Channel                   "json:\"channel\" graphql:\"channel\""
-	Config          map[string]any                  "json:\"config,omitempty\" graphql:\"config\""
-	CreatedAt       *time.Time                      "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string                         "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Destination     *string                         "json:\"destination,omitempty\" graphql:\"destination\""
-	Enabled         bool                            "json:\"enabled\" graphql:\"enabled\""
-	ID              string                          "json:\"id\" graphql:\"id\""
-	IsDefault       bool                            "json:\"isDefault\" graphql:\"isDefault\""
-	LastError       *string                         "json:\"lastError,omitempty\" graphql:\"lastError\""
-	LastUsedAt      *time.Time                      "json:\"lastUsedAt,omitempty\" graphql:\"lastUsedAt\""
-	Metadata        map[string]any                  "json:\"metadata,omitempty\" graphql:\"metadata\""
-	MuteUntil       *time.Time                      "json:\"muteUntil,omitempty\" graphql:\"muteUntil\""
-	OwnerID         *string                         "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Priority        *enums.Priority                 "json:\"priority,omitempty\" graphql:\"priority\""
-	Provider        *string                         "json:\"provider,omitempty\" graphql:\"provider\""
-	QuietHoursEnd   *string                         "json:\"quietHoursEnd,omitempty\" graphql:\"quietHoursEnd\""
-	QuietHoursStart *string                         "json:\"quietHoursStart,omitempty\" graphql:\"quietHoursStart\""
-	Status          enums.NotificationChannelStatus "json:\"status\" graphql:\"status\""
-	TemplateID      *string                         "json:\"templateID,omitempty\" graphql:\"templateID\""
-	Timezone        *string                         "json:\"timezone,omitempty\" graphql:\"timezone\""
-	TopicOverrides  map[string]any                  "json:\"topicOverrides,omitempty\" graphql:\"topicOverrides\""
-	TopicPatterns   []string                        "json:\"topicPatterns,omitempty\" graphql:\"topicPatterns\""
-	UpdatedAt       *time.Time                      "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string                         "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	UserID          string                          "json:\"userID\" graphql:\"userID\""
-	VerifiedAt      *time.Time                      "json:\"verifiedAt,omitempty\" graphql:\"verifiedAt\""
-}
-
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetCadence() *enums.NotificationCadence {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return &t.Cadence
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetChannel() *enums.Channel {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return &t.Channel
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetConfig() map[string]any {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.Config
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetDestination() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.Destination
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetEnabled() bool {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.Enabled
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetID() string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.ID
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetIsDefault() bool {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.IsDefault
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetLastError() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.LastError
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetLastUsedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.LastUsedAt
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetMetadata() map[string]any {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.Metadata
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetMuteUntil() *time.Time {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.MuteUntil
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetPriority() *enums.Priority {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.Priority
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetProvider() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.Provider
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetQuietHoursEnd() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.QuietHoursEnd
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetQuietHoursStart() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.QuietHoursStart
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetStatus() *enums.NotificationChannelStatus {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return &t.Status
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetTemplateID() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.TemplateID
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetTimezone() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.Timezone
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetTopicOverrides() map[string]any {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.TopicOverrides
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetTopicPatterns() []string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.TopicPatterns
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.UpdatedBy
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetUserID() string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.UserID
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetVerifiedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
-	}
-	return t.VerifiedAt
-}
-
-type UpdateBulkNotificationPreference_UpdateBulkNotificationPreference struct {
-	NotificationPreferences []*UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences "json:\"notificationPreferences,omitempty\" graphql:\"notificationPreferences\""
-	UpdatedIDs              []string                                                                                     "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
-}
-
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference) GetNotificationPreferences() []*UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference{}
-	}
-	return t.NotificationPreferences
-}
-func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference) GetUpdatedIDs() []string {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference{}
-	}
-	return t.UpdatedIDs
-}
-
-type UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences struct {
-	Cadence         enums.NotificationCadence       "json:\"cadence\" graphql:\"cadence\""
-	Channel         enums.Channel                   "json:\"channel\" graphql:\"channel\""
-	Config          map[string]any                  "json:\"config,omitempty\" graphql:\"config\""
-	CreatedAt       *time.Time                      "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy       *string                         "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	Destination     *string                         "json:\"destination,omitempty\" graphql:\"destination\""
-	Enabled         bool                            "json:\"enabled\" graphql:\"enabled\""
-	ID              string                          "json:\"id\" graphql:\"id\""
-	IsDefault       bool                            "json:\"isDefault\" graphql:\"isDefault\""
-	LastError       *string                         "json:\"lastError,omitempty\" graphql:\"lastError\""
-	LastUsedAt      *time.Time                      "json:\"lastUsedAt,omitempty\" graphql:\"lastUsedAt\""
-	Metadata        map[string]any                  "json:\"metadata,omitempty\" graphql:\"metadata\""
-	MuteUntil       *time.Time                      "json:\"muteUntil,omitempty\" graphql:\"muteUntil\""
-	OwnerID         *string                         "json:\"ownerID,omitempty\" graphql:\"ownerID\""
-	Priority        *enums.Priority                 "json:\"priority,omitempty\" graphql:\"priority\""
-	Provider        *string                         "json:\"provider,omitempty\" graphql:\"provider\""
-	QuietHoursEnd   *string                         "json:\"quietHoursEnd,omitempty\" graphql:\"quietHoursEnd\""
-	QuietHoursStart *string                         "json:\"quietHoursStart,omitempty\" graphql:\"quietHoursStart\""
-	Status          enums.NotificationChannelStatus "json:\"status\" graphql:\"status\""
-	TemplateID      *string                         "json:\"templateID,omitempty\" graphql:\"templateID\""
-	Timezone        *string                         "json:\"timezone,omitempty\" graphql:\"timezone\""
-	TopicOverrides  map[string]any                  "json:\"topicOverrides,omitempty\" graphql:\"topicOverrides\""
-	TopicPatterns   []string                        "json:\"topicPatterns,omitempty\" graphql:\"topicPatterns\""
-	UpdatedAt       *time.Time                      "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy       *string                         "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	UserID          string                          "json:\"userID\" graphql:\"userID\""
-	VerifiedAt      *time.Time                      "json:\"verifiedAt,omitempty\" graphql:\"verifiedAt\""
-}
-
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetCadence() *enums.NotificationCadence {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return &t.Cadence
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetChannel() *enums.Channel {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return &t.Channel
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetConfig() map[string]any {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.Config
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.CreatedAt
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetCreatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.CreatedBy
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetDestination() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.Destination
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetEnabled() bool {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.Enabled
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetID() string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.ID
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetIsDefault() bool {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.IsDefault
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetLastError() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.LastError
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetLastUsedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.LastUsedAt
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetMetadata() map[string]any {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.Metadata
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetMuteUntil() *time.Time {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.MuteUntil
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetOwnerID() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.OwnerID
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetPriority() *enums.Priority {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.Priority
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetProvider() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.Provider
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetQuietHoursEnd() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.QuietHoursEnd
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetQuietHoursStart() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.QuietHoursStart
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetStatus() *enums.NotificationChannelStatus {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return &t.Status
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetTemplateID() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.TemplateID
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetTimezone() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.Timezone
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetTopicOverrides() map[string]any {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.TopicOverrides
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetTopicPatterns() []string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.TopicPatterns
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.UpdatedAt
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetUpdatedBy() *string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.UpdatedBy
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetUserID() string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.UserID
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetVerifiedAt() *time.Time {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
-	}
-	return t.VerifiedAt
-}
-
-type UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference struct {
-	NotificationPreferences []*UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences "json:\"notificationPreferences,omitempty\" graphql:\"notificationPreferences\""
-	UpdatedIDs              []string                                                                                           "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
-}
-
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference) GetNotificationPreferences() []*UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference{}
-	}
-	return t.NotificationPreferences
-}
-func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference) GetUpdatedIDs() []string {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference{}
-	}
-	return t.UpdatedIDs
-}
-
 type DeleteBulkNotificationPreference_DeleteBulkNotificationPreference struct {
 	DeletedIDs []string "json:\"deletedIDs\" graphql:\"deletedIDs\""
 }
@@ -63092,6 +62659,17 @@ func (t *DeleteBulkNotificationPreference_DeleteBulkNotificationPreference) GetD
 		t = &DeleteBulkNotificationPreference_DeleteBulkNotificationPreference{}
 	}
 	return t.DeletedIDs
+}
+
+type DeleteNotificationPreference_DeleteNotificationPreference struct {
+	DeletedID string "json:\"deletedID\" graphql:\"deletedID\""
+}
+
+func (t *DeleteNotificationPreference_DeleteNotificationPreference) GetDeletedID() string {
+	if t == nil {
+		t = &DeleteNotificationPreference_DeleteNotificationPreference{}
+	}
+	return t.DeletedID
 }
 
 type GetAllNotificationPreferences_NotificationPreferences_PageInfo struct {
@@ -63807,6 +63385,428 @@ func (t *GetNotificationPreferences_NotificationPreferences) GetTotalCount() int
 		t = &GetNotificationPreferences_NotificationPreferences{}
 	}
 	return t.TotalCount
+}
+
+type UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences struct {
+	Cadence         enums.NotificationCadence       "json:\"cadence\" graphql:\"cadence\""
+	Channel         enums.Channel                   "json:\"channel\" graphql:\"channel\""
+	Config          map[string]any                  "json:\"config,omitempty\" graphql:\"config\""
+	CreatedAt       *time.Time                      "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy       *string                         "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Destination     *string                         "json:\"destination,omitempty\" graphql:\"destination\""
+	Enabled         bool                            "json:\"enabled\" graphql:\"enabled\""
+	ID              string                          "json:\"id\" graphql:\"id\""
+	IsDefault       bool                            "json:\"isDefault\" graphql:\"isDefault\""
+	LastError       *string                         "json:\"lastError,omitempty\" graphql:\"lastError\""
+	LastUsedAt      *time.Time                      "json:\"lastUsedAt,omitempty\" graphql:\"lastUsedAt\""
+	Metadata        map[string]any                  "json:\"metadata,omitempty\" graphql:\"metadata\""
+	MuteUntil       *time.Time                      "json:\"muteUntil,omitempty\" graphql:\"muteUntil\""
+	OwnerID         *string                         "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Priority        *enums.Priority                 "json:\"priority,omitempty\" graphql:\"priority\""
+	Provider        *string                         "json:\"provider,omitempty\" graphql:\"provider\""
+	QuietHoursEnd   *string                         "json:\"quietHoursEnd,omitempty\" graphql:\"quietHoursEnd\""
+	QuietHoursStart *string                         "json:\"quietHoursStart,omitempty\" graphql:\"quietHoursStart\""
+	Status          enums.NotificationChannelStatus "json:\"status\" graphql:\"status\""
+	TemplateID      *string                         "json:\"templateID,omitempty\" graphql:\"templateID\""
+	Timezone        *string                         "json:\"timezone,omitempty\" graphql:\"timezone\""
+	TopicOverrides  map[string]any                  "json:\"topicOverrides,omitempty\" graphql:\"topicOverrides\""
+	TopicPatterns   []string                        "json:\"topicPatterns,omitempty\" graphql:\"topicPatterns\""
+	UpdatedAt       *time.Time                      "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy       *string                         "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	UserID          string                          "json:\"userID\" graphql:\"userID\""
+	VerifiedAt      *time.Time                      "json:\"verifiedAt,omitempty\" graphql:\"verifiedAt\""
+}
+
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetCadence() *enums.NotificationCadence {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return &t.Cadence
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetChannel() *enums.Channel {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return &t.Channel
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetConfig() map[string]any {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.Config
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetDestination() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.Destination
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetEnabled() bool {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.Enabled
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetID() string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.ID
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetIsDefault() bool {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.IsDefault
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetLastError() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.LastError
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetLastUsedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.LastUsedAt
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetMetadata() map[string]any {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.Metadata
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetMuteUntil() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.MuteUntil
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetOwnerID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.OwnerID
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetPriority() *enums.Priority {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.Priority
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetProvider() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.Provider
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetQuietHoursEnd() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.QuietHoursEnd
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetQuietHoursStart() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.QuietHoursStart
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetStatus() *enums.NotificationChannelStatus {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return &t.Status
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetTemplateID() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.TemplateID
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetTimezone() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.Timezone
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetTopicOverrides() map[string]any {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.TopicOverrides
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetTopicPatterns() []string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.TopicPatterns
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.UpdatedBy
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetUserID() string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.UserID
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences) GetVerifiedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences{}
+	}
+	return t.VerifiedAt
+}
+
+type UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference struct {
+	NotificationPreferences []*UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences "json:\"notificationPreferences,omitempty\" graphql:\"notificationPreferences\""
+	UpdatedIDs              []string                                                                                           "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
+}
+
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference) GetNotificationPreferences() []*UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference_NotificationPreferences {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference{}
+	}
+	return t.NotificationPreferences
+}
+func (t *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference) GetUpdatedIDs() []string {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference{}
+	}
+	return t.UpdatedIDs
+}
+
+type UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences struct {
+	Cadence         enums.NotificationCadence       "json:\"cadence\" graphql:\"cadence\""
+	Channel         enums.Channel                   "json:\"channel\" graphql:\"channel\""
+	Config          map[string]any                  "json:\"config,omitempty\" graphql:\"config\""
+	CreatedAt       *time.Time                      "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy       *string                         "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	Destination     *string                         "json:\"destination,omitempty\" graphql:\"destination\""
+	Enabled         bool                            "json:\"enabled\" graphql:\"enabled\""
+	ID              string                          "json:\"id\" graphql:\"id\""
+	IsDefault       bool                            "json:\"isDefault\" graphql:\"isDefault\""
+	LastError       *string                         "json:\"lastError,omitempty\" graphql:\"lastError\""
+	LastUsedAt      *time.Time                      "json:\"lastUsedAt,omitempty\" graphql:\"lastUsedAt\""
+	Metadata        map[string]any                  "json:\"metadata,omitempty\" graphql:\"metadata\""
+	MuteUntil       *time.Time                      "json:\"muteUntil,omitempty\" graphql:\"muteUntil\""
+	OwnerID         *string                         "json:\"ownerID,omitempty\" graphql:\"ownerID\""
+	Priority        *enums.Priority                 "json:\"priority,omitempty\" graphql:\"priority\""
+	Provider        *string                         "json:\"provider,omitempty\" graphql:\"provider\""
+	QuietHoursEnd   *string                         "json:\"quietHoursEnd,omitempty\" graphql:\"quietHoursEnd\""
+	QuietHoursStart *string                         "json:\"quietHoursStart,omitempty\" graphql:\"quietHoursStart\""
+	Status          enums.NotificationChannelStatus "json:\"status\" graphql:\"status\""
+	TemplateID      *string                         "json:\"templateID,omitempty\" graphql:\"templateID\""
+	Timezone        *string                         "json:\"timezone,omitempty\" graphql:\"timezone\""
+	TopicOverrides  map[string]any                  "json:\"topicOverrides,omitempty\" graphql:\"topicOverrides\""
+	TopicPatterns   []string                        "json:\"topicPatterns,omitempty\" graphql:\"topicPatterns\""
+	UpdatedAt       *time.Time                      "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy       *string                         "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	UserID          string                          "json:\"userID\" graphql:\"userID\""
+	VerifiedAt      *time.Time                      "json:\"verifiedAt,omitempty\" graphql:\"verifiedAt\""
+}
+
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetCadence() *enums.NotificationCadence {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return &t.Cadence
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetChannel() *enums.Channel {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return &t.Channel
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetConfig() map[string]any {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.Config
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.CreatedAt
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetCreatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.CreatedBy
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetDestination() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.Destination
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetEnabled() bool {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.Enabled
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetID() string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.ID
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetIsDefault() bool {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.IsDefault
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetLastError() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.LastError
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetLastUsedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.LastUsedAt
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetMetadata() map[string]any {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.Metadata
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetMuteUntil() *time.Time {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.MuteUntil
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetOwnerID() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.OwnerID
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetPriority() *enums.Priority {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.Priority
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetProvider() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.Provider
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetQuietHoursEnd() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.QuietHoursEnd
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetQuietHoursStart() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.QuietHoursStart
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetStatus() *enums.NotificationChannelStatus {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return &t.Status
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetTemplateID() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.TemplateID
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetTimezone() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.Timezone
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetTopicOverrides() map[string]any {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.TopicOverrides
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetTopicPatterns() []string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.TopicPatterns
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.UpdatedAt
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetUpdatedBy() *string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.UpdatedBy
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetUserID() string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.UserID
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences) GetVerifiedAt() *time.Time {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences{}
+	}
+	return t.VerifiedAt
+}
+
+type UpdateBulkNotificationPreference_UpdateBulkNotificationPreference struct {
+	NotificationPreferences []*UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences "json:\"notificationPreferences,omitempty\" graphql:\"notificationPreferences\""
+	UpdatedIDs              []string                                                                                     "json:\"updatedIDs,omitempty\" graphql:\"updatedIDs\""
+}
+
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference) GetNotificationPreferences() []*UpdateBulkNotificationPreference_UpdateBulkNotificationPreference_NotificationPreferences {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference{}
+	}
+	return t.NotificationPreferences
+}
+func (t *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference) GetUpdatedIDs() []string {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference_UpdateBulkNotificationPreference{}
+	}
+	return t.UpdatedIDs
 }
 
 type UpdateNotificationPreference_UpdateNotificationPreference_NotificationPreference struct {
@@ -123931,514 +123931,6 @@ func (t *GetAllVulnerabilities_Vulnerabilities) GetTotalCount() int64 {
 	return t.TotalCount
 }
 
-type GetVulnerabilityByID_Vulnerability struct {
-	AssignedTo                    *string              "json:\"assignedTo,omitempty\" graphql:\"assignedTo\""
-	AssignedToGroupID             *string              "json:\"assignedToGroupID,omitempty\" graphql:\"assignedToGroupID\""
-	AssignedToIdentityHolderID    *string              "json:\"assignedToIdentityHolderID,omitempty\" graphql:\"assignedToIdentityHolderID\""
-	AssignedToUserID              *string              "json:\"assignedToUserID,omitempty\" graphql:\"assignedToUserID\""
-	AutoDismissedAt               *models.DateTime     "json:\"autoDismissedAt,omitempty\" graphql:\"autoDismissedAt\""
-	Blocking                      *bool                "json:\"blocking,omitempty\" graphql:\"blocking\""
-	Category                      *string              "json:\"category,omitempty\" graphql:\"category\""
-	CreatedAt                     *time.Time           "json:\"createdAt,omitempty\" graphql:\"createdAt\""
-	CreatedBy                     *string              "json:\"createdBy,omitempty\" graphql:\"createdBy\""
-	CveID                         *string              "json:\"cveID,omitempty\" graphql:\"cveID\""
-	CweIds                        []string             "json:\"cweIds,omitempty\" graphql:\"cweIds\""
-	DependencyScope               *string              "json:\"dependencyScope,omitempty\" graphql:\"dependencyScope\""
-	Description                   *string              "json:\"description,omitempty\" graphql:\"description\""
-	DiscoveredAt                  *models.DateTime     "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
-	DismissedAt                   *models.DateTime     "json:\"dismissedAt,omitempty\" graphql:\"dismissedAt\""
-	DismissedComment              *string              "json:\"dismissedComment,omitempty\" graphql:\"dismissedComment\""
-	DismissedReason               *string              "json:\"dismissedReason,omitempty\" graphql:\"dismissedReason\""
-	DisplayID                     string               "json:\"displayID\" graphql:\"displayID\""
-	DisplayName                   *string              "json:\"displayName,omitempty\" graphql:\"displayName\""
-	EnvironmentID                 *string              "json:\"environmentID,omitempty\" graphql:\"environmentID\""
-	EnvironmentName               *string              "json:\"environmentName,omitempty\" graphql:\"environmentName\""
-	Exploitability                *float64             "json:\"exploitability,omitempty\" graphql:\"exploitability\""
-	ExternalID                    string               "json:\"externalID\" graphql:\"externalID\""
-	ExternalOwnerID               *string              "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
-	ExternalURI                   *string              "json:\"externalURI,omitempty\" graphql:\"externalURI\""
-	FirstPatchedVersion           *string              "json:\"firstPatchedVersion,omitempty\" graphql:\"firstPatchedVersion\""
-	FixAvailable                  *bool                "json:\"fixAvailable,omitempty\" graphql:\"fixAvailable\""
-	FixedAt                       *models.DateTime     "json:\"fixedAt,omitempty\" graphql:\"fixedAt\""
-	ID                            string               "json:\"id\" graphql:\"id\""
-	Impact                        *float64             "json:\"impact,omitempty\" graphql:\"impact\""
-	Impacts                       []string             "json:\"impacts,omitempty\" graphql:\"impacts\""
-	IntegrationRunID              *string              "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
-	InternalOwner                 *string              "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
-	InternalOwnerGroupID          *string              "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
-	InternalOwnerIdentityHolderID *string              "json:\"internalOwnerIdentityHolderID,omitempty\" graphql:\"internalOwnerIdentityHolderID\""
-	InternalOwnerUserID           *string              "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
-	ManagedBy                     *string              "json:\"managedBy,omitempty\" graphql:\"managedBy\""
-	ManifestPath                  *string              "json:\"manifestPath,omitempty\" graphql:\"manifestPath\""
-	Metadata                      map[string]any       "json:\"metadata,omitempty\" graphql:\"metadata\""
-	Open                          *bool                "json:\"open,omitempty\" graphql:\"open\""
-	PackageEcosystem              *string              "json:\"packageEcosystem,omitempty\" graphql:\"packageEcosystem\""
-	PackageName                   *string              "json:\"packageName,omitempty\" graphql:\"packageName\""
-	Priority                      *string              "json:\"priority,omitempty\" graphql:\"priority\""
-	Production                    *bool                "json:\"production,omitempty\" graphql:\"production\""
-	Public                        *bool                "json:\"public,omitempty\" graphql:\"public\""
-	PublishedAt                   *models.DateTime     "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
-	RawPayload                    map[string]any       "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
-	References                    []string             "json:\"references,omitempty\" graphql:\"references\""
-	RemediationSLA                *int64               "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
-	ReviewedBy                    *string              "json:\"reviewedBy,omitempty\" graphql:\"reviewedBy\""
-	ReviewedByGroupID             *string              "json:\"reviewedByGroupID,omitempty\" graphql:\"reviewedByGroupID\""
-	ReviewedByIdentityHolderID    *string              "json:\"reviewedByIdentityHolderID,omitempty\" graphql:\"reviewedByIdentityHolderID\""
-	ReviewedByUserID              *string              "json:\"reviewedByUserID,omitempty\" graphql:\"reviewedByUserID\""
-	ScopeID                       *string              "json:\"scopeID,omitempty\" graphql:\"scopeID\""
-	ScopeName                     *string              "json:\"scopeName,omitempty\" graphql:\"scopeName\""
-	Score                         *float64             "json:\"score,omitempty\" graphql:\"score\""
-	SecurityLevel                 *enums.SecurityLevel "json:\"securityLevel,omitempty\" graphql:\"securityLevel\""
-	Severity                      *string              "json:\"severity,omitempty\" graphql:\"severity\""
-	Source                        *string              "json:\"source,omitempty\" graphql:\"source\""
-	SourceDefinitionID            *string              "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
-	SourceInstanceID              *string              "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
-	SourceKey                     *string              "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
-	SourceUpdatedAt               *models.DateTime     "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
-	Summary                       *string              "json:\"summary,omitempty\" graphql:\"summary\""
-	Tags                          []string             "json:\"tags,omitempty\" graphql:\"tags\""
-	UpdatedAt                     *time.Time           "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
-	UpdatedBy                     *string              "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
-	Validated                     *bool                "json:\"validated,omitempty\" graphql:\"validated\""
-	Vector                        *string              "json:\"vector,omitempty\" graphql:\"vector\""
-	VulnerabilityStatusID         *string              "json:\"vulnerabilityStatusID,omitempty\" graphql:\"vulnerabilityStatusID\""
-	VulnerabilityStatusName       *string              "json:\"vulnerabilityStatusName,omitempty\" graphql:\"vulnerabilityStatusName\""
-	VulnerableVersionRange        *string              "json:\"vulnerableVersionRange,omitempty\" graphql:\"vulnerableVersionRange\""
-}
-
-func (t *GetVulnerabilityByID_Vulnerability) GetAssignedTo() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.AssignedTo
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetAssignedToGroupID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.AssignedToGroupID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetAssignedToIdentityHolderID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.AssignedToIdentityHolderID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetAssignedToUserID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.AssignedToUserID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetAutoDismissedAt() *models.DateTime {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.AutoDismissedAt
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetBlocking() *bool {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Blocking
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetCategory() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Category
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetCreatedAt() *time.Time {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.CreatedAt
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetCreatedBy() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.CreatedBy
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetCveID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.CveID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetCweIds() []string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.CweIds
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetDependencyScope() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.DependencyScope
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetDescription() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Description
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetDiscoveredAt() *models.DateTime {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.DiscoveredAt
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetDismissedAt() *models.DateTime {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.DismissedAt
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetDismissedComment() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.DismissedComment
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetDismissedReason() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.DismissedReason
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetDisplayID() string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.DisplayID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetDisplayName() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.DisplayName
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetEnvironmentID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.EnvironmentID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetEnvironmentName() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.EnvironmentName
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetExploitability() *float64 {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Exploitability
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetExternalID() string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ExternalID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetExternalOwnerID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ExternalOwnerID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetExternalURI() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ExternalURI
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetFirstPatchedVersion() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.FirstPatchedVersion
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetFixAvailable() *bool {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.FixAvailable
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetFixedAt() *models.DateTime {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.FixedAt
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetID() string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetImpact() *float64 {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Impact
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetImpacts() []string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Impacts
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetIntegrationRunID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.IntegrationRunID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetInternalOwner() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.InternalOwner
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetInternalOwnerGroupID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.InternalOwnerGroupID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetInternalOwnerIdentityHolderID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.InternalOwnerIdentityHolderID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetInternalOwnerUserID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.InternalOwnerUserID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetManagedBy() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ManagedBy
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetManifestPath() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ManifestPath
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetMetadata() map[string]any {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Metadata
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetOpen() *bool {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Open
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetPackageEcosystem() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.PackageEcosystem
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetPackageName() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.PackageName
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetPriority() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Priority
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetProduction() *bool {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Production
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetPublic() *bool {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Public
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetPublishedAt() *models.DateTime {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.PublishedAt
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetRawPayload() map[string]any {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.RawPayload
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetReferences() []string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.References
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetRemediationSLA() *int64 {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.RemediationSLA
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetReviewedBy() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ReviewedBy
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetReviewedByGroupID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ReviewedByGroupID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetReviewedByIdentityHolderID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ReviewedByIdentityHolderID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetReviewedByUserID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ReviewedByUserID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetScopeID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ScopeID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetScopeName() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.ScopeName
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetScore() *float64 {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Score
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetSecurityLevel() *enums.SecurityLevel {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.SecurityLevel
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetSeverity() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Severity
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetSource() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Source
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetSourceDefinitionID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.SourceDefinitionID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetSourceInstanceID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.SourceInstanceID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetSourceKey() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.SourceKey
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetSourceUpdatedAt() *models.DateTime {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.SourceUpdatedAt
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetSummary() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Summary
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetTags() []string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Tags
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetUpdatedAt() *time.Time {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.UpdatedAt
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetUpdatedBy() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.UpdatedBy
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetValidated() *bool {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Validated
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetVector() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.Vector
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetVulnerabilityStatusID() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.VulnerabilityStatusID
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetVulnerabilityStatusName() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.VulnerabilityStatusName
-}
-func (t *GetVulnerabilityByID_Vulnerability) GetVulnerableVersionRange() *string {
-	if t == nil {
-		t = &GetVulnerabilityByID_Vulnerability{}
-	}
-	return t.VulnerableVersionRange
-}
-
 type GetVulnerabilities_Vulnerabilities_PageInfo struct {
 	EndCursor       *string "json:\"endCursor,omitempty\" graphql:\"endCursor\""
 	HasNextPage     bool    "json:\"hasNextPage\" graphql:\"hasNextPage\""
@@ -125013,6 +124505,514 @@ func (t *GetVulnerabilities_Vulnerabilities) GetTotalCount() int64 {
 		t = &GetVulnerabilities_Vulnerabilities{}
 	}
 	return t.TotalCount
+}
+
+type GetVulnerabilityByID_Vulnerability struct {
+	AssignedTo                    *string              "json:\"assignedTo,omitempty\" graphql:\"assignedTo\""
+	AssignedToGroupID             *string              "json:\"assignedToGroupID,omitempty\" graphql:\"assignedToGroupID\""
+	AssignedToIdentityHolderID    *string              "json:\"assignedToIdentityHolderID,omitempty\" graphql:\"assignedToIdentityHolderID\""
+	AssignedToUserID              *string              "json:\"assignedToUserID,omitempty\" graphql:\"assignedToUserID\""
+	AutoDismissedAt               *models.DateTime     "json:\"autoDismissedAt,omitempty\" graphql:\"autoDismissedAt\""
+	Blocking                      *bool                "json:\"blocking,omitempty\" graphql:\"blocking\""
+	Category                      *string              "json:\"category,omitempty\" graphql:\"category\""
+	CreatedAt                     *time.Time           "json:\"createdAt,omitempty\" graphql:\"createdAt\""
+	CreatedBy                     *string              "json:\"createdBy,omitempty\" graphql:\"createdBy\""
+	CveID                         *string              "json:\"cveID,omitempty\" graphql:\"cveID\""
+	CweIds                        []string             "json:\"cweIds,omitempty\" graphql:\"cweIds\""
+	DependencyScope               *string              "json:\"dependencyScope,omitempty\" graphql:\"dependencyScope\""
+	Description                   *string              "json:\"description,omitempty\" graphql:\"description\""
+	DiscoveredAt                  *models.DateTime     "json:\"discoveredAt,omitempty\" graphql:\"discoveredAt\""
+	DismissedAt                   *models.DateTime     "json:\"dismissedAt,omitempty\" graphql:\"dismissedAt\""
+	DismissedComment              *string              "json:\"dismissedComment,omitempty\" graphql:\"dismissedComment\""
+	DismissedReason               *string              "json:\"dismissedReason,omitempty\" graphql:\"dismissedReason\""
+	DisplayID                     string               "json:\"displayID\" graphql:\"displayID\""
+	DisplayName                   *string              "json:\"displayName,omitempty\" graphql:\"displayName\""
+	EnvironmentID                 *string              "json:\"environmentID,omitempty\" graphql:\"environmentID\""
+	EnvironmentName               *string              "json:\"environmentName,omitempty\" graphql:\"environmentName\""
+	Exploitability                *float64             "json:\"exploitability,omitempty\" graphql:\"exploitability\""
+	ExternalID                    string               "json:\"externalID\" graphql:\"externalID\""
+	ExternalOwnerID               *string              "json:\"externalOwnerID,omitempty\" graphql:\"externalOwnerID\""
+	ExternalURI                   *string              "json:\"externalURI,omitempty\" graphql:\"externalURI\""
+	FirstPatchedVersion           *string              "json:\"firstPatchedVersion,omitempty\" graphql:\"firstPatchedVersion\""
+	FixAvailable                  *bool                "json:\"fixAvailable,omitempty\" graphql:\"fixAvailable\""
+	FixedAt                       *models.DateTime     "json:\"fixedAt,omitempty\" graphql:\"fixedAt\""
+	ID                            string               "json:\"id\" graphql:\"id\""
+	Impact                        *float64             "json:\"impact,omitempty\" graphql:\"impact\""
+	Impacts                       []string             "json:\"impacts,omitempty\" graphql:\"impacts\""
+	IntegrationRunID              *string              "json:\"integrationRunID,omitempty\" graphql:\"integrationRunID\""
+	InternalOwner                 *string              "json:\"internalOwner,omitempty\" graphql:\"internalOwner\""
+	InternalOwnerGroupID          *string              "json:\"internalOwnerGroupID,omitempty\" graphql:\"internalOwnerGroupID\""
+	InternalOwnerIdentityHolderID *string              "json:\"internalOwnerIdentityHolderID,omitempty\" graphql:\"internalOwnerIdentityHolderID\""
+	InternalOwnerUserID           *string              "json:\"internalOwnerUserID,omitempty\" graphql:\"internalOwnerUserID\""
+	ManagedBy                     *string              "json:\"managedBy,omitempty\" graphql:\"managedBy\""
+	ManifestPath                  *string              "json:\"manifestPath,omitempty\" graphql:\"manifestPath\""
+	Metadata                      map[string]any       "json:\"metadata,omitempty\" graphql:\"metadata\""
+	Open                          *bool                "json:\"open,omitempty\" graphql:\"open\""
+	PackageEcosystem              *string              "json:\"packageEcosystem,omitempty\" graphql:\"packageEcosystem\""
+	PackageName                   *string              "json:\"packageName,omitempty\" graphql:\"packageName\""
+	Priority                      *string              "json:\"priority,omitempty\" graphql:\"priority\""
+	Production                    *bool                "json:\"production,omitempty\" graphql:\"production\""
+	Public                        *bool                "json:\"public,omitempty\" graphql:\"public\""
+	PublishedAt                   *models.DateTime     "json:\"publishedAt,omitempty\" graphql:\"publishedAt\""
+	RawPayload                    map[string]any       "json:\"rawPayload,omitempty\" graphql:\"rawPayload\""
+	References                    []string             "json:\"references,omitempty\" graphql:\"references\""
+	RemediationSLA                *int64               "json:\"remediationSLA,omitempty\" graphql:\"remediationSLA\""
+	ReviewedBy                    *string              "json:\"reviewedBy,omitempty\" graphql:\"reviewedBy\""
+	ReviewedByGroupID             *string              "json:\"reviewedByGroupID,omitempty\" graphql:\"reviewedByGroupID\""
+	ReviewedByIdentityHolderID    *string              "json:\"reviewedByIdentityHolderID,omitempty\" graphql:\"reviewedByIdentityHolderID\""
+	ReviewedByUserID              *string              "json:\"reviewedByUserID,omitempty\" graphql:\"reviewedByUserID\""
+	ScopeID                       *string              "json:\"scopeID,omitempty\" graphql:\"scopeID\""
+	ScopeName                     *string              "json:\"scopeName,omitempty\" graphql:\"scopeName\""
+	Score                         *float64             "json:\"score,omitempty\" graphql:\"score\""
+	SecurityLevel                 *enums.SecurityLevel "json:\"securityLevel,omitempty\" graphql:\"securityLevel\""
+	Severity                      *string              "json:\"severity,omitempty\" graphql:\"severity\""
+	Source                        *string              "json:\"source,omitempty\" graphql:\"source\""
+	SourceDefinitionID            *string              "json:\"sourceDefinitionID,omitempty\" graphql:\"sourceDefinitionID\""
+	SourceInstanceID              *string              "json:\"sourceInstanceID,omitempty\" graphql:\"sourceInstanceID\""
+	SourceKey                     *string              "json:\"sourceKey,omitempty\" graphql:\"sourceKey\""
+	SourceUpdatedAt               *models.DateTime     "json:\"sourceUpdatedAt,omitempty\" graphql:\"sourceUpdatedAt\""
+	Summary                       *string              "json:\"summary,omitempty\" graphql:\"summary\""
+	Tags                          []string             "json:\"tags,omitempty\" graphql:\"tags\""
+	UpdatedAt                     *time.Time           "json:\"updatedAt,omitempty\" graphql:\"updatedAt\""
+	UpdatedBy                     *string              "json:\"updatedBy,omitempty\" graphql:\"updatedBy\""
+	Validated                     *bool                "json:\"validated,omitempty\" graphql:\"validated\""
+	Vector                        *string              "json:\"vector,omitempty\" graphql:\"vector\""
+	VulnerabilityStatusID         *string              "json:\"vulnerabilityStatusID,omitempty\" graphql:\"vulnerabilityStatusID\""
+	VulnerabilityStatusName       *string              "json:\"vulnerabilityStatusName,omitempty\" graphql:\"vulnerabilityStatusName\""
+	VulnerableVersionRange        *string              "json:\"vulnerableVersionRange,omitempty\" graphql:\"vulnerableVersionRange\""
+}
+
+func (t *GetVulnerabilityByID_Vulnerability) GetAssignedTo() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.AssignedTo
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetAssignedToGroupID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.AssignedToGroupID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetAssignedToIdentityHolderID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.AssignedToIdentityHolderID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetAssignedToUserID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.AssignedToUserID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetAutoDismissedAt() *models.DateTime {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.AutoDismissedAt
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetBlocking() *bool {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Blocking
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetCategory() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Category
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetCreatedAt() *time.Time {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.CreatedAt
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetCreatedBy() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.CreatedBy
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetCveID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.CveID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetCweIds() []string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.CweIds
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetDependencyScope() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.DependencyScope
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetDescription() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Description
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetDiscoveredAt() *models.DateTime {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.DiscoveredAt
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetDismissedAt() *models.DateTime {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.DismissedAt
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetDismissedComment() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.DismissedComment
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetDismissedReason() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.DismissedReason
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetDisplayID() string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.DisplayID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetDisplayName() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.DisplayName
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetEnvironmentID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.EnvironmentID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetEnvironmentName() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.EnvironmentName
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetExploitability() *float64 {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Exploitability
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetExternalID() string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ExternalID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetExternalOwnerID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ExternalOwnerID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetExternalURI() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ExternalURI
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetFirstPatchedVersion() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.FirstPatchedVersion
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetFixAvailable() *bool {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.FixAvailable
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetFixedAt() *models.DateTime {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.FixedAt
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetID() string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetImpact() *float64 {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Impact
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetImpacts() []string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Impacts
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetIntegrationRunID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.IntegrationRunID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetInternalOwner() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.InternalOwner
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetInternalOwnerGroupID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.InternalOwnerGroupID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetInternalOwnerIdentityHolderID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.InternalOwnerIdentityHolderID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetInternalOwnerUserID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.InternalOwnerUserID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetManagedBy() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ManagedBy
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetManifestPath() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ManifestPath
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetMetadata() map[string]any {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Metadata
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetOpen() *bool {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Open
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetPackageEcosystem() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.PackageEcosystem
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetPackageName() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.PackageName
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetPriority() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Priority
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetProduction() *bool {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Production
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetPublic() *bool {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Public
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetPublishedAt() *models.DateTime {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.PublishedAt
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetRawPayload() map[string]any {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.RawPayload
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetReferences() []string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.References
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetRemediationSLA() *int64 {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.RemediationSLA
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetReviewedBy() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ReviewedBy
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetReviewedByGroupID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ReviewedByGroupID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetReviewedByIdentityHolderID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ReviewedByIdentityHolderID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetReviewedByUserID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ReviewedByUserID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetScopeID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ScopeID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetScopeName() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.ScopeName
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetScore() *float64 {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Score
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetSecurityLevel() *enums.SecurityLevel {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.SecurityLevel
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetSeverity() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Severity
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetSource() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Source
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetSourceDefinitionID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.SourceDefinitionID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetSourceInstanceID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.SourceInstanceID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetSourceKey() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.SourceKey
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetSourceUpdatedAt() *models.DateTime {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.SourceUpdatedAt
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetSummary() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Summary
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetTags() []string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Tags
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetUpdatedAt() *time.Time {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.UpdatedAt
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetUpdatedBy() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.UpdatedBy
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetValidated() *bool {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Validated
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetVector() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.Vector
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetVulnerabilityStatusID() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.VulnerabilityStatusID
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetVulnerabilityStatusName() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.VulnerabilityStatusName
+}
+func (t *GetVulnerabilityByID_Vulnerability) GetVulnerableVersionRange() *string {
+	if t == nil {
+		t = &GetVulnerabilityByID_Vulnerability{}
+	}
+	return t.VulnerableVersionRange
 }
 
 type UpdateVulnerability_UpdateVulnerability_Vulnerability struct {
@@ -131196,17 +131196,6 @@ func (t *SendCampaignTestEmail) GetSendCampaignTestEmail() *SendCampaignTestEmai
 	return &t.SendCampaignTestEmail
 }
 
-type CreateBulkCSVCampaignTarget struct {
-	CreateBulkCSVCampaignTarget CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget "json:\"createBulkCSVCampaignTarget\" graphql:\"createBulkCSVCampaignTarget\""
-}
-
-func (t *CreateBulkCSVCampaignTarget) GetCreateBulkCSVCampaignTarget() *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget {
-	if t == nil {
-		t = &CreateBulkCSVCampaignTarget{}
-	}
-	return &t.CreateBulkCSVCampaignTarget
-}
-
 type CreateBulkCampaignTarget struct {
 	CreateBulkCampaignTarget CreateBulkCampaignTarget_CreateBulkCampaignTarget "json:\"createBulkCampaignTarget\" graphql:\"createBulkCampaignTarget\""
 }
@@ -131216,6 +131205,17 @@ func (t *CreateBulkCampaignTarget) GetCreateBulkCampaignTarget() *CreateBulkCamp
 		t = &CreateBulkCampaignTarget{}
 	}
 	return &t.CreateBulkCampaignTarget
+}
+
+type CreateBulkCSVCampaignTarget struct {
+	CreateBulkCSVCampaignTarget CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget "json:\"createBulkCSVCampaignTarget\" graphql:\"createBulkCSVCampaignTarget\""
+}
+
+func (t *CreateBulkCSVCampaignTarget) GetCreateBulkCSVCampaignTarget() *CreateBulkCSVCampaignTarget_CreateBulkCSVCampaignTarget {
+	if t == nil {
+		t = &CreateBulkCSVCampaignTarget{}
+	}
+	return &t.CreateBulkCSVCampaignTarget
 }
 
 type CreateCampaignTarget struct {
@@ -134276,39 +134276,6 @@ func (t *CreateNotificationPreference) GetCreateNotificationPreference() *Create
 	return &t.CreateNotificationPreference
 }
 
-type DeleteNotificationPreference struct {
-	DeleteNotificationPreference DeleteNotificationPreference_DeleteNotificationPreference "json:\"deleteNotificationPreference\" graphql:\"deleteNotificationPreference\""
-}
-
-func (t *DeleteNotificationPreference) GetDeleteNotificationPreference() *DeleteNotificationPreference_DeleteNotificationPreference {
-	if t == nil {
-		t = &DeleteNotificationPreference{}
-	}
-	return &t.DeleteNotificationPreference
-}
-
-type UpdateBulkNotificationPreference struct {
-	UpdateBulkNotificationPreference UpdateBulkNotificationPreference_UpdateBulkNotificationPreference "json:\"updateBulkNotificationPreference\" graphql:\"updateBulkNotificationPreference\""
-}
-
-func (t *UpdateBulkNotificationPreference) GetUpdateBulkNotificationPreference() *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference {
-	if t == nil {
-		t = &UpdateBulkNotificationPreference{}
-	}
-	return &t.UpdateBulkNotificationPreference
-}
-
-type UpdateBulkCSVNotificationPreference struct {
-	UpdateBulkCSVNotificationPreference UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference "json:\"updateBulkCSVNotificationPreference\" graphql:\"updateBulkCSVNotificationPreference\""
-}
-
-func (t *UpdateBulkCSVNotificationPreference) GetUpdateBulkCSVNotificationPreference() *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference {
-	if t == nil {
-		t = &UpdateBulkCSVNotificationPreference{}
-	}
-	return &t.UpdateBulkCSVNotificationPreference
-}
-
 type DeleteBulkNotificationPreference struct {
 	DeleteBulkNotificationPreference DeleteBulkNotificationPreference_DeleteBulkNotificationPreference "json:\"deleteBulkNotificationPreference\" graphql:\"deleteBulkNotificationPreference\""
 }
@@ -134318,6 +134285,17 @@ func (t *DeleteBulkNotificationPreference) GetDeleteBulkNotificationPreference()
 		t = &DeleteBulkNotificationPreference{}
 	}
 	return &t.DeleteBulkNotificationPreference
+}
+
+type DeleteNotificationPreference struct {
+	DeleteNotificationPreference DeleteNotificationPreference_DeleteNotificationPreference "json:\"deleteNotificationPreference\" graphql:\"deleteNotificationPreference\""
+}
+
+func (t *DeleteNotificationPreference) GetDeleteNotificationPreference() *DeleteNotificationPreference_DeleteNotificationPreference {
+	if t == nil {
+		t = &DeleteNotificationPreference{}
+	}
+	return &t.DeleteNotificationPreference
 }
 
 type GetAllNotificationPreferences struct {
@@ -134351,6 +134329,28 @@ func (t *GetNotificationPreferences) GetNotificationPreferences() *GetNotificati
 		t = &GetNotificationPreferences{}
 	}
 	return &t.NotificationPreferences
+}
+
+type UpdateBulkCSVNotificationPreference struct {
+	UpdateBulkCSVNotificationPreference UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference "json:\"updateBulkCSVNotificationPreference\" graphql:\"updateBulkCSVNotificationPreference\""
+}
+
+func (t *UpdateBulkCSVNotificationPreference) GetUpdateBulkCSVNotificationPreference() *UpdateBulkCSVNotificationPreference_UpdateBulkCSVNotificationPreference {
+	if t == nil {
+		t = &UpdateBulkCSVNotificationPreference{}
+	}
+	return &t.UpdateBulkCSVNotificationPreference
+}
+
+type UpdateBulkNotificationPreference struct {
+	UpdateBulkNotificationPreference UpdateBulkNotificationPreference_UpdateBulkNotificationPreference "json:\"updateBulkNotificationPreference\" graphql:\"updateBulkNotificationPreference\""
+}
+
+func (t *UpdateBulkNotificationPreference) GetUpdateBulkNotificationPreference() *UpdateBulkNotificationPreference_UpdateBulkNotificationPreference {
+	if t == nil {
+		t = &UpdateBulkNotificationPreference{}
+	}
+	return &t.UpdateBulkNotificationPreference
 }
 
 type UpdateNotificationPreference struct {
@@ -137961,17 +137961,6 @@ func (t *GetAllVulnerabilities) GetVulnerabilities() *GetAllVulnerabilities_Vuln
 	return &t.Vulnerabilities
 }
 
-type GetVulnerabilityByID struct {
-	Vulnerability GetVulnerabilityByID_Vulnerability "json:\"vulnerability\" graphql:\"vulnerability\""
-}
-
-func (t *GetVulnerabilityByID) GetVulnerability() *GetVulnerabilityByID_Vulnerability {
-	if t == nil {
-		t = &GetVulnerabilityByID{}
-	}
-	return &t.Vulnerability
-}
-
 type GetVulnerabilities struct {
 	Vulnerabilities GetVulnerabilities_Vulnerabilities "json:\"vulnerabilities\" graphql:\"vulnerabilities\""
 }
@@ -137981,6 +137970,17 @@ func (t *GetVulnerabilities) GetVulnerabilities() *GetVulnerabilities_Vulnerabil
 		t = &GetVulnerabilities{}
 	}
 	return &t.Vulnerabilities
+}
+
+type GetVulnerabilityByID struct {
+	Vulnerability GetVulnerabilityByID_Vulnerability "json:\"vulnerability\" graphql:\"vulnerability\""
+}
+
+func (t *GetVulnerabilityByID) GetVulnerability() *GetVulnerabilityByID_Vulnerability {
+	if t == nil {
+		t = &GetVulnerabilityByID{}
+	}
+	return &t.Vulnerability
 }
 
 type UpdateVulnerability struct {
@@ -141279,48 +141279,6 @@ func (c *Client) SendCampaignTestEmail(ctx context.Context, input SendCampaignTe
 	return &res, nil
 }
 
-const CreateBulkCSVCampaignTargetDocument = `mutation CreateBulkCSVCampaignTarget ($input: Upload!) {
-	createBulkCSVCampaignTarget(input: $input) {
-		campaignTargets {
-			campaignID
-			completedAt
-			contactID
-			createdAt
-			createdBy
-			email
-			fullName
-			groupID
-			id
-			metadata
-			ownerID
-			sentAt
-			status
-			subscriberID
-			updatedAt
-			updatedBy
-			userID
-		}
-	}
-}
-`
-
-func (c *Client) CreateBulkCSVCampaignTarget(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVCampaignTarget, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res CreateBulkCSVCampaignTarget
-	if err := c.Client.Post(ctx, "CreateBulkCSVCampaignTarget", CreateBulkCSVCampaignTargetDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const CreateBulkCampaignTargetDocument = `mutation CreateBulkCampaignTarget ($input: [CreateCampaignTargetInput!]) {
 	createBulkCampaignTarget(input: $input) {
 		campaignTargets {
@@ -141353,6 +141311,48 @@ func (c *Client) CreateBulkCampaignTarget(ctx context.Context, input []*CreateCa
 
 	var res CreateBulkCampaignTarget
 	if err := c.Client.Post(ctx, "CreateBulkCampaignTarget", CreateBulkCampaignTargetDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const CreateBulkCSVCampaignTargetDocument = `mutation CreateBulkCSVCampaignTarget ($input: Upload!) {
+	createBulkCSVCampaignTarget(input: $input) {
+		campaignTargets {
+			campaignID
+			completedAt
+			contactID
+			createdAt
+			createdBy
+			email
+			fullName
+			groupID
+			id
+			metadata
+			ownerID
+			sentAt
+			status
+			subscriberID
+			updatedAt
+			updatedBy
+			userID
+		}
+	}
+}
+`
+
+func (c *Client) CreateBulkCSVCampaignTarget(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*CreateBulkCSVCampaignTarget, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res CreateBulkCSVCampaignTarget
+	if err := c.Client.Post(ctx, "CreateBulkCSVCampaignTarget", CreateBulkCSVCampaignTargetDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -155223,137 +155223,6 @@ func (c *Client) CreateNotificationPreference(ctx context.Context, input CreateN
 	return &res, nil
 }
 
-const DeleteNotificationPreferenceDocument = `mutation DeleteNotificationPreference ($deleteNotificationPreferenceId: ID!) {
-	deleteNotificationPreference(id: $deleteNotificationPreferenceId) {
-		deletedID
-	}
-}
-`
-
-func (c *Client) DeleteNotificationPreference(ctx context.Context, deleteNotificationPreferenceID string, interceptors ...clientv2.RequestInterceptor) (*DeleteNotificationPreference, error) {
-	vars := map[string]any{
-		"deleteNotificationPreferenceId": deleteNotificationPreferenceID,
-	}
-
-	var res DeleteNotificationPreference
-	if err := c.Client.Post(ctx, "DeleteNotificationPreference", DeleteNotificationPreferenceDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateBulkNotificationPreferenceDocument = `mutation UpdateBulkNotificationPreference ($ids: [ID!]!, $input: UpdateNotificationPreferenceInput!) {
-	updateBulkNotificationPreference(ids: $ids, input: $input) {
-		notificationPreferences {
-			cadence
-			channel
-			config
-			createdAt
-			createdBy
-			destination
-			enabled
-			id
-			isDefault
-			lastError
-			lastUsedAt
-			metadata
-			muteUntil
-			ownerID
-			priority
-			provider
-			quietHoursEnd
-			quietHoursStart
-			status
-			templateID
-			timezone
-			topicOverrides
-			topicPatterns
-			updatedAt
-			updatedBy
-			userID
-			verifiedAt
-		}
-		updatedIDs
-	}
-}
-`
-
-func (c *Client) UpdateBulkNotificationPreference(ctx context.Context, ids []string, input UpdateNotificationPreferenceInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkNotificationPreference, error) {
-	vars := map[string]any{
-		"ids":   ids,
-		"input": input,
-	}
-
-	var res UpdateBulkNotificationPreference
-	if err := c.Client.Post(ctx, "UpdateBulkNotificationPreference", UpdateBulkNotificationPreferenceDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
-const UpdateBulkCSVNotificationPreferenceDocument = `mutation UpdateBulkCSVNotificationPreference ($input: Upload!) {
-	updateBulkCSVNotificationPreference(input: $input) {
-		notificationPreferences {
-			cadence
-			channel
-			config
-			createdAt
-			createdBy
-			destination
-			enabled
-			id
-			isDefault
-			lastError
-			lastUsedAt
-			metadata
-			muteUntil
-			ownerID
-			priority
-			provider
-			quietHoursEnd
-			quietHoursStart
-			status
-			templateID
-			timezone
-			topicOverrides
-			topicPatterns
-			updatedAt
-			updatedBy
-			userID
-			verifiedAt
-		}
-		updatedIDs
-	}
-}
-`
-
-func (c *Client) UpdateBulkCSVNotificationPreference(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVNotificationPreference, error) {
-	vars := map[string]any{
-		"input": input,
-	}
-
-	var res UpdateBulkCSVNotificationPreference
-	if err := c.Client.Post(ctx, "UpdateBulkCSVNotificationPreference", UpdateBulkCSVNotificationPreferenceDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const DeleteBulkNotificationPreferenceDocument = `mutation DeleteBulkNotificationPreference ($ids: [ID!]!) {
 	deleteBulkNotificationPreference(ids: $ids) {
 		deletedIDs
@@ -155368,6 +155237,30 @@ func (c *Client) DeleteBulkNotificationPreference(ctx context.Context, ids []str
 
 	var res DeleteBulkNotificationPreference
 	if err := c.Client.Post(ctx, "DeleteBulkNotificationPreference", DeleteBulkNotificationPreferenceDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const DeleteNotificationPreferenceDocument = `mutation DeleteNotificationPreference ($deleteNotificationPreferenceId: ID!) {
+	deleteNotificationPreference(id: $deleteNotificationPreferenceId) {
+		deletedID
+	}
+}
+`
+
+func (c *Client) DeleteNotificationPreference(ctx context.Context, deleteNotificationPreferenceID string, interceptors ...clientv2.RequestInterceptor) (*DeleteNotificationPreference, error) {
+	vars := map[string]any{
+		"deleteNotificationPreferenceId": deleteNotificationPreferenceID,
+	}
+
+	var res DeleteNotificationPreference
+	if err := c.Client.Post(ctx, "DeleteNotificationPreference", DeleteNotificationPreferenceDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -155549,6 +155442,113 @@ func (c *Client) GetNotificationPreferences(ctx context.Context, first *int64, l
 
 	var res GetNotificationPreferences
 	if err := c.Client.Post(ctx, "GetNotificationPreferences", GetNotificationPreferencesDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateBulkCSVNotificationPreferenceDocument = `mutation UpdateBulkCSVNotificationPreference ($input: Upload!) {
+	updateBulkCSVNotificationPreference(input: $input) {
+		notificationPreferences {
+			cadence
+			channel
+			config
+			createdAt
+			createdBy
+			destination
+			enabled
+			id
+			isDefault
+			lastError
+			lastUsedAt
+			metadata
+			muteUntil
+			ownerID
+			priority
+			provider
+			quietHoursEnd
+			quietHoursStart
+			status
+			templateID
+			timezone
+			topicOverrides
+			topicPatterns
+			updatedAt
+			updatedBy
+			userID
+			verifiedAt
+		}
+		updatedIDs
+	}
+}
+`
+
+func (c *Client) UpdateBulkCSVNotificationPreference(ctx context.Context, input graphql.Upload, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkCSVNotificationPreference, error) {
+	vars := map[string]any{
+		"input": input,
+	}
+
+	var res UpdateBulkCSVNotificationPreference
+	if err := c.Client.Post(ctx, "UpdateBulkCSVNotificationPreference", UpdateBulkCSVNotificationPreferenceDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const UpdateBulkNotificationPreferenceDocument = `mutation UpdateBulkNotificationPreference ($ids: [ID!]!, $input: UpdateNotificationPreferenceInput!) {
+	updateBulkNotificationPreference(ids: $ids, input: $input) {
+		notificationPreferences {
+			cadence
+			channel
+			config
+			createdAt
+			createdBy
+			destination
+			enabled
+			id
+			isDefault
+			lastError
+			lastUsedAt
+			metadata
+			muteUntil
+			ownerID
+			priority
+			provider
+			quietHoursEnd
+			quietHoursStart
+			status
+			templateID
+			timezone
+			topicOverrides
+			topicPatterns
+			updatedAt
+			updatedBy
+			userID
+			verifiedAt
+		}
+		updatedIDs
+	}
+}
+`
+
+func (c *Client) UpdateBulkNotificationPreference(ctx context.Context, ids []string, input UpdateNotificationPreferenceInput, interceptors ...clientv2.RequestInterceptor) (*UpdateBulkNotificationPreference, error) {
+	vars := map[string]any{
+		"ids":   ids,
+		"input": input,
+	}
+
+	var res UpdateBulkNotificationPreference
+	if err := c.Client.Post(ctx, "UpdateBulkNotificationPreference", UpdateBulkNotificationPreferenceDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -172214,101 +172214,6 @@ func (c *Client) GetAllVulnerabilities(ctx context.Context, first *int64, last *
 	return &res, nil
 }
 
-const GetVulnerabilityByIDDocument = `query GetVulnerabilityByID ($vulnerabilityId: ID!) {
-	vulnerability(id: $vulnerabilityId) {
-		assignedTo
-		assignedToGroupID
-		assignedToIdentityHolderID
-		assignedToUserID
-		autoDismissedAt
-		blocking
-		category
-		createdAt
-		createdBy
-		cveID
-		cweIds
-		dependencyScope
-		description
-		discoveredAt
-		dismissedAt
-		dismissedComment
-		dismissedReason
-		displayID
-		displayName
-		environmentID
-		environmentName
-		exploitability
-		externalID
-		externalOwnerID
-		externalURI
-		firstPatchedVersion
-		fixAvailable
-		fixedAt
-		id
-		impact
-		impacts
-		manifestPath
-		managedBy
-		internalOwnerUserID
-		integrationRunID
-		internalOwnerIdentityHolderID
-		internalOwnerGroupID
-		internalOwner
-		metadata
-		open
-		packageEcosystem
-		packageName
-		priority
-		production
-		public
-		publishedAt
-		rawPayload
-		references
-		remediationSLA
-		scopeName
-		scopeID
-		reviewedByUserID
-		reviewedByIdentityHolderID
-		reviewedByGroupID
-		reviewedBy
-		score
-		securityLevel
-		severity
-		source
-		sourceDefinitionID
-		sourceInstanceID
-		sourceKey
-		sourceUpdatedAt
-		vulnerabilityStatusName
-		vulnerableVersionRange
-		summary
-		tags
-		updatedAt
-		updatedBy
-		validated
-		vector
-		vulnerabilityStatusID
-	}
-}
-`
-
-func (c *Client) GetVulnerabilityByID(ctx context.Context, vulnerabilityID string, interceptors ...clientv2.RequestInterceptor) (*GetVulnerabilityByID, error) {
-	vars := map[string]any{
-		"vulnerabilityId": vulnerabilityID,
-	}
-
-	var res GetVulnerabilityByID
-	if err := c.Client.Post(ctx, "GetVulnerabilityByID", GetVulnerabilityByIDDocument, &res, vars, interceptors...); err != nil {
-		if c.Client.ParseDataWhenErrors {
-			return &res, err
-		}
-
-		return nil, err
-	}
-
-	return &res, nil
-}
-
 const GetVulnerabilitiesDocument = `query GetVulnerabilities ($first: Int, $last: Int, $after: Cursor, $before: Cursor, $where: VulnerabilityWhereInput, $orderBy: [VulnerabilityOrder!]) {
 	vulnerabilities(first: $first, last: $last, after: $after, before: $before, where: $where, orderBy: $orderBy) {
 		totalCount
@@ -172410,6 +172315,101 @@ func (c *Client) GetVulnerabilities(ctx context.Context, first *int64, last *int
 
 	var res GetVulnerabilities
 	if err := c.Client.Post(ctx, "GetVulnerabilities", GetVulnerabilitiesDocument, &res, vars, interceptors...); err != nil {
+		if c.Client.ParseDataWhenErrors {
+			return &res, err
+		}
+
+		return nil, err
+	}
+
+	return &res, nil
+}
+
+const GetVulnerabilityByIDDocument = `query GetVulnerabilityByID ($vulnerabilityId: ID!) {
+	vulnerability(id: $vulnerabilityId) {
+		assignedTo
+		assignedToGroupID
+		assignedToIdentityHolderID
+		assignedToUserID
+		autoDismissedAt
+		blocking
+		category
+		createdAt
+		createdBy
+		cveID
+		cweIds
+		dependencyScope
+		description
+		discoveredAt
+		dismissedAt
+		dismissedComment
+		dismissedReason
+		displayID
+		displayName
+		environmentID
+		environmentName
+		exploitability
+		externalID
+		externalOwnerID
+		externalURI
+		firstPatchedVersion
+		fixAvailable
+		fixedAt
+		id
+		impact
+		impacts
+		manifestPath
+		managedBy
+		internalOwnerUserID
+		integrationRunID
+		internalOwnerIdentityHolderID
+		internalOwnerGroupID
+		internalOwner
+		metadata
+		open
+		packageEcosystem
+		packageName
+		priority
+		production
+		public
+		publishedAt
+		rawPayload
+		references
+		remediationSLA
+		scopeName
+		scopeID
+		reviewedByUserID
+		reviewedByIdentityHolderID
+		reviewedByGroupID
+		reviewedBy
+		score
+		securityLevel
+		severity
+		source
+		sourceDefinitionID
+		sourceInstanceID
+		sourceKey
+		sourceUpdatedAt
+		vulnerabilityStatusName
+		vulnerableVersionRange
+		summary
+		tags
+		updatedAt
+		updatedBy
+		validated
+		vector
+		vulnerabilityStatusID
+	}
+}
+`
+
+func (c *Client) GetVulnerabilityByID(ctx context.Context, vulnerabilityID string, interceptors ...clientv2.RequestInterceptor) (*GetVulnerabilityByID, error) {
+	vars := map[string]any{
+		"vulnerabilityId": vulnerabilityID,
+	}
+
+	var res GetVulnerabilityByID
+	if err := c.Client.Post(ctx, "GetVulnerabilityByID", GetVulnerabilityByIDDocument, &res, vars, interceptors...); err != nil {
 		if c.Client.ParseDataWhenErrors {
 			return &res, err
 		}
@@ -174023,8 +174023,8 @@ var DocumentOperationNames = map[string]string{
 	LaunchCampaignDocument:                       "LaunchCampaign",
 	ResendCampaignIncompleteTargetsDocument:      "ResendCampaignIncompleteTargets",
 	SendCampaignTestEmailDocument:                "SendCampaignTestEmail",
-	CreateBulkCSVCampaignTargetDocument:          "CreateBulkCSVCampaignTarget",
 	CreateBulkCampaignTargetDocument:             "CreateBulkCampaignTarget",
+	CreateBulkCSVCampaignTargetDocument:          "CreateBulkCSVCampaignTarget",
 	CreateCampaignTargetDocument:                 "CreateCampaignTarget",
 	DeleteCampaignTargetDocument:                 "DeleteCampaignTarget",
 	GetAllCampaignTargetsDocument:                "GetAllCampaignTargets",
@@ -174303,13 +174303,13 @@ var DocumentOperationNames = map[string]string{
 	CreateBulkCSVNotificationPreferenceDocument:  "CreateBulkCSVNotificationPreference",
 	CreateBulkNotificationPreferenceDocument:     "CreateBulkNotificationPreference",
 	CreateNotificationPreferenceDocument:         "CreateNotificationPreference",
-	DeleteNotificationPreferenceDocument:         "DeleteNotificationPreference",
-	UpdateBulkNotificationPreferenceDocument:     "UpdateBulkNotificationPreference",
-	UpdateBulkCSVNotificationPreferenceDocument:  "UpdateBulkCSVNotificationPreference",
 	DeleteBulkNotificationPreferenceDocument:     "DeleteBulkNotificationPreference",
+	DeleteNotificationPreferenceDocument:         "DeleteNotificationPreference",
 	GetAllNotificationPreferencesDocument:        "GetAllNotificationPreferences",
 	GetNotificationPreferenceByIDDocument:        "GetNotificationPreferenceByID",
 	GetNotificationPreferencesDocument:           "GetNotificationPreferences",
+	UpdateBulkCSVNotificationPreferenceDocument:  "UpdateBulkCSVNotificationPreference",
+	UpdateBulkNotificationPreferenceDocument:     "UpdateBulkNotificationPreference",
 	UpdateNotificationPreferenceDocument:         "UpdateNotificationPreference",
 	CreateBulkCSVNotificationTemplateDocument:    "CreateBulkCSVNotificationTemplate",
 	CreateBulkNotificationTemplateDocument:       "CreateBulkNotificationTemplate",
@@ -174638,8 +174638,8 @@ var DocumentOperationNames = map[string]string{
 	CreateVulnerabilityDocument:                  "CreateVulnerability",
 	DeleteVulnerabilityDocument:                  "DeleteVulnerability",
 	GetAllVulnerabilitiesDocument:                "GetAllVulnerabilities",
-	GetVulnerabilityByIDDocument:                 "GetVulnerabilityByID",
 	GetVulnerabilitiesDocument:                   "GetVulnerabilities",
+	GetVulnerabilityByIDDocument:                 "GetVulnerabilityByID",
 	UpdateVulnerabilityDocument:                  "UpdateVulnerability",
 	DeleteWebauthnDocument:                       "DeleteWebauthn",
 	GetAllWebauthnsDocument:                      "GetAllWebauthns",
