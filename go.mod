@@ -4,13 +4,13 @@ go 1.27.3
 
 require (
 	github.com/99designs/gqlgen v0.17.98
-	github.com/gqlgo/gqlgenc v0.44.0
+	github.com/gqlgo/gqlgenc v0.44.1
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.35.1
 	github.com/theopenlane/core/common v1.2.4
 	github.com/theopenlane/entx v0.38.4
 	github.com/theopenlane/httpsling v0.3.0
-	github.com/theopenlane/iam v0.42.1
+	github.com/theopenlane/iam v0.42.2
 	github.com/theopenlane/utils v0.7.4
 	github.com/vektah/gqlparser/v2 v2.5.64
 	golang.org/x/oauth2 v0.38.0
